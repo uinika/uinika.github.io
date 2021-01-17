@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #c98c9c;
+  background: #6b2f0d;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3056,8 +3056,9 @@ body {
   color: #e2d8d3;
 }
 .sidebar .sidebar-nav {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 .sidebar .site-state-item>a>span {
   color: #fff;
@@ -3265,6 +3266,12 @@ body {
 /*========== 正文 ==========*/
 .post-body {
   font-size: 16px;
+/* 标题 */
+/* 列表 */
+/* 图片描述居中显示 */
+/* 行内代码片段 */
+/* 引用块 */
+/* 表格斑马纹背景 */
 }
 .post-body p,
 .post-body ol,
@@ -3289,7 +3296,7 @@ body {
 }
 .post-body figure figcaption {
   text-align: center;
-  color: #808080;
+  color: #eee;
   font-size: 15px;
   line-height: 0.6em;
 }
@@ -3301,10 +3308,12 @@ body {
   border-left: 5px solid #a38272;
   background: #f3f1ed;
 }
-/*========== 表格斑马纹背景 ==========*/
-table .header {
+.post-body table thead .header {
+  background: #eee;
+}
+.post-body table tbody tr:nth-child(even) {
   background: #fff;
 }
-table .even {
+.post-body table tbody tr:nth-child(even) {
   background: #eee;
 }
