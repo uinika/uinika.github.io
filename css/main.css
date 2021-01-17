@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ff5058;
+  background: #26ab1d;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3021,6 +3021,9 @@ body {
   position: relative;
   top: -2px;
 }
+.header .header-inner .main-menu .menu-item {
+  margin-right: 8px;
+}
 .header .header-inner .brand .site-title {
   color: #fff;
   font-size: 35px;
@@ -3046,7 +3049,7 @@ body {
 }
 /*========== 侧边栏 ==========*/
 .sidebar {
-  background: url("/images/background.png");
+  background: url("/images/background-sidebar.png");
 }
 .sidebar *,
 .sidebar a {
@@ -3136,7 +3139,7 @@ body {
 }
 .main .post-button .btn {
   background: #a38272;
-  border: 2px solid #e2d8d3;
+  border: 2px solid #8c634f;
   border-radius: 8px;
   color: #fff;
   display: inline-block;
