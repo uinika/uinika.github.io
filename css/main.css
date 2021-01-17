@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ffcdff;
+  background: #c98c9c;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3296,6 +3296,10 @@ body {
 .post-body code {
   background: #f3f1ed;
   color: #3f3f3f;
+}
+.post-body blockquote {
+  border-left: 5px solid #a38272;
+  background: #f3f1ed;
 }
 /*========== 表格斑马纹背景 ==========*/
 table .header {
