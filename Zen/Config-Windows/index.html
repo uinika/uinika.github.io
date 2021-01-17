@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#8C634F">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#8C634F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CMonda:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"uinika.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+  </script>
+<meta name="description" content="开发人员长期以来对于 Microsoft Windows 操作系统总抱以嗤之以鼻的态度，笔者亲身经历了Windows XP、Windows 7到Windows 10的版本演变过程，抛开众所周知的偏见，事实上是能够感觉到系统稳定性、用户体验方面的大幅改善的，叠加近年来 Cmder、Neovim 等辅助开发工具的出现与逐渐成熟，作为软件开发环境，其使用体验已经完全可以与 Linux 媲美，并在图形界面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 工作环境 Config 札记">
+<meta property="og:url" content="https://uinika.github.io/Zen/Config-Windows/index.html">
+<meta property="og:site_name" content="Bit by bit">
+<meta property="og:description" content="开发人员长期以来对于 Microsoft Windows 操作系统总抱以嗤之以鼻的态度，笔者亲身经历了Windows XP、Windows 7到Windows 10的版本演变过程，抛开众所周知的偏见，事实上是能够感觉到系统稳定性、用户体验方面的大幅改善的，叠加近年来 Cmder、Neovim 等辅助开发工具的出现与逐渐成熟，作为软件开发环境，其使用体验已经完全可以与 Linux 媲美，并在图形界面">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/logo.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/Environment-Variable.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/close-win10-auto-update-1.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/close-win10-auto-update-2.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/close-win10-lock-screen.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/close-win10-lock-screen-home.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/time-sync.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/hyper-v.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-Python.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-0.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-1.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-2.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-3.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-4.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-5.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-6.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-7.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-8.png">
+<meta property="og:image" content="https://uinika.github.io/Zen/Config-Windows/OpenCV-CMake-9.png">
+<meta property="article:published_time" content="2020-10-13T18:34:28.674Z">
+<meta property="article:modified_time" content="2020-10-13T18:34:28.674Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="Windows Config">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://uinika.github.io/Zen/Config-Windows/logo.png">
+
+
+<link rel="canonical" href="https://uinika.github.io/Zen/Config-Windows/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>Windows 工作环境 Config 札记 | Bit by bit</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bit by bit" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bit by bit</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Electronics, Embedded & Web</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
+        <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#environment-variable"><span class="nav-number">1.</span> <span class="nav-text">Environment Variable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#close-auto-update"><span class="nav-number">2.</span> <span class="nav-text">Close Auto Update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#close-lock-screen"><span class="nav-number">3.</span> <span class="nav-text">Close Lock Screen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time-sync"><span class="nav-number">4.</span> <span class="nav-text">Time Sync</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kms-activate"><span class="nav-number">5.</span> <span class="nav-text">KMS Activate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hyper-v-install"><span class="nav-number">6.</span> <span class="nav-text">Hyper-V Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-grub-from-efi"><span class="nav-number">7.</span> <span class="nav-text">Remove GRUB from EFI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#system-information"><span class="nav-number">8.</span> <span class="nav-text">System Information</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#visual-studio-installation"><span class="nav-number">9.</span> <span class="nav-text">Visual Studio Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#opencv-installation"><span class="nav-number">10.</span> <span class="nav-text">OpenCV Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#switch-group-policy"><span class="nav-number">11.</span> <span class="nav-text">Switch Group Policy</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Electronics, Embedded & Web</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/uinika/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;uinika&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-quora fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:uinika@outlook.com" title="Email → mailto:uinika@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:uinika@outlook.com?call|chat" title="Skype → skype:uinika@outlook.com?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/uinika" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;uinika" rel="noopener" target="_blank"><i class="fab fa-github-alt fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7998979/uinika?tab=profile" title="Stack Overflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7998979&#x2F;uinika?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/uinika" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Zen/Config-Windows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows 工作环境 Config 札记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:34:28" itemprop="dateCreated datePublished" datetime="2020-10-14T02:34:28+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Zen/" itemprop="url" rel="index"><span itemprop="name">Zen</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:03</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>开发人员长期以来对于 Microsoft Windows 操作系统总抱以嗤之以鼻的态度，笔者亲身经历了<code>Windows XP</code>、<code>Windows 7</code>到<code>Windows 10</code>的版本演变过程，抛开众所周知的偏见，事实上是能够感觉到系统稳定性、用户体验方面的大幅改善的，叠加近年来 <a target="_blank" rel="noopener" href="http://cmder.net/"><strong>Cmder</strong></a>、<a target="_blank" rel="noopener" href="https://neovim.io/"><strong>Neovim</strong></a> 等辅助开发工具的出现与逐渐成熟，作为软件开发环境，其使用体验已经完全可以与 Linux 媲美，并在图形界面的稳定性以及交互的友好性方面胜于后者。</p>
+<p><img src="/Zen/Config-Windows/logo.png"></p>
+<p>但是对于广大硬件电子工程师而言，<strong>Altium Designer</strong>、<strong>Pads</strong>、<strong>Allegro</strong> 等商业 EDA 工具仅提供支持 Windows 操作系统的版本，而高频高速 PCB 电路设计基本离不开 Windows 操作系统环境，因而 Windows 和 Linux 在笔者日常工作里都各自拥有着其不可替代性。本文主要用于记录一些笔者使用 Windows 10 操作系统的配置和习惯，便于切换到新的工作环境时快速的展开，因而文章也会持续的保持更新。</p>
+<a id="more"></a>
+<h2 id="environment-variable">Environment Variable</h2>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># <span class="built_in">PATH</span></span><br><span class="line"><span class="function">D:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">CMake</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Curl</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Git</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Go</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">JDK</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Neovim</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Nginx</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Nodejs</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Python</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Ruby</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Yarn</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Tomcat</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">App</span>\<span class="title">Pandoc</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Qt</span>\5.14.2\<span class="title">mingw73_64</span>\<span class="title">bin</span>;<span class="title">D</span>:\<span class="title">Software</span>\<span class="title">Tech</span>\<span class="title">Qt</span>\<span class="title">Tools</span>\<span class="title">mingw730_64</span>\<span class="title">bin</span>;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># JAVA_HOME</span><br><span class="line"><span class="function">D:\<span class="title">software</span>\<span class="title">Tech</span>\<span class="title">JDK</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="/Zen/Config-Windows/Environment-Variable.png"></p>
+<h2 id="close-auto-update">Close Auto Update</h2>
+<ul>
+<li><strong>Win+R</strong>运行<code>services.msc</code>打开<em>服务</em>，找到<code>Windows Update</code>设置启动类型为<strong>禁用</strong>。 <img src="/Zen/Config-Windows/close-win10-auto-update-1.png" alt="close-win10-auto-update-1"></li>
+<li><strong>Win+R</strong>运行<code>gpedit.msc</code>打开<em>组策略编辑器</em>，依次进入<code>计算机配置-管理模板-Windows组件-windows更新</code>目录，找到<code>配置自动更新</code>选项双击打开并选择<strong>已禁用</strong>。 <img src="/Zen/Config-Windows/close-win10-auto-update-2.png" alt="close-win10-auto-update-2"></li>
+</ul>
+<h2 id="close-lock-screen">Close Lock Screen</h2>
+<p>对于 Windows 10 专业版，可以打开<em>组策略编辑器</em>并依次进入<code>计算机配置-管理模板-控制面板-个性化</code>目录，选择右则<code>个性化</code>选项的<code>不显示锁屏</code>并设置为<strong>已启用</strong>。</p>
+<figure>
+<img src="/Zen/Config-Windows/close-win10-lock-screen.png" alt="close-win10-lock-screen"><figcaption aria-hidden="true">close-win10-lock-screen</figcaption>
+</figure>
+<p>对于 Windows 10 家庭版，由于<strong>没有组策略编辑器</strong>，所以需要采用修改注册表的办法禁用锁屏。按下【Win + R】并且输入<code>regedit</code>打开注册表编辑器，依次展开<code>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows</code>，在鼠标右键<code>Windows</code>的菜单项当中，选择【新建项】并将其命名为<code>Personalization</code>，在该项下面新建【DWORD（32 位）值】<code>NoLockScreen</code>，并将其数值数据修改为<code>1</code>。</p>
+<figure>
+<img src="/Zen/Config-Windows/close-win10-lock-screen-home.png" alt="close-win10-lock-screen"><figcaption aria-hidden="true">close-win10-lock-screen</figcaption>
+</figure>
+<h2 id="time-sync">Time Sync</h2>
+<p><strong>Win+R</strong>运行<code>regedit</code>打开<em>注册表编辑器</em>，然后找到下面目录的位置：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Control/TimeZoneInformation/</span><br></pre></td></tr></table></figure>
+<p>鼠标右键新建<strong>QWORD(64 位)值</strong>，键为<code>RealTimeIsUniversal</code>值为<code>1</code>，然后重启 Windows 10。</p>
+<figure>
+<img src="/Zen/Config-Windows/time-sync.png" alt="time-sync"><figcaption aria-hidden="true">time-sync</figcaption>
+</figure>
+<h2 id="kms-activate">KMS Activate</h2>
+<p>如果当前使用的是 Windows 10 专业版，那么可以使用向微软官方购买的正版激活密钥，并以<strong>管理员</strong>方式运行如下命令：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">slmgr /ipk W269N-WFGWX-YVC9B-<span class="number">4</span>J6C9-T83GX</span><br><span class="line"># slmgr /skms kms.xspace.<span class="keyword">in</span></span><br><span class="line">slmgr /skms kms.<span class="number">03</span>k.org</span><br><span class="line">slmgr /ato</span><br></pre></td></tr></table></figure>
+<p>如果当前使用的是 Windows 10 家庭版，则需要将密钥更换为相应的官方正版密钥，然后同样以<strong>管理员</strong>方式运行命令：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">slmgr /ipk PVMJN-<span class="number">6</span>DFY6-<span class="number">9</span>CCP6-<span class="number">7</span>BKTT-D3WVR</span><br><span class="line">slmgr /skms kms.<span class="number">03</span>k.org</span><br><span class="line">slmgr /ato</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：上述脚本里的<code>kms.xspace.in</code>与<code>kms.03k.org</code>仅作为激活方法示例，如需正确稳定的激活系统，请使用微软官方的 KMS 服务地址。</p>
+</blockquote>
+<h2 id="hyper-v-install">Hyper-V Install</h2>
+<p>Hyper-V 是 windows 10 自带的虚拟机工具，打开<code>控制面板\所有控制面板项\程序和功能</code>，然后点击左侧的<code>启用和关闭windows程序</code>，在弹出界面勾选如下选项，然后重启计算机：</p>
+<figure>
+<img src="/Zen/Config-Windows/hyper-v.png" alt="hyper-v"><figcaption aria-hidden="true">hyper-v</figcaption>
+</figure>
+<h2 id="remove-grub-from-efi">Remove GRUB from EFI</h2>
+<p>计算机同时安装有 Linux 与 Windows 双系统的情况下，如果仅仅移除 Linux 分区，那么 BIOS 依然能够读取到遗留的 Linux 启动项。如果需要彻底删除该启动欺罔 ，则需要通过 Windows 10 进入 <strong>Boot EFI</strong> 并且删除 GRUB 目录。以管理员身份运行 Windows PowerShell，执行如下命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">Windows PowerShell</span><br><span class="line">版权所有 (C) Microsoft Corporation。保留所有权利。</span><br><span class="line"></span><br><span class="line">尝试新的跨平台 PowerShell https://aka.ms/pscore6</span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\Windows\system32&gt; diskpart</span><br><span class="line"></span><br><span class="line">Microsoft DiskPart 版本 <span class="number">10.0</span>.<span class="number">18362.1</span></span><br><span class="line"></span><br><span class="line">Copyright (C) Microsoft Corporation.</span><br><span class="line">在计算机上: WINDOWS<span class="literal">-10</span></span><br><span class="line"></span><br><span class="line">DISKPART&gt; list disk</span><br><span class="line"></span><br><span class="line">  磁盘 <span class="comment">###  状态           大小     可用     Dyn  Gpt</span></span><br><span class="line">  --------  -------------  -------  -------  ---  ---</span><br><span class="line">  磁盘 <span class="number">0</span>    联机              <span class="number">447</span> GB      <span class="number">0</span> B   *</span><br><span class="line">  磁盘 <span class="number">1</span>    联机              <span class="number">119</span> GB   <span class="number">119</span> GB</span><br><span class="line"></span><br><span class="line">DISKPART&gt; sel disk <span class="number">0</span>      <span class="comment"># 选择具有 GPT 分区的磁盘</span></span><br><span class="line"></span><br><span class="line">磁盘 <span class="number">0</span> 现在是所选磁盘。</span><br><span class="line"></span><br><span class="line">DISKPART&gt; list vol</span><br><span class="line"></span><br><span class="line">  卷 <span class="comment">###      LTR  标签         FS     类型        大小     状态       信息</span></span><br><span class="line">  ----------  ---  -----------  -----  ----------  -------  ---------  --------</span><br><span class="line">  卷     <span class="number">0</span>     C   System       NTFS    磁盘分区          <span class="number">58</span> GB  正常</span><br><span class="line">  卷     <span class="number">1</span>     D   Recovery     FAT32   磁盘分区         <span class="number">100</span> MB  正常</span><br><span class="line">  卷     <span class="number">2</span>     E   Hank         NTFS    磁盘分区         <span class="number">193</span> GB  正常     系统</span><br><span class="line"></span><br><span class="line">DISKPART&gt; sel vol <span class="number">2</span>      <span class="comment"># 选择具有 FAT32 文件系统的卷</span></span><br><span class="line"></span><br><span class="line">卷 <span class="number">2</span> 是所选卷。</span><br><span class="line"></span><br><span class="line">DISKPART&gt; assign letter=E      <span class="comment"># 分配驱动器代号</span></span><br><span class="line"></span><br><span class="line">DiskPart 成功地分配了驱动器号或装载点。</span><br><span class="line"></span><br><span class="line">DISKPART&gt; <span class="keyword">exit</span>                 <span class="comment"># 退出 diskpart 程序</span></span><br><span class="line"></span><br><span class="line">退出 DiskPart...</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Windows\system32&gt; <span class="built_in">cd</span> E:      <span class="comment"># 进入 Boot EFI 所在分区</span></span><br><span class="line"><span class="built_in">PS</span> E:\&gt; <span class="built_in">cd</span> EFI                     <span class="comment"># 进入 Boot EFI 目录</span></span><br><span class="line"><span class="built_in">PS</span> E:\EFI&gt; <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line">    目录: E:\EFI</span><br><span class="line"></span><br><span class="line">Mode                LastWriteTime         Length Name</span><br><span class="line">----                -------------         ------ ----</span><br><span class="line">d-----        <span class="number">2020</span>/<span class="number">5</span>/<span class="number">23</span>     <span class="number">16</span>:<span class="number">55</span>                Boot</span><br><span class="line">d-----        <span class="number">2020</span>/<span class="number">5</span>/<span class="number">23</span>     <span class="number">16</span>:<span class="number">55</span>                Microsoft</span><br><span class="line">d-----        <span class="number">2020</span>/<span class="number">5</span>/<span class="number">23</span>     <span class="number">16</span>:<span class="number">55</span>                Ubuntu</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span> E:\EFI&gt; <span class="built_in">rmdir</span> ubuntu            <span class="comment"># 删除 EFI 下的 ubuntu 目录</span></span><br><span class="line"><span class="built_in">PS</span> E:\EFI&gt; <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line">    目录: E:\EFI</span><br><span class="line"></span><br><span class="line">Mode                LastWriteTime         Length Name</span><br><span class="line">----                -------------         ------ ----</span><br><span class="line">d-----        <span class="number">2020</span>/<span class="number">5</span>/<span class="number">23</span>     <span class="number">16</span>:<span class="number">55</span>                Boot</span><br><span class="line">d-----        <span class="number">2020</span>/<span class="number">5</span>/<span class="number">23</span>     <span class="number">16</span>:<span class="number">55</span>                Microsoft</span><br></pre></td></tr></table></figure>
+<h2 id="system-information">System Information</h2>
+<p>从 PowerShell 运行下面命令可以查看当前系统的基本信息：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ systeminfo</span><br></pre></td></tr></table></figure>
+<p>按下【Windows + R】快捷键运行如下命令则可以查看到进一步的系统相关信息：</p>
+<ul>
+<li><code>slmgr.vbs -dlv</code> 命令：查询系统激活信息，包括激活 ID、安装 ID、激活截止日期等；</li>
+<li><code>slmgr.vbs -dli</code> 命令：查询系统版本、部分产品密钥、许可证状态等；</li>
+<li><code>slmgr.vbs -xpr</code> 命令：查询 Windows 是否永久激活；</li>
+<li><code>winver</code> 命令：查询系统内核版本，以及注册用户；</li>
+</ul>
+<h2 id="visual-studio-installation">Visual Studio Installation</h2>
+<p>参考<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/visualstudio/install/create-an-offline-installation-of-visual-studio?view=vs-2017">《创建 Visual Studio 的脱机安装》</a>一文，从 Visual Studio 的<a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/vs/older-downloads/">历史版本</a>中下载<code>vs_community.exe</code>安装引导程序，然后在所在目录打开 <strong>PowerShell</strong> 并使用下面命令创建针对 C++ 桌面开发的本地缓存：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\vs_community.exe -<span class="literal">-layout</span> D:\Download\Visual<span class="literal">-Studio</span><span class="literal">-2017</span> -<span class="literal">-add</span> Microsoft.VisualStudio.Workload.NativeDesktop -<span class="literal">-includeRecommended</span> -<span class="literal">-lang</span> zh<span class="literal">-CN</span></span><br></pre></td></tr></table></figure>
+<h2 id="opencv-installation">OpenCV Installation</h2>
+<p>建立 OpenCV 目录，然后下载 OpenCV 源代码并解压至该目录，最终得到如下目录结构：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Software\Tech\OpenCV&gt; <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line">Mode                LastWriteTime         Length Name</span><br><span class="line">----                -------------         ------ ----</span><br><span class="line">d-----        <span class="number">2020</span>/<span class="number">5</span>/<span class="number">25</span>     <span class="number">17</span>:<span class="number">29</span>                build</span><br><span class="line">d-----        <span class="number">2020</span>/<span class="number">5</span>/<span class="number">25</span>     <span class="number">12</span>:<span class="number">42</span>                opencv<span class="literal">-3</span>.<span class="number">4.10</span></span><br><span class="line">d-----        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">26</span>     <span class="number">16</span>:<span class="number">03</span>                opencv_contrib<span class="literal">-3</span>.<span class="number">4.10</span></span><br></pre></td></tr></table></figure>
+<p>首先，安装 Python2，并将其安装目录添加至<code>PYTHON2_EXECUTABLE</code>环境变量：</p>
+<p><img src="/Zen/Config-Windows/OpenCV-Python.png"></p>
+<p>然后，将如下安装过程中<a target="_blank" rel="noopener" href="https://github.com/uinika/raspberry-pi-opencv-patch"><strong>无法下载的文件</strong></a>放置到<code>OpenCV\opencv_contrib-3.4.10\modules\xfeatures2d\src</code>：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">C:\raspberry<span class="literal">-pi</span><span class="literal">-opencv</span><span class="literal">-patch</span><span class="literal">-master</span>&gt; <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line">Mode                LastWriteTime         Length Name</span><br><span class="line">----                -------------         ------ ----</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>          <span class="number">14852</span> boostdesc_bgm.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>          <span class="number">14864</span> boostdesc_bgm_bi.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>           <span class="number">7832</span> boostdesc_bgm_hd.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>         <span class="number">138093</span> boostdesc_binboost_064.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>         <span class="number">275322</span> boostdesc_binboost_128.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>         <span class="number">549754</span> boostdesc_binboost_256.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>         <span class="number">426280</span> boostdesc_lbgm.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>        <span class="number">1257733</span> vgg_generated_120.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>         <span class="number">773330</span> vgg_generated_48.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>         <span class="number">915012</span> vgg_generated_64.i</span><br><span class="line">------        <span class="number">2020</span>/<span class="number">3</span>/<span class="number">15</span>      <span class="number">3</span>:<span class="number">57</span>        <span class="number">1012932</span> vgg_generated_80.i</span><br></pre></td></tr></table></figure>
+<p>接下来打开 CMake 图形界面配置工具，选择<code>opencv-3.4.10</code>源码包的位置以及编译输出的<code>build</code>目录：</p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-0.png"></p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-1.png"></p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-2.png"></p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-3.png"></p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-4.png"></p>
+<p><code>opencv-3.4.10</code>配置完成以后，还需要继续对<code>opencv_contrib-3.4.10</code>扩展模块的路径进行配置，需要修改的配置项如下所示：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WITH_QT                              [ √ ]</span><br><span class="line">WITH_OPENGL                          [ √ ]</span><br><span class="line">OPENCV_EXTRA_MODULES_PATH            C:/Software/Tech/OpenCV/opencv_contrib-<span class="number">3</span>.<span class="number">4</span>.<span class="number">10</span>/modules</span><br><span class="line">OPENCV_ENABLE_ALLOCATOR_STATS        [   ]</span><br></pre></td></tr></table></figure>
+<p>配置完成之后，再次点击【Configure】，当出现<code>Configuring done</code>提示信息时，如果发现配置界面还存在<strong>红色配置框</strong>，则继续点击【Configure】直至界面恢复正常：</p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-5.png"></p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-6.png"></p>
+<p>最后，【Configure】完成以后，点击【Generate】按钮生成用于编译的源文件，直至界面同时提示<code>Configuring done Generating done</code>信息。</p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-7.png"></p>
+<blockquote>
+<p><strong>注意</strong>：如果发现 CMake 配置过程中，发生<code>face_landmark_model.dat</code>无法下载的问题，则可以打开<code>OpenCV\build</code>里的<code>CMakeDownloadLog.txt</code>文件，里边包含了未能成功下载的文件地址，复制这些地址离线下载之后。将其保存在<code>OpenCV\opencv-3.4.10\.cache</code>目录下，其中<code>ippicv.zip</code>保存在<code>ippicv</code>子目录，<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/opencv/opencv_3rdparty/8afa57abc8229d611c4937165d20e2a2d9fc5a12/face_landmark_model.dat"><code>face_landmark_model.dat</code></a>保存在<code>data</code>目录。注意命名规则需要满足<code>MD5 + 文件名</code>格式，例如<code>7505c44ca4eb54b4ab1e4777cb96ac05-face_landmark_model.dat</code>，否则 CMake 仍然会重新下载。</p>
+</blockquote>
+<p>打开 PowerShell 进入<code>build</code>目录，执行<code>mingw32-make</code>命令开始编译源文件：</p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-8.png"></p>
+<blockquote>
+<p><strong>注意</strong>：此时，如果发生<code>opencv-3.4.10\modules\videoio\src\cap_dshow.cpp</code>文件相关的错误，则需要在该文件的头部加入<code>#define STRSAFE_NO_DEPRECATE</code>语句忽略安全检查定义。</p>
+</blockquote>
+<p>完成之后，再运行<code>mingw32-make install</code>安装编译后的二进制文件：</p>
+<p><img src="/Zen/Config-Windows/OpenCV-CMake-9.png"></p>
+<p>最后，将<code>OpenCV\build\bin</code>路径加入到 Windows 10 的 <strong>PATH</strong> 环境变量即可完成 OpenCV 的全部安装过程。</p>
+<h2 id="switch-group-policy">Switch Group Policy</h2>
+<p>将下面代码保存为<code>.bat</code>批处理文件，然后以管理员方式执行，即可打开 Windows 10 家庭版的组策略编辑器。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">pushd</span> <span class="string">&quot;%~dp0&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">dir</span> /b C:\Windows\servicing\Packages\Microsoft<span class="literal">-Windows</span><span class="literal">-GroupPolicy</span><span class="literal">-ClientExtensions</span><span class="literal">-Package</span>~<span class="number">3</span>*.mum &gt;List.txt</span><br><span class="line"></span><br><span class="line"><span class="built_in">dir</span> /b C:\Windows\servicing\Packages\Microsoft<span class="literal">-Windows</span><span class="literal">-GroupPolicy</span><span class="literal">-ClientTools</span><span class="literal">-Package</span>~<span class="number">3</span>*.mum &gt;&gt;List.txt</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> /f %%i <span class="keyword">in</span> (<span class="string">&#x27;findstr /i . List.txt 2^&gt;nul&#x27;</span>) <span class="keyword">do</span> dism /online /norestart /<span class="built_in">add-package</span>:<span class="string">&quot;C:\Windows\servicing\Packages\%%i&quot;</span></span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Hank
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://uinika.github.io/Zen/Config-Windows/" title="Windows 工作环境 Config 札记">https://uinika.github.io/Zen/Config-Windows/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/qrcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">微信公众号</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/column/chengdu">
+          <span class="icon">
+            <i class="fab fa-quora"></i>
+          </span>
+
+          <span class="label">知乎专栏</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://space.bilibili.com/1514341594">
+          <span class="icon">
+            <i class="fab fa-youtube"></i>
+          </span>
+
+          <span class="label">Bilibili 视频</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS 订阅</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Windows-Config/" rel="tag"><i class="fa fa-tag"></i> Windows Config</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Web/JQuery/" rel="prev" title="jQuery 那些容易被忽略的问题">
+                  <i class="fa fa-chevron-left"></i> jQuery 那些容易被忽略的问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Zen/Config-Linux/" rel="next" title="Linux 工作环境 Config 札记">
+                  Linux 工作环境 Config 札记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2010 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-book-open"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.9m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">312:13</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+
+</body>
+</html>

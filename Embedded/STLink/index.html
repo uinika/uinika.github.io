@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#8C634F">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#8C634F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CMonda:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"uinika.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+  </script>
+<meta name="description" content="STLink 是由意法半导体公司推出的在线调试编程器，采用5V的USB2.0全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以 JTAG 或 SWD 模式连接至 STM32 系列微控制器，或者以 SWIM 模式连接至 STM8 系列微控制器，操作温度介于0 ~ 50℃之间。由于 ST 公司极为重视中国市场，因此 STLink 的销售价格相对其它国外大厂的在线仿真设备要实惠许多，基">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STLink V2 调试编程器应用图解">
+<meta property="og:url" content="https://uinika.github.io/Embedded/STLink/index.html">
+<meta property="og:site_name" content="Bit by bit">
+<meta property="og:description" content="STLink 是由意法半导体公司推出的在线调试编程器，采用5V的USB2.0全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以 JTAG 或 SWD 模式连接至 STM32 系列微控制器，或者以 SWIM 模式连接至 STM8 系列微控制器，操作温度介于0 ~ 50℃之间。由于 ST 公司极为重视中国市场，因此 STLink 的销售价格相对其它国外大厂的在线仿真设备要实惠许多，基">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/logo.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/stlink-v2-1.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/stlink-v2-2.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/upgrade.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/connect-to-stm8.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/swim-pin.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/connect-to-stm32.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/jtag-pin.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-1.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-2.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-3.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-4.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-5.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-6.png">
+<meta property="article:published_time" content="2020-10-13T18:37:02.636Z">
+<meta property="article:modified_time" content="2020-10-13T18:37:02.636Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="MCU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://uinika.github.io/Embedded/STLink/logo.png">
+
+
+<link rel="canonical" href="https://uinika.github.io/Embedded/STLink/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>STLink V2 调试编程器应用图解 | Bit by bit</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bit by bit" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bit by bit</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Electronics, Embedded & Web</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
+        <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">配件说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">固件升级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E7%A4%BA%E7%81%AF%E7%8A%B6%E6%80%81%E8%AF%B4%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">指示灯状态说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5-stm8"><span class="nav-number">4.</span> <span class="nav-text">连接 STM8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5-stm32"><span class="nav-number">5.</span> <span class="nav-text">连接 STM32</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#keil-uvision-5-%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">Keil uVision 5 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#keil-uvision-5-%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">Keil uVision 5 使用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Electronics, Embedded & Web</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/uinika/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;uinika&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-quora fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:uinika@outlook.com" title="Email → mailto:uinika@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:uinika@outlook.com?call|chat" title="Skype → skype:uinika@outlook.com?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/uinika" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;uinika" rel="noopener" target="_blank"><i class="fab fa-github-alt fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7998979/uinika?tab=profile" title="Stack Overflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7998979&#x2F;uinika?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/uinika" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/STLink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          STLink V2 调试编程器应用图解
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:37:02" itemprop="dateCreated datePublished" datetime="2020-10-14T02:37:02+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>22 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>STLink 是由意法半导体公司推出的在线调试编程器，采用<code>5V</code>的<strong>USB2.0</strong>全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以 <strong>JTAG</strong> 或 <strong>SWD</strong> 模式连接至 STM32 系列微控制器，或者以 <strong>SWIM</strong> 模式连接至 STM8 系列微控制器，操作温度介于<code>0 ~ 50℃</code>之间。由于 ST 公司极为重视中国市场，因此 STLink 的销售价格相对其它国外大厂的在线仿真设备要实惠许多，基本成为国内嵌入式工程师人手上必备的工具。</p>
+<p><img src="/Embedded/STLink/logo.png"></p>
+<p>本文详细介绍 Keil uVision 5 开发环境下 ST-LINK/V2 版本的调试编程器使用方法，并介绍了相关接口的详细定义与接线方法，文中部分内容翻译至意法半导体官方提供的<a target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/st-link-v2.html">《用于 STM8 与 STM32 的 ST-LINK/V2 在线调试编程器用户手册》</a>，以确保使用方法与解释的规范性。</p>
+<a id="more"></a>
+<h1 id="配件说明">配件说明</h1>
+<p>ST-LINK/V2 基于意法半导体自己的<strong>STM32F103C8</strong>微控制器，主要提供了一个用于 STM32 的<strong>JTAG</strong>与<strong>SWD/SWV</strong>连接器（下图标识 A）和一个用于 STM8 的<strong>SWIM</strong>连接器（下图标识 B）两种连接方式，并带有一枚通信指示灯（下图标识 D）。其中，<strong>SWIM</strong>模式下支持<code>1.65V ~ 5.5V</code>应用电压，支持低速（<code>9.7 Kbytes/s</code>）和高速模式（<code>12.8 Kbytes/s</code>）编程，可使用 ERNI 标准的垂直/水平连接器，以及 2.54 毫米的连接插座。<strong>JTAG/SWD</strong>模式下支持<code>1.65V ~ 3.6V</code>的应用电压与<code>5V</code>容错输入，支持间距<code>2.54mm</code>的 20 针 JTAG 连接器，以及 SWD 和串行线查看器（SWV）通信。</p>
+<p><img src="/Embedded/STLink/stlink-v2-1.png"></p>
+<p>ST-LINK/V2 调试编程器包含如下所示的配件与设备：</p>
+<ul>
+<li>（<strong>A</strong>）Mini USB 数据线。</li>
+<li>（<strong>B</strong>）ST-LINK/V2 调试编程器。</li>
+<li>（<strong>C</strong>）低成本 SWIM 连接器。</li>
+<li>（<strong>D</strong>）带有标准 ERNI 连接器的 SWIM 排线。</li>
+<li>（<strong>E</strong>）带有 20 针连接器的 JTAG 或 SWD排线。</li>
+</ul>
+<p><img src="/Embedded/STLink/stlink-v2-2.png"></p>
+<h1 id="固件升级">固件升级</h1>
+<p>前往意法半导体官方网站<a target="_blank" rel="noopener" href="https://www.st.com/zh/development-tools/st-link-v2.html">ST-LINK/V2</a>下载 USB 驱动程序与升级工具，安装驱动程序之后运行<code>ST-LinkUpgrade.exe</code>升级工具：</p>
+<p><img src="/Embedded/STLink/upgrade.png"></p>
+<p>点击【Device Connect】连接 STLink（如果未连接成功，请将 Mini USB 数据线拔出后重新上电），连接成功后查看当前 STLink 的版本号，然后点击【Yes &gt;&gt;&gt;&gt;】按钮开始升级，完成以后将会弹出升级成功的提示。</p>
+<h1 id="指示灯状态说明">指示灯状态说明</h1>
+<p>STLink 上 LED 指示灯用于提示当前的工作状态，具体情况如下：</p>
+<ul>
+<li>LED 闪烁<strong>红色</strong>：STLink 已经连接至计算机。</li>
+<li>LED 保持<strong>红色</strong>：计算机已经成功与 STLink 建立通信连接。</li>
+<li>LED 交替闪烁<strong>红色</strong>和<strong>绿色</strong>：数据正在传输。</li>
+<li>LED 保持<strong>绿色</strong>：最后一次通信是成功的。</li>
+<li>LED 为橘<strong>黄色</strong>：最后一次通信失败。</li>
+</ul>
+<h1 id="连接-stm8">连接 STM8</h1>
+<p>开发 STM8 微控制器应用程序时，STLink 可以使用一端带有 ERNI 连接器的排线、以及间距 2.54 毫米的双排四针排线，共两种方式连接至开发板：</p>
+<p><img src="/Embedded/STLink/connect-to-stm8.png"></p>
+<p>下面的表格是官方文档里对于 SWIM 四针连接器的针脚功能说明：</p>
+<p><img src="/Embedded/STLink/swim-pin.png"></p>
+<h1 id="连接-stm32">连接 STM32</h1>
+<p>开发 STM32 微控制器应用程序时，需要使用 20 针的 JTAG 排线将 STLink 连接至开发板。</p>
+<p><img src="/Embedded/STLink/connect-to-stm32.png"></p>
+<p>下面的表格对于 20 针 JTAG 排线的针脚功能进行了说明：</p>
+<p><img src="/Embedded/STLink/jtag-pin.png"></p>
+<h1 id="keil-uvision-5-配置">Keil uVision 5 配置</h1>
+<p><strong>JTAG</strong>（联合测试行动小组，Joint Test Action Group）是一种国际标准测试协议，标准 JTAG 接口采用 4 枚针脚，但是目前较为常用的是 14、20 个针脚，笔者之前《J-Link 仿真器固件恢复小记》一文中使用的 JLink 就是采用了 20 针的 JTAG 调试协议，当前使用的 STLink V2 也同样采用了该种 20 针接口，这里直接将其插入 STM32F103C8T6 实验电路中的调试插座，然后打开 Keil uVision 5 界面上的【Options for Target】对编译目标进行设置，选择【Debug】选项卡并选中【Use ST-Link Debugger】选项。</p>
+<p><img src="/Embedded/STLink/keil-1.png"></p>
+<p>接下来再点击界面上的【Settings】选项，在弹出的【Cortex-M Target Driver Setup】设置界面当中，将【Debug】标签下的【Target Com】选择为<strong>JTAG</strong>，点击【确定】按钮以后退出。</p>
+<p><img src="/Embedded/STLink/keil-2.png"></p>
+<p>接下来再打开【Options for Target】界面上的【Utilities】选项卡，将【Use Target Driver for Flash Programming】选中为<strong>ST-Link Debugger</strong>。</p>
+<p><img src="/Embedded/STLink/keil-3.png"></p>
+<p>最后点击选项菜单后面的【Settings】按钮，重新进入【Cortex-M Target Driver Setup】设置界面，点击【Add】添加合适的 Flash 编程算法，确定后保存退出。</p>
+<p><img src="/Embedded/STLink/keil-4.png"></p>
+<blockquote>
+<p>注意：当前运行的 STM32 程序当中不能出现类似<code>GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE)</code>会造成禁用 JTAG 或 SW 接口的语句，并且同时需要注意将 STM32 的下载模式切换至<strong>FLASH ISP</strong>模式。</p>
+</blockquote>
+<p><strong>SWD</strong>（串行调试，Serial Wire Debug）拥有 4 个针脚，高速模式下 SWD 比 JTAG 接口更加稳定可靠，占用引脚数量更少且调试更为方便。</p>
+<h1 id="keil-uvision-5-使用">Keil uVision 5 使用</h1>
+<p>点击 Keil uVision 5 菜单栏上的【Download】按钮，可以通过 STLink 将程序烧写至微控制器的<strong>Flash</strong>当中并且运行，这与 ISP 下载软件的作用完全相同。完成下载之后，程序可以脱离 STLink 独立运行 FLASH 当中。</p>
+<p><img src="/Embedded/STLink/keil-5.png"></p>
+<p>点击 Keil uVision 5 菜单栏上的【Start/Stop Debug】按钮图标，就可以进入仿真模式。</p>
+<p><img src="/Embedded/STLink/keil-6.png"></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\JLink\" rel="bookmark">J-Link 仿真器固件恢复小记</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\Mini2440\" rel="bookmark">基于三星 S3C2440 的嵌入式 Linux 攻略</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\NucleoF767ZI\" rel="bookmark">意法半导体 Nucleo F767ZI 评估板测试</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STM32F103ZET6\" rel="bookmark">基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\RaspberryPi\" rel="bookmark">玩转 Raspberry Pi 4B 开源硬件</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\Arduino\" rel="bookmark">玩转 Arduino Uno、Mega、Due 开源硬件</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STC90C51\" rel="bookmark">宏晶 STC90C516RD+ 数据手册精读</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STM32F103C8T6\" rel="bookmark">意法半导体 STM32F103C8T6 标准库典型实例</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STC89C52\" rel="bookmark">宏晶 STC89C52RC 微控制器实践小书</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Hank
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://uinika.github.io/Embedded/STLink/" title="STLink V2 调试编程器应用图解">https://uinika.github.io/Embedded/STLink/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/qrcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">微信公众号</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/column/chengdu">
+          <span class="icon">
+            <i class="fab fa-quora"></i>
+          </span>
+
+          <span class="label">知乎专栏</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://space.bilibili.com/1514341594">
+          <span class="icon">
+            <i class="fab fa-youtube"></i>
+          </span>
+
+          <span class="label">Bilibili 视频</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS 订阅</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MCU/" rel="tag"><i class="fa fa-tag"></i> MCU</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Embedded/Android/" rel="prev" title="Android 物联网应用开发实例">
+                  <i class="fa fa-chevron-left"></i> Android 物联网应用开发实例
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Embedded/STM32F103ZET6/" rel="next" title="基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南">
+                  基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2010 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-book-open"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.9m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">312:13</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,2822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#8C634F">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#8C634F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CMonda:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"uinika.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+  </script>
+<meta name="description" content="Electronics, Embedded &amp; Web">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bit by bit">
+<meta property="og:url" content="https://uinika.github.io/index.html">
+<meta property="og:site_name" content="Bit by bit">
+<meta property="og:description" content="Electronics, Embedded &amp; Web">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="Electronics, Embedded, Web">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://uinika.github.io/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>Bit by bit</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bit by bit" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bit by bit</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Electronics, Embedded & Web</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
+        <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Electronics, Embedded & Web</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/uinika/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;uinika&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-quora fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:uinika@outlook.com" title="Email → mailto:uinika@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:uinika@outlook.com?call|chat" title="Skype → skype:uinika@outlook.com?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/uinika" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;uinika" rel="noopener" target="_blank"><i class="fab fa-github-alt fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7998979/uinika?tab=profile" title="Stack Overflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7998979&#x2F;uinika?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/uinika" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Electronics/Analog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Electronics/Analog/" class="post-title-link" itemprop="url">模拟电子技术原理与综合运用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-11 23:30:58" itemprop="dateCreated datePublished" datetime="2021-01-11T23:30:58+08:00">2021-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Electronics/" itemprop="url" rel="index"><span itemprop="name">Electronics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>189k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>31:32</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>电子技术发展至今，基础理论方面的突破甚少，进步主要体现在工艺、材料与制程方面。特别是大规模集成电路的广泛应用，过去需要采用大量分立式元器件才能完成的工作，都已经被标准化的模拟、数字集成电路所替代。电子工程师的日常工作内容，逐步从过去各类基础电路的搭建，切换至电子自动化设计 <strong>EDA</strong>（Electronic Design Automation）、信号完整性 <strong>SI</strong>（Signal Integrity）、电磁兼容性 <strong>EMC</strong>（Electro Magnetic Compatibility）等方面。</p>
+<p><img src="/Electronics/Analog/logo.jpg"></p>
+<p>模拟电子技术作为现代电子工业的理论基石，主要围绕<code>双极性结型晶体管</code> <strong>BJT</strong>、<code>场效应晶体管</code> <strong>FET</strong> 构成的<strong>模拟信号</strong>放大电路展开，着重分析了其<strong>频率响应</strong>以及<strong>负反馈</strong>等特性。伴随近年碳化硅、氮化镓等第三代半导体材料在新能源汽车等领域的广泛应用，模拟电子元件在体积、效率、可靠性方面都取得了显著的提高，本文在写作过程当中参考了《Electronic Devices and Circuit Theory》第 11 版一书。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Electronics/Analog/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Electronics/Analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Electronics/Analysis/" class="post-title-link" itemprop="url">电路分析理论 - 电阻电路篇</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-26 01:57:57 / 修改时间：16:49:22" itemprop="dateCreated datePublished" datetime="2020-12-26T01:57:57+08:00">2020-12-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Electronics/" itemprop="url" rel="index"><span itemprop="name">Electronics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>75k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12:27</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>电路分析</strong>作为电子信息工程技术专业的的先导课程，主要讨论电路当中的电磁现象及其发生过程，其理论与工程实践紧密相连，分析过程中需要注意<strong>电路模型</strong>与<strong>实际电路</strong>、<strong>测量值</strong>与<strong>计算值</strong>的差别与联系。由于电路分析技术的本质是数学在电路当中的应用，因此学习过程需要注重将电路分析方法与数学知识相结合。此外，由于每一种电路模型都具备特定的工作条件，所以 在分析过程当中，还需要根据不同工作场景选择合适的电路模型。</p>
+<p><img src="/Electronics/Analysis/logo.png"></p>
+<p>本文涵括了<strong>线性电路</strong>相关的<code>基本概念与两类约束</code>、<code>电路的等效变换</code>、<code>电阻电路的分析方法</code>、<code>常用电路定理</code>，同时也介绍了<code>动态电路的暂态分析</code>、<code>正弦交流电路稳态分析</code>、<code>含二端口元件电路分析</code>等<strong>动态电路</strong>方面的内容，阅读前应具备<code>微分</code>、<code>积分</code>、<code>微分方程</code>、<code>复数运算</code>、<code>线性代数方程组</code>、<code>矩阵</code>、<code>傅里叶级数</code>等<strong>数学</strong>知识。全文撰写过程当中，参考并且借鉴了国外大学所普遍采用的《Electric Circuits》第 10 版教材。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Electronics/Analysis/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Zen/LaTex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Zen/LaTex/" class="post-title-link" itemprop="url">通用 LaTeX 数学公式语法手册</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-22 21:44:11" itemprop="dateCreated datePublished" datetime="2020-12-22T21:44:11+08:00">2020-12-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-06 02:03:27" itemprop="dateModified" datetime="2021-01-06T02:03:27+08:00">2021-01-06</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Zen/" itemprop="url" rel="index"><span itemprop="name">Zen</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>30k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5:05</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://www.mathjax.org/"><strong>MathJax</strong></a> 是一款运行于 Web 浏览器当中的开源 JavaScript 数学符号渲染引擎，通过它可以方便的在现代 Web 浏览器当中显示数学公式，目前已经能够解析 <code>LaTex</code>、<code>MathML</code> 等标记语言。<strong>MathJax</strong> 项目发源于 2009 年，目前由 NumFOCUS 基金会主持，并且得到了 MathJax 联盟的支持，该联盟是<strong>美国数学协会</strong>（AMS）和 <strong>工业与应用数学协会</strong>（SIAM）的共同合资企业。</p>
+<p><img src="/Zen/LaTex/logo.png"></p>
+<p><a target="_blank" rel="noopener" href="https://www.latex-project.org/"><strong>LaTeX</strong></a> 是一种高质量的排版格式，可以生成复杂的表格与数学公式，是当前电子与数学出版行业的事实标准。本文以 <a target="_blank" rel="noopener" href="https://www.pandoc.org/"><strong>Pandoc</strong></a> 作为 LaTex 渲染引擎（一款用于标记语言文档转换的命令行工具），分门别类的总结了撰写数学公式所需要经常使用到的 LaTeX 语法，方便写作相关科技类文章时随手查阅。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Zen/LaTex/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Electronics/Digital/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Electronics/Digital/" class="post-title-link" itemprop="url">数字逻辑电路技术备忘录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-04 21:11:08" itemprop="dateCreated datePublished" datetime="2020-12-04T21:11:08+08:00">2020-12-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-06 19:41:25" itemprop="dateModified" datetime="2020-12-06T19:41:25+08:00">2020-12-06</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Electronics/" itemprop="url" rel="index"><span itemprop="name">Electronics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:02</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>二十一世纪，数字化浪潮席卷了电子工业领域，与传统的模拟电子系统相比，数字系统具备更加优异的精确与可靠性，逐步取代了许多模拟电路的应用场景。数字逻辑电路是对数字信号进行算术与逻辑运算的电路，以<strong>逻辑门</strong>作为基本电路单元（最早采用 <strong>TTL</strong> 工艺，伴随半导体工艺技术的不断进步，目前已经逐步被 <strong>CMOS</strong> 工艺取代），数字电路可以分为<strong>组合逻辑电路</strong>（基本逻辑门）和<strong>时序逻辑电路</strong>（逻辑门 + 反馈逻辑回路）两大类。</p>
+<p><img src="/Electronics/Digital/logo.png"></p>
+<p>本篇文章讲解了数字逻辑电路的分析与设计所涉及到的基础理论，首先讲解了<code>数制</code>、<code>码制</code>和<code>逻辑代数</code>等基础知识，接着重点描述<code>组合逻辑电路</code>和<code>时序逻辑电路</code>的分析与设计方法，然后讨论了各种<code>数字集成电路</code>（ 含门电路、可编程逻辑元件、半导体存储器）的原理以及使用方法，并且介绍了<code>硬件描述语言</code>与<code>可编程逻辑器件</code>的相关知识，最后一部分讲解<code>AD/DA</code>转换以及<code>脉冲波形</code>的产生和转换电路。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Electronics/Digital/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Math/Elementary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Math/Elementary/" class="post-title-link" itemprop="url">常用初等数学图形与公式汇总</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-26 22:41:00" itemprop="dateCreated datePublished" datetime="2020-11-26T22:41:00+08:00">2020-11-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-27 01:10:20" itemprop="dateModified" datetime="2020-11-27T01:10:20+08:00">2020-11-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:21</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>初等数学主要由<strong>代数</strong>（Algebra）和<strong>几何</strong>（Geometry）两部分构成，本篇文章基于《Thomas’ Calculus Early Transcendentals 14th》一书附录的 <strong>A Brief Table of Integrals</strong> 章节整理而成，主要涉及到了初等代数与几何、三角公式与函数等相关内容，较为系统的概括了初等数学当中较为常见的<strong>公式定理</strong>以及<strong>平面直角坐标系图像</strong>，进而为电子学当中涉及的各类数学运算做好知识准备。</p>
+<p><img src="/Math/Elementary/logo.png"></p>
+<p>由于初等数学只能解释常量的几何与物理问题，例如：<code>规则图形的长度</code>、<code>面积</code>与<code>体积</code>，<code>匀速直线运动</code>等等。虽然并不涉及工程计算当中经常涉及的变化量的分析与求解，但是却是高等数学知识体系当中，不可或缺的基础常识性内容。因此，笔者为了温习微积分相关的知识，特意将初等数学的重要概念归纳至本篇文章下面，便于方便快速的进行查阅。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Math/Elementary/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Electronics/KiCad/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Electronics/KiCad/" class="post-title-link" itemprop="url">开源 EDA 工具 KiCad 5.1.8 电路设计小书</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-04 22:48:37" itemprop="dateCreated datePublished" datetime="2020-11-04T22:48:37+08:00">2020-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Electronics/" itemprop="url" rel="index"><span itemprop="name">Electronics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:23</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>对于国内中小型电子企业的工程师而言，Altium Designer、Pads、Allegro 等商业 EDA 工具的授权费用过于昂贵，且大部分仅提供了 Windows 操作系统版本，缺乏相应的跨平台支持。在电子行业版权问题逐步受到重视的今天，一款易使用、低成本的 EDA 工具对于广大电子工程师显得尤为重要。而 PCB 设计流程与布局布线经验超越 EDA 工具本身，如果没有丰富的元件库与封装库支持，也会面临无米难为炊的困境。</p>
+<p><img src="/Electronics/KiCad/logo.png"></p>
+<p>本文介绍的<a target="_blank" rel="noopener" href="https://kicad-pcb.org/">KiCad</a> 是一款基于 <strong>GPL</strong> 开源许可下的跨平台 EDA 电子设计自动化工具集，能够处理多达 32 个铜层、14 个技术层、4 个辅助层的 PCB 电路板，并且生成加工制造所需要的所有文件（包括照片绘图仪的 Gerber 文件、钻孔文件、元件位置文件等），官方开源社区提供并维护了丰富的第三方库可供选用，而针对开源 EDA 工具普遍存在的自动布线功能偏弱的问题，KiCad 也通过<a target="_blank" rel="noopener" href="https://freerouting.org/">FreeRouting</a>提供了有力支持。文中所涉及原理图与 PCB 样图，皆已共享至笔者的 Github 项目<a target="_blank" rel="noopener" href="https://github.com/uinika/abrams">Abrams</a>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Electronics/KiCad/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/RaspberryPi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/RaspberryPi/" class="post-title-link" itemprop="url">玩转 Raspberry Pi 4B 开源硬件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 03:26:12" itemprop="dateCreated datePublished" datetime="2020-10-14T03:26:12+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>37k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6:12</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>万众期待的 <strong>Raspberry Pi 4B</strong> 终于发布，之前由于产品原型的需要，一直计划采购 <strong>3B+</strong>，后来供应商透露新版 <strong>4B</strong> 稍晚就会面市，所以稍微等待了一段时间，今天终于拿到了一块 <strong>2G</strong> 内存的板子。一直以为 <strong>4B</strong> 只会简单的更新一下 SoC 并增大 <strong>DDR</strong> 容量，但是实际上还带来了 <strong>Type-C</strong>、<strong>Bluetooth 5.0</strong>、<strong>Micro HDMI</strong>、<strong>USB 3.0</strong> 乃至 <strong>DDR4</strong> 等诸多崭新升级。而官方推荐的应用范围，开始从教育渗透至工业领域，逐步发展为一套完整的嵌入式生态链。</p>
+<p><img src="/Embedded/RaspberryPi/logo.png"></p>
+<p>本文基于树莓派基金会官方提供的 <a target="_blank" rel="noopener" href="https://www.raspberrypi.org/documentation/">《Raspberry Pi Documentation》</a>，笔者翻译了其中较为常用的配置章节，便于读者拿到板子以后能够快速上手，并避免使用一些官方不推荐的操作和工具库。此外，本文也会涉及 <code>OpenCV</code>、<code>dlib</code> 的编译，以及 <code>Electron</code> 在树莓派上的部署等话题。文章内容将会伴随笔者的日常使用而长期进行更新，欢迎各位爱好者朋友持续关注与勘误。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/RaspberryPi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/Arduino/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/Arduino/" class="post-title-link" itemprop="url">玩转 Arduino Uno、Mega、Due 开源硬件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 03:26:12" itemprop="dateCreated datePublished" datetime="2020-10-14T03:26:12+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>26k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4:17</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://www.arduino.cc/"><strong>Arduino</strong></a> 是一款目前非常成熟的物联网产品原型开发工具，其硬件设计、IDE 工具、微控制器核心库皆基于开源协议发布，其中，<strong>Eagle</strong> 原理图以及 PCB 布线遵循 <code>Creative Commons Attribution Share-Alike</code> 许可，而 IDE 环境的源代码基于 <code>GPL</code> 协议，微控制器的 C/C++ 库则是基于 <code>LGPL</code> 协议。自从 2005 年首块 Arduino 开发板发布以来，已经推出了众多满足不同需求的硬件以及软件库，开源社区也日渐活跃与丰富。</p>
+<p><img src="/Embedded/Arduino/logo.png"></p>
+<p><strong>Arduino Uno</strong> 是整个 Arduino 家族当中使用最为广泛、文档最为齐全的一款硬件产品，基于 Microchip 微芯公司的 <strong>8</strong> 位 <strong>AVR</strong> 单片机 <a target="_blank" rel="noopener" href="http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf"><strong>ATmega328P</strong></a>，工作电压为<code>5V</code>，采用<code>16MHz</code>的无源谐振器，并拥有<code>32 KB</code>的 <strong>Flash</strong> 存储器（其中<code>0.5KB</code>用于<code>Bootloader</code>程序），以及<code>2KB</code>的 <strong>SRAM</strong> 和<code>1KB</code>的 <strong>EEPROM</strong>。本文采用的 Arduino 硬件是于 2011 年发布的 <a target="_blank" rel="noopener" href="https://store.arduino.cc/usa/arduino-uno-rev3"><strong>Arduino Uno R3</strong></a> 版本，是当前国内市场运用最为广泛的一款型号。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/Arduino/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Linux/Qt-Widgets/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/Qt-Widgets/" class="post-title-link" itemprop="url">Qt 5 桌面应用程序开发指南 - QtWidgets 篇</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 03:21:25" itemprop="dateCreated datePublished" datetime="2020-10-14T03:21:25+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>182k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>30:21</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://www.qt.io/offline-installers"><strong>Qt 5.14.2</strong></a> 是跨平台应用开发框架 Qt 的最新版本，除了采用基于 <strong>C++11</strong> 的经典 <a target="_blank" rel="noopener" href="https://doc.qt.io/qt-5/qtwidgets-index.html"><strong>Qt Widgets</strong></a> 进行桌面应用程序开发以外，还支持通过 <strong>Qt Quick</strong> 快速开发适用于移动端设备的用户界面，因为 Qt 5 底层图形渲染引擎基于 GPU 硬件加速，所以其能够保持与原生 <strong>C++</strong> 近乎等同的运行效率。笔者计划通过两篇文章分别对这 2 种技术进行介绍，但是无论如何，在传统跨平台桌面应用开发领域，<strong>Qt Widgets</strong> 依然是 Qt5 最为基础与核心的内容。</p>
+<p><img src="/Linux/Qt-Widgets/logo.png"></p>
+<p>虽然 Qt 6 发布在即，但是官方声明将会依然保持 API 的兼容与稳定性，因此本文依然基于当前最新的 Qt5 稳定版本撰写。全文将会分别对 <strong>Qt Widgets</strong> 当中使用较为频繁的<code>窗口部件</code>、<code>布局管理</code>、<code>应用主窗口</code>、<code>事件系统</code>、<code>对象模型</code>、<code>风格与样式</code>、<code>国际化</code>等部分内容进行深入介绍，同时展示完善的示例代码以及程序运行效果，并结合<a href="./embedded/Qt-Quick.html">《QtQuick 篇》</a>一文讲解混合编程相关的技术。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux/Qt-Widgets/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Linux/Qt-Quick/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/Qt-Quick/" class="post-title-link" itemprop="url">Qt 5 桌面应用程序开发指南 - QtQuick 篇</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 03:21:25" itemprop="dateCreated datePublished" datetime="2020-10-14T03:21:25+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>51k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8:28</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>由于 Material Style 这样富含动画效果的用户界面风格，并不能简单的加入到以静态图形作为主要显示单元的<code>QWidget</code>当中。所以 <strong>Qt</strong> 官方推出了一种声明式编程语言 <a target="_blank" rel="noopener" href="https://doc.qt.io/qt-5/qtqml-index.html"><strong>QML</strong></a>（Qt 元对象语言，Qt Meta-Object Language），其提供了一种具有更高可读性的声明式语法，并附带了必要的 JavaScript 语句和动态属性绑定支持。QML 的语言特性和引擎框架由 <code>Qt QML</code> 模块提供，该模块同时提供了 <strong>QML</strong> 和 <strong>C++</strong> 两套接口。</p>
+<p><img src="/Linux/Qt-Quick/logo.png"></p>
+<p><a target="_blank" rel="noopener" href="https://doc.qt.io/qt-5/qtquick-index.html"><strong>Qt Quick</strong></a> 是一款基于 QML 的应用程序标准库，包含有可视化类型、交互类型、动画、模型和视图、粒子特效等特性，这些都是由 Qt5 上的<code>Qt Quick</code>模块提供，通过<code>import</code>语句即可方便的进行导入。Qt Quick 同样提供了 <strong>QML</strong> 和 <strong>C++</strong> 两套接口，可以轻松构建具有流畅动画效果的动态 QML 用户界面。而 Qt 5.7 版本以后推出的 <a target="_blank" rel="noopener" href="https://doc.qt.io/qt-5/qtquickcontrols-index.html"><strong>Qt Quick Controls</strong></a> 更是提供了丰富的开箱即用控件，让快速开发成为了可能。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux/Qt-Quick/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/NucleoF767ZI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/NucleoF767ZI/" class="post-title-link" itemprop="url">意法半导体 Nucleo F767ZI 评估板测试</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-10-14 03:21:25 / 修改时间：03:22:53" itemprop="dateCreated datePublished" datetime="2020-10-14T03:21:25+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>332</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>意法半导体提供的<a target="_blank" rel="noopener" href="https://www.st.com/zh/evaluation-tools/nucleo-f767zi.html">Nucleo F767ZI</a>是一款基于 Cortex M7 高性能内核与 LQFP144 封装的 <strong>STM32F767ZIT6U</strong> 微控制器评估板，旨在为开发人员提供了一种灵活廉价的方式搭建产品原型，从而为后期产品选型提供帮助。微控制器配套的 <strong>CUBE</strong> 包<code>STM32Cube_FW_F7_V1.15.0</code>还分别提供有针对于该评估板的 <strong>HAL</strong> 和 <strong>LL</strong> 示例工程，便于开发者快速上手。</p>
+<p><img src="/Embedded/NucleoF767ZI/logo.png"></p>
+<p>该评估板提供了兼容 <strong>Arduino™Uno V3</strong> 提供的 <strong>ST Zio</strong> 连接器（黑色插座）以及引用微控制器全部资源的 <strong>ST Morpho</strong> 扩展接口（两侧焊盘），同时板载有 <strong>ST-LINK V2</strong> 调试编程器，以及 3 枚用户 LED 和 2 个用户按键外加 1 只 <code>32.768kHz</code> 外置晶振；此外还搭载了全速的 <strong>USB OTG</strong> 和以太网接口 <strong>RJ45</strong>。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/Mini2440/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/Mini2440/" class="post-title-link" itemprop="url">基于三星 S3C2440 的嵌入式 Linux 攻略</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 03:21:25" itemprop="dateCreated datePublished" datetime="2020-10-14T03:21:25+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:13</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>由于 Linux 操作系统内核具备可裁剪定制的特性，因而能够运行于 ARM 架构的嵌入式设备当中。伴随近几年，硬件性能的飞速提升以及价格的快速下降，<code>Raspberry Pi</code>、<code>Nano Pi</code>、<code>Rock Pi</code>、<code>Orange Pi</code>等可运行完整桌面 Linux 操作系统的卡片电脑大量涌现，通用计算机与嵌入式系统之间的界限愈来愈模糊。各个 IC 厂家不断提升 MCU 性能的同时，也推出了相应的公版外围电路、通用操作系统、驱动程序支持等一揽子完善的嵌入式技术解决方案，与笔者七年以前接触嵌入式技术伊始，早已经不可同日而语。</p>
+<p><img src="/Embedded/Mini2440/logo.png"></p>
+<p>笔者手上这款 Mini2440 开发板于 2013 年购置，是由广州友善电子科技有限公司于 2010 年推出的 ARM9 开发板，虽然板载的三星 S3C2440 嵌入式微处理器已然廉颇老矣，且对应的<code>Linux 2.6.32.2</code>内核版本也早已壮士暮年。但由于最近涉及 Linux 嵌入式操作系统相关的工作，因此重新上电使用，同时以怀旧心态执笔撰写本文，用于记录一些心得体会，同时也作为日后备忘。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/Mini2440/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/JLink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/JLink/" class="post-title-link" itemprop="url">J-Link 仿真器固件恢复小记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 03:21:25" itemprop="dateCreated datePublished" datetime="2020-10-14T03:21:25+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>32 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>JTAG（<em>Joint Test Action Group，联合测试行动组</em>）是一种用于芯片内部测试的国际标准协议，<strong>ARM</strong>、<strong>DSP</strong>、<strong>FPGA</strong>等主流 IC 都对其提供了良好支持，标准 JTAG 接口拥有<code>TMS</code>模式选择、<code>TCK</code>时钟、<code>TDI</code>数据输入、<code>TDO</code>数据输出共 4 条信号线。笔者当前使用的 Mini2440 开发板原厂提供的 JTAG 调试器是采用并口的<a target="_blank" rel="noopener" href="http://www.hjtag.com/">H-JTAG</a>，由于现在的计算机设备早已经不提供并口支持，因此笔者选择了较为通用的<strong>J-Link</strong>作为 ARM9 仿真调试器。</p>
+<p><img src="/Embedded/JLink/logo.png"></p>
+<p><strong>J-Link</strong>是德国<a target="_blank" rel="noopener" href="https://www.segger.com/">SEGGER</a>公司推出的一款专用于 ARM 内核微控制器的 JTAG 仿真调试设备，能够与 ARM 官方提供的 Keil 集成开发环境无缝衔接，支持 Cortex-A/R、Cortex-M、ARM7、ARM9、ARM11、Renesas RX、Microchip PIC、Silicon Labs 8051、RISC-V 等系列的微控制器。笔者 7 年前购置了一台 J-Link V8 版本的<strong>J-Link</strong>调试器，当时由于使用不当造成固件丢失，因此特别撰写此文来记录一下固件恢复的过程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/JLink/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Electronics/Introduct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Electronics/Introduct/" class="post-title-link" itemprop="url">实用模拟 & 数字电路电子技术导论</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-10-14 02:50:57 / 修改时间：03:35:03" itemprop="dateCreated datePublished" datetime="2020-10-14T02:50:57+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Electronics/" itemprop="url" rel="index"><span itemprop="name">Electronics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>21k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3:27</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>自本世纪六十年代开始，数字半导体技术席卷了全球电子工业，伴随工艺与制程的持续演进，高频高速电子信号的处理需求愈加旺盛，电子技术的发展重心逐步由模拟时代，过渡至全面的数字化阶段。虽然模拟电路以及分立式电子元器件的使用频率逐年下降，但是在电磁兼容性处理、开关电源设计等场景当中，传统的模拟电子技术以及相关分立式元器件依然扮演着不可或缺的角色。</p>
+<p><img src="/Electronics/Introduct/logo.png"></p>
+<p>本文定位为一篇<strong>导论</strong>性质的文章，用于帮助当前开发团队里的嵌入式软件工程师，快速了解模拟数字电子技术相关的术语与概念，因此行文中并不涉及各类电路原理的深入数学分析，仅仅言简意赅的汇总了日常工作相关的模拟、数字电路知识。文章中的部分公式与原理图摘取自<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Wikipedia">维基百科</a>，写作过程当中参考了《Practical Electronics》第 4 版一书。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Electronics/Introduct/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/STM32F103ZET6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/STM32F103ZET6/" class="post-title-link" itemprop="url">基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:37:02" itemprop="dateCreated datePublished" datetime="2020-10-14T02:37:02+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>15k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2:28</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>相对于采用 LQFP48 封装的 <strong>STM32F103C8T6</strong> 微控制器，采用 LQFP144 封装的 <strong>STM32F103ZET6</strong> 时钟频率虽然同为<code>72MHz</code>，但提供了更加丰富的片上外设资源，例如高达<code>512Kbytes</code>的 <strong>Flash</strong> 程序存储器和<code>64Kbytes</code>的 <strong>SRAM</strong> 数据存储器，以及 12 通道<code>DMA</code>控制器，内置 2 个基本定时器 2 个高级定时器 4 个通用定时器，以及 3 个<code>12bit</code>的 <strong>ADC</strong> 与 2 个<code>12bit</code>的 <strong>DAC</strong> 转换器，同时还支持多达 3 组 <strong>SPI</strong>、2 组 <strong>I²C</strong>、 5 组<strong>USART</strong>、1 组<strong>CAN</strong>、1 组 <strong>SDIO</strong> 接口和 1 组全速 <strong>USB2.0</strong> 接口。</p>
+<p><img src="/Embedded/STM32F103ZET6/logo.png"></p>
+<p>本文基于 <strong>ST</strong> 官方近年力推的 <strong>HAL</strong>（Hardware Abstraction Layer）与 <strong>LL</strong>（Low-layer）开发库，结合 <strong>STM32CubeIDE</strong> 提供的图形化配置工具，参考意法半导体官方文档《STM32F103xE Data Sheet》和《STM32F103xx Reference Manual》以及《Description of STM32F1 HAL &amp; LL drivers》，并且结合《ARM Cortex-M3 &amp; Cortex-M4 权威指南》一书，对于微控制器片上外设资源的编程方法进行了详细的分析与示例。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/STM32F103ZET6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/STLink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/STLink/" class="post-title-link" itemprop="url">STLink V2 调试编程器应用图解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:37:02" itemprop="dateCreated datePublished" datetime="2020-10-14T02:37:02+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>22 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>STLink 是由意法半导体公司推出的在线调试编程器，采用<code>5V</code>的<strong>USB2.0</strong>全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以 <strong>JTAG</strong> 或 <strong>SWD</strong> 模式连接至 STM32 系列微控制器，或者以 <strong>SWIM</strong> 模式连接至 STM8 系列微控制器，操作温度介于<code>0 ~ 50℃</code>之间。由于 ST 公司极为重视中国市场，因此 STLink 的销售价格相对其它国外大厂的在线仿真设备要实惠许多，基本成为国内嵌入式工程师人手上必备的工具。</p>
+<p><img src="/Embedded/STLink/logo.png"></p>
+<p>本文详细介绍 Keil uVision 5 开发环境下 ST-LINK/V2 版本的调试编程器使用方法，并介绍了相关接口的详细定义与接线方法，文中部分内容翻译至意法半导体官方提供的<a target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/st-link-v2.html">《用于 STM8 与 STM32 的 ST-LINK/V2 在线调试编程器用户手册》</a>，以确保使用方法与解释的规范性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/STLink/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/Android/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/Android/" class="post-title-link" itemprop="url">Android 物联网应用开发实例</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:37:02" itemprop="dateCreated datePublished" datetime="2020-10-14T02:37:02+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>21k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3:26</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/"><strong>Android</strong></a> 可以采用 Kotlin、Java、C++ 语言编写应用程序，<a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference">Android SDK</a> 会将这些代码连同相应的数据和资源文件编译为 Android 软件包，即一个带有<code>.apk</code>后缀的归档文件，也就是 Android 应用程序的安装文件。本质上 Android 系统是一种多用户的 Linux 系统，每个应用程序都运行在独立的 Linux 用户 <strong>ID</strong> 和<strong>进程</strong>之下，从而为每个 Android 应用都提供了独立的<strong>安全沙盒</strong>，体现了最小权限的设计原则。</p>
+<p><img src="/Embedded/Android/logo.png"></p>
+<p>鉴于 Google 官方提供了完善的文档，本文并不过多过深的涉及 Android SDK 开发的具体知识细节，仅会在简单介绍 Android 开发当中的一些基本概念之后，着重分析<strong>经典/低功耗蓝牙</strong>、<strong>NFC</strong>、<strong>WIFI</strong>、<strong>指纹识别</strong>、<strong>5G</strong> 等硬件外设的通信协议概念以及相应的实现步骤，并且展示一些比较典型的应用场景与示例代码，从而为读者在进行物联网相关项目的开发时，在移动设备应用控制端提供即有的现成经验。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/Android/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/STC90C51/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/STC90C51/" class="post-title-link" itemprop="url">宏晶 STC90C516RD+ 数据手册精读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:37:02" itemprop="dateCreated datePublished" datetime="2020-10-14T02:37:02+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>29k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4:51</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>8051 微处理器是指兼容<strong>Intel MCS-51</strong>体系架构的一系列单片机，全球有众多的半导体厂商都有基于这一体系架构的产品，例如：Atmel 的<code>AT89C52</code>、NXP 的<code>P89V51</code>、宏晶科技的<code>STC89/90系列</code>等。截至本篇文章成文之前，意法半导体推出的<code>STM8</code>系列单片机风头正劲，同为 8 位单片机产品，虽然 8051 在架构、功耗乃至价格上基本已无优势，但作为比较经典的嵌入式微处理器解决方案，依然具备着不错的学习价值。</p>
+<p><img src="/Embedded/STC90C51/logo.png"></p>
+<p>本文介绍的<code>STC90C516RD+</code>属于<code>5V</code>单片机（<em>工作电压为<code>5.5V-3.3V</code></em>），属于相对比较廉价和常见的国产单片机解决方案，片上拥有<code>中央处理器CPU</code>、<code>程序存储器Flash</code>、<code>数据存储器RAM</code>、<code>定时/计数器</code>、<code>UART串口</code>、<code>IO接口</code>、<code>EEPROM</code>、<code>看门狗</code>等常用资源。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/STC90C51/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/STM32F103C8T6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/STM32F103C8T6/" class="post-title-link" itemprop="url">意法半导体 STM32F103C8T6 标准库典型实例</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:37:02" itemprop="dateCreated datePublished" datetime="2020-10-14T02:37:02+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>193k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>32:15</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>笔者半年之前的一篇长文，所介绍的<strong>STC51</strong>系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准 8051 架构诞生于 70 年代，其硬件架构、资源数量以及编程方式都已显老旧，成本和性能方面也皆落后于其它架构产品，市场占有率逐步遭到侵蚀，目前仅常见于一些教学与发烧友使用的范畴。伴随近几年物联网行业的快速兴起，<strong>STM32</strong>等基于 ARM Cortex 内核的微控制器，凭借丰富的片上资源与简单易用的标准外设库，逐步成为消费与工业领域中的主流产品。</p>
+<p><img src="/Embedded/STM32F103C8T6/logo.png"></p>
+<p><a target="_blank" rel="noopener" href="https://www.st.com">意法半导体</a>成立于 1987 年，由意大利 <strong>S</strong>GS 和法国 <strong>T</strong>homson 两家半导体企业合并而成，本文所介绍的<a target="_blank" rel="noopener" href="https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html#"><strong>STM32F103C8T6</strong></a>属于该公司应用极为广泛的型号，其提供的<code>STM32F10x Standard Peripheral Library</code>标准外设库对 STM32 片上资源进行了完善的封装，相对于 ST 公司目前力推的<strong>HAL/LL</strong>库，标准外设库更加接近于传统的寄存器操作，因而也较为容易向<a target="_blank" rel="noopener" href="https://www.gigadevice.com">兆易创新</a>的<a target="_blank" rel="noopener" href="https://www.gigadevice.com/products/microcontrollers/gd32/"><strong>GD32</strong></a>等国产微控制器移植。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/STM32F103C8T6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/STC89C52/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/STC89C52/" class="post-title-link" itemprop="url">宏晶 STC89C52RC 微控制器实践小书</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:37:02" itemprop="dateCreated datePublished" datetime="2020-10-14T02:37:02+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>188k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>31:16</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>伴随 NB-IOT、LoRa、5G 等无线物联网通信技术的快速成熟，已经诞生近四十余年的 8051 系列微处理，在功耗、性能、开发难易程度方面，已然全面落后于 ARM Cortex-M3 等主流嵌入式微控制器方案。但是由于其技术架构较为经典，寄存器配置相对简洁，在一些低成本场景中依然有所沿用。笔者当前使用的开发板基于宏晶<strong>STC89C52RC</strong>嵌入式微控制器方案，虽然购置于六年以前，但是依然集成有各类常用的 UART、I²C、SPI 总线模块。</p>
+<p><img src="/Embedded/STC89C52/logo.png"></p>
+<p>笔者日常开发工作当中，经常需要使用到此类嵌入式总线通信协议，因此参考了官方文档以及相关技术资料，逐步将本文涉及的各类模块驱动移植至当前开发板，便于用作与其它嵌入式设备联调测试之用。近几年，意法半导体的<strong>STM32F103C8T6</strong>量产价格不断下探，已经逐步接近宏晶的<strong>STC8051</strong>系列产品，可以预见后者将会逐渐面临市场淘汰，作为一款极为经典的 8 位微控制器，用作测试和实验目的依然是不错的选择。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/STC89C52/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Linux/Native/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/Native/" class="post-title-link" itemprop="url">嵌入式 Linux C 原生应用程序开发</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-10-14 02:35:35 / 修改时间：03:20:12" itemprop="dateCreated datePublished" datetime="2020-10-14T02:35:35+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>704</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。</p>
+<p><img src="/Linux/Native/logo.png"></p>
+<p>本文首先会介绍<code>文件 IO</code>、<code>进程与进程间通信</code>、<code>多线程</code>、<code>网络编程</code>等 Linux 原生应用程序开发的内容，然后分门别类的对<code>串口</code>、<code>GPIO</code>、<code>SPI</code>、<code>I2C</code> 等常用的协议开发进行了介绍。阅读本文前需要具备 C 编程语言基础，并且理解 GNU 编译器、链接器、调试器的相关概念。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux/Native/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Linux/Vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/Vim/" class="post-title-link" itemprop="url">Vim 常用键位生存指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:35:35" itemprop="dateCreated datePublished" datetime="2020-10-14T02:35:35+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>25 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Vim 是从 UNIX 下的 Vi 发展出来的一个文本编辑器，近几年，伴随<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VSCode</a>、<a target="_blank" rel="noopener" href="https://atom.io">Atom</a>、<a target="_blank" rel="noopener" href="https://www.sublimetext.com/">Sublime</a>等一众轻量级编辑器的快速发展，涌现了大量基于这些编辑器平台的 Vim 快捷键插件，甚至 Chrome 和 Firefox 上都已经分别提供<code>Vimium</code>、<code>VimFx</code>等优秀插件。虽然 Vim 本身因为其繁琐的配置，日常开发中已经较少直接使用，但是其快捷键操作习惯得以保留，因此 Vim 逐渐从一套自由软件发展为可以在诸多平台上使用的快捷键套装。</p>
+<p><img src="/Linux/Vim/logo.png"></p>
+<p>本文总结了笔者运用 Vim 作为日常开发工具的过程当中，经常使用到的一些快捷键和命令，并简单的按照操作进行了一个分类，帮助<em>Vim Junior</em>在纷繁的快捷键位里快速适应并生存下来，逐步成为一名熟练的<em>Vim Addict</em>。文章部分命令和键位的解释参考了<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》</a>一文，快捷键位示例图则取自<a target="_blank" rel="noopener" href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">《Graphical vi-vim Cheat Sheet and Tutorial》</a>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux/Vim/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Math/Calculus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Math/Calculus/" class="post-title-link" itemprop="url">常用高等数学公式与导学</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:35:35" itemprop="dateCreated datePublished" datetime="2020-10-14T02:35:35+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>967</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>高等数学是由微积分学，较为深入的代数学、几何学以及它们之间的交叉内容所形成的一门基础学科。由于<strong>电路分析</strong>、<strong>运算放大器</strong>、<strong>信号完整性</strong>、<strong>高频电路</strong>和<strong>信号学</strong>当中，都涉及有大量的积分和导数运算，也需要经常使用到拉普拉斯和傅立叶变换等高等数学内容，因此着手撰写本文用于复习大学本科学习阶段涉及的微积分知识，主要包含<code>一元函数微分学</code>、<code>一元函数积分学</code>、<code>矢量代数与空间解析几何</code>、<code>多元函数微分学</code>、<code>多元函数积分学</code>、<code>无穷级数</code>、<code>常微分方程</code>等部分的内容。</p>
+<p><img src="/Math/Calculus/logo.png"></p>
+<p>由于微积分涉及的概念相对较为抽象，因此在文章写作过程中，阅读并且参考了<strong>《Thomas’ Calculus》</strong>一书当中的有关内容。该书从 1951 年第 1 版发行至今，当前的最新版本为第 14 版，已经足足经历了七十个年头，是一本经历过时间检验的优秀参考资料。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Math/Calculus/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Linux/GCC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/GCC/" class="post-title-link" itemprop="url">基于 Linux 的 GCC 与 GDB 应用程序调试</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:35:35" itemprop="dateCreated datePublished" datetime="2020-10-14T02:35:35+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:59</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://www.gnu.org/"><strong>GNU</strong></a> 的正确发音为<code>[g'noo]</code>，名称由英文句子<code>GNU's Not Unix</code>递归缩写组成，是一项由<a target="_blank" rel="noopener" href="https://www.fsf.org/">自由软件基金会</a>推动的操作系统计划。GNU 计划最早开始于 1984 年 1 月，目标是完成一个由<strong>Hurd</strong>内核与一系列应用程序、系统库、开发工具组成的<strong>GNU 操作系统</strong>。但由于 Hurd 的开发工作迟迟未能完成，因而普遍选择采用 Linux Kernel 作为操作系统的内核，这一套技术组合正是闻名遐迩的 <strong>GNU/Linux</strong> 操作系统。</p>
+<p><img src="/Linux/GCC/logo.png"></p>
+<p>由 <a target="_blank" rel="noopener" href="https://gcc.gnu.org/"><strong>GCC</strong></a> 与 <a target="_blank" rel="noopener" href="http://www.gnu.org/software/gdb/"><strong>GDB</strong></a> 组成的编译套件正是 GNU 计划下诞生的优秀开源项目，也是 GNU/Linux 技术体系不可或缺的构成要素。虽然当前 <a target="_blank" rel="noopener" href="http://clang.llvm.org/"><strong>Clang</strong></a> 与 <a target="_blank" rel="noopener" href="https://www.llvm.org/"><strong>LLVM</strong></a> 编译套件的发展风头正劲，但是由于嵌入式 Linux 设备通常只提供基于 GCC 的交叉编译工具链，加之两者在使用上差异不大，而 GDB 又同时提供了两者编译后程序的完整 Debug 支持，因而笔者依然选择 <strong>GCC</strong> 与 <strong>GDB</strong> 组合来作为本文的撰写的目标。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux/GCC/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Linux/Shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/Shell/" class="post-title-link" itemprop="url">Bash Shell 脚本编程实践</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:35:35" itemprop="dateCreated datePublished" datetime="2020-10-14T02:35:35+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>16k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2:40</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Shell</strong> 既是一套<strong>命令行工具</strong>（交互式地解释和执行用户输入的命令）也是一种<strong>脚本设计语言</strong>（定义有变量与参数，并提供了控制、循环、分支结构）。<a target="_blank" rel="noopener" href="https://tiswww.case.edu/php/chet/bash/bashtop.html"><strong>Bash Shell</strong></a> 是由 GUN 官方项目提供的 Shell 解释器，名称源自于 <strong>B</strong>ourne <strong>A</strong>gain <strong>SH</strong>ell 的英文缩写，整合了传统 <strong>Korn Shell</strong> 以及 <strong>C Shell</strong> 的有效特性，并且尽量遵循<code>IEEE POSIX P1003.2/ISO 9945.2</code>规范，同时在编程与交互使用方面提供了大量的功能改进，因而在提供丰富功能的基础之上，展现出了良好的兼容特性，大多数<code>.sh</code>脚本可以无需移植修改即可交由 Bash Shell 来执行。</p>
+<p><img src="/Linux/Shell/logo.png"></p>
+<p>当用户登入任意一款 Linux 操作系统时，初始化程序<code>init</code>都将会为用户启动一个<strong>Bash Shell</strong>命令解析器，其即可以用于解析命令行输入并与内核进行交互，也可以作为高效的脚本编程语言，运用其提供的变量、参数、循环、分支等编程语法特性，完成一些批量的自动化的任务处理工作，本文将会围绕 Bash Shell 的脚本编程特性，加以进行详细的分析、说明与示例。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux/Shell/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2010 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-book-open"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.9m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">312:13</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

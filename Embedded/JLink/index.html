@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#8C634F">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#8C634F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CMonda:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"uinika.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+  </script>
+<meta name="description" content="JTAG（Joint Test Action Group，联合测试行动组）是一种用于芯片内部测试的国际标准协议，ARM、DSP、FPGA等主流 IC 都对其提供了良好支持，标准 JTAG 接口拥有TMS模式选择、TCK时钟、TDI数据输入、TDO数据输出共 4 条信号线。笔者当前使用的 Mini2440 开发板原厂提供的 JTAG 调试器是采用并口的H-JTAG，由于现在的计算机设备早已经不提供并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="J-Link 仿真器固件恢复小记">
+<meta property="og:url" content="https://uinika.github.io/Embedded/JLink/index.html">
+<meta property="og:site_name" content="Bit by bit">
+<meta property="og:description" content="JTAG（Joint Test Action Group，联合测试行动组）是一种用于芯片内部测试的国际标准协议，ARM、DSP、FPGA等主流 IC 都对其提供了良好支持，标准 JTAG 接口拥有TMS模式选择、TCK时钟、TDI数据输入、TDO数据输出共 4 条信号线。笔者当前使用的 Mini2440 开发板原厂提供的 JTAG 调试器是采用并口的H-JTAG，由于现在的计算机设备早已经不提供并">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/logo.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/jumper-1.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/jumper-2.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/driver.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/sam-ba-1.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/sam-ba-2.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/sam-ba-3.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/sam-ba-4.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/jlink-commander-1.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/jlink-commander-2.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/jlink-commander-3.png">
+<meta property="og:image" content="https://uinika.github.io/Embedded/JLink/jlink-commander-4.png">
+<meta property="article:published_time" content="2020-10-13T19:21:25.760Z">
+<meta property="article:modified_time" content="2020-10-13T19:21:25.760Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="MCU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://uinika.github.io/Embedded/JLink/logo.png">
+
+
+<link rel="canonical" href="https://uinika.github.io/Embedded/JLink/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>J-Link 仿真器固件恢复小记 | Bit by bit</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bit by bit" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bit by bit</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Electronics, Embedded & Web</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
+        <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Electronics, Embedded & Web</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/uinika/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;uinika&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-quora fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:uinika@outlook.com" title="Email → mailto:uinika@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:uinika@outlook.com?call|chat" title="Skype → skype:uinika@outlook.com?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/uinika" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;uinika" rel="noopener" target="_blank"><i class="fab fa-github-alt fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7998979/uinika?tab=profile" title="Stack Overflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7998979&#x2F;uinika?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/uinika" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/JLink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          J-Link 仿真器固件恢复小记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 03:21:25" itemprop="dateCreated datePublished" datetime="2020-10-14T03:21:25+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>32 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>JTAG（<em>Joint Test Action Group，联合测试行动组</em>）是一种用于芯片内部测试的国际标准协议，<strong>ARM</strong>、<strong>DSP</strong>、<strong>FPGA</strong>等主流 IC 都对其提供了良好支持，标准 JTAG 接口拥有<code>TMS</code>模式选择、<code>TCK</code>时钟、<code>TDI</code>数据输入、<code>TDO</code>数据输出共 4 条信号线。笔者当前使用的 Mini2440 开发板原厂提供的 JTAG 调试器是采用并口的<a target="_blank" rel="noopener" href="http://www.hjtag.com/">H-JTAG</a>，由于现在的计算机设备早已经不提供并口支持，因此笔者选择了较为通用的<strong>J-Link</strong>作为 ARM9 仿真调试器。</p>
+<p><img src="/Embedded/JLink/logo.png"></p>
+<p><strong>J-Link</strong>是德国<a target="_blank" rel="noopener" href="https://www.segger.com/">SEGGER</a>公司推出的一款专用于 ARM 内核微控制器的 JTAG 仿真调试设备，能够与 ARM 官方提供的 Keil 集成开发环境无缝衔接，支持 Cortex-A/R、Cortex-M、ARM7、ARM9、ARM11、Renesas RX、Microchip PIC、Silicon Labs 8051、RISC-V 等系列的微控制器。笔者 7 年前购置了一台 J-Link V8 版本的<strong>J-Link</strong>调试器，当时由于使用不当造成固件丢失，因此特别撰写此文来记录一下固件恢复的过程。</p>
+<a id="more"></a>
+<p>J-Link 采用了爱特梅尔（<em>ATMEL</em>）公司的 ARM7 架构微控制器<strong>AT91SAM7S64</strong>作为主控芯片，2017 年 Atmel 已经被微芯半导体（<em>Microchip</em>）收购，进行所有恢复工作之前，需要先访问其官网下载微控制器所对应的程序烧录工具<a target="_blank" rel="noopener" href="https://www.microchip.com/developmenttools/ProductDetails/atmel%20sam-ba%20in-system%20programmer"><strong>SAM-BA 2.18 for Windows</strong></a>。J-Link 仿真器固件由<a target="_blank" rel="noopener" href="https://www.segger.com/">SEGGER</a>开发，因此同样需要前往其官网下载最新的<a target="_blank" rel="noopener" href="https://www.segger.com/downloads/J-Link/#J-LinkSoftwareAndDocumentationPack"><em>J-Link 驱动工具包</em></a>，以及<code>J-Link ARM V8</code>稳定版固件。</p>
+<p>准备好上述三个工具之后，首先需要擦除 J-Link 板载 Flash 上面的原有固件，即<strong>先给 J-Link 通电，然后短接 ERASE 跳线帽，保持 20 秒之后再断电并移除跳线帽</strong>。</p>
+<p><img src="/Embedded/JLink/jumper-1.png"></p>
+<p>然后将 SAM-BA 固件复制到 FLASH 的前两个扇区，即<strong>短接 PCB 板上的 TST 跳线帽，然后给 J-Link 通电，在保持短接状态 30 秒后断电并移除跳线帽</strong>。</p>
+<p><img src="/Embedded/JLink/jumper-2.png"></p>
+<p>完成上述两个步骤之后，应该在 Windows 10 操作系统的设备管理器当中看到如下界面：</p>
+<p><img src="/Embedded/JLink/driver.png"></p>
+<p>这表示 JLINK 已经被驱动正确的识别，接下来就可以打开<strong>SAM-BA</strong>并在界面选择如下设置：</p>
+<p><img src="/Embedded/JLink/sam-ba-1.png"></p>
+<p>点击【connect】按钮之后进入固件烧写主界面，并选择【Send File Name】按钮选择已经下载好的<code>J-Link ARM V8</code>固件：</p>
+<p><img src="/Embedded/JLink/sam-ba-2.png"></p>
+<p>点击【Send File】开始烧写固件，此时会询问你是否解锁已经锁定的区域，这里选择【是】。</p>
+<p><img src="/Embedded/JLink/sam-ba-3.png"></p>
+<p>烧写快要完成的时候，会弹出是否锁定固件存储区域的提示，这里必须选择【否】，不然后面会影响到 J-Link 的正常连接与工作。</p>
+<p><img src="/Embedded/JLink/sam-ba-4.png"></p>
+<p>jlink 固件烧写成功之后，<strong>SAM-BA</strong>会在软件的底部区域展示如下日志信息：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">loading history file ... <span class="number">0</span> events added</span><br><span class="line">SAM-BA console display active (Tcl8.<span class="number">5</span>.<span class="number">9</span> / Tk8.<span class="number">5</span>.<span class="number">9</span>)</span><br><span class="line">(sam-ba_2.<span class="number">18</span>) <span class="number">1</span> %</span><br><span class="line">(sam-ba_2.<span class="number">18</span>) <span class="number">1</span> % send_file &#123;Flash&#125; &quot;D:/Embedded/JLink V8/jlink-v8.bin&quot; <span class="number">0</span>x100000 <span class="number">0</span></span><br><span class="line">-I- Send File D:/Embedded/JLink V8/jlink-v8.bin <span class="built_in">at</span> address <span class="number">0</span>x100000</span><br><span class="line"> first_sector <span class="number">0</span> last_sector <span class="number">15</span></span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x0 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- Sector <span class="number">0</span> unlocked</span><br><span class="line">-I- Sector <span class="number">1</span> unlocked</span><br><span class="line">-I- Sector <span class="number">2</span> unlocked</span><br><span class="line">-I- Sector <span class="number">3</span> unlocked</span><br><span class="line">-I- Sector <span class="number">4</span> unlocked</span><br><span class="line">-I- Sector <span class="number">5</span> unlocked</span><br><span class="line">-I- Sector <span class="number">6</span> unlocked</span><br><span class="line">-I- Sector <span class="number">7</span> unlocked</span><br><span class="line">-I- Sector <span class="number">8</span> unlocked</span><br><span class="line">-I- Sector <span class="number">9</span> unlocked</span><br><span class="line">-I- Sector <span class="number">10</span> unlocked</span><br><span class="line">-I- Sector <span class="number">11</span> unlocked</span><br><span class="line">-I- Sector <span class="number">12</span> unlocked</span><br><span class="line">-I- Sector <span class="number">13</span> unlocked</span><br><span class="line">-I- Sector <span class="number">14</span> unlocked</span><br><span class="line">-I- Sector <span class="number">15</span> unlocked</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x0 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x1500 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x2A00 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x3F00 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x5400 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x6900 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x7E00 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>x9300 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>xA800 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>xBD00 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>xD200 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x1500 bytes <span class="built_in">at</span> <span class="number">0</span>xE700 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x1500 bytes written by applet</span><br><span class="line">-I- 	Writing: <span class="number">0</span>x400 bytes <span class="built_in">at</span> <span class="number">0</span>xFC00 (buffer addr : <span class="number">0</span>x202994)</span><br><span class="line">-I- 	<span class="number">0</span>x400 bytes written by applet</span><br><span class="line"><span class="keyword">Do</span> <span class="keyword">not</span> lock</span><br></pre></td></tr></table></figure>
+<p>最后，关闭<strong>SAM-BA</strong>并将 J-Link 断电，重新通电后 LED 指示灯点亮，表示 J-Link 已经开始工作，接下来打开<strong>J-Link Commander</strong>查看它的工作状态，此时会弹出一个固件升级提示信息，为了保持当前硬件兼容性这里选择【否】跳过升级：</p>
+<p><img src="/Embedded/JLink/jlink-commander-1.png"></p>
+<p>当看到如下命令行界面的时候，表示当前 J-Link 的工作状态一切正常：</p>
+<p><img src="/Embedded/JLink/jlink-commander-2.png"></p>
+<p>此时，可以通过命令行界面输入一条<code>usb</code>指令，表示通过 USB 连接至 J-Link：</p>
+<p><img src="/Embedded/JLink/jlink-commander-3.png"></p>
+<blockquote>
+<p>注意：<strong>J-Link Commander</strong>使用过程中会不断提示<code>当前连接的jlink存在缺陷，不能保证正确的操作。</code>，笔者建议在产品化开发场景下，尽可能选择 SEGGER 公司的最新产品，从而获得完整的商业技术支持。</p>
+</blockquote>
+<p><img src="/Embedded/JLink/jlink-commander-4.png"></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\Mini2440\" rel="bookmark">基于三星 S3C2440 的嵌入式 Linux 攻略</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\NucleoF767ZI\" rel="bookmark">意法半导体 Nucleo F767ZI 评估板测试</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STLink\" rel="bookmark">STLink V2 调试编程器应用图解</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STM32F103ZET6\" rel="bookmark">基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\RaspberryPi\" rel="bookmark">玩转 Raspberry Pi 4B 开源硬件</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\Arduino\" rel="bookmark">玩转 Arduino Uno、Mega、Due 开源硬件</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STC90C51\" rel="bookmark">宏晶 STC90C516RD+ 数据手册精读</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STM32F103C8T6\" rel="bookmark">意法半导体 STM32F103C8T6 标准库典型实例</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Embedded\STC89C52\" rel="bookmark">宏晶 STC89C52RC 微控制器实践小书</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Hank
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://uinika.github.io/Embedded/JLink/" title="J-Link 仿真器固件恢复小记">https://uinika.github.io/Embedded/JLink/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/qrcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">微信公众号</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/column/chengdu">
+          <span class="icon">
+            <i class="fab fa-quora"></i>
+          </span>
+
+          <span class="label">知乎专栏</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://space.bilibili.com/1514341594">
+          <span class="icon">
+            <i class="fab fa-youtube"></i>
+          </span>
+
+          <span class="label">Bilibili 视频</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS 订阅</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MCU/" rel="tag"><i class="fa fa-tag"></i> MCU</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Electronics/Introduct/" rel="prev" title="实用模拟 & 数字电路电子技术导论">
+                  <i class="fa fa-chevron-left"></i> 实用模拟 & 数字电路电子技术导论
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Embedded/Mini2440/" rel="next" title="基于三星 S3C2440 的嵌入式 Linux 攻略">
+                  基于三星 S3C2440 的嵌入式 Linux 攻略 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2010 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-book-open"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.9m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">312:13</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+
+</body>
+</html>

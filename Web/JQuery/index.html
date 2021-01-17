@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#8C634F">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#8C634F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CMonda:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"uinika.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+  </script>
+<meta name="description" content="伴随Vue、Angular、React等编译式前端框架的崛起，前端开发人员逐渐从繁琐的 DOM 操作当中解脱出来。但是在项目实践过程当中，依然存有诸多问题需要通过直接操作 DOM 来解决，虽然现代化浏览器已经支持selectAll()等 HTML5 新特性，但是针对一些强调页面兼容性的场景，为了屏蔽各款浏览器解析引擎所遵循规范的差异，依然需要借助于jQuery来完成 DOM 文档操作。  因此">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery 那些容易被忽略的问题">
+<meta property="og:url" content="https://uinika.github.io/Web/JQuery/index.html">
+<meta property="og:site_name" content="Bit by bit">
+<meta property="og:description" content="伴随Vue、Angular、React等编译式前端框架的崛起，前端开发人员逐渐从繁琐的 DOM 操作当中解脱出来。但是在项目实践过程当中，依然存有诸多问题需要通过直接操作 DOM 来解决，虽然现代化浏览器已经支持selectAll()等 HTML5 新特性，但是针对一些强调页面兼容性的场景，为了屏蔽各款浏览器解析引擎所遵循规范的差异，依然需要借助于jQuery来完成 DOM 文档操作。  因此">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://uinika.github.io/Web/JQuery/logo.png">
+<meta property="og:image" content="https://uinika.github.io/Web/JQuery/dom.png">
+<meta property="og:image" content="https://uinika.github.io/Web/JQuery/jquery.png">
+<meta property="article:published_time" content="2020-10-13T18:33:09.047Z">
+<meta property="article:modified_time" content="2020-10-13T18:33:09.047Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://uinika.github.io/Web/JQuery/logo.png">
+
+
+<link rel="canonical" href="https://uinika.github.io/Web/JQuery/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>jQuery 那些容易被忽略的问题 | Bit by bit</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bit by bit" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bit by bit</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Electronics, Embedded & Web</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
+        <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-%E5%AF%B9%E8%B1%A1%E5%92%8C-dom-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">jQuery 对象和 DOM 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-%E5%AF%B9%E8%B1%A1-dom-%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">jQuery 对象-&gt;DOM 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom-%E5%AF%B9%E8%B1%A1-jquery-%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">DOM 对象-&gt;jQuery 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-%E9%80%89%E6%8B%A9%E5%99%A8%E6%80%A7%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">jQuery 选择器性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%B8%B8%E7%94%A8%E7%9A%84-jquery-%E9%80%89%E6%8B%A9%E5%99%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">缓存常用的 jQuery 选择器对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%8F%E5%B0%91%E5%BE%AA%E7%8E%AF%E6%97%B6%E7%9A%84-dom-%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">减少循环时的 DOM 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9F%E6%96%B9%E5%BC%8F%E5%A4%84%E7%90%86-jquery-%E6%95%B0%E7%BB%84"><span class="nav-number">7.</span> <span class="nav-text">使用原生方式处理 jQuery 数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="nav-number">8.</span> <span class="nav-text">尽可能使用事件委托</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-extend%E5%B0%81%E8%A3%85%E5%8F%AF%E5%A4%8D%E7%94%A8%E4%BB%A3%E7%A0%81"><span class="nav-number">9.</span> <span class="nav-text">通过 extend()封装可复用代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-html5-%E7%9A%84-data-%E5%B1%9E%E6%80%A7%E7%BB%91%E5%AE%9A%E6%95%B0%E6%8D%AE"><span class="nav-number">10.</span> <span class="nav-text">使用 HTML5 的 data 属性绑定数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BD%E9%87%8F%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9F-javascript"><span class="nav-number">11.</span> <span class="nav-text">尽量使用原生 JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#document.ready"><span class="nav-number">12.</span> <span class="nav-text">$(document).ready()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E5%AF%B9%E8%B1%A1.deferred"><span class="nav-number">13.</span> <span class="nav-text">延迟对象$.Deferred()</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Electronics, Embedded & Web</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/uinika/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;uinika&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-quora fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:uinika@outlook.com" title="Email → mailto:uinika@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:uinika@outlook.com?call|chat" title="Skype → skype:uinika@outlook.com?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/uinika" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;uinika" rel="noopener" target="_blank"><i class="fab fa-github-alt fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7998979/uinika?tab=profile" title="Stack Overflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7998979&#x2F;uinika?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/uinika" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Web/JQuery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jQuery 那些容易被忽略的问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-14 02:33:09" itemprop="dateCreated datePublished" datetime="2020-10-14T02:33:09+08:00">2020-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:09</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>伴随<code>Vue</code>、<code>Angular</code>、<code>React</code>等编译式前端框架的崛起，前端开发人员逐渐从繁琐的 DOM 操作当中解脱出来。但是在项目实践过程当中，依然存有诸多问题需要通过直接操作 DOM 来解决，虽然现代化浏览器已经支持<code>selectAll()</code>等 HTML5 新特性，但是针对一些强调页面兼容性的场景，为了屏蔽各款浏览器解析引擎所遵循规范的差异，依然需要借助于<code>jQuery</code>来完成 DOM 文档操作。</p>
+<p><img src="/Web/JQuery/logo.png"></p>
+<p>因此<code>jQuery</code>这款诞生于 2006 年的 JavaScript 库，依然在<strong>现代化前端开发</strong>当中扮演着较为重要角色。本文结合笔者 Web 前端开发工作当中积累的实践经验，较为系统的总结了<code>jQuery</code>实践过程当中一些比较容易被开发人员所忽略的问题。例如 jQuery 对象与 DOM 对象的相互转换、jQuery 选择器性能、异步对象<code>$.Deferred()</code>以及 JavaScript 性能优化相关的话题。</p>
+<a id="more"></a>
+<h2 id="jquery-对象和-dom-对象">jQuery 对象和 DOM 对象</h2>
+<ul>
+<li>DOM 对象：通过原生 javascript（如<code>getElementsByTagName</code>或<code>getElementId</code>）获取的 html 节点。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dom = <span class="built_in">document</span>.getElementById(<span class="string">&quot;app&quot;</span>); <span class="comment">// 获取DOM对象</span></span><br><span class="line"><span class="keyword">var</span> html = dom.innerHTML; <span class="comment">// 获取DOM元素内的HTML代码</span></span><br></pre></td></tr></table></figure>
+<p><img src="/Web/JQuery/dom.png" title="通过document获取原生DOM对象"></p>
+<ul>
+<li>jQuery 对象：被 jQuery 包装过的 DOM 对象。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jq = $(<span class="string">&quot;#app&quot;</span>); <span class="comment">// 获取jQuery对象</span></span><br><span class="line"><span class="keyword">var</span> html = jq.html(); <span class="comment">// 获取jQuery对象内的HTML代码</span></span><br></pre></td></tr></table></figure>
+<p><img src="/Web/JQuery/jquery.png" title="jQuery对象的本质是数组"></p>
+<blockquote>
+<p>不能交换使用 jQuery 对象、DOM 对象上的属性，例如上面代码中的<code>innerHTML</code>与<code>html()</code>。</p>
+</blockquote>
+<h2 id="jquery-对象-dom-对象">jQuery 对象-&gt;DOM 对象</h2>
+<p>jQuery 提供了 2 种转换 DOM 对象的方法：</p>
+<p>（1）jQuery 对象是一个类似于数组的对象，因此可以通过数组运算符<code>[]</code>获取指定索引的 DOM 对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jq = $(<span class="string">&quot;.test&quot;</span>); <span class="comment">// jQuery对象</span></span><br><span class="line"><span class="keyword">var</span> dom = jq[<span class="number">0</span>]; <span class="comment">// DOM对象</span></span><br></pre></td></tr></table></figure>
+<p>（2）通过 jQuery 本身提供的<code>get(index)</code>方法来获取指定 index 的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jq = $(<span class="string">&quot;.test&quot;</span>); <span class="comment">// jQuery对象</span></span><br><span class="line"><span class="keyword">var</span> dom = jq.get(<span class="number">0</span>); <span class="comment">// DOM对象</span></span><br></pre></td></tr></table></figure>
+<h2 id="dom-对象-jquery-对象">DOM 对象-&gt;jQuery 对象</h2>
+<p>将 DOM 对象通过<code>$()</code>函数包装起来，就可以获得 jQuery 对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dom = <span class="built_in">document</span>.getElementById(<span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> jq = $(dom);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以考虑使用<strong>$</strong>作为前缀为 jQuery 对象进行命名，例如上面代码中的变量<code>jq</code>可以命名为<code>$jq</code>。</p>
+</blockquote>
+<h2 id="jquery-选择器性能">jQuery 选择器性能</h2>
+<p>提升选择器性能的有效途径是为选择器指定上下文，并以上下文为基础使用<code>first()</code>、<code>last()</code>、<code>find()</code>、<code>filter()</code>、<code>hasClass()</code>等 jQuery 筛选 API。</p>
+<p>下面对 jQuery 选择器的性能由高向低进行排序：</p>
+<p>1、ID 选择器</p>
+<p>底层通过调用<code>document.getElementById()</code>实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;#id&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>2、标签选择器</p>
+<p>底层通过调用<code>document.getElementsByTagName()</code>实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;input&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>3、类选择器</p>
+<p>底层通过调用<code>document.getElementsByClassName()</code>实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;.class&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>4、属性及其它选择器</p>
+<p>底层通过对 HTML 字符串进行正则表达式匹配来实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;[contenteditable]&quot;</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jQuery 底层有使用原生<code>document.querySelectorAll()</code>，可以有效提升 IE8 及以上浏览器当中选择器的性能。</p>
+</blockquote>
+<blockquote>
+<p>jQuery 作者已经将选择器引擎独立为<a target="_blank" rel="noopener" href="http://sizzlejs.com/">Sizzle</a>库，而 Sizzle 会按照<strong>从右到左</strong>的顺序来解析选择器字符串，从而提高查询效率，缩小查找范围和遍历次数。</p>
+</blockquote>
+<h2 id="缓存常用的-jquery-选择器对象">缓存常用的 jQuery 选择器对象</h2>
+<p>将需要常用的 jQuery 选择器对象赋值给一个局部或全局变量，是有效提升 jQuery 运行性能的良好开端。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $jq = $(<span class="string">&quot;#app&quot;</span>);</span><br><span class="line">$jq.find(<span class="string">&quot;div.tree&quot;</span>).append(<span class="string">&quot;string&quot;</span>);</span><br><span class="line">$jq.find(<span class="string">&quot;[contenteditable].test&quot;</span>).html();</span><br><span class="line">$jq.find(<span class="string">&quot;.demo.test&quot;</span>).html();</span><br></pre></td></tr></table></figure>
+<h2 id="减少循环时的-dom-操作">减少循环时的 DOM 操作</h2>
+<p>在<code>for</code>、<code>while</code>、<code>$.each()</code>等循环语句中，尽量减少 DOM 操作的次数，最好先将模板在循环中组装完成之后再一次性插入 DOM。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $app = $(<span class="string">&quot;#app&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> template = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">  template += <span class="string">&quot;&lt;p&gt;This is a paragraph!&lt;p&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">$app.find(<span class="string">&quot;div&quot;</span>).html(template);</span><br></pre></td></tr></table></figure>
+<h2 id="使用原生方式处理-jquery-数组">使用原生方式处理 jQuery 数组</h2>
+<p>jQuery 选择器的结果是一个数组类型的对象，建议使用<code>for</code>或<code>while</code>等原生语法对其进行处理，而非 jQuery 封装过的<code>$.each()</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;demo&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;demo&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;demo&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;demo&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;demo&quot;</span>&gt;</span>5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $demo = $(<span class="string">&quot;.demo&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; $demo.length; i++) &#123;</span><br><span class="line">  <span class="comment">// 通过数组索引提取后，jQuery对象转换成DOM对象，所以这里使用了DOM对象的innerHTML属性</span></span><br><span class="line">  <span class="built_in">console</span>.info($demo[i].innerHTML);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以通过关键字<code>length</code>检查数组长度，从而判断 jQuery 对象是否存在。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $demo = $(<span class="string">&quot;.demo&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> ($demo.length !== <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="尽可能使用事件委托">尽可能使用事件委托</h2>
+<p>jQuery3.x 版本继续简化了事件委托函数，仅剩下<code>on()</code>、<code>off()</code>、<code>one()</code>、<code>trigger()</code>、<code>triggerHandler()</code>五个事件处理函数。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>parent<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;current&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>current<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;child&quot;</span>&gt;</span>child<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* on可以用于处理冒泡事件，但是无法捕获事件 */</span></span><br><span class="line">$(<span class="string">&quot;#current&quot;</span>).on(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">&quot;current is clicked!&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#child&quot;</span>).trigger(<span class="string">&quot;click&quot;</span>); <span class="comment">// on可以处理向上冒泡的click事件</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#parent&quot;</span>).trigger(<span class="string">&quot;click&quot;</span>); <span class="comment">// on无法捕获父级元素的click事件</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>单页面场景下绑定的<code>on</code>事件，必须在路由切换时通过<code>off</code>解除事件绑定，否则会造成大量无用的事件句柄堆积在内存。</p>
+</blockquote>
+<h2 id="通过-extend封装可复用代码">通过 extend()封装可复用代码</h2>
+<ul>
+<li><p><code>jQuery.extend()</code>：拓展<strong>全局对象$</strong>，例如下面例子中的<code>$.test()</code>，<code>$.demo()</code>;</p></li>
+<li><p><code>jQuery.fn.extend()</code>：拓展<strong>jQuery 对象数组</strong>，例如下面例子中的<code>$("div").test()</code>，<code>$("div").demo()</code>;</p></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">$</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* 标准写法 */</span></span><br><span class="line">  $.extend(&#123;</span><br><span class="line">    test: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">&quot;$.extend&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">/* 简便写法 */</span></span><br><span class="line">  $.demo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 返回全局对象$，便于链式调用</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">/* 标准写法 */</span></span><br><span class="line">  $.fn.extend(&#123;</span><br><span class="line">    test: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="string">&quot;$.fn.extend&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">/* 简便写法 */</span></span><br><span class="line">  $.fn.demo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 返回jQuery对象数组，便于链式调用</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)(jQuery);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>两种方式的最大区别在于自定义方法所属的宿主对象不同。</p>
+</blockquote>
+<h2 id="使用-html5-的-data-属性绑定数据">使用 HTML5 的 data 属性绑定数据</h2>
+<p>通过 HTML5 提供的 data 属性可以更加方便的完成数据绑定，特别是在不借助<code>handlebar</code>、<code>lodash.template()</code>等模板引擎的时候。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div</span><br><span class="line">  id=&quot;app&quot;</span><br><span class="line">  data-number=&quot;13.2&quot;</span><br><span class="line">  data-string=&quot;uinika&quot;</span><br><span class="line">  data-boolean=&quot;true&quot;</span><br><span class="line">  data-null=&quot;null&quot;</span><br><span class="line">  data-undefine=&quot;undefine&quot;</span><br><span class="line">  data-object=&#x27;&#123;&quot;name&quot;: &quot;hank&quot;&#125;&#x27;</span><br><span class="line">  data-array=&#x27;[&quot;demo1&quot;, &quot;demo2&quot;]&#x27;</span><br><span class="line">&gt;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;#app&quot;</span>).data(<span class="string">&quot;number&quot;</span>);</span><br><span class="line">$(<span class="string">&quot;#app&quot;</span>).data(<span class="string">&quot;string&quot;</span>);</span><br><span class="line">$(<span class="string">&quot;#app&quot;</span>).data(<span class="string">&quot;boolean&quot;</span>);</span><br><span class="line">$(<span class="string">&quot;#app&quot;</span>).data(<span class="string">&quot;null&quot;</span>);</span><br><span class="line">$(<span class="string">&quot;#app&quot;</span>).data(<span class="string">&quot;undefine&quot;</span>);</span><br><span class="line">$(<span class="string">&quot;#app&quot;</span>).data(<span class="string">&quot;object&quot;</span>).name;</span><br><span class="line">$(<span class="string">&quot;#app&quot;</span>).data(<span class="string">&quot;array&quot;</span>)[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="尽量使用原生-javascript">尽量使用原生 JavaScript</h2>
+<p>在不影响浏览器兼容性的情况下，尽量使用 JavaScript 原生 API。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $demo = $(<span class="string">&quot;.demo&quot;</span>); <span class="comment">// 缓存选择器</span></span><br><span class="line"></span><br><span class="line">$demo.is(<span class="string">&quot;:checked&quot;</span>); <span class="comment">// 通过jQuery封装过的is()方法</span></span><br><span class="line">$demo[<span class="number">0</span>].checked; <span class="comment">// 通过DOM原生的checked属性</span></span><br><span class="line"></span><br><span class="line">$demo.css(&#123; <span class="attr">color</span>: <span class="string">&quot;red&quot;</span> &#125;); <span class="comment">// 通过jQuery封装过的css()方法</span></span><br><span class="line">$demo[<span class="number">0</span>].style.color = <span class="string">&quot;red&quot;</span>; <span class="comment">// 通过DOM原生的style.color属性</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;&lt;p&gt;&lt;/p&gt;&quot;</span>); <span class="comment">// 通过jQuery新建&lt;p&gt;标签</span></span><br><span class="line">$(<span class="built_in">document</span>.createElement(<span class="string">&quot;p&quot;</span>)); <span class="comment">// 通过DOM原生的createElement方法</span></span><br></pre></td></tr></table></figure>
+<h2 id="document.ready">$(document).ready()</h2>
+<p>该函数内的代码会在 DOM 加载完毕后，内容（<em>如图片</em>）加载完成前执行；生产环境中，尽可能在每个 js 文件下使用该函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 标准写法</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 简化写法</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>JavaScript 原生的<code>window.onload()</code>只会在 DOM 和图片等资源全部加载完成之后才执行。</p>
+</blockquote>
+<h2 id="延迟对象.deferred">延迟对象$.Deferred()</h2>
+<p><code>Deferred()</code>是一个工厂函数，用来建立新的 deferred 对象（<em>deferred [dɪ'fɜ:d] adj.延缓的</em>），该对象上可以注册多个回调函数队列，这些函数的执行依赖于任意同步或异步函数的执行结果（<code>sucess</code>或<code>failure</code>）。该对象可以视为 jQuery 版本的<strong>Promise</strong>实现，可以更加优雅的解决 JavaScript 回调嵌套的问题。</p>
+<blockquote>
+<p>jQuery 的 Deferred 对象是基于<a target="_blank" rel="noopener" href="http://wiki.commonjs.org/wiki/Promises/A">CommonJS Promises/A</a>规范设计的。</p>
+</blockquote>
+<ul>
+<li><p><code>deferred.notify()</code> 触发 Deferred 上<em>progress</em>相关的回调函数。</p></li>
+<li><p><code>deferred.resolve()</code> Resolve 一个 Deferred 对象，并触发<em>resolve</em>状态相关的回调函数。</p></li>
+<li><p><code>deferred.reject()</code> Reject 一个 Deferred 对象，并触发<em>reject</em>状态相关的回调函数。</p></li>
+<li><p><code>deferred.progress()</code> 该函数在 Deferred 对象生成<em>progress</em>通知时被调用。</p></li>
+<li><p><code>deferred.done()</code> 该函数在 Deferred 对象被<em>resolve</em>时调用。</p></li>
+<li><p><code>deferred.fail()</code> 该函数在 Deferred 对象被<em>rejecte</em>时调用。</p></li>
+<li><p><code>deferred.catch()</code> 该函数在 Deferred 对象被<em>rejecte</em>时调用。</p></li>
+<li><p><code>deferred.then()</code> Deferred 对象<em>resolved</em>、<em>rejected</em>、<em>progress</em>时，都会被触发的回调函数。</p></li>
+<li><p><code>deferred.promise()</code> 返回一个延迟的 Promise 对象。</p></li>
+<li><p><code>&amp;.when()</code> 提供一种基于零个或多个 Thenable 对象执行回调函数的方式，其参数是一个代表异步事件的 Deferred 对象。</p></li>
+<li><p><code>$("selector").promise()</code> 返回一个 Promise 对象去观察所有绑定到集合、队列的确定类型行为是否已经完成。</p></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> deferred = $.Deferred();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> demo = <span class="function"><span class="keyword">function</span> (<span class="params">deferred</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> task = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    deferred.resolve();</span><br><span class="line">    <span class="comment">// deferred.notify();</span></span><br><span class="line">    <span class="comment">// deferred.reject();</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">setTimeout</span>(task, <span class="number">2000</span>);</span><br><span class="line">  <span class="keyword">return</span> deferred;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$.when(demo(deferred))</span><br><span class="line">  .progress(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&quot;progress&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&quot;then&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .done(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&quot;done&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .fail(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&quot;fail&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&quot;catch&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出结果：</span></span><br><span class="line"><span class="comment">then</span></span><br><span class="line"><span class="comment">done</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>$.ajax()</code>返回的就是一个 deferred 对象。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Web\Webpack\" rel="bookmark">Webpack 4 核心剖析</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Web\Angularjs\" rel="bookmark">AngularJS 1.6.x 最佳实践总结</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Web\Async\" rel="bookmark">异步事件管理：从 Promise 与 async/await 到 RxJS</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Web\Backbone\" rel="bookmark">为什么认为 Backbone 是现代化前端框架的基石</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Web\Flux\" rel="bookmark">Flux 数据流两三事儿</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Web\Vue\" rel="bookmark">Vue 2 技术栈归纳与精粹</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Web\Javascript\" rel="bookmark">JavaScript 6 简明语法书</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\Web\React\" rel="bookmark">React 16.6.x 全新全译</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Hank
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://uinika.github.io/Web/JQuery/" title="jQuery 那些容易被忽略的问题">https://uinika.github.io/Web/JQuery/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/qrcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">微信公众号</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/column/chengdu">
+          <span class="icon">
+            <i class="fab fa-quora"></i>
+          </span>
+
+          <span class="label">知乎专栏</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://space.bilibili.com/1514341594">
+          <span class="icon">
+            <i class="fab fa-youtube"></i>
+          </span>
+
+          <span class="label">Bilibili 视频</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS 订阅</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Web/Webpack/" rel="prev" title="Webpack 4 核心剖析">
+                  <i class="fa fa-chevron-left"></i> Webpack 4 核心剖析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Zen/Config-Windows/" rel="next" title="Windows 工作环境 Config 札记">
+                  Windows 工作环境 Config 札记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2010 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-book-open"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.9m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">312:13</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+
+</body>
+</html>
