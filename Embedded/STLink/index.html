@@ -204,7 +204,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">配件说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">固件升级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E7%A4%BA%E7%81%AF%E7%8A%B6%E6%80%81%E8%AF%B4%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">指示灯状态说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5-stm8"><span class="nav-number">4.</span> <span class="nav-text">连接 STM8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5-stm32"><span class="nav-number">5.</span> <span class="nav-text">连接 STM32</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#keil-uvision-5-%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">Keil uVision 5 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#keil-uvision-5-%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">Keil uVision 5 使用</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">配件说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BA%E4%BB%B6%E5%8D%87%E7%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">固件升级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E7%A4%BA%E7%81%AF%E7%8A%B6%E6%80%81%E8%AF%B4%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">指示灯状态说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5-STM8"><span class="nav-number">4.</span> <span class="nav-text">连接 STM8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5-STM32"><span class="nav-number">5.</span> <span class="nav-text">连接 STM32</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keil-uVision-5-%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">Keil uVision 5 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keil-uVision-5-%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">Keil uVision 5 使用</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -345,14 +345,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
+      <span>2.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>22 分钟</span>
+      <span>23 分钟</span>
     </span>
 </div>
 
@@ -367,8 +367,8 @@
 <p><img src="/Embedded/STLink/logo.png"></p>
 <p>本文详细介绍 Keil uVision 5 开发环境下 ST-LINK/V2 版本的调试编程器使用方法，并介绍了相关接口的详细定义与接线方法，文中部分内容翻译至意法半导体官方提供的<a target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/st-link-v2.html">《用于 STM8 与 STM32 的 ST-LINK/V2 在线调试编程器用户手册》</a>，以确保使用方法与解释的规范性。</p>
 <a id="more"></a>
-<h1 id="配件说明">配件说明</h1>
-<p>ST-LINK/V2 基于意法半导体自己的<strong>STM32F103C8</strong>微控制器，主要提供了一个用于 STM32 的<strong>JTAG</strong>与<strong>SWD/SWV</strong>连接器（下图标识 A）和一个用于 STM8 的<strong>SWIM</strong>连接器（下图标识 B）两种连接方式，并带有一枚通信指示灯（下图标识 D）。其中，<strong>SWIM</strong>模式下支持<code>1.65V ~ 5.5V</code>应用电压，支持低速（<code>9.7 Kbytes/s</code>）和高速模式（<code>12.8 Kbytes/s</code>）编程，可使用 ERNI 标准的垂直/水平连接器，以及 2.54 毫米的连接插座。<strong>JTAG/SWD</strong>模式下支持<code>1.65V ~ 3.6V</code>的应用电压与<code>5V</code>容错输入，支持间距<code>2.54mm</code>的 20 针 JTAG 连接器，以及 SWD 和串行线查看器（SWV）通信。</p>
+
+<h1 id="配件说明"><a href="#配件说明" class="headerlink" title="配件说明"></a>配件说明</h1><p>ST-LINK/V2 基于意法半导体自己的<strong>STM32F103C8</strong>微控制器，主要提供了一个用于 STM32 的<strong>JTAG</strong>与<strong>SWD/SWV</strong>连接器（下图标识 A）和一个用于 STM8 的<strong>SWIM</strong>连接器（下图标识 B）两种连接方式，并带有一枚通信指示灯（下图标识 D）。其中，<strong>SWIM</strong>模式下支持<code>1.65V ~ 5.5V</code>应用电压，支持低速（<code>9.7 Kbytes/s</code>）和高速模式（<code>12.8 Kbytes/s</code>）编程，可使用 ERNI 标准的垂直/水平连接器，以及 2.54 毫米的连接插座。<strong>JTAG/SWD</strong>模式下支持<code>1.65V ~ 3.6V</code>的应用电压与<code>5V</code>容错输入，支持间距<code>2.54mm</code>的 20 针 JTAG 连接器，以及 SWD 和串行线查看器（SWV）通信。</p>
 <p><img src="/Embedded/STLink/stlink-v2-1.png"></p>
 <p>ST-LINK/V2 调试编程器包含如下所示的配件与设备：</p>
 <ul>
@@ -376,15 +376,13 @@
 <li>（<strong>B</strong>）ST-LINK/V2 调试编程器。</li>
 <li>（<strong>C</strong>）低成本 SWIM 连接器。</li>
 <li>（<strong>D</strong>）带有标准 ERNI 连接器的 SWIM 排线。</li>
-<li>（<strong>E</strong>）带有 20 针连接器的 JTAG 或 SWD排线。</li>
+<li>（<strong>E</strong>）带有 20 针连接器的 JTAG 或 SWD\SWV 排线。</li>
 </ul>
 <p><img src="/Embedded/STLink/stlink-v2-2.png"></p>
-<h1 id="固件升级">固件升级</h1>
-<p>前往意法半导体官方网站<a target="_blank" rel="noopener" href="https://www.st.com/zh/development-tools/st-link-v2.html">ST-LINK/V2</a>下载 USB 驱动程序与升级工具，安装驱动程序之后运行<code>ST-LinkUpgrade.exe</code>升级工具：</p>
+<h1 id="固件升级"><a href="#固件升级" class="headerlink" title="固件升级"></a>固件升级</h1><p>前往意法半导体官方网站<a target="_blank" rel="noopener" href="https://www.st.com/zh/development-tools/st-link-v2.html">ST-LINK/V2</a>下载 USB 驱动程序与升级工具，安装驱动程序之后运行<code>ST-LinkUpgrade.exe</code>升级工具：</p>
 <p><img src="/Embedded/STLink/upgrade.png"></p>
 <p>点击【Device Connect】连接 STLink（如果未连接成功，请将 Mini USB 数据线拔出后重新上电），连接成功后查看当前 STLink 的版本号，然后点击【Yes &gt;&gt;&gt;&gt;】按钮开始升级，完成以后将会弹出升级成功的提示。</p>
-<h1 id="指示灯状态说明">指示灯状态说明</h1>
-<p>STLink 上 LED 指示灯用于提示当前的工作状态，具体情况如下：</p>
+<h1 id="指示灯状态说明"><a href="#指示灯状态说明" class="headerlink" title="指示灯状态说明"></a>指示灯状态说明</h1><p>STLink 上 LED 指示灯用于提示当前的工作状态，具体情况如下：</p>
 <ul>
 <li>LED 闪烁<strong>红色</strong>：STLink 已经连接至计算机。</li>
 <li>LED 保持<strong>红色</strong>：计算机已经成功与 STLink 建立通信连接。</li>
@@ -392,18 +390,15 @@
 <li>LED 保持<strong>绿色</strong>：最后一次通信是成功的。</li>
 <li>LED 为橘<strong>黄色</strong>：最后一次通信失败。</li>
 </ul>
-<h1 id="连接-stm8">连接 STM8</h1>
-<p>开发 STM8 微控制器应用程序时，STLink 可以使用一端带有 ERNI 连接器的排线、以及间距 2.54 毫米的双排四针排线，共两种方式连接至开发板：</p>
+<h1 id="连接-STM8"><a href="#连接-STM8" class="headerlink" title="连接 STM8"></a>连接 STM8</h1><p>开发 STM8 微控制器应用程序时，STLink 可以使用一端带有 ERNI 连接器的排线、以及间距 2.54 毫米的双排四针排线，共两种方式连接至开发板：</p>
 <p><img src="/Embedded/STLink/connect-to-stm8.png"></p>
 <p>下面的表格是官方文档里对于 SWIM 四针连接器的针脚功能说明：</p>
 <p><img src="/Embedded/STLink/swim-pin.png"></p>
-<h1 id="连接-stm32">连接 STM32</h1>
-<p>开发 STM32 微控制器应用程序时，需要使用 20 针的 JTAG 排线将 STLink 连接至开发板。</p>
+<h1 id="连接-STM32"><a href="#连接-STM32" class="headerlink" title="连接 STM32"></a>连接 STM32</h1><p>开发 STM32 微控制器应用程序时，需要使用 20 针的 JTAG 排线将 STLink 连接至开发板。</p>
 <p><img src="/Embedded/STLink/connect-to-stm32.png"></p>
 <p>下面的表格对于 20 针 JTAG 排线的针脚功能进行了说明：</p>
 <p><img src="/Embedded/STLink/jtag-pin.png"></p>
-<h1 id="keil-uvision-5-配置">Keil uVision 5 配置</h1>
-<p><strong>JTAG</strong>（联合测试行动小组，Joint Test Action Group）是一种国际标准测试协议，标准 JTAG 接口采用 4 枚针脚，但是目前较为常用的是 14、20 个针脚，笔者之前《J-Link 仿真器固件恢复小记》一文中使用的 JLink 就是采用了 20 针的 JTAG 调试协议，当前使用的 STLink V2 也同样采用了该种 20 针接口，这里直接将其插入 STM32F103C8T6 实验电路中的调试插座，然后打开 Keil uVision 5 界面上的【Options for Target】对编译目标进行设置，选择【Debug】选项卡并选中【Use ST-Link Debugger】选项。</p>
+<h1 id="Keil-uVision-5-配置"><a href="#Keil-uVision-5-配置" class="headerlink" title="Keil uVision 5 配置"></a>Keil uVision 5 配置</h1><p><strong>JTAG</strong>（联合测试行动小组，Joint Test Action Group）是一种国际标准测试协议，标准 JTAG 接口采用 4 枚针脚，但是目前较为常用的是 14、20 个针脚，笔者之前《J-Link 仿真器固件恢复小记》一文中使用的 JLink 就是采用了 20 针的 JTAG 调试协议，当前使用的 STLink V2 也同样采用了该种 20 针接口，这里直接将其插入 STM32F103C8T6 实验电路中的调试插座，然后打开 Keil uVision 5 界面上的【Options for Target】对编译目标进行设置，选择【Debug】选项卡并选中【Use ST-Link Debugger】选项。</p>
 <p><img src="/Embedded/STLink/keil-1.png"></p>
 <p>接下来再点击界面上的【Settings】选项，在弹出的【Cortex-M Target Driver Setup】设置界面当中，将【Debug】标签下的【Target Com】选择为<strong>JTAG</strong>，点击【确定】按钮以后退出。</p>
 <p><img src="/Embedded/STLink/keil-2.png"></p>
@@ -415,8 +410,7 @@
 <p>注意：当前运行的 STM32 程序当中不能出现类似<code>GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE)</code>会造成禁用 JTAG 或 SW 接口的语句，并且同时需要注意将 STM32 的下载模式切换至<strong>FLASH ISP</strong>模式。</p>
 </blockquote>
 <p><strong>SWD</strong>（串行调试，Serial Wire Debug）拥有 4 个针脚，高速模式下 SWD 比 JTAG 接口更加稳定可靠，占用引脚数量更少且调试更为方便。</p>
-<h1 id="keil-uvision-5-使用">Keil uVision 5 使用</h1>
-<p>点击 Keil uVision 5 菜单栏上的【Download】按钮，可以通过 STLink 将程序烧写至微控制器的<strong>Flash</strong>当中并且运行，这与 ISP 下载软件的作用完全相同。完成下载之后，程序可以脱离 STLink 独立运行 FLASH 当中。</p>
+<h1 id="Keil-uVision-5-使用"><a href="#Keil-uVision-5-使用" class="headerlink" title="Keil uVision 5 使用"></a>Keil uVision 5 使用</h1><p>点击 Keil uVision 5 菜单栏上的【Download】按钮，可以通过 STLink 将程序烧写至微控制器的<strong>Flash</strong>当中并且运行，这与 ISP 下载软件的作用完全相同。完成下载之后，程序可以脱离 STLink 独立运行 FLASH 当中。</p>
 <p><img src="/Embedded/STLink/keil-5.png"></p>
 <p>点击 Keil uVision 5 菜单栏上的【Start/Stop Debug】按钮图标，就可以进入仿真模式。</p>
 <p><img src="/Embedded/STLink/keil-6.png"></p>
@@ -601,7 +595,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">312:13</span>
+    <span title="站点阅读时长">311:32</span>
   </span>
 </div>
 <div class="busuanzi-count">

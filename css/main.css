@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #da4b06;
+  background: #ff5058;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3199,16 +3199,19 @@ body {
 /*========== 【归档】页 ==========*/
 .archive .post-block .post-content {
   margin: 0;
-  padding-left: 40px !important;
+  padding-left: 100px !important;
 }
 .archive .post-block .post-content .collection-title {
   display: none;
 }
-.archive .post-block .post-content .collection-year {
-  margin: 0 0 0 0;
-}
 .archive .pagination {
   display: none;
+}
+/* 修复【分类】和【归档】的样式错误 */
+.post-content::before {
+  position: absolute;
+  top: 0 !important;
+  width: 4px;
 }
 /*========== 【标签】和【分类】页 ==========*/
 .page .post-block {
@@ -3223,6 +3226,30 @@ body {
 }
 .page .post-block .post-header .post-meta-container {
   background: #f00;
+}
+.page .category-list-item {
+  margin: 6px auto;
+}
+.page .category-list {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto;
+  width: 70%;
+}
+.page .category-list .category-list-link {
+  color: #3f3f3f;
+  width: 90%;
+  display: inline-block;
+}
+.page .category-list .category-list-count {
+  color: #8c634f;
+  margin-left: 5px;
+  float: right;
+}
+.tag .post-content,
+.category .post-content {
+  margin: 0;
+  padding-left: 100px !important;
 }
 /*========== 底部页脚 ==========*/
 .footer {
