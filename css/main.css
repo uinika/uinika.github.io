@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ffc3f6;
+  background: #ad5c61;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3128,7 +3128,7 @@ body {
 .main .main-inner .post-block .post-content {
   border: 1px dashed #a38272;
   border-radius: 15px;
-  padding: 1.3rem 1.5rem 1.85rem 1.5rem;
+  padding: 1.65rem 1.5rem 1.85rem 1.5rem;
 }
 .main .book-mark-link::before {
   color: #3f3f3f;

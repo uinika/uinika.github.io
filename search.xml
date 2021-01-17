@@ -12,8 +12,8 @@
       </tags>
   </entry>
   <entry>
-    <title>基于三星 S3C2440 的嵌入式 Linux 攻略</title>
-    <url>/Embedded/Mini2440/</url>
+    <title>意法半导体 Nucleo F767ZI 评估板测试</title>
+    <url>/Embedded/NucleoF767ZI/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Embedded</category>
@@ -23,8 +23,8 @@
       </tags>
   </entry>
   <entry>
-    <title>意法半导体 Nucleo F767ZI 评估板测试</title>
-    <url>/Embedded/NucleoF767ZI/</url>
+    <title>基于三星 S3C2440 的嵌入式 Linux 攻略</title>
+    <url>/Embedded/Mini2440/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Embedded</category>
@@ -67,17 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用高等数学公式与导学</title>
-    <url>/Math/Calculus/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Math</category>
-      </categories>
-      <tags>
-        <tag>Calculus</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2016 年，成都房价上涨对城南 IT 产业的影响与思考</title>
     <url>/Other/2016-Chengdu-Realestate/</url>
     <content><![CDATA[]]></content>
@@ -108,6 +97,17 @@
       </categories>
       <tags>
         <tag>Economy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用高等数学公式与导学</title>
+    <url>/Math/Calculus/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>Calculus</tag>
       </tags>
   </entry>
   <entry>
@@ -243,17 +243,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用初等数学图形与公式汇总</title>
-    <url>/Math/Elementary/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Math</category>
-      </categories>
-      <tags>
-        <tag>Elementary</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AngularJS 1.6.x 最佳实践总结</title>
     <url>/Web/Angularjs/</url>
     <content><![CDATA[]]></content>
@@ -262,6 +251,17 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用初等数学图形与公式汇总</title>
+    <url>/Math/Elementary/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>Elementary</tag>
       </tags>
   </entry>
   <entry>
@@ -364,17 +364,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Flux 数据流两三事儿</title>
-    <url>/Web/Flux/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用 Electron 打造跨平台桌面应用</title>
     <url>/Web/Electron/</url>
     <content><![CDATA[]]></content>
@@ -383,6 +372,17 @@
       </categories>
       <tags>
         <tag>Server</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Flux 数据流两三事儿</title>
+    <url>/Web/Flux/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
