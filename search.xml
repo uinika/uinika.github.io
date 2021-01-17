@@ -364,17 +364,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 Electron 打造跨平台桌面应用</title>
-    <url>/Web/Electron/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Server</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Flux 数据流两三事儿</title>
     <url>/Web/Flux/</url>
     <content><![CDATA[]]></content>
@@ -383,6 +372,17 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Electron 打造跨平台桌面应用</title>
+    <url>/Web/Electron/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
       </tags>
   </entry>
   <entry>
