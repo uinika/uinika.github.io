@@ -452,6 +452,17 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue 2 技术栈归纳与精粹</title>
+    <url>/Web/Vue/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SCSS 3.5.5 简明上手指南</title>
     <url>/Web/Scss/</url>
     <content><![CDATA[]]></content>
@@ -463,14 +474,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue 2 技术栈归纳与精粹</title>
-    <url>/Web/Vue/</url>
+    <title>通用 LaTeX 数学公式语法手册</title>
+    <url>/Zen/LaTex/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Web</category>
+        <category>Zen</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>Markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -515,17 +526,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通用 LaTeX 数学公式语法手册</title>
-    <url>/Zen/LaTex/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Zen</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
       </tags>
   </entry>
   <entry>

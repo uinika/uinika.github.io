@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ffe400;
+  background: #beedff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3051,17 +3051,23 @@ header.header .site-nav-right .toggle {
 .sidebar {
   background: url("/images/background-sidebar.png");
 }
-.sidebar *,
-.sidebar a {
+.sidebar .site-author-name,
+.sidebar .site-description {
+  color: #e2d8d3;
+}
+.sidebar .links-of-author-item>a {
+  color: #e2d8d3;
+}
+.sidebar .site-state-item>a>span {
+  color: #fff;
+}
+.sidebar .nav a {
   color: #e2d8d3;
 }
 .sidebar .sidebar-nav {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 5px;
-}
-.sidebar .site-state-item>a>span {
-  color: #fff;
 }
 .sidebar .sidebar-panel-container {
   font-size: 17px;
@@ -3325,4 +3331,8 @@ header.header .site-nav-right .toggle {
 }
 .post-body .table-container table tbody tr:nth-child(even) {
   background: #eee;
+}
+/*========== 搜索弹窗 ==========*/
+.popup.search-popup {
+  transition: transform 0.3s;
 }
