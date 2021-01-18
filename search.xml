@@ -474,17 +474,6 @@
       </tags>
   </entry>
   <entry>
-    <title>通用 LaTeX 数学公式语法手册</title>
-    <url>/Zen/LaTex/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Zen</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>玩转 Arduino Uno、Mega、Due 开源硬件</title>
     <url>/Embedded/Arduino/</url>
     <content><![CDATA[]]></content>
@@ -526,6 +515,17 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通用 LaTeX 数学公式语法手册</title>
+    <url>/Zen/LaTex/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Zen</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
       </tags>
   </entry>
   <entry>

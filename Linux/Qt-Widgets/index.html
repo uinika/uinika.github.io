@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#8C634F">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.1.1">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
@@ -1440,8 +1440,9 @@
 <li>断开与一个对象所有信号的全部关联： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">disconnect(myObject, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">/* 等价于 */</span></span><br><span class="line">myObject-&gt;disconnect();</span><br></pre></td></tr></table></figure></li>
 <li>断开与一个指定信号的全部关联： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">disconnect(myObject, SIGNAL(mySignal()), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">/* 等价于 */</span></span><br><span class="line">myObject-&gt;disconnect(SIGNAL(mySignal()));</span><br></pre></td></tr></table></figure></li>
 <li>断开一个指定信号与槽的关联： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">disconnect(myObject, <span class="number">0</span>, myReceiver, <span class="number">0</span>);</span><br><span class="line"><span class="comment">/* 等价于 */</span></span><br><span class="line">myObject-&gt;disconnect(myReceiver);</span><br></pre></td></tr></table></figure></li>
-<li>断开一个指定信号和槽的关联： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">disconnect(myObject, SIGNAL(mySignal()), myReceiver, SLOT(mySlot()));</span><br><span class="line"><span class="comment">/* 等价于 */</span></span><br><span class="line">myObject-&gt;disconnect(myObject, SIGNAL(mySignal()), myReceiver, SLOT(mySlot()));</span><br><span class="line"><span class="comment">/* 等价于 */</span></span><br><span class="line">myObject-&gt;disconnect(myConnection);   <span class="comment">// myConnection 是信号槽关联时 connect() 的返回值</span></span><br></pre></td></tr></table></figure> 与<code>disconnect()</code>类似，<code>disconnect()</code>也提供了基于函数指针的重载形式：</li>
+<li>断开一个指定信号和槽的关联： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">disconnect(myObject, SIGNAL(mySignal()), myReceiver, SLOT(mySlot()));</span><br><span class="line"><span class="comment">/* 等价于 */</span></span><br><span class="line">myObject-&gt;disconnect(myObject, SIGNAL(mySignal()), myReceiver, SLOT(mySlot()));</span><br><span class="line"><span class="comment">/* 等价于 */</span></span><br><span class="line">myObject-&gt;disconnect(myConnection);   <span class="comment">// myConnection 是信号槽关联时 connect() 的返回值</span></span><br></pre></td></tr></table></figure></li>
 </ol>
+<p>与<code>disconnect()</code>类似，<code>disconnect()</code>也提供了基于函数指针的重载形式：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">QObject::disconnect</span><span class="params">(<span class="keyword">const</span> QObject *sender,</span></span></span><br><span class="line"><span class="function"><span class="params">                         PointerToMemberFunction signal,</span></span></span><br><span class="line"><span class="function"><span class="params">                         <span class="keyword">const</span> QObject *receiver,</span></span></span><br><span class="line"><span class="function"><span class="params">                         PointerToMemberFunction method)</span></span></span><br></pre></td></tr></table></figure>
 <p>该函数并不能断开信号与普通函数或者 Lambda 表达式之间的关联，遇到此类情况通常需要借助于<code>connect()</code>函数的返回值来执行断开操作。</p>
 <h4 id="qsignalmapper-类">QSignalMapper 类</h4>
@@ -2020,7 +2021,7 @@ a > code {
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">312:13</span>
+    <span title="站点阅读时长">312:12</span>
   </span>
 </div>
 <div class="busuanzi-count">

@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #22a775;
+  background: #ffe400;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3009,42 +3009,42 @@ body {
   background: #a38272;
 }
 /*========== 顶部工具栏 ==========*/
-.header {
+header.header {
   background: #8c634f;
 /* 移动端左右角图标颜色 */
 }
-.header .header-inner {
+header.header .header-inner {
   padding: 5px 0;
 }
-.header .header-inner .main-menu {
+header.header .header-inner .main-menu {
   font-size: 18px;
   position: relative;
   top: -2px;
 }
-.header .header-inner .main-menu .menu-item {
+header.header .header-inner .main-menu .menu-item {
   margin-right: 8px;
 }
-.header .header-inner .brand .site-title {
+header.header .header-inner .brand .site-title {
   color: #fff;
   font-size: 35px;
   font-weight: bold;
 }
-.header .header-inner .brand .logo-line {
+header.header .header-inner .brand .logo-line {
   display: none;
 }
-.header .header-inner .site-nav .main-menu .menu-item>a {
+header.header .header-inner .site-nav .main-menu .menu-item>a {
   color: #fff !important;
 }
-.header .header-inner .site-nav .main-menu .menu-item>a:hover {
+header.header .header-inner .site-nav .main-menu .menu-item>a:hover {
   color: #a38272 !important;
 }
-.header .header-inner .site-nav .main-menu a.menu-item-active {
+header.header .header-inner .site-nav .main-menu a.menu-item-active {
   color: #8c634f !important;
 }
-.header .site-nav-toggle .toggle .toggle-line {
+header.header .site-nav-toggle .toggle .toggle-line {
   background: #fff;
 }
-.header .site-nav-right .toggle {
+header.header .site-nav-right .toggle {
   color: #fff;
 }
 /*========== 侧边栏 ==========*/
@@ -3228,9 +3228,6 @@ body {
 .page .post-block .post-header .post-title {
   font-weight: bold;
 }
-.page .post-block .post-header .post-meta-container {
-  background: #f00;
-}
 .page .category-list-item {
   margin: 6px auto;
 }
@@ -3273,6 +3270,9 @@ body {
 /* 引用块 */
 /* 表格斑马纹背景 */
 }
+.post-body a {
+  border-bottom: 1px solid #a38272;
+}
 .post-body p,
 .post-body ol,
 .post-body img {
@@ -3294,6 +3294,9 @@ body {
 .post-body ol li figure {
   margin-bottom: 0.93em;
 }
+.post-body figure {
+  margin-bottom: 0.5em !important;
+}
 .post-body figure figcaption {
   text-align: center;
   color: #eee;
@@ -3308,12 +3311,18 @@ body {
   border-left: 5px solid #a38272;
   background: #f3f1ed;
 }
-.post-body table thead .header {
-  background: #eee;
+.post-body .table-container {
+  border: 1px solid #a8a8a8;
 }
-.post-body table tbody tr:nth-child(even) {
+.post-body .table-container table {
+  margin: 0;
+}
+.post-body .table-container table thead .header {
+  background: #eee !important;
+}
+.post-body .table-container table tbody tr:nth-child(even) {
   background: #fff;
 }
-.post-body table tbody tr:nth-child(even) {
+.post-body .table-container table tbody tr:nth-child(even) {
   background: #eee;
 }

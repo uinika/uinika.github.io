@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#8C634F">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.1.1">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
@@ -819,10 +819,10 @@
 <li><p><code>uint32_t Pull</code>：GPIO 引脚上下拉配置，</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GPIO_NOPULL    无上下拉</span><br><span class="line">GPIO_PULLUP    上拉使能</span><br><span class="line">GPIO_PULLDOWN  下拉使能</span><br></pre></td></tr></table></figure></li>
 <li><p><code>uint32_t Speed</code>：GPIO 引脚最大输出速度。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GPIO_SPEED_FREQ_LOW     低速 <span class="number">2</span>MHz</span><br><span class="line">GPIO_SPEED_FREQ_MEDIUM  中速 <span class="number">10</span>MHz</span><br><span class="line">GPIO_SPEED_FREQ_HIGH    高速 <span class="number">50</span>MHz</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / <span class="number">1000</span>);    <span class="comment">// 配置并启动系统滴答定时器，每 1ms 中断一次</span></span><br><span class="line">HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK); <span class="comment">// 系统滴答定时器时钟源</span></span><br><span class="line">HAL_NVIC_SetPriority(SysTick_IRQn, <span class="number">0</span>, <span class="number">0</span>);            <span class="comment">// 系统滴答定时器中断优先级</span></span><br></pre></td></tr></table></figure>
-<h3 id="gpio-控制流程">GPIO 控制流程</h3></li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GPIO_SPEED_FREQ_LOW     低速 <span class="number">2</span>MHz</span><br><span class="line">GPIO_SPEED_FREQ_MEDIUM  中速 <span class="number">10</span>MHz</span><br><span class="line">GPIO_SPEED_FREQ_HIGH    高速 <span class="number">50</span>MHz</span><br></pre></td></tr></table></figure></li>
 </ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / <span class="number">1000</span>);    <span class="comment">// 配置并启动系统滴答定时器，每 1ms 中断一次</span></span><br><span class="line">HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK); <span class="comment">// 系统滴答定时器时钟源</span></span><br><span class="line">HAL_NVIC_SetPriority(SysTick_IRQn, <span class="number">0</span>, <span class="number">0</span>);            <span class="comment">// 系统滴答定时器中断优先级</span></span><br></pre></td></tr></table></figure>
+<h3 id="gpio-控制流程">GPIO 控制流程</h3>
 <ol type="1">
 <li>使能 GPIO 端口时钟；</li>
 <li>初始化 GPIO 引脚，即为 GPIO 初始化结构体成员赋值，</li>
@@ -1027,7 +1027,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">312:13</span>
+    <span title="站点阅读时长">312:12</span>
   </span>
 </div>
 <div class="busuanzi-count">
