@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #beedff;
+  background: #ffade5;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3334,5 +3334,5 @@ header.header .site-nav-right .toggle {
 }
 /*========== 搜索弹窗 ==========*/
 .popup.search-popup {
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
