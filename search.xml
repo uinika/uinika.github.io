@@ -225,10 +225,10 @@
     <url>/Linux/GCC/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Note</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
+        <tag>GCC GDB</tag>
       </tags>
   </entry>
   <entry>
@@ -236,10 +236,10 @@
     <url>/Linux/Shell/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Note</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
+        <tag>Shell</tag>
       </tags>
   </entry>
   <entry>

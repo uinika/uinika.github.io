@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ffff2b;
+  background: #e5ffb6;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3225,7 +3225,7 @@ header.header .site-nav-right .toggle {
 }
 /*========== 【标签】和【分类】页 ==========*/
 .page .post-block {
-  padding: 0 50px 60px 50px;
+  padding-bottom: 60px;
   border: 1px dashed #a38272;
 }
 .page .post-block .post-header {
@@ -3234,24 +3234,41 @@ header.header .site-nav-right .toggle {
 .page .post-block .post-header .post-title {
   font-weight: bold;
 }
-.page .category-list-item {
-  margin: 6px auto;
-}
 .page .category-list {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: bold;
   margin: 0 auto;
   width: 70%;
 }
-.page .category-list .category-list-link {
-  color: #3f3f3f;
-  width: 90%;
-  display: inline-block;
+.page .category-list .category-list-item {
+  margin-bottom: 15px;
+  border: 1px solid #8c634f;
+  border-radius: 17px;
+  padding: 3px 10px;
+  display: flex;
 }
-.page .category-list .category-list-count {
+.page .category-list .category-list-item .category-list-link {
+  padding-left: 40px;
+  color: #3f3f3f;
+  display: inline-block;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+.page .category-list .category-list-item .category-list-count {
+  padding-right: 30px;
+  display: inline-block;
   color: #8c634f;
-  margin-left: 5px;
   float: right;
+}
+.page .category-list .category-list-item:hover {
+  background: #a38272;
+}
+.page .category-list .category-list-item:hover .category-list-link {
+  color: #eee;
+}
+.page .category-list .category-list-item:hover .category-list-count {
+  color: #eee;
 }
 .tag .post-content,
 .category .post-content {

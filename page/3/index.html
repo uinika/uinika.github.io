@@ -126,8 +126,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
@@ -209,13 +209,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -277,6 +277,418 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Linux/Vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/Vim/" class="post-title-link" itemprop="url">Vim 常用键位生存指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2011-10-08 00:00:00" itemprop="dateCreated datePublished" datetime="2011-10-08T00:00:00+08:00">2011-10-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-06-17 00:00:00" itemprop="dateModified" datetime="2019-06-17T00:00:00+08:00">2019-06-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>25 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Vim 是从 UNIX 下的 Vi 发展出来的一个文本编辑器，近几年，伴随<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VSCode</a>、<a target="_blank" rel="noopener" href="https://atom.io">Atom</a>、<a target="_blank" rel="noopener" href="https://www.sublimetext.com/">Sublime</a>等一众轻量级编辑器的快速发展，涌现了大量基于这些编辑器平台的 Vim 快捷键插件，甚至 Chrome 和 Firefox 上都已经分别提供<code>Vimium</code>、<code>VimFx</code>等优秀插件。虽然 Vim 本身因为其繁琐的配置，日常开发中已经较少直接使用，但是其快捷键操作习惯得以保留，因此 Vim 逐渐从一套自由软件发展为可以在诸多平台上使用的快捷键套装。</p>
+<p><img src="/Linux/Vim/logo.png"></p>
+<p>本文总结了笔者运用 Vim 作为日常开发工具的过程当中，经常使用到的一些快捷键和命令，并简单的按照操作进行了一个分类，帮助<em>Vim Junior</em>在纷繁的快捷键位里快速适应并生存下来，逐步成为一名熟练的<em>Vim Addict</em>。文章部分命令和键位的解释参考了<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》</a>一文，快捷键位示例图则取自<a target="_blank" rel="noopener" href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">《Graphical vi-vim Cheat Sheet and Tutorial》</a>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux/Vim/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Web/Javascript/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Web/Javascript/" class="post-title-link" itemprop="url">JavaScript 6 简明语法书</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2011-04-23 00:00:00" itemprop="dateCreated datePublished" datetime="2011-04-23T00:00:00+08:00">2011-04-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2012-07-26 00:00:00" itemprop="dateModified" datetime="2012-07-26T00:00:00+08:00">2012-07-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>52k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8:43</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>JavaScript 遵循了 ECMAScript 语言规范，2012 年之后的现代浏览器都完整支持 <strong>ECMAScript 5.1</strong> 标准。2015 年 6 月 17 日，ECMA 国际组织发布了 <strong>ECMAScript 6</strong> 标准，官方称为 <strong>ECMAScript 2015</strong>（俗称为 <strong>ES6</strong>），从此 ECMAScript 每年发布一次新标准，<strong>本文覆盖了当前最新 ECMAScript2017 草案中的新特性</strong>。示例代码和术语定义参考了《JavaScrip 高级程序设计》，但是该书成文于 ES6 发布之前，因此从<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">《Mozilla JavaScript Reference》</a>摘取了部分内容作为补充。出于查阅与核对的方便，本文目录结构与 Mozilla 官方英文文档保持一致。</p>
+<p><img src="/Web/Javascript/logo.png"></p>
+<p>JavaScript 标准化工作由<strong>ECMA</strong>（<em>European Computer Manufacturers Association</em>）国际组织负责，JavaScript 的语言标准被称为<strong>ECMAScript</strong>，企业遵循该标准开发各自的 JavaScript 实现，例如 Firefox 的<code>SpiderMonkey</code>或者 Chrome 中的<code>V8</code>解析引擎（<em>ECMAScript 的规范文档主要针对解析引擎的开发人员，而非 JavaScript 脚本的编写人员</em>）。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Web/Javascript/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/English/Grammar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/English/Grammar/" class="post-title-link" itemprop="url">英文语法学以致用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2011-03-27 00:00:00" itemprop="dateCreated datePublished" datetime="2011-03-27T00:00:00+08:00">2011-03-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2012-08-13 00:00:00" itemprop="dateModified" datetime="2012-08-13T00:00:00+08:00">2012-08-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/English/" itemprop="url" rel="index"><span itemprop="name">English</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>62k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10:23</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>近几年出于工作需要，阅读到了大量的英文技术文档，在翻译一些文章的过程当中，对于语法的重要性有了较为理性的认识。只有具备扎实的语法知识，才能够准确的理解复杂艰涩的各种长句结构，也才能正确领会句子所要表达的含义。翻阅了一些市面上一些大而全的语法教材，动辄上七八百页的厚度让人望而生畏。对于非英语专业工作人士，自然无需进行如此详尽与面面俱到的语法剖析，仅仅需要具备常见的构词造句知识即可。</p>
+<p><img src="/English/Grammar/logo.png"></p>
+<p>笔者在翻阅了《Cambridge English Grammar in Use》等相关书籍以后，通过这篇读书笔记整理了常用的词类、时态、语态、句型、并列句、复合句等语法知识，便于在后续阅读到长难句时，能够及时的查阅到相关的信息，便于查缺补漏的同时，也为后续进一步学习《Cambridge Interchange》四册丛书做好铺垫，循序渐进提高英文听说读写译的实际运用能力。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/English/Grammar/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Web/JQuery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Web/JQuery/" class="post-title-link" itemprop="url">jQuery 那些容易被忽略的问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2010-08-07 00:00:00" itemprop="dateCreated datePublished" datetime="2010-08-07T00:00:00+08:00">2010-08-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2011-12-31 00:00:00" itemprop="dateModified" datetime="2011-12-31T00:00:00+08:00">2011-12-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:09</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>伴随<code>Vue</code>、<code>Angular</code>、<code>React</code>等编译式前端框架的崛起，前端开发人员逐渐从繁琐的 DOM 操作当中解脱出来。但是在项目实践过程当中，依然存有诸多问题需要通过直接操作 DOM 来解决，虽然现代化浏览器已经支持<code>selectAll()</code>等 HTML5 新特性，但是针对一些强调页面兼容性的场景，为了屏蔽各款浏览器解析引擎所遵循规范的差异，依然需要借助于<code>jQuery</code>来完成 DOM 文档操作。</p>
+<p><img src="/Web/JQuery/logo.png"></p>
+<p>因此<code>jQuery</code>这款诞生于 2006 年的 JavaScript 库，依然在<strong>现代化前端开发</strong>当中扮演着较为重要角色。本文结合笔者 Web 前端开发工作当中积累的实践经验，较为系统的总结了<code>jQuery</code>实践过程当中一些比较容易被开发人员所忽略的问题。例如 jQuery 对象与 DOM 对象的相互转换、jQuery 选择器性能、异步对象<code>$.Deferred()</code>以及 JavaScript 性能优化相关的话题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Web/JQuery/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Web/Html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,8 +713,15 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-10-14 02:33:09" itemprop="dateCreated datePublished" datetime="2020-10-14T02:33:09+08:00">2020-10-14</time>
+      <time title="创建时间：2010-05-27 00:00:00" itemprop="dateCreated datePublished" datetime="2010-05-27T00:00:00+08:00">2010-05-27</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2012-06-19 00:00:00" itemprop="dateModified" datetime="2012-06-19T00:00:00+08:00">2012-06-19</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -373,7 +792,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Web/Angularjs/">
+    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Web/CSS2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -386,7 +805,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/Web/Angularjs/" class="post-title-link" itemprop="url">AngularJS 1.6.x 最佳实践总结</a>
+          <a href="/Web/CSS2/" class="post-title-link" itemprop="url">CSS 2.1 典型概念与布局详解</a>
         </h2>
 
         <div class="post-meta-container">
@@ -397,8 +816,15 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-10-14 02:33:09" itemprop="dateCreated datePublished" datetime="2020-10-14T02:33:09+08:00">2020-10-14</time>
+      <time title="创建时间：2010-02-15 00:00:00" itemprop="dateCreated datePublished" datetime="2010-02-15T00:00:00+08:00">2010-02-15</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2012-07-11 00:00:00" itemprop="dateModified" datetime="2012-07-11T00:00:00+08:00">2012-07-11</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -415,14 +841,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>23k</span>
+      <span>20k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3:51</span>
+      <span>3:19</span>
     </span>
 </div>
 
@@ -433,397 +859,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>开发小组在 2015 年 11 月的时候，就已经开始尝试使用<code>webpack</code>+<code>babel</code>+<code>react</code>+<code>reflux</code>技术栈，但是团队对这种编译式前端开发的反馈并不友好，一方面 webpack 1.x 版本的打包效率仍然较差，每次保存操作后页面 reload 速度蜗牛一样缓慢，非常影响开发过程中的心情愉悦指数。另一方面，team 的同学们对于传统<code>jQuery</code>+<code>backbone</code>+<code>handlebar</code>+<code>requirejs</code>开发方式带有思维惯性，不太能接受 JSX 和 ES6 模块化的写法。</p>
-<p><img src="/Web/Angularjs/logo.png"></p>
-<p>对于 React 的组件化思想，笔者本人非常推崇，但是遗憾 facebook 并未提供出解决组件间通讯的官方实现，其 Virtual DOM 与 Webpack.sourcemap 结合使用后，debug 变成一件非常困难的事情，并未在实际开发中体现其性能和效率上的优势。且因为社区驱动的 reflux、redux 的存在，实质上又为开发带来了额外的复杂度。更具有决定因素的是，截至在 2015 年底 React 依然停留在 0.14.x 版本，技术栈本身还处于不断成熟的过程，API 也一直在调整与变化。最终从技术成熟度的角度考量，还是稳妥的选择了 Angular 1.6.x 版本。</p>
+          <p>本文详细参考<a target="_blank" rel="noopener" href="http://nec.netease.com/">网易 NEC 前端开源项目</a>、<a target="_blank" rel="noopener" href="https://www.apress.com/cn/book/9781430223979">《CSS Mastery》</a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS">Mozilla 开发者社区</a>，将 <strong>CSS 2.1</strong> 当中常用的概念与典型布局进行了比较全面的梳理与概括，并对<code>定位</code>、<code>居中</code>、<code>外边距塌陷</code>、<code>包含块</code>、<code>多列布局</code>等较易混淆的内容，进行了详实的文字说明与代码示例。在涵盖日常开发当中经典布局的同时，也加入了 HTML/CSS 渲染的重绘与回流等更为深入的主题，是笔者 Web 前端开发工作经验的回顾与总结。</p>
+<p><img src="/Web/CSS2/logo.png"></p>
+<p><strong>CSS</strong> 层叠样式表（<em>Cascading Stylesheet</em>）用于指定浏览器所渲染的样式（<em>如颜色、定位、装饰</em>），距离 2011 年 <strong>CSS 2.1</strong> 版本发布至今，已经整整过去<strong>6</strong>个年头，浏览器和前端技术经历了日新月异的变化。虽然目前 <strong>CSS 3.0</strong> 规范在选择器、弹性盒模型、动画与过渡方面进行了诸多增强，但是 <a target="_blank" rel="noopener" href="https://www.w3.org/">W3C 规范</a>始终保持着一致的继承性，所以 <strong>CSS 2.1</strong> 及之前版本规范中提出的大量特性与概念依旧得以沿用。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Web/Angularjs/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Other/2017-Chengdu-Realestate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Other/2017-Chengdu-Realestate/" class="post-title-link" itemprop="url">2017 年，再聊聊成都房价与地价那些事儿</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-10-13 21:57:13" itemprop="dateCreated datePublished" datetime="2020-10-13T21:57:13+08:00">2020-10-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Article/" itemprop="url" rel="index"><span itemprop="name">Article</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.7k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>47 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/Other/2017-Chengdu-Realestate/chengdu.jpg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Other/2017-Chengdu-Realestate/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Other/2018-Guiyang-Big-Data/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Other/2018-Guiyang-Big-Data/" class="post-title-link" itemprop="url">如何理性看待贵阳大数据与 IT 行业的过去与未来</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-10-13 21:57:13" itemprop="dateCreated datePublished" datetime="2020-10-13T21:57:13+08:00">2020-10-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Article/" itemprop="url" rel="index"><span itemprop="name">Article</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>49 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/Other/2018-Guiyang-Big-Data/expo.jpg" title="2018年数博会"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Other/2018-Guiyang-Big-Data/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Other/2016-Chengdu-Realestate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Other/2016-Chengdu-Realestate/" class="post-title-link" itemprop="url">2016 年，成都房价上涨对城南 IT 产业的影响与思考</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-10-13 21:57:13" itemprop="dateCreated datePublished" datetime="2020-10-13T21:57:13+08:00">2020-10-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Article/" itemprop="url" rel="index"><span itemprop="name">Article</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>5.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>53 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/Other/2016-Chengdu-Realestate/tianfusoftwarepark-b.jpg" title="天府软件园B区一角"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Other/2016-Chengdu-Realestate/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Zen/LaTex/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Zen/LaTex/" class="post-title-link" itemprop="url">通用 LaTeX 数学公式语法手册</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-10-06 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-06T00:00:00+08:00">2020-10-06</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-01-03 00:00:00" itemprop="dateModified" datetime="2021-01-03T00:00:00+08:00">2021-01-03</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Zen/" itemprop="url" rel="index"><span itemprop="name">Zen</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>30k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5:05</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://www.mathjax.org/"><strong>MathJax</strong></a> 是一款运行于 Web 浏览器当中的开源 JavaScript 数学符号渲染引擎，通过它可以方便的在现代 Web 浏览器当中显示数学公式，目前已经能够解析 <code>LaTex</code>、<code>MathML</code> 等标记语言。<strong>MathJax</strong> 项目发源于 2009 年，目前由 NumFOCUS 基金会主持，并且得到了 MathJax 联盟的支持，该联盟是<strong>美国数学协会</strong>（AMS）和 <strong>工业与应用数学协会</strong>（SIAM）的共同合资企业。</p>
-<p><img src="/Zen/LaTex/logo.png"></p>
-<p><a target="_blank" rel="noopener" href="https://www.latex-project.org/"><strong>LaTeX</strong></a> 是一种高质量的排版格式，可以生成复杂的表格与数学公式，是当前电子与数学出版行业的事实标准。本文以 <a target="_blank" rel="noopener" href="https://www.pandoc.org/"><strong>Pandoc</strong></a> 作为 LaTex 渲染引擎（一款用于标记语言文档转换的命令行工具），分门别类的总结了撰写数学公式所需要经常使用到的 LaTeX 语法，方便写作相关科技类文章时随手查阅。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Zen/LaTex/#more" rel="contents">
+              <a class="btn" href="/Web/CSS2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -943,38 +984,7 @@
 
 
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'none'
-      },
-      options: {
-        renderActions: {
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
+  
 
 
 </body>
