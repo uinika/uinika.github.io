@@ -1152,7 +1152,7 @@ pre code {
 }
 .header-inner {
   margin: 0 auto;
-  width: 950px;
+  width: 1000px;
 }
 @media (min-width: 1200px) {
   .header-inner {
@@ -1693,7 +1693,7 @@ pre code {
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
-  width: 950px;
+  width: 1000px;
 }
 @media (min-width: 1200px) {
   .footer-inner {
@@ -2899,7 +2899,7 @@ hr {
 }
 .main-inner {
   margin: 0 auto;
-  width: 950px;
+  width: 1000px;
 }
 @media (min-width: 1200px) {
   .main-inner {
@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ffade5;
+  background: #ffff2b;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3122,19 +3122,19 @@ header.header .site-nav-right .toggle {
   justify-content: center;
 }
 .main .main-inner {
-  padding: 1px;
+  padding: 1vh;
 }
 .main .main-inner .post-block {
   padding-top: 0px;
-  margin-top: 35px;
-  margin-bottom: 40px;
+  margin-top: 2vh;
+  margin-bottom: 3vh;
   background: #e2d8d3;
   border-radius: 15px;
 }
 .main .main-inner .post-block .post-content {
   border: 1px dashed #a38272;
   border-radius: 15px;
-  padding: 1.65rem 1.5rem 1.85rem 1.5rem;
+  padding: 2.5vh 2vw;
 }
 .main .book-mark-link::before {
   color: #3f3f3f;
@@ -3318,7 +3318,7 @@ header.header .site-nav-right .toggle {
   background: #f3f1ed;
 }
 .post-body .table-container {
-  border: 1px solid #a8a8a8;
+  margin-bottom: 0.5em;
 }
 .post-body .table-container table {
   margin: 0;
