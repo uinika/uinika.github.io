@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #e5ffb6;
+  background: #7d3785;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3243,7 +3243,8 @@ header.header .site-nav-right .toggle {
 .page .category-list .category-list-item {
   margin-bottom: 15px;
   border: 1px solid #8c634f;
-  border-radius: 17px;
+  background: #ded1c7;
+  border-radius: 20px;
   padding: 3px 10px;
   display: flex;
 }
