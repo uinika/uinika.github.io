@@ -20,31 +20,31 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"uinika.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+    var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
   </script>
 <meta name="description" content="HTTP 是基于 TCP&#x2F;IP 协议而建立 Web 基础协议，从 1989 年早期的简单 HTTP&#x2F;0.9 单行协议开始，至 1996 年逐步扩展了状态码、协议头等特性发展到 HTTP&#x2F;1.0，然后在 1997 年的 HTTP&#x2F;1.1 增加了 TCP 连接复用、流水线支持、响应分块、缓存控制、内容协商等特性。2015 年 HTTP&#x2F;2 协议正式标准化之后，传统 HTTP 的文本协议被二进制协议替代">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP 协议深入解析">
-<meta property="og:url" content="https://uinika.github.io/Web/Http/index.html">
+<meta property="og:url" content="https://uinika.gitee.io/Web/Http/index.html">
 <meta property="og:site_name" content="Bit by bit">
 <meta property="og:description" content="HTTP 是基于 TCP&#x2F;IP 协议而建立 Web 基础协议，从 1989 年早期的简单 HTTP&#x2F;0.9 单行协议开始，至 1996 年逐步扩展了状态码、协议头等特性发展到 HTTP&#x2F;1.0，然后在 1997 年的 HTTP&#x2F;1.1 增加了 TCP 连接复用、流水线支持、响应分块、缓存控制、内容协商等特性。2015 年 HTTP&#x2F;2 协议正式标准化之后，传统 HTTP 的文本协议被二进制协议替代">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://uinika.github.io/Web/Http/logo.png">
-<meta property="og:image" content="https://uinika.github.io/Web/Http/Http/http-layers.png">
-<meta property="og:image" content="https://uinika.github.io/Web/Http/client-server-chain.png">
-<meta property="og:image" content="https://uinika.github.io/Web/Http/Http/http-message-structure.png">
-<meta property="og:image" content="https://uinika.github.io/Web/Http/Http/http-request-header.png">
-<meta property="og:image" content="https://uinika.github.io/Web/Http/Http/http-response-header.png">
-<meta property="og:image" content="https://uinika.github.io/Web/Http/binary-frame.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/Http/logo.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/Http/Http/http-layers.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/Http/client-server-chain.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/Http/Http/http-message-structure.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/Http/Http/http-request-header.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/Http/Http/http-response-header.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/Http/binary-frame.png">
 <meta property="article:published_time" content="2015-03-07T16:00:00.000Z">
 <meta property="article:modified_time" content="2015-11-11T16:00:00.000Z">
 <meta property="article:author" content="Hank">
 <meta property="article:tag" content="Convention">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://uinika.github.io/Web/Http/logo.png">
+<meta name="twitter:image" content="https://uinika.gitee.io/Web/Http/logo.png">
 
 
-<link rel="canonical" href="https://uinika.github.io/Web/Http/">
+<link rel="canonical" href="https://uinika.gitee.io/Web/Http/">
 
 
 <script class="page-configurations">
@@ -136,7 +136,7 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
@@ -226,7 +226,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -289,7 +289,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Web/Http/">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Web/Http/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -464,7 +464,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://uinika.github.io/Web/Http/" title="HTTP 协议深入解析">https://uinika.github.io/Web/Http/</a>
+      <a href="https://uinika.gitee.io/Web/Http/" title="HTTP 协议深入解析">https://uinika.gitee.io/Web/Http/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！

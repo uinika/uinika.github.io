@@ -3,11 +3,11 @@
   <title>Bit by bit</title>
   
   <subtitle>Electronics, Embedded &amp; Web</subtitle>
-  <link href="https://uinika.github.io/atom.xml" rel="self"/>
+  <link href="https://uinika.gitee.io/atom.xml" rel="self"/>
   
-  <link href="https://uinika.github.io/"/>
+  <link href="https://uinika.gitee.io/"/>
   <updated>2021-01-20T12:43:11.761Z</updated>
-  <id>https://uinika.github.io/</id>
+  <id>https://uinika.gitee.io/</id>
   
   <author>
     <name>Hank</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>现代数字逻辑电子技术概论</title>
-    <link href="https://uinika.github.io/Electronics/Digital/"/>
-    <id>https://uinika.github.io/Electronics/Digital/</id>
+    <link href="https://uinika.gitee.io/Electronics/Digital/"/>
+    <id>https://uinika.gitee.io/Electronics/Digital/</id>
     <published>2020-11-20T16:00:00.000Z</published>
     <updated>2021-01-20T12:43:11.761Z</updated>
     
@@ -32,17 +32,17 @@
     
     
     
-    <category term="Electronics" scheme="https://uinika.github.io/categories/Electronics/"/>
+    <category term="Electronics" scheme="https://uinika.gitee.io/categories/Electronics/"/>
     
     
-    <category term="Digital" scheme="https://uinika.github.io/tags/Digital/"/>
+    <category term="Digital" scheme="https://uinika.gitee.io/tags/Digital/"/>
     
   </entry>
   
   <entry>
     <title>Bash Shell 脚本编程实践</title>
-    <link href="https://uinika.github.io/Linux/Shell/"/>
-    <id>https://uinika.github.io/Linux/Shell/</id>
+    <link href="https://uinika.gitee.io/Linux/Shell/"/>
+    <id>https://uinika.gitee.io/Linux/Shell/</id>
     <published>2020-11-06T16:00:00.000Z</published>
     <updated>2020-11-12T16:00:00.000Z</updated>
     
@@ -55,17 +55,17 @@
     
     
     
-    <category term="Linux" scheme="https://uinika.github.io/categories/Linux/"/>
+    <category term="Linux" scheme="https://uinika.gitee.io/categories/Linux/"/>
     
     
-    <category term="Shell" scheme="https://uinika.github.io/tags/Shell/"/>
+    <category term="Shell" scheme="https://uinika.gitee.io/tags/Shell/"/>
     
   </entry>
   
   <entry>
     <title>通用 LaTeX 数学公式语法手册</title>
-    <link href="https://uinika.github.io/Zen/LaTex/"/>
-    <id>https://uinika.github.io/Zen/LaTex/</id>
+    <link href="https://uinika.gitee.io/Zen/LaTex/"/>
+    <id>https://uinika.gitee.io/Zen/LaTex/</id>
     <published>2020-10-05T16:00:00.000Z</published>
     <updated>2021-01-02T16:00:00.000Z</updated>
     
@@ -78,17 +78,17 @@
     
     
     
-    <category term="Zen" scheme="https://uinika.github.io/categories/Zen/"/>
+    <category term="Zen" scheme="https://uinika.gitee.io/categories/Zen/"/>
     
     
-    <category term="Markdown" scheme="https://uinika.github.io/tags/Markdown/"/>
+    <category term="Markdown" scheme="https://uinika.gitee.io/tags/Markdown/"/>
     
   </entry>
   
   <entry>
     <title>Qt 5 桌面应用程序开发指南 - QtWidgets 篇</title>
-    <link href="https://uinika.github.io/Linux/Qt-Widgets/"/>
-    <id>https://uinika.github.io/Linux/Qt-Widgets/</id>
+    <link href="https://uinika.gitee.io/Linux/Qt-Widgets/"/>
+    <id>https://uinika.gitee.io/Linux/Qt-Widgets/</id>
     <published>2020-08-20T16:00:00.000Z</published>
     <updated>2020-10-06T16:00:00.000Z</updated>
     
@@ -101,17 +101,17 @@
     
     
     
-    <category term="Qt" scheme="https://uinika.github.io/categories/Qt/"/>
+    <category term="Qt" scheme="https://uinika.gitee.io/categories/Qt/"/>
     
     
-    <category term="Desktop" scheme="https://uinika.github.io/tags/Desktop/"/>
+    <category term="Linux" scheme="https://uinika.gitee.io/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>模拟电子技术原理与综合运用</title>
-    <link href="https://uinika.github.io/Electronics/Analog/"/>
-    <id>https://uinika.github.io/Electronics/Analog/</id>
+    <link href="https://uinika.gitee.io/Electronics/Analog/"/>
+    <id>https://uinika.gitee.io/Electronics/Analog/</id>
     <published>2020-08-05T16:00:00.000Z</published>
     <updated>2021-01-19T18:35:00.943Z</updated>
     
@@ -124,17 +124,17 @@
     
     
     
-    <category term="Electronics" scheme="https://uinika.github.io/categories/Electronics/"/>
+    <category term="Electronics" scheme="https://uinika.gitee.io/categories/Electronics/"/>
     
     
-    <category term="Analog" scheme="https://uinika.github.io/tags/Analog/"/>
+    <category term="Analog" scheme="https://uinika.gitee.io/tags/Analog/"/>
     
   </entry>
   
   <entry>
     <title>Qt 5 桌面应用程序开发指南 - QtQuick 篇</title>
-    <link href="https://uinika.github.io/Linux/Qt-Quick/"/>
-    <id>https://uinika.github.io/Linux/Qt-Quick/</id>
+    <link href="https://uinika.gitee.io/Linux/Qt-Quick/"/>
+    <id>https://uinika.gitee.io/Linux/Qt-Quick/</id>
     <published>2020-07-01T16:00:00.000Z</published>
     <updated>2020-08-18T16:00:00.000Z</updated>
     
@@ -147,17 +147,17 @@
     
     
     
-    <category term="Qt" scheme="https://uinika.github.io/categories/Qt/"/>
+    <category term="Qt" scheme="https://uinika.gitee.io/categories/Qt/"/>
     
     
-    <category term="Desktop" scheme="https://uinika.github.io/tags/Desktop/"/>
+    <category term="Linux" scheme="https://uinika.gitee.io/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Android 物联网应用开发实例</title>
-    <link href="https://uinika.github.io/Embedded/Android/"/>
-    <id>https://uinika.github.io/Embedded/Android/</id>
+    <link href="https://uinika.gitee.io/Embedded/Android/"/>
+    <id>https://uinika.gitee.io/Embedded/Android/</id>
     <published>2020-06-12T16:00:00.000Z</published>
     <updated>2021-01-19T18:23:53.004Z</updated>
     
@@ -170,17 +170,17 @@
     
     
     
-    <category term="Embedded" scheme="https://uinika.github.io/categories/Embedded/"/>
+    <category term="Embedded" scheme="https://uinika.gitee.io/categories/Embedded/"/>
     
     
-    <category term="Mobile" scheme="https://uinika.github.io/tags/Mobile/"/>
+    <category term="Mobile" scheme="https://uinika.gitee.io/tags/Mobile/"/>
     
   </entry>
   
   <entry>
     <title>玩转 Raspberry Pi 4B 开源硬件</title>
-    <link href="https://uinika.github.io/Embedded/RaspberryPi/"/>
-    <id>https://uinika.github.io/Embedded/RaspberryPi/</id>
+    <link href="https://uinika.gitee.io/Embedded/RaspberryPi/"/>
+    <id>https://uinika.gitee.io/Embedded/RaspberryPi/</id>
     <published>2020-05-17T16:00:00.000Z</published>
     <updated>2020-11-26T16:00:00.000Z</updated>
     
@@ -193,17 +193,17 @@
     
     
     
-    <category term="Embedded" scheme="https://uinika.github.io/categories/Embedded/"/>
+    <category term="Embedded" scheme="https://uinika.gitee.io/categories/Embedded/"/>
     
     
-    <category term="MCU" scheme="https://uinika.github.io/tags/MCU/"/>
+    <category term="MCU" scheme="https://uinika.gitee.io/tags/MCU/"/>
     
   </entry>
   
   <entry>
     <title>电路分析理论 - 电阻电路篇</title>
-    <link href="https://uinika.github.io/Electronics/Analysis/"/>
-    <id>https://uinika.github.io/Electronics/Analysis/</id>
+    <link href="https://uinika.gitee.io/Electronics/Analysis/"/>
+    <id>https://uinika.gitee.io/Electronics/Analysis/</id>
     <published>2020-03-05T16:00:00.000Z</published>
     <updated>2020-08-04T16:00:00.000Z</updated>
     
@@ -216,17 +216,17 @@
     
     
     
-    <category term="Electronics" scheme="https://uinika.github.io/categories/Electronics/"/>
+    <category term="Electronics" scheme="https://uinika.gitee.io/categories/Electronics/"/>
     
     
-    <category term="Analysis" scheme="https://uinika.github.io/tags/Analysis/"/>
+    <category term="Analysis" scheme="https://uinika.gitee.io/tags/Analysis/"/>
     
   </entry>
   
   <entry>
     <title>常用高等数学公式与导学</title>
-    <link href="https://uinika.github.io/Math/Calculus/"/>
-    <id>https://uinika.github.io/Math/Calculus/</id>
+    <link href="https://uinika.gitee.io/Math/Calculus/"/>
+    <id>https://uinika.gitee.io/Math/Calculus/</id>
     <published>2020-02-18T16:00:00.000Z</published>
     <updated>2020-02-22T16:00:00.000Z</updated>
     
@@ -239,17 +239,17 @@
     
     
     
-    <category term="Math" scheme="https://uinika.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://uinika.gitee.io/categories/Math/"/>
     
     
-    <category term="Calculus" scheme="https://uinika.github.io/tags/Calculus/"/>
+    <category term="Calculus" scheme="https://uinika.gitee.io/tags/Calculus/"/>
     
   </entry>
   
   <entry>
     <title>常用初等数学图形与公式汇总</title>
-    <link href="https://uinika.github.io/Math/Elementary/"/>
-    <id>https://uinika.github.io/Math/Elementary/</id>
+    <link href="https://uinika.gitee.io/Math/Elementary/"/>
+    <id>https://uinika.gitee.io/Math/Elementary/</id>
     <published>2020-01-12T16:00:00.000Z</published>
     <updated>2020-11-24T16:00:00.000Z</updated>
     
@@ -262,17 +262,17 @@
     
     
     
-    <category term="Math" scheme="https://uinika.github.io/categories/Math/"/>
+    <category term="Math" scheme="https://uinika.gitee.io/categories/Math/"/>
     
     
-    <category term="Elementary" scheme="https://uinika.github.io/tags/Elementary/"/>
+    <category term="Elementary" scheme="https://uinika.gitee.io/tags/Elementary/"/>
     
   </entry>
   
   <entry>
     <title>开源 EDA 工具 KiCad 5.1.8 电路设计小书</title>
-    <link href="https://uinika.github.io/Electronics/KiCad/"/>
-    <id>https://uinika.github.io/Electronics/KiCad/</id>
+    <link href="https://uinika.gitee.io/Electronics/KiCad/"/>
+    <id>https://uinika.gitee.io/Electronics/KiCad/</id>
     <published>2019-11-20T16:00:00.000Z</published>
     <updated>2020-09-26T16:00:00.000Z</updated>
     
@@ -285,17 +285,17 @@
     
     
     
-    <category term="Electronics" scheme="https://uinika.github.io/categories/Electronics/"/>
+    <category term="Electronics" scheme="https://uinika.gitee.io/categories/Electronics/"/>
     
     
-    <category term="EDA" scheme="https://uinika.github.io/tags/EDA/"/>
+    <category term="EDA" scheme="https://uinika.gitee.io/tags/EDA/"/>
     
   </entry>
   
   <entry>
     <title>基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</title>
-    <link href="https://uinika.github.io/Embedded/STM32F103ZET6/"/>
-    <id>https://uinika.github.io/Embedded/STM32F103ZET6/</id>
+    <link href="https://uinika.gitee.io/Embedded/STM32F103ZET6/"/>
+    <id>https://uinika.gitee.io/Embedded/STM32F103ZET6/</id>
     <published>2019-07-25T16:00:00.000Z</published>
     <updated>2019-11-28T16:00:00.000Z</updated>
     
@@ -308,17 +308,17 @@
     
     
     
-    <category term="Embedded" scheme="https://uinika.github.io/categories/Embedded/"/>
+    <category term="Embedded" scheme="https://uinika.gitee.io/categories/Embedded/"/>
     
     
-    <category term="MCU" scheme="https://uinika.github.io/tags/MCU/"/>
+    <category term="MCU" scheme="https://uinika.gitee.io/tags/MCU/"/>
     
   </entry>
   
   <entry>
     <title>玩转 Arduino Uno、Mega、Due 开源硬件</title>
-    <link href="https://uinika.github.io/Embedded/Arduino/"/>
-    <id>https://uinika.github.io/Embedded/Arduino/</id>
+    <link href="https://uinika.gitee.io/Embedded/Arduino/"/>
+    <id>https://uinika.gitee.io/Embedded/Arduino/</id>
     <published>2019-07-15T16:00:00.000Z</published>
     <updated>2021-01-19T18:24:14.529Z</updated>
     
@@ -331,17 +331,17 @@
     
     
     
-    <category term="Embedded" scheme="https://uinika.github.io/categories/Embedded/"/>
+    <category term="Embedded" scheme="https://uinika.gitee.io/categories/Embedded/"/>
     
     
-    <category term="MCU" scheme="https://uinika.github.io/tags/MCU/"/>
+    <category term="MCU" scheme="https://uinika.gitee.io/tags/MCU/"/>
     
   </entry>
   
   <entry>
     <title>STLink V2 调试编程器应用图解</title>
-    <link href="https://uinika.github.io/Embedded/STLink/"/>
-    <id>https://uinika.github.io/Embedded/STLink/</id>
+    <link href="https://uinika.gitee.io/Embedded/STLink/"/>
+    <id>https://uinika.gitee.io/Embedded/STLink/</id>
     <published>2019-05-16T16:00:00.000Z</published>
     <updated>2019-12-29T16:00:00.000Z</updated>
     
@@ -354,17 +354,17 @@
     
     
     
-    <category term="Embedded" scheme="https://uinika.github.io/categories/Embedded/"/>
+    <category term="Embedded" scheme="https://uinika.gitee.io/categories/Embedded/"/>
     
     
-    <category term="MCU" scheme="https://uinika.github.io/tags/MCU/"/>
+    <category term="MCU" scheme="https://uinika.gitee.io/tags/MCU/"/>
     
   </entry>
   
   <entry>
     <title>意法半导体 STM32F103C8T6 标准库典型实例</title>
-    <link href="https://uinika.github.io/Embedded/STM32F103C8T6/"/>
-    <id>https://uinika.github.io/Embedded/STM32F103C8T6/</id>
+    <link href="https://uinika.gitee.io/Embedded/STM32F103C8T6/"/>
+    <id>https://uinika.gitee.io/Embedded/STM32F103C8T6/</id>
     <published>2019-03-19T16:00:00.000Z</published>
     <updated>2019-07-10T16:00:00.000Z</updated>
     
@@ -377,17 +377,17 @@
     
     
     
-    <category term="Embedded" scheme="https://uinika.github.io/categories/Embedded/"/>
+    <category term="Embedded" scheme="https://uinika.gitee.io/categories/Embedded/"/>
     
     
-    <category term="MCU" scheme="https://uinika.github.io/tags/MCU/"/>
+    <category term="MCU" scheme="https://uinika.gitee.io/tags/MCU/"/>
     
   </entry>
   
   <entry>
     <title>从 GNU Make 到 CMake 快速入门</title>
-    <link href="https://uinika.github.io/Linux/CMake/"/>
-    <id>https://uinika.github.io/Linux/CMake/</id>
+    <link href="https://uinika.gitee.io/Linux/CMake/"/>
+    <id>https://uinika.gitee.io/Linux/CMake/</id>
     <published>2019-02-10T16:00:00.000Z</published>
     <updated>2019-04-25T16:00:00.000Z</updated>
     
@@ -400,17 +400,17 @@
     
     
     
-    <category term="C/C++" scheme="https://uinika.github.io/categories/C-C/"/>
+    <category term="C/C++" scheme="https://uinika.gitee.io/categories/C-C/"/>
     
     
-    <category term="Qt" scheme="https://uinika.github.io/tags/Qt/"/>
+    <category term="Linux" scheme="https://uinika.gitee.io/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>实用模拟 &amp; 数字电路电子技术导论</title>
-    <link href="https://uinika.github.io/Electronics/Introduct/"/>
-    <id>https://uinika.github.io/Electronics/Introduct/</id>
+    <link href="https://uinika.gitee.io/Electronics/Introduct/"/>
+    <id>https://uinika.gitee.io/Electronics/Introduct/</id>
     <published>2018-07-18T16:00:00.000Z</published>
     <updated>2018-12-12T16:00:00.000Z</updated>
     
@@ -423,17 +423,17 @@
     
     
     
-    <category term="Electronics" scheme="https://uinika.github.io/categories/Electronics/"/>
+    <category term="Electronics" scheme="https://uinika.gitee.io/categories/Electronics/"/>
     
     
-    <category term="Wikipedia" scheme="https://uinika.github.io/tags/Wikipedia/"/>
+    <category term="Wikipedia" scheme="https://uinika.gitee.io/tags/Wikipedia/"/>
     
   </entry>
   
   <entry>
     <title>意法半导体 Nucleo F767ZI 评估板测试</title>
-    <link href="https://uinika.github.io/Embedded/NucleoF767ZI/"/>
-    <id>https://uinika.github.io/Embedded/NucleoF767ZI/</id>
+    <link href="https://uinika.gitee.io/Embedded/NucleoF767ZI/"/>
+    <id>https://uinika.gitee.io/Embedded/NucleoF767ZI/</id>
     <published>2018-07-12T16:00:00.000Z</published>
     <updated>2018-07-14T16:00:00.000Z</updated>
     
@@ -447,17 +447,17 @@
     
     
     
-    <category term="Embedded" scheme="https://uinika.github.io/categories/Embedded/"/>
+    <category term="Embedded" scheme="https://uinika.gitee.io/categories/Embedded/"/>
     
     
-    <category term="MCU" scheme="https://uinika.github.io/tags/MCU/"/>
+    <category term="MCU" scheme="https://uinika.gitee.io/tags/MCU/"/>
     
   </entry>
   
   <entry>
     <title>嵌入式 Linux C 原生应用程序开发</title>
-    <link href="https://uinika.github.io/Linux/Native/"/>
-    <id>https://uinika.github.io/Linux/Native/</id>
+    <link href="https://uinika.gitee.io/Linux/Native/"/>
+    <id>https://uinika.gitee.io/Linux/Native/</id>
     <published>2018-07-12T16:00:00.000Z</published>
     <updated>2018-07-14T16:00:00.000Z</updated>
     
@@ -470,10 +470,10 @@
     
     
     
-    <category term="Linux" scheme="https://uinika.github.io/categories/Linux/"/>
+    <category term="Linux" scheme="https://uinika.gitee.io/categories/Linux/"/>
     
     
-    <category term="C language" scheme="https://uinika.github.io/tags/C-language/"/>
+    <category term="C language" scheme="https://uinika.gitee.io/tags/C-language/"/>
     
   </entry>
   

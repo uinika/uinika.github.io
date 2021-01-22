@@ -20,38 +20,38 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"uinika.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+    var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
   </script>
 <meta name="description" content="STLink 是由意法半导体公司推出的在线调试编程器，采用5V的USB2.0全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以 JTAG 或 SWD 模式连接至 STM32 系列微控制器，或者以 SWIM 模式连接至 STM8 系列微控制器，操作温度介于0 ~ 50℃之间。由于 ST 公司极为重视中国市场，因此 STLink 的销售价格相对其它国外大厂的在线仿真设备要实惠许多，基">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STLink V2 调试编程器应用图解">
-<meta property="og:url" content="https://uinika.github.io/Embedded/STLink/index.html">
+<meta property="og:url" content="https://uinika.gitee.io/Embedded/STLink/index.html">
 <meta property="og:site_name" content="Bit by bit">
 <meta property="og:description" content="STLink 是由意法半导体公司推出的在线调试编程器，采用5V的USB2.0全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以 JTAG 或 SWD 模式连接至 STM32 系列微控制器，或者以 SWIM 模式连接至 STM8 系列微控制器，操作温度介于0 ~ 50℃之间。由于 ST 公司极为重视中国市场，因此 STLink 的销售价格相对其它国外大厂的在线仿真设备要实惠许多，基">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/logo.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/stlink-v2-1.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/stlink-v2-2.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/upgrade.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/connect-to-stm8.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/swim-pin.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/connect-to-stm32.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/jtag-pin.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-1.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-2.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-3.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-4.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-5.png">
-<meta property="og:image" content="https://uinika.github.io/Embedded/STLink/keil-6.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/logo.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/stlink-v2-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/stlink-v2-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/upgrade.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/connect-to-stm8.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/swim-pin.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/connect-to-stm32.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/jtag-pin.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/keil-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/keil-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/keil-3.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/keil-4.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/keil-5.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/STLink/keil-6.png">
 <meta property="article:published_time" content="2019-05-16T16:00:00.000Z">
 <meta property="article:modified_time" content="2019-12-29T16:00:00.000Z">
 <meta property="article:author" content="Hank">
 <meta property="article:tag" content="MCU">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://uinika.github.io/Embedded/STLink/logo.png">
+<meta name="twitter:image" content="https://uinika.gitee.io/Embedded/STLink/logo.png">
 
 
-<link rel="canonical" href="https://uinika.github.io/Embedded/STLink/">
+<link rel="canonical" href="https://uinika.gitee.io/Embedded/STLink/">
 
 
 <script class="page-configurations">
@@ -143,7 +143,7 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
@@ -233,7 +233,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -296,7 +296,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Embedded/STLink/">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Embedded/STLink/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -476,7 +476,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://uinika.github.io/Embedded/STLink/" title="STLink V2 调试编程器应用图解">https://uinika.github.io/Embedded/STLink/</a>
+      <a href="https://uinika.gitee.io/Embedded/STLink/" title="STLink V2 调试编程器应用图解">https://uinika.gitee.io/Embedded/STLink/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！

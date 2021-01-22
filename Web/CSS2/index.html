@@ -20,50 +20,50 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"uinika.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+    var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
   </script>
 <meta name="description" content="本文详细参考网易 NEC 前端开源项目、《CSS Mastery》、Mozilla 开发者社区，将 CSS 2.1 当中常用的概念与典型布局进行了比较全面的梳理与概括，并对定位、居中、外边距塌陷、包含块、多列布局等较易混淆的内容，进行了详实的文字说明与代码示例。在涵盖日常开发当中经典布局的同时，也加入了 HTML&#x2F;CSS 渲染的重绘与回流等更为深入的主题，是笔者 Web 前端开发工作经验的回顾与总">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS 2.1 典型概念与布局详解">
-<meta property="og:url" content="https://uinika.github.io/Web/CSS2/index.html">
+<meta property="og:url" content="https://uinika.gitee.io/Web/CSS2/index.html">
 <meta property="og:site_name" content="Bit by bit">
 <meta property="og:description" content="本文详细参考网易 NEC 前端开源项目、《CSS Mastery》、Mozilla 开发者社区，将 CSS 2.1 当中常用的概念与典型布局进行了比较全面的梳理与概括，并对定位、居中、外边距塌陷、包含块、多列布局等较易混淆的内容，进行了详实的文字说明与代码示例。在涵盖日常开发当中经典布局的同时，也加入了 HTML&#x2F;CSS 渲染的重绘与回流等更为深入的主题，是笔者 Web 前端开发工作经验的回顾与总">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/logo.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/boxmodel.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/float-1.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/float-2.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/containing-block-1.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/containing-block-2.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/containing-block-3.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/containing-block-4.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/containing-block-5.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/repaint-reflow.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-1-1.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-1-2.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-1-3.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-2-1.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-2-2.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-2-3.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-2-4.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-3-1.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-3-2.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/layout-3-3.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/vertical-center-1.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/vertical-center-2.gif">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/vertical-center-3.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/vertical-center-4.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/vertical-center-5.png">
-<meta property="og:image" content="https://uinika.github.io/Web/CSS2/text-align.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/logo.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/boxmodel.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/float-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/float-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/containing-block-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/containing-block-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/containing-block-3.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/containing-block-4.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/containing-block-5.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/repaint-reflow.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-1-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-1-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-1-3.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-2-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-2-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-2-3.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-2-4.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-3-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-3-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/layout-3-3.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/vertical-center-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/vertical-center-2.gif">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/vertical-center-3.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/vertical-center-4.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/vertical-center-5.png">
+<meta property="og:image" content="https://uinika.gitee.io/Web/CSS2/text-align.png">
 <meta property="article:published_time" content="2010-02-14T16:00:00.000Z">
 <meta property="article:modified_time" content="2012-07-10T16:00:00.000Z">
 <meta property="article:author" content="Hank">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://uinika.github.io/Web/CSS2/logo.png">
+<meta name="twitter:image" content="https://uinika.gitee.io/Web/CSS2/logo.png">
 
 
-<link rel="canonical" href="https://uinika.github.io/Web/CSS2/">
+<link rel="canonical" href="https://uinika.gitee.io/Web/CSS2/">
 
 
 <script class="page-configurations">
@@ -155,7 +155,7 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
@@ -245,7 +245,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -308,7 +308,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://uinika.github.io/Web/CSS2/">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Web/CSS2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -743,7 +743,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://uinika.github.io/Web/CSS2/" title="CSS 2.1 典型概念与布局详解">https://uinika.github.io/Web/CSS2/</a>
+      <a href="https://uinika.gitee.io/Web/CSS2/" title="CSS 2.1 典型概念与布局详解">https://uinika.gitee.io/Web/CSS2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！

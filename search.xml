@@ -206,7 +206,7 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>Qt</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -217,7 +217,7 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>Qt</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -287,17 +287,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS 3.0 新增特性集锦</title>
-    <url>/Web/CSS3/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Web 前端开发遵循的一些规范与约定</title>
     <url>/Web/Convention/</url>
     <content><![CDATA[]]></content>
@@ -306,6 +295,17 @@
       </categories>
       <tags>
         <tag>Convention</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS 3.0 新增特性集锦</title>
+    <url>/Web/CSS3/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -514,7 +514,7 @@
         <category>Qt</category>
       </categories>
       <tags>
-        <tag>Desktop</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -580,7 +580,7 @@
         <category>Qt</category>
       </categories>
       <tags>
-        <tag>Desktop</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
