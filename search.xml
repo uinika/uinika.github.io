@@ -45,17 +45,6 @@
       </tags>
   </entry>
   <entry>
-    <title>嵌入式 Linux C 原生应用程序开发</title>
-    <url>/Linux/Native/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>C language</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vim 常用键位生存指南</title>
     <url>/Linux/Vim/</url>
     <content><![CDATA[]]></content>
@@ -64,6 +53,17 @@
       </categories>
       <tags>
         <tag>Embedded</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>嵌入式 Linux C 原生应用程序开发</title>
+    <url>/Linux/Native/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>C language</tag>
       </tags>
   </entry>
   <entry>
@@ -221,17 +221,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基于 Linux 的 GCC 与 GDB 应用程序调试</title>
-    <url>/Linux/GCC/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>GCC GDB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bash Shell 脚本编程实践</title>
     <url>/Linux/Shell/</url>
     <content><![CDATA[]]></content>
@@ -240,6 +229,17 @@
       </categories>
       <tags>
         <tag>Shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于 Linux 的 GCC 与 GDB 应用程序调试</title>
+    <url>/Linux/GCC/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>GCC GDB</tag>
       </tags>
   </entry>
   <entry>
