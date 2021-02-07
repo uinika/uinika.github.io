@@ -2974,7 +2974,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ecffff;
+  background: #befff1;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3117,6 +3117,11 @@ header.header .site-nav-right .toggle {
 .main .post-title,
 .main .post-button {
   text-align: center;
+}
+.main .post-title .post-sticky-flag,
+.main .post-button .post-sticky-flag {
+  float: right;
+  color: #a38272;
 }
 .main .posts-expand.index .post-meta {
   justify-content: center;

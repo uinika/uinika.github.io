@@ -22,12 +22,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
   </script>
-<meta name="description" content="笔者半年之前的一篇长文，所介绍的STC51系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准 8051 架构诞生于 70 年代，其硬件架构、资源数量以及编程方式都已显老旧，成本和性能方面也皆落后于其它架构产品，市场占有率逐步遭到侵蚀，目前仅常见于一些教学与发烧友使用的范畴。伴随近几年物联网行业的快速兴起，STM32等基于 ARM Cortex 内核的微控制器，凭借丰富的片上资源与简单">
+<meta name="description" content="博主之前文章介绍的STC51系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准 8051 架构诞生于 70 年代，其硬件架构、资源数量以及编程方式都已显老旧，成本和性能方面也皆落后于其它架构产品，市场占有率逐步遭到侵蚀，目前仅常见于一些教学与发烧友使用的范畴。伴随近几年物联网行业的快速兴起，STM32等基于 ARM Cortex 内核的微控制器，凭借丰富的片上资源与简单易用的标准外设">
 <meta property="og:type" content="article">
 <meta property="og:title" content="意法半导体 STM32F103C8T6 标准库典型实例">
 <meta property="og:url" content="https://uinika.gitee.io/Embedded/STM32F103C8T6/index.html">
 <meta property="og:site_name" content="Bit by bit">
-<meta property="og:description" content="笔者半年之前的一篇长文，所介绍的STC51系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准 8051 架构诞生于 70 年代，其硬件架构、资源数量以及编程方式都已显老旧，成本和性能方面也皆落后于其它架构产品，市场占有率逐步遭到侵蚀，目前仅常见于一些教学与发烧友使用的范畴。伴随近几年物联网行业的快速兴起，STM32等基于 ARM Cortex 内核的微控制器，凭借丰富的片上资源与简单">
+<meta property="og:description" content="博主之前文章介绍的STC51系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准 8051 架构诞生于 70 年代，其硬件架构、资源数量以及编程方式都已显老旧，成本和性能方面也皆落后于其它架构产品，市场占有率逐步遭到侵蚀，目前仅常见于一些教学与发烧友使用的范畴。伴随近几年物联网行业的快速兴起，STM32等基于 ARM Cortex 内核的微控制器，凭借丰富的片上资源与简单易用的标准外设">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://uinika.gitee.io/Embedded/STM32F103C8T6/logo.png">
 <meta property="og:image" content="https://uinika.gitee.io/Embedded/STM32F103C8T6/overview/architecture.png">
@@ -188,7 +188,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">57</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
@@ -263,7 +263,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -413,7 +413,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>笔者半年之前的一篇长文，所介绍的<strong>STC51</strong>系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准 8051 架构诞生于 70 年代，其硬件架构、资源数量以及编程方式都已显老旧，成本和性能方面也皆落后于其它架构产品，市场占有率逐步遭到侵蚀，目前仅常见于一些教学与发烧友使用的范畴。伴随近几年物联网行业的快速兴起，<strong>STM32</strong>等基于 ARM Cortex 内核的微控制器，凭借丰富的片上资源与简单易用的标准外设库，逐步成为消费与工业领域中的主流产品。</p>
+        <p>博主之前文章介绍的<strong>STC51</strong>系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准 8051 架构诞生于 70 年代，其硬件架构、资源数量以及编程方式都已显老旧，成本和性能方面也皆落后于其它架构产品，市场占有率逐步遭到侵蚀，目前仅常见于一些教学与发烧友使用的范畴。伴随近几年物联网行业的快速兴起，<strong>STM32</strong>等基于 ARM Cortex 内核的微控制器，凭借丰富的片上资源与简单易用的标准外设库，逐步成为消费与工业领域中的主流产品。</p>
 <p><img src="/Embedded/STM32F103C8T6/logo.png"></p>
 <p><a target="_blank" rel="noopener" href="https://www.st.com">意法半导体</a>成立于 1987 年，由意大利 <strong>S</strong>GS 和法国 <strong>T</strong>homson 两家半导体企业合并而成，本文所介绍的<a target="_blank" rel="noopener" href="https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html#"><strong>STM32F103C8T6</strong></a>属于该公司应用极为广泛的型号，其提供的<code>STM32F10x Standard Peripheral Library</code>标准外设库对 STM32 片上资源进行了完善的封装，相对于 ST 公司目前力推的<strong>HAL/LL</strong>库，标准外设库更加接近于传统的寄存器操作，因而也较为容易向<a target="_blank" rel="noopener" href="https://www.gigadevice.com">兆易创新</a>的<a target="_blank" rel="noopener" href="https://www.gigadevice.com/products/microcontrollers/gd32/"><strong>GD32</strong></a>等国产微控制器移植。</p>
 <a id="more"></a>
@@ -2001,7 +2001,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">320:01</span>
+    <span title="站点阅读时长">320:34</span>
   </span>
 </div>
 <div class="busuanzi-count">

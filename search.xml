@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>电路分析理论 - 动态电路篇</title>
+    <url>/Electronics/Dynamic/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>J-Link 仿真器固件恢复小记</title>
     <url>/Embedded/JLink/</url>
     <content><![CDATA[]]></content>
@@ -111,17 +122,6 @@
       </tags>
   </entry>
   <entry>
-    <title>HTTP 协议深入解析</title>
-    <url>/Web/Http/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Convention</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>jQuery 那些容易被忽略的问题</title>
     <url>/Web/JQuery/</url>
     <content><![CDATA[]]></content>
@@ -130,6 +130,17 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP 协议深入解析</title>
+    <url>/Web/Http/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Convention</tag>
       </tags>
   </entry>
   <entry>
@@ -364,17 +375,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 Electron 打造跨平台桌面应用</title>
-    <url>/Web/Electron/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Server</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Flux 数据流两三事儿</title>
     <url>/Web/Flux/</url>
     <content><![CDATA[]]></content>
@@ -383,6 +383,17 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Electron 打造跨平台桌面应用</title>
+    <url>/Web/Electron/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
       </tags>
   </entry>
   <entry>
@@ -563,7 +574,7 @@
   </entry>
   <entry>
     <title>电路分析理论 - 电阻电路篇</title>
-    <url>/Electronics/Analysis/</url>
+    <url>/Electronics/Resistance/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Electronics</category>
