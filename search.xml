@@ -122,17 +122,6 @@
       </tags>
   </entry>
   <entry>
-    <title>jQuery 那些容易被忽略的问题</title>
-    <url>/Web/JQuery/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HTTP 协议深入解析</title>
     <url>/Web/Http/</url>
     <content><![CDATA[]]></content>
@@ -141,6 +130,17 @@
       </categories>
       <tags>
         <tag>Convention</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jQuery 那些容易被忽略的问题</title>
+    <url>/Web/JQuery/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -375,17 +375,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Flux 数据流两三事儿</title>
-    <url>/Web/Flux/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用 Electron 打造跨平台桌面应用</title>
     <url>/Web/Electron/</url>
     <content><![CDATA[]]></content>
@@ -394,6 +383,17 @@
       </categories>
       <tags>
         <tag>Server</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Flux 数据流两三事儿</title>
+    <url>/Web/Flux/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>

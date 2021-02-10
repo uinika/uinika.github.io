@@ -223,6 +223,7 @@ p {
 a {
   border-bottom: 1px solid #ccc;
   color: var(--link-color);
+  cursor: pointer;
   outline: 0;
   text-decoration: none;
   overflow-wrap: break-word;
@@ -2974,7 +2975,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #befff1;
+  background: #961d7f;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3002,11 +3003,16 @@ hr {
 }
 /*========== 主背景色 ==========*/
 body {
-  background: url("/images/background-main.gif");
+  background-color: #f3f1ed;
+  background-image: url("/images/background-main.gif");
 }
 /*========== 文本选择背景色 ==========*/
 ::selection {
   background: #a38272;
+}
+.posts-expand .post-title-link::before {
+  background: #a38272;
+  transition: transform 0.25s ease-in-out;
 }
 /*========== 顶部工具栏 ==========*/
 header.header {
@@ -3051,18 +3057,59 @@ header.header .site-nav-right .toggle {
 .sidebar {
   background: url("/images/background-sidebar.png");
 }
-.sidebar .site-author-name,
-.sidebar .site-description {
+.sidebar .site-author {
+  margin-top: 35px;
+}
+.sidebar .site-author .site-author-name {
+  font-size: 26px;
+  font-weight: bold;
   color: #e2d8d3;
 }
-.sidebar .links-of-author-item>a {
+.sidebar .site-author .site-description {
+  font-size: 17px;
   color: #e2d8d3;
 }
-.sidebar .site-state-item>a>span {
-  color: #fff;
+.sidebar .site-state-wrap {
+  margin-top: 30px;
+}
+.sidebar .site-state-wrap .site-state-item>a>span {
+  color: #ded1c7;
+}
+.sidebar .links-of-author {
+  margin-top: 40px;
+}
+.sidebar .links-of-author a::before {
+  display: none;
+}
+.sidebar .links-of-author .links-of-author-item {
+  display: block;
+  width: 100%;
+}
+.sidebar .links-of-author .links-of-author-item a {
+  margin: 0;
+  width: 100%;
+  color: #ded1c7;
+  font-size: 15px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  vertical-align: center;
+}
+.sidebar .links-of-author .links-of-author-item:first-child {
+  border-top: 1px solid #555;
+}
+.sidebar .links-of-author .links-of-author-item a:hover {
+  background-color: rgba(255,255,255,0.1);
+  transition: background-color 0.1s ease-in-out;
+}
+.sidebar .cc-license {
+  margin-top: 50px;
+}
+.sidebar .cc-license .cc-opacity img {
+  display: block;
+  width: 120px;
 }
 .sidebar .nav a {
-  color: #e2d8d3;
+  color: #ded1c7;
 }
 .sidebar .sidebar-nav {
   font-size: 20px;
@@ -3074,30 +3121,6 @@ header.header .site-nav-right .toggle {
 }
 .sidebar .sidebar-panel-container .nav>li {
   padding: 2px 0;
-}
-.sidebar .site-author-name {
-  font-size: 20px;
-  font-weight: bold;
-}
-.sidebar .links-of-author a::before {
-  display: none;
-}
-.sidebar .site-overview-item {
-  margin-top: 30px;
-}
-.sidebar .links-of-author-item {
-  display: block;
-  width: 100%;
-}
-.sidebar .links-of-author-item a {
-  width: 100%;
-  font-size: 15px;
-  padding-top: 2;
-  padding-bottom: 13px;
-}
-.sidebar .cc-opacity img {
-  display: block;
-  width: 120px;
 }
 .sidebar .back-to-top {
   font-size: 14px;
@@ -3122,6 +3145,10 @@ header.header .site-nav-right .toggle {
 .main .post-button .post-sticky-flag {
   float: right;
   color: #a38272;
+}
+.main .post-title .post-title-link,
+.main .post-button .post-title-link {
+  width: 90%;
 }
 .main .posts-expand.index .post-meta {
   justify-content: center;
