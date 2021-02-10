@@ -2975,7 +2975,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #961d7f;
+  background: #066ffa;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3108,6 +3108,12 @@ header.header .site-nav-right .toggle {
   display: block;
   width: 120px;
 }
+.sidebar .back-to-top {
+  margin-top: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #e2d8d3;
+}
 .sidebar .nav a {
   color: #ded1c7;
 }
@@ -3121,9 +3127,6 @@ header.header .site-nav-right .toggle {
 }
 .sidebar .sidebar-panel-container .nav>li {
   padding: 2px 0;
-}
-.sidebar .back-to-top {
-  font-size: 14px;
 }
 /*========== 正文 ==========*/
 .main {
