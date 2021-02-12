@@ -24,7 +24,7 @@
   </script>
 <meta name="description" content="JavaScript 遵循了 ECMAScript 语言规范，2012 年之后的现代浏览器都完整支持 ECMAScript 5.1 标准。2015 年 6 月 17 日，ECMA 国际组织发布了 ECMAScript 6 标准，官方称为 ECMAScript 2015（俗称为 ES6），从此 ECMAScript 每年发布一次新标准，本文覆盖了当前最新 ECMAScript2017 草案中的新特性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript 6 简明语法书">
+<meta property="og:title" content="JavaScript 简明语法书">
 <meta property="og:url" content="https://uinika.gitee.io/Web/Javascript/index.html">
 <meta property="og:site_name" content="Bit by bit">
 <meta property="og:description" content="JavaScript 遵循了 ECMAScript 语言规范，2012 年之后的现代浏览器都完整支持 ECMAScript 5.1 标准。2015 年 6 月 17 日，ECMA 国际组织发布了 ECMAScript 6 标准，官方称为 ECMAScript 2015（俗称为 ES6），从此 ECMAScript 每年发布一次新标准，本文覆盖了当前最新 ECMAScript2017 草案中的新特性">
@@ -57,7 +57,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>JavaScript 6 简明语法书 | Bit by bit</title>
+<title>JavaScript 简明语法书 | Bit by bit</title>
   
 
 
@@ -303,7 +303,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript 6 简明语法书
+          JavaScript 简明语法书
         </h1>
 
         <div class="post-meta-container">
@@ -489,7 +489,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>, <span class="number">117</span> and -<span class="number">345</span> (decimal, base <span class="number">10</span>)</span><br><span class="line"><span class="number">015</span>, <span class="number">0001</span> and -<span class="number">0o77</span> (octal, base <span class="number">8</span>)</span><br><span class="line"><span class="number">0x1123</span>, <span class="number">0x00111</span> and -<span class="number">0xF1A7</span> (hexadecimal, <span class="string">&quot;hex&quot;</span> or base <span class="number">16</span>)</span><br><span class="line"><span class="number">0b11</span>, <span class="number">0b0011</span> and -<span class="number">0b11</span> (binary, base <span class="number">2</span></span><br></pre></td></tr></table></figure>
 <h4 id="floating-point-literals">Floating-point literals</h4>
 <p>浮点数可以以小数或指数形式表示，但至少拥有一位数字，且必须带小数点或者 e 或 E。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.14</span> -</span><br><span class="line"><span class="number">0.2345789</span> - <span class="comment">// -0.23456789</span></span><br><span class="line">  <span class="number">3.12e12</span>; <span class="comment">// -3.12*1012</span></span><br><span class="line"><span class="number">0.1e-23</span>; <span class="comment">// 0.1*10-23=10-24=1e-24</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.14</span> -</span><br><span class="line">  <span class="number">0.2345789</span> - <span class="comment">// -0.23456789</span></span><br><span class="line">  <span class="number">3.12e12</span>; <span class="comment">// -3.12*1012</span></span><br><span class="line"><span class="number">0.1e-23</span>; <span class="comment">// 0.1*10-23=10-24=1e-24</span></span><br></pre></td></tr></table></figure>
 <h4 id="object-literals">Object literals</h4>
 <p>对象字面量是封闭在花括号<code>&#123;&#125;</code>中的<em>键-值对</em>的列表。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Sales = <span class="string">&quot;Toyota&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CarTypes</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> name === <span class="string">&quot;Honda&quot;</span> ? name : <span class="string">&quot;Sorry, we don&#x27;t sell &quot;</span> + name + <span class="string">&quot;.&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> car = &#123; <span class="attr">myCar</span>: <span class="string">&quot;Saturn&quot;</span>, <span class="attr">getCar</span>: CarTypes(<span class="string">&quot;Honda&quot;</span>), <span class="attr">special</span>: Sales &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(car.myCar); <span class="comment">// Saturn</span></span><br><span class="line"><span class="built_in">console</span>.log(car.getCar); <span class="comment">// Honda</span></span><br><span class="line"><span class="built_in">console</span>.log(car.special); <span class="comment">// Toyota</span></span><br></pre></td></tr></table></figure>
@@ -506,7 +506,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="regexp">/ab+c/</span>;</span><br></pre></td></tr></table></figure>
 <h4 id="string-literals">String literals</h4>
 <p>由双引号<code>"</code>或单引号<code>‘</code>括起来的零个或多个字符。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;foo&quot;</span>;</span><br><span class="line"><span class="string">&quot;bar&quot;</span>;</span><br><span class="line"><span class="string">&quot;1234&quot;</span>;</span><br><span class="line"><span class="string">&quot;one line \n another line&quot;</span>;</span><br><span class="line"><span class="string">&quot;John&#x27;s cat&quot;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;foo&quot;</span>;</span><br><span class="line"><span class="string">&quot;bar&quot;</span>;</span><br><span class="line"><span class="string">&quot;1234&quot;</span>;</span><br><span class="line"><span class="string">&quot;one line \n another line&quot;</span>;</span><br><span class="line"><span class="string">&quot;John&#x27;s cat&quot;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>可以在<em>字符串字面量</em>上使用<em>字符串对象</em>的所有方法，JavaScript 会自动将字符串字面量转换为临时的字符串对象。当方法调用完毕之后，该临时字符串对象就会被销毁。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;John&#x27;s cat&quot;</span>.length);</span><br><span class="line"><span class="comment">// Will print the number of symbols in the string including whitespace.</span></span><br><span class="line"><span class="comment">// In this case, 10.</span></span><br></pre></td></tr></table></figure>
 <p>ES2015 提供了模板字面量特性(<em>template literals</em>)，提供了一些语法糖帮助构建字符串。除此之外，还可以在模板字面量中通过添加标签来自定义模板的解析过程，从而防止注入攻击，或者建立基于字符串的高级封装。</p>
@@ -1169,7 +1169,7 @@
       <div class="popular-posts-title"><a href="\Web\JQuery\" rel="bookmark">jQuery 那些容易被忽略的问题</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\Web\Webpack\" rel="bookmark">Webpack 4 核心剖析</a></div>
+      <div class="popular-posts-title"><a href="\Web\Webpack\" rel="bookmark">Webpack 4 核心配置剖析</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\Web\Angularjs\" rel="bookmark">AngularJS 1.6.x 最佳实践总结</a></div>
@@ -1202,7 +1202,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://uinika.gitee.io/Web/Javascript/" title="JavaScript 6 简明语法书">https://uinika.gitee.io/Web/Javascript/</a>
+      <a href="https://uinika.gitee.io/Web/Javascript/" title="JavaScript 简明语法书">https://uinika.gitee.io/Web/Javascript/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
