@@ -12,6 +12,17 @@
       </tags>
   </entry>
   <entry>
+    <title>经典 PCB 布线规范与设计准则</title>
+    <url>/Electronics/PCB/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>J-Link 仿真器固件恢复小记</title>
     <url>/Embedded/JLink/</url>
     <content><![CDATA[]]></content>
