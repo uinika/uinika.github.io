@@ -277,521 +277,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Web/Http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Web/Http/" class="post-title-link" itemprop="url">HTTP 协议深入解析</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2015-03-08 00:00:00" itemprop="dateCreated datePublished" datetime="2015-03-08T00:00:00+08:00">2015-03-08</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2015-11-12 00:00:00" itemprop="dateModified" datetime="2015-11-12T00:00:00+08:00">2015-11-12</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>42 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/">HTTP</a> 是基于 <strong>TCP/IP</strong> 协议而建立 Web 基础协议，从 1989 年早期的简单 <strong>HTTP/0.9</strong> 单行协议开始，至 1996 年逐步扩展了状态码、协议头等特性发展到 <strong>HTTP/1.0</strong>，然后在 1997 年的 <strong>HTTP/1.1</strong> 增加了 TCP 连接复用、流水线支持、响应分块、缓存控制、内容协商等特性。2015 年 <strong>HTTP/2</strong> 协议正式标准化之后，传统 HTTP 的文本协议被二进制协议替代，让并行的请求在同 1 个 TCP 连接中处理，并移除了<code>header</code>中的重复数据，大幅提升通信效率。</p>
-<p><img src="/Web/Http/logo.png"></p>
-<p>在各类现代化 Web 服务器与开发框架群雄并起的年代，无论是 Python 的<a target="_blank" rel="noopener" href="https://www.djangoproject.com/">Django</a>、<a target="_blank" rel="noopener" href="http://www.tornadoweb.org">Tornado</a>，还是 Java 的<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/index-jsp-135475.html">Servlet</a>或者是 Go 上的<a target="_blank" rel="noopener" href="https://beego.me/">BeeGo</a>，其本质上都是基于<a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/">HTTP 协议</a>的封装。因此了解 HTTP 相关协议规范能够提升 Web 开发的透明度，能够从协议角度理解 Web 报文的通信过程，而非仅仅从各类 Web 开发框架及其 API 封装的角度。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Web/Http/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Web/Convention/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Web/Convention/" class="post-title-link" itemprop="url">Web 前端开发遵循的一些规范与约定</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2015-02-27 00:00:00" itemprop="dateCreated datePublished" datetime="2015-02-27T00:00:00+08:00">2015-02-27</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2016-01-13 00:00:00" itemprop="dateModified" datetime="2016-01-13T00:00:00+08:00">2016-01-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>12k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1:56</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>开发团队当前正在全面切换到<code>ES6 + Vue/React + Webpack</code>这套技术栈，小伙伴们在开发过程中对编码规范以及 ES6 使用约定方面存在诸多困惑，所以参考了 Github 以及互联网企业 UED 的相关技术文档，结合团队之前积累的大量开发约定和范式，整理了这篇 <strong>code style</strong> 并且<a target="_blank" rel="noopener" href="https://uinika.github.io/">开源</a>出来，计划在 Team 小伙伴们熟练掌握以后，逐步在项目中推广使用 <a target="_blank" rel="noopener" href="https://eslint.org/">ESLint</a> 校验代码风格。</p>
-<p><img src="/Web/Convention/logo.png"></p>
-<p>本文撰写过程中参考了爱彼迎的 <a target="_blank" rel="noopener" href="https://github.com/airbnb/javascript">《Airbnb JavaScript Style Guide》</a>，以及网易 NEC 团队的<a target="_blank" rel="noopener" href="http://nec.netease.com/">《CSS 基础库命名约定》</a>等开源规范，结合笔者之前撰写的 <a href="/Web/Html.html">《HTML5 语义化标签概览》</a>一文，总体上分为<code>总体原则</code>、<code>JavaScript/ES6</code>、<code>CSS/SCSS</code>、<code>HTML</code>四个部分，分门别类的从命名约定、选择器使用、DOM 结构组织等纬度进行阐述，以帮助小组成员形成良好的编码习惯。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Web/Convention/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Web/Scss/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Web/Scss/" class="post-title-link" itemprop="url">SCSS 3.5.5 简明上手指南</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2015-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2015-01-20T00:00:00+08:00">2015-01-20</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2017-11-29 00:00:00" itemprop="dateModified" datetime="2017-11-29T00:00:00+08:00">2017-11-29</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>41k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6:47</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong><a target="_blank" rel="noopener" href="http://sass-lang.com/">Sass</a></strong> 是成熟、稳定、强大的<strong>CSS 预处理器</strong>，截止到目前为止已经发展有 10 年，前当最新 release 版本为<code>3.5.5</code>。而<strong>SCSS</strong>是<strong>Sass3</strong>版本当中引入的新语法特性，完全兼容 CSS3 的同时继承了<strong>Sass</strong>强大的动态功能。本文翻译自<a target="_blank" rel="noopener" href="http://sass-lang.com/guide">《Sass Guide》</a>和<a target="_blank" rel="noopener" href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html">《Sass Syntactically Awesome StyleSheets》</a>两篇官方文档，讲解了现代化前端开发当中经常使用的 SCSS 语法特性，便于开发小组的同学快速上手。</p>
-<p><img src="/Web/Scss/logo.png"></p>
-<p>基于 Gulp 完成前端自动化的年代，出于快速上手以及 npm 安装方便的考虑，开发团队一直沿用<a target="_blank" rel="noopener" href="http://lesscss.org">Less</a>和<a target="_blank" rel="noopener" href="https://github.com/stevelacy/gulp-less">gulp-less</a>作为 CSS 预处理工具，但是 Sass 提供了更加丰富的动态语法特征，因此逐步淘汰基于 Gulp 的<a target="_blank" rel="noopener" href="https://github.com/uinika/beaver">beaver</a>前端项目脚手架以后，新项目全部基于 Webpack 的<a target="_blank" rel="noopener" href="https://github.com/sass/node-sass">node-sass</a>和<a target="_blank" rel="noopener" href="https://github.com/webpack-contrib/sass-loader">sass-loader</a>作为预处理工具。Sass 和 Less 的详细比较可以参考<a target="_blank" rel="noopener" href="https://css-tricks.com/sass-vs-less/">sass-vs-less</a>和<a target="_blank" rel="noopener" href="http://cued.xunlei.com/log044">Sass 与 Less 比拼</a>两篇文章，里面对两者的优劣做了非常详实的比较。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Web/Scss/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Embedded/STC90C51/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Embedded/STC90C51/" class="post-title-link" itemprop="url">宏晶 STC90C516RD+ 数据手册精读</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2014-12-24 00:00:00" itemprop="dateCreated datePublished" datetime="2014-12-24T00:00:00+08:00">2014-12-24</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2015-03-27 00:00:00" itemprop="dateModified" datetime="2015-03-27T00:00:00+08:00">2015-03-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>29k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4:51</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>8051 微处理器是指兼容<strong>Intel MCS-51</strong>体系架构的一系列单片机，全球有众多的半导体厂商都有基于这一体系架构的产品，例如：Atmel 的<code>AT89C52</code>、NXP 的<code>P89V51</code>、宏晶科技的<code>STC89/90系列</code>等。截至本篇文章成文之前，意法半导体推出的<code>STM8</code>系列单片机风头正劲，同为 8 位单片机产品，虽然 8051 在架构、功耗乃至价格上基本已无优势，但作为比较经典的嵌入式微处理器解决方案，依然具备着不错的学习价值。</p>
-<p><img src="/Embedded/STC90C51/logo.png"></p>
-<p>本文介绍的<code>STC90C516RD+</code>属于<code>5V</code>单片机（<em>工作电压为<code>5.5V-3.3V</code></em>），属于相对比较廉价和常见的国产单片机解决方案，片上拥有<code>中央处理器CPU</code>、<code>程序存储器Flash</code>、<code>数据存储器RAM</code>、<code>定时/计数器</code>、<code>UART串口</code>、<code>IO接口</code>、<code>EEPROM</code>、<code>看门狗</code>等常用资源。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Embedded/STC90C51/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Web/CSS3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Web/CSS3/" class="post-title-link" itemprop="url">CSS 3.0 新增特性集锦</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2014-10-16 00:00:00" itemprop="dateCreated datePublished" datetime="2014-10-16T00:00:00+08:00">2014-10-16</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2015-07-21 00:00:00" itemprop="dateModified" datetime="2015-07-21T00:00:00+08:00">2015-07-21</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>12k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1:57</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>现代 CSS 开发当中所面临的挑战，已不在于如何绕过各类转瞬即逝的浏览器兼容性 bug，而在于保证灵活、轻量、易维护的前提下，尽可能符合标准的将 CSS 特性转化为网页中的各种交互创意</strong>。阅读 W3C 工作组成员<a target="_blank" rel="noopener" href="https://github.com/LeaVerou">Lea Verou</a>的<strong>《CSS 揭秘》</strong>之后，开始重新审视前端重度交互下 CSS 提供的各类最新特性，在系统的参考 Mozilla 的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">CSS Reference</a>之后，结合<a target="_blank" rel="noopener" href="https://www.w3.org">W3C 规范</a>对常用 CSS 3.0 特性进行逐步的归纳与说明。</p>
-<p><img src="/Web/CSS3/logo.png"></p>
-<p>由于 CSS 2.1 以后的规范越来越庞大，因而 W3C 工作组将这些规范打散到不同的模块，每个模块都独立在进行版本更新。首先所有 CSS2.1 特性模块都被升级至<strong>3</strong>作为版本号，其次全新的功能模块将从版本号<em>1</em>开始定义。因此 CSS 3.0 并非真正意义上的 W3C 规范，准确的描述应是<strong>CSS 标准规范第 3 版与部分版本号为 1 的新规范的集合</strong>。因为目前 CSS 规范的各个模块版本更新速度不尽相同，所以后续将很难再给予准确的版本号描述。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Web/CSS3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Web/Nodejs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -865,6 +350,212 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Web/Nodejs/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Linux/C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/C/" class="post-title-link" itemprop="url">Linux C 标准程序设计语言</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2014-03-16 00:00:00" itemprop="dateCreated datePublished" datetime="2014-03-16T00:00:00+08:00">2014-03-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2017-05-21 00:00:00" itemprop="dateModified" datetime="2017-05-21T00:00:00+08:00">2017-05-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>55k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9:08</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最早的 C 编程语言标准由<strong>美国国家标准协会（ANSI）</strong>在 1989 年首次发布（<em>C89 版本</em>），后于 1990 年由<strong>国际标准化组织（ISO）</strong>修订后发布（<em>C90 版本</em>）标准，而后经历了 C99、C11 等一系列主要版本的演进，截止目前最新的版本是 2018 年 10 月发布的 C18 版本。笔者当前使用的 Linux C 编译工具是 2018 年 1 月 25 日释出的<strong>GCC 7.3.0</strong>版本，提供了 C89/C90 、C99、C11 等一系列 ISO 标准特性的支持。</p>
+<p><img src="/Linux/C/logo.png"></p>
+<p>本文将分为<a href>《语法规范》</a>与<a href>《应用程序》</a>两个姊妹篇，前者侧重于介绍 Linux C 各个数据类型的存储模型，并概括了函数、条件编译、动态内存管理、位运算、指针等嵌入式 C 程序设计的常用概念。后者将涉及 Linux 文件系统 IO、进程间通信、多线程、网络编程等应用程序开发方面的内容。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux/C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Web/Scss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Web/Scss/" class="post-title-link" itemprop="url">SCSS 3.5.5 简明上手指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2014-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2014-01-20T00:00:00+08:00">2014-01-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2017-11-29 00:00:00" itemprop="dateModified" datetime="2017-11-29T00:00:00+08:00">2017-11-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>41k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6:47</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong><a target="_blank" rel="noopener" href="http://sass-lang.com/">Sass</a></strong> 是成熟、稳定、强大的<strong>CSS 预处理器</strong>，截止到目前为止已经发展有 10 年，前当最新 release 版本为<code>3.5.5</code>。而<strong>SCSS</strong>是<strong>Sass3</strong>版本当中引入的新语法特性，完全兼容 CSS3 的同时继承了<strong>Sass</strong>强大的动态功能。本文翻译自<a target="_blank" rel="noopener" href="http://sass-lang.com/guide">《Sass Guide》</a>和<a target="_blank" rel="noopener" href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html">《Sass Syntactically Awesome StyleSheets》</a>两篇官方文档，讲解了现代化前端开发当中经常使用的 SCSS 语法特性，便于开发小组的同学快速上手。</p>
+<p><img src="/Web/Scss/logo.png"></p>
+<p>基于 Gulp 完成前端自动化的年代，出于快速上手以及 npm 安装方便的考虑，开发团队一直沿用<a target="_blank" rel="noopener" href="http://lesscss.org">Less</a>和<a target="_blank" rel="noopener" href="https://github.com/stevelacy/gulp-less">gulp-less</a>作为 CSS 预处理工具，但是 Sass 提供了更加丰富的动态语法特征，因此逐步淘汰基于 Gulp 的<a target="_blank" rel="noopener" href="https://github.com/uinika/beaver">beaver</a>前端项目脚手架以后，新项目全部基于 Webpack 的<a target="_blank" rel="noopener" href="https://github.com/sass/node-sass">node-sass</a>和<a target="_blank" rel="noopener" href="https://github.com/webpack-contrib/sass-loader">sass-loader</a>作为预处理工具。Sass 和 Less 的详细比较可以参考<a target="_blank" rel="noopener" href="https://css-tricks.com/sass-vs-less/">sass-vs-less</a>和<a target="_blank" rel="noopener" href="http://cued.xunlei.com/log044">Sass 与 Less 比拼</a>两篇文章，里面对两者的优劣做了非常详实的比较。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Web/Scss/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1410,6 +1101,109 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Math/Calculus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Math/Calculus/" class="post-title-link" itemprop="url">常用高等数学公式与导学</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2012-02-19 00:00:00" itemprop="dateCreated datePublished" datetime="2012-02-19T00:00:00+08:00">2012-02-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-02-23 00:00:00" itemprop="dateModified" datetime="2020-02-23T00:00:00+08:00">2020-02-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>967</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>高等数学是由微积分学，较为深入的代数学、几何学以及它们之间的交叉内容所形成的一门基础学科。由于<strong>电路分析</strong>、<strong>运算放大器</strong>、<strong>信号完整性</strong>、<strong>高频电路</strong>和<strong>信号学</strong>当中，都涉及有大量的积分和导数运算，也需要经常使用到拉普拉斯和傅立叶变换等高等数学内容，因此着手撰写本文用于复习大学本科学习阶段涉及的微积分知识，主要包含<code>一元函数微分学</code>、<code>一元函数积分学</code>、<code>矢量代数与空间解析几何</code>、<code>多元函数微分学</code>、<code>多元函数积分学</code>、<code>无穷级数</code>、<code>常微分方程</code>等部分的内容。</p>
+<p><img src="/Math/Calculus/logo.png"></p>
+<p>由于微积分涉及的概念相对较为抽象，因此在文章写作过程中，阅读并且参考了<strong>《Thomas’ Calculus》</strong>一书当中的有关内容。该书从 1951 年第 1 版发行至今，当前的最新版本为第 14 版，已经足足经历了七十个年头，是一本经历过时间检验的优秀参考资料。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Math/Calculus/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Zen/Design-Pattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1792,6 +1586,212 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/English/Grammar/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Math/Elementary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Math/Elementary/" class="post-title-link" itemprop="url">常用初等数学图形与公式汇总</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2011-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2011-01-13T00:00:00+08:00">2011-01-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-25 00:00:00" itemprop="dateModified" datetime="2020-11-25T00:00:00+08:00">2020-11-25</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1:21</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>初等数学主要由<strong>代数</strong>（Algebra）和<strong>几何</strong>（Geometry）两部分构成，本篇文章基于《Thomas’ Calculus Early Transcendentals 14th》一书附录的 <strong>A Brief Table of Integrals</strong> 章节整理而成，主要涉及到了初等代数与几何、三角公式与函数等相关内容，较为系统的概括了初等数学当中较为常见的<strong>公式定理</strong>以及<strong>平面直角坐标系图像</strong>，进而为电子学当中涉及的各类数学运算做好知识准备。</p>
+<p><img src="/Math/Elementary/logo.png"></p>
+<p>由于初等数学只能解释常量的几何与物理问题，例如：<code>规则图形的长度</code>、<code>面积</code>与<code>体积</code>，<code>匀速直线运动</code>等等。虽然并不涉及工程计算当中经常涉及的变化量的分析与求解，但是却是高等数学知识体系当中，不可或缺的基础常识性内容。因此，笔者为了温习微积分相关的知识，特意将初等数学的重要概念归纳至本篇文章下面，便于方便快速的进行查阅。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Math/Elementary/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Embedded/STC90C51/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Embedded/STC90C51/" class="post-title-link" itemprop="url">宏晶 STC90C516RD+ 数据手册精读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2010-12-24 00:00:00" itemprop="dateCreated datePublished" datetime="2010-12-24T00:00:00+08:00">2010-12-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2013-03-27 00:00:00" itemprop="dateModified" datetime="2013-03-27T00:00:00+08:00">2013-03-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>29k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4:51</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>8051 微处理器是指兼容<strong>Intel MCS-51</strong>体系架构的一系列单片机，全球有众多的半导体厂商都有基于这一体系架构的产品，例如：Atmel 的<code>AT89C52</code>、NXP 的<code>P89V51</code>、宏晶科技的<code>STC89/90系列</code>等。截至本篇文章成文之前，意法半导体推出的<code>STM8</code>系列单片机风头正劲，同为 8 位单片机产品，虽然 8051 在架构、功耗乃至价格上基本已无优势，但作为比较经典的嵌入式微处理器解决方案，依然具备着不错的学习价值。</p>
+<p><img src="/Embedded/STC90C51/logo.png"></p>
+<p>本文介绍的<code>STC90C516RD+</code>属于<code>5V</code>单片机（<em>工作电压为<code>5.5V-3.3V</code></em>），属于相对比较廉价和常见的国产单片机解决方案，片上拥有<code>中央处理器CPU</code>、<code>程序存储器Flash</code>、<code>数据存储器RAM</code>、<code>定时/计数器</code>、<code>UART串口</code>、<code>IO接口</code>、<code>EEPROM</code>、<code>看门狗</code>等常用资源。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Embedded/STC90C51/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
