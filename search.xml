@@ -155,17 +155,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux 工作环境 Config 札记</title>
-    <url>/Zen/Config-Linux/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Zen</category>
-      </categories>
-      <tags>
-        <tag>Linux Config</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Webpack 4 核心配置剖析</title>
     <url>/Web/Webpack/</url>
     <content><![CDATA[]]></content>
@@ -174,6 +163,17 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 工作环境 Config 札记</title>
+    <url>/Zen/Config-Linux/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Zen</category>
+      </categories>
+      <tags>
+        <tag>Linux Config</tag>
       </tags>
   </entry>
   <entry>
