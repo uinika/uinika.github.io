@@ -67,17 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用高等数学公式与导学</title>
-    <url>/Math/Calculus/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Math</category>
-      </categories>
-      <tags>
-        <tag>Calculus</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>嵌入式 Linux C 原生应用程序开发</title>
     <url>/Linux/Native/</url>
     <content><![CDATA[]]></content>
@@ -97,6 +86,17 @@
       </categories>
       <tags>
         <tag>Embedded</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用高等数学公式与导学</title>
+    <url>/Math/Calculus/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>Calculus</tag>
       </tags>
   </entry>
   <entry>
@@ -221,17 +221,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用初等数学图形与公式汇总</title>
-    <url>/Math/Elementary/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Math</category>
-      </categories>
-      <tags>
-        <tag>Elementary</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>面向对象的 C++ 11 程序设计语言</title>
     <url>/Linux/C++/</url>
     <content><![CDATA[]]></content>
@@ -273,6 +262,17 @@
       </categories>
       <tags>
         <tag>Shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用初等数学图形与公式汇总</title>
+    <url>/Math/Elementary/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>Elementary</tag>
       </tags>
   </entry>
   <entry>
