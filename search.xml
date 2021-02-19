@@ -78,17 +78,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vim 常用键位生存指南</title>
-    <url>/Linux/Vim/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Embedded</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>常用高等数学公式与导学</title>
     <url>/Math/Calculus/</url>
     <content><![CDATA[]]></content>
@@ -97,6 +86,17 @@
       </categories>
       <tags>
         <tag>Calculus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vim 常用键位生存指南</title>
+    <url>/Linux/Vim/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Embedded</tag>
       </tags>
   </entry>
   <entry>
