@@ -24,7 +24,7 @@
   </script>
 <meta name="description" content="对于国内中小型电子企业的工程师而言，Altium Designer、Pads、Allegro 等商业 EDA 工具的授权费用过于昂贵，且大部分仅提供了 Windows 操作系统版本，缺乏相应的跨平台支持。在电子行业版权问题逐步受到重视的今天，一款易使用、低成本的 EDA 工具对于广大电子工程师显得尤为重要。而 PCB 设计流程与布局布线经验超越 EDA 工具本身，如果没有丰富的元件库与封装库支持，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开源 EDA 工具 KiCad 5.1.8 电路设计小书">
+<meta property="og:title" content="开源 EDA 工具 KiCad 5.1.9 电路设计小书">
 <meta property="og:url" content="https://uinika.gitee.io/Electronics/KiCad/index.html">
 <meta property="og:site_name" content="Bit by bit">
 <meta property="og:description" content="对于国内中小型电子企业的工程师而言，Altium Designer、Pads、Allegro 等商业 EDA 工具的授权费用过于昂贵，且大部分仅提供了 Windows 操作系统版本，缺乏相应的跨平台支持。在电子行业版权问题逐步受到重视的今天，一款易使用、低成本的 EDA 工具对于广大电子工程师显得尤为重要。而 PCB 设计流程与布局布线经验超越 EDA 工具本身，如果没有丰富的元件库与封装库支持，">
@@ -87,7 +87,7 @@
 <meta property="og:image" content="https://uinika.gitee.io/Electronics/KiCad/Footprint/step-3.png">
 <meta property="og:image" content="https://uinika.gitee.io/Electronics/KiCad/Footprint/step-4.png">
 <meta property="article:published_time" content="2019-11-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-20T16:00:00.000Z">
 <meta property="article:author" content="Hank">
 <meta property="article:tag" content="EDA">
 <meta name="twitter:card" content="summary">
@@ -106,7 +106,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>开源 EDA 工具 KiCad 5.1.8 电路设计小书 | Bit by bit</title>
+<title>开源 EDA 工具 KiCad 5.1.9 电路设计小书 | Bit by bit</title>
   
 
 
@@ -247,7 +247,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%A5%97%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">工具套件概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">涉及的环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E5%89%8D%E4%B8%8E%E5%90%91%E5%90%8E%E6%B3%A8%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">向前与向后注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E9%94%AE%E4%B8%8E%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">4.</span> <span class="nav-text">热键与快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88"><span class="nav-number">5.</span> <span class="nav-text">调整配色方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B6%E4%BD%9C%E5%8E%9F%E7%90%86%E5%9B%BE%E7%AC%A6%E5%8F%B7"><span class="nav-number">6.</span> <span class="nav-text">制作原理图符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86%E5%9B%BE"><span class="nav-number">7.</span> <span class="nav-text">绘制原理图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E5%9B%BE%E6%80%BB%E7%BA%BF%E5%BA%94%E7%94%A8"><span class="nav-number">8.</span> <span class="nav-text">原理图总线应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B0%E5%88%B7%E7%94%B5%E8%B7%AF%E6%9D%BF%E5%B8%83%E5%B1%80"><span class="nav-number">9.</span> <span class="nav-text">印刷电路板布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA-gerber-%E6%96%87%E4%BB%B6"><span class="nav-number">10.</span> <span class="nav-text">导出 Gerber 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%B8%83%E7%BA%BF-freerouting"><span class="nav-number">11.</span> <span class="nav-text">自动布线 FreeRouting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%B0%81%E8%A3%85%E5%88%B6%E4%BD%9C"><span class="nav-number">12.</span> <span class="nav-text">PCB 封装制作</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%A5%97%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">工具套件概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">涉及的环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E5%89%8D%E4%B8%8E%E5%90%91%E5%90%8E%E6%B3%A8%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">向前与向后注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E9%94%AE%E4%B8%8E%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">4.</span> <span class="nav-text">热键与快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E7%95%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">4.1.</span> <span class="nav-text">主界面快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eeschema-%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">4.2.</span> <span class="nav-text">Eeschema 快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C"><span class="nav-number">4.2.1.</span> <span class="nav-text">常规操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E5%9B%BE%E7%BC%96%E8%BE%91"><span class="nav-number">4.2.2.</span> <span class="nav-text">原理图编辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcbnew-%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">4.3.</span> <span class="nav-text">Pcbnew 快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">常规操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pcb-%E7%BC%96%E8%BE%91"><span class="nav-number">4.3.2.</span> <span class="nav-text">PCB 编辑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88"><span class="nav-number">5.</span> <span class="nav-text">调整配色方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">安装常用插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B6%E4%BD%9C%E5%8E%9F%E7%90%86%E5%9B%BE%E7%AC%A6%E5%8F%B7"><span class="nav-number">7.</span> <span class="nav-text">制作原理图符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86%E5%9B%BE"><span class="nav-number">8.</span> <span class="nav-text">绘制原理图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E5%9B%BE%E6%80%BB%E7%BA%BF%E5%BA%94%E7%94%A8"><span class="nav-number">9.</span> <span class="nav-text">原理图总线应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B0%E5%88%B7%E7%94%B5%E8%B7%AF%E6%9D%BF%E5%B8%83%E5%B1%80"><span class="nav-number">10.</span> <span class="nav-text">印刷电路板布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA-gerber-%E6%96%87%E4%BB%B6"><span class="nav-number">11.</span> <span class="nav-text">导出 Gerber 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%B8%83%E7%BA%BF-freerouting"><span class="nav-number">12.</span> <span class="nav-text">自动布线 FreeRouting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%B0%81%E8%A3%85%E5%88%B6%E4%BD%9C"><span class="nav-number">13.</span> <span class="nav-text">PCB 封装制作</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -352,7 +352,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          开源 EDA 工具 KiCad 5.1.8 电路设计小书
+          开源 EDA 工具 KiCad 5.1.9 电路设计小书
         </h1>
 
         <div class="post-meta-container">
@@ -370,7 +370,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-27 00:00:00" itemprop="dateModified" datetime="2020-09-27T00:00:00+08:00">2020-09-27</time>
+        <time title="修改时间：2021-02-21 00:00:00" itemprop="dateModified" datetime="2021-02-21T00:00:00+08:00">2021-02-21</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -395,14 +395,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>8.3k</span>
+      <span>11k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1:23</span>
+      <span>1:50</span>
     </span>
 </div>
 
@@ -501,22 +501,617 @@
 <li><strong>向后注解（Backward Annotation）</strong>：将 PCB 布局的修改发送回对应的原理图，一旦在 PCB 布局期间进行了修改，则这些修改操作将会被回推至原理图。</li>
 </ul>
 <h2 id="热键与快捷键">热键与快捷键</h2>
-<p>KiCad 拥有如下 2 种不同类型的快捷操作方式：</p>
+<p><strong>KiCad</strong> 拥有如下两种不同类型的快捷操作方式：</p>
 <ul>
-<li>快捷键（Accelerator Keys）：用途与鼠标单击菜单栏、工具栏图标的效果相同，按下鼠标左键之后才会执行该操作。</li>
-<li>热键（Hotkeys）：执行以后将会立即在当前鼠标位置执行操作，按下键盘上的【Ctrl + F1】即可查询 KiCad 所提供的热键。</li>
+<li><strong>快捷键</strong>（Accelerator Keys）：用途与鼠标单击菜单栏、工具栏图标的效果相同，按下 <strong>【Alt + 工具/菜单栏字母】</strong> 即可完成与鼠标点选菜单类似的效果；</li>
+<li><strong>热键</strong>（Hotkeys）：执行以后将会立即在当前鼠标位置执行操作，按下键盘上的 <strong>【Ctrl + F1】</strong> 即可查询 KiCad 所提供的热键。</li>
 </ul>
+<h3 id="主界面快捷键">主界面快捷键</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>新建工程</strong></td>
+<td style="text-align: center;"><code>【Ctrl+N】</code></td>
+<td style="text-align: center;"><strong>从模板新建工程</strong></td>
+<td style="text-align: center;"><code>【Ctrl+T】</code></td>
+<td style="text-align: center;"><strong>打开工程</strong></td>
+<td style="text-align: center;"><code>【Ctrl+O】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>刷新工程目录</strong></td>
+<td style="text-align: center;"><code>【Ctrl+R】</code></td>
+<td style="text-align: center;"><strong>快捷键列表</strong></td>
+<td style="text-align: center;"><code>【Ctrl+F1】</code></td>
+<td style="text-align: center;"><strong>首选项</strong></td>
+<td style="text-align: center;"><code>【Ctrl+,】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>运行 Eeschema</strong></td>
+<td style="text-align: center;"><code>【Ctrl+E】</code></td>
+<td style="text-align: center;"><strong>运行库编辑器</strong></td>
+<td style="text-align: center;"><code>【Ctrl+L】</code></td>
+<td style="text-align: center;"><strong>运行 Pcbnew</strong></td>
+<td style="text-align: center;"><code>【Ctrl+P】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>运行封装编辑器</strong></td>
+<td style="text-align: center;"><code>【Ctrl+F】</code></td>
+<td style="text-align: center;"><strong>运行 Gerbview</strong></td>
+<td style="text-align: center;"><code>【Ctrl+G】</code></td>
+<td style="text-align: center;"><strong>运行 Bitmap2Component</strong></td>
+<td style="text-align: center;"><code>【Ctrl+B】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>运行 PCB 计算器</strong></td>
+<td style="text-align: center;"><code>【Ctrl+A】</code></td>
+<td style="text-align: center;"><strong>运行图框编辑器</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Y】</code></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eeschema-快捷键">Eeschema 快捷键</h3>
+<h4 id="常规操作">常规操作</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>新建</strong></td>
+<td style="text-align: center;"><code>【Ctrl+N】</code></td>
+<td style="text-align: center;"><strong>打开</strong></td>
+<td style="text-align: center;"><code>【Ctrl+O】</code></td>
+<td style="text-align: center;"><strong>保存</strong></td>
+<td style="text-align: center;"><code>【Ctrl+S】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>另存为</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+S】</code></td>
+<td style="text-align: center;"><strong>打印</strong></td>
+<td style="text-align: center;"><code>【Ctrl+P】</code></td>
+<td style="text-align: center;"><strong>撤销</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Z】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>重做</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Y】</code></td>
+<td style="text-align: center;"><strong>剪切</strong></td>
+<td style="text-align: center;"><code>【Ctrl+X】</code></td>
+<td style="text-align: center;"><strong>复制</strong></td>
+<td style="text-align: center;"><code>【Ctrl+C】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>粘贴</strong></td>
+<td style="text-align: center;"><code>【Ctrl+V】</code></td>
+<td style="text-align: center;"><strong>快捷键列表</strong></td>
+<td style="text-align: center;"><code>【Ctrl+F1】</code></td>
+<td style="text-align: center;"><strong>首选项</strong></td>
+<td style="text-align: center;"><code>【Ctrl+,】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>放大</strong></td>
+<td style="text-align: center;"><code>【F1】</code></td>
+<td style="text-align: center;"><strong>缩小</strong></td>
+<td style="text-align: center;"><code>【F2】</code></td>
+<td style="text-align: center;"><strong>刷新显示</strong></td>
+<td style="text-align: center;"><code>【F3】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>置中显示</strong></td>
+<td style="text-align: center;"><code>【F4】</code></td>
+<td style="text-align: center;"><strong>适应屏幕</strong></td>
+<td style="text-align: center;"><code>【Home】</code></td>
+<td style="text-align: center;"><strong>缩放至选区大小</strong></td>
+<td style="text-align: center;"><code>【Ctrl+F5】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>置局部坐标</strong></td>
+<td style="text-align: center;"><code>【Space】</code></td>
+<td style="text-align: center;"><strong>编辑项目</strong></td>
+<td style="text-align: center;"><code>【E】</code></td>
+<td style="text-align: center;"><strong>删除项目</strong></td>
+<td style="text-align: center;"><code>【Del】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>旋转项目</strong></td>
+<td style="text-align: center;"><code>【R】</code></td>
+<td style="text-align: center;"><strong>拖动项目</strong></td>
+<td style="text-align: center;"><code>【G】</code></td>
+<td style="text-align: center;"><strong>单击鼠标左键</strong></td>
+<td style="text-align: center;"><code>【Return】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>双击鼠标左键</strong></td>
+<td style="text-align: center;"><code>【End】</code></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+</tbody>
+</table>
+<h4 id="原理图编辑">原理图编辑</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>查找项目</strong></td>
+<td style="text-align: center;"><code>【Ctrl+F】</code></td>
+<td style="text-align: center;"><strong>查找下一项</strong></td>
+<td style="text-align: center;"><code>【F5】</code></td>
+<td style="text-align: center;"><strong>查找下一个 DRC 标记</strong></td>
+<td style="text-align: center;"><code>【Shift+F5】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>查找和替换</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Alt+F】</code></td>
+<td style="text-align: center;"><strong>重复最后项</strong></td>
+<td style="text-align: center;"><code>【Ins】</code></td>
+<td style="text-align: center;"><strong>移动块-&gt;拖动块</strong></td>
+<td style="text-align: center;"><code>【Tab】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>移动原理图项目</strong></td>
+<td style="text-align: center;"><code>【M】</code></td>
+<td style="text-align: center;"><strong>重复的符号或标签</strong></td>
+<td style="text-align: center;"><code>【C】</code></td>
+<td style="text-align: center;"><strong>添加符号</strong></td>
+<td style="text-align: center;"><code>【A】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>添加电源端口</strong></td>
+<td style="text-align: center;"><code>【P】</code></td>
+<td style="text-align: center;"><strong>X 轴镜像</strong></td>
+<td style="text-align: center;"><code>【X】</code></td>
+<td style="text-align: center;"><strong>Y 轴镜像</strong></td>
+<td style="text-align: center;"><code>【Y】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>元件默认方向</strong></td>
+<td style="text-align: center;"><code>【N】</code></td>
+<td style="text-align: center;"><strong>编辑符号值</strong></td>
+<td style="text-align: center;"><code>【V】</code></td>
+<td style="text-align: center;"><strong>编辑符号位号</strong></td>
+<td style="text-align: center;"><code>【U】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>编辑符号封装</strong></td>
+<td style="text-align: center;"><code>【F】</code></td>
+<td style="text-align: center;"><strong>显示符号数据手册</strong></td>
+<td style="text-align: center;"><code>【Ctrl+D】</code></td>
+<td style="text-align: center;"><strong>用符号编辑器来编辑</strong></td>
+<td style="text-align: center;"><code>【Ctrl+E】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>开始连线</strong></td>
+<td style="text-align: center;"><code>【W】</code></td>
+<td style="text-align: center;"><strong>开始总线绘制</strong></td>
+<td style="text-align: center;"><code>【B】</code></td>
+<td style="text-align: center;"><strong>结束总线绘制</strong></td>
+<td style="text-align: center;"><code>【K】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>添加标签</strong></td>
+<td style="text-align: center;"><code>【L】</code></td>
+<td style="text-align: center;"><strong>添加层次标签</strong></td>
+<td style="text-align: center;"><code>【H】</code></td>
+<td style="text-align: center;"><strong>添加全局标签</strong></td>
+<td style="text-align: center;"><code>【Ctrl+H】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>添加连接点</strong></td>
+<td style="text-align: center;"><code>【J】</code></td>
+<td style="text-align: center;"><strong>添加不连接标记</strong></td>
+<td style="text-align: center;"><code>【Q】</code></td>
+<td style="text-align: center;"><strong>添加图框</strong></td>
+<td style="text-align: center;"><code>【S】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>添加连接线入口</strong></td>
+<td style="text-align: center;"><code>【Z】</code></td>
+<td style="text-align: center;"><strong>添加总线入口</strong></td>
+<td style="text-align: center;"><code>【/】</code></td>
+<td style="text-align: center;"><strong>添加多段线图形</strong></td>
+<td style="text-align: center;"><code>【I】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>添加图形文字</strong></td>
+<td style="text-align: center;"><code>【T】</code></td>
+<td style="text-align: center;"><strong>从原理图更新 PCB</strong></td>
+<td style="text-align: center;"><code>【F8】</code></td>
+<td style="text-align: center;"><strong>自动放置字段</strong></td>
+<td style="text-align: center;"><code>【O】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>离开图框</strong></td>
+<td style="text-align: center;"><code>【Alt+Back】</code></td>
+<td style="text-align: center;"><strong>删除节点</strong></td>
+<td style="text-align: center;"><code>【Back】</code></td>
+<td style="text-align: center;"><strong>高亮连接</strong></td>
+<td style="text-align: center;"><code>【Ctrl+B】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>切换到软件图形加速的工具箱</strong></td>
+<td style="text-align: center;"><code>【F12】</code></td>
+<td style="text-align: center;"><strong>切换到硬件图形的加速工具箱(推荐)</strong></td>
+<td style="text-align: center;"><code>【F11】</code></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pcbnew-快捷键">Pcbnew 快捷键</h3>
+<h4 id="常规操作-1">常规操作</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>新建</strong></td>
+<td style="text-align: center;"><code>【Ctrl+N】</code></td>
+<td style="text-align: center;"><strong>打开</strong></td>
+<td style="text-align: center;"><code>【Ctrl+O】</code></td>
+<td style="text-align: center;"><strong>保存</strong></td>
+<td style="text-align: center;"><code>【Ctrl+S】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>另存为</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+S】</code></td>
+<td style="text-align: center;"><strong>打印</strong></td>
+<td style="text-align: center;"><code>【Ctrl+P】</code></td>
+<td style="text-align: center;"><strong>撤消</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Z】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>重做</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Y】</code></td>
+<td style="text-align: center;"><strong>剪切</strong></td>
+<td style="text-align: center;"><code>【Ctrl+X】</code></td>
+<td style="text-align: center;"><strong>复制</strong></td>
+<td style="text-align: center;"><code>【Ctrl+C】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>粘贴</strong></td>
+<td style="text-align: center;"><code>【Ctrl+V】</code></td>
+<td style="text-align: center;"><strong>快捷键列表</strong></td>
+<td style="text-align: center;"><code>【Ctrl+F1】</code></td>
+<td style="text-align: center;"><strong>首选项</strong></td>
+<td style="text-align: center;"><code>【Ctrl+,】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>放大</strong></td>
+<td style="text-align: center;"><code>【F1】</code></td>
+<td style="text-align: center;"><strong>缩小</strong></td>
+<td style="text-align: center;"><code>【F2】</code></td>
+<td style="text-align: center;"><strong>刷新显示</strong></td>
+<td style="text-align: center;"><code>【F3】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>置中显示</strong></td>
+<td style="text-align: center;"><code>【F4】</code></td>
+<td style="text-align: center;"><strong>自动缩放</strong></td>
+<td style="text-align: center;"><code>【Home】</code></td>
+<td style="text-align: center;"><strong>缩放至选区大小</strong></td>
+<td style="text-align: center;"><code>【Ctrl+F5】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>3D 查看器</strong></td>
+<td style="text-align: center;"><code>【Alt+3】</code></td>
+<td style="text-align: center;"><strong>切换单元</strong></td>
+<td style="text-align: center;"><code>【Ctrl+U】</code></td>
+<td style="text-align: center;"><strong>重置局部坐标</strong></td>
+<td style="text-align: center;"><code>【Space】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>设置网格原点</strong></td>
+<td style="text-align: center;"><code>【S】</code></td>
+<td style="text-align: center;"><strong>复位网格原点</strong></td>
+<td style="text-align: center;"><code>【Z】</code></td>
+<td style="text-align: center;"><strong>单击鼠标左键</strong></td>
+<td style="text-align: center;"><code>【Return】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>双击鼠标左键</strong></td>
+<td style="text-align: center;"><code>【End】</code></td>
+<td style="text-align: center;"><strong>减小层透明度</strong></td>
+<td style="text-align: center;"><code>【 &#123; 】</code></td>
+<td style="text-align: center;"><strong>增加层透明度</strong></td>
+<td style="text-align: center;"><code>【 &#125; 】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>切换光标显示</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+X】</code></td>
+<td style="text-align: center;"><strong>测量距离</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+M】</code></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pcb-编辑">PCB 编辑</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>放置项目</strong></td>
+<td style="text-align: center;"><code>【P】</code></td>
+<td style="text-align: center;"><strong>添加封装</strong></td>
+<td style="text-align: center;"><code>【O】</code></td>
+<td style="text-align: center;"><strong>添加过孔</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+V】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>添加埴充区域</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shif+Z】</code></td>
+<td style="text-align: center;"><strong>添加禁止布线区</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+K】</code></td>
+<td style="text-align: center;"><strong>添加挖空区域</strong></td>
+<td style="text-align: center;"><code>【Shift+C】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>添加相似区域</strong></td>
+<td style="text-align: center;"><code>【Ctrl+&gt;】</code></td>
+<td style="text-align: center;"><strong>绘制线</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+L】</code></td>
+<td style="text-align: center;"><strong>绘制圆</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shft+C】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>绘制圆弧</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+A】</code></td>
+<td style="text-align: center;"><strong>绘制多边形</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shft+P】</code></td>
+<td style="text-align: center;"><strong>添加文本</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+T】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>添加标注</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+H】</code></td>
+<td style="text-align: center;"><strong>放置 DXF</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+F】</code></td>
+<td style="text-align: center;"><strong>添加新布线</strong></td>
+<td style="text-align: center;"><code>【X】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>切换布线状态</strong></td>
+<td style="text-align: center;"><code>【/】</code></td>
+<td style="text-align: center;"><strong>保持角度拖动布线</strong></td>
+<td style="text-align: center;"><code>【D】</code></td>
+<td style="text-align: center;"><strong>添加通孔</strong></td>
+<td style="text-align: center;"><code>【V】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>添加盲/埋孔</strong></td>
+<td style="text-align: center;"><code>【Alt+Shft+V】</code></td>
+<td style="text-align: center;"><strong>添加微孔</strong></td>
+<td style="text-align: center;"><code>【Alt+V】</code></td>
+<td style="text-align: center;"><strong>差分对布线</strong></td>
+<td style="text-align: center;"><code>【6】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>调整单轨布线</strong></td>
+<td style="text-align: center;"><code>【7】</code></td>
+<td style="text-align: center;"><strong>调整差分对长度</strong></td>
+<td style="text-align: center;"><code>【8】</code></td>
+<td style="text-align: center;"><strong>调整差分对偏斜</strong></td>
+<td style="text-align: center;"><code>【9】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>布线选项</strong></td>
+<td style="text-align: center;"><code>【Ctrl+&lt;】</code></td>
+<td style="text-align: center;"><strong>长度调整设置</strong></td>
+<td style="text-align: center;"><code>【Ctrl+L】</code></td>
+<td style="text-align: center;"><strong>1 个步长增加弯曲间距</strong></td>
+<td style="text-align: center;"><code>【1】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1 个步长减少弯曲幅度</strong></td>
+<td style="text-align: center;"><code>【2】</code></td>
+<td style="text-align: center;"><strong>1 个步长增加弯曲幅度</strong></td>
+<td style="text-align: center;"><code>【3】</code></td>
+<td style="text-align: center;"><strong>1 个步长降低曲折幅度</strong></td>
+<td style="text-align: center;"><code>【4】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>差分对标注</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+R】</code></td>
+<td style="text-align: center;"><strong>埴充或重新填充所有区域</strong></td>
+<td style="text-align: center;"><code>【B】</code></td>
+<td style="text-align: center;"><strong>删除所有填充区域</strong></td>
+<td style="text-align: center;"><code>【Ctrl+B】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>插入拐角</strong></td>
+<td style="text-align: center;"><code>【Ins】</code></td>
+<td style="text-align: center;"><strong>选择单轨布线</strong></td>
+<td style="text-align: center;"><code>【U】</code></td>
+<td style="text-align: center;"><strong>选择已连接的布线</strong></td>
+<td style="text-align: center;"><code>【I】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>切换到所选网络高亮</strong></td>
+<td style="text-align: center;"><code>【 ` 】</code></td>
+<td style="text-align: center;"><strong>布线显示模式</strong></td>
+<td style="text-align: center;"><code>【K】</code></td>
+<td style="text-align: center;"><strong>自定义布线/过孔尺寸</strong></td>
+<td style="text-align: center;"><code>【Q】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>切换下一个布线宽度</strong></td>
+<td style="text-align: center;"><code>【W】</code></td>
+<td style="text-align: center;"><strong>切换上一个布线宽度</strong></td>
+<td style="text-align: center;"><code>【Shift+W】</code></td>
+<td style="text-align: center;"><strong>增大过孔尺寸</strong></td>
+<td style="text-align: center;"><code>【'】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>减小过孔尺寸</strong></td>
+<td style="text-align: center;"><code>【\】</code></td>
+<td style="text-align: center;"><strong>删除整条布线</strong></td>
+<td style="text-align: center;"><code>【Del】</code></td>
+<td style="text-align: center;"><strong>删除布线段</strong></td>
+<td style="text-align: center;"><code>【Back】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>拖动项目</strong></td>
+<td style="text-align: center;"><code>【G】</code></td>
+<td style="text-align: center;"><strong>复制项目</strong></td>
+<td style="text-align: center;"><code>【C】</code></td>
+<td style="text-align: center;"><strong>移动项目</strong></td>
+<td style="text-align: center;"><code>【M】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>获取和移动封装</strong></td>
+<td style="text-align: center;"><code>【T】</code></td>
+<td style="text-align: center;"><strong>精确移动项目</strong></td>
+<td style="text-align: center;"><code>【Ctrl+M】</code></td>
+<td style="text-align: center;"><strong>项目相对位置</strong></td>
+<td style="text-align: center;"><code>【Ctrl+R】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>翻转项</strong></td>
+<td style="text-align: center;"><code>【F】</code></td>
+<td style="text-align: center;"><strong>旋转项目</strong></td>
+<td style="text-align: center;"><code>【R】</code></td>
+<td style="text-align: center;"><strong>顺时针旋转项</strong></td>
+<td style="text-align: center;"><code>【Shift+R】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>选择层并添加通孔</strong></td>
+<td style="text-align: center;"><code>【 &lt; 】</code></td>
+<td style="text-align: center;"><strong>选择层并添加盲/理孔</strong></td>
+<td style="text-align: center;"><code>【Alt+&lt;】</code></td>
+<td style="text-align: center;"><strong>重复项</strong></td>
+<td style="text-align: center;"><code>【Ctrl+D】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>重复项与增量</strong></td>
+<td style="text-align: center;"><code>【Ctrl+Shift+D】</code></td>
+<td style="text-align: center;"><strong>创建阵列</strong></td>
+<td style="text-align: center;"><code>【Ctrl+T】</code></td>
+<td style="text-align: center;"><strong>锁定/解锁封装</strong></td>
+<td style="text-align: center;"><code>【L】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>查找项目</strong></td>
+<td style="text-align: center;"><code>【Ctrl+F】</code></td>
+<td style="text-align: center;"><strong>编辑项目</strong></td>
+<td style="text-align: center;"><code>【E】</code></td>
+<td style="text-align: center;"><strong>在封装编辑器編辑</strong></td>
+<td style="text-align: center;"><code>【Ctrl+E】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>切换到元件层(顶层铜层)</strong></td>
+<td style="text-align: center;"><code>【PgUp】</code></td>
+<td style="text-align: center;"><strong>切换到铜层(底层铜层)</strong></td>
+<td style="text-align: center;"><code>【PgDn】</code></td>
+<td style="text-align: center;"><strong>内层 1</strong></td>
+<td style="text-align: center;"><code>【F5】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>内层 2</strong></td>
+<td style="text-align: center;"><code>【F6】</code></td>
+<td style="text-align: center;"><strong>内层 3</strong></td>
+<td style="text-align: center;"><code>【F7】</code></td>
+<td style="text-align: center;"><strong>内层 4</strong></td>
+<td style="text-align: center;"><code>【F8】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>内层 5</strong></td>
+<td style="text-align: center;"><code>【Shift+F5】</code></td>
+<td style="text-align: center;"><strong>内层 6</strong></td>
+<td style="text-align: center;"><code>【Shift+F6】</code></td>
+<td style="text-align: center;"><strong>下一层</strong></td>
+<td style="text-align: center;"><code>【+】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>上一层</strong></td>
+<td style="text-align: center;"><code>【-】</code></td>
+<td style="text-align: center;"><strong>切换为快速网格 1</strong></td>
+<td style="text-align: center;"><code>【Alt+1】</code></td>
+<td style="text-align: center;"><strong>切换为快速网格 2</strong></td>
+<td style="text-align: center;"><code>【Alt+2】</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>切换网格到下一个</strong></td>
+<td style="text-align: center;"><code>【N】</code></td>
+<td style="text-align: center;"><strong>切换网格到上一个</strong></td>
+<td style="text-align: center;"><code>【Shift+N】</code></td>
+<td style="text-align: center;"><strong>切换高对比度模式</strong></td>
+<td style="text-align: center;"><code>【Ctrl+H】</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>切换到传统工具箱</strong></td>
+<td style="text-align: center;"><code>【F9】</code></td>
+<td style="text-align: center;"><strong>切换到软件图形加速的工具箱</strong></td>
+<td style="text-align: center;"><code>【F12】</code></td>
+<td style="text-align: center;"><strong>切换到硬件图形加速的工具箱</strong></td>
+<td style="text-align: center;"><code>【F11】</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="调整配色方案">调整配色方案</h2>
-<p>下载 <a target="_blank" rel="noopener" href="https://github.com/uinika/kicad-color-schemes">kicad-color-schemes</a> 到本地，解压后每个主题目录都包含有 <strong>Eeschema</strong> 和 <strong>Pcbnew</strong> 安装文件的配色方案，将主题目录下面的文件复制到如下操作系统对应的目录：</p>
+<p>下载 <a target="_blank" rel="noopener" href="https://github.com/aerospaceplane/kicad-color-schemes">kicad-color-schemes</a> 到本地，解压后每个主题目录都包含有 <strong>Eeschema</strong> 和 <strong>Pcbnew</strong> 安装文件的配色方案，将主题目录下面的文件复制到如下操作系统对应的目录：</p>
 <ul>
 <li><strong>Linux</strong>：<code>~.config/kicad/</code>；</li>
 <li><strong>macOS</strong>: 用户 <strong>Home</strong> 主目录 + <code>/Library/Preferences/kicad</code>；</li>
 <li><strong>Windows XP</strong>: <code>C:\Documents and Settings\username\Application Data\kicad</code>，即 <code>%APPDATA%\kicad</code>；</li>
-<li><strong>Windows 10</strong>: <code>C:\Users\username\AppData\Roaming\kicad</code>，即 <code>%APPDATA%\kicad</code>，例如 <code>C:\Users\hank\AppData\Roaming\kicad</code>；</li>
+<li><strong>Windows 10</strong>: <code>C:\Users\username\AppData\Roaming\kicad</code>，即 <code>%APPDATA%\kicad</code>，例如：<code>C:\Users\hank\AppData\Roaming\kicad</code>；</li>
 </ul>
 <blockquote>
 <p><strong>注意</strong>：笔者个人比较推荐 <strong>kicad-color-schemes</strong> 当中的 <strong>behave-dark</strong> 配色方案。</p>
 </blockquote>
+<h2 id="安装常用插件">安装常用插件</h2>
+<p>将下列插件解压到 KiCad 安装目录下面的 <code>\share\kicad\scripting\plugins</code> 文件夹，例如把下载解压 <code>kicad_scripts</code> 以后得到的<code>teardrops</code>目录，或者下载解压 <code>InteractiveHtmlBom.zip</code> 以后获得的 <code>InteractiveHtmlBom</code> 目录，拷贝至<code>D:\Software\Tech\KiCad\share\kicad\scripting\plugins</code>，然后重新启动 KiCad 即可完成插件安装。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/NilujePerchut/kicad_scripts">kicad_scripts</a>：一款用于导出交互式 HTML BOM 的插件；</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/openscopeproject/InteractiveHtmlBom">InteractiveHtmlBom</a>：一款用于删除与添加 PCB 焊盘泪滴的插件；</li>
+</ul>
 <h2 id="制作原理图符号">制作原理图符号</h2>
 <p>进入【符号编辑器】界面，选择菜单栏上的【文件 -&gt; 新建库】，建立一个名称为<code>myLib.lib</code>的原理图元件库：</p>
 <figure>
@@ -824,7 +1419,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://uinika.gitee.io/Electronics/KiCad/" title="开源 EDA 工具 KiCad 5.1.8 电路设计小书">https://uinika.gitee.io/Electronics/KiCad/</a>
+      <a href="https://uinika.gitee.io/Electronics/KiCad/" title="开源 EDA 工具 KiCad 5.1.9 电路设计小书">https://uinika.gitee.io/Electronics/KiCad/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -956,7 +1551,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">326:12</span>
+    <span title="站点阅读时长">326:51</span>
   </span>
 </div>
 <div class="busuanzi-count">

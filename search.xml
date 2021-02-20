@@ -78,17 +78,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用高等数学公式与导学</title>
-    <url>/Math/Calculus/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Math</category>
-      </categories>
-      <tags>
-        <tag>Calculus</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vim 常用键位生存指南</title>
     <url>/Linux/Vim/</url>
     <content><![CDATA[]]></content>
@@ -97,6 +86,17 @@
       </categories>
       <tags>
         <tag>Embedded</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用高等数学公式与导学</title>
+    <url>/Math/Calculus/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>Calculus</tag>
       </tags>
   </entry>
   <entry>
@@ -207,17 +207,6 @@
       </categories>
       <tags>
         <tag>Digital</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开源 EDA 工具 KiCad 5.1.8 电路设计小书</title>
-    <url>/Electronics/KiCad/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>EDA</tag>
       </tags>
   </entry>
   <entry>
@@ -339,6 +328,17 @@
       </categories>
       <tags>
         <tag>Zen</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开源 EDA 工具 KiCad 5.1.9 电路设计小书</title>
+    <url>/Electronics/KiCad/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>EDA</tag>
       </tags>
   </entry>
   <entry>
@@ -496,17 +496,6 @@
       </tags>
   </entry>
   <entry>
-    <title>通用 LaTeX 数学公式语法手册</title>
-    <url>/Zen/LaTex/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Zen</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>玩转 Arduino Uno、Mega、Due 开源硬件</title>
     <url>/Embedded/Arduino/</url>
     <content><![CDATA[]]></content>
@@ -548,6 +537,17 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通用 LaTeX 数学公式语法手册</title>
+    <url>/Zen/LaTex/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Zen</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
       </tags>
   </entry>
   <entry>
