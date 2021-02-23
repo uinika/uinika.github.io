@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>电路分析理论 - 动态电路篇</title>
-    <url>/Electronics/Dynamic/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>经典 PCB 布线规范与设计准则</title>
-    <url>/Electronics/PCB/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>J-Link 仿真器固件恢复小记</title>
     <url>/Embedded/JLink/</url>
     <content><![CDATA[]]></content>
@@ -64,6 +42,28 @@
       </categories>
       <tags>
         <tag>MCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电路分析理论 - 动态电路篇</title>
+    <url>/Electronics/Dynamic/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PCB 基本布线规范与设计原则</title>
+    <url>/Electronics/PCB/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analysis</tag>
       </tags>
   </entry>
   <entry>
@@ -331,17 +331,6 @@
       </tags>
   </entry>
   <entry>
-    <title>开源 EDA 工具 KiCad 5.1.9 电路设计小书</title>
-    <url>/Electronics/KiCad/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>EDA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Android 物联网应用开发实例</title>
     <url>/Embedded/Android/</url>
     <content><![CDATA[]]></content>
@@ -361,6 +350,17 @@
       </categories>
       <tags>
         <tag>MCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开源 EDA 工具 KiCad 5.1.9 电路设计小书</title>
+    <url>/Electronics/KiCad/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>EDA</tag>
       </tags>
   </entry>
   <entry>

@@ -22,14 +22,17 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
   </script>
-<meta name="description" content="优秀的 PCB 设计者同时也是出色的艺术家，但是伴随 5G 的全面商用以及物联网设备的普及，信号频率日益提高，电磁干扰问题日趋严重，PCB 设计人员不得不去面对一个现实问题：PCB 电路板已经开始像一个具有电阻、电容、电感的组件，而非像过去 10 年前那样仅仅作为线路连接的平台，因而为了确保信号的完整性，硬件工程师需要知晓一些经典的 PCB 布线规范与设计准则，避免。">
+<meta name="description" content="优秀的 PCB 设计者同时也是出色的艺术家，但是伴随 5G 的全面商用以及物联网设备的普及，电路板走线越来越精密，信号频率日益提高，电磁干扰问题日趋严重，PCB 设计人员不得不去面对一个现实问题：PCB 电路板已经开始像一个具有电阻、电容、电感的组件，而非像过去 10 年前那样仅仅作为线路连接的平台。电磁兼容性与信号完整性的问题日益突出，对于 PCB 布线与元器件布局的要求越来越高。  本文首">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典 PCB 布线规范与设计准则">
+<meta property="og:title" content="PCB 基本布线规范与设计原则">
 <meta property="og:url" content="https://uinika.gitee.io/Electronics/PCB/index.html">
 <meta property="og:site_name" content="Bit by bit">
-<meta property="og:description" content="优秀的 PCB 设计者同时也是出色的艺术家，但是伴随 5G 的全面商用以及物联网设备的普及，信号频率日益提高，电磁干扰问题日趋严重，PCB 设计人员不得不去面对一个现实问题：PCB 电路板已经开始像一个具有电阻、电容、电感的组件，而非像过去 10 年前那样仅仅作为线路连接的平台，因而为了确保信号的完整性，硬件工程师需要知晓一些经典的 PCB 布线规范与设计准则，避免。">
+<meta property="og:description" content="优秀的 PCB 设计者同时也是出色的艺术家，但是伴随 5G 的全面商用以及物联网设备的普及，电路板走线越来越精密，信号频率日益提高，电磁干扰问题日趋严重，PCB 设计人员不得不去面对一个现实问题：PCB 电路板已经开始像一个具有电阻、电容、电感的组件，而非像过去 10 年前那样仅仅作为线路连接的平台。电磁兼容性与信号完整性的问题日益突出，对于 PCB 布线与元器件布局的要求越来越高。  本文首">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/logo.png">
+<meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/via.jpg">
+<meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/soldering.png">
+<meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/multilayer.png">
 <meta property="article:published_time" content="2021-02-11T16:00:00.000Z">
 <meta property="article:modified_time" content="2021-02-11T16:00:00.000Z">
 <meta property="article:author" content="Hank">
@@ -50,7 +53,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>经典 PCB 布线规范与设计准则 | Bit by bit</title>
+<title>PCB 基本布线规范与设计原则 | Bit by bit</title>
   
 
 
@@ -178,7 +181,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -191,6 +194,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.</span> <span class="nav-text">基本术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb"><span class="nav-number">2.</span> <span class="nav-text">PCB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF"><span class="nav-number">2.1.</span> <span class="nav-text">布线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%BC%E6%9D%BF"><span class="nav-number">2.2.</span> <span class="nav-text">拼板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E5%AD%94"><span class="nav-number">2.3.</span> <span class="nav-text">过孔</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B0%E7%BA%BF%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">走线参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8"><span class="nav-number">4.</span> <span class="nav-text">封装尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="nav-number">5.</span> <span class="nav-text">PCB 分层结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E5%AE%8C%E6%95%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">信号完整性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%B8%83%E5%B1%80%E8%A7%84%E8%8C%83"><span class="nav-number">7.</span> <span class="nav-text">PCB 布局规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%B8%83%E7%BA%BF%E5%8E%9F%E5%88%99"><span class="nav-number">8.</span> <span class="nav-text">PCB 布线原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E6%8B%BC%E6%9D%BF"><span class="nav-number">9.</span> <span class="nav-text">PCB 拼板</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -295,7 +299,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          经典 PCB 布线规范与设计准则
+          PCB 基本布线规范与设计原则
         </h1>
 
         <div class="post-meta-container">
@@ -331,14 +335,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>175</span>
+      <span>4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>40 分钟</span>
     </span>
 </div>
 
@@ -349,8 +353,151 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><strong>优秀的 PCB 设计者同时也是出色的艺术家</strong>，但是伴随 5G 的全面商用以及物联网设备的普及，信号频率日益提高，电磁干扰问题日趋严重，PCB 设计人员不得不去面对一个现实问题：PCB 电路板已经开始像一个具有电阻、电容、电感的<strong>组件</strong>，而非像过去 10 年前那样仅仅作为线路连接的平台，因而为了确保信号的完整性，硬件工程师需要知晓一些经典的 PCB 布线规范与设计准则，避免。</p>
+        <p><strong>优秀的 PCB 设计者同时也是出色的艺术家</strong>，但是伴随 5G 的全面商用以及物联网设备的普及，电路板<strong>走线</strong>越来越精密，信号<strong>频率</strong>日益提高，电磁干扰问题日趋严重，PCB 设计人员不得不去面对一个现实问题：PCB 电路板已经开始像一个具有电阻、电容、电感的<strong>组件</strong>，而非像过去 10 年前那样仅仅作为线路连接的平台。<strong>电磁兼容性</strong>与<strong>信号完整性</strong>的问题日益突出，对于 PCB 布线与元器件布局的要求越来越高。</p>
 <p><img src="/Electronics/PCB/logo.png"></p>
+<p>本文首先介绍了 PCB 制造工艺与元器件封装相关的知识，然后重点讨论了笔者工作过程当中总结的一些 PCB Layout 方面的基本布线规范与设计原则。当然，信号完整性作为一个比较系统的工程化问题，这些<strong>经验与原则并非绝对适用于任意场合，实际布线时仍然需要具体问题具体分析，结合实际的工况进行设计</strong>。而对于信号完整性方面的各类繁杂问题，将会专门新开一篇文章另行讨论。</p>
+<a id="more"></a>
+<h2 id="基本术语">基本术语</h2>
+<p>目前全球 EDA 产业格局主要由 <strong>Synopsys</strong> (新思科技)、<strong>Cadence</strong> (铿腾电子)、<strong>Mentor</strong>（明导电子） 三大企业垄断，其中 Cadence 公司的 <strong>Allegro</strong>(<code>/əˈleɡroʊ/</code>) 是业内比较推崇的一款高速 PCB 板级布线工具，当然面对价格不菲的商业 License，也可以选择免费又好用的 <code>KiCad</code>。</p>
+<p>PCB 是<strong>印刷电路板</strong>（Printed Circuit Board）的英文缩写，其基材是由<strong>介电层</strong>（绝缘材料）和<strong>高纯度导体</strong> (铜箔)构成，常用的 PCB 的基材主要是<strong>覆铜箔环氧玻纤布层压板</strong>，也称为<strong>FR-4 全玻纤板</strong>，使用浸润了环氧树脂的<strong>玻璃纤维布</strong>层压而成。</p>
+<h2 id="pcb">PCB</h2>
+<ul>
+<li><strong>网络</strong>：电路也称为网络，即<strong>电路网络</strong>；</li>
+<li><strong>板框</strong>：放置 PCB 封装之前，需要先行在相应的图层绘制 PCB 板的边框；</li>
+<li><strong>飞线</strong>：是基于相同的原理图网络产生的，当两个封装的焊盘网络相同时就会出现飞线，表示这两个焊盘在 PCB 当中可以通过导线连接；</li>
+<li><strong>焊盘</strong>：用于将电子元件固定并且连接到 PCB ，每个焊盘都拥有独立编号，以便于和元件引脚对应；</li>
+<li><strong>泪滴</strong>：平滑过渡布线与焊盘之间的连接，提高连接的可靠性，降低信号传输时阻抗的急剧跳变，避免高频信号由于线宽突然减小而造成反射；</li>
+<li><strong>铺铜</strong>：用于保留连接<strong>地</strong>或者<strong>电源</strong>的整块铜箔区域，一块 PCB 可以分别设置并且绘制多个铺铜区；</li>
+</ul>
+<h3 id="布线">布线</h3>
+<ul>
+<li><strong>差分对布线</strong>：<strong>差分对</strong>是一种有效的高速信号走线方式，可以抑制共模噪声，达到更好的信号完整性；其中，<strong>等长</strong>和<strong>等距</strong>是差分布线的最基本要求；</li>
+<li><strong>蛇形等长布线</strong>：<strong>蛇形走线</strong>用于解决高速信号下，线长不相等导致的并行信号到达时间差异，进而引发信号时序的改变；其没有所谓滤波或者抗干扰的能力，因而只适用于<strong>时序匹配</strong>用途；</li>
+</ul>
+<h3 id="拼板">拼板</h3>
+<ul>
+<li><strong>拼板</strong>：用于充分利用 PCB 板材，将多块相同或者不同的 PCB 设计放置到一个上面，从而提高生产效率；</li>
+<li><strong>V 割</strong>：也称为 <code>V-CUT</code>，是指板厂按照客户的拼板要求（便于后期<strong>分板</strong>），在印刷电路板的特定位置预先使用切割机开出 <strong>V</strong> 形槽，由于 V-CUT 刀只能走直线，不能走曲线和折线，所以规则的 PCB 拼板才会采用该方式；此外，PCB 走线距离 V 割线距离不应小于<code>0.4mm</code> 以避免损坏；</li>
+<li><strong>邮票孔</strong>：一种是为了便于后期分板，在分板位置打上一些小孔，由于容易造成毛边等问题，所以仅用于拼板不规则的场合；另一种则是经常用于核心板，具有连接特性的邮票孔，使用时需要精确切割为半孔；</li>
+</ul>
+<h3 id="过孔">过孔</h3>
+<p><strong>过孔</strong>（<code>Via Hole</code>）是镀铜的的金属小孔，用于实现不同铜层之间的电气连接，具体可以划分为如下 3 种：</p>
+<p><img src="/Electronics/PCB/via.jpg"></p>
+<ol type="1">
+<li><strong>通孔</strong>（<code>Through</code>）：连接顶层与底层并贯穿整个 PCB；</li>
+<li><strong>盲孔</strong>（<code>Blind</code>）：一端位于 PCB 表面，另一端位于 PCB 中间的工作层；</li>
+<li><strong>埋孔</strong>（<code>Buried</code>）：用于 PCB 内部中间两个工作层之间的连接；</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：出于信号完整性的考虑，PCB 设计当中应该尽量减少<strong>过孔</strong>的使用；如果必须使用过孔，则尽量避免采用<strong>盲孔</strong>和<strong>埋孔</strong>，它们不但增加了 PCB 的加工难度，也带来了大量电气安全性方面的问题。</p>
+</blockquote>
+<h2 id="走线参数">走线参数</h2>
+<p>目前 PCB 板厂默认采用 <code>1.6</code> 毫米厚度的 <strong>FR-4</strong> 板材：</p>
+<ul>
+<li><strong>外层铜厚</strong>：<code>1oz ~ 2oz</code>，即<code>35um ~ 70um</code>，默认常规电路板外层铜箔厚度为<code>1 oz</code>，最多可以做到<code>2 oz</code>（需备注）；</li>
+<li><strong>内层铜厚</strong>：<code>0.5oz</code>，即 <code>17um</code>，默认常规电路板内层铜箔线路厚度为 <code>0.5 oz</code>；</li>
+<li><strong>最小线宽与间隙</strong>：嘉立创<code>3.5mil</code>，捷配<code>4mil</code>，两者约等于 <code>0.1mm</code>，实际布线时尽量保证大于 <code>4mil</code> 即可；</li>
+<li><strong>最小过孔内外径</strong>：多层板最小内径 <code>0.2mm</code>，最小外径为<code>0.4mm</code>，双面板最小内径 <code>0.3mm</code>,最小外径 <code>0.5mm</code>；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：具体参数请参考所打样 PCB 工厂的文档，例如：<a target="_blank" rel="noopener" href="https://www.jlc.com/portal/vtechnology.html">《嘉立创 PCB 工艺参数》</a>、<a target="_blank" rel="noopener" href="https://www.jlc.com/portal/1/serviceGuide">《嘉立创制造工艺要求》</a>、<a target="_blank" rel="noopener" href="https://www.jiepei.com/capabilities.html">《捷配 PCB 工艺能力》</a>。</p>
+</blockquote>
+<h2 id="封装尺寸">封装尺寸</h2>
+<h2 id="pcb-分层结构">PCB 分层结构</h2>
+<p>虽然 PCB 可以分为多层结构进行设计，但是通常元器件仅能在顶层或者底层，分别通过<strong>波峰焊</strong>（针对贴片元件）或者<strong>回流焊</strong>（针对分立元件）进行焊接：</p>
+<p><img src="/Electronics/PCB/soldering.png"></p>
+<p>根据覆铜层数的不同，可以将 PCB 具体划分为如下 3 种类型：</p>
+<ul>
+<li><strong>单面 PCB 板</strong>：仅有一面走线或者覆铜；</li>
+<li><strong>双面 PCB 板</strong>：顶层和底层都会进行走线或者覆铜；</li>
+<li><strong>多层 PCB 板</strong>：除了顶层和底层之外，中间还包含了<code>信号层</code>、<code>中间层</code>、<code>电源层</code>、<code>接地层</code>，每一层之间相互绝缘并采用过孔连接；</li>
+</ul>
+<p><img src="/Electronics/PCB/multilayer.png"></p>
+<p>每层 PCB 之间，分别可以采用<code>通孔</code>、<code>盲孔</code>、<code>埋孔</code>方式进行连接。总体而言，绝大多数板级 EDA 工具软件都定义有下表当中的 PCB 功能层次：</p>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">名称</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>顶层/底层</strong></td>
+<td style="text-align: left;">PCB 板顶面、底面的铜箔层，用于信号走线。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>内层</strong></td>
+<td style="text-align: left;">覆盖有铜箔，用于信号走线与铺铜，可以设置为信号层和内电层。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>顶层/底层丝印层</strong></td>
+<td style="text-align: left;">印刷在 PCB 板上的字符层（通常为白色）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>顶层/底层锡膏层</strong></td>
+<td style="text-align: left;">也称为正片工艺时的<strong>助焊层</strong>，用于为贴片焊盘制造不锈钢网使用的层，从而决定锡膏填充区域大小以辅助焊接，不需要贴片可以忽略该层；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>顶层/底层阻焊层：</strong></td>
+<td style="text-align: left;">PCB 顶层、底层上的盖油层（通常为绿色阻焊油），其作用是阻止焊锡粘结板材；该层为负片绘制方式，当有导线或区域不需要覆盖阻焊油时进行绘制，生产出的 PCB 相应区域将不会覆盖阻焊油，该操作通常称为<strong>开窗</strong>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>边框层</strong></td>
+<td style="text-align: left;">该层用于定义板框的形状、尺寸，板厂会基于该层进行 PCB 生产；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>顶层/底层装配层</strong></td>
+<td style="text-align: left;">元器件的简化轮廓，用于装配与维修，可以导出文档打印，不会对 PCB 板生产造成影响；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>机械层</strong></td>
+<td style="text-align: left;">用于记录一些 PCB 板的机械信息，生产时默认不会使用该层定义的形状进行制造，某些板厂使用源文件生产时会采用机械层作为边框，使用 <code>Gerber</code> 文件生产时该层仅用于标识<code>工艺参数</code>、<code>V 割路径</code>等文字信息；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>文档层</strong></td>
+<td style="text-align: left;">类似于机械层，但是该层仅在 EDA 工具当中可见，不会导出至 <code>Gerber</code> 文件当中；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>飞线层</strong></td>
+<td style="text-align: left;">显示 PCB 网络飞线，不属于物理意义上的层，只是为了方便颜色设置，因此某些 EDA 工具会将其放置到<code>层管理器</code>当中进行配置；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>孔层</strong></td>
+<td style="text-align: left;">类似于飞线层，不属于物理意义上的层，仅用于<strong>通孔</strong>（非金属化孔）的显示与颜色配置使用；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>多层</strong></td>
+<td style="text-align: left;">类似于飞线层，金属化孔的显示和颜色配置，当焊盘层属性为多层时，该层将用于连接包括内层在内的每个铜箔层；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>错误层</strong></td>
+<td style="text-align: left;">类似于飞线层，用于 DRC（设计规则检验）的错误标识显示与颜色配置；</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<strong>信号层</strong>主要放置铜膜导线与元件，为电气信号提供传输通道；<strong>内部电源/接地层</strong> 也称为<strong>内电层</strong>，主要用来铺设电源和接地，由大块的铜膜覆盖而成，可以提升 PCB 工作的稳定性。</p>
+</blockquote>
+<h2 id="信号完整性问题">信号完整性问题</h2>
+<p><strong>信号完整性（SI，Signal Integrity）</strong>是指 PCB 上的信号经由信号线传输以后仍然能保持完整与正确，当电路中的信号能够以正确的时序、符合要求的持续时间与电压幅度进行传送，并完整的到达输出端时，即说明该电路具有良好的信号完整性；而当信号不能正常响应时，就认为出现了信号完整性问题，特别是在高频高速电路当中。因此，信号完整性分析的目的就是为了确保信号的<strong>时序</strong>与<strong>电压</strong>幅度正确传输，电路设计当中常见的信号完整性问题主要集中在如下几个方面：</p>
+<ul>
+<li><strong>传输延迟</strong>（<code>Transmission Delay</code>）：指信号没有在规定的时间内以一定的持续时间和幅度到达接收端，通常是由于驱动过载、布线过长的传输线效应引起。此外，传输线上的电容、电感也会对信号的状态切换产生延时。高速电路设计当中，传输延迟是一个无法回避的问题，因此专门引入了一个延迟容限的概念，即确保电路正常工作的前提下，所允许的信号最大时序变化。</li>
+<li><strong>反射</strong>（<code>Reflection</code>）：指传输线上的回波，信号功率的一部分从源端经过传输线传递至负载，另一部分则会向源端反射。高速电路设计当中，可以将导线等效为传输线，而非集总参数电路中的导线。若阻抗匹配(源端阻抗、传输线阻抗、负载阻抗三者相等)则反射不会发生；反之，如果负载阻抗与传输线阻抗不匹配就会导致接收端向源端的信号反射。布线的几何形状、不恰当的端接方式、经过连接器的传输及电源平面不连续等因素均会导致该问题，进而导致传送信号出现严重的<strong>过冲</strong>（Overshoot）或<strong>下冲</strong>（Undershooot）现象，并最终造成信号的波形变形与时序混乱。</li>
+<li><strong>窜扰</strong>（<code>Crosstalk</code>）：指没有电气连接的信号线之间的感应电压与电流所导致的电磁耦合，这种耦合会造成信号线产生类似天线的作用。其中，容性耦合会引发耦合电流，感性耦合则会引发耦合电压，并伴随时钟速率的提升与 PCB 尺寸的缩小而加大，一切都是由于信号线上有交变的信号电流通过所产生的磁场，处于该磁场中的其它信号线就会感应到信号电压。PCB 的工作层的参数、信号线间距、驱动与接收端的电气特性、信号线本身的端接方式等等都会对窜扰造成一定影响。</li>
+<li><strong>接地反弹</strong>（<code>Ground Bounce</code>）：指由于电路中由于较大电流涌动而在电源与接地平面之间产生的大量噪声，例如大量芯片同步进行切换时，就会在与电源平面之间产生较大的瞬时电流，而芯片封装与电源之间的寄生电感、电容、电阻就会随之引发电源噪声，造成电路在零电位上产生较大的电压波动，进而影响其它元器件的正常工作。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：<strong>信号完整性问题</strong>往往与<strong>电磁兼容性问题</strong>相伴而生。</p>
+</blockquote>
+<h2 id="pcb-布局规范">PCB 布局规范</h2>
+<h2 id="pcb-布线原则">PCB 布线原则</h2>
+<h2 id="pcb-拼板">PCB 拼板</h2>
+<p>常见的 PCB 拼版方式主要有 3 种：<strong>同方向拼版</strong>、<strong>中心对称拼版</strong>、<strong>镜像对称拼版</strong>。</p>
 
     </div>
 
@@ -379,7 +526,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://uinika.gitee.io/Electronics/PCB/" title="经典 PCB 布线规范与设计准则">https://uinika.gitee.io/Electronics/PCB/</a>
+      <a href="https://uinika.gitee.io/Electronics/PCB/" title="PCB 基本布线规范与设计原则">https://uinika.gitee.io/Electronics/PCB/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -508,7 +655,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">326:51</span>
+    <span title="站点阅读时长">327:43</span>
   </span>
 </div>
 <div class="busuanzi-count">
