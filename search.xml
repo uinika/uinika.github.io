@@ -12,17 +12,6 @@
       </tags>
   </entry>
   <entry>
-    <title>PCB 基本布线规范与设计原则</title>
-    <url>/Electronics/PCB/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>J-Link 仿真器固件恢复小记</title>
     <url>/Embedded/JLink/</url>
     <content><![CDATA[]]></content>
@@ -78,17 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vim 常用键位生存指南</title>
-    <url>/Linux/Vim/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Embedded</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>常用高等数学公式与导学</title>
     <url>/Math/Calculus/</url>
     <content><![CDATA[]]></content>
@@ -100,14 +78,14 @@
       </tags>
   </entry>
   <entry>
-    <title>2016 年，成都房价上涨对城南 IT 产业的影响与思考</title>
-    <url>/Other/2016-Chengdu-Realestate/</url>
+    <title>Vim 常用键位生存指南</title>
+    <url>/Linux/Vim/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Article</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>Economy</tag>
+        <tag>Embedded</tag>
       </tags>
   </entry>
   <entry>
@@ -119,6 +97,17 @@
       </categories>
       <tags>
         <tag>Industry</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2016 年，成都房价上涨对城南 IT 产业的影响与思考</title>
+    <url>/Other/2016-Chengdu-Realestate/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Article</category>
+      </categories>
+      <tags>
+        <tag>Economy</tag>
       </tags>
   </entry>
   <entry>
@@ -210,6 +199,17 @@
       </tags>
   </entry>
   <entry>
+    <title>PCB 基本布线规范与设计原则</title>
+    <url>/Electronics/PCB/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面向对象的 C++ 11 程序设计语言</title>
     <url>/Linux/C++/</url>
     <content><![CDATA[]]></content>
@@ -265,8 +265,8 @@
       </tags>
   </entry>
   <entry>
-    <title>AngularJS 1.6.x 最佳实践总结</title>
-    <url>/Web/Angularjs/</url>
+    <title>异步事件管理：从 Promise 与 async/await 到 RxJS</title>
+    <url>/Web/Async/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
@@ -276,8 +276,8 @@
       </tags>
   </entry>
   <entry>
-    <title>异步事件管理：从 Promise 与 async/await 到 RxJS</title>
-    <url>/Web/Async/</url>
+    <title>AngularJS 1.6.x 最佳实践总结</title>
+    <url>/Web/Angularjs/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
