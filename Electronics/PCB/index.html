@@ -33,6 +33,9 @@
 <meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/via.jpg">
 <meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/soldering.png">
 <meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/multilayer.png">
+<meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/joint-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/joint-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Electronics/PCB/joint-3.png">
 <meta property="article:published_time" content="2021-02-11T16:00:00.000Z">
 <meta property="article:modified_time" content="2021-02-11T16:00:00.000Z">
 <meta property="article:author" content="Hank">
@@ -194,7 +197,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.</span> <span class="nav-text">基本术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">布线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%BC%E6%9D%BF"><span class="nav-number">1.2.</span> <span class="nav-text">拼板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E5%AD%94"><span class="nav-number">1.3.</span> <span class="nav-text">过孔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%BD%8D%E6%8D%A2%E7%AE%97"><span class="nav-number">1.4.</span> <span class="nav-text">单位换算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E4%BB%B6%E5%B0%81%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">元件封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%B4%E7%89%87%E5%85%83%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">贴片元件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%AF%E7%89%87%E5%B0%81%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">芯片封装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">布线参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF%E5%AE%BD%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">布线宽度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF%E9%97%B4%E8%B7%9D"><span class="nav-number">3.2.</span> <span class="nav-text">布线间距</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%BF%87%E5%AD%94"><span class="nav-number">3.3.</span> <span class="nav-text">最小过孔</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8"><span class="nav-number">4.</span> <span class="nav-text">封装尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="nav-number">5.</span> <span class="nav-text">PCB 分层结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E5%AE%8C%E6%95%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">信号完整性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%B8%83%E5%B1%80%E8%A7%84%E8%8C%83"><span class="nav-number">7.</span> <span class="nav-text">PCB 布局规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%B8%83%E7%BA%BF%E5%8E%9F%E5%88%99"><span class="nav-number">8.</span> <span class="nav-text">PCB 布线原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E6%8B%BC%E6%9D%BF"><span class="nav-number">9.</span> <span class="nav-text">PCB 拼板</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.</span> <span class="nav-text">基本术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">布线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%BC%E6%9D%BF"><span class="nav-number">1.2.</span> <span class="nav-text">拼板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E5%AD%94"><span class="nav-number">1.3.</span> <span class="nav-text">过孔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%BD%8D%E6%8D%A2%E7%AE%97"><span class="nav-number">1.4.</span> <span class="nav-text">单位换算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E4%BB%B6%E5%B0%81%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">元件封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%B4%E7%89%87%E5%85%83%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">贴片元件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%AF%E7%89%87%E5%B0%81%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">芯片封装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">布线参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF%E5%AE%BD%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">布线宽度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E7%BA%BF%E9%97%B4%E8%B7%9D"><span class="nav-number">3.2.</span> <span class="nav-text">布线间距</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%BF%87%E5%AD%94"><span class="nav-number">3.3.</span> <span class="nav-text">最小过孔</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8"><span class="nav-number">4.</span> <span class="nav-text">封装尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%A0%86%E5%8F%A0%E4%B8%8E%E5%88%86%E5%B1%82"><span class="nav-number">5.</span> <span class="nav-text">PCB 堆叠与分层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E5%B1%82-pcb-%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.1.</span> <span class="nav-text">四层 PCB 参考设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E5%B1%82-pcb-%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.2.</span> <span class="nav-text">六层 PCB 参考设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E5%AE%8C%E6%95%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">信号完整性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#w20h55-%E5%8E%9F%E5%88%99"><span class="nav-number">7.</span> <span class="nav-text">3W&#x2F;20H&#x2F;55 原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%B8%83%E5%B1%80%E8%A7%84%E8%8C%83"><span class="nav-number">8.</span> <span class="nav-text">PCB 布局规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E4%BB%B6%E5%B8%83%E5%B1%80%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="nav-number">8.1.</span> <span class="nav-text">元件布局基本原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E7%94%B5%E7%A3%81%E5%B9%B2%E6%89%B0"><span class="nav-number">8.2.</span> <span class="nav-text">防止电磁干扰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%91%E5%88%B6%E7%83%AD%E5%B9%B2%E6%89%B0"><span class="nav-number">8.3.</span> <span class="nav-text">抑制热干扰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%BA%90%E5%B8%83%E5%B1%80"><span class="nav-number">8.4.</span> <span class="nav-text">电源布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%80%9F%E5%85%83%E4%BB%B6%E4%B8%8E%E5%A4%A9%E7%BA%BF%E5%B8%83%E5%B1%80"><span class="nav-number">8.5.</span> <span class="nav-text">高速元件与天线布局</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E5%B8%83%E7%BA%BF%E5%8E%9F%E5%88%99"><span class="nav-number">9.</span> <span class="nav-text">PCB 布线原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E6%89%B0"><span class="nav-number">9.1.</span> <span class="nav-text">串扰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%86%E9%93%9C"><span class="nav-number">9.2.</span> <span class="nav-text">覆铜</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pcb-%E6%8B%BC%E6%9D%BF"><span class="nav-number">10.</span> <span class="nav-text">PCB 拼板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E8%89%BA%E8%BE%B9"><span class="nav-number">11.</span> <span class="nav-text">工艺边</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -335,14 +338,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>6.5k</span>
+      <span>11k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1:05</span>
+      <span>1:47</span>
     </span>
 </div>
 
@@ -568,6 +571,13 @@
 <p><strong>注意</strong>：具体参数请参考所打样 PCB 工厂的文档，例如：<a target="_blank" rel="noopener" href="https://www.jlc.com/portal/vtechnology.html"><strong>《嘉立创 PCB 工艺参数》</strong></a>、<a target="_blank" rel="noopener" href="https://www.jlc.com/portal/1/serviceGuide"><strong>《嘉立创制造工艺要求》</strong></a>、<a target="_blank" rel="noopener" href="https://www.jiepei.com/capabilities.html"><strong>《捷配 PCB 工艺能力》</strong></a>。</p>
 </blockquote>
 <h3 id="布线宽度">布线宽度</h3>
+<p><strong>IPC</strong> 是美国印刷电路板协会（The Institute of Printed Circuit）的英文缩写，该组织制定了多个 PCB 设计与制造工艺相关的的规范与标准：</p>
+<ul>
+<li>《IPC-7525 钢网设计标准》</li>
+<li><strong>《IPC-2221 PCB 设计通用标准》</strong></li>
+<li>《IPC-SM-782 表面安装设计焊盘图形标准》</li>
+<li>《IPC-SM-770 印制板组件装配规范(包括<strong>表面安装</strong>和<strong>穿孔安装</strong>的设计要求)》</li>
+</ul>
 <p>下面这个线宽计算公式出自于<strong>《IPC-2221 印制电路板通用设计标准》</strong>，适用于外层电流<code>35A</code>、内层电流<code>17.5A</code>、温度为<code>100C°</code>、宽度 <code>400mil</code> 的情况：：</p>
 <p><span class="math display">\[
 最大电流(安) = K \times 相对环境温升(摄氏度)^{0.44} \times (布线宽度 \times 布线厚度)^{0.725}，其中 K = 内层布线 0.024 或外层布线 0.048
@@ -778,7 +788,7 @@
 <h3 id="最小过孔">最小过孔</h3>
 <p>当前 PCB 板厂可以提供的多层板最小内径为 <code>0.2mm</code>，最小外径为 <code>0.4mm</code>，双面板最小内径 <code>0.3mm</code>，最小外径 <code>0.5mm</code>。</p>
 <h2 id="封装尺寸">封装尺寸</h2>
-<h2 id="pcb-分层结构">PCB 分层结构</h2>
+<h2 id="pcb-堆叠与分层">PCB 堆叠与分层</h2>
 <p>虽然 PCB 可以分为多层结构进行设计，但是通常元器件仅能在顶层或者底层，分别通过<strong>波峰焊</strong>（针对贴片元件）或者<strong>回流焊</strong>（针对分立元件）进行焊接：</p>
 <p><img src="/Electronics/PCB/soldering.png"></p>
 <p>根据覆铜层数的不同，可以将 PCB 具体划分为如下 3 种类型：</p>
@@ -787,6 +797,9 @@
 <li><strong>双面 PCB 板</strong>：顶层和底层都会进行走线或者覆铜；</li>
 <li><strong>多层 PCB 板</strong>：除了顶层和底层之外，中间还包含了<code>信号层</code>、<code>中间层</code>、<code>电源层</code>、<code>接地层</code>，每一层之间相互绝缘并采用过孔连接；</li>
 </ul>
+<blockquote>
+<p><strong>注意</strong>：因为双面 PCB 的电磁兼容性较差，所以通常仅用于低速设计当中。</p>
+</blockquote>
 <p><img src="/Electronics/PCB/multilayer.png"></p>
 <p>每层 PCB 之间，分别可以采用<code>通孔</code>、<code>盲孔</code>、<code>埋孔</code>方式进行连接。总体而言，绝大多数板级 EDA 工具软件都定义有下表当中的 PCB 功能层次：</p>
 <table>
@@ -858,6 +871,104 @@
 <blockquote>
 <p><strong>注意</strong>：<strong>信号层</strong>主要放置铜膜导线与元件，为电气信号提供传输通道；<strong>内部电源/接地层</strong> 也称为<strong>内电层</strong>，主要用来铺设电源和接地，由大块的铜膜覆盖而成，可以提升 PCB 工作的稳定性。</p>
 </blockquote>
+<h3 id="四层-pcb-参考设计">四层 PCB 参考设计</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">板层顺序</th>
+<th style="text-align: center;">第 1 层</th>
+<th style="text-align: center;">第 2 层</th>
+<th style="text-align: center;">第 3 层</th>
+<th style="text-align: center;">第 4 层</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>第 1 种情况</strong></td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">（信号 1 + 电源）</td>
+<td style="text-align: center;">（信号 2 + 电源）</td>
+<td style="text-align: center;">接地</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>第 2 种情况</strong></td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">信号 2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>第 3 种情况</strong></td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">电源层</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>第 1 种情况</strong>，比较理想的四层板堆叠设计，因为最外层是接地层，对于 EMI 有屏蔽作用，同时<strong>电源层</strong>与<strong>接地层</strong>可以靠得很近，使得电源内阻较小；但是，当元器件密度比较大时，不能保证接地层的完整性，信号层的信号质量会变得较差，相邻信号层之间的串扰较大；</li>
+<li><strong>第 2 种情况</strong>，这种方式较为常用，这种结构拥有较好的层电容效应，整个 PCB 的层间串扰较小，信号层可以取得较好的信号完整性；但这种结构当中，由于信号层处于表层，空间电磁辐射的强度增大，需要通过外加屏蔽壳才能够降低 EMI；</li>
+<li><strong>第 3 种情况</strong>，电源层与接地层都处于表层，信号完整性比较好，其中 <code>信号 1</code> 层上的信号质量最好，<code>信号 2</code> 层次之；这种设计对于 EMI 有一定的屏蔽作用；但是，由于环路较大，器件密度的大小直接决定着信号质量，相邻信号层不能避免层间干扰，整体上不如第 1 种结构，除非对于电源功率有特殊要求；</li>
+</ul>
+<h3 id="六层-pcb-参考设计">六层 PCB 参考设计</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">板层顺序</th>
+<th style="text-align: center;">第 1 层</th>
+<th style="text-align: center;">第 2 层</th>
+<th style="text-align: center;">第 3 层</th>
+<th style="text-align: center;">第 4 层</th>
+<th style="text-align: center;">第 5 层</th>
+<th style="text-align: center;">第 6 层</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>第 1 种情况</strong></td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">信号 3</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">信号 4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>第 2 种情况</strong></td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">信号 3</td>
+<td style="text-align: center;">信号 4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>第 3 种情况</strong></td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">信号 3</td>
+<td style="text-align: center;">信号 4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>第 4 种情况</strong></td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">接地层</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>第 1 种情况</strong>，是常见的方式之一，<code>信号 1</code> 层是比较好的布线层，<code>信号 2</code> 层次之；但是要注意 <code>信号 2</code> 与 <code>信号 3</code> 之间的层间串扰，<code>信号 4</code> 如果没有元件，就尽量减少信号线，并且多覆盖一层接地；</li>
+<li><strong>第 2 种情况</strong>，<code>信号 2</code> 与 <code>信号 3</code>层的信号完整性最好，其中 <code>信号 2</code> 层为最好的布线层，<code>信号 3</code> 层次之；电源平面的阻抗较好，层间电容较大，有利于抑制整板的 EMI；但是由于 <code>信号 1</code> 与 <code>信号 2</code> 之间存在较大的层间干扰，并且距离电源层和接地层较远，EMI 空间辐射强度较大，可能需要外加屏蔽壳；</li>
+<li><strong>第 3 种情况</strong>，这种情况是六层板的最佳布局，<code>信号 1</code>、<code>信号 2</code>、<code>信号 3</code> 都是比较好的布线层，并且电源平面的阻抗也比较好，美中不足之处在于 <code>信号 4</code> 距离接地层过远；</li>
+<li><strong>第 4 种情况</strong>，虽然性能优于前面 3 种，但是可供布线的层数仅有 2 层；</li>
+</ul>
 <h2 id="信号完整性问题">信号完整性问题</h2>
 <p><strong>信号完整性（SI，Signal Integrity）</strong>是指 PCB 上的信号经由信号线传输以后仍然能保持完整与正确，当电路中的信号能够以正确的时序、符合要求的持续时间与电压幅度进行传送，并完整的到达输出端时，即说明该电路具有良好的信号完整性；而当信号不能正常响应时，就认为出现了信号完整性问题，特别是在高频高速电路当中。因此，信号完整性分析的目的就是为了确保信号的<strong>时序</strong>与<strong>电压</strong>幅度正确传输，电路设计当中常见的信号完整性问题主要集中在如下几个方面：</p>
 <ul>
@@ -869,10 +980,120 @@
 <blockquote>
 <p><strong>注意</strong>：<strong>信号完整性问题</strong>往往与<strong>电磁兼容性问题</strong>相伴而生。</p>
 </blockquote>
+<h2 id="w20h55-原则">3W/20H/55 原则</h2>
+<ul>
+<li><strong>3W 原则</strong>：也称为 3H 原则，保证两条走线的中心间距大于 <strong>3 倍的线宽</strong>，从而减小走线之间的串扰；当走线间的中心距离大于 3 倍线宽时，可以保持 <code>70%</code> 的线间电场不会互相干扰；如要希望达到 <code>98%</code> 的线间电场不互相干扰，则可以使用 <strong>10W</strong> 规则；</li>
+<li><strong>20H 原则</strong>：多层 PCB 的边缘会向外辐射电磁干扰，让<strong>电源平面</strong>尺寸相对<strong>地平面</strong>尺寸内缩相互间距的 <code>20</code> 倍尺寸，让电场只在接地层范围内进行传导，从而有效抑制这种边缘辐射效应；内缩 <code>20H</code> 则可以将 <code>70%</code> 的电场限制在接地层，内缩 <code>100H</code> 则可以限制 <code>98%</code> 的电场；</li>
+<li><strong>55 原则</strong>：时钟频率达到 <code>5MHz</code> 或者脉冲信号的上升时间小于 <code>5ns</code>，那么 PCB 必须采用多层板；有时出于成本因素的考虑采用双层板结构，这种情况下最好将 PCB 其中一层作为完整的地平面层；</li>
+</ul>
 <h2 id="pcb-布局规范">PCB 布局规范</h2>
+<ol type="1">
+<li><strong>电源</strong>与<strong>信号</strong>要分开；</li>
+<li>信号的<strong>输入</strong>与<strong>输出</strong>要分开；</li>
+<li><strong>数字部分</strong>与<strong>模拟部分</strong>要分开；</li>
+<li><strong>高频部分</strong>与<strong>低频部分</strong>要分开；</li>
+<li><strong>强电部分</strong>与<strong>弱电部分</strong>要分开。</li>
+</ol>
+<h3 id="元件布局基本原则">元件布局基本原则</h3>
+<ul>
+<li>通常条件下，所有元件均应分布在 PCB 的相同面上，只有在 PCB 顶层元件过密时，才将一些高度有限并且发热量较小的贴片元件放置在底层；</li>
+<li>依据【<strong>先大后小，先难后易</strong>】的布线原则，重要的单元电路、核心元器件需要首先进行布局，并且保持关键信号线最短；</li>
+<li><strong>高电压大电流信号</strong>与<strong>小电流低电压信号</strong>完全分开；<strong>模拟信号</strong>与<strong>数字信号</strong>分开；<strong>高频信号</strong>与<strong>低频信号</strong>分开，并且高频元器件的隔离要充分；</li>
+<li>布局过程当中，充分参考原理框图，根据<strong>主信号流向</strong>摆放主要元器件；</li>
+<li>元件的布局应当便于信号流通，并让信号尽可能保持一致的流动方向；</li>
+<li>保证电气性能的前提下，元件应当放置在相互平行或者垂直排列的栅格上，以求整齐美观；</li>
+<li>如果元件或导线之间存在较高的电位差，应当加大其间隔距离，避免由于放电击穿引起意外短路；</li>
+<li>带有高电压的元件应当尽量布置在调试时，手不容易触及的地方；</li>
+<li>位于 PCB 边缘的元件，距离边缘至少要有 <strong>2</strong> 个板厚的距离；</li>
+<li>相同类型的<strong>插装元件</strong>应当同方向进行放置，同类型的有极性元件也尽量朝相同方向摆放，便于后期生产检测；</li>
+<li>避免不同金属封装的元件相互接触；</li>
+<li>元件之间的间隔距离需要满足操作空间的要求，例如插拔 TF 卡；</li>
+<li>重量较大的元件，应当安装在靠近 PCB 支承点的位置，减小 PCB 板材受力的翘曲度；必要时还应当采取固定措施，不能仅依靠引脚焊面固定；</li>
+<li>高压元器件和低压元器件之间保持较宽的<strong>电气隔离带</strong>，即不将电压等级相差较大的元器件摆放在一起，既有利于电气绝缘，也可以隔离信号提升抗干扰能力；</li>
+</ul>
+<h3 id="防止电磁干扰">防止电磁干扰</h3>
+<ul>
+<li>电磁辐射较强的元件，或者对于电磁辐射较为敏感的元件，应<strong>加大相互之间的距离或者添加屏蔽罩</strong>，元件摆放的方向应当<strong>与相邻的铜泊导线交叉</strong>；</li>
+<li>对于变压器、扬声器、电感等会产生磁场的元件，布局时应注意<strong>减少磁力线对于印制导线的切割</strong>，相邻元件磁场方向应相互垂直，减少彼此之间的耦合；</li>
+<li><strong>电感器件</strong>不要近距离并排摆放，避免形成互感；</li>
+<li>对电磁干扰源进行屏蔽，并且保证<strong>屏蔽罩能够良好的接地</strong>；</li>
+<li>对于高频电路，需要<strong>考虑元件之间的分布参数</strong>的影响；</li>
+</ul>
+<h3 id="抑制热干扰">抑制热干扰</h3>
+<ul>
+<li>发热元件优先安排在利于散热的位置，必要时可以单独设置散热片、散热风扇；</li>
+<li>一些功耗大的集成块、大或中功率管、电阻等元件，要布置在容易散热的地方，并与其它元件隔开一定距离。</li>
+<li>PCB 双面都摆放元件时，底层一般不放置发热元件；</li>
+<li>电阻、电容、晶振等热敏元件，应当尽量远离高温区域，以避免受到热干扰；</li>
+<li>热敏器件尽量摆放在上风口，<strong>高元件</strong>放置在<strong>矮元件</strong>后面，并且沿风阻最小的方向放置，避免风道受阻；</li>
+<li>采用大面积的<strong>接地铜箔</strong>，提升 PCB 的散热效率；</li>
+<li><strong>接地安装孔</strong>可以采用较大的焊盘，以充分利用安装螺栓和 PCB 两侧的铜箔进行散热；</li>
+</ul>
+<h3 id="电源布局">电源布局</h3>
+<ul>
+<li>多采用<strong>星形拓扑结构</strong>，少采用<strong>菊花链布局</strong>，缩短电源的公共回路；</li>
+<li>电源的<strong>输入与输出要分开进行布局</strong>，以避免串扰问题；</li>
+<li>电源管理芯片、背光芯片、升压芯片需要放置在<strong>屏蔽壳</strong>当中；</li>
+<li>电源走线要尽量<strong>避开射频区域</strong>；</li>
+</ul>
+<h3 id="高速元件与天线布局">高速元件与天线布局</h3>
+<ul>
+<li>DDR、SDRAM、NAND Flash 等存储芯片需要靠近 CPU 进行摆放，并尽量减少线长以及交叉线的数量；</li>
+<li>屏幕插座应当顺着 CPU 出线的方向，中间的 <strong>RC 滤波器</strong>尽量摆放在 CPU 一侧；</li>
+<li>高速器件 CPU、液晶屏幕插座等应当远离天线模块；</li>
+<li>射频模块和天线周边不要有金属元器件，以避免影响天线的频率点、阻抗等参数；</li>
+</ul>
 <h2 id="pcb-布线原则">PCB 布线原则</h2>
+<ul>
+<li>高速信号的走线要尽可能<strong>短</strong>和<strong>直</strong>，走线间距要足够大，并且尽量靠近 PCB 边缘或者接插件；</li>
+<li>相同信号传输线的<strong>线宽</strong>需要保持一致，<strong>拐线</strong>时同样需要保持相同的线宽；</li>
+<li>重要的信号线可以<strong>增加线宽</strong>，以降低其特性阻抗；</li>
+<li>关键信号线可以采用<strong>平行地线</strong>的方式进行隔离；</li>
+<li>相邻的两层之间，走线采用 <strong>#</strong> 字型错开布线；</li>
+<li>每条<strong>走线</strong>的宽度与元器件每个引脚的<strong>焊盘</strong>连接保持<strong>对称</strong>，并且从元件<strong>焊盘中心位置出线</strong>；</li>
+<li>当和焊盘连接的走线比焊盘宽时，走线不能覆盖焊盘，应从焊盘末端引线；</li>
+<li>引脚间距较为密集的贴片元件焊盘引脚，需要从<strong>焊盘外部</strong>走线进行连接，不允许直接连接引脚之间的焊盘；</li>
+<li><strong>过孔</strong>可能会引发信号传输线的阻抗突变，因此需要尽量减少过孔使用的数量；</li>
+<li>信号传输线上避免出现<strong>桩线</strong>，如果无法避免，那么桩线的长度应小于信号的上升时间，避免出现反射；</li>
+<li>高速信号走线换层时，附近要有<strong>接地孔</strong>提供回流环路，确保整板回环小阻抗小；</li>
+<li>模拟信号不要使用 EDA 工具的自动布线功能；</li>
+<li>对敏感节点使用屏蔽线，即在受干扰结点的周边添加一组屏蔽线，并且在<strong>屏蔽线上放置多个接地过孔</strong>；</li>
+</ul>
+<h3 id="串扰">串扰</h3>
+<ul>
+<li><strong>反向电流平行走线</strong>带来的串扰较大；</li>
+<li>串扰强度与走线<strong>长度</strong>成正比，与<strong>间距</strong>成反比，与<strong>频率</strong>成正比；</li>
+<li>加大走线的间距，缩小走线的平行长度，必要时可以采用 <strong>Jog-Out</strong> 凹凸布线；</li>
+<li>加入端接匹配可以降低反射，并且减小串扰；</li>
+<li>将信号层限制在高于接地平面 <code>10mil</code> 范围以内；</li>
+<li>向串扰比较严重的两条线之间插入一条地线进行隔离，从而减小串扰；</li>
+<li><strong>避开噪声源</strong>，例如 MCU、电感、晶振邻近的表层严禁走线或者打过孔；</li>
+</ul>
+<h3 id="覆铜">覆铜</h3>
+<ul>
+<li>PCB 设计当中，没有布线的区域最好选择一个较大的<strong>接地平面</strong>来进行覆盖，以提供屏蔽和提高去耦能力；</li>
+<li>发热元件周围或者大电流走线应当尽量避免使用大面积铜箔，长时间受热会导致铜箔膨胀脱落；</li>
+<li>发热元件周围如果必须使用大面积铜箔，那么最好采用<strong>栅格覆铜</strong>，便于释放铜箔的表面张力；</li>
+<li>相同层的走线分布不平衡或者不同层的铜分布不对称时，推荐覆铜设计。</li>
+<li>PCB 最外层如果存在大面积的区域没有走线，建议在该区域内栅格覆铜，使得 PCB 整体的铜箔分布均匀；</li>
+<li>推荐铺铜网格之间<strong>空白方格</strong>的大小约为 <code>25mil x 25mil</code>；</li>
+<li>噪声敏感的电路需要考虑接地屏蔽，即在信号层的四周布宽度大于 <code>50mil</code> 地线或间距小于 <code>300mil</code> 的地孔；</li>
+<li><strong>孤铜</strong>（特别是表层）超过 <code>150mils</code> 时，不能打接地过孔，需要删除该区域，以免形成悬空的天线；</li>
+</ul>
 <h2 id="pcb-拼板">PCB 拼板</h2>
-<p>常见的 PCB 拼版方式主要有 3 种：<strong>同方向拼版</strong>、<strong>中心对称拼版</strong>、<strong>镜像对称拼版</strong>。</p>
+<p><strong>拼板</strong>是指由于电子元件自动化贴片，需要将单块 PCB 电路板进行 <strong>V 割</strong>或者<strong>邮票孔</strong>处理的加工方式。常见的 PCB 拼版方式主要有 3 种：<strong>同方向拼版</strong>、<strong>中心对称拼版</strong>、<strong>镜像对称拼版</strong>。</p>
+<p><strong>同方向拼版</strong>：最简单的拼板方式，将同款的 PCB 设计平铺复制以后就可以实现。</p>
+<p><img src="/Electronics/PCB/joint-1.png"></p>
+<p><strong>中心对称拼版</strong>：适用于拼接<strong>两块</strong>形状不规则的 PCB，中间必须开铣（<code>xǐ</code>）槽才能够进行分离；如果拼版以后产生较大变形，可以考虑在拼版中添加邮票孔连接的<strong>辅助块</strong>。</p>
+<p><img src="/Electronics/PCB/joint-2.png"></p>
+<p><strong>镜像对称拼版</strong>：通常在 PCB 正反面的贴片元件都能够满足<strong>回流焊</strong>的焊接要求时采用，但是要注意镜像对称拼版需要满足 PCB 光绘的<strong>正负片对称分布</strong>，例如四层板第 2 层为电源/接地的<strong>负片</strong>，则与其对称的第 3 层也必须是<strong>负片</strong>，否则不能采用镜像对称方式拼版。</p>
+<p><img src="/Electronics/PCB/joint-3.png"></p>
+<h2 id="工艺边">工艺边</h2>
+<p><strong>工艺边</strong>是为了满足自动化贴片的需要而增加的辅助部分，生产完成之后会被移除，一般设计为 <code>5mm</code>。</p>
+<ul>
+<li><strong>定位孔</strong>: 用于 PCB 加工和测试时的定位，一般设计为 <code>2mm</code> 的<strong>过孔</strong>；</li>
+<li><strong>Mark 点</strong>: 用于自动化贴片机进行识别定位，通常设计为 <code>1mm</code> 的<strong>焊盘</strong>；</li>
+</ul>
 
     </div>
 
@@ -1030,7 +1251,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">328:08</span>
+    <span title="站点阅读时长">328:53</span>
   </span>
 </div>
 <div class="busuanzi-count">

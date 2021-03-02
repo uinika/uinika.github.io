@@ -199,17 +199,6 @@
       </tags>
   </entry>
   <entry>
-    <title>PCB 基本布线规范与设计原则</title>
-    <url>/Electronics/PCB/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>面向对象的 C++ 11 程序设计语言</title>
     <url>/Linux/C++/</url>
     <content><![CDATA[]]></content>
@@ -339,6 +328,17 @@
       </categories>
       <tags>
         <tag>EDA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PCB 基本布线规范与设计原则</title>
+    <url>/Electronics/PCB/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analysis</tag>
       </tags>
   </entry>
   <entry>
