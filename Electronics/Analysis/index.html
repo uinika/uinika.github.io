@@ -22,12 +22,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
   </script>
-<meta name="description" content="动态电路是指含有电容、电感等储能动态元件的电路，由于动态元件的特性方程当中含有微分和积分形式，因此动态电路主要采用微分方程进行描述，其中方程的阶数通常等于电路当中动态元件的个数。本文所指的动态也称为暂态，是指电路从一个稳态变化到另外一个稳态的中间变化过程，也称为过渡过程。而稳态则被称为静态，指电路当中的电压、电流等参数达到一个稳定状态，如果电路不发生变化，就会一直以该状态运行。  本文主要讨论">
+<meta name="description" content="动态电路是指含有电容、电感等储能动态元件的电路，由于动态元件的特性方程当中含有微分和积分形式，因此动态电路主要采用微分方程进行描述，其中方程的阶数通常等于电路当中动态元件的个数。本文所指的动态也称为暂态，是指电路从一个稳态变化到另外一个稳态的中间变化过程，也称为过渡过程。而稳态则被称为静态，指电路当中的电压、电流等参数达到一个稳定状态，如果电路不发生变化，就会一直以该状态运行。  本文主要讨论了动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="电路分析经典理论复习笔记">
 <meta property="og:url" content="https://uinika.gitee.io/Electronics/Analysis/index.html">
 <meta property="og:site_name" content="Bit by bit">
-<meta property="og:description" content="动态电路是指含有电容、电感等储能动态元件的电路，由于动态元件的特性方程当中含有微分和积分形式，因此动态电路主要采用微分方程进行描述，其中方程的阶数通常等于电路当中动态元件的个数。本文所指的动态也称为暂态，是指电路从一个稳态变化到另外一个稳态的中间变化过程，也称为过渡过程。而稳态则被称为静态，指电路当中的电压、电流等参数达到一个稳定状态，如果电路不发生变化，就会一直以该状态运行。  本文主要讨论">
+<meta property="og:description" content="动态电路是指含有电容、电感等储能动态元件的电路，由于动态元件的特性方程当中含有微分和积分形式，因此动态电路主要采用微分方程进行描述，其中方程的阶数通常等于电路当中动态元件的个数。本文所指的动态也称为暂态，是指电路从一个稳态变化到另外一个稳态的中间变化过程，也称为过渡过程。而稳态则被称为静态，指电路当中的电压、电流等参数达到一个稳定状态，如果电路不发生变化，就会一直以该状态运行。  本文主要讨论了动">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://uinika.gitee.io/Electronics/Analysis/logo.png">
 <meta property="og:image" content="https://uinika.gitee.io/Electronics/Analysis/Chapter-1/0.png">
@@ -210,7 +210,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">电路模型与基本定律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">电路模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%AD%A6"><span class="nav-number">1.1.1.</span> <span class="nav-text">导学</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">电路分析思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E7%94%B5%E8%B7%AF%E5%85%83%E4%BB%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">理想电路元件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E6%A8%A1%E5%9E%8B-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">电路模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE"><span class="nav-number">1.1.5.</span> <span class="nav-text">电路理论的基本假设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.1.6.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">电路变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%AD%A6-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">导学</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%8D%B7%E4%B8%8E%E7%94%B5%E6%B5%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">电荷与电流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%8E%8B%E4%B8%8E%E7%94%B5%E4%BD%8D"><span class="nav-number">1.2.3.</span> <span class="nav-text">电压与电位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%83%BD%E4%B8%8E%E7%94%B5%E5%8A%9F%E7%8E%87"><span class="nav-number">1.2.4.</span> <span class="nav-text">电能与电功率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93-1"><span class="nav-number">1.2.5.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%85%83%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">电路元件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.4.</span> <span class="nav-text">基本定律</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E9%98%BB%E7%94%B5%E8%B7%AF%E7%AD%89%E6%95%88%E5%8F%98%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text">电阻电路等效变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90%E6%96%B9%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">电路分析方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%AE%9A%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">电路定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AB%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E7%94%B5%E8%B7%AF"><span class="nav-number">5.</span> <span class="nav-text">含运算放大器的电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E5%AE%B9%E7%94%B5%E6%84%9F%E5%8F%8A%E5%8A%A8%E6%80%81%E7%94%B5%E8%B7%AF"><span class="nav-number">6.</span> <span class="nav-text">电容、电感及动态电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%98%B6%E7%94%B5%E8%B7%AF%E7%9A%84%E6%9A%82%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">7.</span> <span class="nav-text">一阶电路的暂态分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%98%B6%E7%94%B5%E8%B7%AF%E7%9A%84%E6%9A%82%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">8.</span> <span class="nav-text">二阶电路的暂态分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">9.</span> <span class="nav-text">正弦稳态分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E7%94%B5%E8%B7%AF%E7%9A%84%E5%8A%9F%E7%8E%87"><span class="nav-number">10.</span> <span class="nav-text">正弦稳态电路的功率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%9B%B8%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E7%94%B5%E8%B7%AF"><span class="nav-number">11.</span> <span class="nav-text">三相正弦稳态电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AB%E7%A3%81%E8%80%A6%E5%90%88%E7%9A%84%E7%94%B5%E8%B7%AF"><span class="nav-number">12.</span> <span class="nav-text">含磁耦合的电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E7%94%B5%E8%B7%AF%E7%9A%84%E9%A2%91%E7%8E%87%E5%93%8D%E5%BA%94"><span class="nav-number">13.</span> <span class="nav-text">正弦稳态电路的频率响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%A8%E6%9C%9F%E6%80%A7%E9%9D%9E%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E7%94%B5%E8%B7%AF"><span class="nav-number">14.</span> <span class="nav-text">周期性非正弦稳态电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%AB%AF%E5%8F%A3%E7%BD%91%E7%BB%9C"><span class="nav-number">15.</span> <span class="nav-text">二端口网络</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%9F%BA%E6%9C%AC%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">电路模型与基本定律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">电路模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%AD%A6"><span class="nav-number">1.1.1.</span> <span class="nav-text">导学</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">电路分析思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E7%94%B5%E8%B7%AF%E5%85%83%E4%BB%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">理想电路元件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E6%A8%A1%E5%9E%8B-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">电路模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE"><span class="nav-number">1.1.5.</span> <span class="nav-text">电路理论的基本假设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.1.6.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">电路变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%AD%A6-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">导学</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%8D%B7%E4%B8%8E%E7%94%B5%E6%B5%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">电荷与电流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%8E%8B%E4%B8%8E%E7%94%B5%E4%BD%8D"><span class="nav-number">1.2.3.</span> <span class="nav-text">电压与电位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%83%BD%E4%B8%8E%E7%94%B5%E5%8A%9F%E7%8E%87"><span class="nav-number">1.2.4.</span> <span class="nav-text">电能与电功率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93-1"><span class="nav-number">1.2.5.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%85%83%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">电路元件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.4.</span> <span class="nav-text">基本定律</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E9%98%BB%E7%94%B5%E8%B7%AF%E7%AD%89%E6%95%88%E5%8F%98%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text">电阻电路等效变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90%E6%96%B9%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">电路分析方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%AE%9A%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">电路定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AB%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E7%94%B5%E8%B7%AF"><span class="nav-number">5.</span> <span class="nav-text">含运算放大器的电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E5%AE%B9%E3%80%81%E7%94%B5%E6%84%9F%E5%8F%8A%E5%8A%A8%E6%80%81%E7%94%B5%E8%B7%AF"><span class="nav-number">6.</span> <span class="nav-text">电容、电感及动态电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%98%B6%E7%94%B5%E8%B7%AF%E7%9A%84%E6%9A%82%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">7.</span> <span class="nav-text">一阶电路的暂态分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%98%B6%E7%94%B5%E8%B7%AF%E7%9A%84%E6%9A%82%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">8.</span> <span class="nav-text">二阶电路的暂态分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">9.</span> <span class="nav-text">正弦稳态分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E7%94%B5%E8%B7%AF%E7%9A%84%E5%8A%9F%E7%8E%87"><span class="nav-number">10.</span> <span class="nav-text">正弦稳态电路的功率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%9B%B8%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E7%94%B5%E8%B7%AF"><span class="nav-number">11.</span> <span class="nav-text">三相正弦稳态电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AB%E7%A3%81%E8%80%A6%E5%90%88%E7%9A%84%E7%94%B5%E8%B7%AF"><span class="nav-number">12.</span> <span class="nav-text">含磁耦合的电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E7%94%B5%E8%B7%AF%E7%9A%84%E9%A2%91%E7%8E%87%E5%93%8D%E5%BA%94"><span class="nav-number">13.</span> <span class="nav-text">正弦稳态电路的频率响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%A8%E6%9C%9F%E6%80%A7%E9%9D%9E%E6%AD%A3%E5%BC%A6%E7%A8%B3%E6%80%81%E7%94%B5%E8%B7%AF"><span class="nav-number">14.</span> <span class="nav-text">周期性非正弦稳态电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%AB%AF%E5%8F%A3%E7%BD%91%E7%BB%9C"><span class="nav-number">15.</span> <span class="nav-text">二端口网络</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -358,14 +358,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>3.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>34 分钟</span>
+      <span>33 分钟</span>
     </span>
 </div>
 
@@ -380,63 +380,51 @@
 <p><img src="/Electronics/Analysis/logo.png"></p>
 <p>本文主要讨论了<code>动态电路的暂态分析</code>、<code>正弦交流电路稳态分析</code>、<code>含二端口元件电路分析</code>等动态电路分析方面的内容，阅读前应当具备<code>微分</code>、<code>积分</code>、<code>微分方程</code>、<code>复数运算</code>、<code>线性代数方程组</code>、<code>矩阵</code>、<code>傅里叶级数</code>等<strong>高等数学</strong>知识。本文在撰写过程当中，参考阅读了国外大学普遍采用的《Electric Circuits》第 10 版教材。</p>
 <a id="more"></a>
-<h2 id="电路模型与基本定律">电路模型与基本定律</h2>
-<h3 id="电路模型">电路模型</h3>
-<h4 id="导学">导学</h4>
-<ul>
+
+<h2 id="电路模型与基本定律"><a href="#电路模型与基本定律" class="headerlink" title="电路模型与基本定律"></a>电路模型与基本定律</h2><h3 id="电路模型"><a href="#电路模型" class="headerlink" title="电路模型"></a>电路模型</h3><h4 id="导学"><a href="#导学" class="headerlink" title="导学"></a>导学</h4><ul>
 <li>分析实际电路的基本流程是什么？</li>
 <li>电路元件与实际电器件有何差别？</li>
 <li>电路模型与实际电路有何差别？</li>
 <li>电路理论为什么需要基本假设？</li>
 </ul>
-<h4 id="电路分析思路">电路分析思路</h4>
-<p>电路通常包括<strong>提供电能的电源</strong>、<strong>消耗电能的负载</strong>、<strong>连接控制部件</strong>三个部分，在下面的手电筒电路当中干电池为电源，灯珠为负载，导线与开关是连接控制部件。如果当前的分析目标是灯珠点亮时流过的电流 <span class="math inline">\(i\)</span>，那么可以将每个电路元件转换为相应的电路模型。</p>
+<h4 id="电路分析思路"><a href="#电路分析思路" class="headerlink" title="电路分析思路"></a>电路分析思路</h4><p>电路通常包括<strong>提供电能的电源</strong>、<strong>消耗电能的负载</strong>、<strong>连接控制部件</strong>三个部分，在下面的手电筒电路当中干电池为电源，灯珠为负载，导线与开关是连接控制部件。如果当前的分析目标是灯珠点亮时流过的电流 $i$，那么可以将每个电路元件转换为相应的电路模型。</p>
 <p><img src="/Electronics/Analysis/Chapter-1/0.png"></p>
 <p><strong>滑动开关</strong>用接通电阻为零断开电阻为无穷大的<strong>理想开关</strong>近似，<strong>导线</strong>采用没有电阻的理想导线近似；<strong>灯珠</strong>使用<strong>电阻</strong>作为电路模型，由于金属的电阻率随温度上升而增大，而灯珠的灯丝为金属，因而其电阻会随着电流的增大而略有增大，但是这里依然将其近似为直线表示：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/1.png"></p>
 <p><strong>干电池</strong>的端电压会随着电流的增大而略有下降，当电流超过一定数值以后电压会快速下降，这里仍然采用直线近似，电路模型为<strong>电压源与电阻的串联</strong>：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/2.png"></p>
-<p>由此可见，<strong>电路模型</strong>是实际电路的近似模型，建立电路模型之后选择相应的分析方法 <span class="math inline">\(u_s = (R_s + R_L)i\)</span>，最后计算目标变量求得电流 <span class="math inline">\(i = \frac{u_s}{R_s + R_L}\)</span>：</p>
+<p>由此可见，<strong>电路模型</strong>是实际电路的近似模型，建立电路模型之后选择相应的分析方法 $u_s = (R_s + R_L)i$，最后计算目标变量求得电流 $i = \frac{u_s}{R_s + R_L}$：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/3.png"></p>
 <p>总结下来，电路分析的过程通常会遵循着如下的步骤：</p>
-<p><span class="math display">\[
-确定分析目标 \longrightarrow 计算目标变量 \longrightarrow 建立电路模型 \longrightarrow 选择分析方法 \longrightarrow 校验所得结果
-\]</span></p>
-<h4 id="理想电路元件">理想电路元件</h4>
-<p><strong>电路建模</strong>是将实际电路当中的电子元器件用对应的理想电路模型进行表示。<strong>理想电路元件</strong>没有空间大小，表征单一电磁现象，并且有精确的特性方程。</p>
+<p>$$<br>确定分析目标 \longrightarrow 计算目标变量 \longrightarrow 建立电路模型 \longrightarrow 选择分析方法 \longrightarrow 校验所得结果<br>$$</p>
+<h4 id="理想电路元件"><a href="#理想电路元件" class="headerlink" title="理想电路元件"></a>理想电路元件</h4><p><strong>电路建模</strong>是将实际电路当中的电子元器件用对应的理想电路模型进行表示。<strong>理想电路元件</strong>没有空间大小，表征单一电磁现象，并且有精确的特性方程。</p>
 <p><img src="/Electronics/Analysis/Chapter-1/4.png"></p>
-<h4 id="电路模型-1">电路模型</h4>
-<p><strong>电路模型</strong>是相互连接的理想电路元件，是实际电路的近似。电路模型并不体现元器件的空间大小，因而也称为<strong>集中参数电路模型</strong>。例如当<strong>电感</strong>元件通过交流电流时，线圈周围产生磁场，线端两端存在电压，匝间存在电场：</p>
+<h4 id="电路模型-1"><a href="#电路模型-1" class="headerlink" title="电路模型"></a>电路模型</h4><p><strong>电路模型</strong>是相互连接的理想电路元件，是实际电路的近似。电路模型并不体现元器件的空间大小，因而也称为<strong>集中参数电路模型</strong>。例如当<strong>电感</strong>元件通过交流电流时，线圈周围产生磁场，线端两端存在电压，匝间存在电场：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/5.png"></p>
 <ul>
 <li>当电流频率较低时，线圈两端电压较小，匝间电场可以忽略，所以采用电感元件表征存储的磁场能量，电阻元件表征消耗的电能，两者皆与电流大小相关，所以电路模型为电感元件与电阻元件的串联；</li>
 <li>当电流频率较高时，线圈两端电压较大，匝间电场不可忽略，因此还需要引入电容元件来表征存储的电场能量；而存储的电场能量与电压相关，因此电路模型当中需要并联一个电容元件；</li>
 </ul>
-<h4 id="电路理论的基本假设">电路理论的基本假设</h4>
-<p><strong>集中参数电路模型</strong>是不考虑空间大小的电路模型，该模型需要满足电路理论的 3 点基本假设：</p>
-<ol type="1">
-<li>电磁效应瞬间传遍全电路，即 <span class="math inline">\(电路空间大小 d &lt;&lt; 波长 \lambda\)</span>；</li>
+<h4 id="电路理论的基本假设"><a href="#电路理论的基本假设" class="headerlink" title="电路理论的基本假设"></a>电路理论的基本假设</h4><p><strong>集中参数电路模型</strong>是不考虑空间大小的电路模型，该模型需要满足电路理论的 3 点基本假设：</p>
+<ol>
+<li>电磁效应瞬间传遍全电路，即 $电路空间大小 d &lt;&lt; 波长 \lambda$；</li>
 <li>元器件的<strong>磁场</strong>主要由<code>自由电流</code>产生；</li>
 <li>元器件的<strong>电场</strong>主要由<code>自由电荷</code>产生；</li>
 </ol>
-<h4 id="小结">小结</h4>
-<ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
 <li>电路理论建立在一定的假设条件下，是对电磁问题的近似分析。</li>
 <li>建模与计算是电路分析的两个主要方面</li>
 </ul>
-<h3 id="电路变量">电路变量</h3>
-<p>电路理论当中的计算对象是由<strong>实际电路</strong>抽象和近似而来的<strong>电路模型</strong>。</p>
+<h3 id="电路变量"><a href="#电路变量" class="headerlink" title="电路变量"></a>电路变量</h3><p>电路理论当中的计算对象是由<strong>实际电路</strong>抽象和近似而来的<strong>电路模型</strong>。</p>
 <p><img src="/Electronics/Analysis/Chapter-1/6.png"></p>
 <p>通常会使用<code>电荷与电流</code>、<code>电压与电位</code>、<code>电能与电功率</code>来描述电路当中的电磁现象。</p>
-<h4 id="导学-1">导学</h4>
-<ol type="1">
+<h4 id="导学-1"><a href="#导学-1" class="headerlink" title="导学"></a>导学</h4><ol>
 <li>电流、电压体现什么物理现象？</li>
 <li>电流、电压为什么要有参考方向？</li>
 <li>电流、电压、电功率如何关联？</li>
 <li>如何判断吸收还是提供电功率？</li>
 </ol>
-<h4 id="电荷与电流">电荷与电流</h4>
-<p><strong>电荷</strong>是最基本的物理量，电荷及其运动是形成所有电磁现象的根源。</p>
+<h4 id="电荷与电流"><a href="#电荷与电流" class="headerlink" title="电荷与电流"></a>电荷与电流</h4><p><strong>电荷</strong>是最基本的物理量，电荷及其运动是形成所有电磁现象的根源。</p>
 <p><img src="/Electronics/Analysis/Chapter-1/7.png"></p>
 <ul>
 <li>在导电物质当中，可以定向运动的<strong>自由电子或离子</strong>；</li>
@@ -444,94 +432,52 @@
 <li>在真空或者气体当中，可以迁移运动的<strong>带电粒子</strong>；</li>
 </ul>
 <p>电荷的定向运动形成<strong>电流</strong>，本文所讨论的电路理论当中只涉及<strong>自由电荷</strong>形成的电流：</p>
-<p><span class="math display">\[
-流过截面积 S 的电流 = \frac{正电荷 dq}{时间 dt}
-\]</span></p>
+<p>$$<br>流过截面积 S 的电流 = \frac{正电荷 dq}{时间 dt}<br>$$</p>
 <p>电荷的方向是<strong>正电荷</strong>运动的方向，下图当中箭头表示的是<strong>电流的参考方向</strong>：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/8.png"></p>
 <p>电流按照大小与方向是否随着时间变化，可以具体划分<strong>直流</strong>与<strong>交流</strong>：</p>
 <ul>
-<li><strong>直流</strong>（Direct Current）：恒定不变的电流，大小与方向都不会随时间变化； <img src="/Electronics/Analysis/Chapter-1/9.png"></li>
-<li><strong>交流</strong>（Alternating Current）：大小随时间变化，并且平均值为零的电流，例如最为常见的正弦交流； <img src="/Electronics/Analysis/Chapter-1/10.png"></li>
+<li><strong>直流</strong>（Direct Current）：恒定不变的电流，大小与方向都不会随时间变化；<br><img src="/Electronics/Analysis/Chapter-1/9.png"></li>
+<li><strong>交流</strong>（Alternating Current）：大小随时间变化，并且平均值为零的电流，例如最为常见的正弦交流；<br><img src="/Electronics/Analysis/Chapter-1/10.png"></li>
 </ul>
-<p>▶【例题】已知正电荷流 <span class="math inline">\(q(t) = 5 \sin \pi t\)</span> 毫库从 <span class="math inline">\(b\)</span> 流向 <span class="math inline">\(a\)</span>：</p>
+<p>▶【例题】已知正电荷流 $q(t) = 5 \sin \pi t$ 毫库从 $b$ 流向 $a$：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/11.png"></p>
-<ol type="1">
-<li>计算电流 <span class="math inline">\(i\)</span> ？</li>
-<li>计算 <span class="math inline">\(1 \sim 2\)</span> 秒之间流过电阻的电荷 ？</li>
+<ol>
+<li>计算电流 $i$ ？</li>
+<li>计算 $1 \sim 2$ 秒之间流过电阻的电荷 ？</li>
 </ol>
 <p>▶【解答】上图当中，电流的参考方向与正电荷流动的方向相反：</p>
-<p><span class="math display">\[
-\begin{aligned}
-&amp;电流 i = - \frac{dq}{dt} = - \frac{d (5 \sin \pi t)}{dt} = -5 \pi \cos \pi t\ 毫安 \\
-&amp;电荷 \Delta q = \int^{2}_{1} i(t)\ dt \xrightarrow{由于电荷变化周期为2秒，因此1秒内的积分为零} = \int^{2}_{1} - 5 \pi \cos \pi t d t = 0
-\end{aligned}
-\]</span></p>
-<h4 id="电压与电位">电压与电位</h4>
-<p><strong>电压</strong>是表征电场力<strong>移动电荷</strong>时做功能力的物理量，如果电场力将正电荷 <span class="math inline">\(dq\)</span> 从 <code>a</code> 点推到 <code>b</code> 点做功 <span class="math inline">\(dw\)</span>，此时 <span class="math inline">\(\frac{dw}{dq}\)</span> 就是 <code>a</code> 与 <code>b</code> 两点之间的电压：</p>
+<p>$$<br>\begin{aligned}<br>&amp;电流 i = - \frac{dq}{dt} = - \frac{d (5 \sin \pi t)}{dt} = -5 \pi \cos \pi t\ 毫安 \<br>&amp;电荷 \Delta q = \int^{2}<em>{1} i(t)\ dt \xrightarrow{由于电荷变化周期为2秒，因此1秒内的积分为零} = \int^{2}</em>{1} - 5 \pi \cos \pi t d t = 0<br>\end{aligned}<br>$$</p>
+<h4 id="电压与电位"><a href="#电压与电位" class="headerlink" title="电压与电位"></a>电压与电位</h4><p><strong>电压</strong>是表征电场力<strong>移动电荷</strong>时做功能力的物理量，如果电场力将正电荷 $dq$ 从 <code>a</code> 点推到 <code>b</code> 点做功 $dw$，此时 $\frac{dw}{dq}$ 就是 <code>a</code> 与 <code>b</code> 两点之间的电压：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/12.png"></p>
-<p><span class="math display">\[
-ab\ 两点之间的电压\ u_{ab} = \frac{所做的功\ dw}{正电荷\ dq}
-\]</span></p>
+<p>$$<br>ab\ 两点之间的电压\ u_{ab} = \frac{所做的功\ dw}{正电荷\ dq}<br>$$</p>
 <p>同电流一样，电路分析时不易确定电场力移动正电荷的方向，因此同样需要引入参考方向，电压的参考方向存在如下两种表示方法：</p>
-<p><strong>双下标法</strong>：下图 <span class="math inline">\(u_{ab} = 10V\)</span> 表示电场力将单位正电荷由 <span class="math inline">\(a\)</span> 推向 <span class="math inline">\(b\)</span>，做功 <code>10</code> 焦耳，也可以记为 <span class="math inline">\(u_{ba} = -10V\)</span>。</p>
+<p><strong>双下标法</strong>：下图 $u_{ab} = 10V$ 表示电场力将单位正电荷由 $a$ 推向 $b$，做功 <code>10</code> 焦耳，也可以记为 $u_{ba} = -10V$。</p>
 <p><img src="/Electronics/Analysis/Chapter-1/13.png"></p>
-<p><strong>正负极性法</strong>：如果 <code>a</code> 点为正极性 <code>b</code> 点为负极性，两点之间的电压为 <span class="math inline">\(u\)</span>，那么此时 <span class="math inline">\(u = 10V\)</span>；反之，如果 <code>b</code> 点为正极性 <code>a</code> 点为负极性，则 <span class="math inline">\(u = -10V\)</span>:</p>
+<p><strong>正负极性法</strong>：如果 <code>a</code> 点为正极性 <code>b</code> 点为负极性，两点之间的电压为 $u$，那么此时 $u = 10V$；反之，如果 <code>b</code> 点为正极性 <code>a</code> 点为负极性，则 $u = -10V$:</p>
 <p><img src="/Electronics/Analysis/Chapter-1/14.png"></p>
-<p><strong>电位</strong>指的是共用一个<strong>负极性点</strong>的电压，在下面电路当中选取一个公共负极性点作为<strong>电位参考点</strong>，其中 <code>a</code> 点的电位 <span class="math inline">\(U_a\)</span> 等于电压 <span class="math inline">\(U_{ad} = 5V\)</span>，而 <code>c</code> 点的电位 <span class="math inline">\(U_c\)</span> 等于电压 <span class="math inline">\(U_{cd} = 12V\)</span>。由于电路理论假设了器件外部的电场是一个由<strong>自由电荷</strong>产生的保守场，因此电压 <span class="math inline">\(U_{ac}\)</span> 等于 <code>a</code> 与 <code>c</code> 两点的电位之差：</p>
-<p><span class="math display">\[
-U_{ac} = U_a - U_c = 5V - 12V = -7V
-\]</span></p>
-<h4 id="电能与电功率">电能与电功率</h4>
-<p>电路当中，能量的转换是通过<strong>正负电荷的分离与运动</strong>来实现，例如下图的电池当中，化学能将电解液当中的正负电荷分离，并且分别积聚于电池的正负极，从而在电池外部形成<strong>库伦电场</strong>，使得电荷流过电器件并且消耗电能：</p>
+<p><strong>电位</strong>指的是共用一个<strong>负极性点</strong>的电压，在下面电路当中选取一个公共负极性点作为<strong>电位参考点</strong>，其中 <code>a</code> 点的电位 $U_a$ 等于电压 $U_{ad} = 5V$，而 <code>c</code> 点的电位 $U_c$ 等于电压 $U_{cd} = 12V$。由于电路理论假设了器件外部的电场是一个由<strong>自由电荷</strong>产生的保守场，因此电压 $U_{ac}$ 等于 <code>a</code> 与 <code>c</code> 两点的电位之差：</p>
+<p>$$<br>U_{ac} = U_a - U_c = 5V - 12V = -7V<br>$$</p>
+<h4 id="电能与电功率"><a href="#电能与电功率" class="headerlink" title="电能与电功率"></a>电能与电功率</h4><p>电路当中，能量的转换是通过<strong>正负电荷的分离与运动</strong>来实现，例如下图的电池当中，化学能将电解液当中的正负电荷分离，并且分别积聚于电池的正负极，从而在电池外部形成<strong>库伦电场</strong>，使得电荷流过电器件并且消耗电能：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/15.png"></p>
 <p><strong>电功率</strong>指的是电能转换的速率，</p>
 <p><strong>关联参考方向</strong>下的功率：</p>
 <p><img src="/Electronics/Analysis/Chapter-1/16.png"></p>
 <p>元件<strong>吸收</strong>的功率：</p>
-<p><span class="math display">\[
-p = \frac{dw}{dt} = \frac{dw}{dq} \times \frac{dq}{dt} = u \times i
-\]</span></p>
+<p>$$<br>p = \frac{dw}{dt} = \frac{dw}{dq} \times \frac{dq}{dt} = u \times i<br>$$</p>
 <p><strong>非关联参考方向</strong>下的功率：</p>
-<p><span class="math display">\[
-\begin{aligned}
-元件吸收的功率 p = -u \times i \\
-元件提供的功率 p = u \times i
-\end{aligned}
-\]</span></p>
+<p>$$<br>\begin{aligned}<br>元件吸收的功率 p = -u \times i \<br>元件提供的功率 p = u \times i<br>\end{aligned}<br>$$</p>
 <p><img src="/Electronics/Analysis/Chapter-1/17.png"></p>
 <p>▶【例题】计算下图当中元件的功率？</p>
 <p><img src="/Electronics/Analysis/Chapter-1/18.png"></p>
 <p>▶【解答】</p>
-<p><span class="math display">\[
-\begin{aligned}
-元件 1 提供的功率：P_1 = UI = 4V \times -3A = -12W \implies 元件 1 吸收 12W 功率 \\
-元件 2 吸收的功率：P_2 = UI = 4V \times -3A = -12W \implies 元件 2 提供 12W 功率
-\end{aligned}
-\]</span></p>
-<h4 id="小结-1">小结</h4>
-<ul>
+<p>$$<br>\begin{aligned}<br>元件 1 提供的功率：P_1 = UI = 4V \times -3A = -12W \implies 元件 1 吸收 12W 功率 \<br>元件 2 吸收的功率：P_2 = UI = 4V \times -3A = -12W \implies 元件 2 提供 12W 功率<br>\end{aligned}<br>$$</p>
+<h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><ul>
 <li><strong>电流</strong>与<strong>电压</strong>都是有大小和方向的代数量，因此参考方向不可或缺；</li>
 <li>选取的参考方向不同，就像给同一件事物取不同的名称，并不会改变问题的本质；</li>
 <li>讨论功率，必须先明确当前是<strong>吸收功率</strong>还是<strong>提供功率</strong>；</li>
 </ul>
-<h3 id="电路元件">电路元件</h3>
-<h3 id="基本定律">基本定律</h3>
-<h2 id="电阻电路等效变换">电阻电路等效变换</h2>
-<h2 id="电路分析方程">电路分析方程</h2>
-<h2 id="电路定理">电路定理</h2>
-<h2 id="含运算放大器的电路">含运算放大器的电路</h2>
-<h2 id="电容电感及动态电路">电容、电感及动态电路</h2>
-<h2 id="一阶电路的暂态分析">一阶电路的暂态分析</h2>
-<h2 id="二阶电路的暂态分析">二阶电路的暂态分析</h2>
-<h2 id="正弦稳态分析">正弦稳态分析</h2>
-<h2 id="正弦稳态电路的功率">正弦稳态电路的功率</h2>
-<h2 id="三相正弦稳态电路">三相正弦稳态电路</h2>
-<h2 id="含磁耦合的电路">含磁耦合的电路</h2>
-<h2 id="正弦稳态电路的频率响应">正弦稳态电路的频率响应</h2>
-<h2 id="周期性非正弦稳态电路">周期性非正弦稳态电路</h2>
-<h2 id="二端口网络">二端口网络</h2>
-
+<h3 id="电路元件"><a href="#电路元件" class="headerlink" title="电路元件"></a>电路元件</h3><h3 id="基本定律"><a href="#基本定律" class="headerlink" title="基本定律"></a>基本定律</h3><h2 id="电阻电路等效变换"><a href="#电阻电路等效变换" class="headerlink" title="电阻电路等效变换"></a>电阻电路等效变换</h2><h2 id="电路分析方程"><a href="#电路分析方程" class="headerlink" title="电路分析方程"></a>电路分析方程</h2><h2 id="电路定理"><a href="#电路定理" class="headerlink" title="电路定理"></a>电路定理</h2><h2 id="含运算放大器的电路"><a href="#含运算放大器的电路" class="headerlink" title="含运算放大器的电路"></a>含运算放大器的电路</h2><h2 id="电容、电感及动态电路"><a href="#电容、电感及动态电路" class="headerlink" title="电容、电感及动态电路"></a>电容、电感及动态电路</h2><h2 id="一阶电路的暂态分析"><a href="#一阶电路的暂态分析" class="headerlink" title="一阶电路的暂态分析"></a>一阶电路的暂态分析</h2><h2 id="二阶电路的暂态分析"><a href="#二阶电路的暂态分析" class="headerlink" title="二阶电路的暂态分析"></a>二阶电路的暂态分析</h2><h2 id="正弦稳态分析"><a href="#正弦稳态分析" class="headerlink" title="正弦稳态分析"></a>正弦稳态分析</h2><h2 id="正弦稳态电路的功率"><a href="#正弦稳态电路的功率" class="headerlink" title="正弦稳态电路的功率"></a>正弦稳态电路的功率</h2><h2 id="三相正弦稳态电路"><a href="#三相正弦稳态电路" class="headerlink" title="三相正弦稳态电路"></a>三相正弦稳态电路</h2><h2 id="含磁耦合的电路"><a href="#含磁耦合的电路" class="headerlink" title="含磁耦合的电路"></a>含磁耦合的电路</h2><h2 id="正弦稳态电路的频率响应"><a href="#正弦稳态电路的频率响应" class="headerlink" title="正弦稳态电路的频率响应"></a>正弦稳态电路的频率响应</h2><h2 id="周期性非正弦稳态电路"><a href="#周期性非正弦稳态电路" class="headerlink" title="周期性非正弦稳态电路"></a>周期性非正弦稳态电路</h2><h2 id="二端口网络"><a href="#二端口网络" class="headerlink" title="二端口网络"></a>二端口网络</h2>
     </div>
 
     
@@ -544,7 +490,7 @@ p = \frac{dw}{dt} = \frac{dw}{dq} \times \frac{dq}{dt} = u \times i
       <div class="popular-posts-title"><a href="\Electronics\PCB\" rel="bookmark">PCB 基本布线规范与设计原则</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\Electronics\Resistance\" rel="bookmark">电路分析理论 - 电阻电路篇</a></div>
+      <div class="popular-posts-title"><a href="\Electronics\Resistance\" rel="bookmark">电路分析基础理论导学</a></div>
     </li>
   </ul>
 
@@ -691,7 +637,7 @@ p = \frac{dw}{dt} = \frac{dw}{dq} \times \frac{dq}{dt} = u \times i
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">329:53</span>
+    <span title="站点阅读时长">328:40</span>
   </span>
 </div>
 <div class="busuanzi-count">
