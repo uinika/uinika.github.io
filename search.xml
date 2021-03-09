@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>电路分析理论 - 动态电路篇</title>
-    <url>/Electronics/Dynamic/</url>
+    <title>电路分析经典理论复习笔记</title>
+    <url>/Electronics/Analysis/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Electronics</category>
       </categories>
       <tags>
         <tag>Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>意法半导体 Nucleo F767ZI 评估板测试</title>
-    <url>/Embedded/NucleoF767ZI/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Embedded</category>
-      </categories>
-      <tags>
-        <tag>MCU</tag>
       </tags>
   </entry>
   <entry>
@@ -36,6 +25,17 @@
   <entry>
     <title>基于三星 S3C2440 的嵌入式 Linux 攻略</title>
     <url>/Embedded/Mini2440/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Embedded</category>
+      </categories>
+      <tags>
+        <tag>MCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>意法半导体 Nucleo F767ZI 评估板测试</title>
+    <url>/Embedded/NucleoF767ZI/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Embedded</category>
