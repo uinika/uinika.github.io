@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>电路分析经典理论复习笔记</title>
-    <url>/Electronics/Analysis/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>J-Link 仿真器固件恢复小记</title>
     <url>/Embedded/JLink/</url>
     <content><![CDATA[]]></content>
@@ -185,6 +174,17 @@
       </categories>
       <tags>
         <tag>Zen</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电路分析经典理论复习笔记</title>
+    <url>/Electronics/Analysis/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analysis</tag>
       </tags>
   </entry>
   <entry>
