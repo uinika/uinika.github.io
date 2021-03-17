@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#8C634F">
-<meta name="generator" content="Hexo 5.1.1">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
@@ -142,9 +142,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">58</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">59</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
@@ -219,7 +219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -232,7 +232,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -372,7 +372,7 @@
         <p>最早的 C 编程语言标准由<strong>美国国家标准协会（ANSI）</strong>在 1989 年首次发布（<em>C89 版本</em>），后于 1990 年由<strong>国际标准化组织（ISO）</strong>修订后发布（<em>C90 版本</em>）标准，而后经历了 C99、C11 等一系列主要版本的演进，截止目前最新的版本是 2018 年 10 月发布的 C18 版本。笔者当前使用的 Linux C 编译工具是 2018 年 1 月 25 日释出的<strong>GCC 7.3.0</strong>版本，提供了 C89/C90 、C99、C11 等一系列 ISO 标准特性的支持。</p>
 <p><img src="/Linux/C/logo.png"></p>
 <p>本文将分为<a href>《语法规范》</a>与<a href>《应用程序》</a>两个姊妹篇，前者侧重于介绍 Linux C 各个数据类型的存储模型，并概括了函数、条件编译、动态内存管理、位运算、指针等嵌入式 C 程序设计的常用概念。后者将涉及 Linux 文件系统 IO、进程间通信、多线程、网络编程等应用程序开发方面的内容。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h1 id="hello-wrold">Hello Wrold</h1>
 <p>第一步，我们先来尝试编写一个老派的 Hello World 程序，<code>main</code>函数是 Linux C 语言程序的执行入口，因此也称为<strong>主函数</strong>。主函数的<code>argc</code>参数为整型，用于统计程序执行时传递给主函数的命令行参数的个数。而<code>argv</code>参数是一个字符串数组，数组中每个元素指向一个命令行输入的执行参数。</p>
 <p>不同于 Python、JavaScript 这样的脚本语言，函数内部每条语句尾部的分号<code>;</code>都不能被省略。代码开头的<code>#include</code>预处理指令用于包含标准 IO 头文件，从而能够在后续主函数中调用<code>printf()</code>方法。另外值得注意的是，C 语言代码当中存在<code>/*块注释*/</code>和<code>//行注释</code>两种注释风格，但是<code>//</code>风格在 GCC 的 C89/C90 编译选项下会提示错误信息，开发人员可以根据实际情况酌情使用。</p>
@@ -1523,7 +1523,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">331:01</span>
+    <span title="站点阅读时长">333:32</span>
   </span>
 </div>
 <div class="busuanzi-count">

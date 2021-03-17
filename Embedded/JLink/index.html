@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#8C634F">
-<meta name="generator" content="Hexo 5.1.1">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
@@ -141,9 +141,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">58</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">59</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
@@ -217,7 +217,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -230,7 +230,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -370,7 +370,7 @@
         <p>JTAG（<em>Joint Test Action Group，联合测试行动组</em>）是一种用于芯片内部测试的国际标准协议，<strong>ARM</strong>、<strong>DSP</strong>、<strong>FPGA</strong>等主流 IC 都对其提供了良好支持，标准 JTAG 接口拥有<code>TMS</code>模式选择、<code>TCK</code>时钟、<code>TDI</code>数据输入、<code>TDO</code>数据输出共 4 条信号线。笔者当前使用的 Mini2440 开发板原厂提供的 JTAG 调试器是采用并口的<a target="_blank" rel="noopener" href="http://www.hjtag.com/">H-JTAG</a>，由于现在的计算机设备早已经不提供并口支持，因此笔者选择了较为通用的<strong>J-Link</strong>作为 ARM9 仿真调试器。</p>
 <p><img src="/Embedded/JLink/logo.png"></p>
 <p><strong>J-Link</strong>是德国<a target="_blank" rel="noopener" href="https://www.segger.com/">SEGGER</a>公司推出的一款专用于 ARM 内核微控制器的 JTAG 仿真调试设备，能够与 ARM 官方提供的 Keil 集成开发环境无缝衔接，支持 Cortex-A/R、Cortex-M、ARM7、ARM9、ARM11、Renesas RX、Microchip PIC、Silicon Labs 8051、RISC-V 等系列的微控制器。笔者 7 年前购置了一台 J-Link V8 版本的<strong>J-Link</strong>调试器，当时由于使用不当造成固件丢失，因此特别撰写此文来记录一下固件恢复的过程。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>J-Link 采用了爱特梅尔（<em>ATMEL</em>）公司的 ARM7 架构微控制器<strong>AT91SAM7S64</strong>作为主控芯片，2017 年 Atmel 已经被微芯半导体（<em>Microchip</em>）收购，进行所有恢复工作之前，需要先访问其官网下载微控制器所对应的程序烧录工具<a target="_blank" rel="noopener" href="https://www.microchip.com/developmenttools/ProductDetails/atmel%20sam-ba%20in-system%20programmer"><strong>SAM-BA 2.18 for Windows</strong></a>。J-Link 仿真器固件由<a target="_blank" rel="noopener" href="https://www.segger.com/">SEGGER</a>开发，因此同样需要前往其官网下载最新的<a target="_blank" rel="noopener" href="https://www.segger.com/downloads/J-Link/#J-LinkSoftwareAndDocumentationPack"><em>J-Link 驱动工具包</em></a>，以及<code>J-Link ARM V8</code>稳定版固件。</p>
 <p>准备好上述三个工具之后，首先需要擦除 J-Link 板载 Flash 上面的原有固件，即<strong>先给 J-Link 通电，然后短接 ERASE 跳线帽，保持 20 秒之后再断电并移除跳线帽</strong>。</p>
 <p><img src="/Embedded/JLink/jumper-1.png"></p>
@@ -579,7 +579,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">331:01</span>
+    <span title="站点阅读时长">333:32</span>
   </span>
 </div>
 <div class="busuanzi-count">

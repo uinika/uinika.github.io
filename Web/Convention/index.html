@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#8C634F">
-<meta name="generator" content="Hexo 5.1.1">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
@@ -130,9 +130,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">58</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">59</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
@@ -207,7 +207,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,7 +220,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -360,14 +360,14 @@
         <p>开发团队当前正在全面切换到<code>ES6 + Vue/React + Webpack</code>这套技术栈，小伙伴们在开发过程中对编码规范以及 ES6 使用约定方面存在诸多困惑，所以参考了 Github 以及互联网企业 UED 的相关技术文档，结合团队之前积累的大量开发约定和范式，整理了这篇 <strong>code style</strong> 并且<a target="_blank" rel="noopener" href="https://uinika.github.io/">开源</a>出来，计划在 Team 小伙伴们熟练掌握以后，逐步在项目中推广使用 <a target="_blank" rel="noopener" href="https://eslint.org/">ESLint</a> 校验代码风格。</p>
 <p><img src="/Web/Convention/logo.png"></p>
 <p>本文撰写过程中参考了爱彼迎的 <a target="_blank" rel="noopener" href="https://github.com/airbnb/javascript">《Airbnb JavaScript Style Guide》</a>，以及网易 NEC 团队的<a target="_blank" rel="noopener" href="http://nec.netease.com/">《CSS 基础库命名约定》</a>等开源规范，结合笔者之前撰写的 <a href="/Web/Html.html">《HTML5 语义化标签概览》</a>一文，总体上分为<code>总体原则</code>、<code>JavaScript/ES6</code>、<code>CSS/SCSS</code>、<code>HTML</code>四个部分，分门别类的从命名约定、选择器使用、DOM 结构组织等纬度进行阐述，以帮助小组成员形成良好的编码习惯。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="总体原则">总体原则</h2>
 <ol type="1">
 <li><strong>驼峰命名</strong>（<em>camelCase</em>）：用于定义 JavaScript<code>基本数据类型</code>、<code>函数方法</code>。</li>
 <li><strong>帕斯卡命名</strong>（<em>PascalCase</em>）：用于 JavaScript 声明<code>Class类</code>、<code>Object对象</code>、<code>Array数组</code>引用数据类型。</li>
 <li><strong>短横线命名</strong>（<em>kebab-case</em>）：用于自定义<code>HTML视图</code>、<code>SCSS样式</code>、<code>Assets资源</code>，即样式与视图相关的自定义元素都采用该方式命名。</li>
 </ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;article-content&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">my-paragraph</span>&gt;</span>kebab-case<span class="tag">&lt;/<span class="name">my-paragraph</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">      <span class="selector-id">#app</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">background</span>: <span class="selector-tag">url</span>(../<span class="selector-tag">assets</span>/<span class="selector-tag">banner-logo</span><span class="selector-class">.png</span>); // <span class="selector-tag">kebab-case</span></span></span><br><span class="line">      &#125;</span><br><span class="line"><span class="css">      <span class="selector-class">.article-content</span> &#123;</span></span><br><span class="line">        font-size: 18px; // kebab-case</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> currentDate = <span class="string">&quot;Tue Oct 10 2017 17:52:04 GMT+0800 (CST)&quot;</span>; <span class="comment">// camelCase</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> changeDate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>()); <span class="comment">// camelCase</span></span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> YourName = &#123;</span></span><br><span class="line"><span class="javascript">        name: <span class="string">&quot;Hank&quot;</span>, <span class="comment">// PascalCase</span></span></span><br><span class="line">      &#125;;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;article-content&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">my-paragraph</span>&gt;</span>kebab-case<span class="tag">&lt;/<span class="name">my-paragraph</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      #app &#123;</span><br><span class="line"><span class="css">        <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">../assets/banner-logo.png</span>); // kebab-case</span></span><br><span class="line">      &#125;</span><br><span class="line">      .article-content &#123;</span><br><span class="line"><span class="css">        <span class="attribute">font-size</span>: <span class="number">18px</span>; // kebab-case</span></span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> currentDate = <span class="string">&quot;Tue Oct 10 2017 17:52:04 GMT+0800 (CST)&quot;</span>; <span class="comment">// camelCase</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> changeDate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>()); <span class="comment">// camelCase</span></span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> YourName = &#123;</span></span><br><span class="line"><span class="javascript">        name: <span class="string">&quot;Hank&quot;</span>, <span class="comment">// PascalCase</span></span></span><br><span class="line">      &#125;;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>所有代码缩进必须使用 2 个空格，并优先使用单引号<code>'</code>，除非字符串嵌套需要，否则禁止单-双引号混用</strong>。</p>
 </blockquote>
@@ -1042,7 +1042,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">331:01</span>
+    <span title="站点阅读时长">333:32</span>
   </span>
 </div>
 <div class="busuanzi-count">

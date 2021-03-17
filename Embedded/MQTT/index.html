@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#8C634F">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#8C634F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CMonda:300,300italic,400,400italic,700,700italic%7CSource+Code+Pro:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
+  </script>
+<meta name="description" content="物联网（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，进行信息的传输与控制交互，以实现智能化的信息感知、识别、管理，从而构建出万物相联的智能化环境，将网络连接能力渗透到现实世界的方方面面。而且伴随近年来 5G 无线网的逐步商用，通过低延迟、大容量的 5G 无线通信基础设施，物联网技术也必将会在诸多领域为社会带来巨大的创新。  本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小议 MQTT 物联网消息传输协议">
+<meta property="og:url" content="https://uinika.gitee.io/Embedded/MQTT/index.html">
+<meta property="og:site_name" content="Bit by bit">
+<meta property="og:description" content="物联网（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，进行信息的传输与控制交互，以实现智能化的信息感知、识别、管理，从而构建出万物相联的智能化环境，将网络连接能力渗透到现实世界的方方面面。而且伴随近年来 5G 无线网的逐步商用，通过低延迟、大容量的 5G 无线通信基础设施，物联网技术也必将会在诸多领域为社会带来巨大的创新。  本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/logo.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/example.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/control-packet-0.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/control-packet-1.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/control-packet-2.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/control-packet-3.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/control-packet-4.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/control-packet-5.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/control-packet-6.png">
+<meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/control-packet-7.png">
+<meta property="article:published_time" content="2012-06-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2015-12-26T16:00:00.000Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="Protocol">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://uinika.gitee.io/Embedded/MQTT/logo.png">
+
+
+<link rel="canonical" href="https://uinika.gitee.io/Embedded/MQTT/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>小议 MQTT 物联网消息传输协议 | Bit by bit</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bit by bit" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bit by bit</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Electronics, Embedded & Web</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-%E6%9C%8D%E5%8A%A1%E7%AB%AF-%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">客户端 &#x2F; 服务端 &#x2F; 会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83-publish-%E8%AE%A2%E9%98%85-subscribe"><span class="nav-number">2.</span> <span class="nav-text">发布 Publish &#x2F; 订阅 Subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98-topic"><span class="nav-number">3.</span> <span class="nav-text">主题 Topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F-qos"><span class="nav-number">4.</span> <span class="nav-text">服务质量 QoS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87-control-packet"><span class="nav-number">5.</span> <span class="nav-text">控制报文 Control Packet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E6%8A%A5%E5%A4%B4-fixed-header"><span class="nav-number">5.1.</span> <span class="nav-text">固定报头 Fixed header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E7%B1%BB%E5%9E%8B-control-packet-type"><span class="nav-number">5.1.1.</span> <span class="nav-text">报文类型 Control Packet type</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E6%A0%87%E5%BF%97-flags"><span class="nav-number">5.1.2.</span> <span class="nav-text">特定标志 Flags</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%A9%E4%BD%99%E9%95%BF%E5%BA%A6-remaining-length"><span class="nav-number">5.1.3.</span> <span class="nav-text">剩余长度 Remaining Length</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E6%8A%A5%E5%A4%B4-variable-header"><span class="nav-number">5.2.</span> <span class="nav-text">可变报头 Variable header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E6%A0%87%E8%AF%86%E7%AC%A6-packet-identifier"><span class="nav-number">5.2.1.</span> <span class="nav-text">报文标识符 Packet Identifier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-properties"><span class="nav-number">5.2.2.</span> <span class="nav-text">属性 Properties</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E8%BD%BD%E8%8D%B7-payload"><span class="nav-number">5.3.</span> <span class="nav-text">有效载荷 Payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E7%A0%81-reason-code"><span class="nav-number">5.4.</span> <span class="nav-text">原因码 Reason Code</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Electronics, Embedded & Web</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/uinika/posts" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;uinika&#x2F;posts" rel="noopener" target="_blank"><i class="fab fa-quora fa-fw"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:uinika@outlook.com" title="Email → mailto:uinika@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:uinika@outlook.com?call|chat" title="Skype → skype:uinika@outlook.com?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/uinika" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;uinika" rel="noopener" target="_blank"><i class="fab fa-github-alt fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7998979/uinika?tab=profile" title="Stack Overflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7998979&#x2F;uinika?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/uinika" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Embedded/MQTT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小议 MQTT 物联网消息传输协议
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2012-06-26 00:00:00" itemprop="dateCreated datePublished" datetime="2012-06-26T00:00:00+08:00">2012-06-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2015-12-27 00:00:00" itemprop="dateModified" datetime="2015-12-27T00:00:00+08:00">2015-12-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>31 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>物联网</strong>（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，进行信息的传输与控制交互，以实现智能化的信息感知、识别、管理，从而构建出万物相联的智能化环境，将网络连接能力渗透到现实世界的方方面面。而且伴随近年来 <strong>5G</strong> 无线网的逐步商用，通过低延迟、大容量的 5G 无线通信基础设施，物联网技术也必将会在诸多领域为社会带来巨大的创新。</p>
+<p><img src="/Embedded/MQTT/logo.png"></p>
+<p>本文所要讨论的 <a target="_blank" rel="noopener" href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html"><strong>遥测消息传输协议</strong>（MQTT，Message Queuing Telemetry Transport）</a> 是用于物联网环境的 <strong>OASIS</strong> 轻量级消息传输协议，主要应用于受限设备、以及低带宽高网络延迟的场景。采用<strong>发布/订阅</strong>模式，可以一对多进行消息发布；主要基于 TCP/IP 提供有序、无损的双向连接，并且最小化协议交换，可以有效降低传输开销。目前 MQTT 最新的协议标准为 <strong>2019</strong> 年发布的 <a target="_blank" rel="noopener" href="https://github.com/hui6075/mqtt_v5"><code>V5.0</code></a>，相较于早期的 <a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/mqtt-cn/content/"><code>V3.1.1</code></a> 版本进行了较大改进，并且支持众多的新特性。</p>
+<span id="more"></span>
+<h2 id="客户端-服务端-会话">客户端 / 服务端 / 会话</h2>
+<ul>
+<li><strong>会话</strong>（Session）：维护<strong>客户端</strong>与<strong>服务端</strong>之间的状态交互；</li>
+<li><strong>客户端</strong>（Client）：客户端总是通过网络连接到服务端，可以<code>发布应用消息给其它客户端</code>，<code>订阅以请求接收应用消息</code>、<code>取消订阅以移除接收应用消息</code>、<code>从服务端断开连接</code>；</li>
+<li><strong>服务端</strong>（Server）：作为<strong>发送消息的客户端</strong>和<strong>请求订阅的客户端</strong>之间的中介，用于<code>接受来自客户端的网络连接</code>、<code>接受客户端发布的应用消息</code>、<code>处理客户端的订阅以及取消订阅请求</code>、<code>转发消息给符合条件的已订阅客户端</code>；</li>
+</ul>
+<h2 id="发布-publish-订阅-subscribe">发布 Publish / 订阅 Subscribe</h2>
+<p>互联网开发技术当中广泛应用的 <code>请求</code>/<code>响应</code>（<code>Request</code>/<code>Response</code>）模式并不适用于物联网场景，取而代之的是 MQTT 所采用的<code>发布</code>/<code>订阅</code>（<code>Publish</code>/<code>Subscribe</code>）模式。</p>
+<p><img src="/Embedded/MQTT/example.png"></p>
+<p><code>发布</code>/<code>订阅</code>模式解耦了发布消息的<strong>发布者</strong>与订阅消息的<strong>订阅者</strong>之间的联系，发布者和订阅者之间不再需要直接进行联系，如此带来了如下优点：</p>
+<ul>
+<li><strong>发布者</strong>与<strong>订阅者</strong>无需互相了解，只需认识同一个<strong>消息代理</strong>；</li>
+<li><strong>发布者</strong>和<strong>订阅者</strong>无需直接交互，<strong>发布者</strong>无需等待<strong>订阅者</strong>确认而导致锁定；</li>
+<li><strong>发布者</strong>和<strong>订阅者</strong>无需同时在线，可以自由选择时间来处理消息；</li>
+</ul>
+<h2 id="主题-topic">主题 Topic</h2>
+<p>MQTT 通过<strong>主题</strong> <code>Topic</code> 来对消息进行分类，<code>Topic</code> 本质上是一个 <strong>UTF-8</strong> 字符串，书写时可通过反斜杠<code>/</code>表示多个层级关系。<code>Topic</code>可以通过<strong>通配符</strong>进行过滤，其中 <code>+</code> 可以过滤掉一个层级，而 <code>*</code> 只能出现在主题最后表示过滤任意层级，例如：</p>
+<ul>
+<li><code>+/floor-15</code>：表示任意楼层第 15 层的设备；</li>
+<li><code>building-A/*</code>：代表 A 栋所有楼层的设备；</li>
+<li><code>building-A/floor-1</code>：代表 A 栋第 1 层的设备；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：MQTT 允许采用通配符订阅主题，但是不允许使用通配符进行广播。</p>
+</blockquote>
+<h2 id="服务质量-qos">服务质量 QoS</h2>
+<p>MQTT 支持 3 种不同级别的<strong>服务质量</strong>（<strong>QoS</strong>，Quality of Service），确保不同应用场景下消息传输的可靠性：</p>
+<ul>
+<li><code>QoS 0</code>：最多分发一次，消息的分发依赖于底层网络能力，接收者不会发送响应，发送者也不会重试，消息可能送达也可能没有；</li>
+<li><code>QoS 1</code>：服务质量确保消息至少送达一次，服务质量确保消息至少送达一次，可能会造成重复消息；</li>
+<li><code>QoS 2</code>：仅分发一次，这是最高等级的服务质量，消息的丢失与重复都是不可接受的，使用该服务质量等级会产生额外的性能开销；</li>
+</ul>
+<p><code>QoS 2</code> 提供的不重复不丢失虽然是最为理想的服务质量，但是反复多次的消息确认必然对并发与延迟带来影响；而 <code>QoS 1</code> 提供的至少一次，在类似日志处理场景下是完全可用的，虽然减少了消息确认次数，但是有效提高了并发量；<code>QoS 0</code> 适合一些无关紧要的数据场景，虽然并发性能最好，但是可能会存在消息频繁丢失的情况。</p>
+<blockquote>
+<p><strong>注意</strong>：1 个订阅 <code>Subscribe</code> 当中包含有 1 个<strong>主题过滤器</strong>（Topic Filter）和 1 个<strong>服务质量</strong>（QoS）等级，并且订阅与单个<strong>会话</strong>（Session）相关联，会话当中可以包含 1 个以上的订阅，并且每个订阅都有一个不同的主题过滤器。</p>
+</blockquote>
+<h2 id="控制报文-control-packet">控制报文 Control Packet</h2>
+<p>控制报文就是 MQTT 通过网络连接发送的信息数据包，MQTT 在规范当中定义了 16 种不同类型的控制报文，其中 <code>PUBLISH</code> 报文用于消息的传输：</p>
+<p><img src="/Embedded/MQTT/control-packet-0.png"></p>
+<ol type="1">
+<li><strong>固定报头</strong>（Fixed Header）：所有控制报文均包含；</li>
+<li><strong>可变报头</strong>（Variable Header）：只有特定控制报文会包含；</li>
+<li><strong>有效载荷</strong>（Payload）：仅部分控制报文包含；</li>
+</ol>
+<h3 id="固定报头-fixed-header">固定报头 Fixed header</h3>
+<p>每一个 MQTT 控制报文都包含着一个固定报头，每个固定报头则是由<code>控制报文类型</code>、<code>控制报文类型标志位</code>、<code>剩余长度</code> 共 3 部分组成：</p>
+<p><img src="/Embedded/MQTT/control-packet-1.png"></p>
+<h4 id="报文类型-control-packet-type">报文类型 Control Packet type</h4>
+<p>第 1 个字节，二进制位 <code>7 ~ 4</code>，表示为 4 位无符号值，这些值的定义如下表所示：</p>
+<p><img src="/Embedded/MQTT/control-packet-2.png"></p>
+<h4 id="特定标志-flags">特定标志 Flags</h4>
+<p>固定报头第 1 个字节的剩余的 4 位 <code>3 ~ 0</code> 包含了每一条 MQTT 控制报文类型特定的标志，具体请见下表：</p>
+<p><img src="/Embedded/MQTT/control-packet-3.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<code>Reserved</code> 表示该标志位保留给未来使用，必须设置为表格中列出的值，如果接收到非法的标志，该报文会被视为无效报文。<code>DUP</code> 表示 <code>PUBLISH</code> 报文的<strong>重复分发标志</strong>，<code>QoS</code> 表示 <code>PUBLISH</code> 报文的<strong>服务质量等级</strong>，<code>RETAIN</code> 表示 <code>PUBLISH</code> 报文的<strong>保留标志</strong>。</p>
+</blockquote>
+<h4 id="剩余长度-remaining-length">剩余长度 Remaining Length</h4>
+<p>剩余长度的表达从第 2 个字节开始，用来表示当前控制报文剩余部分的字节数（包括<code>可变报头</code>和<code>负载</code>的数据，但不包括用于剩余长度字段本身的数据）</p>
+<blockquote>
+<p><strong>注意</strong>：换而言之，一条 MQTT 控制报文的总长度等于<code>固定报头长度</code>加上<code>剩余长度</code>。</p>
+</blockquote>
+<h3 id="可变报头-variable-header">可变报头 Variable header</h3>
+<p>某些 MQTT 控制报文会包含有 1 个<strong>可变报头</strong>，其由<code>报文标识符</code>和<code>属性</code>两部分组成，位于<code>固定报头</code>与<code>有效载荷</code>之间，内容会根据报文类型的不同而发生变化。</p>
+<h4 id="报文标识符-packet-identifier">报文标识符 Packet Identifier</h4>
+<p>部分类型 MQTT 控制报文的可变报头部分包含有 2 个字节的报文标识符字段：</p>
+<p><img src="/Embedded/MQTT/control-packet-4.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<code>QoS 0</code> 的 <code>PUBLISH</code> 报文不能包含报文标识符；客户端每次发送 1 个新的 <code>SUBSCRIBE</code>、<code>UNSUBSCRIBE</code>、<code>PUBLISH</code>，MQTT 控制报文都必须分配一个当前未被使用的非零报文标识符；服务端每次发送 1 个新的 <code>PUBLISH</code>，MQTT 控制报文时都必须分配一个当前未被使用的非零报文标识符；当客户端处理完报文对应的确认之后，相应的报文标识符就可以被释放重用；</p>
+</blockquote>
+<h4 id="属性-properties">属性 Properties</h4>
+<p><strong>属性字段</strong>由<strong>属性长度</strong>和<strong>所有属性</strong>组成，<code>CONNECT</code>、<code>CONNACK</code>、<code>PUBLISH</code>、<code>PUBACK</code>、<code>PUBREC</code>、<code>PUBREL</code>、<code>PUBCOMP</code>、<code>SUBSCRIBE</code>、<code>SUBACK</code>、<code>UNSUBACK</code>、<code>DISCONNECT</code>、<code>AUTH</code> 报文的可变报头最后一部分就是 1 组属性。</p>
+<ul>
+<li><strong>属性长度</strong>：包含所有属性的长度（但是不包括属性长度自身），如果没有任何属性，那么属性长度为零；</li>
+<li><strong>属性</strong>：包含 1 段数据和 1 个定义了属性用途与数据类型的标识符（如下面表格所示）；</li>
+</ul>
+<p><img src="/Embedded/MQTT/control-packet-5.png"></p>
+<h3 id="有效载荷-payload">有效载荷 Payload</h3>
+<p>某些 MQTT 控制报文会在报文的最后部分包含 1 个有效载荷，对于 <code>PUBLISH</code> 而言，有效载荷就是应用的消息，下面表格展示了包含有效载荷的 MQTT 控制报文：</p>
+<p><img src="/Embedded/MQTT/control-packet-6.png"></p>
+<h3 id="原因码-reason-code">原因码 Reason Code</h3>
+<p>原因码是一个单字节的无符号数，用来表示一次操作的结果。小于 <code>0x80</code> 的原因码表示某次操作成功完成（通常使用 <code>0</code> 表示），而大于或者等于 <code>0x80</code> 的原因码用来标识操作失败，常用的原因码如下表所示：</p>
+<p><img src="/Embedded/MQTT/control-packet-7.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<code>CONNACK</code>、<code>PUBACK</code>、<code>PUBREC</code>、<code>PUBREL</code>、<code>PUBCOMP</code>、<code>DISCONNECT</code>、<code>AUTH</code> 控制报文的可变报头有一个单字节的原因码，而 <code>SUBACK</code> 和 <code>UNSUBACK</code> 报文的有效载荷字段包含一个或者多个原因码。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Hank
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://uinika.gitee.io/Embedded/MQTT/" title="小议 MQTT 物联网消息传输协议">https://uinika.gitee.io/Embedded/MQTT/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/qrcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">微信公众号</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://www.zhihu.com/column/chengdu">
+          <span class="icon">
+            <i class="fab fa-quora"></i>
+          </span>
+
+          <span class="label">知乎专栏</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://space.bilibili.com/1514341594">
+          <span class="icon">
+            <i class="fab fa-youtube"></i>
+          </span>
+
+          <span class="label">Bilibili 视频</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS 订阅</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Protocol/" rel="tag"><i class="fa fa-tag"></i> Protocol</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Embedded/Mini2440/" rel="prev" title="基于三星 S3C2440 的嵌入式 Linux 攻略">
+                  <i class="fa fa-chevron-left"></i> 基于三星 S3C2440 的嵌入式 Linux 攻略
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Linux/Command/" rel="next" title="Linux 常用命令行速查手册">
+                  Linux 常用命令行速查手册 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2010 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-book-open"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">2m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">333:32</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+
+</body>
+</html>

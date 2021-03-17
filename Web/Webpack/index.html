@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#8C634F">
-<meta name="generator" content="Hexo 5.1.1">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
@@ -130,9 +130,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">58</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">59</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
@@ -207,7 +207,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,7 +220,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -360,7 +360,7 @@
         <p><strong><a target="_blank" rel="noopener" href="https://webpack.js.org">Webpack</a></strong> 是现代 Web 应用程序的静态模块打包工具，它会递归的构建应用程序各个模块的依赖关系图，然后将所有模块打包成一个或多个<code>bundle</code>。目前 Webpack 已经更新至 <strong>4.29.6</strong> 版本，增加了诸多打包和执行性能相关的支持，是目前应用最广泛、社区最活跃的 Web 前端代码打包方案。而更新版本的 Webpack 5 已经进入 Beta 发布阶段，未来将会带来更多构建性能的提升，本文依然以更为稳定的 Webpack 4 为讲解对象。</p>
 <p><img src="/Web/Webpack/logo.png"></p>
 <p>Webpack 提出了<strong>入口</strong><code>entry</code>、<strong>输出</strong><code>output</code>、<strong>加载器</strong><code>loader</code>、<strong>插件</strong><code>plugin</code>这四个核心概念，本文将会在简单介绍 Webpack 相关基础概念之后，对其原生实现的<code>import</code>模块导入机制进行分析，以清晰的展现 Wepback 在底层所进行的工作；最后逐步备注笔者在开发、生产环境下使用到的各类插件和加载器，并分享在<a target="_blank" rel="noopener" href="https://github.com/uinika/aves">aves</a>和<a target="_blank" rel="noopener" href="https://github.com/uinika/rhino">rhino</a>两个开源脚手架项目当中（<em>分别基于 Vue2 和 React16</em>）所使用到的最佳配置实践。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="入口-entry">入口 entry</h2>
 <p><code>entry</code>属性用来指定 webpack 应该使用哪个模块作为构建工作的起点，进入起点后 webpack 将会寻找入口起点直接或间接的依赖，并最后输出到称为<code>bundle</code>的文件。Webpack 中的<code>entry</code>属性值可以是一个或多个字符串、一个对象或数组。</p>
 <p>下面的示例代码当中只定义了一个路径字符串：</p>
@@ -687,7 +687,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">331:01</span>
+    <span title="站点阅读时长">333:32</span>
   </span>
 </div>
 <div class="busuanzi-count">

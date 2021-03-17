@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#8C634F">
-<meta name="generator" content="Hexo 5.1.1">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
@@ -126,9 +126,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fas fa-th-large fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fas fa-briefcase fa-fw"></i>分类<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">58</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">59</span></a></li>
         <li class="menu-item menu-item-it圈"><a href="/industry/" rel="section"><i class="fas fa-microchip fa-fw"></i>IT圈</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fas fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
@@ -202,7 +202,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -215,7 +215,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -268,6 +268,112 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Electronics/Analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Electronics, Embedded & Web">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bit by bit">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+              <span class="post-sticky-flag" title="置顶">
+                <i class="fa fa-thumbtack"></i>
+              </span><a href="/Electronics/Analysis/" class="post-title-link" itemprop="url">电路分析经典理论复习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-12T00:00:00+08:00">2021-01-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-02-05 00:00:00" itemprop="dateModified" datetime="2020-02-05T00:00:00+08:00">2020-02-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Electronics/" itemprop="url" rel="index"><span itemprop="name">Electronics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>22k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3:42</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>动态电路</strong>是指含有<code>电容</code>、<code>电感</code>等储能动态元件的电路，由于动态元件的特性方程当中含有<strong>微分</strong>和<strong>积分</strong>形式，因此动态电路主要采用<strong>微分方程</strong>进行描述，其中方程的阶数通常等于电路当中动态元件的个数。本文所指的<strong>动态</strong>也称为<strong>暂态</strong>，是指电路从一个稳态变化到另外一个稳态的中间变化过程，也称为<strong>过渡过程</strong>。而<strong>稳态</strong>则被称为<strong>静态</strong>，指电路当中的电压、电流等参数达到一个稳定状态，如果电路不发生变化，就会一直以该状态运行。</p>
+<p><img src="/Electronics/Analysis/logo.png"></p>
+<p>本文主要讨论了<code>动态电路的暂态分析</code>、<code>正弦交流电路稳态分析</code>、<code>含二端口元件电路分析</code>等动态电路分析方面的内容，阅读前应当具备<code>微分</code>、<code>积分</code>、<code>微分方程</code>、<code>复数运算</code>、<code>线性代数方程组</code>、<code>矩阵</code>、<code>傅里叶级数</code>等<strong>高等数学</strong>知识。本文在撰写过程当中，参考阅读了国外大学普遍采用的《Electric Circuits》第 10 版教材。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Electronics/Analysis/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -376,7 +482,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Electronics/Analysis/">
+    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Embedded/MQTT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -392,7 +498,7 @@
           
               <span class="post-sticky-flag" title="置顶">
                 <i class="fa fa-thumbtack"></i>
-              </span><a href="/Electronics/Analysis/" class="post-title-link" itemprop="url">电路分析经典理论复习笔记</a>
+              </span><a href="/Embedded/MQTT/" class="post-title-link" itemprop="url">小议 MQTT 物联网消息传输协议</a>
         </h2>
 
         <div class="post-meta-container">
@@ -403,14 +509,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-01-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-12T00:00:00+08:00">2021-01-12</time>
+      <time title="创建时间：2012-06-26 00:00:00" itemprop="dateCreated datePublished" datetime="2012-06-26T00:00:00+08:00">2012-06-26</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-02-05 00:00:00" itemprop="dateModified" datetime="2020-02-05T00:00:00+08:00">2020-02-05</time>
+        <time title="修改时间：2015-12-27 00:00:00" itemprop="dateModified" datetime="2015-12-27T00:00:00+08:00">2015-12-27</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -418,7 +524,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Electronics/" itemprop="url" rel="index"><span itemprop="name">Electronics</span></a>
+          <a href="/categories/Embedded/" itemprop="url" rel="index"><span itemprop="name">Embedded</span></a>
         </span>
     </span>
 
@@ -428,14 +534,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>10k</span>
+      <span>3.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1:41</span>
+      <span>31 分钟</span>
     </span>
 </div>
 
@@ -446,12 +552,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>动态电路</strong>是指含有<code>电容</code>、<code>电感</code>等储能动态元件的电路，由于动态元件的特性方程当中含有<strong>微分</strong>和<strong>积分</strong>形式，因此动态电路主要采用<strong>微分方程</strong>进行描述，其中方程的阶数通常等于电路当中动态元件的个数。本文所指的<strong>动态</strong>也称为<strong>暂态</strong>，是指电路从一个稳态变化到另外一个稳态的中间变化过程，也称为<strong>过渡过程</strong>。而<strong>稳态</strong>则被称为<strong>静态</strong>，指电路当中的电压、电流等参数达到一个稳定状态，如果电路不发生变化，就会一直以该状态运行。</p>
-<p><img src="/Electronics/Analysis/logo.png"></p>
-<p>本文主要讨论了<code>动态电路的暂态分析</code>、<code>正弦交流电路稳态分析</code>、<code>含二端口元件电路分析</code>等动态电路分析方面的内容，阅读前应当具备<code>微分</code>、<code>积分</code>、<code>微分方程</code>、<code>复数运算</code>、<code>线性代数方程组</code>、<code>矩阵</code>、<code>傅里叶级数</code>等<strong>高等数学</strong>知识。本文在撰写过程当中，参考阅读了国外大学普遍采用的《Electric Circuits》第 10 版教材。</p>
+          <p><strong>物联网</strong>（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，进行信息的传输与控制交互，以实现智能化的信息感知、识别、管理，从而构建出万物相联的智能化环境，将网络连接能力渗透到现实世界的方方面面。而且伴随近年来 <strong>5G</strong> 无线网的逐步商用，通过低延迟、大容量的 5G 无线通信基础设施，物联网技术也必将会在诸多领域为社会带来巨大的创新。</p>
+<p><img src="/Embedded/MQTT/logo.png"></p>
+<p>本文所要讨论的 <a target="_blank" rel="noopener" href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html"><strong>遥测消息传输协议</strong>（MQTT，Message Queuing Telemetry Transport）</a> 是用于物联网环境的 <strong>OASIS</strong> 轻量级消息传输协议，主要应用于受限设备、以及低带宽高网络延迟的场景。采用<strong>发布/订阅</strong>模式，可以一对多进行消息发布；主要基于 TCP/IP 提供有序、无损的双向连接，并且最小化协议交换，可以有效降低传输开销。目前 MQTT 最新的协议标准为 <strong>2019</strong> 年发布的 <a target="_blank" rel="noopener" href="https://github.com/hui6075/mqtt_v5"><code>V5.0</code></a>，相较于早期的 <a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/mqtt-cn/content/"><code>V3.1.1</code></a> 版本进行了较大改进，并且支持众多的新特性。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Electronics/Analysis/#more" rel="contents">
+              <a class="btn" href="/Embedded/MQTT/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2227,109 +2333,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://uinika.gitee.io/Linux/C++/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Electronics, Embedded & Web">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bit by bit">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Linux/C++/" class="post-title-link" itemprop="url">面向对象的 C++ 11 程序设计语言</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-06-21 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-21T00:00:00+08:00">2018-06-21</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2018-07-31 00:00:00" itemprop="dateModified" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>17k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2:53</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>2011 年，C++ 标准委员会发布了 ISO C++ 标准的一个重要修订版 <strong>C++ 11</strong>；该修订版是 C++ 语言演进过程当中的重要一步，也是当前获得编译器（<a target="_blank" rel="noopener" href="http://gcc.gnu.org/">GCC</a>、<a target="_blank" rel="noopener" href="https://llvm.org/">LLVM</a>、<a target="_blank" rel="noopener" href="https://www.qt.io/">Qt5</a>、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/cpp/cpp/c-cpp-language-and-standard-libraries?view=vs-2017">Visual C++</a>支持较多，兼容性最为优秀的一个版本。增添了类型说明符<code>auto</code>和<code>decltype</code>、<code>Lambda 表达式</code>、<code>智能指针 unique_ptr shared_ptr weak_ptr</code>、<code>空指针 nullptr</code>等诸多新特性，语言风格更加灵活统一的同时，极大提升了程序的编写效率。</p>
-<p><img src="/Linux/C++/logo.jpg"></p>
-<p>本文基于<a target="_blank" rel="noopener" href="https://www.pearson.com/store/p/c-primer/P100001360317/9780321714114?tab=for-teachers">《C++ Primer》</a>一书最新的第 5 版撰写而成，该书作为 C++ 语言学习的经典读物，同样与时俱进增添了 C++ 11 的诸多新特性。因此，本文也选择了支持 C++ 11 标准的 <strong>Qt5</strong> 作为开发编译环境。由于 C++ 面向过程的语法与 C 语言类似，而笔者之前已经在<a href="/linux/c-reference.html">《Linux C 标准程序设计》</a>一文对相关内容进行了详尽的表述，因而本文将会着重笔墨水介绍 C++ 面向对象以及标准库方面的内容。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux/C++/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -2384,7 +2387,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">331:01</span>
+    <span title="站点阅读时长">333:32</span>
   </span>
 </div>
 <div class="busuanzi-count">
