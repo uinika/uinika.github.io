@@ -254,8 +254,8 @@
       </tags>
   </entry>
   <entry>
-    <title>AngularJS 1.6.x 最佳实践总结</title>
-    <url>/Web/Angularjs/</url>
+    <title>异步事件管理：从 Promise 与 async/await 到 RxJS</title>
+    <url>/Web/Async/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
@@ -265,8 +265,8 @@
       </tags>
   </entry>
   <entry>
-    <title>异步事件管理：从 Promise 与 async/await 到 RxJS</title>
-    <url>/Web/Async/</url>
+    <title>AngularJS 1.6.x 最佳实践总结</title>
+    <url>/Web/Angularjs/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
