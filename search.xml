@@ -364,6 +364,17 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux 常用命令行速查手册</title>
+    <url>/Linux/Command/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Embedded</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS 2.1 典型概念与布局详解</title>
     <url>/Web/CSS2/</url>
     <content><![CDATA[]]></content>
@@ -394,17 +405,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 常用命令行速查手册</title>
-    <url>/Linux/Command/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Embedded</tag>
       </tags>
   </entry>
   <entry>
