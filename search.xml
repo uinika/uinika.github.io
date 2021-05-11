@@ -122,6 +122,17 @@
       </tags>
   </entry>
   <entry>
+    <title>HTTP 协议深入解析</title>
+    <url>/Web/Http/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Convention</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jQuery 那些容易被忽略的问题</title>
     <url>/Web/JQuery/</url>
     <content><![CDATA[]]></content>
@@ -152,17 +163,6 @@
       </categories>
       <tags>
         <tag>Linux Config</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTTP 协议深入解析</title>
-    <url>/Web/Http/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Convention</tag>
       </tags>
   </entry>
   <entry>
@@ -320,6 +320,28 @@
       </tags>
   </entry>
   <entry>
+    <title>Android 物联网应用开发实例</title>
+    <url>/Embedded/Android/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Embedded</category>
+      </categories>
+      <tags>
+        <tag>Mobile</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</title>
+    <url>/Embedded/STM32F103ZET6/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Embedded</category>
+      </categories>
+      <tags>
+        <tag>MCU</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>开源 EDA 工具 KiCad 5.1.9 电路设计小书</title>
     <url>/Electronics/KiCad/</url>
     <content><![CDATA[]]></content>
@@ -342,17 +364,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Android 物联网应用开发实例</title>
-    <url>/Embedded/Android/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Embedded</category>
-      </categories>
-      <tags>
-        <tag>Mobile</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux 常用命令行速查手册</title>
     <url>/Linux/Command/</url>
     <content><![CDATA[]]></content>
@@ -361,17 +372,6 @@
       </categories>
       <tags>
         <tag>Embedded</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</title>
-    <url>/Embedded/STM32F103ZET6/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Embedded</category>
-      </categories>
-      <tags>
-        <tag>MCU</tag>
       </tags>
   </entry>
   <entry>
