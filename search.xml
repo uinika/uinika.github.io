@@ -144,17 +144,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Webpack 4 核心配置剖析</title>
-    <url>/Web/Webpack/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux 工作环境 Config 札记</title>
     <url>/Zen/Config-Linux/</url>
     <content><![CDATA[]]></content>
@@ -163,6 +152,17 @@
       </categories>
       <tags>
         <tag>Linux Config</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Webpack 4 核心配置剖析</title>
+    <url>/Web/Webpack/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -254,17 +254,6 @@
       </tags>
   </entry>
   <entry>
-    <title>AngularJS 1.6.x 最佳实践总结</title>
-    <url>/Web/Angularjs/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>异步事件管理：从 Promise 与 async/await 到 RxJS</title>
     <url>/Web/Async/</url>
     <content><![CDATA[]]></content>
@@ -278,6 +267,17 @@
   <entry>
     <title>为什么认为 Backbone 是现代化前端框架的基石</title>
     <url>/Web/Backbone/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AngularJS 1.6.x 最佳实践总结</title>
+    <url>/Web/Angularjs/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
