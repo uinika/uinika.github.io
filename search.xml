@@ -122,19 +122,19 @@
       </tags>
   </entry>
   <entry>
-    <title>HTTP 协议深入解析</title>
-    <url>/Web/Http/</url>
+    <title>jQuery 那些容易被忽略的问题</title>
+    <url>/Web/JQuery/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
       </categories>
       <tags>
-        <tag>Convention</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
-    <title>jQuery 那些容易被忽略的问题</title>
-    <url>/Web/JQuery/</url>
+    <title>Webpack 4 核心配置剖析</title>
+    <url>/Web/Webpack/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
@@ -155,14 +155,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Webpack 4 核心配置剖析</title>
-    <url>/Web/Webpack/</url>
+    <title>HTTP 协议深入解析</title>
+    <url>/Web/Http/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>Convention</tag>
       </tags>
   </entry>
   <entry>
@@ -254,6 +254,17 @@
       </tags>
   </entry>
   <entry>
+    <title>AngularJS 1.6.x 最佳实践总结</title>
+    <url>/Web/Angularjs/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>异步事件管理：从 Promise 与 async/await 到 RxJS</title>
     <url>/Web/Async/</url>
     <content><![CDATA[]]></content>
@@ -267,17 +278,6 @@
   <entry>
     <title>为什么认为 Backbone 是现代化前端框架的基石</title>
     <url>/Web/Backbone/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AngularJS 1.6.x 最佳实践总结</title>
-    <url>/Web/Angularjs/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
@@ -353,17 +353,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</title>
-    <url>/Embedded/STM32F103ZET6/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Embedded</category>
-      </categories>
-      <tags>
-        <tag>MCU</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux 常用命令行速查手册</title>
     <url>/Linux/Command/</url>
     <content><![CDATA[]]></content>
@@ -372,6 +361,17 @@
       </categories>
       <tags>
         <tag>Embedded</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</title>
+    <url>/Embedded/STM32F103ZET6/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Embedded</category>
+      </categories>
+      <tags>
+        <tag>MCU</tag>
       </tags>
   </entry>
   <entry>
