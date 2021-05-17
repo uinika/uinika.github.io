@@ -23,8 +23,8 @@
       </tags>
   </entry>
   <entry>
-    <title>基于三星 S3C2440 的嵌入式 Linux 攻略</title>
-    <url>/Embedded/Mini2440/</url>
+    <title>意法半导体 Nucleo F767ZI 评估板测试</title>
+    <url>/Embedded/NucleoF767ZI/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Embedded</category>
@@ -34,8 +34,8 @@
       </tags>
   </entry>
   <entry>
-    <title>意法半导体 Nucleo F767ZI 评估板测试</title>
-    <url>/Embedded/NucleoF767ZI/</url>
+    <title>基于三星 S3C2440 的嵌入式 Linux 攻略</title>
+    <url>/Embedded/Mini2440/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Embedded</category>
@@ -254,8 +254,8 @@
       </tags>
   </entry>
   <entry>
-    <title>AngularJS 1.6.x 最佳实践总结</title>
-    <url>/Web/Angularjs/</url>
+    <title>异步事件管理：从 Promise 与 async/await 到 RxJS</title>
+    <url>/Web/Async/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
@@ -265,8 +265,8 @@
       </tags>
   </entry>
   <entry>
-    <title>异步事件管理：从 Promise 与 async/await 到 RxJS</title>
-    <url>/Web/Async/</url>
+    <title>AngularJS 1.6.x 最佳实践总结</title>
+    <url>/Web/Angularjs/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
