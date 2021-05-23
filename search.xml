@@ -210,17 +210,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基于 Linux 的 GCC 与 GDB 应用程序调试</title>
-    <url>/Linux/GCC/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>GCC GDB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>从 GNU Make 到 CMake 快速入门</title>
     <url>/Linux/CMake/</url>
     <content><![CDATA[]]></content>
@@ -229,6 +218,17 @@
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于 Linux 的 GCC 与 GDB 应用程序调试</title>
+    <url>/Linux/GCC/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>GCC GDB</tag>
       </tags>
   </entry>
   <entry>
