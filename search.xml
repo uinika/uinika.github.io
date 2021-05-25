@@ -276,17 +276,6 @@
       </tags>
   </entry>
   <entry>
-    <title>为什么认为 Backbone 是现代化前端框架的基石</title>
-    <url>/Web/Backbone/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS 3.0 新增特性集锦</title>
     <url>/Web/CSS3/</url>
     <content><![CDATA[]]></content>
@@ -320,25 +309,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Android 物联网应用开发实例</title>
-    <url>/Embedded/Android/</url>
+    <title>为什么认为 Backbone 是现代化前端框架的基石</title>
+    <url>/Web/Backbone/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Embedded</category>
+        <category>Web</category>
       </categories>
       <tags>
-        <tag>Mobile</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</title>
-    <url>/Embedded/STM32F103ZET6/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Embedded</category>
-      </categories>
-      <tags>
-        <tag>MCU</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -361,6 +339,28 @@
       </categories>
       <tags>
         <tag>Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android 物联网应用开发实例</title>
+    <url>/Embedded/Android/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Embedded</category>
+      </categories>
+      <tags>
+        <tag>Mobile</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于 HAL 与 CubeIDE 的 STM32F103ZET6 开发指南</title>
+    <url>/Embedded/STM32F103ZET6/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Embedded</category>
+      </categories>
+      <tags>
+        <tag>MCU</tag>
       </tags>
   </entry>
   <entry>
@@ -463,14 +463,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue 2 技术栈归纳与精粹</title>
-    <url>/Web/Vue/</url>
+    <title>言简意赅 の Python3</title>
+    <url>/Web/Python/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>Server</tag>
       </tags>
   </entry>
   <entry>
@@ -485,25 +485,14 @@
       </tags>
   </entry>
   <entry>
-    <title>言简意赅 の Python3</title>
-    <url>/Web/Python/</url>
+    <title>Vue 2 技术栈归纳与精粹</title>
+    <url>/Web/Vue/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
       </categories>
       <tags>
-        <tag>Server</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>玩转 Arduino Uno、Mega、Due 开源硬件</title>
-    <url>/Embedded/Arduino/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Embedded</category>
-      </categories>
-      <tags>
-        <tag>MCU</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -515,6 +504,17 @@
       </categories>
       <tags>
         <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>玩转 Arduino Uno、Mega、Due 开源硬件</title>
+    <url>/Embedded/Arduino/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Embedded</category>
+      </categories>
+      <tags>
+        <tag>MCU</tag>
       </tags>
   </entry>
   <entry>
