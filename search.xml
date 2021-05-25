@@ -320,28 +320,6 @@
       </tags>
   </entry>
   <entry>
-    <title>开源 EDA 工具 KiCad 5.1.9 电路设计小书</title>
-    <url>/Electronics/KiCad/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>EDA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PCB 基本布线规范与设计原则</title>
-    <url>/Electronics/PCB/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Android 物联网应用开发实例</title>
     <url>/Embedded/Android/</url>
     <content><![CDATA[]]></content>
@@ -361,6 +339,28 @@
       </categories>
       <tags>
         <tag>MCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开源 EDA 工具 KiCad 5.1.9 电路设计小书</title>
+    <url>/Electronics/KiCad/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>EDA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PCB 基本布线规范与设计原则</title>
+    <url>/Electronics/PCB/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analysis</tag>
       </tags>
   </entry>
   <entry>
@@ -463,14 +463,14 @@
       </tags>
   </entry>
   <entry>
-    <title>言简意赅 の Python3</title>
-    <url>/Web/Python/</url>
+    <title>Vue 2 技术栈归纳与精粹</title>
+    <url>/Web/Vue/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
       </categories>
       <tags>
-        <tag>Server</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -485,25 +485,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue 2 技术栈归纳与精粹</title>
-    <url>/Web/Vue/</url>
+    <title>言简意赅 の Python3</title>
+    <url>/Web/Python/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通用 LaTeX 数学公式语法手册</title>
-    <url>/Zen/LaTex/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Zen</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
+        <tag>Server</tag>
       </tags>
   </entry>
   <entry>
@@ -515,6 +504,17 @@
       </categories>
       <tags>
         <tag>MCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通用 LaTeX 数学公式语法手册</title>
+    <url>/Zen/LaTex/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Zen</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
       </tags>
   </entry>
   <entry>
