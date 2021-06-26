@@ -22,12 +22,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
   </script>
-<meta name="description" content="嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。  本文首先会介绍文件 IO、进">
+<meta name="description" content="嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。  本文首先会介绍文件 IO、进程与">
 <meta property="og:type" content="article">
 <meta property="og:title" content="嵌入式 Linux C 原生应用程序开发">
 <meta property="og:url" content="https://uinika.gitee.io/Linux/Native/index.html">
 <meta property="og:site_name" content="Bit by bit">
-<meta property="og:description" content="嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。  本文首先会介绍文件 IO、进">
+<meta property="og:description" content="嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。  本文首先会介绍文件 IO、进程与">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://uinika.gitee.io/Linux/Native/logo.png">
 <meta property="article:published_time" content="2018-07-12T16:00:00.000Z">
@@ -191,7 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kernel"><span class="nav-number">1.</span> <span class="nav-text">Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">内核版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6-io"><span class="nav-number">3.</span> <span class="nav-text">文件 IO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">5.</span> <span class="nav-text">进程间通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text">网络编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gpio"><span class="nav-number">8.</span> <span class="nav-text">GPIO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B2%E5%8F%A3"><span class="nav-number">9.</span> <span class="nav-text">串口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spi"><span class="nav-number">10.</span> <span class="nav-text">SPI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#i2c"><span class="nav-number">11.</span> <span class="nav-text">I2C</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kernel"><span class="nav-number">1.</span> <span class="nav-text">Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">内核版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6-IO"><span class="nav-number">3.</span> <span class="nav-text">文件 IO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">5.</span> <span class="nav-text">进程间通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text">网络编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GPIO"><span class="nav-number">8.</span> <span class="nav-text">GPIO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B2%E5%8F%A3"><span class="nav-number">9.</span> <span class="nav-text">串口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SPI"><span class="nav-number">10.</span> <span class="nav-text">SPI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I2C"><span class="nav-number">11.</span> <span class="nav-text">I2C</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -339,7 +339,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>704</span>
+      <span>710</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -361,21 +361,10 @@
 <p><img src="/Linux/Native/logo.png"></p>
 <p>本文首先会介绍<code>文件 IO</code>、<code>进程与进程间通信</code>、<code>多线程</code>、<code>网络编程</code>等 Linux 原生应用程序开发的内容，然后分门别类的对<code>串口</code>、<code>GPIO</code>、<code>SPI</code>、<code>I2C</code> 等常用的协议开发进行了介绍。阅读本文前需要具备 C 编程语言基础，并且理解 GNU 编译器、链接器、调试器的相关概念。</p>
 <span id="more"></span>
-<h1 id="kernel">Kernel</h1>
-<p>Linux 是一款由<strong>C</strong>语言编写，符合<strong>POSIX</strong>（<em>可移植操作系统接口，Portable Operating System Interface</em>）标准，并遵循<strong>GPL</strong>开源协议的多任务多用户类<strong>UNIX</strong>操作系统，其内核源代码使用<strong>Git</strong>托管在作者 Linus 创建的<a target="_blank" rel="noopener" href="https://www.kernel.org/">Linux Kernel 官方仓库</a>当中，Linux 内核采用一体化的宏内核架构（<em>VxWorks 和 Windows 属于微内核架构</em>），集成了大量的设备驱动；同时采用模块化设计，可以在内核运行时进行模块的热加载/卸载。嵌入式开发当中，Linux 内核移植大致分为：体系结构级别、处理器级别、板级移植 3 个层次，其中板级移植较为常见。</p>
-<h2 id="内核版本">内核版本</h2>
-<p>Linux 内核版本号通常由三段数字组成，以 2019 年 3 月 27 日释出的<code>4.19.32</code>版本内核为例，其中<code>4</code>为主版本号，<code>6</code>为次版本号（<em>奇数表示开发版，偶数表示稳定版</em>），<code>28</code>为修订号。</p>
-<h1 id="文件结构">文件结构</h1>
-<h1 id="文件-io">文件 IO</h1>
-<h1 id="进程">进程</h1>
-<h1 id="进程间通信">进程间通信</h1>
-<h1 id="多线程">多线程</h1>
-<h1 id="网络编程">网络编程</h1>
-<h1 id="gpio">GPIO</h1>
-<h1 id="串口">串口</h1>
-<h1 id="spi">SPI</h1>
-<h1 id="i2c">I2C</h1>
 
+<h1 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h1><p>Linux 是一款由<strong>C</strong>语言编写，符合<strong>POSIX</strong>（_可移植操作系统接口，Portable Operating System Interface_）标准，并遵循<strong>GPL</strong>开源协议的多任务多用户类<strong>UNIX</strong>操作系统，其内核源代码使用<strong>Git</strong>托管在作者 Linus 创建的<a target="_blank" rel="noopener" href="https://www.kernel.org/">Linux Kernel 官方仓库</a>当中，Linux 内核采用一体化的宏内核架构（_VxWorks 和 Windows 属于微内核架构_），集成了大量的设备驱动；同时采用模块化设计，可以在内核运行时进行模块的热加载/卸载。嵌入式开发当中，Linux 内核移植大致分为：体系结构级别、处理器级别、板级移植 3 个层次，其中板级移植较为常见。</p>
+<h2 id="内核版本"><a href="#内核版本" class="headerlink" title="内核版本"></a>内核版本</h2><p>Linux 内核版本号通常由三段数字组成，以 2019 年 3 月 27 日释出的<code>4.19.32</code>版本内核为例，其中<code>4</code>为主版本号，<code>6</code>为次版本号（_奇数表示开发版，偶数表示稳定版_），<code>28</code>为修订号。</p>
+<h1 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h1><h1 id="文件-IO"><a href="#文件-IO" class="headerlink" title="文件 IO"></a>文件 IO</h1><h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><h1 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h1><h1 id="串口"><a href="#串口" class="headerlink" title="串口"></a>串口</h1><h1 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h1><h1 id="I2C"><a href="#I2C" class="headerlink" title="I2C"></a>I2C</h1>
     </div>
 
     
@@ -463,13 +452,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Linux/C++/" rel="prev" title="面向对象的 C++ 11 程序设计语言">
-                  <i class="fa fa-chevron-left"></i> 面向对象的 C++ 11 程序设计语言
+                <a href="/Embedded/NucleoF767ZI/" rel="prev" title="意法半导体 Nucleo F767ZI 评估板测试">
+                  <i class="fa fa-chevron-left"></i> 意法半导体 Nucleo F767ZI 评估板测试
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Embedded/NucleoF767ZI/" rel="next" title="意法半导体 Nucleo F767ZI 评估板测试">
-                  意法半导体 Nucleo F767ZI 评估板测试 <i class="fa fa-chevron-right"></i>
+                <a href="/Electronics/Introduct/" rel="next" title="实用模拟 & 数字电路电子技术导论">
+                  实用模拟 & 数字电路电子技术导论 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -532,7 +521,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">349:18</span>
+    <span title="站点阅读时长">348:03</span>
   </span>
 </div>
 <div class="busuanzi-count">
