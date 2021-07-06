@@ -408,6 +408,29 @@
   </entry>
   
   <entry>
+    <title>嵌入式 Linux C 原生应用程序开发</title>
+    <link href="https://uinika.gitee.io/Linux/Native/"/>
+    <id>https://uinika.gitee.io/Linux/Native/</id>
+    <published>2018-07-12T16:00:00.000Z</published>
+    <updated>2018-07-14T16:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。</p><p><img src="/Linux/Native/logo.png"></p><p>本文首先会介绍<code>文件 IO</code>、<code>进程与进程间通信</code>、<code>多线程</code>、<code>网络编程</code>等 Linux 原生应用程序开发的内容，然后分门别类的对<code>串口</code>、<code>GPIO</code>、<code>SPI</code>、<code>I2C</code> 等常用的协议开发进行了介绍。阅读本文前需要具备 C 编程语言基础，并且理解 GNU 编译器、链接器、调试器的相关概念。</p><span id="more"></span><h1 id="kernel">Kernel</h1><p>Linux 是一款由<strong>C</strong>语言编写，符合<strong>POSIX</strong>（<em>可移植操作系统接口，Portable Operating System Interface</em>）标准，并遵循<strong>GPL</strong>开源协议的多任务多用户类<strong>UNIX</strong>操作系统，其内核源代码使用<strong>Git</strong>托管在作者 Linus 创建的<a href="https://www.kernel.org/">Linux Kernel 官方仓库</a>当中，Linux 内核采用一体化的宏内核架构（<em>VxWorks 和 Windows 属于微内核架构</em>），集成了大量的设备驱动；同时采用模块化设计，可以在内核运行时进行模块的热加载/卸载。嵌入式开发当中，Linux 内核移植大致分为：体系结构级别、处理器级别、板级移植 3 个层次，其中板级移植较为常见。</p><h2 id="内核版本">内核版本</h2><p>Linux 内核版本号通常由三段数字组成，以 2019 年 3 月 27 日释出的<code>4.19.32</code>版本内核为例，其中<code>4</code>为主版本号，<code>6</code>为次版本号（<em>奇数表示开发版，偶数表示稳定版</em>），<code>28</code>为修订号。</p><h1 id="文件结构">文件结构</h1><h1 id="文件-io">文件 IO</h1><h1 id="进程">进程</h1><h1 id="进程间通信">进程间通信</h1><h1 id="多线程">多线程</h1><h1 id="网络编程">网络编程</h1><h1 id="gpio">GPIO</h1><h1 id="串口">串口</h1><h1 id="spi">SPI</h1><h1 id="i2c">I2C</h1>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/Linux/Native/logo.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;本文首先会介绍&lt;code&gt;文件 IO&lt;/code&gt;、&lt;code&gt;进程与进程间通信&lt;/code&gt;、&lt;code&gt;多线程&lt;/code&gt;、&lt;code&gt;网络编程&lt;/code&gt;等 Linux 原生应用程序开发的内容，然后分门别类的对&lt;code&gt;串口&lt;/code&gt;、&lt;code&gt;GPIO&lt;/code&gt;、&lt;code&gt;SPI&lt;/code&gt;、&lt;code&gt;I2C&lt;/code&gt; 等常用的协议开发进行了介绍。阅读本文前需要具备 C 编程语言基础，并且理解 GNU 编译器、链接器、调试器的相关概念。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://uinika.gitee.io/categories/Linux/"/>
+    
+    
+    <category term="C language" scheme="https://uinika.gitee.io/tags/C-language/"/>
+    
+  </entry>
+  
+  <entry>
     <title>意法半导体 Nucleo F767ZI 评估板测试</title>
     <link href="https://uinika.gitee.io/Embedded/NucleoF767ZI/"/>
     <id>https://uinika.gitee.io/Embedded/NucleoF767ZI/</id>
@@ -428,29 +451,6 @@
     
     
     <category term="MCU" scheme="https://uinika.gitee.io/tags/MCU/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>嵌入式 Linux C 原生应用程序开发</title>
-    <link href="https://uinika.gitee.io/Linux/Native/"/>
-    <id>https://uinika.gitee.io/Linux/Native/</id>
-    <published>2018-07-12T16:00:00.000Z</published>
-    <updated>2018-07-14T16:00:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。</p><p><img src="/Linux/Native/logo.png"></p><p>本文首先会介绍<code>文件 IO</code>、<code>进程与进程间通信</code>、<code>多线程</code>、<code>网络编程</code>等 Linux 原生应用程序开发的内容，然后分门别类的对<code>串口</code>、<code>GPIO</code>、<code>SPI</code>、<code>I2C</code> 等常用的协议开发进行了介绍。阅读本文前需要具备 C 编程语言基础，并且理解 GNU 编译器、链接器、调试器的相关概念。</p><span id="more"></span><h1 id="kernel">Kernel</h1><p>Linux 是一款由<strong>C</strong>语言编写，符合<strong>POSIX</strong>（<em>可移植操作系统接口，Portable Operating System Interface</em>）标准，并遵循<strong>GPL</strong>开源协议的多任务多用户类<strong>UNIX</strong>操作系统，其内核源代码使用<strong>Git</strong>托管在作者 Linus 创建的<a href="https://www.kernel.org/">Linux Kernel 官方仓库</a>当中，Linux 内核采用一体化的宏内核架构（<em>VxWorks 和 Windows 属于微内核架构</em>），集成了大量的设备驱动；同时采用模块化设计，可以在内核运行时进行模块的热加载/卸载。嵌入式开发当中，Linux 内核移植大致分为：体系结构级别、处理器级别、板级移植 3 个层次，其中板级移植较为常见。</p><h2 id="内核版本">内核版本</h2><p>Linux 内核版本号通常由三段数字组成，以 2019 年 3 月 27 日释出的<code>4.19.32</code>版本内核为例，其中<code>4</code>为主版本号，<code>6</code>为次版本号（<em>奇数表示开发版，偶数表示稳定版</em>），<code>28</code>为修订号。</p><h1 id="文件结构">文件结构</h1><h1 id="文件-io">文件 IO</h1><h1 id="进程">进程</h1><h1 id="进程间通信">进程间通信</h1><h1 id="多线程">多线程</h1><h1 id="网络编程">网络编程</h1><h1 id="gpio">GPIO</h1><h1 id="串口">串口</h1><h1 id="spi">SPI</h1><h1 id="i2c">I2C</h1>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;嵌入式 Linux 是将日益流行的 Linux 操作系统进行裁剪与修改，使之能在嵌入式硬件上运行的一种操作系统，拥有许多开源的参考与移植，也出现了 RTLinux 等实时性更强的发行版本。嵌入式 Linux 应用开发过程当中，会大量运用到 C 语言去开发原生的 Linux 应用程序，从而获得较小的存储空间占用，以及更高的执行效率，并且能够兼顾较好的代码维护效率。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/Linux/Native/logo.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;本文首先会介绍&lt;code&gt;文件 IO&lt;/code&gt;、&lt;code&gt;进程与进程间通信&lt;/code&gt;、&lt;code&gt;多线程&lt;/code&gt;、&lt;code&gt;网络编程&lt;/code&gt;等 Linux 原生应用程序开发的内容，然后分门别类的对&lt;code&gt;串口&lt;/code&gt;、&lt;code&gt;GPIO&lt;/code&gt;、&lt;code&gt;SPI&lt;/code&gt;、&lt;code&gt;I2C&lt;/code&gt; 等常用的协议开发进行了介绍。阅读本文前需要具备 C 编程语言基础，并且理解 GNU 编译器、链接器、调试器的相关概念。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Linux" scheme="https://uinika.gitee.io/categories/Linux/"/>
-    
-    
-    <category term="C language" scheme="https://uinika.gitee.io/tags/C-language/"/>
     
   </entry>
   
