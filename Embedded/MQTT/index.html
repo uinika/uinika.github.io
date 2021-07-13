@@ -22,12 +22,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"uinika.gitee.io","root":"/","images":"/images","scheme":"Mist","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":50,"offset":0},"copycode":"flat","bookmark":{"enable":true,"color":"#A38272","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"slideInRight","post_header":"bounceIn","post_body":"zoomIn","coll_header":"fadeInLeft","sidebar":"slideInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false}};
   </script>
-<meta name="description" content="物联网（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，进行信息的传输与控制交互，以实现智能化的信息感知、识别、管理，从而构建出万物相联的智能化环境，将网络连接能力渗透到现实世界的方方面面。而且伴随近年来 5G 无线网的逐步商用，通过低延迟、大容量的 5G 无线通信基础设施，物联网技术也必将会在诸多领域为社会带来巨大的创新。  本">
+<meta name="description" content="物联网（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，进行信息的传输与控制交互，以实现智能化的信息感知、识别、管理，从而构建出万物相联的智能化环境，将网络连接能力渗透到现实世界的方方面面。而且伴随近年来 5G 无线网的逐步商用，通过低延迟、大容量的 5G 无线通信基础设施，物联网技术也必将会在诸多领域为社会带来巨大的创新。  本文所">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小议 MQTT 物联网消息传输协议">
 <meta property="og:url" content="https://uinika.gitee.io/Embedded/MQTT/index.html">
 <meta property="og:site_name" content="Bit by bit">
-<meta property="og:description" content="物联网（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，进行信息的传输与控制交互，以实现智能化的信息感知、识别、管理，从而构建出万物相联的智能化环境，将网络连接能力渗透到现实世界的方方面面。而且伴随近年来 5G 无线网的逐步商用，通过低延迟、大容量的 5G 无线通信基础设施，物联网技术也必将会在诸多领域为社会带来巨大的创新。  本">
+<meta property="og:description" content="物联网（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，进行信息的传输与控制交互，以实现智能化的信息感知、识别、管理，从而构建出万物相联的智能化环境，将网络连接能力渗透到现实世界的方方面面。而且伴随近年来 5G 无线网的逐步商用，通过低延迟、大容量的 5G 无线通信基础设施，物联网技术也必将会在诸多领域为社会带来巨大的创新。  本文所">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/logo.png">
 <meta property="og:image" content="https://uinika.gitee.io/Embedded/MQTT/example.png">
@@ -200,7 +200,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-%E6%9C%8D%E5%8A%A1%E7%AB%AF-%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">客户端 &#x2F; 服务端 &#x2F; 会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83-publish-%E8%AE%A2%E9%98%85-subscribe"><span class="nav-number">2.</span> <span class="nav-text">发布 Publish &#x2F; 订阅 Subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98-topic"><span class="nav-number">3.</span> <span class="nav-text">主题 Topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F-qos"><span class="nav-number">4.</span> <span class="nav-text">服务质量 QoS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87-control-packet"><span class="nav-number">5.</span> <span class="nav-text">控制报文 Control Packet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E6%8A%A5%E5%A4%B4-fixed-header"><span class="nav-number">5.1.</span> <span class="nav-text">固定报头 Fixed header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E7%B1%BB%E5%9E%8B-control-packet-type"><span class="nav-number">5.1.1.</span> <span class="nav-text">报文类型 Control Packet type</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E6%A0%87%E5%BF%97-flags"><span class="nav-number">5.1.2.</span> <span class="nav-text">特定标志 Flags</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%A9%E4%BD%99%E9%95%BF%E5%BA%A6-remaining-length"><span class="nav-number">5.1.3.</span> <span class="nav-text">剩余长度 Remaining Length</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E6%8A%A5%E5%A4%B4-variable-header"><span class="nav-number">5.2.</span> <span class="nav-text">可变报头 Variable header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E6%A0%87%E8%AF%86%E7%AC%A6-packet-identifier"><span class="nav-number">5.2.1.</span> <span class="nav-text">报文标识符 Packet Identifier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-properties"><span class="nav-number">5.2.2.</span> <span class="nav-text">属性 Properties</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E8%BD%BD%E8%8D%B7-payload"><span class="nav-number">5.3.</span> <span class="nav-text">有效载荷 Payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E7%A0%81-reason-code"><span class="nav-number">5.4.</span> <span class="nav-text">原因码 Reason Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-nodejs-%E7%9A%84-aedes"><span class="nav-number">6.</span> <span class="nav-text">基于 NodeJS 的 Aedes</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-%E6%9C%8D%E5%8A%A1%E7%AB%AF-%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">客户端 &#x2F; 服务端 &#x2F; 会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83-Publish-%E8%AE%A2%E9%98%85-Subscribe"><span class="nav-number">2.</span> <span class="nav-text">发布 Publish &#x2F; 订阅 Subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98-Topic"><span class="nav-number">3.</span> <span class="nav-text">主题 Topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F-QoS"><span class="nav-number">4.</span> <span class="nav-text">服务质量 QoS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87-Control-Packet"><span class="nav-number">5.</span> <span class="nav-text">控制报文 Control Packet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E6%8A%A5%E5%A4%B4-Fixed-header"><span class="nav-number">5.1.</span> <span class="nav-text">固定报头 Fixed header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E7%B1%BB%E5%9E%8B-Control-Packet-type"><span class="nav-number">5.1.1.</span> <span class="nav-text">报文类型 Control Packet type</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E6%A0%87%E5%BF%97-Flags"><span class="nav-number">5.1.2.</span> <span class="nav-text">特定标志 Flags</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%A9%E4%BD%99%E9%95%BF%E5%BA%A6-Remaining-Length"><span class="nav-number">5.1.3.</span> <span class="nav-text">剩余长度 Remaining Length</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E6%8A%A5%E5%A4%B4-Variable-header"><span class="nav-number">5.2.</span> <span class="nav-text">可变报头 Variable header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E6%A0%87%E8%AF%86%E7%AC%A6-Packet-Identifier"><span class="nav-number">5.2.1.</span> <span class="nav-text">报文标识符 Packet Identifier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-Properties"><span class="nav-number">5.2.2.</span> <span class="nav-text">属性 Properties</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E8%BD%BD%E8%8D%B7-Payload"><span class="nav-number">5.3.</span> <span class="nav-text">有效载荷 Payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E7%A0%81-Reason-Code"><span class="nav-number">5.4.</span> <span class="nav-text">原因码 Reason Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-NodeJS-%E7%9A%84-Aedes"><span class="nav-number">6.</span> <span class="nav-text">基于 NodeJS 的 Aedes</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -370,14 +370,13 @@
 <p><img src="/Embedded/MQTT/logo.png"></p>
 <p>本文所要讨论的 <a target="_blank" rel="noopener" href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html"><strong>遥测消息传输协议</strong>（MQTT，Message Queuing Telemetry Transport）</a> 是用于物联网环境的 <strong>OASIS</strong> 轻量级消息传输协议，主要应用于受限设备、以及低带宽高网络延迟的场景。采用<strong>发布/订阅</strong>模式，可以一对多进行消息发布；主要基于 TCP/IP 提供有序、无损的双向连接，并且最小化协议交换，可以有效降低传输开销。目前 MQTT 最新的协议标准为 <strong>2019</strong> 年发布的 <a target="_blank" rel="noopener" href="https://github.com/hui6075/mqtt_v5"><code>V5.0</code></a>，相较于早期的 <a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/mqtt-cn/content/"><code>V3.1.1</code></a> 版本进行了较大改进，并且支持众多的新特性。</p>
 <span id="more"></span>
-<h2 id="客户端-服务端-会话">客户端 / 服务端 / 会话</h2>
-<ul>
+
+<h2 id="客户端-服务端-会话"><a href="#客户端-服务端-会话" class="headerlink" title="客户端 / 服务端 / 会话"></a>客户端 / 服务端 / 会话</h2><ul>
 <li><strong>会话</strong>（Session）：维护<strong>客户端</strong>与<strong>服务端</strong>之间的状态交互；</li>
 <li><strong>客户端</strong>（Client）：客户端总是通过网络连接到服务端，可以<code>发布应用消息给其它客户端</code>，<code>订阅以请求接收应用消息</code>、<code>取消订阅以移除接收应用消息</code>、<code>从服务端断开连接</code>；</li>
 <li><strong>服务端</strong>（Server）：作为<strong>发送消息的客户端</strong>和<strong>请求订阅的客户端</strong>之间的中介，用于<code>接受来自客户端的网络连接</code>、<code>接受客户端发布的应用消息</code>、<code>处理客户端的订阅以及取消订阅请求</code>、<code>转发消息给符合条件的已订阅客户端</code>；</li>
 </ul>
-<h2 id="发布-publish-订阅-subscribe">发布 Publish / 订阅 Subscribe</h2>
-<p>互联网开发技术当中广泛应用的 <code>请求</code>/<code>响应</code>（<code>Request</code>/<code>Response</code>）模式并不适用于物联网场景，取而代之的是 MQTT 所采用的<code>发布</code>/<code>订阅</code>（<code>Publish</code>/<code>Subscribe</code>）模式。</p>
+<h2 id="发布-Publish-订阅-Subscribe"><a href="#发布-Publish-订阅-Subscribe" class="headerlink" title="发布 Publish / 订阅 Subscribe"></a>发布 Publish / 订阅 Subscribe</h2><p>互联网开发技术当中广泛应用的 <code>请求</code>/<code>响应</code>（<code>Request</code>/<code>Response</code>）模式并不适用于物联网场景，取而代之的是 MQTT 所采用的<code>发布</code>/<code>订阅</code>（<code>Publish</code>/<code>Subscribe</code>）模式。</p>
 <p><img src="/Embedded/MQTT/example.png"></p>
 <p><code>发布</code>/<code>订阅</code>模式解耦了发布消息的<strong>发布者</strong>与订阅消息的<strong>订阅者</strong>之间的联系，发布者和订阅者之间不再需要直接进行联系，如此带来了如下优点：</p>
 <ul>
@@ -385,8 +384,7 @@
 <li><strong>发布者</strong>和<strong>订阅者</strong>无需直接交互，<strong>发布者</strong>无需等待<strong>订阅者</strong>确认而导致锁定；</li>
 <li><strong>发布者</strong>和<strong>订阅者</strong>无需同时在线，可以自由选择时间来处理消息；</li>
 </ul>
-<h2 id="主题-topic">主题 Topic</h2>
-<p>MQTT 通过<strong>主题</strong> <code>Topic</code> 来对消息进行分类，<code>Topic</code> 本质上是一个 <strong>UTF-8</strong> 字符串，书写时可通过反斜杠<code>/</code>表示多个层级关系。<code>Topic</code>可以通过<strong>通配符</strong>进行过滤，其中 <code>+</code> 可以过滤掉一个层级，而 <code>*</code> 只能出现在主题最后表示过滤任意层级，例如：</p>
+<h2 id="主题-Topic"><a href="#主题-Topic" class="headerlink" title="主题 Topic"></a>主题 Topic</h2><p>MQTT 通过<strong>主题</strong> <code>Topic</code> 来对消息进行分类，<code>Topic</code> 本质上是一个 <strong>UTF-8</strong> 字符串，书写时可通过反斜杠<code>/</code>表示多个层级关系。<code>Topic</code>可以通过<strong>通配符</strong>进行过滤，其中 <code>+</code> 可以过滤掉一个层级，而 <code>*</code> 只能出现在主题最后表示过滤任意层级，例如：</p>
 <ul>
 <li><code>+/floor-15</code>：表示任意楼层第 15 层的设备；</li>
 <li><code>building-A/*</code>：代表 A 栋所有楼层的设备；</li>
@@ -395,8 +393,7 @@
 <blockquote>
 <p><strong>注意</strong>：MQTT 允许采用通配符订阅主题，但是不允许使用通配符进行广播。</p>
 </blockquote>
-<h2 id="服务质量-qos">服务质量 QoS</h2>
-<p>MQTT 支持 3 种不同级别的<strong>服务质量</strong>（<strong>QoS</strong>，Quality of Service），确保不同应用场景下消息传输的可靠性：</p>
+<h2 id="服务质量-QoS"><a href="#服务质量-QoS" class="headerlink" title="服务质量 QoS"></a>服务质量 QoS</h2><p>MQTT 支持 3 种不同级别的<strong>服务质量</strong>（<strong>QoS</strong>，Quality of Service），确保不同应用场景下消息传输的可靠性：</p>
 <ul>
 <li><code>QoS 0</code>：最多分发一次，消息的分发依赖于底层网络能力，接收者不会发送响应，发送者也不会重试，消息可能送达也可能没有；</li>
 <li><code>QoS 1</code>：服务质量确保消息至少送达一次，服务质量确保消息至少送达一次，可能会造成重复消息；</li>
@@ -406,57 +403,46 @@
 <blockquote>
 <p><strong>注意</strong>：1 个订阅 <code>Subscribe</code> 当中包含有 1 个<strong>主题过滤器</strong>（Topic Filter）和 1 个<strong>服务质量</strong>（QoS）等级，并且订阅与单个<strong>会话</strong>（Session）相关联，会话当中可以包含 1 个以上的订阅，并且每个订阅都有一个不同的主题过滤器。</p>
 </blockquote>
-<h2 id="控制报文-control-packet">控制报文 Control Packet</h2>
-<p>控制报文就是 MQTT 通过网络连接发送的信息数据包，MQTT 在规范当中定义了 16 种不同类型的控制报文，其中 <code>PUBLISH</code> 报文用于消息的传输：</p>
+<h2 id="控制报文-Control-Packet"><a href="#控制报文-Control-Packet" class="headerlink" title="控制报文 Control Packet"></a>控制报文 Control Packet</h2><p>控制报文就是 MQTT 通过网络连接发送的信息数据包，MQTT 在规范当中定义了 16 种不同类型的控制报文，其中 <code>PUBLISH</code> 报文用于消息的传输：</p>
 <p><img src="/Embedded/MQTT/control-packet-0.png"></p>
-<ol type="1">
+<ol>
 <li><strong>固定报头</strong>（Fixed Header）：所有控制报文均包含；</li>
 <li><strong>可变报头</strong>（Variable Header）：只有特定控制报文会包含；</li>
 <li><strong>有效载荷</strong>（Payload）：仅部分控制报文包含；</li>
 </ol>
-<h3 id="固定报头-fixed-header">固定报头 Fixed header</h3>
-<p>每一个 MQTT 控制报文都包含着一个固定报头，每个固定报头则是由<code>控制报文类型</code>、<code>控制报文类型标志位</code>、<code>剩余长度</code> 共 3 部分组成：</p>
+<h3 id="固定报头-Fixed-header"><a href="#固定报头-Fixed-header" class="headerlink" title="固定报头 Fixed header"></a>固定报头 Fixed header</h3><p>每一个 MQTT 控制报文都包含着一个固定报头，每个固定报头则是由<code>控制报文类型</code>、<code>控制报文类型标志位</code>、<code>剩余长度</code> 共 3 部分组成：</p>
 <p><img src="/Embedded/MQTT/control-packet-1.png"></p>
-<h4 id="报文类型-control-packet-type">报文类型 Control Packet type</h4>
-<p>第 1 个字节，二进制位 <code>7 ~ 4</code>，表示为 4 位无符号值，这些值的定义如下表所示：</p>
+<h4 id="报文类型-Control-Packet-type"><a href="#报文类型-Control-Packet-type" class="headerlink" title="报文类型 Control Packet type"></a>报文类型 Control Packet type</h4><p>第 1 个字节，二进制位 <code>7 ~ 4</code>，表示为 4 位无符号值，这些值的定义如下表所示：</p>
 <p><img src="/Embedded/MQTT/control-packet-2.png"></p>
-<h4 id="特定标志-flags">特定标志 Flags</h4>
-<p>固定报头第 1 个字节的剩余的 4 位 <code>3 ~ 0</code> 包含了每一条 MQTT 控制报文类型特定的标志，具体请见下表：</p>
+<h4 id="特定标志-Flags"><a href="#特定标志-Flags" class="headerlink" title="特定标志 Flags"></a>特定标志 Flags</h4><p>固定报头第 1 个字节的剩余的 4 位 <code>3 ~ 0</code> 包含了每一条 MQTT 控制报文类型特定的标志，具体请见下表：</p>
 <p><img src="/Embedded/MQTT/control-packet-3.png"></p>
 <blockquote>
 <p><strong>注意</strong>：<code>Reserved</code> 表示该标志位保留给未来使用，必须设置为表格中列出的值，如果接收到非法的标志，该报文会被视为无效报文。<code>DUP</code> 表示 <code>PUBLISH</code> 报文的<strong>重复分发标志</strong>，<code>QoS</code> 表示 <code>PUBLISH</code> 报文的<strong>服务质量等级</strong>，<code>RETAIN</code> 表示 <code>PUBLISH</code> 报文的<strong>保留标志</strong>。</p>
 </blockquote>
-<h4 id="剩余长度-remaining-length">剩余长度 Remaining Length</h4>
-<p>剩余长度的表达从第 2 个字节开始，用来表示当前控制报文剩余部分的字节数（包括<code>可变报头</code>和<code>负载</code>的数据，但不包括用于剩余长度字段本身的数据）</p>
+<h4 id="剩余长度-Remaining-Length"><a href="#剩余长度-Remaining-Length" class="headerlink" title="剩余长度 Remaining Length"></a>剩余长度 Remaining Length</h4><p>剩余长度的表达从第 2 个字节开始，用来表示当前控制报文剩余部分的字节数（包括<code>可变报头</code>和<code>负载</code>的数据，但不包括用于剩余长度字段本身的数据）</p>
 <blockquote>
 <p><strong>注意</strong>：换而言之，一条 MQTT 控制报文的总长度等于<code>固定报头长度</code>加上<code>剩余长度</code>。</p>
 </blockquote>
-<h3 id="可变报头-variable-header">可变报头 Variable header</h3>
-<p>某些 MQTT 控制报文会包含有 1 个<strong>可变报头</strong>，其由<code>报文标识符</code>和<code>属性</code>两部分组成，位于<code>固定报头</code>与<code>有效载荷</code>之间，内容会根据报文类型的不同而发生变化。</p>
-<h4 id="报文标识符-packet-identifier">报文标识符 Packet Identifier</h4>
-<p>部分类型 MQTT 控制报文的可变报头部分包含有 2 个字节的报文标识符字段：</p>
+<h3 id="可变报头-Variable-header"><a href="#可变报头-Variable-header" class="headerlink" title="可变报头 Variable header"></a>可变报头 Variable header</h3><p>某些 MQTT 控制报文会包含有 1 个<strong>可变报头</strong>，其由<code>报文标识符</code>和<code>属性</code>两部分组成，位于<code>固定报头</code>与<code>有效载荷</code>之间，内容会根据报文类型的不同而发生变化。</p>
+<h4 id="报文标识符-Packet-Identifier"><a href="#报文标识符-Packet-Identifier" class="headerlink" title="报文标识符 Packet Identifier"></a>报文标识符 Packet Identifier</h4><p>部分类型 MQTT 控制报文的可变报头部分包含有 2 个字节的报文标识符字段：</p>
 <p><img src="/Embedded/MQTT/control-packet-4.png"></p>
 <blockquote>
 <p><strong>注意</strong>：<code>QoS 0</code> 的 <code>PUBLISH</code> 报文不能包含报文标识符；客户端每次发送 1 个新的 <code>SUBSCRIBE</code>、<code>UNSUBSCRIBE</code>、<code>PUBLISH</code>，MQTT 控制报文都必须分配一个当前未被使用的非零报文标识符；服务端每次发送 1 个新的 <code>PUBLISH</code>，MQTT 控制报文时都必须分配一个当前未被使用的非零报文标识符；当客户端处理完报文对应的确认之后，相应的报文标识符就可以被释放重用；</p>
 </blockquote>
-<h4 id="属性-properties">属性 Properties</h4>
-<p><strong>属性字段</strong>由<strong>属性长度</strong>和<strong>所有属性</strong>组成，<code>CONNECT</code>、<code>CONNACK</code>、<code>PUBLISH</code>、<code>PUBACK</code>、<code>PUBREC</code>、<code>PUBREL</code>、<code>PUBCOMP</code>、<code>SUBSCRIBE</code>、<code>SUBACK</code>、<code>UNSUBACK</code>、<code>DISCONNECT</code>、<code>AUTH</code> 报文的可变报头最后一部分就是 1 组属性。</p>
+<h4 id="属性-Properties"><a href="#属性-Properties" class="headerlink" title="属性 Properties"></a>属性 Properties</h4><p><strong>属性字段</strong>由<strong>属性长度</strong>和<strong>所有属性</strong>组成，<code>CONNECT</code>、<code>CONNACK</code>、<code>PUBLISH</code>、<code>PUBACK</code>、<code>PUBREC</code>、<code>PUBREL</code>、<code>PUBCOMP</code>、<code>SUBSCRIBE</code>、<code>SUBACK</code>、<code>UNSUBACK</code>、<code>DISCONNECT</code>、<code>AUTH</code> 报文的可变报头最后一部分就是 1 组属性。</p>
 <ul>
 <li><strong>属性长度</strong>：包含所有属性的长度（但是不包括属性长度自身），如果没有任何属性，那么属性长度为零；</li>
 <li><strong>属性</strong>：包含 1 段数据和 1 个定义了属性用途与数据类型的标识符（如下面表格所示）；</li>
 </ul>
 <p><img src="/Embedded/MQTT/control-packet-5.png"></p>
-<h3 id="有效载荷-payload">有效载荷 Payload</h3>
-<p>某些 MQTT 控制报文会在报文的最后部分包含 1 个有效载荷，对于 <code>PUBLISH</code> 而言，有效载荷就是应用的消息，下面表格展示了包含有效载荷的 MQTT 控制报文：</p>
+<h3 id="有效载荷-Payload"><a href="#有效载荷-Payload" class="headerlink" title="有效载荷 Payload"></a>有效载荷 Payload</h3><p>某些 MQTT 控制报文会在报文的最后部分包含 1 个有效载荷，对于 <code>PUBLISH</code> 而言，有效载荷就是应用的消息，下面表格展示了包含有效载荷的 MQTT 控制报文：</p>
 <p><img src="/Embedded/MQTT/control-packet-6.png"></p>
-<h3 id="原因码-reason-code">原因码 Reason Code</h3>
-<p>原因码是一个单字节的无符号数，用来表示一次操作的结果。小于 <code>0x80</code> 的原因码表示某次操作成功完成（通常使用 <code>0</code> 表示），而大于或者等于 <code>0x80</code> 的原因码用来标识操作失败，常用的原因码如下表所示：</p>
+<h3 id="原因码-Reason-Code"><a href="#原因码-Reason-Code" class="headerlink" title="原因码 Reason Code"></a>原因码 Reason Code</h3><p>原因码是一个单字节的无符号数，用来表示一次操作的结果。小于 <code>0x80</code> 的原因码表示某次操作成功完成（通常使用 <code>0</code> 表示），而大于或者等于 <code>0x80</code> 的原因码用来标识操作失败，常用的原因码如下表所示：</p>
 <p><img src="/Embedded/MQTT/control-packet-7.png"></p>
 <blockquote>
 <p><strong>注意</strong>：<code>CONNACK</code>、<code>PUBACK</code>、<code>PUBREC</code>、<code>PUBREL</code>、<code>PUBCOMP</code>、<code>DISCONNECT</code>、<code>AUTH</code> 控制报文的可变报头有一个单字节的原因码，而 <code>SUBACK</code> 和 <code>UNSUBACK</code> 报文的有效载荷字段包含一个或者多个原因码。</p>
 </blockquote>
-<h2 id="基于-nodejs-的-aedes">基于 NodeJS 的 Aedes</h2>
-<p>常用的 MQTT Broker 有 <a target="_blank" rel="noopener" href="https://activemq.apache.org/">ActiveMQ</a>、<a target="_blank" rel="noopener" href="https://github.com/mcollina/mosca">Mosca</a> 等，其中 <code>Mosca</code> 基于 NodeJS 实现，不过目前 Github 上该项目已经停止维护，其原作者重新打造了一款支持数据持久化和集群，且性能更为优越的 <a target="_blank" rel="noopener" href="https://github.com/moscajs/aedes">Aedes</a>。</p>
+<h2 id="基于-NodeJS-的-Aedes"><a href="#基于-NodeJS-的-Aedes" class="headerlink" title="基于 NodeJS 的 Aedes"></a>基于 NodeJS 的 Aedes</h2><p>常用的 MQTT Broker 有 <a target="_blank" rel="noopener" href="https://activemq.apache.org/">ActiveMQ</a>、<a target="_blank" rel="noopener" href="https://github.com/mcollina/mosca">Mosca</a> 等，其中 <code>Mosca</code> 基于 NodeJS 实现，不过目前 Github 上该项目已经停止维护，其原作者重新打造了一款支持数据持久化和集群，且性能更为优越的 <a target="_blank" rel="noopener" href="https://github.com/moscajs/aedes">Aedes</a>。</p>
 
     </div>
 
@@ -608,7 +594,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">351:11</span>
+    <span title="站点阅读时长">350:23</span>
   </span>
 </div>
 <div class="busuanzi-count">
