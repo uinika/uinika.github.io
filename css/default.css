@@ -12319,9 +12319,12 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(
   content: '\f09b';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(8)::before {
-  content: '\f2db';
+  content: '\f1d3';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(9)::before {
+  content: '\f2db';
+}
+nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(10)::before {
   content: '\f4fb';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
