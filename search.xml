@@ -23,6 +23,17 @@
       </tags>
   </entry>
   <entry>
+    <title>FreeCAD 参数化 3D 建模上手实例</title>
+    <url>/Design/FreeCAD/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Design</category>
+      </categories>
+      <tags>
+        <tag>CAD</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Qt 5 桌面应用程序开发指南 - QtQuick 篇</title>
     <url>/C&amp;C++/Qt-Quick/</url>
     <content><![CDATA[]]></content>
@@ -34,14 +45,146 @@
       </tags>
   </entry>
   <entry>
-    <title>FreeCAD 参数化 3D 建模上手实例</title>
-    <url>/Design/FreeCAD/</url>
+    <title>模拟与数字电子技术入门读物</title>
+    <url>/Electronics/Getting_Started/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Design</category>
+        <category>Electronics</category>
       </categories>
       <tags>
-        <tag>CAD</tag>
+        <tag>Circuit Theory</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>现代数字逻辑电子技术概论</title>
+    <url>/Electronics/Digital/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Digital Circuit</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电子测量仪器通用术语与相关原理</title>
+    <url>/Electronics/Instrument/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Instrument</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高等教育出版社《模拟电子技术》温习札记</title>
+    <url>/Electronics/HEP_Analog/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Circuit Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Qt 5 桌面应用程序开发指南 - QtWidgets 篇</title>
+    <url>/C&amp;C++/Qt-Widgets/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>C/C++</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开源 EDA 工具 KiCad 6.0 电路设计小书</title>
+    <url>/Electronics/KiCad_Tutorial/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>EDA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常见 LDO 线性稳压芯片的对比选型</title>
+    <url>/Electronics/LDO/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>电源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何设计 NFC 动态标签的天线</title>
+    <url>/Electronics/NFC_Antenna/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>RFID</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《电路分析导论》读书笔记</title>
+    <url>/Electronics/Introduct_Analysis/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Circuit Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《PCB 电流与信号完整性设计》读书笔记</title>
+    <url>/Electronics/PCB_Currents/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>PCB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PCB 基本布线规范与设计原则</title>
+    <url>/Electronics/PCB_Principle/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>PCB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高等教育出版社《电路原理》温习札记</title>
+    <url>/Electronics/HEP_Analysis/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Circuit Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简明厄要的《电路理论》读书笔记</title>
+    <url>/Electronics/Simple_Analysis/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Circuit Analysis</tag>
       </tags>
   </entry>
   <entry>
@@ -56,14 +199,14 @@
       </tags>
   </entry>
   <entry>
-    <title>J-Link 仿真器固件恢复小记</title>
-    <url>/Embedded/JLink/</url>
+    <title>《实用电子元器件与电路基础》读书笔记</title>
+    <url>/Electronics/Practical_Electronics/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Embedded</category>
+        <category>Electronics</category>
       </categories>
       <tags>
-        <tag>MCU</tag>
+        <tag>Circuit Analysis</tag>
       </tags>
   </entry>
   <entry>
@@ -78,14 +221,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Qt 5 桌面应用程序开发指南 - QtWidgets 篇</title>
-    <url>/C&amp;C++/Qt-Widgets/</url>
+    <title>J-Link 仿真器固件恢复小记</title>
+    <url>/Embedded/JLink/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>C/C++</category>
+        <category>Embedded</category>
       </categories>
       <tags>
-        <tag>Qt</tag>
+        <tag>MCU</tag>
       </tags>
   </entry>
   <entry>
@@ -166,8 +309,19 @@
       </tags>
   </entry>
   <entry>
-    <title>基于 HAL 与 LL 的 STM32F401 开发实践</title>
-    <url>/Embedded/STM32F401/</url>
+    <title>Linux 常用命令行速查手册</title>
+    <url>/Linux/Command/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Command</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宏晶 STC89C52RC 微控制器实践小书</title>
+    <url>/Embedded/STC89C52/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Embedded</category>
@@ -188,14 +342,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux 常用命令行速查手册</title>
-    <url>/Linux/Command/</url>
+    <title>基于 HAL 与 LL 的 STM32F401 开发实践</title>
+    <url>/Embedded/STM32F401/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Linux</category>
+        <category>Embedded</category>
       </categories>
       <tags>
-        <tag>Command</tag>
+        <tag>MCU</tag>
       </tags>
   </entry>
   <entry>
@@ -221,17 +375,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vim 常用键位生存指南</title>
-    <url>/Linux/Vim/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Command</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>意法半导体 STM32F103 标准库典型实例</title>
     <url>/Embedded/STM32F103/</url>
     <content><![CDATA[]]></content>
@@ -243,157 +386,25 @@
       </tags>
   </entry>
   <entry>
-    <title>现代数字逻辑电子技术概论</title>
-    <url>/Electronics/Digital/</url>
+    <title>Vim 常用键位生存指南</title>
+    <url>/Linux/Vim/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Electronics</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>Digital Circuit</tag>
+        <tag>Command</tag>
       </tags>
   </entry>
   <entry>
-    <title>模拟与数字电子技术入门读物</title>
-    <url>/Electronics/Getting_Started/</url>
+    <title>高等数学主要概念与公式摘要</title>
+    <url>/Math/Calculus/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Electronics</category>
+        <category>Math</category>
       </categories>
       <tags>
-        <tag>Circuit Theory</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高等教育出版社《模拟电子技术》温习札记</title>
-    <url>/Electronics/HEP_Analog/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Circuit Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高等教育出版社《电路原理》温习札记</title>
-    <url>/Electronics/HEP_Analysis/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Circuit Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>电子测量仪器通用术语与相关原理</title>
-    <url>/Electronics/Instrument/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Instrument</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>宏晶 STC89C52RC 微控制器实践小书</title>
-    <url>/Embedded/STC89C52/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Embedded</category>
-      </categories>
-      <tags>
-        <tag>MCU</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开源 EDA 工具 KiCad 6.0 电路设计小书</title>
-    <url>/Electronics/KiCad_Tutorial/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>EDA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常见 LDO 线性稳压芯片的对比选型</title>
-    <url>/Electronics/LDO/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>电源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《电路分析导论》读书笔记</title>
-    <url>/Electronics/Introduct_Analysis/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Circuit Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何设计 NFC 动态标签的天线</title>
-    <url>/Electronics/NFC_Antenna/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>RFID</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《PCB 电流与信号完整性设计》读书笔记</title>
-    <url>/Electronics/PCB_Currents/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>PCB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PCB 基本布线规范与设计原则</title>
-    <url>/Electronics/PCB_Principle/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>PCB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简明厄要的《电路理论》读书笔记</title>
-    <url>/Electronics/Simple_Analysis/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Circuit Analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《实用电子元器件与电路基础》读书笔记</title>
-    <url>/Electronics/Practical_Electronics/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Circuit Analysis</tag>
+        <tag>Calculus</tag>
       </tags>
   </entry>
   <entry>
@@ -408,14 +419,14 @@
       </tags>
   </entry>
   <entry>
-    <title>高等数学主要概念与公式摘要</title>
-    <url>/Math/Calculus/</url>
+    <title>使用 Django2 快速开发 Web 服务</title>
+    <url>/Python/Django/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Math</category>
+        <category>Python</category>
       </categories>
       <tags>
-        <tag>Calculus</tag>
+        <tag>Server</tag>
       </tags>
   </entry>
   <entry>
@@ -441,14 +452,14 @@
       </tags>
   </entry>
   <entry>
-    <title>ARM 调试工具 UINIO-DAP-Link 应用详解</title>
-    <url>/Project/UINIO-DAP-Link/</url>
+    <title>言简意赅 の Python3</title>
+    <url>/Python/Python3/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Project</category>
+        <category>Python</category>
       </categories>
       <tags>
-        <tag>Tools</tag>
+        <tag>Python3</tag>
       </tags>
   </entry>
   <entry>
@@ -460,6 +471,17 @@
       </categories>
       <tags>
         <tag>MCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ARM 调试工具 UINIO-DAP-Link 应用详解</title>
+    <url>/Project/UINIO-DAP-Link/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Project</category>
+      </categories>
+      <tags>
+        <tag>Tools</tag>
       </tags>
   </entry>
   <entry>
@@ -485,17 +507,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基于 UINIO-MCU-ESP32 的 Arduino 进阶教程</title>
-    <url>/Project/Arduino-ESP32/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Project</category>
-      </categories>
-      <tags>
-        <tag>Arduino</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪</title>
     <url>/Project/UINIO-MCU-RP2040/</url>
     <content><![CDATA[]]></content>
@@ -504,6 +515,28 @@
       </categories>
       <tags>
         <tag>MCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>理工科学生的《新概念英语》第 1 册教程</title>
+    <url>/English/NCE-1/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>English</category>
+      </categories>
+      <tags>
+        <tag>New Concept English</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于 UINIO-MCU-ESP32 的 Arduino 进阶教程</title>
+    <url>/Project/Arduino-ESP32/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Project</category>
+      </categories>
+      <tags>
+        <tag>Arduino</tag>
       </tags>
   </entry>
   <entry>
@@ -518,30 +551,8 @@
       </tags>
   </entry>
   <entry>
-    <title>2017 年，再聊聊成都房价与地价那些事儿</title>
-    <url>/Thinking/2017-Chengdu-Realestate/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Thinking</category>
-      </categories>
-      <tags>
-        <tag>Industry</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何理性看待贵阳大数据与 IT 行业的过去与未来</title>
     <url>/Thinking/2018-Guiyang-Big-Data/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Thinking</category>
-      </categories>
-      <tags>
-        <tag>Economy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2022 互联网裁员潮之后，国内 IT 行业何去何从？</title>
-    <url>/Thinking/2022-Downsizing/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Thinking</category>
@@ -562,14 +573,25 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 Django2 快速开发 Web 服务</title>
-    <url>/Python/Django/</url>
+    <title>2022 互联网裁员潮之后，国内 IT 行业何去何从？</title>
+    <url>/Thinking/2022-Downsizing/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>Python</category>
+        <category>Thinking</category>
       </categories>
       <tags>
-        <tag>Server</tag>
+        <tag>Economy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2017 年，再聊聊成都房价与地价那些事儿</title>
+    <url>/Thinking/2017-Chengdu-Realestate/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Thinking</category>
+      </categories>
+      <tags>
+        <tag>Industry</tag>
       </tags>
   </entry>
   <entry>
@@ -584,50 +606,6 @@
       </tags>
   </entry>
   <entry>
-    <title>言简意赅 の Python3</title>
-    <url>/Python/Python3/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS 3 典型概念与布局详解</title>
-    <url>/Web/CSS/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为什么认为 Backbone 是现代化前端框架的基石</title>
-    <url>/Web/Backbone/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web 前端开发遵循的一些规范与约定</title>
-    <url>/Web/Convention/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Convention</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用 Electron 打造跨平台桌面应用</title>
     <url>/Web/Electron/</url>
     <content><![CDATA[]]></content>
@@ -636,50 +614,6 @@
       </categories>
       <tags>
         <tag>Server</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTTP 协议深入解析</title>
-    <url>/Web/Http/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Convention</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>理工科学生的《新概念英语》第 1 册教程</title>
-    <url>/English/NCE-1/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>English</category>
-      </categories>
-      <tags>
-        <tag>New Concept English</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Flux 数据流两三事儿</title>
-    <url>/Web/Flux/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jQuery 那些容易被忽略的问题</title>
-    <url>/Web/JQuery/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -694,14 +628,47 @@
       </tags>
   </entry>
   <entry>
-    <title>NodeJS 快速上手指南</title>
-    <url>/Web/Nodejs/</url>
+    <title>CSS 3 典型概念与布局详解</title>
+    <url>/Web/CSS/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
       </categories>
       <tags>
-        <tag>Server</tag>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web 前端开发遵循的一些规范与约定</title>
+    <url>/Web/Convention/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Convention</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP 协议深入解析</title>
+    <url>/Web/Http/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Convention</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jQuery 那些容易被忽略的问题</title>
+    <url>/Web/JQuery/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -716,8 +683,8 @@
       </tags>
   </entry>
   <entry>
-    <title>React 16.6.x 全新全译</title>
-    <url>/Web/React/</url>
+    <title>Flux 数据流两三事儿</title>
+    <url>/Web/Flux/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
@@ -727,8 +694,30 @@
       </tags>
   </entry>
   <entry>
+    <title>NodeJS 快速上手指南</title>
+    <url>/Web/Nodejs/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于 ES6 的 JavaScript 简明语法书</title>
     <url>/Web/Javascript/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为什么认为 Backbone 是现代化前端框架的基石</title>
+    <url>/Web/Backbone/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
@@ -760,17 +749,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows 工作环境 Config 札记</title>
-    <url>/Zen/Config-Windows/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Zen</category>
-      </categories>
-      <tags>
-        <tag>Config</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux 工作环境 Config 札记</title>
     <url>/Zen/Config-Linux/</url>
     <content><![CDATA[]]></content>
@@ -793,14 +771,25 @@
       </tags>
   </entry>
   <entry>
-    <title>编码实践当中涉及的密码学知识</title>
-    <url>/Zen/Cryptology/</url>
+    <title>Windows 工作环境 Config 札记</title>
+    <url>/Zen/Config-Windows/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>Zen</category>
       </categories>
       <tags>
-        <tag>Encrypt</tag>
+        <tag>Config</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React 16.6.x 全新全译</title>
+    <url>/Web/React/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -826,6 +815,17 @@
       </tags>
   </entry>
   <entry>
+    <title>编码实践当中涉及的密码学知识</title>
+    <url>/Zen/Cryptology/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Zen</category>
+      </categories>
+      <tags>
+        <tag>Encrypt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git 版本管理命令备忘录</title>
     <url>/Zen/Git/</url>
     <content><![CDATA[]]></content>
@@ -837,17 +837,6 @@
       </tags>
   </entry>
   <entry>
-    <title>模拟电子技术原理与综合运用</title>
-    <url>/Electronics/Analog_Mooc/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Electronics</category>
-      </categories>
-      <tags>
-        <tag>Analog Circuit</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>电路分析经典理论与习题手记</title>
     <url>/Electronics/Analysis_Mooc/</url>
     <content><![CDATA[]]></content>
@@ -856,6 +845,17 @@
       </categories>
       <tags>
         <tag>Circuit Analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>模拟电子技术原理与综合运用</title>
+    <url>/Electronics/Analog_Mooc/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Electronics</category>
+      </categories>
+      <tags>
+        <tag>Analog Circuit</tag>
       </tags>
   </entry>
 </search>
