@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>兆易创新 UINIO-MCU-GD32F350 标准库开发指南 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="早在新冠疫情爆发前的 2019 年，就曾经撰写过一篇关于 ARM 标准库的技术长文 《意法半导体 STM32F103 标准库典型实例》 ，文章非常详尽的介绍了各种常见片上外设资源的应用。时至 4 年以后的今天，国产微控制器在工程实践领域已经得到了广泛运用，因而基于兆易创新 推出的国产 ARM 微控制器，制作了 UINIO-MCU-GD32F350RBT6 和 UINIO-MCU-GD32F103C"><meta property="og:type" content="blog"><meta property="og:title" content="兆易创新 UINIO-MCU-GD32F350 标准库开发指南"><meta property="og:url" content="http://www.uinio.com/Project/UINIO-MCU-GD32/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="早在新冠疫情爆发前的 2019 年，就曾经撰写过一篇关于 ARM 标准库的技术长文 《意法半导体 STM32F103 标准库典型实例》 ，文章非常详尽的介绍了各种常见片上外设资源的应用。时至 4 年以后的今天，国产微控制器在工程实践领域已经得到了广泛运用，因而基于兆易创新 推出的国产 ARM 微控制器，制作了 UINIO-MCU-GD32F350RBT6 和 UINIO-MCU-GD32F103C"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-01-05T16:00:00.000Z"><meta property="article:modified_time" content="2024-02-06T13:23:56.117Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Project/UINIO-MCU-GD32/"},"headline":"兆易创新 UINIO-MCU-GD32F350 标准库开发指南","image":["http://www.uinio.com/Project/UINIO-MCU-GD32/logo.png"],"datePublished":"2024-01-05T16:00:00.000Z","dateModified":"2024-02-06T13:23:56.117Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"早在新冠疫情爆发前的 2019 年，就曾经撰写过一篇关于 ARM 标准库的技术长文 《意法半导体 STM32F103 标准库典型实例》 ，文章非常详尽的介绍了各种常见片上外设资源的应用。时至 4 年以后的今天，国产微控制器在工程实践领域已经得到了广泛运用，因而基于兆易创新 推出的国产 ARM 微控制器，制作了 UINIO-MCU-GD32F350RBT6 和 UINIO-MCU-GD32F103C"}</script><link rel="canonical" href="http://www.uinio.com/Project/UINIO-MCU-GD32/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>兆易创新 UINIO-MCU-GD32F350 标准库开发指南 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="早在新冠疫情爆发前的 2019 年，就曾经撰写过一篇关于 ARM 标准库的技术长文 《意法半导体 STM32F103 标准库典型实例》 ，文章非常详尽的介绍了各种常见片上外设资源的应用。时至 4 年以后的今天，国产微控制器在工程实践领域已经得到了广泛运用，因而基于兆易创新 推出的国产 ARM 微控制器，制作了 UINIO-MCU-GD32F350RBT6 和 UINIO-MCU-GD3"><meta property="og:type" content="blog"><meta property="og:title" content="兆易创新 UINIO-MCU-GD32F350 标准库开发指南"><meta property="og:url" content="http://www.uinio.com/Project/UINIO-MCU-GD32/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="早在新冠疫情爆发前的 2019 年，就曾经撰写过一篇关于 ARM 标准库的技术长文 《意法半导体 STM32F103 标准库典型实例》 ，文章非常详尽的介绍了各种常见片上外设资源的应用。时至 4 年以后的今天，国产微控制器在工程实践领域已经得到了广泛运用，因而基于兆易创新 推出的国产 ARM 微控制器，制作了 UINIO-MCU-GD32F350RBT6 和 UINIO-MCU-GD3"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-01-05T16:00:00.000Z"><meta property="article:modified_time" content="2024-02-06T13:23:56.117Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Project/UINIO-MCU-GD32/"},"headline":"兆易创新 UINIO-MCU-GD32F350 标准库开发指南","image":["http://www.uinio.com/Project/UINIO-MCU-GD32/logo.png"],"datePublished":"2024-01-05T16:00:00.000Z","dateModified":"2024-02-06T13:23:56.117Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"早在新冠疫情爆发前的 2019 年，就曾经撰写过一篇关于\r ARM 标准库的技术长文 《意法半导体\r STM32F103 标准库典型实例》\r ，文章非常详尽的介绍了各种常见片上外设资源的应用。时至 4\r 年以后的今天，国产微控制器在工程实践领域已经得到了广泛运用，因而基于兆易创新\r 推出的国产 ARM 微控制器，制作了 UINIO-MCU-GD32F350RBT6\r 和 UINIO-MCU-GD3"}</script><link rel="canonical" href="http://www.uinio.com/Project/UINIO-MCU-GD32/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
   (function () {
       function switchTab() {
           if (!location.hash) {
@@ -29,104 +29,221 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-01-05T16:00:00.000Z" title="2024/1/6 00:00:00">2024-01-06</time>发表</span><span class="level-item"><time dateTime="2024-02-06T13:23:56.117Z" title="2024/2/6 21:23:56">2024-02-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">38 分钟读完 (大约5754个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">兆易创新 UINIO-MCU-GD32F350 标准库开发指南</h1><div class="content"><p>早在新冠疫情爆发前的 <strong>2019</strong> 年，就曾经撰写过一篇关于 <strong>ARM</strong> 标准库的技术长文 <a target="_blank" rel="noopener" href="http://uinio.com/Embedded/STM32F103/"><strong>《意法半导体 STM32F103 标准库典型实例》</strong></a> ，文章非常详尽的介绍了各种常见片上外设资源的应用。时至 4 年以后的今天，国产微控制器在工程实践领域已经得到了广泛运用，因而基于<a target="_blank" rel="noopener" href="https://www.gigadevice.com.cn/product/mcu"><strong>兆易创新</strong></a> 推出的国产 ARM 微控制器，制作了 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F350RBT6"><strong>UINIO-MCU-GD32F350RBT6</strong></a> 和 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F103C"><strong>UINIO-MCU-GD32F103C</strong></a> 两款开源核心板，并且撰写了这篇文章作为配套教程，希冀为国产芯片的商业化普及添砖加瓦。</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-01-05T16:00:00.000Z" title="2024/1/6 00:00:00">2024-01-06</time>发表</span><span class="level-item"><time dateTime="2024-02-06T13:23:56.117Z" title="2024/2/6 21:23:56">2024-02-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">38 分钟读完 (大约5754个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">兆易创新 UINIO-MCU-GD32F350 标准库开发指南</h1><div class="content"><p>早在新冠疫情爆发前的 <strong>2019</strong> 年，就曾经撰写过一篇关于
+<strong>ARM</strong> 标准库的技术长文 <a target="_blank" rel="noopener" href="http://uinio.com/Embedded/STM32F103/"><strong>《意法半导体
+STM32F103 标准库典型实例》</strong></a>
+，文章非常详尽的介绍了各种常见片上外设资源的应用。时至 4
+年以后的今天，国产微控制器在工程实践领域已经得到了广泛运用，因而基于<a target="_blank" rel="noopener" href="https://www.gigadevice.com.cn/product/mcu"><strong>兆易创新</strong></a>
+推出的国产 ARM 微控制器，制作了 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F350RBT6"><strong>UINIO-MCU-GD32F350RBT6</strong></a>
+和 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F103C"><strong>UINIO-MCU-GD32F103C</strong></a>
+两款开源核心板，并且撰写了这篇文章作为配套教程，希冀为国产芯片的商业化普及添砖加瓦。</p>
 <p><img src="/Project/UINIO-MCU-GD32/logo.png"></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F350RBT6"><strong>UINIO-MCU-GD32F350RBT6</strong></a> 是一款采用 LQFP64 封装的 <strong>GD32F350RBT6</strong> 微控制器核心板，基于 <strong>ARM Cortex-M4</strong> 内核架构，主频高达 <code>108MHz</code>，拥有 <code>128K</code> 容量 Flash，以及 <code>16K</code> 的 SRAM。而 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F103C"><strong>UINIO-MCU-GD32F103C</strong></a> 采用 LQFP48 封装的 <strong>GD32F103Cxxx</strong> 系列微控制器（包括 <code>GD32F103CBT6</code>、<code>GD32F103C8T6</code>、<code>GD32F103C6T6</code>、<code>GD32F103C4T6</code>），基于 <strong>ARM Cortex-M3</strong> 内核架构，主频达到 <code>108MHz</code>，拥有 <code>16K ~ 128K</code> 容量 Flash，以及 <code>6K ~ 20K</code> 的 SRAM。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F350RBT6"><strong>UINIO-MCU-GD32F350RBT6</strong></a>
+是一款采用 LQFP64 封装的 <strong>GD32F350RBT6</strong>
+微控制器核心板，基于 <strong>ARM Cortex-M4</strong> 内核架构，主频高达
+<code>108MHz</code>，拥有 <code>128K</code> 容量 Flash，以及
+<code>16K</code> 的 SRAM。而 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F103C"><strong>UINIO-MCU-GD32F103C</strong></a>
+采用 LQFP48 封装的 <strong>GD32F103Cxxx</strong> 系列微控制器（包括
+<code>GD32F103CBT6</code>、<code>GD32F103C8T6</code>、<code>GD32F103C6T6</code>、<code>GD32F103C4T6</code>），基于
+<strong>ARM Cortex-M3</strong> 内核架构，主频达到
+<code>108MHz</code>，拥有 <code>16K ~ 128K</code> 容量 Flash，以及
+<code>6K ~ 20K</code> 的 SRAM。</p>
 <span id="more"></span>
-
-<h1 id="准备-GD32-支持包-amp-固件库"><a href="#准备-GD32-支持包-amp-固件库" class="headerlink" title="准备 GD32 支持包 &amp; 固件库"></a>准备 GD32 支持包 &amp; 固件库</h1><p>这里以 <strong>UINIO-MCU-GD32F350RBT6</strong> 核心板作为例子，首先需要前往兆易创新的 <a target="_blank" rel="noopener" href="https://www.gd32mcu.com/cn/download/7?kw=GD32F3x0"><strong>GD32 MCU 微控制器</strong></a> 官方网站，把如下两个开发资源下载到本地计算机：</p>
-<ol>
-<li><strong>GD32F350RBT6</strong> 固件库 <code>GD32F3x0_Firmware_Library_V2.2.1</code>。</li>
-<li><strong>Keil uVision5</strong> 开发环境的支持包 <code>GigaDevice.GD32F3x0_DFP.3.0.2.pack</code>。</li>
+<h1 id="准备-gd32-支持包-固件库">准备 GD32 支持包 &amp; 固件库</h1>
+<p>这里以 <strong>UINIO-MCU-GD32F350RBT6</strong>
+核心板作为例子，首先需要前往兆易创新的 <a target="_blank" rel="noopener" href="https://www.gd32mcu.com/cn/download/7?kw=GD32F3x0"><strong>GD32
+MCU 微控制器</strong></a>
+官方网站，把如下两个开发资源下载到本地计算机：</p>
+<ol type="1">
+<li><strong>GD32F350RBT6</strong> 固件库
+<code>GD32F3x0_Firmware_Library_V2.2.1</code>。</li>
+<li><strong>Keil uVision5</strong> 开发环境的支持包
+<code>GigaDevice.GD32F3x0_DFP.3.0.2.pack</code>。</li>
 </ol>
-<p>然后，启动 <strong>Keil uVision5</strong> 开发环境，开始导入或者在线安装 <code>GigaDevice.GD32F3x0_DFP.3.0.2.pack</code> 支持包：</p>
+<p>然后，启动 <strong>Keil uVision5</strong>
+开发环境，开始导入或者在线安装
+<code>GigaDevice.GD32F3x0_DFP.3.0.2.pack</code> 支持包：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/0.png"></p>
-<p>接下来，解压 <code>GD32F3x0_Firmware_Library_V2.2.1</code> 固件库，此时会得到如下一系列目录：</p>
+<p>接下来，解压 <code>GD32F3x0_Firmware_Library_V2.2.1</code>
+固件库，此时会得到如下一系列目录：</p>
 <ul>
 <li><strong>Docs</strong>：包含有官方评估板的<strong>原理图</strong>和固件库的<strong>使用指南</strong>。</li>
-<li><strong>Examples</strong>：各种 <strong>GD32F350RBT6</strong> 片上外设的官方示例源程序。</li>
-<li><strong>Firmware</strong>：包含有<strong>内核库</strong> <code>CMSIS</code>、<strong>标准外设库</strong> <code>GD32F3x0_standard_peripheral</code>、<strong>USB 文件系统库</strong> <code>GD32F3x0_usbfs_library</code> 三个子目录。</li>
-<li><strong>Template</strong>：集成开发环境 <strong>IAR</strong> 和 <strong>Keil uVision4</strong> 的工程模板，包含有 LED 闪烁、USART 打印、按键控制的简单示例程序。</li>
-<li><strong>Utilities</strong>：一些第三方组件和 GD32 配套的评估板测试文件。</li>
+<li><strong>Examples</strong>：各种 <strong>GD32F350RBT6</strong>
+片上外设的官方示例源程序。</li>
+<li><strong>Firmware</strong>：包含有<strong>内核库</strong>
+<code>CMSIS</code>、<strong>标准外设库</strong>
+<code>GD32F3x0_standard_peripheral</code>、<strong>USB
+文件系统库</strong> <code>GD32F3x0_usbfs_library</code>
+三个子目录。</li>
+<li><strong>Template</strong>：集成开发环境 <strong>IAR</strong> 和
+<strong>Keil uVision4</strong> 的工程模板，包含有 LED 闪烁、USART
+打印、按键控制的简单示例程序。</li>
+<li><strong>Utilities</strong>：一些第三方组件和 GD32
+配套的评估板测试文件。</li>
 </ul>
-<p>其中 <strong>Examples</strong> 下面的每一个子目录，都对应着一种片上外设的示例程序，里面通常会包含有如下的源文件：</p>
+<p>其中 <strong>Examples</strong>
+下面的每一个子目录，都对应着一种片上外设的示例程序，里面通常会包含有如下的源文件：</p>
 <ul>
 <li><code>main.c</code>：主程序源文件。</li>
 <li><code>systick.h</code>：Systick 精准延时头文件；</li>
 <li><code>systick.c</code>：Systick 精准延时源文件；</li>
 <li><code>GD32f3x0.it.h</code>：中断处理程序头文件；</li>
 <li><code>GD32f3x0_it.c</code>：中断处理程序源文件（未使用中断，所有函数体为空）；</li>
-<li><code>GD32f3x0_libopt.h</code>：通过预处理语句 <code>#include</code> 包含指定的外设库 <code>.h</code> 头文件（默认导入全部外设）；</li>
+<li><code>GD32f3x0_libopt.h</code>：通过预处理语句 <code>#include</code>
+包含指定的外设库 <code>.h</code> 头文件（默认导入全部外设）；</li>
 </ul>
-<p>而 <strong>Firmware</strong> 目录下面包含有 <strong>GD32F350RBT6</strong> 固件库的核心源文件：</p>
+<p>而 <strong>Firmware</strong> 目录下面包含有
+<strong>GD32F350RBT6</strong> 固件库的核心源文件：</p>
 <ul>
-<li><code>CMSIS</code> 子目录包含有 <strong>ARM Cortex-M4</strong> 内核的支持文件、启动代码、库引导文件，以及 <code>GD32F3x0</code> 的全局头文件和系统配置文件。</li>
-<li><code>GD32F3x0_standard_peripheral</code> 子目录下的 <code>Include</code> 包含了固件库所需要的头文件，而 <code>Source</code> 则包含有固件库所需的源文件。</li>
+<li><code>CMSIS</code> 子目录包含有 <strong>ARM Cortex-M4</strong>
+内核的支持文件、启动代码、库引导文件，以及 <code>GD32F3x0</code>
+的全局头文件和系统配置文件。</li>
+<li><code>GD32F3x0_standard_peripheral</code> 子目录下的
+<code>Include</code> 包含了固件库所需要的头文件，而 <code>Source</code>
+则包含有固件库所需的源文件。</li>
 </ul>
-<h1 id="测试-UINIO-MCU-GD32-核心板"><a href="#测试-UINIO-MCU-GD32-核心板" class="headerlink" title="测试 UINIO-MCU-GD32 核心板"></a>测试 UINIO-MCU-GD32 核心板</h1><p>打开 <code>GD32F3x0_Firmware_Library_V2.2.1</code> 固件库下面的 <code>Template</code> 目录，删掉除开 <code>Keil_project</code> 目录之外的其它文件与目录，然后将 <code>Examples\GPIO\Running_led</code> 内的全部源文件，拷贝至 <code>Template</code> 目录当中，从而获得如下的文件目录结构：</p>
+<h1 id="测试-uinio-mcu-gd32-核心板">测试 UINIO-MCU-GD32 核心板</h1>
+<p>打开 <code>GD32F3x0_Firmware_Library_V2.2.1</code> 固件库下面的
+<code>Template</code> 目录，删掉除开 <code>Keil_project</code>
+目录之外的其它文件与目录，然后将 <code>Examples\GPIO\Running_led</code>
+内的全部源文件，拷贝至 <code>Template</code>
+目录当中，从而获得如下的文件目录结构：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Template</span><br><span class="line">├── Keil_project</span><br><span class="line">│   ├── Project.uvopt</span><br><span class="line">│   └── Project.uvproj</span><br><span class="line">├── gd32f3x0_it.c</span><br><span class="line">├── gd32f3x0_it.h</span><br><span class="line">├── gd32f3x0_libopt.h</span><br><span class="line">├── main.c</span><br><span class="line">├── readme.txt</span><br><span class="line">├── systick.c</span><br><span class="line">└── systick.h</span><br></pre></td></tr></table></figure>
-
-<p>鼠标双击 <code>Template</code> 目录下面的工程描述文件 <code>Project.uvproj</code>，启动 <strong>Keil uVision5</strong>。由于 <code>GD32F3x0_Firmware_Library_V2.2.1</code> 当中的示例工程采用的是 <strong>Keil uVision4</strong> 建立和编译，因而此时会弹出下面的错误信息：</p>
+<p>鼠标双击 <code>Template</code> 目录下面的工程描述文件
+<code>Project.uvproj</code>，启动 <strong>Keil uVision5</strong>。由于
+<code>GD32F3x0_Firmware_Library_V2.2.1</code> 当中的示例工程采用的是
+<strong>Keil uVision4</strong>
+建立和编译，因而此时会弹出下面的错误信息：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/1.png"></p>
-<p>按下【确定】按钮忽略这些错误信息，依次选择顶部菜单栏上面的【Project -&gt; Manage -&gt; Migrate to Version 5 Format…】，把工程迁移成为 <strong>Keil uVision5</strong> 兼容的格式：</p>
+<p>按下【确定】按钮忽略这些错误信息，依次选择顶部菜单栏上面的【Project
+-&gt; Manage -&gt; Migrate to Version 5 Format...】，把工程迁移成为
+<strong>Keil uVision5</strong> 兼容的格式：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/2.png"></p>
-<p>此时会提示工程描述文件需要从 <strong>Keil uVision4</strong> 的 <code>Project.uvproj</code> 保存为 <strong>Keil uVision5</strong> 的 <code>Project.uvprojx</code>，直接按下【确定】按钮即可：</p>
+<p>此时会提示工程描述文件需要从 <strong>Keil uVision4</strong> 的
+<code>Project.uvproj</code> 保存为 <strong>Keil uVision5</strong> 的
+<code>Project.uvprojx</code>，直接按下【确定】按钮即可：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/3.png"></p>
-<p>在开始接下来的操作之前，需要先将 <strong>Keil uVision5</strong> 工程的编译目标切换为 <strong>UINIO-MCU-GD32F350RBT6</strong> 核心板所使用的型号【GD32F350】：</p>
+<p>在开始接下来的操作之前，需要先将 <strong>Keil uVision5</strong>
+工程的编译目标切换为 <strong>UINIO-MCU-GD32F350RBT6</strong>
+核心板所使用的型号【GD32F350】：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/4.png"></p>
-<p>点击顶部工具栏上的【Options for Target…】按钮，指定<strong>目标选项对话框</strong>里的【ARM Compiler】版本为 <code>compiler version 5</code>：</p>
+<p>点击顶部工具栏上的【Options for
+Target...】按钮，指定<strong>目标选项对话框</strong>里的【ARM
+Compiler】版本为 <code>compiler version 5</code>：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/5.png"></p>
 <blockquote>
-<p><strong>注意</strong>：这里必须修改 <strong>Keil uVision5</strong> 当中 ARM 编译器版本，否则会导致后续的编译操作出现错误，具体请参考 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link">《ARM 调试工具 UINIO-DAP-Link 应用详解》</a> 一文的 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/#%E6%B7%BB%E5%8A%A0-arm-compiler-version-5">添加 ARM Compiler version 5</a> 小节内容。</p>
+<p><strong>注意</strong>：这里必须修改 <strong>Keil uVision5</strong>
+当中 ARM 编译器版本，否则会导致后续的编译操作出现错误，具体请参考 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link">《ARM 调试工具
+UINIO-DAP-Link 应用详解》</a> 一文的 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/#%E6%B7%BB%E5%8A%A0-arm-compiler-version-5">添加
+ARM Compiler version 5</a> 小节内容。</p>
 </blockquote>
-<p>切换至对话框的【Output】选项卡，在勾选【Create HEX File】的同时，把【Name of Executable】修改为 <code>Project.hex</code>（务必添加 <code>.hex</code> 后缀，否则默认烧录的是 <code>.axf</code> 文件）：</p>
+<p>切换至对话框的【Output】选项卡，在勾选【Create HEX
+File】的同时，把【Name of Executable】修改为
+<code>Project.hex</code>（务必添加 <code>.hex</code>
+后缀，否则默认烧录的是 <code>.axf</code> 文件）：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/6.png"></p>
-<p>再切换至对话框当中的【Debug】选项卡，此时需要将 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/"><strong>UINIO-DAP-Link</strong></a> 插入至计算机的 USB 接口，然后在下拉选择【CMSIS-DAP Debugger】之后，再按下右侧的【Settings】按钮：</p>
+<p>再切换至对话框当中的【Debug】选项卡，此时需要将 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/"><strong>UINIO-DAP-Link</strong></a>
+插入至计算机的 USB 接口，然后在下拉选择【CMSIS-DAP
+Debugger】之后，再按下右侧的【Settings】按钮：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/7.png"></p>
-<p>此时会弹出<strong>调试器设置对话框</strong>，这里我们选择【UINIO-CMSIS-DAP】，并且将【Max Clock】配置为 <code>10MHz</code>：</p>
+<p>此时会弹出<strong>调试器设置对话框</strong>，这里我们选择【UINIO-CMSIS-DAP】，并且将【Max
+Clock】配置为 <code>10MHz</code>：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/8.png"></p>
-<p>最后再切换至【Flash Download】选项卡，勾选【Reset and Run】，并且点击【Add】按钮添加片上 Flash 的编程算法：</p>
+<p>最后再切换至【Flash Download】选项卡，勾选【Reset and
+Run】，并且点击【Add】按钮添加片上 Flash 的编程算法：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Keil/9.png"></p>
-<p>完成上述配置步骤之后点击【OK】，回到 <strong>Keil uVision5</strong> 的主界面，此时按下快捷键【F7】或者顶部工具栏上的【Build】按钮编译示例工程，再按下快捷键【F8】或者【Download】按钮将编译后得到的 <code>.hex</code> 程序下载至 <strong>UINIO-MCU-GD32F350RBT6</strong> 核心板运行，此时整个工程的目录文件结构如下所示，其中的 <code>Out</code> 目录保存着编译后产生的十六进制 <code>.hex</code> 文件：</p>
+<p>完成上述配置步骤之后点击【OK】，回到 <strong>Keil uVision5</strong>
+的主界面，此时按下快捷键【F7】或者顶部工具栏上的【Build】按钮编译示例工程，再按下快捷键【F8】或者【Download】按钮将编译后得到的
+<code>.hex</code> 程序下载至 <strong>UINIO-MCU-GD32F350RBT6</strong>
+核心板运行，此时整个工程的目录文件结构如下所示，其中的 <code>Out</code>
+目录保存着编译后产生的十六进制 <code>.hex</code> 文件：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Template</span><br><span class="line">├── Keil_project</span><br><span class="line">│   ├── Project.uvguix.hank</span><br><span class="line">│   ├── Project.uvopt</span><br><span class="line">│   ├── Project.uvoptx</span><br><span class="line">│   ├── Project.uvproj.saved_uv4</span><br><span class="line">│   ├── Project.uvprojx</span><br><span class="line">│   ├── RTE</span><br><span class="line">│   │   ├── _GD32F310</span><br><span class="line">│   │   │   └── RTE_Components.h</span><br><span class="line">│   │   ├── _GD32F330</span><br><span class="line">│   │   │   └── RTE_Components.h</span><br><span class="line">│   │   └── _GD32F350</span><br><span class="line">│   │       └── RTE_Components.h</span><br><span class="line">│   ├── list</span><br><span class="line">│   │   ├── Project.map</span><br><span class="line">│   │   └── startup_gd32f3x0.lst</span><br><span class="line">│   └── output</span><br><span class="line">├── gd32f3x0_it.c</span><br><span class="line">├── gd32f3x0_it.h</span><br><span class="line">├── gd32f3x0_libopt.h</span><br><span class="line">├── main.c</span><br><span class="line">├── readme.txt</span><br><span class="line">├── systick.c</span><br><span class="line">└── systick.h</span><br></pre></td></tr></table></figure>
-
-<p>该示例程序会每间隔 4 秒的时间，循环切换 <strong>UINIO-MCU-GD32F350RBT6</strong> 的四个 GPIO 引脚 <code>C2</code>、<code>C10</code>、<code>C11</code>、<code>C12</code> 的高低电平状态，此时通过万用表就可以测量出运行结果，从而方便的判断出程序是否下载成功，以及核心板运行是否存在有故障。</p>
+<p>该示例程序会每间隔 4 秒的时间，循环切换
+<strong>UINIO-MCU-GD32F350RBT6</strong> 的四个 GPIO 引脚
+<code>C2</code>、<code>C10</code>、<code>C11</code>、<code>C12</code>
+的高低电平状态，此时通过万用表就可以测量出运行结果，从而方便的判断出程序是否下载成功，以及核心板运行是否存在有故障。</p>
 <blockquote>
-<p><strong>注意</strong>：<strong>DAPLink</strong> 是 ARM 系列微控制器开发过程当中，程序下载与调试不可少的工具，相关资料和设计资源可以参考笔者之前撰写的<a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/">《ARM 调试工具 UINIO-DAP-Link 应用详解》</a> 一文。</p>
+<p><strong>注意</strong>：<strong>DAPLink</strong> 是 ARM
+系列微控制器开发过程当中，程序下载与调试不可少的工具，相关资料和设计资源可以参考笔者之前撰写的<a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/">《ARM 调试工具
+UINIO-DAP-Link 应用详解》</a> 一文。</p>
 </blockquote>
-<h1 id="搭建-Keil-uVision5-自定义工程"><a href="#搭建-Keil-uVision5-自定义工程" class="headerlink" title="搭建 Keil uVision5 自定义工程"></a>搭建 Keil uVision5 自定义工程</h1><h2 id="新建目录与拷贝源文件"><a href="#新建目录与拷贝源文件" class="headerlink" title="新建目录与拷贝源文件"></a>新建目录与拷贝源文件</h2><p>本节内容开始尝试自己动手搭建 <strong>Keil uVision5</strong> 工程，首先新建一个名称为 <code>Keil-GD32F350RBT6</code> 的 <strong>Keil uVision5</strong> 工程，并将其保存至同名的目录下面，然后再新建如下一系列子目录，并且将固件库里的源文件拷贝至对应的子目录：</p>
+<h1 id="搭建-keil-uvision5-自定义工程">搭建 Keil uVision5
+自定义工程</h1>
+<h2 id="新建目录与拷贝源文件">新建目录与拷贝源文件</h2>
+<p>本节内容开始尝试自己动手搭建 <strong>Keil uVision5</strong>
+工程，首先新建一个名称为 <code>Keil-GD32F350RBT6</code> 的 <strong>Keil
+uVision5</strong>
+工程，并将其保存至同名的目录下面，然后再新建如下一系列子目录，并且将固件库里的源文件拷贝至对应的子目录：</p>
 <ul>
 <li><strong>Applications</strong>：保存应用层相关的源文件。</li>
-<li><strong>Documents</strong>：用于存放 Markdown 说明文档，可以预先放置一个 <code>README.md</code> 文件。</li>
-<li><strong>Drivers</strong>：存放针对 <strong>UINIO-MCU-GD32F350RBT6</strong> 定制的板级驱动程序。</li>
-<li><strong>Firmware</strong>：用于放置 <code>GD32F3x0_Firmware_Library_V2.2.1</code> 当中 <code>Firmware</code> 目录下的全部内容（即 <code>CMSIS</code>、<code>GD32F3x0_standard_peripheral</code>、<code>GD32F3x0_usbfs_library</code> 三个子目录）。</li>
-<li><strong>Sources</strong>：用于保存 <code>GD32F3x0_Firmware_Library_V2.2.1 </code> 下面的 <code>Template</code> 目录当中，除 <code>IAR_project</code>、<code>Keil_project</code>、<code>readme.txt</code> 之外的文件（即<code>main.c/h</code>、<code>systick.c/h</code>、<code>gd32f3x0_it.c/h</code>、<code>gd32f3x0_libopt.h</code> 七个源文件）。</li>
+<li><strong>Documents</strong>：用于存放 Markdown
+说明文档，可以预先放置一个 <code>README.md</code> 文件。</li>
+<li><strong>Drivers</strong>：存放针对
+<strong>UINIO-MCU-GD32F350RBT6</strong> 定制的板级驱动程序。</li>
+<li><strong>Firmware</strong>：用于放置
+<code>GD32F3x0_Firmware_Library_V2.2.1</code> 当中 <code>Firmware</code>
+目录下的全部内容（即
+<code>CMSIS</code>、<code>GD32F3x0_standard_peripheral</code>、<code>GD32F3x0_usbfs_library</code>
+三个子目录）。</li>
+<li><strong>Sources</strong>：用于保存
+<code>GD32F3x0_Firmware_Library_V2.2.1</code> 下面的
+<code>Template</code> 目录当中，除
+<code>IAR_project</code>、<code>Keil_project</code>、<code>readme.txt</code>
+之外的文件（即<code>main.c/h</code>、<code>systick.c/h</code>、<code>gd32f3x0_it.c/h</code>、<code>gd32f3x0_libopt.h</code>
+七个源文件）。</li>
 </ul>
-<h2 id="创建分组与添加源文件"><a href="#创建分组与添加源文件" class="headerlink" title="创建分组与添加源文件"></a>创建分组与添加源文件</h2><p>鼠标点击 <strong>Keil uVision5</strong> 顶部菜单栏上面的【File Extensions, Books and Environment…】按钮：</p>
+<h2 id="创建分组与添加源文件">创建分组与添加源文件</h2>
+<p>鼠标点击 <strong>Keil uVision5</strong> 顶部菜单栏上面的【File
+Extensions, Books and Environment...】按钮：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Project/0.png"></p>
-<p>在弹出的<strong>工程管理项</strong>对话框当中，分别将左侧的【Project Targets】命名为 <code>Keil-GD32F350RBT6</code>，而中间的【Groups】则分别建立如下几个分组，并且通过右侧的 <code>Files</code> 向指定分组添加相应的源文件：</p>
+<p>在弹出的<strong>工程管理项</strong>对话框当中，分别将左侧的【Project
+Targets】命名为
+<code>Keil-GD32F350RBT6</code>，而中间的【Groups】则分别建立如下几个分组，并且通过右侧的
+<code>Files</code> 向指定分组添加相应的源文件：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Project/1.png"></p>
 <ul>
-<li><strong>CMSIS 分组</strong>：分别添加 <code>Keil-GD32F350RBT6\Firmware\CMSIS\GD\GD32F3x0\Source</code> 目录下的 <code>system_gd32f3x0.c</code> 外设接入层源文件，以及 <code>Keil-GD32F350RBT6\Firmware\CMSIS\GD\GD32F3x0\Source\ARM</code> 目录下的 <code>startup_gd32f3x0.s</code> 启动文件（添加对话框的文件类型要修改为 <code>.s</code>）。</li>
+<li><strong>CMSIS 分组</strong>：分别添加
+<code>Keil-GD32F350RBT6\Firmware\CMSIS\GD\GD32F3x0\Source</code>
+目录下的 <code>system_gd32f3x0.c</code> 外设接入层源文件，以及
+<code>Keil-GD32F350RBT6\Firmware\CMSIS\GD\GD32F3x0\Source\ARM</code>
+目录下的 <code>startup_gd32f3x0.s</code>
+启动文件（添加对话框的文件类型要修改为 <code>.s</code>）。</li>
 <li><strong>Drivers 分组</strong>：暂时不需要添加任何源文件。</li>
-<li><strong>Firmware 分组</strong>：按需添加 <code>Keil-GD32F350RBT6\Firmware\GD32F3x0_standard_peripheral\Source</code> 目录下的 <code>.c</code> 源文件（其中的 <code>gd32f3x0_rcu.c</code> 和 <code>gd32f3x0_gpio.c</code> 属于必须添加）。</li>
-<li><strong>Documents 分组</strong>：将 <code>Keil-GD32F350RBT6\Documents</code> 目录下新建的 <code>README.md</code> 文件添加进去。</li>
-<li><strong>Applications</strong> 分组：添加 <code>Keil-GD32F350RBT6\Sources</code> 目录下的 <code>main.c</code>、<code>systick.c</code>、<code>gd32f3x0_it.c</code> 三个源文件。</li>
+<li><strong>Firmware 分组</strong>：按需添加
+<code>Keil-GD32F350RBT6\Firmware\GD32F3x0_standard_peripheral\Source</code>
+目录下的 <code>.c</code> 源文件（其中的 <code>gd32f3x0_rcu.c</code> 和
+<code>gd32f3x0_gpio.c</code> 属于必须添加）。</li>
+<li><strong>Documents 分组</strong>：将
+<code>Keil-GD32F350RBT6\Documents</code> 目录下新建的
+<code>README.md</code> 文件添加进去。</li>
+<li><strong>Applications</strong> 分组：添加
+<code>Keil-GD32F350RBT6\Sources</code> 目录下的
+<code>main.c</code>、<code>systick.c</code>、<code>gd32f3x0_it.c</code>
+三个源文件。</li>
 <li><strong>Sources 分组</strong>：暂时不需要添加任何源文件。</li>
 </ul>
 <p>完成上述操作之后，在<strong>工程管理项</strong>对话框当中，各个分组下面的源文件情况如下图所示：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Project/2.png"></p>
-<p>点击【OK】按钮关闭<strong>工程管理项</strong>对话框，此时 <strong>Keil uVision5</strong> 左侧呈现的工程目录结构如下面所示：</p>
+<p>点击【OK】按钮关闭<strong>工程管理项</strong>对话框，此时
+<strong>Keil uVision5</strong> 左侧呈现的工程目录结构如下面所示：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Project/3.png"></p>
-<h2 id="移除-Source-目录下的冗余代码"><a href="#移除-Source-目录下的冗余代码" class="headerlink" title="移除 Source 目录下的冗余代码"></a>移除 Source 目录下的冗余代码</h2><p>为了避免工程搭建过程当中，直接拷贝官方固件库 <code>Template</code> 目录下的源文件，出现冗余代码导致编译错误的情况，接下来还需要对 <code>Source</code> 目录进行一些清理工作。首先需要删除掉该目录下 <code>main.c</code> 源文件里多余的内容，只需要保留如下所示的代码：</p>
+<h2 id="移除-source-目录下的冗余代码">移除 Source 目录下的冗余代码</h2>
+<p>为了避免工程搭建过程当中，直接拷贝官方固件库 <code>Template</code>
+目录下的源文件，出现冗余代码导致编译错误的情况，接下来还需要对
+<code>Source</code> 目录进行一些清理工作。首先需要删除掉该目录下
+<code>main.c</code> 源文件里多余的内容，只需要保留如下所示的代码：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;gd32f3x0.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;systick.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;main.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* configure systick */</span></span><br><span class="line">    <span class="built_in">systick_config</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>除此之外，还需要再移除掉 <code>Source</code> 目录下 <code>gd32f3x0_it.c</code> 源文件里面，如下所示的无效代码片段：</p>
+<p>除此之外，还需要再移除掉 <code>Source</code> 目录下
+<code>gd32f3x0_it.c</code> 源文件里面，如下所示的无效代码片段：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span></span><br><span class="line"><span class="comment">    \brief      this function handles SysTick exception</span></span><br><span class="line"><span class="comment">    \param[in]  none</span></span><br><span class="line"><span class="comment">    \param[out] none</span></span><br><span class="line"><span class="comment">    \retval     none</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SysTick_Handler</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">led_spark</span>();</span><br><span class="line">    <span class="built_in">delay_decrement</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置编译器路径与选项"><a href="#配置编译器路径与选项" class="headerlink" title="配置编译器路径与选项"></a>配置编译器路径与选项</h2><p>点击 <strong>Keil uVision5</strong> 工具栏顶部的【Options for target】，在弹出的<strong>目标选项对话框</strong>当中，首先切换至【C&#x2F;C++】选项卡，将【Define】输入框设置为 <code>USE_STDPERIPH_DRIVER,GD32F3X0,GD32F350</code>：</p>
+<h2 id="配置编译器路径与选项">配置编译器路径与选项</h2>
+<p>点击 <strong>Keil uVision5</strong> 工具栏顶部的【Options for
+target】，在弹出的<strong>目标选项对话框</strong>当中，首先切换至【C/C++】选项卡，将【Define】输入框设置为
+<code>USE_STDPERIPH_DRIVER,GD32F3X0,GD32F350</code>：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Project/4.png"></p>
-<p>然后再点击对话框当中【Include Paths】输入框右侧的按钮，配置 ARM 编译器分别包含 <strong>Keil-GD32F350RBT6</strong> 工程目录下的如下路径：</p>
+<p>然后再点击对话框当中【Include Paths】输入框右侧的按钮，配置 ARM
+编译器分别包含 <strong>Keil-GD32F350RBT6</strong>
+工程目录下的如下路径：</p>
 <ul>
 <li><code>.\Sources</code></li>
 <li><code>.\Firmware\CMSIS</code></li>
@@ -134,136 +251,222 @@
 <li><code>.\Firmware\GD32F3x0_standard_peripheral\Include</code></li>
 </ul>
 <p><img src="/Project/UINIO-MCU-GD32/Project/5.png"></p>
-<p>接下来切换至【Target】选项卡，选择 ARM 编译器的版本为 <strong>5</strong>，并勾选界面上 <strong>Keil uVision5</strong> 自带的用于串口重定向的【Use MicroLIB】工具库：</p>
+<p>接下来切换至【Target】选项卡，选择 ARM 编译器的版本为
+<strong>5</strong>，并勾选界面上 <strong>Keil uVision5</strong>
+自带的用于串口重定向的【Use MicroLIB】工具库：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Project/6.png"></p>
-<p>最后切换到【Output】选项卡，将【Name of Executable】输入框设置为 <code>Keil-GD32F350RBT6.hex</code>，并且勾选 <strong>Create HEX File</strong> 使得编译结果为十六进制 <code>.hex</code> 格式：</p>
+<p>最后切换到【Output】选项卡，将【Name of Executable】输入框设置为
+<code>Keil-GD32F350RBT6.hex</code>，并且勾选 <strong>Create HEX
+File</strong> 使得编译结果为十六进制 <code>.hex</code> 格式：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Project/7.png"></p>
-<h2 id="测试工程的编译下载"><a href="#测试工程的编译下载" class="headerlink" title="测试工程的编译下载"></a>测试工程的编译下载</h2><p>完成上述配置工作之后，关闭 <strong>Keil uVision5</strong> 界面上的全部对话框，然后按下快捷键【F7】或者顶部工具栏上的【Build】按钮，将新建工程里的相关源文件编译为一个 <code>Keil-GD32F350RBT6.hex</code> 文件：</p>
+<h2 id="测试工程的编译下载">测试工程的编译下载</h2>
+<p>完成上述配置工作之后，关闭 <strong>Keil uVision5</strong>
+界面上的全部对话框，然后按下快捷键【F7】或者顶部工具栏上的【Build】按钮，将新建工程里的相关源文件编译为一个
+<code>Keil-GD32F350RBT6.hex</code> 文件：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Build started: Project: Keil-GD32F350RBT6</span><br><span class="line">*** Using Compiler &#x27;V5.<span class="number">06</span> update <span class="number">7</span> (build <span class="number">960</span>)&#x27;, folder: &#x27;D:\Software\Tech\Keil\ARM\ARMCC\Bin&#x27;</span><br><span class="line">Build target &#x27;Keil-GD32F350RBT6&#x27;</span><br><span class="line">assembling startup_gd32f3x0.s...</span><br><span class="line">compiling gd32f3x0_dma.c...</span><br><span class="line">compiling gd32f3x0_dbg.c...</span><br><span class="line">compiling gd32f3x0_crc.c...</span><br><span class="line">compiling gd32f3x0_ctc.c...</span><br><span class="line">compiling gd32f3x0_cec.c...</span><br><span class="line">compiling gd32f3x0_dac.c...</span><br><span class="line">compiling gd32f3x0_exti.c...</span><br><span class="line">compiling gd32f3x0_adc.c...</span><br><span class="line">compiling gd32f3x0_cmp.c...</span><br><span class="line">compiling system_gd32f3x0.c...</span><br><span class="line">compiling gd32f3x0_fmc.c...</span><br><span class="line">compiling gd32f3x0_fwdgt.c...</span><br><span class="line">compiling gd32f3x0_i2c.c...</span><br><span class="line">compiling gd32f3x0_misc.c...</span><br><span class="line">compiling gd32f3x0_gpio.c...</span><br><span class="line">compiling gd32f3x0_pmu.c...</span><br><span class="line">compiling gd32f3x0_spi.c...</span><br><span class="line">compiling gd32f3x0_syscfg.c...</span><br><span class="line">compiling gd32f3x0_rcu.c...</span><br><span class="line">compiling gd32f3x0_rtc.c...</span><br><span class="line">compiling gd32f3x0_tsi.c...</span><br><span class="line">compiling gd32f3x0_timer.c...</span><br><span class="line">compiling gd32f3x0_wwdgt.c...</span><br><span class="line">compiling gd32f3x0_usart.c...</span><br><span class="line">compiling gd32f3x0_it.c...</span><br><span class="line">compiling main.c...</span><br><span class="line">compiling systick.c...</span><br><span class="line">linking...</span><br><span class="line">Program Size: Code=<span class="number">1104</span> RO-data=<span class="number">368</span> RW-data=<span class="number">4</span> ZI-data=<span class="number">1028</span></span><br><span class="line"><span class="function">FromELF: <span class="title">creating</span> <span class="title">hex</span> <span class="title">file</span>...</span></span><br><span class="line"><span class="function">&quot;.\<span class="title">Objects</span>\<span class="title">Keil</span>-<span class="title">GD32F350RBT6.hex</span>&quot; - 0 <span class="title">Error</span>(<span class="title">s</span>), 0 <span class="title">Warning</span>(<span class="title">s</span>).</span></span><br><span class="line"><span class="function"><span class="title">Build</span> <span class="title">Time</span> <span class="title">Elapsed</span>:  00:00:03</span></span><br></pre></td></tr></table></figure>
-
-<p>如果编译结果显示 <code>0 Error(s), 0 Warning(s)</code>，说明这个 <strong>Keil uVision5</strong> 工程已经搭建成功。接下来，就可以按下快捷键【F8】或者顶部工具栏上的【Download】按钮，把编译后得到的十六进制文件 <code>Keil-GD32F350RBT6.hex</code>，通过 <strong>UINIO-DAP-Link</strong> 下载至 <strong>UINIO-MCU-GD32F350RBT6</strong> 核心板上面运行：</p>
+<p>如果编译结果显示 <code>0 Error(s), 0 Warning(s)</code>，说明这个
+<strong>Keil uVision5</strong>
+工程已经搭建成功。接下来，就可以按下快捷键【F8】或者顶部工具栏上的【Download】按钮，把编译后得到的十六进制文件
+<code>Keil-GD32F350RBT6.hex</code>，通过 <strong>UINIO-DAP-Link</strong>
+下载至 <strong>UINIO-MCU-GD32F350RBT6</strong> 核心板上面运行：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Load &quot;D:\\Workspace\\UINIO-MCU-GD32F350RBT6\\Keil-GD32F350RBT6\\Objects\\Keil-GD32F350RBT6.hex&quot;</span><br><span class="line"><span class="built_in">Erase</span> Done.</span><br><span class="line">Programming Done.</span><br><span class="line"><span class="built_in">Verify</span> OK.</span><br><span class="line">Flash Load finished <span class="built_in">at</span> <span class="number">18</span>:<span class="number">22</span>:<span class="number">55</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p><strong>注意</strong>：为了大家能够方便快速的搭建测试项目，该自定义工程已被保存到开源硬件项目 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F350RBT6"><strong>UINIO-MCU-GD32F350RBT6</strong></a> 的 <code>Keil-GD32F350RBT6</code> 目录里面。</p>
+<p><strong>注意</strong>：为了大家能够方便快速的搭建测试项目，该自定义工程已被保存到开源硬件项目
+<a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F350RBT6"><strong>UINIO-MCU-GD32F350RBT6</strong></a>
+的 <code>Keil-GD32F350RBT6</code> 目录里面。</p>
 </blockquote>
-<h1 id="MCU-微控制器系统结构概览"><a href="#MCU-微控制器系统结构概览" class="headerlink" title="MCU 微控制器系统结构概览"></a>MCU 微控制器系统结构概览</h1><h2 id="芯片资源简介"><a href="#芯片资源简介" class="headerlink" title="芯片资源简介"></a>芯片资源简介</h2><p><strong>GD32F350RBT6</strong> 是一款采用 Arm Cortex-M4 内核架构的 32 位微控制器，工作频率为 <code>108MHz</code>，工作电压范围在 <code>2.6V ~ 3.6V</code> 之间，工作温度介于 <code>-40°C ~ +85°C</code> 范围。提供高达 <code>128KB</code> 的片上 <strong>Flash</strong> 闪存和 <code>16KB</code> 的 <strong>SRAM</strong> 内存，其它的片上资源情况可以参考下面表格：</p>
+<h1 id="mcu-微控制器系统结构概览">MCU 微控制器系统结构概览</h1>
+<h2 id="芯片资源简介">芯片资源简介</h2>
+<p><strong>GD32F350RBT6</strong> 是一款采用 Arm Cortex-M4 内核架构的 32
+位微控制器，工作频率为 <code>108MHz</code>，工作电压范围在
+<code>2.6V ~ 3.6V</code> 之间，工作温度介于 <code>-40°C ~ +85°C</code>
+范围。提供高达 <code>128KB</code> 的片上 <strong>Flash</strong> 闪存和
+<code>16KB</code> 的 <strong>SRAM</strong>
+内存，其它的片上资源情况可以参考下面表格：</p>
 <table>
 <thead>
-<tr>
-<th align="left">资源名称</th>
-<th align="left">数量</th>
-<th align="left">资源名称</th>
-<th align="left">数量</th>
+<tr class="header">
+<th style="text-align: left;">资源名称</th>
+<th style="text-align: left;">数量</th>
+<th style="text-align: left;">资源名称</th>
+<th style="text-align: left;">数量</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left"><strong>12 位 ADC</strong></td>
-<td align="left">1 个</td>
-<td align="left"><strong>SPI</strong></td>
-<td align="left">2 个</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>12 位 ADC</strong></td>
+<td style="text-align: left;">1 个</td>
+<td style="text-align: left;"><strong>SPI</strong></td>
+<td style="text-align: left;">2 个</td>
 </tr>
-<tr>
-<td align="left"><strong>12 位 DAC</strong></td>
-<td align="left">1 个</td>
-<td align="left"><strong>I2C</strong></td>
-<td align="left">2 个</td>
+<tr class="even">
+<td style="text-align: left;"><strong>12 位 DAC</strong></td>
+<td style="text-align: left;">1 个</td>
+<td style="text-align: left;"><strong>I2C</strong></td>
+<td style="text-align: left;">2 个</td>
 </tr>
-<tr>
-<td align="left"><strong>通用比较器 CMP</strong></td>
-<td align="left">2 个</td>
-<td align="left"><strong>USART</strong></td>
-<td align="left">2 个</td>
+<tr class="odd">
+<td style="text-align: left;"><strong>通用比较器 CMP</strong></td>
+<td style="text-align: left;">2 个</td>
+<td style="text-align: left;"><strong>USART</strong></td>
+<td style="text-align: left;">2 个</td>
 </tr>
-<tr>
-<td align="left"><strong>通用 16 位定时器</strong></td>
-<td align="left">5 个</td>
-<td align="left"><strong>I2S</strong></td>
-<td align="left">1 个</td>
+<tr class="even">
+<td style="text-align: left;"><strong>通用 16 位定时器</strong></td>
+<td style="text-align: left;">5 个</td>
+<td style="text-align: left;"><strong>I2S</strong></td>
+<td style="text-align: left;">1 个</td>
 </tr>
-<tr>
-<td align="left"><strong>通用 32 位定时器</strong></td>
-<td align="left">1 个</td>
-<td align="left"><strong>HDMI-CEC</strong></td>
-<td align="left">1 个</td>
+<tr class="odd">
+<td style="text-align: left;"><strong>通用 32 位定时器</strong></td>
+<td style="text-align: left;">1 个</td>
+<td style="text-align: left;"><strong>HDMI-CEC</strong></td>
+<td style="text-align: left;">1 个</td>
 </tr>
-<tr>
-<td align="left"><strong>基本定时器</strong></td>
-<td align="left">1 个</td>
-<td align="left"><strong>TSI</strong></td>
-<td align="left">1 个</td>
+<tr class="even">
+<td style="text-align: left;"><strong>基本定时器</strong></td>
+<td style="text-align: left;">1 个</td>
+<td style="text-align: left;"><strong>TSI</strong></td>
+<td style="text-align: left;">1 个</td>
 </tr>
-<tr>
-<td align="left"><strong>PWM 高级定时器</strong></td>
-<td align="left">1 个</td>
-<td align="left"><strong>USBFS 全速 USB</strong></td>
-<td align="left">1 个</td>
+<tr class="odd">
+<td style="text-align: left;"><strong>PWM 高级定时器</strong></td>
+<td style="text-align: left;">1 个</td>
+<td style="text-align: left;"><strong>USBFS 全速 USB</strong></td>
+<td style="text-align: left;">1 个</td>
 </tr>
-</tbody></table>
-<p><strong>UINIO-MCU-GD32F350RBT6</strong> 采用的 <strong>GD32F350RBT6</strong> 微控制器使用的是 <code>LQFP64</code> 封装形式，其具体 <strong>64</strong> 个引脚的功能分配可以参见下图：</p>
+</tbody>
+</table>
+<p><strong>UINIO-MCU-GD32F350RBT6</strong> 采用的
+<strong>GD32F350RBT6</strong> 微控制器使用的是 <code>LQFP64</code>
+封装形式，其具体 <strong>64</strong> 个引脚的功能分配可以参见下图：</p>
 <p><img src="/Project/UINIO-MCU-GD32/ARM/0.png"></p>
-<h2 id="ARM-Cortex-M4-内核架构"><a href="#ARM-Cortex-M4-内核架构" class="headerlink" title="ARM Cortex-M4 内核架构"></a>ARM Cortex-M4 内核架构</h2><p><strong>ARM Cortex-M4</strong> 系列微控制器基于 <strong>ARMv7</strong> 架构，其拥有着如下一系列的片上外设资源：</p>
+<h2 id="arm-cortex-m4-内核架构">ARM Cortex-M4 内核架构</h2>
+<p><strong>ARM Cortex-M4</strong> 系列微控制器基于
+<strong>ARMv7</strong> 架构，其拥有着如下一系列的片上外设资源：</p>
 <p><img src="/Project/UINIO-MCU-GD32/ARM/1.png"></p>
 <ul>
-<li>嵌套式向量型中断控制器（<strong>NVIC</strong>，Nested Vectored Interrupt Controller）。</li>
+<li>嵌套式向量型中断控制器（<strong>NVIC</strong>，Nested Vectored
+Interrupt Controller）。</li>
 <li>浮点运算单元（<strong>FPU</strong>，Floating Point Unit）。</li>
-<li>闪存地址重载及断点单元（<strong>FPB</strong>，Flash Patch Breakpoint）。</li>
-<li>串行线调试接口（<strong>SW-DP</strong>，Serial-Wire Debug Port）。</li>
-<li>数据观测点及跟踪单元（<strong>DWT</strong>，Data Watchpoint And Trace）。</li>
-<li>指令跟踪宏单元（<strong>ITM</strong>，Instrumentation Trace Macrocell）。</li>
-<li>跟踪端口接口单元（<strong>TPIU</strong>，Trace Port Interface Unit）。</li>
-<li>内部总线矩阵（用于实现 <strong>I-Code</strong> 指令总线、<strong>D-Code</strong> 数据总线、<strong>System</strong> 系统总线、<strong>PPB</strong> 专用总线、<strong>AHB-AP</strong> 调试专用总线的相互联接）。</li>
+<li>闪存地址重载及断点单元（<strong>FPB</strong>，Flash Patch
+Breakpoint）。</li>
+<li>串行线调试接口（<strong>SW-DP</strong>，Serial-Wire Debug
+Port）。</li>
+<li>数据观测点及跟踪单元（<strong>DWT</strong>，Data Watchpoint And
+Trace）。</li>
+<li>指令跟踪宏单元（<strong>ITM</strong>，Instrumentation Trace
+Macrocell）。</li>
+<li>跟踪端口接口单元（<strong>TPIU</strong>，Trace Port Interface
+Unit）。</li>
+<li>内部总线矩阵（用于实现 <strong>I-Code</strong>
+指令总线、<strong>D-Code</strong> 数据总线、<strong>System</strong>
+系统总线、<strong>PPB</strong> 专用总线、<strong>AHB-AP</strong>
+调试专用总线的相互联接）。</li>
 </ul>
-<h2 id="GD32F350RBT6-外设架构"><a href="#GD32F350RBT6-外设架构" class="headerlink" title="GD32F350RBT6 外设架构"></a>GD32F350RBT6 外设架构</h2><p><strong>GD32F350RBT6</strong> 微控制器的系统架构如下图所示，由于 <strong>AHB</strong>（Advanced High performance Bus）高级高性能总线矩阵采用的是多层总线结构，支持多个主从设备之间实现并行通信，其中<strong>主设备</strong>包含有来自 <strong>ARM Cortex-M4</strong> 内核架构的 I-Code 指令总线、D-Code 数据总线、System 系统总线，以及来自内核架构之外的 DMA 一共四个：</p>
+<h2 id="gd32f350rbt6-外设架构">GD32F350RBT6 外设架构</h2>
+<p><strong>GD32F350RBT6</strong> 微控制器的系统架构如下图所示，由于
+<strong>AHB</strong>（Advanced High performance
+Bus）高级高性能总线矩阵采用的是多层总线结构，支持多个主从设备之间实现并行通信，其中<strong>主设备</strong>包含有来自
+<strong>ARM Cortex-M4</strong> 内核架构的 I-Code 指令总线、D-Code
+数据总线、System 系统总线，以及来自内核架构之外的 DMA 一共四个：</p>
 <ul>
-<li><strong>I-Code 总线</strong>：即 Instruction Code，用于从 <code>0x 0000 0000 ~ 0x 1FFF FFFF</code> <strong>代码区域</strong>获取向量。</li>
-<li><strong>D-Code 总线</strong>：即 Data Code，用于加载和存储数据，以及调试访问<strong>代码区域</strong>。</li>
-<li><strong>System 系统总线</strong>：用于获取指令和向量、加载与存储数据、调试访问<strong>系统区域</strong>（包括内部 SRAM 和外设区域）。</li>
+<li><strong>I-Code 总线</strong>：即 Instruction Code，用于从
+<code>0x 0000 0000 ~ 0x 1FFF FFFF</code>
+<strong>代码区域</strong>获取向量。</li>
+<li><strong>D-Code 总线</strong>：即 Data
+Code，用于加载和存储数据，以及调试访问<strong>代码区域</strong>。</li>
+<li><strong>System
+系统总线</strong>：用于获取指令和向量、加载与存储数据、调试访问<strong>系统区域</strong>（包括内部
+SRAM 和外设区域）。</li>
 </ul>
 <p><img src="/Project/UINIO-MCU-GD32/ARM/2.png"></p>
-<p>除此之外，该 <strong>AHB 总线矩阵</strong>还具有 Flash 存储控制器的 <strong>IBUS</strong> 和 <strong>DBUS</strong> 总线、<strong>SRM 控制器</strong>、<strong>AHB1</strong> 和 <strong>AHB2</strong> 总线五个<strong>从设备</strong>连接。</p>
+<p>除此之外，该 <strong>AHB 总线矩阵</strong>还具有 Flash 存储控制器的
+<strong>IBUS</strong> 和 <strong>DBUS</strong> 总线、<strong>SRM
+控制器</strong>、<strong>AHB1</strong> 和 <strong>AHB2</strong>
+总线五个<strong>从设备</strong>连接。</p>
 <ul>
-<li><strong>AHB2</strong> 总线连接了 <strong>A</strong>、<strong>B</strong>、<strong>C</strong>、<strong>D</strong>、<strong>F</strong> 一共五组 GPIO 端口。</li>
-<li><strong>AHB1</strong> 总线连接的是 AHB 外设，其中的两组 <strong>AHB-APB 总线桥</strong>提供了其与 <strong>APB</strong> 高级外设总线（Advanced Peripheral Bus）之间的同步连接。</li>
+<li><strong>AHB2</strong> 总线连接了
+<strong>A</strong>、<strong>B</strong>、<strong>C</strong>、<strong>D</strong>、<strong>F</strong>
+一共五组 GPIO 端口。</li>
+<li><strong>AHB1</strong> 总线连接的是 AHB 外设，其中的两组
+<strong>AHB-APB 总线桥</strong>提供了其与 <strong>APB</strong>
+高级外设总线（Advanced Peripheral Bus）之间的同步连接。</li>
 </ul>
-<h2 id="地址空间映射"><a href="#地址空间映射" class="headerlink" title="地址空间映射"></a>地址空间映射</h2><p><strong>ARM Cortex M4</strong> 内核采用了<strong>哈佛结构</strong>，使用相互独立的总线来读取<strong>指令</strong>和操作<strong>数据</strong>。这些指令和数据都存储在一个大小为 <code>4GB</code> 的相同<strong>地址空间</strong>（因为 <strong>ARM Cortex M4</strong> 的地址总线宽度为 <strong>32 位</strong>，所以其对应的地址范围为 <code>2</code> 的 <code>32</code> 次方等于 <strong>4GB</strong>），但是处于不同的<strong>地址范围</strong>：</p>
+<h2 id="地址空间映射">地址空间映射</h2>
+<p><strong>ARM Cortex M4</strong>
+内核采用了<strong>哈佛结构</strong>，使用相互独立的总线来读取<strong>指令</strong>和操作<strong>数据</strong>。这些指令和数据都存储在一个大小为
+<code>4GB</code> 的相同<strong>地址空间</strong>（因为 <strong>ARM
+Cortex M4</strong> 的地址总线宽度为 <strong>32
+位</strong>，所以其对应的地址范围为 <code>2</code> 的 <code>32</code>
+次方等于
+<strong>4GB</strong>），但是处于不同的<strong>地址范围</strong>：</p>
 <p><img src="/Project/UINIO-MCU-GD32/ARM/3.png"></p>
-<p>观察上面的表格可以发现 <strong>GD32F350RBT6</strong>  的片上外设地址空间被划分为 <strong>AHB1</strong> 和 <strong>AHB2</strong> 总线、<strong>APB1</strong> 和 <strong>APB2</strong> 总线共四个部分，这些总线的最低地址被称为<strong>总线基地址</strong>，也就是挂载在该总线上首个外设的地址，而每个外设的最低地址则被称为<strong>外设基地址</strong>，每一个外设的地址范围内都分布着该外设的<strong>寄存器</strong>，通过<strong>操作这些寄存器就可以达到控制外设的目的</strong>。</p>
-<h1 id="从操作寄存器到运用固件库"><a href="#从操作寄存器到运用固件库" class="headerlink" title="从操作寄存器到运用固件库"></a>从操作寄存器到运用固件库</h1><h2 id="操作寄存器"><a href="#操作寄存器" class="headerlink" title="操作寄存器"></a>操作寄存器</h2><p>如果需要将 <strong>AHB</strong> 总线上的 <strong>GPIOA</strong> 外设对应的 16 个引脚全部置为 <code>1</code>，那么就需要去配置<strong>端口输出控制寄存器</strong> <code>GPIOx_OCTL</code>，通过查询用户手册可以知道其地址偏移量为 <code>0x14</code>：</p>
+<p>观察上面的表格可以发现 <strong>GD32F350RBT6</strong> 
+的片上外设地址空间被划分为 <strong>AHB1</strong> 和
+<strong>AHB2</strong> 总线、<strong>APB1</strong> 和
+<strong>APB2</strong>
+总线共四个部分，这些总线的最低地址被称为<strong>总线基地址</strong>，也就是挂载在该总线上首个外设的地址，而每个外设的最低地址则被称为<strong>外设基地址</strong>，每一个外设的地址范围内都分布着该外设的<strong>寄存器</strong>，通过<strong>操作这些寄存器就可以达到控制外设的目的</strong>。</p>
+<h1 id="从操作寄存器到运用固件库">从操作寄存器到运用固件库</h1>
+<h2 id="操作寄存器">操作寄存器</h2>
+<p>如果需要将 <strong>AHB</strong> 总线上的 <strong>GPIOA</strong>
+外设对应的 16 个引脚全部置为
+<code>1</code>，那么就需要去配置<strong>端口输出控制寄存器</strong>
+<code>GPIOx_OCTL</code>，通过查询用户手册可以知道其地址偏移量为
+<code>0x14</code>：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Register/1.png"></p>
-<p>由于 <strong>GPIOA</strong> 的外设基地址为 <code>0x4800 0000</code>，所以寄存器 <code>GPIOA_OCTL</code> 的地址计算方式如下所示：</p>
+<p>由于 <strong>GPIOA</strong> 的外设基地址为
+<code>0x4800 0000</code>，所以寄存器 <code>GPIOA_OCTL</code>
+的地址计算方式如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x4800</span> <span class="number">0000</span> + <span class="number">0x0000</span> <span class="number">0014</span> = <span class="number">0x4800</span> <span class="number">0014</span></span><br></pre></td></tr></table></figure>
-
-<p>换而言之，将寄存器 <code>OCTL(0~15)</code> 相应的<strong>位</strong>置 <code>1</code>，就可以把对应的 <code>GPIOA(0~15)</code> 控制为高电平。如果要让全部 16 个引脚输出高电平，那么相应的 <code>GPIOA_OCTL</code> 寄存器的高 16 位可以置为 <code>0</code> 而低 16 位置为 <code>1</code>，即 <code>0000 0000 0000 0000 1111 1111 1111 1111</code>，转换为十六进制就是 <code>0x0000FFFF</code>：</p>
+<p>换而言之，将寄存器 <code>OCTL(0~15)</code>
+相应的<strong>位</strong>置 <code>1</code>，就可以把对应的
+<code>GPIOA(0~15)</code> 控制为高电平。如果要让全部 16
+个引脚输出高电平，那么相应的 <code>GPIOA_OCTL</code> 寄存器的高 16
+位可以置为 <code>0</code> 而低 16 位置为 <code>1</code>，即
+<code>0000 0000 0000 0000 1111 1111 1111 1111</code>，转换为十六进制就是
+<code>0x0000FFFF</code>：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0x48000014</span>) = <span class="number">0x0000FFFF</span>; <span class="comment">// 将 GPIOA 外设对应的 16 个引脚全部输出高电平</span></span><br></pre></td></tr></table></figure>
-
-<p>像上面这样直接对寄存器地址进行操作会比较麻烦，下面可以通过宏定义 <code>#define</code>，为每一个寄存器地址都分配一个名称：</p>
+<p>像上面这样直接对寄存器地址进行操作会比较麻烦，下面可以通过宏定义
+<code>#define</code>，为每一个寄存器地址都分配一个名称：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOA_OCTL (unsigned int*)(0x48000014)  <span class="comment">// 将寄存器地址 0x48000014 定义为指针类型的 GPIOA_OCTL</span></span></span><br><span class="line">*GPIOA_OCTL = <span class="number">0x0000FFFF</span>;                       <span class="comment">// 将 GPIOA 外设对应的 16 个引脚全部输出高电平</span></span><br></pre></td></tr></table></figure>
-
-<p>为了进一步简化代码，可以将指针类型 <code>*</code> 的声明合并到 <code>GPIOA_OCTL</code> 的宏定义当中：</p>
+<p>为了进一步简化代码，可以将指针类型 <code>*</code> 的声明合并到
+<code>GPIOA_OCTL</code> 的宏定义当中：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOA_OCTL *(unsigned int*)(0x48000014) <span class="comment">// 将寄存器地址 0x48000014 定义为 GPIOA_OCTL</span></span></span><br><span class="line">GPIOA_OCTL = <span class="number">0x0000FFFF</span>;                        <span class="comment">// 将 GPIOA 外设对应的 16 个引脚全部输出高电平</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="运用库函数"><a href="#运用库函数" class="headerlink" title="运用库函数"></a>运用库函数</h2><p>通过使用 <code>GD32F3x0_Firmware_Library_V2.2.1</code> 当中的<strong>标准外设库</strong> <code>Firmware\GD32F3x0_standard_peripheral</code>，该目录下的 <code>Include\gd32f3x0_gpio.h</code> 和 <code>Source\gd32f3x0_gpio.c</code> 两个源文件，提供一系列用于操作 GPIO 的库函数：</p>
+<h2 id="运用库函数">运用库函数</h2>
+<p>通过使用 <code>GD32F3x0_Firmware_Library_V2.2.1</code>
+当中的<strong>标准外设库</strong>
+<code>Firmware\GD32F3x0_standard_peripheral</code>，该目录下的
+<code>Include\gd32f3x0_gpio.h</code> 和
+<code>Source\gd32f3x0_gpio.c</code> 两个源文件，提供一系列用于操作 GPIO
+的库函数：</p>
 <p><img src="/Project/UINIO-MCU-GD32/Register/2.png"></p>
-<p>其中的 <code>void gpio_port_write(uint32_t gpio_periph, uint16_t data)</code> 函数可以用于向特定的 GPIO 端口写入状态值：</p>
+<p>其中的
+<code>void gpio_port_write(uint32_t gpio_periph, uint16_t data)</code>
+函数可以用于向特定的 GPIO 端口写入状态值：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpio_port_write(GPIOA, <span class="number">0xFFFF</span>);</span><br></pre></td></tr></table></figure>
-
-<p>该函数被定义在 <code>Source\gd32f3x0_gpio.c</code> 源文件当中，可以看到其函数体内调用了 <code>GPIO_OCTL(gpio_periph)</code> 函数：</p>
+<p>该函数被定义在 <code>Source\gd32f3x0_gpio.c</code>
+源文件当中，可以看到其函数体内调用了 <code>GPIO_OCTL(gpio_periph)</code>
+函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span></span><br><span class="line"><span class="comment">    \brief      write data to the specified GPIO port</span></span><br><span class="line"><span class="comment">    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,F)</span></span><br><span class="line"><span class="comment">                only one parameter can be selected which is shown as below:</span></span><br><span class="line"><span class="comment">      \arg        GPIOx(x = A,B,C,D,F)</span></span><br><span class="line"><span class="comment">    \param[in]  data: specify the value to be written to the port output control register</span></span><br><span class="line"><span class="comment">    \param[out] none</span></span><br><span class="line"><span class="comment">    \retval     none</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">gpio_port_write</span><span class="params">(<span class="type">uint32_t</span> gpio_periph, <span class="type">uint16_t</span> data)</span></span><br><span class="line">&#123;</span><br><span class="line">    GPIO_OCTL(gpio_periph) = (<span class="type">uint32_t</span>)data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而这个 <code>GPIO_OCTL(gpio_periph)</code> 函数又被预定义在了 <code>Include\gd32f3x0_gpio.h</code> 头文件里面，最终其调用的是 <code>REG32(addr)</code> 函数：</p>
+<p>而这个 <code>GPIO_OCTL(gpio_periph)</code> 函数又被预定义在了
+<code>Include\gd32f3x0_gpio.h</code> 头文件里面，最终其调用的是
+<code>REG32(addr)</code> 函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_OCTL(gpiox)           REG32((gpiox) + 0x00000014U)    <span class="comment">/*!&lt; GPIO port output control register */</span></span></span><br></pre></td></tr></table></figure>
-
-<p><code>REG32(addr)</code> 函数的定义位于官方固件库 <code>Firmware\CMSIS\GD\GD32F3x0\Include</code> 目录下的 <code>gd32f3x0.h</code> 头文件当中：</p>
+<p><code>REG32(addr)</code> 函数的定义位于官方固件库
+<code>Firmware\CMSIS\GD\GD32F3x0\Include</code> 目录下的
+<code>gd32f3x0.h</code> 头文件当中：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> REG32(addr)                  (*(volatile uint32_t *)(uint32_t)(addr))</span></span><br></pre></td></tr></table></figure>
-
-<p>把前面寄存器 <code>GPIOA_OCTL</code> 的地址计算式 <code>0x4800 0000 + 0x0000 0014</code> 作为 <code>addr</code> 参数代入之后，就会发现标准外设库底层也是在操作寄存器，只是在使用的时候更加直观简单：</p>
+<p>把前面寄存器 <code>GPIOA_OCTL</code> 的地址计算式
+<code>0x4800 0000 + 0x0000 0014</code> 作为 <code>addr</code>
+参数代入之后，就会发现标准外设库底层也是在操作寄存器，只是在使用的时候更加直观简单：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> REG32(addr) (*(volatile uint32_t *)(uint32_t)(0x4800 0000 + 0x0000 0014))</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p><strong>注意</strong>：通过<strong>寄存器</strong>直接控制外设，性能开销更少，运行更加快速，适用于片上资源有限，或对于实时性要求更高的场景。而使用<strong>标准外设库</strong>来操控外设，优势主要体现在提升代码可读性以及开发效率方面。</p>
 </blockquote>
-<h1 id="通过-GPIO-控制发光二极管"><a href="#通过-GPIO-控制发光二极管" class="headerlink" title="通过 GPIO 控制发光二极管"></a>通过 GPIO 控制发光二极管</h1></div><div class="article-licensing box"><div class="licensing-title"><p>兆易创新 UINIO-MCU-GD32F350 标准库开发指南</p><p><a href="http://www.uinio.com/Project/UINIO-MCU-GD32/">http://www.uinio.com/Project/UINIO-MCU-GD32/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-01-06</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-02-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Project/UINIO-MCU-RP2040/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Project/UINIO-Monitor/"><span class="level-item">运用 U8G2 与 TFT_eSPI 玩转 UINIO-Monitor 显示屏</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#准备-GD32-支持包-amp-固件库"><span class="level-left"><span class="level-item">1</span><span class="level-item">准备 GD32 支持包 &amp; 固件库</span></span></a></li><li><a class="level is-mobile" href="#测试-UINIO-MCU-GD32-核心板"><span class="level-left"><span class="level-item">2</span><span class="level-item">测试 UINIO-MCU-GD32 核心板</span></span></a></li><li><a class="level is-mobile" href="#搭建-Keil-uVision5-自定义工程"><span class="level-left"><span class="level-item">3</span><span class="level-item">搭建 Keil uVision5 自定义工程</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建目录与拷贝源文件"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">新建目录与拷贝源文件</span></span></a></li><li><a class="level is-mobile" href="#创建分组与添加源文件"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">创建分组与添加源文件</span></span></a></li><li><a class="level is-mobile" href="#移除-Source-目录下的冗余代码"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">移除 Source 目录下的冗余代码</span></span></a></li><li><a class="level is-mobile" href="#配置编译器路径与选项"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">配置编译器路径与选项</span></span></a></li><li><a class="level is-mobile" href="#测试工程的编译下载"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">测试工程的编译下载</span></span></a></li></ul></li><li><a class="level is-mobile" href="#MCU-微控制器系统结构概览"><span class="level-left"><span class="level-item">4</span><span class="level-item">MCU 微控制器系统结构概览</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#芯片资源简介"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">芯片资源简介</span></span></a></li><li><a class="level is-mobile" href="#ARM-Cortex-M4-内核架构"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">ARM Cortex-M4 内核架构</span></span></a></li><li><a class="level is-mobile" href="#GD32F350RBT6-外设架构"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">GD32F350RBT6 外设架构</span></span></a></li><li><a class="level is-mobile" href="#地址空间映射"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">地址空间映射</span></span></a></li></ul></li><li><a class="level is-mobile" href="#从操作寄存器到运用固件库"><span class="level-left"><span class="level-item">5</span><span class="level-item">从操作寄存器到运用固件库</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#操作寄存器"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">操作寄存器</span></span></a></li><li><a class="level is-mobile" href="#运用库函数"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">运用库函数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#通过-GPIO-控制发光二极管"><span class="level-left"><span class="level-item">6</span><span class="level-item">通过 GPIO 控制发光二极管</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-RP2040/"><img src="/Project/UINIO-MCU-RP2040/logo.png" alt="基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-01-14T16:00:00.000Z">2024-01-15</time></p><p class="title"><a href="/Project/UINIO-MCU-RP2040/">基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 标准库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-01-05T16:00:00.000Z">2024-01-06</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 标准库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-Monitor/"><img src="/Project/UINIO-Monitor/logo.png" alt="运用 U8G2 与 TFT_eSPI 玩转 UINIO-Monitor 显示屏"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-08-31T16:00:00.000Z">2023-09-01</time></p><p class="title"><a href="/Project/UINIO-Monitor/">运用 U8G2 与 TFT_eSPI 玩转 UINIO-Monitor 显示屏</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/Arduino-ESP32/"><img src="/Project/Arduino-ESP32/logo.png" alt="基于 UINIO-MCU-ESP32 的 Arduino 进阶教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-04-30T16:00:00.000Z">2023-05-01</time></p><p class="title"><a href="/Project/Arduino-ESP32/">基于 UINIO-MCU-ESP32 的 Arduino 进阶教程</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LDO/"><img src="/Electronics/LDO/thumbnail.png" alt="常见 LDO 线性稳压芯片的对比选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-04-09T16:00:00.000Z">2023-04-10</time></p><p class="title"><a href="/Electronics/LDO/">常见 LDO 线性稳压芯片的对比选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+<h1 id="通过-gpio-控制发光二极管">通过 GPIO 控制发光二极管</h1>
+</div><div class="article-licensing box"><div class="licensing-title"><p>兆易创新 UINIO-MCU-GD32F350 标准库开发指南</p><p><a href="http://www.uinio.com/Project/UINIO-MCU-GD32/">http://www.uinio.com/Project/UINIO-MCU-GD32/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-01-06</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-02-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Project/UINIO-MCU-RP2040/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Project/UINIO-Monitor/"><span class="level-item">运用 U8G2 与 TFT_eSPI 玩转 UINIO-Monitor 显示屏</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#准备-gd32-支持包-固件库"><span class="level-left"><span class="level-item">1</span><span class="level-item">准备 GD32 支持包 &amp; 固件库</span></span></a></li><li><a class="level is-mobile" href="#测试-uinio-mcu-gd32-核心板"><span class="level-left"><span class="level-item">2</span><span class="level-item">测试 UINIO-MCU-GD32 核心板</span></span></a></li><li><a class="level is-mobile" href="#搭建-keil-uvision5-自定义工程"><span class="level-left"><span class="level-item">3</span><span class="level-item">搭建 Keil uVision5
+自定义工程</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建目录与拷贝源文件"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">新建目录与拷贝源文件</span></span></a></li><li><a class="level is-mobile" href="#创建分组与添加源文件"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">创建分组与添加源文件</span></span></a></li><li><a class="level is-mobile" href="#移除-source-目录下的冗余代码"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">移除 Source 目录下的冗余代码</span></span></a></li><li><a class="level is-mobile" href="#配置编译器路径与选项"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">配置编译器路径与选项</span></span></a></li><li><a class="level is-mobile" href="#测试工程的编译下载"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">测试工程的编译下载</span></span></a></li></ul></li><li><a class="level is-mobile" href="#mcu-微控制器系统结构概览"><span class="level-left"><span class="level-item">4</span><span class="level-item">MCU 微控制器系统结构概览</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#芯片资源简介"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">芯片资源简介</span></span></a></li><li><a class="level is-mobile" href="#arm-cortex-m4-内核架构"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">ARM Cortex-M4 内核架构</span></span></a></li><li><a class="level is-mobile" href="#gd32f350rbt6-外设架构"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">GD32F350RBT6 外设架构</span></span></a></li><li><a class="level is-mobile" href="#地址空间映射"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">地址空间映射</span></span></a></li></ul></li><li><a class="level is-mobile" href="#从操作寄存器到运用固件库"><span class="level-left"><span class="level-item">5</span><span class="level-item">从操作寄存器到运用固件库</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#操作寄存器"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">操作寄存器</span></span></a></li><li><a class="level is-mobile" href="#运用库函数"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">运用库函数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#通过-gpio-控制发光二极管"><span class="level-left"><span class="level-item">6</span><span class="level-item">通过 GPIO 控制发光二极管</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-RP2040/"><img src="/Project/UINIO-MCU-RP2040/logo.png" alt="基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-01-14T16:00:00.000Z">2024-01-15</time></p><p class="title"><a href="/Project/UINIO-MCU-RP2040/">基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 标准库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-01-05T16:00:00.000Z">2024-01-06</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 标准库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-Monitor/"><img src="/Project/UINIO-Monitor/logo.png" alt="运用 U8G2 与 TFT_eSPI 玩转 UINIO-Monitor 显示屏"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-08-31T16:00:00.000Z">2023-09-01</time></p><p class="title"><a href="/Project/UINIO-Monitor/">运用 U8G2 与 TFT_eSPI 玩转 UINIO-Monitor 显示屏</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/Arduino-ESP32/"><img src="/Project/Arduino-ESP32/logo.png" alt="基于 UINIO-MCU-ESP32 的 Arduino 进阶教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-04-30T16:00:00.000Z">2023-05-01</time></p><p class="title"><a href="/Project/Arduino-ESP32/">基于 UINIO-MCU-ESP32 的 Arduino 进阶教程</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LDO/"><img src="/Electronics/LDO/thumbnail.png" alt="常见 LDO 线性稳压芯片的对比选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-04-09T16:00:00.000Z">2023-04-10</time></p><p class="title"><a href="/Electronics/LDO/">常见 LDO 线性稳压芯片的对比选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
