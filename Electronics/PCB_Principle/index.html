@@ -29,7 +29,7 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-02-11T16:00:00.000Z" title="2021/2/12 00:00:00">2021-02-12</time>发表</span><span class="level-item"><time dateTime="2021-03-14T16:00:00.000Z" title="2021/3/15 00:00:00">2021-03-15</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">1 小时读完 (大约10091个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">PCB 基本布线规范与设计原则</h1><div class="content"><p><strong>优秀的 PCB 设计者同时也是出色的艺术家</strong>，但是伴随 5G
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-02-11T16:00:00.000Z" title="2021/2/12 00:00:00">2021-02-12</time>发表</span><span class="level-item"><time dateTime="2021-03-14T16:00:00.000Z" title="2021/3/15 00:00:00">2021-03-15</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">1 小时读完 (大约10334个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">PCB 基本布线规范与设计原则</h1><div class="content"><p><strong>优秀的 PCB 设计者同时也是出色的艺术家</strong>，但是伴随 5G
 的全面商用以及物联网设备的普及，电路板<strong>走线</strong>越来越精密，信号<strong>频率</strong>日益提高，电磁干扰问题日趋严重，PCB
 设计人员不得不去面对一个现实问题：PCB
 电路板已经开始像一个具有电阻、电容、电感的<strong>组件</strong>，而非像过去
@@ -253,67 +253,162 @@ Mounting Technology）的英文缩写，常见的贴片元件有
 <p>半导体芯片的封装材料主要有<code>塑料</code>、<code>陶瓷</code>、<code>玻璃</code>、<code>金属</code>等等，如果没有特殊工艺要求，现在普遍采用的是塑料封装：</p>
 <table>
 <colgroup>
-<col style="width: 13%">
-<col style="width: 47%">
-<col style="width: 38%">
+<col style="width: 10%">
+<col style="width: 56%">
+<col style="width: 32%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">封装缩写</th>
+<th style="text-align: left;">封装缩写</th>
 <th style="text-align: left;">封装名称</th>
 <th style="text-align: left;">说明</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><strong>SIP</strong></td>
-<td style="text-align: left;">Single in-line Package</td>
-<td style="text-align: left;"><strong>单列直插式封装</strong></td>
+<td style="text-align: left;"><strong>MELF</strong></td>
+<td style="text-align: left;">Metal Electrode Face Components</td>
+<td style="text-align: left;"><strong>金属电极无引线端面元器件</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><strong>DIP</strong></td>
-<td style="text-align: left;">Dual in-line Package</td>
-<td style="text-align: left;"><strong>双列直插式封装</strong></td>
+<td style="text-align: left;"><strong>SOT</strong></td>
+<td style="text-align: left;">Small Outline Transistor</td>
+<td style="text-align: left;"><strong>小外形晶体管</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><strong>SOP</strong></td>
-<td style="text-align: left;">Small Out-Line Package</td>
-<td style="text-align: left;"><strong>小外形封装（双列）</strong></td>
+<td style="text-align: left;"><strong>SOD</strong></td>
+<td style="text-align: left;">Small Outline Diode</td>
+<td style="text-align: left;"><strong>小外形二极管</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><strong>QFP</strong></td>
-<td style="text-align: left;">Quad Flat Package</td>
-<td style="text-align: left;"><strong>方型扁平式封装技术</strong></td>
+<td style="text-align: left;"><strong>SOIC</strong></td>
+<td style="text-align: left;">Small Outline Integrated Circuits</td>
+<td style="text-align: left;"><strong>小外形集成电路</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><strong>QFN</strong></td>
+<td style="text-align: left;"><strong>SSOIC</strong></td>
+<td style="text-align: left;">Shrink Small Outline Integrated
+Circuits</td>
+<td style="text-align: left;"><strong>缩小外形集成电路</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SOP</strong></td>
+<td style="text-align: left;">Small Outline Package Integrated
+Circuits</td>
+<td style="text-align: left;"><strong>小外形封装集成电路</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SSOP</strong></td>
+<td style="text-align: left;">Shrink Small Outline Package Integrated
+Circuits</td>
+<td style="text-align: left;"><strong>缩小外形封装集成电路</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TSOP</strong></td>
+<td style="text-align: left;">Thin Small Outline Package</td>
+<td style="text-align: left;"><strong>薄小外形封装</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TSSOP</strong></td>
+<td style="text-align: left;">Thin Shrink Small Outline Package</td>
+<td style="text-align: left;"><strong>薄缩小外形封装</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SOJ</strong></td>
+<td style="text-align: left;">Small Outline Integrated Circuits with J
+Leads</td>
+<td style="text-align: left;"><strong>J
+形引脚小外形集成电路</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>CFP</strong></td>
+<td style="text-align: left;">Ceramic Flat Packs</td>
+<td style="text-align: left;"><strong>陶瓷扁平封装</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>PQFP</strong></td>
+<td style="text-align: left;">Plastic Quad Flat Pack</td>
+<td style="text-align: left;"><strong>塑料方形扁平封装</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SQFP</strong></td>
+<td style="text-align: left;">Shrink Quad Flat Pack</td>
+<td style="text-align: left;"><strong>缩小方形扁平封装</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CQFP</strong></td>
+<td style="text-align: left;">Ceramic Quad Flat Pack</td>
+<td style="text-align: left;"><strong>陶瓷方形扁平封装</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>PLCC</strong></td>
+<td style="text-align: left;">Plastic Leaded Chip Carriers</td>
+<td style="text-align: left;"><strong>塑料封装有引线芯片载体</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>LCC</strong></td>
+<td style="text-align: left;">Leadless Ceramic Chip Carriers</td>
+<td style="text-align: left;"><strong>无引线陶瓷芯片载体</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>QFN</strong></td>
 <td style="text-align: left;">Quad Flat Non-leaded Package</td>
 <td style="text-align: left;"><strong>四侧无引脚扁平封装</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><strong>COG</strong></td>
-<td style="text-align: left;">Chip on Glass</td>
-<td style="text-align: left;"><strong>芯片安装到液晶屏玻璃当中</strong></td>
+<td style="text-align: left;"><strong>DIP</strong></td>
+<td style="text-align: left;">Dual-In-Line Components</td>
+<td style="text-align: left;"><strong>双列引脚元器件</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><strong>CSP</strong></td>
-<td style="text-align: left;">Chip Scale Package</td>
-<td style="text-align: left;"><strong>芯片级封装</strong></td>
+<td style="text-align: left;"><strong>PBGA</strong></td>
+<td style="text-align: left;">Plastic Ball Grid Array</td>
+<td style="text-align: left;"><strong>塑封球栅阵列器件</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><strong>PGA</strong></td>
-<td style="text-align: left;">Pin Grid Array Package</td>
-<td style="text-align: left;"><strong>插针网格阵列封装</strong></td>
+<td style="text-align: left;"><strong>AX</strong></td>
+<td style="text-align: left;">Non-polarized Axial-Leaded Discretes</td>
+<td style="text-align: left;"><strong>无极性轴向引脚分立元件</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><strong>BGA</strong></td>
-<td style="text-align: left;">Ball Grid Array Package</td>
-<td style="text-align: left;"><strong>球栅阵列封装</strong></td>
+<td style="text-align: left;"><strong>CPAX</strong></td>
+<td style="text-align: left;">Polarized Capacitor, Axial</td>
+<td style="text-align: left;"><strong>带极性轴向引脚电容</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><strong>C/PLCC</strong></td>
-<td style="text-align: left;">Ceramic/Plastic Leaded Chip Carrier</td>
-<td style="text-align: left;"><strong>陶瓷/塑料有引线芯片载体</strong></td>
+<td style="text-align: left;"><strong>CPC</strong></td>
+<td style="text-align: left;">Polarized Capacitor, Cylindricals</td>
+<td style="text-align: left;"><strong>带极性圆柱形电容</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>CYL</strong></td>
+<td style="text-align: left;">Non-polarized Cylindricals</td>
+<td style="text-align: left;"><strong>无极性圆柱形元器件</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>DISC</strong></td>
+<td style="text-align: left;">Non-polarized Offset-Leaded Discs</td>
+<td style="text-align: left;"><strong>无极性偏置引脚分立元件</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RAD</strong></td>
+<td style="text-align: left;">Non-polarized Radial-Leaded Discretes</td>
+<td style="text-align: left;"><strong>无极性径向引脚分立元件</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TO</strong></td>
+<td style="text-align: left;">Transistors Outlines</td>
+<td style="text-align: left;"><strong>晶体管外形</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>PGA</strong></td>
+<td style="text-align: left;">Plastic Grid Array</td>
+<td style="text-align: left;"><strong>塑封阵列器件</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SIP</strong></td>
+<td style="text-align: left;">Single-In-Line Components</td>
+<td style="text-align: left;"><strong>单排引脚元器件</strong></td>
 </tr>
 </tbody>
 </table>
