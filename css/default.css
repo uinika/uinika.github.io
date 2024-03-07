@@ -12238,7 +12238,7 @@ figure.highlight.foldable div.level-left {
     border-radius: 0 0 0 1rem !important;
   }
   .section {
-    padding: 0 !important;
+    padding: 1vh 0 !important;
   }
   .section .card {
     margin: 0.5rem 0 !important; /* 文章主体 */
