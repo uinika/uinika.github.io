@@ -12237,9 +12237,6 @@ figure.highlight.foldable div.level-left {
     animation-play-state: paused !important;
     border-radius: 0 0 0 1rem !important;
   }
-  .section {
-    padding: 1vh 0 !important;
-  }
   .section .card {
     margin: 0.5rem 0 !important; /* 文章主体 */
   }
