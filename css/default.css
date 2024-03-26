@@ -12580,8 +12580,14 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
   border: none;
   margin-bottom: 0;
 }
+.section .container .columns .column-main .article .content .highlight .highlight-body {
+  background-color: #fff;
+}
 .section .container .columns .column-main .article .content .highlight .highlight-body table tr {
   background: #272822 !important;
+}
+.section .container .columns .column-main .article .content .highlight .highlight-body table tr .code {
+  width: 100%;
 }
 .section .container .columns .column-main .article .content .highlight .highlight-body table tr:hover {
   background: #272822 !important;
