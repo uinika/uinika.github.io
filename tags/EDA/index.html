@@ -29,25 +29,26 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">标签</a></li><li class="is-active"><a href="#" aria-current="page">EDA</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-05T16:00:00.000Z" title="2020/8/6 00:00:00">2020-08-06</time>发表</span><span class="level-item"><time dateTime="2024-03-28T06:37:25.354Z" title="2024/3/28 14:37:25">2024-03-28</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">3 分钟读完 (大约380个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Electronics/Cadence/">日常使用 Cadence Allegro 17.4 的一些技巧汇总</a></p><div class="content"><p><a target="_blank" rel="noopener" href="https://www.cadence.com/zh_CN/home/company.html">楷登电子
-<strong>Cadence</strong></a> 推出的 <strong>Allegro</strong>
-是一款专业的板级 EDA
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">标签</a></li><li class="is-active"><a href="#" aria-current="page">EDA</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-05T16:00:00.000Z" title="2020/8/6 00:00:00">2020-08-06</time>发表</span><span class="level-item"><time dateTime="2024-04-03T17:48:13.837Z" title="2024/4/4 01:48:13">2024-04-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">18 分钟读完 (大约2755个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Electronics/Cadence/">写给有经验 PCB 工程师的 Cadence Allegro 极速上手指南</a></p><div class="content"><p>楷登电子 <a target="_blank" rel="noopener" href="https://www.cadence.com/zh_CN/home/company.html"><strong>Cadence</strong></a>
+推出的 <strong>Allegro/OrCAD SPB</strong> 是一款专业的板级 EDA
 工具，其融合了<code>原理图设计</code>、<code>电路仿真</code>、<code>PCB 绘制编辑</code>、<code>拓扑逻辑自动布线</code>、<code>信号完整性分析</code>、<code>设计输出</code>
-等功能，非常适用于设计复杂的 PCB 电路板工程。<strong>Allegro</strong> 的
-<code>17.4</code>
-版本，进行了全新的功能升级，显著的提高了用户体验与设计效率，通过更加美观合理的界面设计，使得开发人员的
-PCB 设计体验更加友好。在提供更为丰富 3D
-渲染功能的同时，还新增和优化了大量的 PCB 设计功能。</p>
+等设计功能，经常被运用于各种高速 PCB
+设计场景。这篇文章的目的，是为已经具备有其它 EDA
+设计经验的工程师，快速上手相关设计套件。本文撰写时所采用的是
+<strong>Allegro/OrCAD SPB 17.4</strong> 版本，并且将补丁更新至
+<code>Hotfix_SPB17.40.037</code>，该版本的基础操作与快捷键，与目前最新的
+<code>23.1</code>
+版本基本相同，且两者的工程文件相互兼容，无需进行任何额外的数据转换。</p>
 <p><img src="/Electronics/Cadence/logo.png"></p>
-<p><strong>Allegro</strong> 的 <code>17.4</code>
-版本新增了一个暗黑主题，并且对工具栏的图标进行了重组，可以多屏幕显示单页原理图。同时还优化了主界面的各个窗口，更加重要的更新在于支持从原理图直接创建
-PCB，能够更为方便的实现原理图与 PCB 的同步。并且提供了基于 Web
-的搜索功能，可以方便的从 <a target="_blank" rel="noopener" href="https://www.samacsys.com/component-search-engine/">Samacsys</a> 和
-<a target="_blank" rel="noopener" href="https://www.ultralibrarian.com/">Ultra Librarian</a>
-下载<code>原理图符号</code>、<code>封装</code>、<code>数据手册</code>
-乃至于 <code>3D 模型</code>。而且完美兼容早期的 <code>17.2</code>
-版本，打开较早版本工程时并不会强制更新为当前的 <code>17.4</code>
-版本。</p></div><a class="article-more button is-small is-size-7" href="/Electronics/Cadence/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-11-20T16:00:00.000Z" title="2019/11/21 00:00:00">2019-11-21</time>发表</span><span class="level-item"><time dateTime="2021-07-26T16:00:00.000Z" title="2021/7/27 00:00:00">2021-07-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">1 小时读完 (大约11193个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Electronics/KiCad_Tutorial/">开源 EDA 工具 KiCad 6.0 电路设计小书</a></p><div class="content"><p>对于国内的中小型电子企业而言，<strong>Allegro</strong>、<strong>Pads</strong>、<strong>Altium
+<p><strong>Allegro/OrCAD SPB 17.4</strong> 版本于 2019
+年推出，在兼容早期 <code>17.2</code> 和 <code>16.6</code>
+版本工程文件的基础之上，还进行了一些全新的功能升级，显著的提高了用户体验与设计效率。其在老版本基础上新增了一套<strong>暗黑主题</strong>，并且对工具栏的图标以及主界面的窗口进行了重组。最为重要的更新在于支持从原理图直接创建
+PCB，且可以方便的实现两者的同步操作。除此之外，还提供了 Web
+搜索功能，可以方便的从 <a target="_blank" rel="noopener" href="https://www.samacsys.com/component-search-engine/"><strong>Samacsys</strong></a>
+和 <a target="_blank" rel="noopener" href="https://www.ultralibrarian.com/"><strong>Ultra
+Librarian</strong></a> 下载
+<code>原理图符号</code>、<code>PCB 封装</code>、<code>数据手册</code>
+以及 <code>3D 模型</code>。</p></div><a class="article-more button is-small is-size-7" href="/Electronics/Cadence/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-11-20T16:00:00.000Z" title="2019/11/21 00:00:00">2019-11-21</time>发表</span><span class="level-item"><time dateTime="2021-07-26T16:00:00.000Z" title="2021/7/27 00:00:00">2021-07-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">1 小时读完 (大约11193个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Electronics/KiCad_Tutorial/">开源 EDA 工具 KiCad 6.0 电路设计小书</a></p><div class="content"><p>对于国内的中小型电子企业而言，<strong>Allegro</strong>、<strong>Pads</strong>、<strong>Altium
 Designer</strong> 等商业 EDA 工具的授权费用过于昂贵，且大部分只提供
 Windows
 操作系统版本，缺乏相应的跨平台支持。在电子信息技术行业版权问题充分受到重视的今天，一款易于使用并且受到厂商广泛支持的开源
