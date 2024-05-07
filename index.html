@@ -100,7 +100,34 @@ Cortex-M0+</strong> 双核心的微控制器，运行频率高达
 两个引脚资源。除此之外，由于模数转换引脚内部集成有连接至
 <code>IOVDD</code> 的反向二极管，所以采用 FET 场效应管
 <strong>DMG1012T</strong> 防止 RP2040 未上电时，这些引脚上施加的电压通过
-<code>ADC3</code> 引脚泄露至 <code>3.3V</code> 电源网络。</p></div><a class="article-more button is-small is-size-7" href="/Project/UINIO-MCU-RP2040/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-12T16:00:00.000Z" title="2024/3/13 00:00:00">2024-03-13</time>发表</span><span class="level-item"><time dateTime="2024-03-14T07:12:30.259Z" title="2024/3/14 15:12:30">2024-03-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Zen/">Zen</a></span><span class="level-item">28 分钟读完 (大约4127个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><div class="content"><p><a target="_blank" rel="noopener" href="https://www.markdownguide.org/"><strong>Markdown</strong></a>
+<code>ADC3</code> 引脚泄露至 <code>3.3V</code> 电源网络。</p></div><a class="article-more button is-small is-size-7" href="/Project/UINIO-MCU-RP2040/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-30T16:00:00.000Z" title="2024/3/31 00:00:00">2024-03-31</time>发表</span><span class="level-item"><time dateTime="2024-05-07T16:21:52.169Z" title="2024/5/8 00:21:52">2024-05-08</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">1 小时读完 (大约10532个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Electronics/Component/">硬件电路设计当中 の 常用电子元器件选型</a></p><div class="content"><p>自从 <strong>1883</strong>
+年电子管作为人类第一个电子元器件诞生以来，<strong>电子元器件</strong>的发展历程，见证了人类科技进步的辉煌成就。从最初的
+<code>电阻</code>、<code>电容</code>、<code>电感</code>
+等基础元器件，发展到
+<code>晶闸管</code>、<code>场效应管</code>、<code>IGBT</code>
+等半导体元器件，再进一步发展到现如今各种琳琅满目的<strong>微处理器</strong>、<strong>微控制器</strong>、<strong>传感器</strong>。电子元器件的功能越来越强大，体积越来越小，集成度越来越高。这些变化不仅极大地提升了电子产品的性能和可靠性，也为我们带来了更加便捷与智能的生活方式。</p>
+<p><img src="/Electronics/Component/logo.png"></p>
+<p>电子元器件如同电子设备的细胞，承载着实现各种复杂功能的基础任务，它们是电路设计和调试中不可或缺的元素。实际的电路设计过程当中，各类电子元器件的选择、连接、调试都至关重要，正确的选型能够确保设备的性能和稳定性，而合理的连接方式更是能够降低信号的损失与干扰。本文旨在以简单明了的方式介绍
+<code>电阻器</code>、<code>电容器</code>、<code>电感器</code>、<code>变压器</code>、<code>二极管</code>、<code>三极管</code>、<code>晶闸管</code>、<code>场效应管</code>、<code>IGBT</code>、<code>继电器</code>
+等常用电子元器件的参数与选型注意事项。</p></div><a class="article-more button is-small is-size-7" href="/Electronics/Component/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-01-21T16:00:00.000Z" title="2023/1/22 00:00:00">2023-01-22</time>发表</span><span class="level-item"><time dateTime="2024-02-01T15:24:34.692Z" title="2024/2/1 23:24:34">2024-02-01</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">1 小时读完 (大约7046个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Project/UINIO-DAP-Link/">ARM 调试工具 UINIO-DAP-Link 应用详解</a></p><div class="content"><p><strong>ARM Mbed OS</strong>
+是一款开源免费的物联网操作系统，包含有基于 <strong>ARM Cortex-M</strong>
+系列微控制器开发智能连接产品所需的全部基础架构。其社区推出的 <a target="_blank" rel="noopener" href="https://daplink.io/"><strong>DAP-Link</strong></a>
+同样是一个开源项目，它支持编程和调试运行在 ARM Cortex
+微控制器上面的代码，主要运行于拥有 <strong>SWD</strong> 或者
+<strong>JTAG</strong> 接口的微控制器当中，并且通过 USB 接口在计算机与
+ARM Cortex
+微控制器之间创建一个用于调试仿真的通道与桥梁，为开发人员提供了<strong>下载调试</strong>、<strong>串口通信</strong>、<strong>拖拽烧录</strong>等一系列实用功能。</p>
+<p><img src="/Project/UINIO-DAP-Link/logo.png"></p>
+<p><strong>DAPLink</strong> 主要由 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/mbed-HDK-Eagle-Projects"><strong>Mbed
+硬件开发工具包</strong></a> 以及 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/DAPLink"><strong>DAPLink
+固件</strong></a> 两个开源项目构成，而 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link"><strong>UINIO-DAP-Link</strong></a>
+则是由我自己设计的一款完全开源的 DAPLink
+实现，相比于官方原版的硬件电路设计，在引出有 <strong>SWD</strong>
+调试接口（由 ARM 公司制订）的同时，还引出了 <strong>JTAG</strong>
+接口（属于 IEEE1149 国际标准）以及<code>5V</code> 和 <code>3.3V</code>
+电源，并且附带有 <strong>SWD</strong> 至 <strong>JTAG</strong> 转接板的
+PCB 设计，而固件部分则是基于 ARM
+官方的最新的原版固件移植而来，全部的原理图与固件程序都已经开源在 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link"><strong>GitHub</strong></a>。</p></div><a class="article-more button is-small is-size-7" href="/Project/UINIO-DAP-Link/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-12T16:00:00.000Z" title="2024/3/13 00:00:00">2024-03-13</time>发表</span><span class="level-item"><time dateTime="2024-05-07T16:21:49.542Z" title="2024/5/8 00:21:49">2024-05-08</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Zen/">Zen</a></span><span class="level-item">28 分钟读完 (大约4127个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><div class="content"><p><a target="_blank" rel="noopener" href="https://www.markdownguide.org/"><strong>Markdown</strong></a>
 是一款轻量级的文本标记语言，由<strong>约翰·格鲁伯</strong>（John
 Gruber）于 <strong>2004</strong>
 年开发，主要用于在<strong>纯文本文档</strong>当中添加格式化元素。具有语法简单，易于读写的特点，同时也可以方便的纳入
@@ -119,34 +146,7 @@ Git 进行版本控制。其源文件采用 <code>.md</code> 或者
 <strong>Markdown</strong> 语法与 <strong>HTML</strong>
 元素之间的映射关系，从而更加清晰的呈现其底层的转换逻辑，便于大家结合自定义的
 <strong>CSS</strong> 样式与 <strong>HTML</strong>
-标签，创造出更加丰富多彩的 Markdown 文本内容。</p></div><a class="article-more button is-small is-size-7" href="/Zen/Markdown/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-01-21T16:00:00.000Z" title="2023/1/22 00:00:00">2023-01-22</time>发表</span><span class="level-item"><time dateTime="2024-02-01T15:24:34.692Z" title="2024/2/1 23:24:34">2024-02-01</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">1 小时读完 (大约7046个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Project/UINIO-DAP-Link/">ARM 调试工具 UINIO-DAP-Link 应用详解</a></p><div class="content"><p><strong>ARM Mbed OS</strong>
-是一款开源免费的物联网操作系统，包含有基于 <strong>ARM Cortex-M</strong>
-系列微控制器开发智能连接产品所需的全部基础架构。其社区推出的 <a target="_blank" rel="noopener" href="https://daplink.io/"><strong>DAP-Link</strong></a>
-同样是一个开源项目，它支持编程和调试运行在 ARM Cortex
-微控制器上面的代码，主要运行于拥有 <strong>SWD</strong> 或者
-<strong>JTAG</strong> 接口的微控制器当中，并且通过 USB 接口在计算机与
-ARM Cortex
-微控制器之间创建一个用于调试仿真的通道与桥梁，为开发人员提供了<strong>下载调试</strong>、<strong>串口通信</strong>、<strong>拖拽烧录</strong>等一系列实用功能。</p>
-<p><img src="/Project/UINIO-DAP-Link/logo.png"></p>
-<p><strong>DAPLink</strong> 主要由 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/mbed-HDK-Eagle-Projects"><strong>Mbed
-硬件开发工具包</strong></a> 以及 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/DAPLink"><strong>DAPLink
-固件</strong></a> 两个开源项目构成，而 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link"><strong>UINIO-DAP-Link</strong></a>
-则是由我自己设计的一款完全开源的 DAPLink
-实现，相比于官方原版的硬件电路设计，在引出有 <strong>SWD</strong>
-调试接口（由 ARM 公司制订）的同时，还引出了 <strong>JTAG</strong>
-接口（属于 IEEE1149 国际标准）以及<code>5V</code> 和 <code>3.3V</code>
-电源，并且附带有 <strong>SWD</strong> 至 <strong>JTAG</strong> 转接板的
-PCB 设计，而固件部分则是基于 ARM
-官方的最新的原版固件移植而来，全部的原理图与固件程序都已经开源在 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link"><strong>GitHub</strong></a>。</p></div><a class="article-more button is-small is-size-7" href="/Project/UINIO-DAP-Link/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-30T16:00:00.000Z" title="2024/3/31 00:00:00">2024-03-31</time>发表</span><span class="level-item"><time dateTime="2024-05-07T16:18:48.416Z" title="2024/5/8 00:18:48">2024-05-08</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">1 小时读完 (大约10532个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Electronics/Component/">硬件电路设计当中 の 常用电子元器件选型</a></p><div class="content"><p>自从 <strong>1883</strong>
-年电子管作为人类第一个电子元器件诞生以来，<strong>电子元器件</strong>的发展历程，见证了人类科技进步的辉煌成就。从最初的
-<code>电阻</code>、<code>电容</code>、<code>电感</code>
-等基础元器件，发展到
-<code>晶闸管</code>、<code>场效应管</code>、<code>IGBT</code>
-等半导体元器件，再进一步发展到现如今各种琳琅满目的<strong>微处理器</strong>、<strong>微控制器</strong>、<strong>传感器</strong>。电子元器件的功能越来越强大，体积越来越小，集成度越来越高。这些变化不仅极大地提升了电子产品的性能和可靠性，也为我们带来了更加便捷与智能的生活方式。</p>
-<p><img src="/Electronics/Component/logo.png"></p>
-<p>电子元器件如同电子设备的细胞，承载着实现各种复杂功能的基础任务，它们是电路设计和调试中不可或缺的元素。实际的电路设计过程当中，各类电子元器件的选择、连接、调试都至关重要，正确的选型能够确保设备的性能和稳定性，而合理的连接方式更是能够降低信号的损失与干扰。本文旨在以简单明了的方式介绍
-<code>电阻器</code>、<code>电容器</code>、<code>电感器</code>、<code>变压器</code>、<code>二极管</code>、<code>三极管</code>、<code>晶闸管</code>、<code>场效应管</code>、<code>IGBT</code>、<code>继电器</code>
-等常用电子元器件的参数与选型注意事项。</p></div><a class="article-more button is-small is-size-7" href="/Electronics/Component/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2015-03-19T16:00:00.000Z" title="2015/3/20 00:00:00">2015-03-20</time>发表</span><span class="level-item"><time dateTime="2019-07-10T16:00:00.000Z" title="2019/7/11 00:00:00">2019-07-11</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Embedded/">Embedded</a></span><span class="level-item">7 小时读完 (大约62885个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Embedded/STM32F103/">意法半导体 UINIO-MCU-STM32F103 标准库典型实例</a></p><div class="content"><p>博主之前文章介绍的<strong>STC51</strong>系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准
+标签，创造出更加丰富多彩的 Markdown 文本内容。</p></div><a class="article-more button is-small is-size-7" href="/Zen/Markdown/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2015-03-19T16:00:00.000Z" title="2015/3/20 00:00:00">2015-03-20</time>发表</span><span class="level-item"><time dateTime="2019-07-10T16:00:00.000Z" title="2019/7/11 00:00:00">2019-07-11</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Embedded/">Embedded</a></span><span class="level-item">7 小时读完 (大约62885个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Embedded/STM32F103/">意法半导体 UINIO-MCU-STM32F103 标准库典型实例</a></p><div class="content"><p>博主之前文章介绍的<strong>STC51</strong>系列单片机是一款结构简单、易于学习的嵌入式微控制器，但是由于标准
 8051 架构诞生于 70
 年代，其硬件架构、资源数量以及编程方式都已显老旧，成本和性能方面也皆落后于其它架构产品，市场占有率逐步遭到侵蚀，目前仅常见于一些教学与发烧友使用的范畴。伴随近几年物联网行业的快速兴起，<strong>STM32</strong>等基于
 ARM Cortex
