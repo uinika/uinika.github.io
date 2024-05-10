@@ -230,8 +230,8 @@ I_3\)</span>，这样就可以将中间的<strong>支路电流</strong> <span cl
 <strong>KVL</strong> 方程如下所示：</p>
 <p><span class="math display">\[
 \begin{cases}
--U_{S1} + R_1 I_1 + R_3(I_1 + I_2) = 0 \\
-U_{S2} + R_2 I_2 + R_3(I_1 + I_2) = 0
+-U_{S1} + R_1 I_1 + R_3(I_1 - I_2) = 0 \\
+U_{S2} + R_2 I_2 + R_3(I_2 - I_1) = 0
 \end{cases}
 \]</span></p>
 <p>接下来，采用回路电流法求解下图所示的复杂电路，首先选择 3
@@ -278,7 +278,7 @@ I_1 = I_{S1} \\
 \begin{cases}
 补充方程 \implies I_2 - I_1 = I_S \\
 回路1 \implies  -U_{S1} + R_1 I_1 + U = 0 \\
-回路2 \implies  -U + R_2 I_2 - U_{S2} = 0
+回路2 \implies  -U + R_2 I_2 + U_{S2} = 0
 \end{cases}
 \]</span></p>
 <h4 id="基于自阻-互阻列写">基于自阻 &amp; 互阻列写</h4>
@@ -352,7 +352,7 @@ U_{S2}(电压源项) = 0
 方程即可完成求解。</p>
 <p><span class="math display">\[
 \begin{cases}
-\frac{U_{S1} - U_1}{R_1} = \frac{U_1}{R} + \frac{U_1 - U_2}{R_3} \\
+\frac{U_{S1} - U_1}{R_1} = \frac{U_1}{R_2} + \frac{U_1 - U_2}{R_3} \\
 \frac{U_1 - U_2}{R_3} = \frac{U_2}{R_4} + \frac{U_2 - U_{S2}}{R_5}
 \end{cases}
 \]</span></p>
