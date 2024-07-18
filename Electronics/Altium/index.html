@@ -1,0 +1,2115 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>采用 Altium Designer 17.1 进行 PCB 电路绘制与仿真 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Altium公司最早推出的EDA（电子设计自动化，Electronics Design Automation）产品名为Protel，经过一系列的企业并购与技术整合之后，于 2009 年推出了Altium Designer 09，接着 2012 年又推出Altium Designer 13.0，本文将要介绍的Altium Designer 17.1则是Altium公司于 2017 年发布"><meta property="og:type" content="blog"><meta property="og:title" content="采用 Altium Designer 17.1 进行 PCB 电路绘制与仿真"><meta property="og:url" content="http://www.uinio.com/Electronics/Altium/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="Altium公司最早推出的EDA（电子设计自动化，Electronics Design Automation）产品名为Protel，经过一系列的企业并购与技术整合之后，于 2009 年推出了Altium Designer 09，接着 2012 年又推出Altium Designer 13.0，本文将要介绍的Altium Designer 17.1则是Altium公司于 2017 年发布"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2019-08-05T16:00:00.000Z"><meta property="article:modified_time" content="2021-02-19T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="EDA"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/Altium/"},"headline":"采用 Altium Designer 17.1 进行 PCB 电路绘制与仿真","image":["http://www.uinio.com/Electronics/Altium/logo.png"],"datePublished":"2019-08-05T16:00:00.000Z","dateModified":"2021-02-19T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"Altium公司最早推出的EDA（电子设计自动化，Electronics\r Design\r Automation）产品名为Protel，经过一系列的企业并购与技术整合之后，于\r 2009 年推出了Altium Designer 09，接着 2012\r 年又推出Altium Designer\r 13.0，本文将要介绍的Altium Designer 17.1则是Altium公司于 2017\r 年发布"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/Altium/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-08-05T16:00:00.000Z" title="2019/8/6 00:00:00">2019-08-06</time>发表</span><span class="level-item"><time dateTime="2021-02-19T16:00:00.000Z" title="2021/2/20 00:00:00">2021-02-20</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">3 小时读完 (大约26784个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">采用 Altium Designer 17.1 进行 PCB 电路绘制与仿真</h1><div class="content"><p><a target="_blank" rel="noopener" href="https://www.altium.com.cn/">Altium</a>公司最早推出的<strong>EDA</strong>（电子设计自动化，<strong>E</strong>lectronics
+<strong>D</strong>esign
+<strong>A</strong>utomation）产品名为<strong>Protel</strong>，经过一系列的企业并购与技术整合之后，于
+2009 年推出了<strong>Altium Designer 09</strong>，接着 2012
+年又推出<strong>Altium Designer
+13.0</strong>，本文将要介绍的<strong>Altium Designer 17.1</strong>则是<a target="_blank" rel="noopener" href="https://www.altium.com.cn/">Altium</a>公司于 2017
+年发布的产品，可用于设计板级原理图并进行 PCB 布线，同时整合了 SPICE
+仿真以及 FPGA 设计等高级功能。</p>
+<p><img src="/Electronics/Altium/logo.png"></p>
+<p>经过多年的迭代与发展，<a target="_blank" rel="noopener" href="https://www.altium.com.cn/altium-designer/cn">Altium Desinger</a>
+已经并不仅仅局限于作为一款 EDA
+工具，其功能已经贯穿于电子设计的全流程，包括 MCU 微控制器和 FPGA
+设计建模、电路 SPICE 仿真与验证、元器件库封装、电路原理图绘制、PCB
+绘制、PCB 信号完整性验证、PCB 制板文件生成等等；而本文主要围绕 Altium
+Desinger 的<strong>原理图与 PCB
+绘制</strong>、<strong>元器件封装</strong>、<strong>PCB
+仿真与验证</strong> 3 个核心主题进行相关介绍。</p>
+<span id="more"></span>
+<h2 id="概览与设置">概览与设置</h2>
+<p>Altium Designer 17
+的主界面要分为菜单栏、工具栏、导航栏、工作区面板、工作区、状态栏等几个部分，其中工具栏、菜单栏会跟随用户编辑器环境的变化而变化，下图标注了主界面的各个组成部分：</p>
+<p><img src="/Electronics/Altium/1-setting/overview.png"></p>
+<h3 id="系统设置">系统设置</h3>
+<p>为了更加高效的运用 Altium
+Designer，需要进行一系列的初始化工作，点击菜单栏 <strong>DXP -&gt;
+Preferences -&gt; System -&gt; General</strong> 进行如下设置：</p>
+<p><img src="/Electronics/Altium/1-setting/system/general.png"></p>
+<p>在执行操作导航过程当中，为了更加快速的定位所选择的对象，需要将所选对象进行高亮与放大处理，即交叉选择模式（Cross
+Select Mode），点击 <strong>DXP -&gt; Preferences -&gt; System -&gt;
+Navigation</strong> 进行如下设置：</p>
+<p><img src="/Electronics/Altium/1-setting/system/navigation.png"></p>
+<p>设置文件关联选项，点击 <strong>DXP -&gt; Preferences -&gt; System
+-&gt; File Types</strong> 进行勾选：</p>
+<p><img src="/Electronics/Altium/1-setting/system/file-types.png"></p>
+<p>关闭自动更新检查，通过 <strong>DXP -&gt; Preferences -&gt; System
+-&gt; Installation</strong> 进行如下设置：</p>
+<p><img src="/Electronics/Altium/1-setting/system/installation.png"></p>
+<p>文件自动备份设置，选择 <strong>DXP -&gt; Data Management -&gt;
+Backup</strong> 进行如下设置：</p>
+<p><img src="/Electronics/Altium/1-setting/system/backup.png"></p>
+<h3 id="原理图设置">原理图设置</h3>
+<p>打开 <strong>DXP -&gt; Schematic -&gt; General</strong>
+并且取消勾选<code>Pin Direction</code>选项，并且设置空白原理图模板为
+<strong>A4</strong> 尺寸：</p>
+<p><img src="/Electronics/Altium/1-setting/schematic/general.png"></p>
+<p>打开 <strong>DXP -&gt; Schematic -&gt; Graphical
+Editing</strong>，选择选项<code>Single'\'Negation</code>表示网络标号上使用<code>\</code>符号表示负信号，从而使网络标号出现上划线。选择选项<code>Click Clears Selection</code>表示单击空白处退出选择状态，便于多选环境下退出选择状态。选择选项<code>Color Option</code>表示所选中对象上的虚线框颜色。选择选项<code>Cursor</code>表示原理图编辑界面内的鼠标形状，这里修改为<code>Large Cursor 90</code>表示全屏十字指针。最后，取消<code>Mark Manual Parameters</code>与<code>Place Sheet Entries automatically</code>两个选项的默认勾选。</p>
+<p><img src="/Electronics/Altium/1-setting/schematic/graphical-editing.png"></p>
+<p>将 <strong>DXP -&gt; Schematic -&gt; Compiler</strong> 下面的
+<code>Errors &amp; Warnings</code> 里
+<code>Fatal Error</code>的颜色设置为红色：</p>
+<p><img src="/Electronics/Altium/1-setting/schematic/compiler.png"></p>
+<p>进入 <strong>DXP -&gt; Schematic -&gt; Break Wire</strong> 设置
+Altium Designer
+的导线切割功能（即将连接的导线断开），切割宽度通常取值为线宽的
+<code>5</code> 倍：</p>
+<p><img src="/Electronics/Altium/1-setting/schematic/break-wire.png"></p>
+<h3 id="pcb-设置">PCB 设置</h3>
+<p>打开 <strong>DXP -&gt; PCB Editor -&gt; General</strong>
+进行设置，选择<code>Cursor Type</code>为更加便于布局布线对齐的<code>Large 90</code>风格，并且取消<code>File Format Change Report</code>下的两个选项，避免
+HTML 文档打扰。</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/general.png"></p>
+<p>勾选 <strong>DXP -&gt; PCB Editor -&gt; Display</strong>
+里<code>Highlighting Options</code>下的走线时使用高亮模式<code>Apply Highlight During Interactive Editing</code>。</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/display.png"></p>
+<p>取消 <strong>DXP -&gt; PCB Editor -&gt; Board Insight
+Display</strong> 下
+<code>Live Highlighting only when Shift Key Down</code> 的勾选：</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/board-insight-display.png"></p>
+<p>取消 <strong>DXP -&gt; PCB Editor -&gt; Board Insight Modes</strong>
+里如下几个选项的勾选，当然也可以在编辑 PCB 文件时使用【Shift +
+H】快捷键关闭。</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/board-insight-modes.png"></p>
+<p>点击选择 <strong>DXP -&gt; PCB Editor -&gt; Board Insight Color
+Overrides</strong>
+下<code>Base Pattern</code>里的<code>Solid (Override Color)</code>，防止颜色过于杂乱造成眩晕。</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/board-insight-color-overrides.png"></p>
+<p>同理，<strong>DXP -&gt; PCB Editor -&gt; DRC Violations
+Display</strong>
+下的<code>Violation Overlay Style</code>也同样选择<code>Solid (Override Color)</code>。</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/drc-violations-display.png"></p>
+<p>打开 <strong>DXP -&gt; PCB Editor -&gt; Interactive Routing</strong>
+进行走线相关的设置：</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/interactive-routing.png"></p>
+<p>取消勾选 <strong>DXP -&gt; PCB Editor -&gt; True Type Fonts</strong>
+下的嵌入字体到 PCB
+文档<code>Embed TrueType fonts inside PCB documents</code>选项，可以有效的减小所输出文件的尺寸：</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/true-type-fonts.png"></p>
+<p>选择 <strong>DXP -&gt; PCB Editor -&gt; Default</strong> 可以设置 PCB
+编辑器中的元素参数的默认值：</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/default.png"></p>
+<p>选择 <strong>DXP -&gt; PCB Editor -&gt; Layer Colors</strong> 可以对
+PCB 的每一层颜色进行单独设置：</p>
+<p><img src="/Electronics/Altium/1-setting/pcb/layer-colors.png"></p>
+<blockquote>
+<p>点击 <strong>Preferences</strong>
+上的【Save】按钮，可以将上述的配置保存为以<code>.DXPPrf</code>作为后缀名的文件。</p>
+</blockquote>
+<h2 id="工程创建">工程创建</h2>
+<p>工程 <strong>Project</strong> 是 Altium Designer
+当中各种类型源文件相互关联的集合体，一个完整的 Altium Designer
+工程至少应该包括<code>.PrjPcb</code>工程文件、<code>.SchLib</code>元件库文件、<code>.SchDoc</code>原理图文件、<code>PcbLib</code>
+PCB 库文件、<code>PcbDoc</code>PCB
+文件、<code>.NET</code>网络列表文件。</p>
+<p>执行菜单栏上的
+<strong>File-New-Project...</strong>按照下图格式新建一个工程：</p>
+<p><img src="/Electronics/Altium/2-project/new-project.png"></p>
+<p>工程建立以后，会在 PCB
+工作目录下建立一个名为<code>PCB_Project</code>的工程文件夹，最终形成的目录结构如下所示：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">D:\<span class="title">Workspace</span>\<span class="title">PCB</span></span></span><br><span class="line"><span class="function">└─<span class="title">PCB_Project</span></span></span><br><span class="line"><span class="function">      └─<span class="title">PCB_Project.PrjPcb</span></span></span><br></pre></td></tr></table></figure>
+<p>接下来执行如下一系列的操作，建立原理图与 PCB
+文件，以及相关的库文件：</p>
+<ul>
+<li>执行菜单命令 <strong>File -&gt; New -&gt; Schematic</strong>
+或者在工程名上单击鼠标右键 <strong>Add New to Project -&gt;
+Schematic</strong> 创建原理图<code>Sheet1.SchDoc</code>；</li>
+<li>执行菜单命令 <strong>File -&gt; New -&gt; PCB</strong>
+或者在工程名上单击鼠标右键 <strong>Add New to Project -&gt; PCB</strong>
+创建 PCB 文件<code>PCB1.PcbDoc</code>；</li>
+<li>执行菜单命令 <strong>File -&gt; New -&gt; Library -&gt; Schematic
+Library</strong> 或者在工程名上单击鼠标右键 <strong>Add New to Project
+-&gt; Schematic Library</strong>
+创建元件库<code>Schlib1.SchLib</code>；</li>
+<li>执行菜单命令 <strong>File -&gt; New -&gt; Library -&gt; PCB
+Library</strong> 或者在工程名上单击鼠标右键 <strong>Add New to Project
+-&gt; PCB Library</strong> 创建 PCB 库<code>PcbLib1.PcbLib</code>；</li>
+</ul>
+<p>上述文件新建完成以后，最终形成的项目目录结构如下图所示：</p>
+<p><img src="/Electronics/Altium/2-project/projects.png"></p>
+<p>最终，计算机磁盘上实际形成的文件夹目录结构如下所示：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">D:\<span class="title">Workspace</span>\<span class="title">PCB</span></span></span><br><span class="line"><span class="function">└─<span class="title">PCB_Project</span></span></span><br><span class="line"><span class="function">      ├─<span class="title">PCB1.PcbDoc</span></span></span><br><span class="line"><span class="function">      ├─<span class="title">PcbLib1.PcbLib</span></span></span><br><span class="line"><span class="function">      ├─<span class="title">PCB_Project.PrjPcb</span></span></span><br><span class="line"><span class="function">      ├─<span class="title">PCB_Project.PrjPcbStructure</span></span></span><br><span class="line"><span class="function">      ├─<span class="title">Schlib1.SchLib</span></span></span><br><span class="line"><span class="function">      ├─<span class="title">Sheet1.SchDoc</span></span></span><br><span class="line"><span class="function">      ├─<span class="title">__Previews</span></span></span><br><span class="line"><span class="function">      |     ├─<span class="title">PCB1.PcbDocPreview</span></span></span><br><span class="line"><span class="function">      |     └─<span class="title">Sheet1.SchDocPreview</span></span></span><br><span class="line"><span class="function">      └─<span class="title">History</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="原理图元件库">原理图元件库</h2>
+<p>元件符号是电子元件在原理图上的表现形式，主要由边框、引脚名称与序号、元件名称与说明组成，并且元件符号中的引脚序号与电子元件实物的管脚必须逐一对应。建立元件库时，使用频率较高的非工具栏上的【Place】下拉菜单莫属，该菜单下拥有如下命令：</p>
+<table>
+<colgroup>
+<col style="width: 26%">
+<col style="width: 22%">
+<col style="width: 26%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/1.png" alt="icon"></td>
+<td style="text-align: left;">放置线（<code>Place Line</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/8.png" alt="icon"></td>
+<td style="text-align: left;">新建器件（<code>Create Component</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/2.png" alt="icon"></td>
+<td style="text-align: left;">放置贝塞尔曲线（<code>Place Bezier</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/9.png" alt="icon"></td>
+<td style="text-align: left;">添加器件部件（<code>Add Component Part</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/3.png" alt="icon"></td>
+<td style="text-align: left;">放置椭圆弧（<code>Place Elliptical Arcs</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/10.png" alt="icon"></td>
+<td style="text-align: left;">放置矩形（<code>Place Rectangle</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/4.png" alt="icon"></td>
+<td style="text-align: left;">放置多边线（<code>Place Polygons</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/11.png" alt="icon"></td>
+<td style="text-align: left;">放置圆角矩形（<code>Place Round Rectangle</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/5.png" alt="icon"></td>
+<td style="text-align: left;">放置文本字符串（<code>Place Text String</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/12.png" alt="icon"></td>
+<td style="text-align: left;">放置椭圆（<code>Place Ellipses</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/6.png" alt="icon"></td>
+<td style="text-align: left;">放置超级链接（<code>Place Hyperlink</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/13.png" alt="icon"></td>
+<td style="text-align: left;">放置图形（<code>Place Graphic Image</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/7.png" alt="icon"></td>
+<td style="text-align: left;">放置文本框（<code>Place Text Frame</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/3-schematic-lib/place/14.png" alt="icon"></td>
+<td style="text-align: left;">放置引脚（<code>Place Pin</code>）</td>
+</tr>
+</tbody>
+</table>
+<p>此外，还可以使用工具栏上的【Place
+Symbol】菜单去放置一些元件符号，该下拉菜单拥有如下命令：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/symbol.png"></p>
+<p>Altium Designer
+左侧的工作区面板下，主要拥有如下几个较为常用的子面板，首先是元件
+Components 管理子面板，主要用于管理元件的放置、添加、删除、编辑：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/pannel/components.png"></p>
+<p>引脚 Pins
+管理子面板，主要用于进行原理图上元件引脚的添加、删除、编辑：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/pannel/pins.png"></p>
+<p>模型 Model 管理子面板，主要用于管理元件的封装、3D、仿真等模型：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/pannel/model.png"></p>
+<h3 id="新建元件">新建元件</h3>
+<p>点击菜单命令 <strong>Tools -&gt; Document
+Options...</strong>，进入元件库编辑器工作区选项编辑窗口，然后执行下图所示的操作：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/schematic-library-options.png"></p>
+<p>单击 <strong>Components</strong>
+子面板上的【Add】按钮，可以添加一个新的元件，然后也可以通过菜单栏上的
+<strong>Tools -&gt; Rename Component</strong>
+重命名这个元件，一般以电子元件的型号作为元件的命名，下面新建了一个元件<code>Component_1</code>，并且放置了一个矩形框：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/component/diagram.png"></p>
+<p>双击该矩形框，可以调整其属性，例如选择是否使用填充以及调整边框宽度：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/component/rectangle.png"></p>
+<p>单击绘制工具栏当中的快捷按钮【Place
+Pin】，放置管脚时要注意将具有电气特性（标识<code>x</code>）的一端朝外（通过空格键调整），以用于后续原理图绘制时的走线连接。放置过程中按下【Tab】键或者放置完毕后双击，可以设置管脚的属性：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/component/pin-properties.png"></p>
+<p>完成上述步骤以后，图形元素就绘制完毕了，此时需要设置这个绘制好的元件属性，在元件库面板列表中选中该元件，执行菜单栏命令
+<strong>Tools -&gt; Component Properties...</strong>
+打开元件属性设置对话框，或者在元件库面板中双击该元件名称也可以打开该对话框：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/component/library-component-properties.png"></p>
+<p>保存上述配置之后，最终得到的元件效果如下图所示：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/component/diagram-1.png"></p>
+<p>如果一个元件封装包含有多个相对独立的功能部件时，就可以采用<strong>多部件元件</strong>。这里首先创建一个名为<code>ADC</code>的元件，在
+<strong>Components</strong> 子面板的列表中选中该元件，然后点击菜单
+<strong>Tools -&gt; New Part</strong>，此时会生成 2
+个部件<code>Part A</code>和<code>Part B</code></p>
+<p><img src="/Electronics/Altium/3-schematic-lib/component/new-part.png"></p>
+<blockquote>
+<p><strong>注意：</strong>需要设置多部件元件属性，可以通过双击该多部件元件进行设置，毋须对单个部件进行设置。</p>
+</blockquote>
+<h3 id="元件规则检查">元件规则检查</h3>
+<p>如果想要检查自定义的元件是否符合规范，或者需要了解该元件的一些信息，可以通过元件的检查与报告功能来实现。首先打开元件库面板
+<strong>SCH
+Library</strong>，选中元件库当中需要进行检查的元件，选择菜单栏的命令
+<strong>Reports -&gt; Component Rule Check...</strong>
+打开库组件规则检查对话框，然后勾选当前需要进行检查的条目：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/component/library-component-rule-check.png"></p>
+<p>最后，点击【OK】就会自动打开并且弹出检查结果文件<code>Schlib1.ERR</code>，：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/component/schlib-err.png"></p>
+<h3 id="生成元件库">生成元件库</h3>
+<p>打开需要导出元件库的原理图，点击 Altium Designer 菜单栏的
+<strong>Design -&gt; Make Schematic
+Library</strong>，即可将当前原理所使用的元件库输出为一个以<code>.SCHLIB</code>作为后缀名的库文件。</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/make-schematic-library.png"></p>
+<h3 id="元件库复制">元件库复制</h3>
+<p>打开需要复制的元件库文件，单击选择或者按住【Shift】键多选等待复制的元件，然后鼠标右键选择【Copy】，然后打开目标元件库，鼠标右键执行【Paste】命令，即可以跨库完成元件的复制。</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/copy-paste.png"></p>
+<h3 id="实例创建电容">实例：创建电容</h3>
+<p><img src="/Electronics/Altium/3-schematic-lib/example1/diagram.png"></p>
+<ol type="1">
+<li>单击 <strong>Components</strong> 子面板上的【Add】按钮，添加一个名为
+<strong>CAP</strong> 的电容元件；</li>
+<li>执行菜单命令【Place
+Line】，放置两条线代表电容的两极；执行菜单命令【Place
+Pin】，并在放置状态按下【Tab】键设置属性，管脚的名称和序号统一为数字<code>1</code>和<code>2</code>；</li>
+<li>由于电容的管脚不需要进行信号识别，可以双击管脚设置其属性，取消勾选<code>Display Name</code>的<code>Visible</code>选项，避免显示的名称和标识符过多而造成视觉干扰；</li>
+<li>分别采用菜单命令 <strong>Place Line</strong> 以及 <strong>Place Text
+String</strong> 绘制电容的管脚及其极性标识<code>+</code>。</li>
+<li>双击 <strong>Components</strong> 子面板上的电容名称
+<strong>CAP</strong> 设置该元件的属性，这里将
+<strong>标志符</strong>（Designator，[,dɛzɪg'netɚ]）设置为<code>C?</code>，将
+<strong>Comment</strong>
+填写为<code>10μF</code>，<strong>Description</strong>
+填写为<code>极性电容</code>，然后在 <strong>Models</strong>
+添加名称为<code>3528C</code>的
+<strong>Footprint</strong>，从而最终完成了电容元件的创建。 <img src="/Electronics/Altium/3-schematic-lib/example1/component-properties.png"></li>
+</ol>
+<h3 id="实例创建-adc">实例：创建 ADC</h3>
+<p><img src="/Electronics/Altium/3-schematic-lib/example2/diagram.png"></p>
+<ol type="1">
+<li>执行菜单命令<strong>Tools -&gt; New
+Component</strong>，新建一个名称为<code>ADC08200</code>的集成电路元件；</li>
+<li>单击工具栏上的快捷按钮【Place
+Rectangle】，绘制一个空白的矩形框；</li>
+<li>单击【Place
+Pin】，在放置状态按下【Tab】键，分别按照下图所示设置管脚的名称和序号，且管脚长度默认为<code>30</code>；</li>
+<li>随机放置好管脚以后，使用 Altium Designer
+提供的对齐操作命令进行快速对齐；</li>
+<li>双击元件设置其属性，<strong>Designator</strong>
+设置为<code>U?</code>，<strong>Comment</strong>
+填写<code>ADC08200</code>，<strong>Description</strong>
+填写为<code>模数混合IC</code>，在 <strong>Models</strong>
+添加名称为<code>MTC24</code>的封装，即完成该元件的创建。 <img src="/Electronics/Altium/3-schematic-lib/example2/component-properties.png"></li>
+</ol>
+<h3 id="实例创建放大器">实例：创建放大器</h3>
+<p>任何元件原则上都可以被划分为多个子部件，这里将
+<strong>74HC00</strong> 放大芯片的 4
+个独立功能与非门，分别创建为相应的子部件：</p>
+<p><img src="/Electronics/Altium/3-schematic-lib/example3/relevance.png"></p>
+<ol type="1">
+<li>点击 <strong>Tools -&gt; New Component</strong>
+新建一个名为<code>74HC00</code>的元件;</li>
+<li>通过放置多边形 <strong>Place Polygons</strong>
+拖拽一个三角形，并且保存为<code>Part A</code>，公用的<code>VCC</code>和<code>GND</code>管脚亦放置在该子部件；
+<img src="/Electronics/Altium/3-schematic-lib/example3/part-a.png"></li>
+<li>接着执行 <strong>Tools -&gt; New
+Part</strong>，分别创建<code>Part B</code>、<code>Part C</code>、<code>Part D</code>子部件，并且分别设置相应的属性；
+<img src="/Electronics/Altium/3-schematic-lib/example3/part-b-c-d.png"></li>
+<li>双击元件设置属性，<strong>Designator</strong>
+设置为<code>U?</code>，<strong>Comment</strong>
+填写<code>74HC00</code>，<strong>Models</strong>
+添加名称为<code>SSOP14</code>的封装，最终完成该<em>多子部件元件</em>的创建。
+<img src="/Electronics/Altium/3-schematic-lib/example3/component-properties.png"></li>
+</ol>
+<h2 id="原理图绘制">原理图绘制</h2>
+<p>原理图用于表示当前电路当中电子元件之间的连接关系，由原理图可以推导出如何进行
+PCB Layout（布线）。点击 Altium Designer 菜单栏 <strong>File -&gt; New
+Schematic</strong> 创建原理图，当 Altium Designer
+处在原理图编辑器界面时，工具上的主要图标如下所示：</p>
+<p><img src="/Electronics/Altium/4-schematic/pcb-icons.png"></p>
+<p>下面表格对于工具栏上的每个图标所对应的功能与快捷键进行了说明：</p>
+<table>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 23%">
+<col style="width: 24%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/1.png" alt="icon"></td>
+<td style="text-align: left;">放置线（<code>Place Wire</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/11.png" alt="icon"></td>
+<td style="text-align: left;">放置器件图表符（<code>Place Device Sheet Symbol</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/2.png" alt="icon"></td>
+<td style="text-align: left;">放置总线（<code>Place Bus</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/12.png" alt="icon"></td>
+<td style="text-align: left;">放置线束连接器（<code>Place Harness Connector</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/3.png" alt="icon"></td>
+<td style="text-align: left;">放置信号线束（<code>Place Signal Harness</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/13.png" alt="icon"></td>
+<td style="text-align: left;">放置线束入口（<code>Place Harness Entry</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/4.png" alt="icon"></td>
+<td style="text-align: left;">放置总线入口（<code>Place Bus Entry</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/14.png" alt="icon"></td>
+<td style="text-align: left;">放置端口（<code>Place Port</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/5.png" alt="icon"></td>
+<td style="text-align: left;">放置网络标号（<code>Place Net Label</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/15.png" alt="icon"></td>
+<td style="text-align: left;"><code>Place Non-Specific No ERC</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/6.png" alt="icon"></td>
+<td style="text-align: left;">GND
+电源端口（<code>GND Power Port</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/16.png" alt="icon"></td>
+<td style="text-align: left;"><code>Place No ERC Targeting a Specific Error</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/7.png" alt="icon"></td>
+<td style="text-align: left;">VCC
+电源端口（<code>VCC Power Port</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/17.png" alt="icon"></td>
+<td style="text-align: left;">网络颜色（<code>Net Colors</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/8.png" alt="icon"></td>
+<td style="text-align: left;">放置器件（<code>Place Part</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/18.png" alt="icon"></td>
+<td style="text-align: left;">放置 C
+代码符号（<code>Place C Code Symbol</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/9.png" alt="icon"></td>
+<td style="text-align: left;">放置图表符（<code>Place Sheet Symbol</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/19.png" alt="icon"></td>
+<td style="text-align: left;">放置 C 代码入口
+（<code>Place C Code Entry</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/icons/10.png" alt="icon"></td>
+<td style="text-align: left;">放置图纸入口（<code>Place Sheet Entry</code>）</td>
+<td style="text-align: center;"> </td>
+<td style="text-align: left;"> </td>
+</tr>
+</tbody>
+</table>
+<h3 id="原理图设置-1">原理图设置</h3>
+<p>执行菜单栏命令 <strong>Design -&gt; Document Options...</strong>
+或者双击原理图边框，可以进入原理图页参数设置界面，从而根据产品需要设置合适的原理图尺寸以及方向：</p>
+<p><img src="/Electronics/Altium/4-schematic/setting/document-options.png"></p>
+<blockquote>
+<p><strong>注意</strong>：取消<code>Title Block</code>选项的勾选，可以去除原理图右下角的默认模板信息。</p>
+</blockquote>
+<p>使用网格便于放置元件和绘制导线，执行 <strong>Tools -&gt; Schematic
+Preferences -&gt; Grids</strong>
+进入原理图网格设置界面，可以同时对捕获网格（Snap
+Grid）、电气网格（Electrical Grid）、可视网格（Visible
+Grid）的尺寸进行设置，参数取值都建议设置为<code>5</code>的倍数：</p>
+<p><img src="/Electronics/Altium/4-schematic/setting/grids.png"></p>
+<blockquote>
+<p>点击菜单栏 <strong>View -&gt; Grids -&gt; Toggle Visible
+Grid</strong> 或者快捷键 <strong>V + G +
+V</strong>，可以切换网格的隐藏与显示。</p>
+</blockquote>
+<p>执行 <strong>View -&gt; Grids -&gt; Set Snap Grid...</strong>
+或者使用快捷键 <strong>V + G + S</strong> 对捕获网格（Snap
+Grid）进行设置，依然建议将其设置为<code>5</code>的整数倍，这里推荐设置为<code>10</code>：</p>
+<p><img src="/Electronics/Altium/4-schematic/setting/snap-grid-size.png"></p>
+<blockquote>
+<p><strong>注意：</strong>捕获网格的设置必须与元件库里的网格保持一致，从而保证连接导线时不会出现偏移问题。</p>
+</blockquote>
+<p>Altium Designer
+提供的原理图模板包含了标题、外观属性方面的设置，方便开发人员直接调用，Altium
+Designer
+默认的模板保存在安装目录下的<code>Templates</code>文件夹。当然，开发人员也可以定义自己的模板，这里新建一张原理图并按照上面描述的方法，去除原理图右下角的默认模板信息，然后调用菜单栏上的【Place
+Line】和【Place Text】绘制如下的表格和文本：</p>
+<p><img src="/Electronics/Altium/4-schematic/setting/info.png"></p>
+<p>接着操作菜单栏命令 <strong>Design -&gt; -&gt; General Templates -&gt;
+Choose Another File</strong>
+选择需要显示的模板，此时会弹出模板更新提示框，要求指定模板更新的范围：</p>
+<p><img src="/Electronics/Altium/4-schematic/setting/update-template.png"></p>
+<blockquote>
+<p><strong>注意：</strong>如果需要放弃当前使用的模板，那么可以执行
+<strong>Design -&gt; Templates -&gt; Remove Current Template...</strong>
+移除当前所使用的模板。</p>
+</blockquote>
+<h3 id="元件操作">元件操作</h3>
+<p>创建好元件库以后，需要将创建好的元件放置到原理图当中，正式开始电路原理图的设计工作。首先，使用快捷键
+<strong>D + B</strong> 或者点击右侧 <strong>Libraries</strong>
+面板导入<code>74系列芯片.SchLib</code>元件库。</p>
+<h4 id="放置元件">放置元件</h4>
+<p>从上面安装的<code>74系列芯片.SchLib</code>元件库当中找到<code>74HC595</code>位移缓存器，采用双击、向原理图拖拽、点击库面板上方的【Place
+74HC595】，将该元件放置到新建的原理图上：</p>
+<p><img src="/Electronics/Altium/4-schematic/place/place-74hc595.png"></p>
+<p>此时，点击菜单栏上的 <strong>Place -&gt; Part...</strong>
+或者按下快捷键 ** P + P
+**，会弹出一个元件放置对话框，如果需要再次放置，单击【OK】按钮即可：</p>
+<p><img src="/Electronics/Altium/4-schematic/place/place-part.png"></p>
+<p>原理图上的每个元件都拥有自己的属性，Altium Designer 提供了 4
+种打开原理图元件属性设置对话框的方法：</p>
+<ol type="1">
+<li>从元件库选取元件放置到原理图过程中，当光标还处于十字状态时按下【Tab】键；</li>
+<li>元件放置到原理图以后，选中元件然后双击鼠标左键；</li>
+<li>鼠标选中元件并且按住鼠标左键不松开，同时按下【Tab】键；</li>
+<li>点击菜单上的 <strong>Edit -&gt; Change</strong> 或者按下快捷键
+<strong>E +
+H</strong>，此时光标会变成十字状态，将其放置到元件上单击即可。</li>
+</ol>
+<p><img src="/Electronics/Altium/4-schematic/place/properties.png"></p>
+<p>上面截图中的 【Models】
+区域主要用来添加元件对应的模型，包括<code>Footprint</code>（PCB
+封装模型，即原理图到 PCB
+的映射模型）、<code>Simulation</code>（仿真模型）、<code>PCB3D</code>（PCB
+上元件的 3D
+模型）、<code>Signal Integrity</code>（信号完整性分析模型）：</p>
+<p><img src="/Electronics/Altium/4-schematic/place/models.png"></p>
+<p>通过单击【Add…】按钮添加所需的模型，一般经常使用的是添加 PCB
+封装模型，点击后弹出 PCB
+模型管理界面，此处需要填写模型所在的磁盘路径（如果 PCB
+封装库在本工程下，则路径设置选择【Any】，可以通过名称自动匹配；反之，则可以通过指定封装库的路径来进行匹配），当封装名称与模型匹配完成之后，<code>Selected Footprint</code>栏就会自动展示该封装的预览图像：</p>
+<p><img src="/Electronics/Altium/4-schematic/place/pcb-model.png"></p>
+<h4 id="选择元件">选择元件</h4>
+<p>Altium Designer
+当中，直接使用鼠标左键<strong>单击</strong>就可以选择一个原理图元件，也可以按下【Shift】键依次点击各个元件执行<strong>多选</strong>操作。更高级的多选方案是按下【S】按键，在弹出的选择命令菜单上选择相应的方式：</p>
+<p><img src="/Electronics/Altium/4-schematic/adjust/select.png"></p>
+<ul>
+<li><code>Inside Area</code>：选中框选区域内的元件；</li>
+<li><code>Outside Ares</code>：反向选中框选区域之外的元件；</li>
+<li><code>Touching Rectangle</code>：鼠标拖出矩形进行框选；</li>
+<li><code>Touching Line</code>：鼠标十字线单击进行选中；</li>
+<li><code>Connection</code>：选中网络标号相同的元件；</li>
+<li><code>All</code>：选择当前原理图上的全部元件。</li>
+</ul>
+<p>如果需要移动元件，则可以将鼠标指针放置到原理图元件上，按下鼠标左键直接进行拖动，此外也可以按下【M】键，在弹出的菜单中选择更为高级的操作，例如：选择<code>Move Selection</code>移动当前选中的所有元件，点选<code>Move Selection by X，Y…</code>则可以在
+X 轴和 Y 轴上对元件进行精确的移动。</p>
+<p><img src="/Electronics/Altium/4-schematic/adjust/move.png"></p>
+<blockquote>
+<p>此时，如果还希望对元件进行旋转操作，除了选中元件并按下【空格】或者【Shift
++
+空格】键进行逆时针或顺时针旋转以外，还可以在按下【M】键以后选择<code>Rotate Selection</code>、<code>Rotate Selection Clockwise</code>完成相同的操作。</p>
+</blockquote>
+<p>如果需要对元件进行水平或者垂直的翻转，则可以在当元件处于拖动状态时，按下【X】键或者【Y】键分别完成
+X 轴或者 Y 轴的镜像，下面原理图就对其中一个 <strong>74HC138</strong>
+译码器进行了翻转操作：</p>
+<p><img src="/Electronics/Altium/4-schematic/adjust/mirror.png"></p>
+<h4 id="复制元件">复制元件</h4>
+<p>选中需要操作的元件，执行菜单命令 <strong>Edit-Copy</strong>
+或者按下快捷键 <strong>Ctrl + C</strong>
+就能完成复制操作。但是，如果在按住【Shift】键的情况下拖动元件，则依然会复制元件，所不同的是所复制元件的网络标号会自增<code>1</code>。</p>
+<p><img src="/Electronics/Altium/4-schematic/adjust/copy.png"></p>
+<p>如果需要调整递增的幅度，则可以在原理图编辑界面按下快捷键 <strong>T +
+P</strong> 或者点击菜单 <strong>DXP -&gt; Preferences -&gt; Schematic
+-&gt;
+General</strong>，找到<code>Auto-Increment During Placement</code>下的<code>Primary</code>参数，将其设置为所需的幅度值即可。</p>
+<p><img src="/Electronics/Altium/4-schematic/adjust/auto-increment-during-placement.png"></p>
+<h4 id="对齐元件">对齐元件</h4>
+<p>选择菜单 <strong>Edit -&gt; Align</strong>
+或者按下按键【A】可以进入排列与对齐命令菜单，其中<code>Distribute Horizontally</code>表示水平等间距对齐，<code>Distribute Vertically</code>则表示垂直等间距对齐：</p>
+<p><img src="/Electronics/Altium/4-schematic/adjust/align.png"></p>
+<h3 id="连接操作">连接操作</h3>
+<p>元件放置完成以后，就可以开始进行电气连接，从而让毫无关联的元件之间形成连接联系，进而构成完整的电路网络。</p>
+<h4 id="导线绘制">导线绘制</h4>
+<p>点击菜单栏上的 <strong>Place -&gt; Wire</strong>
+或者工具栏上的【Place
+Wire】图标，进行导线的放置，此时鼠标将会变为十字状态。选择一个元件管脚作为开始点，另一个元件管脚作为结束点，完成放置之后单击<strong>鼠标右键</strong>或者按下【Esc】键，结束本次导线绘制操作：</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/place.png"></p>
+<p>当处于导线放置状态时按下【Tab】键，或者双击原理图上已经绘制好的导线，可以对导线的属性进行相应的设置。例如设置为<code>Locked</code>状态，使导线不会由于误操作而发生移动：</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/property.png"></p>
+<p>在布线状态下，可以按住快捷键 <strong>Shift + 空格键</strong>
+切换布线为 90° 直角、45° 度、任意角度：</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/angle.png"></p>
+<p><strong>网络标号</strong>（Net
+Label）用于间接体现元件的连接关系，通过点击菜单栏命令 <strong>Place
+-&gt; Net Label</strong> 或者按下【Place Net
+Label】按钮进行放置。同样的，处于放置状态时按下【Tab】键或者双击网络标号，可以对其属性进行设置：</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/net-label.png"></p>
+<p>Altium Designer
+专门提供了电源和地的原理图符号，分别单击工具栏上的<code>VCC Power Port</code>
+和 <code>GND Power Port</code>按钮即可以直接放置相应符号，</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/vcc-gnd.png"></p>
+<p>单击 Altium Designer 右上角的【Power
+Sources】图标，可以打开下图所示的常用电源端口菜单，这里可以选择所需的端口类型进行放置：</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/power-sources.png"></p>
+<p>同样的，在放置过程中按下【Tab】或者放置以后双击该元件，可以对电源的属性进行设置：</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/power-property.png"></p>
+<p>导线放置时，如果两条导线发生了交叉连接，则 Altium Designer
+会自动放置交叉点（Junction）；如果需要手动放置电气交叉点，则需要点击菜单上的
+<strong>Place -&gt; Manual Junction</strong> 命令或者使用快捷键【P +
+J】进行放置：</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/junction.png"></p>
+<p>放置过程中按下【Tab】或者放置后双击交叉点，依然可以方便的进行属性设置：</p>
+<p><img src="/Electronics/Altium/4-schematic/wire/junction-property.png"></p>
+<h4 id="页连接符">页连接符</h4>
+<p>单张图纸当中，可以简单的通过网络标号（Net
+Label）实现电路的连接；但是，如果一个工程中存在多张原理图，此时就需要采用对应的连接符来完成原理图之间的连接。在这里，简单的总结和比较一下涉及网络连接的标识符。</p>
+<table>
+<colgroup>
+<col style="width: 32%">
+<col style="width: 67%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/wire/connectors/power-port.png" alt="icon"></td>
+<td style="text-align: left;"><strong>电源端口</strong>，可以忽视掉工程的结构，因为其全局连接着所有原理图上出现的电源端口。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/wire/connectors/net-label.png" alt="icon"></td>
+<td style="text-align: left;"><strong>网络标号</strong>，单张原理图内部，可用来代替导线表达元件之间的连接关系；多张原理图当中，依然只能用于表达单张图纸内部连接关系。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/wire/connectors/port.png" alt="icon"></td>
+<td style="text-align: left;"><strong>端口</strong>，即可以用来表示单张原理图内部的连接关系，也可以用于体现多张原理图之间的连接，常用于
+<strong>层次化的原理图设计</strong>。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/wire/connectors/off-sheet.png" alt="icon"></td>
+<td style="text-align: left;"><strong>跨页连接符</strong>，用于不同原理图之间的跨页连接，并且可以将其连接属性扩大至整个工程，常用于
+<strong>扁平化的原理图设计</strong>。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/wire/connectors/sheet-entry.png" alt="icon"></td>
+<td style="text-align: left;"><strong>图纸入口</strong>，总是垂直连接到下层的原理图端口，常见于
+<strong>层次化的原理图设计</strong>。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/wire/connectors/sheet-symbol.png" alt="icon"></td>
+<td style="text-align: left;"><strong>图纸符号</strong>，即所需要链接的原理图的图纸符号，常见于
+<strong>层次化的原理图设计</strong>。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="添加网络标号">添加网络标号</h4>
+<p>紧接上面的操作步骤，接下来为上面原理图当中的总线与信号线添加网络标号。单击绘图工具栏上的【Place
+Net Label】或者 <strong>P + N</strong>
+快捷键，将网络标号放置到总线，放置过程中按下【Space】空格键可以旋转网络标号的方向，按下【F2】按键可以修改转网络标号的名称。</p>
+<p><img src="/Electronics/Altium/4-schematic/net-label/1.png"></p>
+<blockquote>
+<p><strong>注意：</strong>必须将网络标号紧密的放在信号线或者总线上，使其成为信号线与总线相关的标识。</p>
+</blockquote>
+<p>双击原理图当中的网络标号，可以打开 Net Label
+网络标号对话框，这里可以对网络标号的名称、颜色、字体、位置进行设置：</p>
+<p><img src="/Electronics/Altium/4-schematic/net-label/2.png"></p>
+<p>接下来为两条总线添加相应的网络标号，最终得到的效果如下图所示：</p>
+<p><img src="/Electronics/Altium/4-schematic/net-label/3.png"></p>
+<h4 id="添加端口">添加端口</h4>
+<p>接着上面的步骤，单击绘图工具栏上的【Place Port】或者 <strong>P +
+R</strong>
+快捷键，为输入与输出信号线添加端口。按下【Esc】或者鼠标右键可以退出添加过程，并且同样可以通过【Space】空格键调整端口的放置方向，不过基于连线与端口符号接触的位置，Altium
+Designer 能够自动检测端口的方向：</p>
+<p><img src="/Electronics/Altium/4-schematic/port/1.png"></p>
+<p>单击上面原理图上添加的端口标号，打开 <strong>Port Properties</strong>
+端口属性对话框，这里可以对端口的名称、类型、唯一
+ID、颜色等属性进行配置：</p>
+<p><img src="/Electronics/Altium/4-schematic/port/2.png"></p>
+<p>接下来修改端口名称，最终获得的原理图效果如下图所示：</p>
+<p><img src="/Electronics/Altium/4-schematic/port/3.png"></p>
+<h4 id="添加信号束">添加信号束</h4>
+<p><strong>信号线 Wire</strong>
+用来表示各个元件端口之间的电气连接，<strong>总线 Bus</strong>
+则用于表示一组相关的信号线，<strong>信号束 Harness</strong>
+则是对多个信号进行逻辑分组，包含有<code>信号束（Signal Harness）</code>、
+<code>束入口（Harness Entry）</code>、<code>束连接器（Harness Connector）</code>、<code>束定义文件（Harness Definition File）</code>这
+4
+个关键要素，将鼠标放置在信号束上，就可以获得其所包含的所有网络、总线、子信号束的详细信息。本小节需要打开一个全新的
+PCB_Project1.PrjPCB 示例工程，然后双击打开 Sheet1.SchDoc
+原理图文件：</p>
+<p><img src="/Electronics/Altium/4-schematic/harness/1.png"></p>
+<p>单击工具栏上的【Place Harness
+Connector】放置信号束连接器，按下【Space】空格键可以改变信号束连接器的方向，然后使用鼠标按需对其进行拉伸：</p>
+<p><img src="/Electronics/Altium/4-schematic/harness/2.png"></p>
+<p>单击工具栏上的【Place Harness
+Entry】放置信号束入口到元件<code>U1</code>和<code>P1</code>的所有引脚：</p>
+<p><img src="/Electronics/Altium/4-schematic/harness/3.png"></p>
+<p>鼠标双击信号束编号<code>0</code>，打开 Harness Entry
+信号束入口对话框，修改该信号束入口的名称：</p>
+<p><img src="/Electronics/Altium/4-schematic/harness/4.png"></p>
+<p>当然，也可以选中信号束入口之后，直接按下【F2】按键更加方便的进行修改：</p>
+<p><img src="/Electronics/Altium/4-schematic/harness/5.png"></p>
+<p>点击工具栏上的【Place Signal
+Harness】，使用信号束连接两个信号束连接器，最后保存原理图并关闭工程。</p>
+<p><img src="/Electronics/Altium/4-schematic/harness/6.png"></p>
+<p>每个包含信号束的原理图都拥有一份信号束定义文件，该文件内定义了每个信号束的构成属性，打开主界面左侧的工程面板，依次展开
+<strong>PCB_Project1.PrjPCB -&gt; Settings -&gt; Harness Definitions
+Files</strong>，即可以查看到信号束定义文件的内容。</p>
+<p><img src="/Electronics/Altium/4-schematic/harness/7.png"></p>
+<h4 id="总线放置">总线放置</h4>
+<p>总线是一组具有相同电气特性的导线，即将具有相同电气特性的导线抽象为总线，以便于原理图的分析；总线上通过总线分支引出相应的各条导线，并以网络标号加以标识和区分；因此，<strong>总线</strong>、<strong>总线分支</strong>、<strong>网络标号</strong>密不可分。</p>
+<p>首先，单击工具栏上的【Place Bus】图标，或者通过菜单栏上的
+<strong>Place -&gt; Bus</strong> 以及快捷键【P +
+B】放置总线；然后，通过工具栏上的【Place Bus
+Entry】图标，或者通过菜单栏上的 <strong>Place -&gt; Bus Entry</strong>
+以及快捷键【P + U】放置总线分支，下面是一个完成操作以后的示例：</p>
+<p><img src="/Electronics/Altium/4-schematic/bus/example1.png"></p>
+<p>原理图当中，两条总线上分别放置 1 个相同名称的 Port
+端口，表示这两条总线是相互连接在一起的，接下来在上面例子基础上添加 1
+个端口：</p>
+<p><img src="/Electronics/Altium/4-schematic/bus/example2.png"></p>
+<h4 id="差分标识放置">差分标识放置</h4>
+<p>高速电路设计当中，经常会使用到差分走线，例如： USB
+接口的<code>D+</code>与<code>D-</code>差分信号、HDMI
+接口的数据与时钟差分等等。 Altium Designer 当中，可以通点击菜单栏上的
+<strong>Place -&gt; Directives -&gt; Differential Pair</strong>
+分别将差分标识放置在一对信号线上。</p>
+<p><img src="/Electronics/Altium/4-schematic/differential-pair.png"></p>
+<blockquote>
+<p><strong>注意：</strong>原理图设计时，习惯性在差分对信号线名称的后缀上添加<code>+</code>和<code>-</code>或者<code>_P</code>和<code>_N</code>，</p>
+</blockquote>
+<h4 id="no-erc-放置">No ERC 放置</h4>
+<p><strong>No ERC</strong> 是指忽略 ERC
+检测，凡是指定了<code>No ERC</code>的元件管脚，在进行 ERC
+检测时，出现的错误或者警告信息将会被自动忽略，并不会影响网络报表的生成。<strong>No
+ERC</strong> 本身并不具备任何电气特性，主要用于原理图规则的检查。</p>
+<p>点击菜单栏上的【Place Non-Specific No ERC】，然后移动鼠标到需要忽略
+ERC
+检测的元件管脚，并且点击进行放置，完成后单击鼠标右键或者按下【Esc】键退出放置状态。</p>
+<p><img src="/Electronics/Altium/4-schematic/no-erc/diagram.png"></p>
+<p>放置状态按下【Tab】键，或者放置完成之后双击 No ERC
+检测点，即可设置其属性：</p>
+<p><img src="/Electronics/Altium/4-schematic/no-erc/suppress-all-violations.png"></p>
+<p>其中，<code>Suppress all violations</code>表示抑制所有违规信息，<code>Suppress specific violations</code>表示抑制指定的违规信息，选择后者时将会自动弹出复选框，并进一步指定需要抑制哪些违规信息：</p>
+<p><img src="/Electronics/Altium/4-schematic/no-erc/suppress-specific-violations.png"></p>
+<h3 id="辅助信息">辅助信息</h3>
+<p>原理图上出现的辅助信息没有电气属性，仅用于增强电路的可读性，或者添加相关的作者和版权版本。</p>
+<p><img src="/Electronics/Altium/4-schematic/info/icons.png"></p>
+<table>
+<colgroup>
+<col style="width: 26%">
+<col style="width: 22%">
+<col style="width: 27%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/1.png" alt="icon"></td>
+<td style="text-align: left;">放置线条（<code>Place Line</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/8.png" alt="icon"></td>
+<td style="text-align: left;">放置矩形（<code>Place Rectangle</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/2.png" alt="icon"></td>
+<td style="text-align: left;">放置多边形（<code>Place Polygons</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/9.png" alt="icon"></td>
+<td style="text-align: left;">放置圆角矩形（<code>Place Round Rectangle</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/3.png" alt="icon"></td>
+<td style="text-align: left;">放置椭圆弧（<code>Place Elliptical Arcs</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/10.png" alt="icon"></td>
+<td style="text-align: left;">放置椭圆（<code>Place Ellipses</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/4.png" alt="icon"></td>
+<td style="text-align: left;">放置贝塞尔曲线（<code>Place Bezier</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/11.png" alt="icon"></td>
+<td style="text-align: left;">放置饼图（<code>Place Pie Charts</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/5.png" alt="icon"></td>
+<td style="text-align: left;">放置文本字符串（<code>Place Text String</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/12.png" alt="icon"></td>
+<td style="text-align: left;">放置图片（<code>Place Graphic Image</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/6.png" alt="icon"></td>
+<td style="text-align: left;">放置超级链接（<code>Place Hyperlink</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/13.png" alt="icon"></td>
+<td style="text-align: left;">智能粘贴（<code>Smart Paste</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/4-schematic/info/place/7.png" alt="icon"></td>
+<td style="text-align: left;">放置文本框（<code>Place Text Frame</code>）</td>
+<td style="text-align: center;"> </td>
+<td style="text-align: left;"> </td>
+</tr>
+</tbody>
+</table>
+<p>需要特别说明的是，原理图设计时，可以通过放置线条来标识信号的方向或者对功能模块进行分块标识。执行
+Altium Designer 右上角菜单上的【Place Line】图标，或者使用快捷键 ** P +
+D + L **，绘制一条普通的线条。</p>
+<p><img src="/Electronics/Altium/4-schematic/info/line.png"></p>
+<p>在放置状态按下【Tab】键，或者放置完成之后双击线条设置其属性：</p>
+<p><img src="/Electronics/Altium/4-schematic/info/poly-line.png"></p>
+<p>此时，该线条就会变成一个可以用于标识电流方向的箭头：</p>
+<p><img src="/Electronics/Altium/4-schematic/info/line-arrow.png"></p>
+<p>【Place
+Line】也可以用于对电路功能进行分块，从而能够更加清晰的阅读电路原理图：</p>
+<p><img src="/Electronics/Altium/4-schematic/info/line-table.png"></p>
+<blockquote>
+<p><strong>注意：</strong>【Place Wire】和【Place
+Line】是完全不同的两个概念，【Place Wire】具有电气性能，而【Place
+Line】没有电气性能，实际设计当中如果混淆使用，会造成电路的电气连接开路。</p>
+</blockquote>
+<h4 id="放置注释">放置注释</h4>
+<p>Altium Designer
+可以方便的在电路原理图当中放置注释框，注释框当中的内容可以通过鼠标点击进行最大或最小化。执行菜单命令
+<strong>Place -&gt; Notes -&gt; Note</strong> 或者按下快捷键【P + E +
+O】为原理图添加注释：</p>
+<p><img src="/Electronics/Altium/4-schematic/info/note/menu.png"></p>
+<p>完成放置以后，可以在注释框的属性设置里添加具体的注释内容，也可以点击左上角的红色三角标将该注释最小化：</p>
+<p><img src="/Electronics/Altium/4-schematic/info/note/comment.png"></p>
+<h3 id="全局编号">全局编号</h3>
+<p>Altium Designer
+支持批量对元件的标志符（Designator）进行编号，执行菜单栏命令
+<strong>Tools -&gt; Annotation -&gt; Annotate
+Schematics...</strong>或按下快捷键【T + A + A】进入 Annotate
+注释对话框：</p>
+<p><img src="/Electronics/Altium/4-schematic/designator/annotate.png"></p>
+<p>首先，在【Order of
+Processing】区域选择自动编号的方向，然后点击【Update Changes
+List】更新元件的标志符编号，然后点击【Accept Changes (Create
+CEO)】将更新后的编号写入原理图，此时会弹出 Engineering Change Order
+对话框：</p>
+<p><img src="/Electronics/Altium/4-schematic/designator/change.png"></p>
+<p>这里可以点击【Validate Changes】按钮验证变更，如果右侧 Check
+栏出现全绿色的<code>√</code>就表示验证成功，接下来点击【Execute
+Changes】按钮执行变更，从而完成原理图元件标志符的重新编号：</p>
+<p><img src="/Electronics/Altium/4-schematic/designator/effect.png"></p>
+<p>下面的表格整理了常用的元件标志符前缀：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 19%">
+<col style="width: 26%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Designator</th>
+<th>Designator</th>
+<th>Designator</th>
+<th>Designator</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>R</code> (电阻)</td>
+<td><code>RN</code> (排阻)</td>
+<td><code>C</code> (电容)</td>
+<td><code>EC</code> (电解电容)</td>
+</tr>
+<tr class="even">
+<td><code>FB</code> (磁珠</td>
+<td><code>U</code> (芯片)</td>
+<td><code>MOD</code>/<code>U</code> (模块)</td>
+<td><code>X</code> (晶振)</td>
+</tr>
+<tr class="odd">
+<td><code>Q</code>/<code>T</code> (三极管)</td>
+<td><code>D</code> (二极管)</td>
+<td><code>ZD</code> (整流二极管)</td>
+<td><code>LED</code> (发光二极管)</td>
+</tr>
+<tr class="even">
+<td><code>CON</code> (连接器)</td>
+<td><code>J</code> (跳线)</td>
+<td><code>K</code>/<code>SW</code> (开关)</td>
+<td><code>BAT</code> (电池)</td>
+</tr>
+<tr class="odd">
+<td><code>MH</code> (固定通孔)</td>
+<td><code>H</code> (标记点)</td>
+<td><code>TP</code> (测试点)</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h3 id="批量修改属性">批量修改属性</h3>
+<p>Altium Designer
+可以方便的对元件属性进行批量编辑，例如下面原理图当中，查找出<code>20KΩ</code>阻值的电阻并将其修改为<code>10KΩ</code>阻值（其它属性的修改操作也可以触类旁通）：</p>
+<p><img src="/Electronics/Altium/4-schematic/batch/diagram.png"></p>
+<p>选中电阻元件<code>R1</code>，在鼠标右键弹出的菜单上选择【Find Similar
+Objects...】：</p>
+<p><img src="/Electronics/Altium/4-schematic/batch/menu.png"></p>
+<p>此时弹出的 <strong>Find Similar Ojbects</strong>
+界面上，找到<code>value = 20K</code>那一栏并选择为【Same】，表示当前所要查找的是阻值为
+20 千欧的电阻，同时勾选底部的【Select Matching】和【Run
+Inspector】，然后点击【OK】按钮：</p>
+<p><img src="/Electronics/Altium/4-schematic/batch/find.png"></p>
+<p>此时，Altium Designer 会放大并且自动选择 20
+千欧电阻<code>R1</code>和<code>R4</code>，并且同时弹出 <strong>SCH
+Inspector</strong>
+对话框，在这里将<code>value</code>的值修改为<code>1000K</code>，然后关闭界面：</p>
+<p><img src="/Electronics/Altium/4-schematic/batch/update.png"></p>
+<p>最终，原理图上的<code>R1</code>和<code>R4</code>被一次性的批量修改为<code>1000K</code>欧姆：</p>
+<p><img src="/Electronics/Altium/4-schematic/batch/result.png"></p>
+<h3 id="查询与跳转">查询与跳转</h3>
+<p>较大尺寸的原理图里不便于定位元件，此种情况下可以通过查询并且跳转来进行定位操作。按下快捷键【Ctrl
++
+F】弹出文本查询对话框，在<code>Text To Find</code>输入框填写待查询的元件标志符、网络标号、管脚编号等文本信息，并且勾选<code>Jump to Results</code>选项，此时按下【OK】按钮即可跳转至指定元件。</p>
+<p><img src="/Electronics/Altium/4-schematic/find/find-text.png"></p>
+<p>打开菜单栏命令 <strong>Edit -&gt; Jump</strong>
+或者按下快捷键【J】，弹出如下跳转操作相关的菜单：</p>
+<p><img src="/Electronics/Altium/4-schematic/find/jump.png"></p>
+<ul>
+<li><code>Origin</code>：跳转至原理图左下角的起始点；</li>
+<li><code>New Location...</code>：跳转至指定的<code>X</code>和<code>Y</code>坐标值位置；</li>
+<li><code>Jump Component</code>：跳转至指定标识符名称<code>Designator</code>元件；</li>
+<li><code>Location Marks</code>：跳转至标记的位置；</li>
+<li><code>Set Location Marks</code>：设置标记位置；</li>
+</ul>
+<h3 id="多页原理图">多页原理图</h3>
+<p>伴随着电路原理图复杂程度的日益提高，电路的设计已经不可能在一张绘图页上完成，其设计方法逐渐趋向于层次化（水平或者垂直）结构。即将电路图<strong>垂直</strong>或<strong>水平</strong>分割为多个模块，然后共同组成为一套完整的电路原理图。</p>
+<ul>
+<li>如果采用<strong>扁平化（Flat）</strong>方式绘制，类似拼图的模式就是平坦式结构，一般通过<strong>跨页连接符</strong>（Off
+Sheet Connector）以及全局网络标号来完成逻辑上的连接。</li>
+<li>如果采用<strong>层次化（Hierarchical）</strong>方式绘制，则每个模块可能由几个更为基础的模块构成，最后形成类似金字塔的层次化结构，此时采用原理图符号（Sheet
+Symbol）、原理图入口（Sheet Entry)、端口（Port）完成逻辑连接。</li>
+</ul>
+<h4 id="扁平化-flat">扁平化 Flat</h4>
+<p>本小节将采用扁平化（Flat）方式绘制一个多页原理图，分别在 2
+页原理图内绘制 2 个独立放大电路，然后在第 3
+页绘制电路其它部分，最后通过网络标号<strong>Net
+Label</strong>与跨页连接符<strong>Off Sheet
+Connector</strong>实现每一页电路的连接。</p>
+<p>首先，新建一个<code>PCB_Project1.PrjPCB</code>工程，并添加原理图文件<code>Sheet1.SchDoc</code>；然后，分别从<code>Miscellaneous Devices.IntLib</code>库中放置
+2 个电阻元件<code>Res1</code>和 1
+个运算放大器元件<code>Op Amp</code>，以及 1 个<code>GND</code>和 2
+个电源<code>VCC</code>与<code>VEE</code>：</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/flat-1.png"></p>
+<p>选择 Altium Designer 工具栏以及鼠标右键菜单上的 <strong>Place -&gt;
+Off Sheet Connector</strong> 或者按下<strong>P +
+C</strong>快捷键，然后在放大器的输入/输出端分别放置 2
+个跨页连接符<code>Vo1</code>和<code>Vo2</code>，最后自动分配网络标号：</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/flat-2.png"></p>
+<p>然后，再新建一个原理图文件<code>Sheet2.SchDoc</code>，重新从<code>Miscellaneous Devices.IntLib</code>库中放置
+2 个电阻元件<code>Res1</code>和 1
+个运算放大器元件<code>Op Amp</code>，以及 1 个<code>GND</code>和 2
+个电源<code>VCC</code>与<code>VEE</code>。</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/flat-3.png"></p>
+<p>最后，新建一个原理图文件<code>Sheet3.SchDoc</code>，从<code>Simulation Sources.IntLib</code>库中放置
+2 个<code>VSRC</code>和 1
+个<code>VSIN</code>，以及相应的<code>GND</code>、<code>VCC</code>、<code>VEE</code>，并且放置跨页连接符<code>Vi</code>，以及分配唯一网络标号。</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/flat-4.png"></p>
+<p>分别双击原理图上的<code>VSRC</code>元件，打开各自的属性对话框，将<code>V2</code>设置为<code>+12V</code>，将<code>V3</code>设置为<code>-12V</code>。</p>
+<h4 id="层次化-hierarchical">层次化 Hierarchical</h4>
+<p>本小节改为采用层次化（Hierarchical）方式绘制多页原理图，分别在 2
+页原理图内绘制 2 个独立放大电路，最后通过原理图入口 <strong>Sheet
+Entry</strong>
+关联这些原理图，最终组合为一个完整的多级放大电路。继续新建一个<code>PCB_Project2.PrjPCB</code>工程，然后添加<code>Sheet1.SchDoc</code>原理图文件，并且添加
+<strong>Port</strong>
+端口<code>Vi</code>、<code>GND</code>、<code>VO</code>、<code>VCC</code>、<code>VEE</code>，并自动化生成相应网络标号。</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/hierarchical-1.png"></p>
+<p>同样的，再新建一个相同内容的<code>Sheet2.SchDoc</code>原理图文件，并自动化生成网络标号：</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/hierarchical-2.png"></p>
+<p>新建<code>Sheet3.SchDoc</code>原理图文件并且选中，然后依次选择主界面菜单上的
+<strong>Design → Create Sheet Symbol From Sheet or HDL</strong>
+或者快捷键 <strong>D + Y</strong>，此时会弹出 <strong>Choose Document to
+Place</strong>
+对话框，双击或者选择<code>Sheet1.SchDoc</code>以后点击【OK】：</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/Choose%20Document%20to%20Place.png"></p>
+<p>接下来以同样的步骤选择并且放置<code>Sheet2.SchDoc</code>的原理图符号：</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/hierarchical-3.png"></p>
+<p>选择主界面菜单上的 <strong>Project -&gt; Compile PCB Project</strong>
+编译当前工程，此时可以看到左侧工程面板的原理图文件层次结构发生了变化：</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/hierarchical-4.png"></p>
+<p>拖动上图中的原理图入口标识 <strong>Sheet
+Entry</strong>，重新进行排版布局，便于后续进一步处理：</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/hierarchical-5.png"></p>
+<p>最后，从<code>Simulation Sources.IntLib</code>库中放置<code>VSRC</code>和<code>VSIN</code>元件，以及相应的<code>GND</code>、<code>VCC</code>、<code>VEE</code>，然后自动分配网络标号，同时勾选<code>V1</code>的参数，并且设置<code>V2</code>和<code>V3</code>的元件属性值为<code>+12V</code>和<code>-12V</code>，最终呈现的原理图效果如下：</p>
+<p><img src="/Electronics/Altium/4-schematic/multiple/hierarchical-6.png"></p>
+<h3 id="检查与编译">检查与编译</h3>
+<p>原理图设计完成之后，可以利用 Altium Designer 自带的 ERC
+(<strong>D</strong>esign <strong>R</strong>ule <strong>C</strong>heck)
+校验功能进行检查，避免一些常规性错误的同时，确保后续能够正确的导出网表并生成
+PCB。首先，将鼠标移动至左侧的工程面板，然后右键选择 <strong>Project
+Options</strong>；或者打开顶部菜单栏的 <strong>Project -&gt; Project
+Options</strong>；单击【Error
+Reporting】选项卡进入错误检查设置界面，选择需要进行校验的规则以及对应的处理措施：</p>
+<p><img src="/Electronics/Altium/4-schematic/compile/error-reporting.png"></p>
+<p>完成 ERC 设计规则检查的相关设置之后，可以通过执行菜单栏命令
+<strong>Project -&gt; Compile PCB Project.PrjPcb</strong>
+执行电路原理图的编译工作：</p>
+<p><img src="/Electronics/Altium/4-schematic/compile/compile-project.png"></p>
+<p>如果工程中的原理图在编译时发生错误，则会自动弹出
+<strong>Messages</strong>
+对话框并列出相关的错误信息，双击具体错误即可自动跳转至原理图对应位置：</p>
+<p><img src="/Electronics/Altium/4-schematic/compile/messages.png"></p>
+<h3 id="物料清单-bom">物料清单 BOM</h3>
+<p>BOM（物料清单，<strong>B</strong>ill <strong>o</strong>f
+<strong>M</strong>aterial）是在原理图设计完成之后，将电路中涉及的电子元件信息导出，便于后期采购和生成
+PCB。执行菜单命令 <strong>Reports -&gt; Bill of Materials</strong>
+或者按下【R + I】快捷键：</p>
+<p><img src="/Electronics/Altium/4-schematic/bom/menu.png"></p>
+<p>此时就会自动进入 BOM
+导出设置界面，单击该界面左下角的【Export...】按钮，将所生成的 BOM
+表保存至硬盘的指定位置，一般情况下就保存在当前工程目录的下面：</p>
+<p><img src="/Electronics/Altium/4-schematic/bom/export.png"></p>
+<h3 id="输出打印">输出打印</h3>
+<p>原理图设计完成之后，可以将其以 PDF
+格式导出，以便于提供给其它开发人员阅读，执行菜单命令 <strong>File -&gt;
+Smart PDF</strong> 进入 PDF 创建向导，并且单击【Next】按钮：</p>
+<p><img src="/Electronics/Altium/4-schematic/bom/pdf.png"></p>
+<h3 id="快捷键总结">快捷键总结</h3>
+<h4 id="鼠标">鼠标</h4>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 18%">
+<col style="width: 32%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">用途</th>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">长按鼠标【<strong>左</strong>】键</td>
+<td style="text-align: left;">拖动<strong>元件</strong></td>
+<td style="text-align: left;">长按鼠标【<strong>右</strong>】键</td>
+<td style="text-align: left;">拖动<strong>原理图</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">双击鼠标【<strong>左</strong>】键</td>
+<td style="text-align: left;">设置<strong>元件</strong>属性</td>
+<td style="text-align: left;">按住鼠标【<strong>滚轮</strong>】并且移动</td>
+<td style="text-align: left;">放大/缩小<strong>原理图</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>Alt</strong>】 + 鼠标单击</td>
+<td style="text-align: left;">高亮指定元件</td>
+<td style="text-align: left;">【<strong>Shift</strong>】 + 鼠标拖动</td>
+<td style="text-align: left;">标识符递增复制</td>
+</tr>
+</tbody>
+</table>
+<h4 id="视图">视图</h4>
+<table>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 36%">
+<col style="width: 17%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">用途</th>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">【<strong>V + D</strong>】</td>
+<td style="text-align: left;">Fit Document，原理图全屏显示</td>
+<td style="text-align: left;">【<strong>V + F</strong>】</td>
+<td style="text-align: left;">Fit All Objects，放大元件区域</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>Page Up</strong>】</td>
+<td style="text-align: left;">Zoom In，以鼠标为中心进行放大</td>
+<td style="text-align: left;">【<strong>Page Down</strong>】</td>
+<td style="text-align: left;">Zoom Out，以鼠标为中心进行缩小</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>V + E</strong>】</td>
+<td style="text-align: left;">Selected Objects，放大当前选中的元件</td>
+<td style="text-align: left;"> </td>
+<td style="text-align: left;"> </td>
+</tr>
+</tbody>
+</table>
+<h4 id="排列">排列</h4>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 38%">
+<col style="width: 12%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">用途</th>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">【<strong>A + L</strong>】</td>
+<td style="text-align: left;">Align Left，向左对齐</td>
+<td style="text-align: left;">【<strong>A + R</strong>】</td>
+<td style="text-align: left;">Align Right，向右对齐</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>A + T</strong>】</td>
+<td style="text-align: left;">Align Top，向上对齐</td>
+<td style="text-align: left;">【<strong>A + B</strong>】</td>
+<td style="text-align: left;">Align Bottom，向下对齐</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>A + D</strong>】</td>
+<td style="text-align: left;">Distribute
+Horizontally，水平等间距对齐</td>
+<td style="text-align: left;">【<strong>A + I</strong>】</td>
+<td style="text-align: left;">Distribute Vertically，垂直等间距对齐</td>
+</tr>
+</tbody>
+</table>
+<h4 id="其它">其它</h4>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 34%">
+<col style="width: 17%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">用途</th>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">【<strong>J + C</strong>】</td>
+<td style="text-align: left;">跳转至元件</td>
+<td style="text-align: left;">【<strong>Ctrl + F</strong>】</td>
+<td style="text-align: left;">查找元件上的文本</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>P + W</strong>】</td>
+<td style="text-align: left;">Place Wire，放置导线</td>
+<td style="text-align: left;">【<strong>P + B</strong>】</td>
+<td style="text-align: left;">Place Bus，放置总线</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>P + P</strong>】</td>
+<td style="text-align: left;">Place Part，放置元件</td>
+<td style="text-align: left;">【<strong>P + N</strong>】</td>
+<td style="text-align: left;">Place Net Label，放置网络标号</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>P + T</strong>】</td>
+<td style="text-align: left;">Place Text String，放置字符标注</td>
+<td style="text-align: left;">【<strong>E + D</strong>】</td>
+<td style="text-align: left;">Delete，删除选中元件</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>T + P</strong>】</td>
+<td style="text-align: left;">Preferences，系统参数设置</td>
+<td style="text-align: left;"> </td>
+<td style="text-align: left;"> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="pcb-基本结构">PCB 基本结构</h2>
+<p>PCB 是（印制电路板，Printed Circuit
+Board）的英文缩写，主要以绝缘覆铜板为基材，经过印刷、蚀刻、钻孔等处理工序，将电路元件的连接关系用一系列导电图形、孔位制作出来，最后剪裁为特定的外形尺寸。根据覆铜层数的不同，可以将
+PCB 分为如下 3 种：</p>
+<ul>
+<li><strong>单面板（Single
+Layer）</strong>：仅有一面覆铜，通常情况下，元件集中放置在没有覆铜的一侧（即
+Component Side），覆铜导线则集中放置在另一侧（即 Solder [ˈsəʊldə]，焊料
+Side）；</li>
+<li><strong>双面板（Double
+Layer）</strong>：两面都有覆铜，上下两个覆铜层分别称为顶层（Top
+Layer）和底层（Bottom
+Layer），两层之间采用过孔进行连接；通常情况下，顶层主要放置元件，底层主要用于焊接与走线；</li>
+<li><strong>多层板（Multi
+Layer）</strong>：除了顶层和底层之外，中间还包含有信号层、中间层、电源层、接地层，每层之间相互绝缘，并且采用过孔进行连接；多层板由于采用了独立的电源层和接地层，从而有效的提升了电路可靠性。</li>
+</ul>
+<h3 id="工作层">工作层</h3>
+<p>Altium Designer 提供的 PCB
+编辑器包含有多个工作层，这些工作层可以更具体的划分为<strong>信号层（Signal
+Layers）</strong>、<strong>内部电源/接地层（Internal
+Planes）</strong>、<strong>机械层（Mechanical
+Layers）</strong>、<strong>屏蔽层（Mask
+Layers）</strong>、<strong>丝印层（Silkscreen
+Layers）</strong>以及<strong>其它层（Other Layers）</strong>，在 Altium
+Designer 的 PCB 编辑界面下，选择工具栏的 <strong>Design -&gt; Layer
+Stack Manager...</strong> 或者按下快捷键【D +
+K】可以打开板层管理器，然后选择<code>Presets</code>下拉菜单中的<code>Six Layer</code>打开
+6 层 PCB 的剖面图：</p>
+<p><img src="/Electronics/Altium/5-pcb-base/layer-stack-manager.png"></p>
+<ul>
+<li><p><strong>信号层（Signal
+Layers）</strong>：主要用来放置铜膜导线和元件，为电气信号提供传输通道，Altium
+Designer 可以设置多达 32 个信号层，包括 1
+个<code>顶层（Top Layer）</code>和 1
+个<code>底层（Bottom Layer）</code>，以及 30
+个中间<code>信号层（Signal Layer）</code>，每层都可以设置不同的颜色以便于区分。</p></li>
+<li><p><strong>内部电源/接地层（Internal Planes
+[pleinz]，平面）</strong>：也称为<strong>内电层</strong>，主要用来铺设电源和接地，由大块的铜膜覆盖而成，可以提升电路板的工作稳定性，Altium
+Designer 最多可设置 16
+个内电层。相同的内部电源/接地层可以分为几个区域（内电层分割），分别用来安置不同的电源和接地，例如将接电层分割为不同区域，分别用来放置电源地、模拟地、数字地。</p></li>
+<li><p><strong>机械层（Mechanical Layers）</strong>：主要用来放置 PCB
+生产与装配相关的各种标注，例如 PCB
+的外形尺寸、焊盘与过孔类型等等，Altium Designer 最多可以设置 16
+个机械层。</p></li>
+<li><p><strong>屏蔽层（Mask Layers）</strong>：是<strong>阻焊层（Solder
+Mask）</strong>和<strong>助焊层（Paste
+Mask）</strong>的总称；阻焊层除留出焊点位置以外，其余部分采用阻焊膜将铜膜导线覆盖，排开焊锡避免波峰焊时发生桥接，主要包括<strong>顶层阻焊层（Top
+Solder）</strong>和<strong>底层阻焊层（Bottom
+Solder）</strong>。助焊层则是在需要焊接的位置，涂一层助焊剂以增强焊盘的着锡能力，主要包括<strong>顶层助焊层（Top
+Paste）</strong>和<strong>底层助焊层（Bottom Paste）</strong>。</p></li>
+<li><p><strong>丝印层（Silkscreen
+Layers）</strong>：用于印制电子元件相关的信息，例如元件编号、外形轮廓、设计者、设计日期。涂料采用了不导电绝缘材料，主要分为<strong>顶层丝印（Top
+Overlay [ˌəʊvəˈleɪ]，涂层）</strong>和<strong>底层丝印（Bottom
+Overlay）</strong>。</p></li>
+<li><p><strong>其它层（Other
+Layers）</strong>：主要包括用于提供钻孔位置信息的<strong>钻孔引导层（Drill
+[drɪl]，钻孔 Guide）</strong>和<strong>钻孔视图层（Drill
+Drawing）</strong>，前者主要兼容旧式电路板工艺，现代工艺主要使用后者来提供钻孔参考信息；用于定义元件和导线放置区域（电气边界）的<strong>禁止布线层（Keep-Out
+Layer）</strong>，自动布线时元件和导线必须放置在禁止布线层划定的区域。代表所有信号层的<strong>多层（Multi-Layer）</strong>，该层放置的元件会自动放置到所有的信号层上。</p></li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong> 实际工作环境下，并不会使用到 Altium Designer
+提供的全部层，例如：双面板只有底层和顶层没有中间层，而顶层信号层和顶层丝印层等工作层在物理上相互重合，机械层只是为了便于
+PCB 的加工与制作。</p>
+</blockquote>
+<h3 id="正负片层">正/负片层</h3>
+<p><strong>正片层</strong>即 PCB
+上用于走线的信号层，可以用<code>Track</code>、<code>Polygon</code>进行大块的敷铜填充操作。<strong>负片层</strong>则正好相反，即默认整层是敷铜的，而铺线的位置则是未覆铜的分割线。</p>
+<h3 id="元件封装-footprint">元件封装 Footprint</h3>
+<p>元件封装（Footprint）是指元件实际焊接至 PCB
+电路板时，所形成的焊接位置与外形尺寸以及引脚间距。相同元件可以有不同封装方式，同种元件也可能共用一种封装。例如常用的电阻，可能拥有插针式（AXIAL-xx）和贴片式（SMD），其中贴片元件的封装规格用
+4 位数字表示，前 2 位表示长度，后 2
+位表示宽度，例如<code>0603R</code>、<code>0402R</code>、<code>0201R</code>、<code>0805R</code>。</p>
+<p><img src="/Electronics/Altium/5-pcb-base/footprint.png"></p>
+<h3 id="过孔-via">过孔 Via</h3>
+<p>过孔是镀铜的的金属小孔，用于 PCB
+不同工作层之间的电气连接，可以分为<strong>通孔</strong>（<code>Through</code>，连接顶层与底层并贯穿整个
+PCB 的）、<strong>盲孔</strong>（<code>Blind</code>，一端位于 PCB
+表面，另一端位于 PCB
+中间的工作层）、<strong>埋孔</strong>（<code>Buried</code>，用于 PCB
+中间两个工作层之间的连接）。</p>
+<p><img src="/Electronics/Altium/5-pcb-base/via.jpg"></p>
+<blockquote>
+<p><strong>注意：</strong>出于信号完整性的考虑，PCB
+设计当中应该尽量减少过孔的使用；如果使用了过孔，则尽量避免采用盲孔和埋孔，它们不但增加了
+PCB
+的加工难度，也带来了大量电气安全性方面的问题，同时也为后期的电路调试埋下了隐患。</p>
+</blockquote>
+<h3 id="焊盘-pad">焊盘 Pad</h3>
+<p>焊盘用来将电子元件固定并连接在 PCB
+电路上，每个焊盘都拥有独立编号，以便于和元件引脚对应，Altium Designer
+提供了多种不同形状的焊盘：</p>
+<p><img src="/Electronics/Altium/5-pcb-base/pads.png"></p>
+<h3 id="铜膜导线-track">铜膜导线 Track</h3>
+<p><strong>铜膜导线</strong> 是覆铜板经过加工以后，在 PCB
+上形成的实际走线，主要用于连接 PCB
+上的各个焊盘，因其在电路中载流能力的不同，设计电路时所选取的宽度也有所不同。不同工作层上的铜膜导线通过
+<strong>过孔</strong> 进行连接。而 <strong>覆铜</strong> 是指在 PCB
+布线完成以后，在未进行布线的区域铺设铜膜，一方面加大电路的接地面积提升抗干扰能力，另外也利于元件的散热。敷铜可以与电路网络相连接，也可以独立存在，不同区域的敷铜可以连接不同的网络，但是大多数情况下敷铜都用于接地。</p>
+<p><img src="/Electronics/Altium/5-pcb-base/track.jpeg"></p>
+<p>此外为了降低 PCB
+上的导线、过孔、焊盘及元器件之间的相互干扰，需要在其之间留出一定的间隔距离（即<strong>安全距离</strong>），该选项可以在
+Altium Designer 的布线规则当中进行配置。</p>
+<h2 id="pcb-封装库">PCB 封装库</h2>
+<p>电路原理图设计完成之后，原理图上的元件将通过 PCB 封装库映射至真实的
+PCB 印刷电路板上面。因此，不能随意调整 PCB
+封装库中元件的尺寸，而应按照元件官方的规格说明书进行精确的绘制。</p>
+<p>点击菜单 <strong>Project -&gt; Add New to Project -&gt; PCB
+Library</strong> 向工程添加一个 PCB
+封装库文件<code>PcbLib1.PcbLib</code>，然后将左侧的项目选项卡切换至【PCB
+Library】即可进入如下 PCB 库的编辑界面：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/ui.png"></p>
+<p>通常情况下，一个元件的 PCB 封装会包含以下几个基本组成部分：</p>
+<ol type="1">
+<li><strong>焊盘</strong>：PCB 上提供给电子元件引脚焊接的载体；</li>
+<li><strong>管脚序号</strong>：用于匹配原理图元件电气连接关系的序号。</li>
+<li><strong>丝印层</strong>：位于 PCB
+最表层，用于放置元件标识或者文字性描述；</li>
+<li><strong>阻焊层</strong>：指 PCB
+上被绿油覆盖的部分，主要用于保护下面的 PCB
+走线，避免铜线氧化或者回流焊时粘锡；</li>
+<li><strong>1 脚/极性标识</strong>：定位元件方向的标识符号；</li>
+<li><strong>过孔</strong>：双面或多面 PCB
+上用于连通各层的公用导通孔；</li>
+<li><strong>安装孔</strong>：用于固定 PCB 电路板的开孔；</li>
+</ol>
+<p>通过 Altium Designer
+顶部工具栏可以方便的放置圆弧、多边形、线条、焊盘、过孔等元素，下面的表格罗列了工具栏上放置相关的按钮及功能：</p>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/1.png" alt="icon"></td>
+<td style="text-align: left;">放置线条（<code>Place Line</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/8.png" alt="icon"></td>
+<td style="text-align: left;">按边缘放置圆弧(任意角度)（<code>Place Arc by Edge(Any Angle)</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/2.png" alt="icon"></td>
+<td style="text-align: left;">放置焊盘（<code>Place Pad</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/9.png" alt="icon"></td>
+<td style="text-align: left;">放置正圆形（<code>Place Full Circle Arc</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/3.png" alt="icon"></td>
+<td style="text-align: left;">放置过孔（<code>Place Via</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/10.png" alt="icon"></td>
+<td style="text-align: left;">放置填充（<code>Place Fill</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/4.png" alt="icon"></td>
+<td style="text-align: left;">放置字符串（<code>Place String</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/11.png" alt="icon"></td>
+<td style="text-align: left;">放置固态区域（<code>Place Solid Region</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/5.png" alt="icon"></td>
+<td style="text-align: left;">放置坐标（<code>Place Coordinate</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/12.png" alt="icon"></td>
+<td style="text-align: left;">阵列式粘贴（<code>Paste Array</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/6.png" alt="icon"></td>
+<td style="text-align: left;">按中心放置圆弧（<code>Place Arc by Center</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/13.png" alt="icon"></td>
+<td style="text-align: left;">放置 3D
+元件体（<code>Paste 3D Body</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/7.png" alt="icon"></td>
+<td style="text-align: left;">按边缘放置圆弧（<code>Place Arc by Edge</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/6-pcb-lib/place/14.png" alt="icon"></td>
+<td style="text-align: left;">多边形填充挖空（<code>Polygon Pour Cutout</code>）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="d-封装">2D 封装</h3>
+<p>Altium Designer
+创建封装的方法包含<strong>自动向导创建</strong>和<strong>手动绘制创建</strong>两种方式，<strong>自动向导创建</strong>适用于引脚数目比较多且形状较规范的封装，<strong>手动绘制创建</strong>适用于引脚数目较少或者形状不规范的封装。</p>
+<h4 id="自动向导创建">自动向导创建</h4>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/wizard/footprint.gif"></p>
+<p>鼠标右键点击 Altium Designer 左侧工程面板的
+<strong>Components</strong> 界面，选择【Component
+Wizard...】打开下图所示的封装创建向导：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/wizard/step-1.png"></p>
+<p>参考上面截图中提供的 <strong>DIP14</strong>
+封装尺寸数据，在封装创建向导当中填写 <strong>焊盘尺寸（Pads dimensions
+）</strong>、<strong>焊盘间距（Pad
+layout）</strong>、<strong>元件轮廓宽度（Outline
+Width）</strong>、<strong>焊盘个数（Pads Number）</strong>
+等参数，最后设置该 <strong>DIP</strong> 封装的名称：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/wizard/step-2.png"></p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/wizard/step-3.png"></p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/wizard/step-4.png"></p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/wizard/step-5.png"></p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/wizard/step-6.png"></p>
+<p>最终，Altium Designer 会根据创建向导中填写的数据信息，自动生成如下的
+<strong>DIP14</strong> 封装：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/wizard/dip14.png"></p>
+<h4 id="手动绘制创建">手动绘制创建</h4>
+<p>本章节开始的内容中，已经通过执行 Altium Designer 菜单栏上的
+<strong>File -&gt; New -&gt; Library -&gt; PCB Library</strong>
+新建一个名为<code>PcbLib1.PcbLib</code>的 PCB
+库文件，并随之自动生成了一个名为<code>PCBCOMPONENT_1</code>的封装，双击该封装将其重新命名为<code>DEMO</code>：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/pcb-library.png"></p>
+<p>执行菜单栏命令 <strong>Place -&gt; Pad</strong>
+放置焊盘，在放置状态按下【Tab】键设置焊盘属性，选择形状为圆角矩形<code>Rounded Rectangular</code>的顶层焊盘<code>Top Layer</code>。为了抵消元件安装时产生误差，焊盘制作时通常会加入适当的补偿值，这里为了方便理解与简化计算，仅根据元件实际尺寸进行绘制，如下截图是德州仪器生产的
+<strong>TPS54550</strong> 同步降压转换器的封装尺寸数据：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/tps54550.png"></p>
+<p>数据手册显示当前焊盘的最大<strong>长度</strong>与<strong>高度</strong>分别为<code>0.725mm</code>与<code>0.3mm</code>，焊盘中心之间的纵向间隔距离为<code>0.65mm</code>，左右两排焊盘横向的间隔距离为<code>((6.6mm - 4.5mm)/2 - 0.725mm) * 2 + 4.5mm = 5.15mm</code>，同时阻焊的宽度要设置为<code>2mil</code>：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/pad.png"></p>
+<blockquote>
+<p><strong>注意：</strong>选择菜单栏命令<strong>Reports -&gt; Measure
+Distance</strong>或按下快捷键【Ctrl +
+M】可以调出测量工具，完成测量后按下【Shift + C】即可取消。</p>
+</blockquote>
+<p>按照指定间隔距离摆放焊盘主要存在两种方式，第 1
+种是在选中并且复制一个焊盘以后将两者重合在一起，然后鼠标点击 Altium
+Designer 菜单栏上的 <strong>Edit -&gt; Move -&gt; Move Selection by X,
+Y...</strong>
+或者按下快捷键【M】在弹出的移动菜单上选择<code>Move Selection by X, Y...</code>，即采用<strong>X
+Y 坐标轴移动方式</strong>完成横向或者纵向的移动：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/move-1.png"></p>
+<p>然后在 <strong>Y Offset</strong> 上填写<code>-0.65mm</code>，即向 Y
+轴偏移<code>0.65</code>毫米，点击【OK】：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/move-2.png"></p>
+<p>完成移动以后，调用测量工具对<code>1</code>和<code>2</code>两个焊盘的间隔距离进行测量，得到结果即为上面设置的<code>0.65mm</code>：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/move-3.png"></p>
+<p>这种采用<code>X</code>、<code>Y</code>坐标轴移动的方式需要逐个元件进行操作，速度较慢而且容易出错，因此这种情况下通常会采用更为便捷的第
+2
+种方式：首先放置一个已经设定好尺寸的焊盘并且选中复制，然后鼠标点击菜单栏上的
+<strong>Edit -&gt; Paste Special...</strong> 或者按下快捷键【E +
+A】弹出特殊粘贴对话框，点击粘贴阵列按钮【Paste Array...】：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/paste-1.png"></p>
+<p>接下来进入到粘贴阵列配置界面，分别将粘贴数量<code>Item Count</code>设置为<code>10</code>，阵列类型<code>Array Type</code>选择为<code>Linear</code>，线性阵列<code>Linear Array</code>的
+<strong>Y</strong>
+轴间隔填写为<code>0.65mm</code>，最后鼠标点击【OK】：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/paste-2.png"></p>
+<p>此时将会自动返回至封装库绘制区域，鼠标点击需要生成阵列的焊盘，即可一次性自动生成
+10 个间距为<code>0.65mm</code>的焊盘：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/paste-3.png"></p>
+<blockquote>
+<p><strong>注意：</strong>采用<strong>阵列粘贴方式</strong>批量生成焊盘之后，最初的<code>1</code>号焊盘将会被冗余出来，此时需要手动将其删除，避免后续
+DRC 校验时引发错误。</p>
+</blockquote>
+<p>接着采用同样方式放置<code>11 ~ 20</code>号焊盘，并通过 X 和 Y
+轴偏移方式使左右两组焊盘保持<code>5.15mm</code>间隔距离，然后鼠标选择菜单栏上的
+<strong>Edit -&gt; Set Reference -&gt; Center</strong> 或按下快捷键【E +
+F + C】将绘制区域的原点设置为中心点：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/center.png"></p>
+<p>接下来向丝印层 <strong>Top Overlayer</strong>
+绘制元件的丝印，丝印的线宽一般选择为<code>5mil</code>，由于<code>1mil = 0.0254mm</code>，那么换算为毫米单位应为<code>1.27mm</code>，而元件本体的长度和宽度分别为<code>5.1mm</code>和<code>4.5mm</code>，这里采用辅助线向
+X 和 Y 轴偏移的方式来定位尺寸：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/paste-4.png"></p>
+<p>接着根据 <strong>TPS54550</strong>
+的封装尺寸数据来放置长度<code>3.40mm</code>宽度<code>2.46mm</code>的散热焊盘，同时将
+1 号引脚设计为矩形，并添加方向丝印：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/paste-5.png"></p>
+<blockquote>
+<p><strong>注意：</strong>上面的示例当中，焊盘的长度与宽度均按照元件引脚的最大尺寸进行设计，最终呈现的效果会发现焊盘尺寸过小而间距过大，因此实际生产环境下必须增加相应的补偿值。</p>
+</blockquote>
+<p>最后，为了方便其它工程师了解该元件的封装高度，需要再添加高度相关的信息，双击
+PCB 封装列表 <strong>Components</strong>
+上的元件<code>DEMO</code>，在弹出的对话框中输入高度值<code>1.2mm</code>：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/paste-6.png"></p>
+<p>如果遇到元件丝印覆盖了引脚焊盘的情况，此时可以鼠标选中菜单栏上的
+<strong>Edit -&gt; Slice Tracks</strong> 或者按下快捷键【E +
+K】剪断丝印，并将覆盖焊盘的丝印删除：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/2d/paint/paste-7.png"></p>
+<h3 id="从-pcb-文件导出封装">从 PCB 文件导出封装</h3>
+<p>生产环境下有时需要从已经设计完成的 PCB
+文件中导出某些元件的封装，设计人员可以在打开该 PCB
+文件以后，执行菜单命令 <strong>Design -&gt; Make PCB
+Library</strong>或按下快捷键【D +
+P】，即可自动开始封装库的导出工作：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/export.png"></p>
+<h3 id="复制-pcb-封装">复制 PCB 封装</h3>
+<p>可以将多个 PCB
+封装库里所需的封装复制至一个封装库，以便于管理与使用。首先选择 PCB
+封装编辑界面右下角的 <strong>PCB -&gt; PCB Library</strong>
+调出<code>PCB Library</code>工作面板，并在封装列表当中按住【Shift】键逐个选中待复制的元件封装，然后鼠标右键执行<code>Copy</code>命令或按下快捷键【Ctrl
++
+C】，最后切换至目标封装库的封装列表当中，单击鼠标右键执行<code>Paste N Components</code>或按下快捷键【Ctrl
++ V】粘贴封装：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/copy-paste.png"></p>
+<h3 id="封装规则检查">封装规则检查</h3>
+<p>Altium Designer 还提供有 PCB
+封装的规则检查功能，可以在创建完封装以后单击菜单栏的 <strong>Reports
+-&gt; Component Rule Check</strong>
+，然后在弹出的<code>Component Rule Check</code>界面选择想要执行的检查任务：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/rule-check.png"></p>
+<h3 id="集成库">集成库</h3>
+<p>集成库（Integrated Library）整合了原理图元件、PCB
+封装、仿真模型、信号完整性模型、3D
+模型，便于分发共享以及快速使用。执行菜单栏命令 <strong>File -&gt; New
+-&gt; Project -&gt; Integrated Library</strong>
+可以新建一个集成库工程<code>Integrated_Library.LibPkg</code>：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/integrated/new-project.png"></p>
+<p>在左侧工程面板鼠标选中该集成库工程，然后右键选择 <strong>Add New to
+Project -&gt; Schematic Library</strong> 和 <strong>Add New to Project
+-&gt; PCB Library</strong>
+分别创建原理图元件库<code>Schlib1.SchLib</code>和 PCB
+封装库<code>PcbLib1.PcbLib</code>，</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/integrated/new-schematic-footprint.png"></p>
+<p>按照之前内容提到的方式，分别创建原理图元件库与 PCB
+封装库，然后在原理图元件的模型管理界面添加 PCB
+封装信息，从而建立两者的关联。添加完成以后，在工程名称上鼠标右键执行
+<strong>Compile Integrated Library Integrated_Library.LibPkg</strong>
+命令对集成库进行编译，编译完成后就会自动在工程目录下生成一个名为<code>Integrated_Library.IntLib</code>集成库文件。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">D:\<span class="title">Workspace</span>\<span class="title">PCB</span>\<span class="title">Integrated_Library</span></span></span><br><span class="line"><span class="function">λ <span class="title">tree</span> /<span class="title">F</span> /<span class="title">A</span></span></span><br><span class="line"><span class="function">├─<span class="title">Integrated_Library.LibPkg</span></span></span><br><span class="line"><span class="function">├─<span class="title">PcbLib1.PcbLib</span></span></span><br><span class="line"><span class="function">├─<span class="title">Schlib1.SchLib</span></span></span><br><span class="line"><span class="function">├─<span class="title">History</span></span></span><br><span class="line"><span class="function">└─<span class="title">Project</span> <span class="title">Outputs</span> <span class="title">for</span> <span class="title">Integrated_Library</span></span></span><br><span class="line"><span class="function">     └─<span class="title">Integrated_Library.IntLib</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="分离集成库">分离集成库</h4>
+<p>如果需要将给定集成库里内置的原理图元件库与 PCB
+封装库进行分离，可以双击上面编译生成的集成库文件<code>Integrated_Library.IntLib</code>，此时会自动打开
+Altium Designer 并且弹出 <strong>Extract Sources or Install</strong>
+对话框：</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/integrated/extract-source.png"></p>
+<p>按下【Extract
+Sources】按钮即可将集成库分离为<code>PcbLib1.PcbLib</code>和<code>Schlib1.SchLib</code>两个文件。</p>
+<h4 id="安装与卸载">安装与卸载</h4>
+<p>选择 Altium Designer
+右侧的【Libraries】选项卡，展开库管理面板可以看到当前可供使用的集成库列表，同时还可以预览集成库中所包含的原理图元件以及对应
+PCB 封装。</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/integrated/libraries.png"></p>
+<p>如果需要安装集成库，则可以点击顶部的【Libraries...】按钮，打开下面的
+<strong>Available Libraries</strong> 对话框，设计人员按下该界面上的【Add
+Library】或【Remove】按钮，就可以方便的安装或者移除各种库文件。</p>
+<p><img src="/Electronics/Altium/6-pcb-lib/integrated/available-libraries.png"></p>
+<h2 id="pcb-工作环境">PCB 工作环境</h2>
+<p><img src="/Electronics/Altium/6-pcb-lib/integrated/available-libraries.png"></p>
+<p>进入 PCB
+编辑器以后点击左侧面板底部的【PCB】选项卡或者底部状态栏左侧的【PCB】图标，就可以展开如下图所示的
+PCB 编辑面板：</p>
+<p><img src="/Electronics/Altium/7-pcb-gui/main.png"></p>
+<p>通过走线、覆铜、放置填充等操作可以实现各种电气属性的连接，Altium
+Designer 提供了丰富的电气连接放置命令：</p>
+<table>
+<colgroup>
+<col style="width: 19%">
+<col style="width: 39%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/1.png" alt="icon"></td>
+<td style="text-align: left;">交互式布线连接（<code>Interactively Route Connections</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/6.png" alt="icon"></td>
+<td style="text-align: left;">按边缘放置圆弧（<code>Place Arc by Edge</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/2.png" alt="icon"></td>
+<td style="text-align: left;">交互式布多根线连接（<code>Interactively Route Multiple Connections</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/7.png" alt="icon"></td>
+<td style="text-align: left;">放置填充（<code>Place Fill</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/3.png" alt="icon"></td>
+<td style="text-align: left;">交互式布差分对连接（<code>Interactively Route Differential Pair Connections</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/8.png" alt="icon"></td>
+<td style="text-align: left;">放置多边形平面（<code>Place Polygon Plane</code>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/4.png" alt="icon"></td>
+<td style="text-align: left;">放置焊盘（<code>Place Pad</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/9.png" alt="icon"></td>
+<td style="text-align: left;">放置字符串（<code>Place String</code>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/5.png" alt="icon"></td>
+<td style="text-align: left;">放置过孔（<code>Place Via</code>）</td>
+<td style="text-align: center;"><img src="/Electronics/Altium/7-pcb-gui/place/10.png" alt="icon"></td>
+<td style="text-align: left;">放置元件（<code>Paste Component</code>）</td>
+</tr>
+</tbody>
+</table>
+<p>Altium Designer
+默认提供了诸多由操作的英文首字母所触发的快捷键，下面的表格列出了 PCB
+编辑器界面下较为常用的一些快捷键：</p>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 42%">
+<col style="width: 12%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: left;">功能描述</th>
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>L</strong></td>
+<td style="text-align: left;">打开工作层视图设置，如果是在元件移动状态按下【L】键可以更换元件所要放置的层；</td>
+<td style="text-align: center;"><strong>S</strong></td>
+<td style="text-align: left;">打开选择菜单，例如：<code>S + L</code>线选、<code>S + I</code>框选、<code>S + E</code>滑动选择；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>J</strong></td>
+<td style="text-align: left;">打开跳转菜单，例如：<code>J + C</code>跳转至元件、<code>J + N</code>跳转至网络；</td>
+<td style="text-align: center;"><strong>Q</strong></td>
+<td style="text-align: left;">切换 PCB 编辑区采用的单位（mil/mm）；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Delete</strong></td>
+<td style="text-align: left;">删除 PCB 编辑区当前选中的对象；</td>
+<td style="text-align: center;"><strong>Page Up / Page
+Down</strong></td>
+<td style="text-align: left;">放大或者缩小，按下鼠标中键前后推动也可完成该操作；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>E + D</strong></td>
+<td style="text-align: left;">通过鼠标点击完成 PCB
+编辑区对象的删除；</td>
+<td style="text-align: center;"><strong>A + T</strong></td>
+<td style="text-align: left;">向上对齐，同理<code>A + L</code>向左对齐、<code>A + R</code>向右对齐、<code>A + B</code>向下对齐；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Shift + S</strong></td>
+<td style="text-align: left;">切换 PCB 编辑区单层或多层显示；</td>
+<td style="text-align: center;"><strong>Ctrl + M</strong></td>
+<td style="text-align: left;">测量 PCB 编辑区两个对象间的距离；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Space</strong></td>
+<td style="text-align: left;">空格键，翻转显示当前选中的对象（包括导线、过孔等）；</td>
+<td style="text-align: center;"><strong>Tab</strong></td>
+<td style="text-align: left;">修改当前所放置对象的属性（如导线长度、过孔大小等）；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Shift + Space</strong></td>
+<td style="text-align: left;">改走线模式；</td>
+<td style="text-align: center;"><strong>P + S</strong></td>
+<td style="text-align: left;">放置字符串；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Shift + W</strong></td>
+<td style="text-align: left;">选择线宽；</td>
+<td style="text-align: center;"><strong>Shift + V</strong></td>
+<td style="text-align: left;">选择过孔；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>T + T + M</strong></td>
+<td style="text-align: left;">不可更改间距的等间距走线；</td>
+<td style="text-align: center;"><strong>P + M</strong></td>
+<td style="text-align: left;">可更改间距的等间距走线；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Shift + G</strong></td>
+<td style="text-align: left;">鼠标走线时显示当前走线的长度；</td>
+<td style="text-align: center;"><strong>Shift + H</strong></td>
+<td style="text-align: left;">显示或者关闭坐标信息显示；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Shift + M</strong></td>
+<td style="text-align: left;">显示或关闭放大镜；</td>
+<td style="text-align: center;">**Shift + A**</td>
+<td style="text-align: left;">局部自动走线；</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pcb-导入与定义">PCB 导入与定义</h2>
+<p>进行电路原理图转换为 PCB 的操作之前，需要使用 Altium Designer
+提供的封装管理器检查原理图<strong>封装</strong>的完整性，确保原理图上的所有元件都存在对应的封装模型，避免导入出现遗漏与错误。选择菜单栏上的
+<strong>Tools -&gt; Footprint Manager...</strong> 或者按下【D +
+G】快捷键打开封装管理器，就可以查看并管理当前原理图元件的封装信息：</p>
+<p><img src="/Electronics/Altium/8-pcb-import/footprint-manager.png"></p>
+<p>如果对元件的封装进行了编辑，那么需要按下对话框右下角的【Accept
+Changes（Create ECO）】按钮，然后在弹出的 <strong>Engineering Change
+Order</strong> 界面继续点击【Execute Changes】按钮更新封装信息：</p>
+<p><img src="/Electronics/Altium/8-pcb-import/engineering-change-order.png"></p>
+<h3 id="网络列表-netlist">网络列表 Netlist</h3>
+<p>网络列表 Netlist 用于体现原理图上的元件及其连接关系，在 PCB
+编辑界面下，执行菜单命令 <strong>Design -&gt; Netlist -&gt; Create
+Netlist From Connected Copper...</strong>
+可以导出一个针对当前工程的<code>.Net</code>网表文件。</p>
+<p><img src="/Electronics/Altium/8-pcb-import/netlist-pcb.png"></p>
+<p>或者是在原理图编辑界面下，执行菜单命令 <strong>Design -&gt; Netlist
+For Project -&gt;
+Protel</strong>，从而在当前工程的<code>Generated</code>目录下生成一个针对当前原理图的<code>.Net</code>网表文件。</p>
+<p><img src="/Electronics/Altium/8-pcb-import/netlist-schematic.png"></p>
+<h3 id="直接导入-pcb">直接导入 PCB</h3>
+<p>在原理图编辑界面选择菜单 <strong>Design -&gt; Update PCB Document
+PCB1.PcbDoc</strong> 或者在 PCB 设计交互界面点击菜单 <strong>Design
+-&gt; Import Changes From PCB1.PrjPCB</strong> 就可以将原理图导入至
+PCB，执行导入操作之后，界面会跳转至封装管理器，点击【Execute
+Change】按钮就可以完成导入操作：</p>
+<p><img src="/Electronics/Altium/8-pcb-import/update-pcb.png"></p>
+<blockquote>
+<p><strong>注意：</strong>导入之前需要创建好相关工程，<code>Free Document</code>类型的原理图无法进行导入。</p>
+</blockquote>
+<h3 id="网表对比导入">网表对比导入</h3>
+<p>工程目录上鼠标右键，执行命令 <strong>Add Existing to
+Project...</strong>，将待导入的网表添加至当前工程，然后鼠标选中网表并且右键选择
+<strong>Show Differences...</strong> 进入如下的网表对比窗口：</p>
+<p><img src="/Electronics/Altium/8-pcb-import/step-1.png"></p>
+<p>在弹出的 <strong>Choose Documents To Compare</strong>
+对话框上勾选【Advanced Mode】，界面左侧选择等待导入 PCB
+的网表，右侧选择网表所要更新的 PCB，最后鼠标点击【OK】按钮。</p>
+<p><img src="/Electronics/Altium/8-pcb-import/step-2.png"></p>
+<p>此时进入 <strong>Differences between Netlist File</strong>
+网表文件比较界面，鼠标右键选择 <strong>Update All in &gt;&gt; PCB
+Document[PCB1.PcbDoc]</strong> 选项：</p>
+<p><img src="/Electronics/Altium/8-pcb-import/step-3.png"></p>
+<p>按下底部的【Create Engineering Change Order】按钮进入
+<strong>Engineering Change Order</strong> 对话框，点击【Execute
+Changes】按钮，将网络列表与当前 PCB 的比较结果导入至 PCB 当中：</p>
+<p><img src="/Electronics/Altium/8-pcb-import/step-4.png"></p>
+<h3 id="板框绘制">板框绘制</h3>
+<p>对于较为简单的圆形或矩形的 PCB 板框，可以直接在机械层或禁止布线层放置
+2D 线进行绘制。接下来通过一个实例进行说明，首先将当前层切换至
+<strong>Mechanical 1</strong> 层，按下快捷键【E + O + S】在指定位置放置
+PCB 原点。</p>
+<p><img src="/Electronics/Altium/8-pcb-import/outline/step-1.png"></p>
+<p>执行菜单命令 <strong>Place Line</strong> 单击原点位置放置 2D
+线条，按下空格键可以调整线条的放置方向，然后双击线条调整其长度尺寸，然后修改线条的起始与末端坐标精准定义其长度，并最终绘制出一个封闭的板框区域。</p>
+<p><img src="/Electronics/Altium/8-pcb-import/outline/step-2.png"></p>
+<p>选中所绘制的闭合的板框（一定是闭合的，不然会定义不成功），执行菜单命令
+<strong>Design -&gt; Board Shape -&gt; Define from selected
+objects</strong>，即可完成板框的定义。</p>
+<p><img src="/Electronics/Altium/8-pcb-import/outline/step-3.png"></p>
+<p>最终得到的手绘板框效果图如下所示：</p>
+<p><img src="/Electronics/Altium/8-pcb-import/outline/step-4.png"></p>
+<h2 id="pcb-布局">PCB 布局</h2>
+<p>优秀的 PCB 设计，除了实现电路原理功能以外，还需要考虑到
+MC（电磁兼容性）、ESD（静电释放）、SI（信号完整性）等电气特性，并且兼顾机械结构、元件散热、布局美观等方面的问题。</p>
+<h3 id="自动布局">自动布局</h3>
+<p>Altium Designer 提供了强大的 PCB
+自动布局功能，基于一套预置算法自动将元器件分开并放置到规划区域，点击菜单栏上的
+<strong>Tools -&gt; Component Placement</strong>或者按下快捷键【T +
+O】，可以打开自动布局的相关菜单项：</p>
+<p><img src="/Electronics/Altium/9-pcb-place/auto/menu.png"></p>
+<ul>
+<li><strong>Arrange Within Room</strong>：在 Room
+内部排列，用于在指定的空间内部排列元件；执行后光标变为十字形状，单击需要排列元件的
+Room 区域，元件就会自动排列至该 Room 内部。</li>
+<li><strong>Arrange Within
+Reactangle</strong>：在矩形区域内部排列，用于将选中的元件排列至一个矩形区域内；使用之前需要先选中元件，待光标变为十字形状时，鼠标单击并且拖动出一个矩形区域，完成以后就会自动将元件排列至该区域当中。</li>
+<li><strong>Arrange Outside Board</strong>：用于将选中的元件排列至 PCB
+板的外部，使用前同样需要先选中元件，执行后就会自动将选择的元件排列至 PCB
+范围之外的左上角区域。</li>
+<li><strong>Auto
+Placer...</strong>：自动布局命令，用于执行自动布局操作。</li>
+<li><strong>Stop Auto
+Placer</strong>：停止自动布局命令，用于停止自动布局操作。</li>
+<li><strong>Shove</strong>：用于推挤布局，将重叠在一起的元件推开；选择一个元件作为基准，当周围元件与基准元件存在重叠时，则以基准元件为中心向四周推挤其他的元件；如果不存在重叠则不会执行推挤命令。</li>
+<li><strong>Set Shove
+Depth...</strong>：用于设置推挤命令的深度，可以是<code>1 ~ 1000</code>之间的任意数字。</li>
+<li><strong>Place From
+File...</strong>：依据导入的自动布局文件进行放置。</li>
+<li><strong>Reposition Selected Components</strong>：重新放置当前选中的
+PCB 元件。</li>
+</ul>
+<p>进行自动布局之前，可以设置自动布局的约束参数，从而使结果更加完善，减少后续自动布局的工作量。选择主菜单上的<strong>Design
+-&gt; Rules</strong>或者按下快捷键【D + R】，可以打开 PCB
+约束和规则编辑器<code>PCB Rules and Constraints Editor</code>：</p>
+<p><img src="/Electronics/Altium/9-pcb-place/auto/rules-constraints-editor.png"></p>
+<h3 id="手动布局">手动布局</h3>
+<p>自动布局仅仅只能对元件进行初步的摆放，需要手动进行进一步的调整，因此
+Altium Designer 提供了专门的手动布局操作。其中，元件的对齐操作可以让 PCB
+布局更加整齐与对称，同时也更加便于布线；点击菜单栏上的 <strong>Edit
+-&gt; Align</strong> 或者按下快捷键【E +
+G】即可展开对齐操作相关的菜单：</p>
+<p><img src="/Electronics/Altium/9-pcb-place/manual/align.png"></p>
+<p>与此同时，PCB 上元件的标志符和注释的位置都是可以进行修改的，选择菜单
+<strong>Edit -&gt; Align -&gt; Position Component Text...</strong>
+或者按下快捷键【E + G + P】打开元件位置调整对话框：</p>
+<p><img src="/Electronics/Altium/9-pcb-place/manual/text-position.png"></p>
+<p>手动布局时，拖动元件时按下【空格键】可以调整元件的摆放方向。而对于需要调整多个相同类型元件的情况，可以借助查找相似命令的方式：选择菜单栏命令
+<strong>Edit -&gt; Find Similar Objects</strong> 或者按下快捷键【Shift +
+F】，当光标变为十字形状时，选取 PCB
+区域内的一个电子元件，此时会弹出<code>Find Similar Objects</code>对话框：</p>
+<p><img src="/Electronics/Altium/9-pcb-place/manual/find-similar-objects.png"></p>
+<p>将<code>Object Kinds</code>对应的选项设置为<code>Same</code>，然后依次点击【Apply】和【OK】按钮，对话框关闭以后所有满足相似条件的元件都将会被选中。此时再通过对齐等操作，将各个元件排列整齐。如果发现之前定义的
+PCB 形状偏大或者偏小，则还需要对 PCB 的尺寸重新进行定义。</p>
+<h3 id="原理图与-pcb-交互设计">原理图与 PCB 交互设计</h3>
+<p>PCB 绘制时，为了便于与原理图进行对应，让两者互相进行映射，需要使用到
+Altium Designer
+提供的交互式选择模式，从而方便快速的定位元件，缩短设计周期，提高工作效率。鼠标选择菜单栏上的
+<strong>Tools -&gt; Cross Select Mode</strong> 激活交互式选择模式：</p>
+<p><img src="/Electronics/Altium/9-pcb-place/cross-select-mode.png"></p>
+<p>从上面的截图当中可以看到，当选中原理图上的某个元件以后，PCB
+上对应的元件就会自动同步选中，反之亦是成立的。</p>
+<h3 id="d-预览">3D 预览</h3>
+<p>PCB 布局完成之后，可以通过直观查看成品的 3D
+效果，来检查当前布局是否合理；选择菜单栏上的 <strong>View -&gt; 3D
+Layout Mode</strong> 查看 PCB 裸板的 3D 实物效果图：</p>
+<p><img src="/Electronics/Altium/9-pcb-place/3d/layout.png"></p>
+<p>或者选择菜单栏上的 <strong>Tools -&gt; Legacy Tools -&gt; Legacy 3D
+View</strong> 查看带元件的 3D 效果：</p>
+<p><img src="/Electronics/Altium/9-pcb-place/3d/legacy.png"></p>
+<h3 id="网络密度分析">网络密度分析</h3>
+<p>网络密度分析是利用 Altium Designer 提供的密度分析工具，对当前 PCB
+文件的元件放置和连接情况进行分析，并最终生成一个临时的密度指示图（Density
+Map）覆盖在 PCB 上面。按下菜单栏的 <strong>Tools -&gt; Density
+Map</strong> 开始进行密度分析，或者选择 <strong>Tools -&gt; Clear
+Density Map</strong> 取消当前密度结果的显示。</p>
+<p><img src="/Electronics/Altium/9-pcb-place/density.png"></p>
+<p>其中绿色部分表示密度较低，红色则表示网络密度较高的区域，元件越密集连线越多的区域颜色就会呈现一定变化趋势。密度指示图展示了当前
+PCB
+电路板的布局密度特征，可以作为各个区域内布线难度、布通率的提示信息，从而进行相应的调整，提高后续布线的布通率，降低布线难度。</p>
+<h2 id="pcb-布线">PCB 布线</h2>
+<p>PCB 上元件的布局完成之后，就可以开始进行布线操作。布线是整个 PCB
+设计流程当中要求最高、细节最多、工作量最大的步骤。PCB
+布线的首要任务是通过导线建立完整的电气连接，走线长度尽量<strong>短</strong>和<strong>直</strong>，以保证信号完整性；走线中尽量减少过孔的使用，并且尽量加大走线的宽度；同时输入输出导线应当避免相邻平行，从而规避反射干扰，且必要时应当增加地线进行隔离；此外，两条相邻的布线尽量互相垂直，如果平行则会导致耦合。</p>
+<h3 id="自动布线">自动布线</h3>
+<p>对于散热、电磁干扰、高频特性要求较低的电路设计，可以采用自动布线操作来降低工作量。</p>
+<h4 id="自动布线规则与约束">自动布线规则与约束</h4>
+<p>Altium Designer 17 在 PCB 规则和约束编辑器当中提供了 10
+种设计规则，覆盖了元件的电气特性、走线宽度、走线拓扑结构、表面安装焊盘、阻焊层、电源层、测试点、电路板制作、元件布局、信号完整性等设计过程当中的方方面面。进行自动布线操作之前，需要首先对规则进行详细的设置。鼠标打开菜单栏上的
+<strong>Design -&gt; Rules...</strong> 或者按下快捷键【D +
+R】即可打开如下编辑界面：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/auto/rules-and-constraints.png"></p>
+<h4 id="自动布线策略">自动布线策略</h4>
+<p>布线策略是指 PCB 进行自动布线时所采取的策略，选择菜单栏上的
+<strong>Route -&gt; Auto Route -&gt; Setup...</strong> 可以打开 Situs
+布线策略对话框界面：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/auto/situs-routing-strategies.png"></p>
+<p>Situs 布线策略界面当中默认提供了如下 5 种自动布线策略：</p>
+<ul>
+<li><strong>Cleanup</strong>：清除策略；</li>
+<li><strong>Default 2 Layer Board</strong>：默认的双面 PCB
+布线策略；</li>
+<li><strong>Default 2 Layer With Edge
+Connectors</strong>：默认的具有边缘连接器的双面 PCB 布线策略；</li>
+<li><strong>Default Multi Layer Board</strong>：默认的多层 PCB
+布线策略；</li>
+<li><strong>Via Miser</strong>：尽量减少过孔使用的策略；</li>
+</ul>
+<p>鼠标点击该界面当中的【Add】按钮可以进入 Situs
+策略编辑器界面，从而自定义新的布线策略：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/auto/situs-strategy-editor.png"></p>
+<p>界面中的<code>Strategy Name</code>和<code>Strategy Description</code>分别代表自定义策略的名称与描述，下面的滑块表示该策略所允许的过孔数目（过孔越多自动布线速度越快），界面底部的左侧的列表<code>Available Routing Passes</code>表示已有的布线操作，右侧的<code>Passes in this Routing Strategy</code>则表示<code>布线策略中的操作</code>，可以通过中间的【Add】和【Remove】按钮添加或移除策略，或者使用下面的【Move
+Up】与【Move Down】按钮调整各条策略的优先级。</p>
+<h4 id="自动布线操作">自动布线操作</h4>
+<p>完成了布线规则与策略的设置以后，即可以开始着手自动布线操作。Altium
+Designer 提供的自动布线操作主要通过菜单栏上的 <strong>Auto
+Route</strong>
+来提供，设计人员不仅可以整体进行布线，还可以对指定区域、网络、元件进行单独布线。</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/auto/auto-route.png"></p>
+<p>选择菜单栏上的 <strong>Auto Route -&gt; All...</strong> 命令，进入
+Situs
+布线策略界面，选择默认的<code>Default 2 Layer Board</code>策略，最后按下【Route
+All】按钮弹出一个用于提供布线状态信息的 <strong>Messages</strong>
+对话框：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/auto/messages.png"></p>
+<p>关闭对话框后，就可以看到自动布线的结果。当 PCB
+上元件排列比较密集或者布线规则设置较为严格时，自动布线可能无法完全布通，即使布通也可能存在大量走线不合理（绕线过多、走线过长等等）的情况，此时就需要手动完成进一步的调整。</p>
+<h3 id="手动布线">手动布线</h3>
+<p>对于自动布线中出现的一些不合理情况，可以通过手动布线进行修正。当然，对于元件较少的
+PCB
+设计也可以完全采用手动布线。手动布线时，由于需要设计人员自行规划元件的走线布局与路径，而网格是尺寸控制的重要依据，因此合理的设置网格尺寸，可以方便设计者规划布局与走线。设计人员在不同阶段会需要动态的调整网格的大小，例如元件布局阶段，可以将捕获网格设置大一些（例如<code>20mil</code>），而布线阶段则捕获网格会被设置得小一些(例如<code>5mil</code>)，尤其是走线密集的区域，捕获网格设置小一些便于观察与走线。</p>
+<h4 id="拆除布线">拆除布线</h4>
+<p>如果需要删除自动布线时遗留下的一些不合理走线，直接按下键盘上的【Delete】就可以完成。当删除工作量较大的时候，可以选择菜单栏上的
+<strong>Tools -&gt; Un Route</strong> 或者按下快捷键【T +
+U】，选择子菜单里相应的删除方式快速拆除布线。</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/manual/unroute.png"></p>
+<ul>
+<li><strong>All</strong>：拆除当前 PCB 上所有布线；</li>
+<li><strong>Net</strong>：拆除指定网络上的布线；</li>
+<li><strong>Connection</strong>：拆除鼠标指定连接上的布线；</li>
+<li><strong>Component</strong>：拆除指定元件上的布线；</li>
+<li><strong>Room</strong>：拆除指定 Room 区域内的布线；</li>
+</ul>
+<h4 id="手动布线操作">手动布线操作</h4>
+<p>手动布线遵循与自动布线相同的约束与规则，其具体操作步骤如下：</p>
+<ol type="1">
+<li>执行菜单栏命令 <strong>Place -&gt; Interactive
+Routing</strong>，鼠标光标此时变为十字形状；</li>
+<li>移动光标到 PCB 元件的焊盘上，点击放置布线的起点；</li>
+<li>选择另一个焊盘，点击放置布线的终点；</li>
+</ol>
+<p><img src="/Electronics/Altium/10-pcb-layout/manual/interactive-routing.png"></p>
+<p>手动布线模式下可以通过【Shift +
+Space】切换转角的角度模式，可以选择任意角度、40° 或 90° 的矩形拐角、45°
+或 90° 的弧形拐角共五种。</p>
+<blockquote>
+<p><strong>注意：</strong>交互式布线时，按下小键盘区的【 *
+】键可以在不同信号层之间切换，从而方便的完成不同信号层上的走线。此外，对于不同
+PCB 层上的走线，Altium Designer 会自动为其添加一个过孔进行连接。</p>
+</blockquote>
+<h3 id="安装孔">安装孔</h3>
+<p>电路板布线完成之后，就可以开始着手添加 PCB
+上的安装孔；安装孔通常采用过孔形式，并与接地网络进行连接，以方便后期调试。选择菜单栏
+<strong>Place -&gt; Via</strong>
+放置过孔，然后按下【Tab】键打开过孔属性设置界面：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/hole/via.png"></p>
+<p><code>Hole Size</code>孔尺寸选项，由于这里过孔是作为安装孔使用，所以需要设置一个较大的内径，这里填写<code>100mil</code>；<code>Diameter</code>直径选项，用于设置过孔的外径，此处填写为<code>150mil</code>；<code>Location</code>位置项，通常设置到
+PCB 的四个角上面。下图是一块已经完成了安装孔放置的 PCB 设计：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/hole/example.png"></p>
+<p><img src="/Electronics/Altium/10-pcb-layout/hole/pcb.png"></p>
+<h3 id="覆铜操作">覆铜操作</h3>
+<p>覆铜用于填充 PCB
+上的不规则区域，并与电路网络进行连接，通常情况是直接连接至
+GND。覆铜工艺可以提高电路的抗干扰能力，并增强大电流的通过能力，因此其安全间距应是普通导线的
+2 倍以上。</p>
+<p>鼠标选中菜单栏上的 <strong>Place -&gt; Polygon Pour...</strong>
+或者按下快捷键【P + G】，Altium Designer 将会弹出多边形覆铜对话框：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/copper-pour/polygon-pour.png"></p>
+<p>顶部<code>Fill Mode</code>单选按钮组里面，<code>Solid(Copper Regions)</code>是指覆盖区域为全铜敷设，<code>Hatched(Tracks/Arcs)</code>是指向覆盖区域填充网络状的铜层，<code>None(Outlines Only)</code>则只保留覆铜边界，内部不进行填充处理。这里我们选择网状铜层，孵化铜层为<code>45°</code>，链接至<code>GND</code>，并作用于<code>Top Layer</code>，最后选中<code>移除死铜</code>，按下【OK】按钮以后，光标变为十字形状时，在禁止布线层
+<strong>Keep Out</strong> 拖拽出一个矩形框，此时 Altium Designer
+就会自动在 PCB 顶层填充出一个网状的铜层：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/copper-pour/pcb-2d.png"></p>
+<p>打开 PCB 的 3D 预览功能，可以看到该铜层最终所呈现的效果：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/copper-pour/pcb-3d.png"></p>
+<blockquote>
+<p><strong>注意：</strong>以同样的方式，还可以选择在 PCB
+的底层<code>Bottom Layer</code>进行覆铜操作。</p>
+</blockquote>
+<h3 id="补泪滴">补泪滴</h3>
+<p>PCB
+导线与焊盘、过孔的连接位置，通常需要进行补泪滴操作，去除连接处直角的同时，增大连接面。一方面避免
+PCB
+加工过程中，因为钻孔偏差导致焊盘与导线断裂；另一方面是在安装和使用过程中，避免受力不均衡导致断开。</p>
+<p>鼠标点击菜单栏上的 <strong>Tools -&gt; Teardrops</strong>
+命令或者按下【T + E】快捷键即可开始进行补泪滴操作，此时 Altium Designer
+会弹出泪滴属性的设置界面：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/teardrop/teardrops.png"></p>
+<p>其中，工作模式选项<code>Working Mode</code>用于表明当前操作是需要<code>Add</code>添加还是<code>Remove</code>删除泪滴，对象选项<code>Objects</code>表示需要添加泪滴的是所有<code>All</code>还是仅仅是选中的对象<code>Selected Only</code>。复选框<code>Force teardrops</code>强制对所有焊盘或者过孔添加泪滴，取消选中则在安全间距过小的时候不自动添加泪滴；复选框<code>Adjust teardrop size</code>用于自动调整泪滴的大小；复选框<code>Generate report</code>则用于生成泪滴相关的报表文件。此外，泪滴类型<code>Teardrop style</code>下拉菜单里拥有<code>Curved</code>曲线（上图）和<code>Line</code>线（下图）两种泪滴类型：</p>
+<p><img src="/Electronics/Altium/10-pcb-layout/teardrop/pcb-curved.png"></p>
+<p><img src="/Electronics/Altium/10-pcb-layout/teardrop/pcb-line.png"></p>
+<h2 id="spice-电路仿真">SPICE 电路仿真</h2>
+<p><strong>SPICE</strong>是以集成电路为重点的仿真程序（<strong>S</strong>imulation
+<strong>P</strong>rogram with <strong>I</strong>ntegrated
+<strong>C</strong>ircuit <strong>E</strong>mphasis）的英文缩写，Altium
+Designer 在原理图层面提供了完善的 SPICE
+混合信号仿真功能，除提供对<strong>SPICE</strong>标准的支持以外，还支持对<strong>Pspice</strong>模型与电路进行仿真。Altium
+Designer
+内置的集成库的原理图符号当中包含了对应的仿真模型，因此原理图可以直接用作仿真电路。</p>
+<p>这里通过一个直流工作点分析的实例，来讲解 Altium Designer
+进行原理图仿真分析的基本步骤。首先从<code>Simulation Sources.IntLib</code>和<code>Miscellaneous Devices.IntLib</code>库中找到相应元件，并绘制如下原理图：</p>
+<p><img src="/Electronics/Altium/11-spice/1.png"></p>
+<p>选择 Altium Designer 主菜单下的<strong>Design -&gt; Simulate -&gt;
+MixedSim</strong>，在弹出的<strong>Analyses
+Setup</strong>分析设置对话框进行如下设置：</p>
+<p><img src="/Electronics/Altium/11-spice/2.png"></p>
+<p>点击【OK】以后，弹出 SIPCE 电路分析过程的消息窗口：</p>
+<p><img src="/Electronics/Altium/11-spice/3.png"></p>
+<p>点击关闭该消息窗口，此时会自动打开<code>PCB_Project1.sdf</code>文件，在打开的文件上右键选择【Add
+Wave】打开<strong>Add Wave To
+Table</strong>对话框，添加<code>V(1)</code>、<code>V(2)</code>、<code>v1#branch</code>三个直流分析工作点</p>
+<p><img src="/Electronics/Altium/11-spice/4.png"></p>
+<p>点击界面上的【Create】按钮，就能看到流经电阻的电流为<code>4.545mA</code>：</p>
+<p><img src="/Electronics/Altium/11-spice/5.png"></p>
+<p>接着再次通过<strong>Design -&gt; Simulate -&gt;
+MixedSim</strong>打开<strong>Analyses
+Setup</strong>分析设置对话框，勾选<strong>DC Sweep
+Analysis</strong>选项，并进行如下设置：</p>
+<p><img src="/Electronics/Altium/11-spice/6.png"></p>
+<p>点击【OK】按钮后，关闭 SIPCE
+电路分析过程消息窗口，此时会自动打开<code>PCB_Project1.sdf</code>文件，将文件底部的选项卡从【Operating
+Point】切换至【DC Sweep】：</p>
+<p><img src="/Electronics/Altium/11-spice/7.png"></p>
+<p>在左侧工程面板下找到当前项目的<code>PCB_Project1.nsx</code>文件，双击打开：</p>
+<p><img src="/Electronics/Altium/11-spice/8.png"></p>
+<p>上面窗口中的代码展示了一个完整的 SPICE 分析源程序，其中第 1
+行<code>PCB_Project_1</code>是标题行，以<code>*</code>号开始的是注释内容，<code>.END</code>用于标识结束行，<code>.MODEL</code>用于声明模型描述，其它<code>.DC</code>和<code>.OP</code>等以<code>.</code>开头的语句则用于执行相应的分析命令。</p>
+<h2 id="si-信号完整性">SI 信号完整性</h2>
+<p><strong>信号完整性（SI，Signal Integrity）</strong>是指 PCB
+上的信号经由信号线传输以后仍然能保持完整与正确，当电路中的信号能够以正确的时序、符合要求的持续时间与电压幅度进行传送，并完整的到达输出端时，即说明该电路具有良好的信号完整性；而当信号不能正常响应时，就认为出现了信号完整性问题，特别是在高频高速电路当中。因此，信号完整性分析的目的就是为了确保信号的<strong>时序</strong>与<strong>电压</strong>幅度正确传输，电路设计当中常见的信号完整性问题主要集中在如下几个方面：</p>
+<h3 id="传输延迟-transmission-delay">传输延迟 Transmission Delay</h3>
+<p>指信号没有在规定的时间内以一定的持续时间和幅度到达接收端，通常是由于驱动过载、布线过长的传输线效应引起。此外，传输线上的电容、电感也会对信号的状态切换产生延时。高速电路设计当中，传输延迟是一个无法回避的问题，因此专门引入了一个延迟容限的概念，即确保电路正常工作的前提下，所允许的信号最大时序变化。</p>
+<h3 id="反射-reflection">反射 Reflection</h3>
+<p>指传输线上的回波，信号功率的一部分从源端经过传输线传递至负载，另一部分则会向源端反射。高速电路设计当中，可以将导线等效为传输线，而非集总参数电路中的导线。若阻抗匹配(源端阻抗、传输线阻抗、负载阻抗三者相等)则反射不会发生；反之，如果负载阻抗与传输线阻抗不匹配就会导致接收端向源端的信号反射。</p>
+<p>布线的几何形状、不恰当的端接方式、经过连接器的传输及电源平面不连续等因素均会导致该问题，进而导致传送信号出现严重的<strong>过冲</strong>（Overshoot）或<strong>下冲</strong>（Undershooot）现象，并最终造成信号的波形变形与时序混乱。</p>
+<h3 id="窜扰-crosstalk">窜扰 Crosstalk</h3>
+<p>指没有电气连接的信号线之间的感应电压与电流所导致的电磁耦合，这种耦合会造成信号线产生类似天线的作用。其中，容性耦合会引发耦合电流，感性耦合则会引发耦合电压，并伴随时钟速率的提升与
+PCB
+尺寸的缩小而加大，一切都是由于信号线上有交变的信号电流通过所产生的磁场，处于该磁场中的其它信号线就会感应到信号电压。PCB
+的工作层的参数、信号线间距、驱动与接收端的电气特性、信号线本身的端接方式等等都会对窜扰造成一定影响。</p>
+<h3 id="接地反弹-ground-bounce">接地反弹 Ground Bounce</h3>
+<p>指由于电路中由于较大电流涌动而在电源与接地平面之间产生的大量噪声，例如大量芯片同步进行切换时，就会在与电源平面之间产生较大的瞬时电流，而芯片封装与电源之间的寄生电感、电容、电阻就会随之引发电源噪声，造成电路在零电位上产生较大的电压波动，进而影响其它元器件的正常工作。</p>
+<p>Altium Designer 17 拥有完整的信号完整性仿真功能，能够分析 PCB
+设计并且检查相关参数，测试整板的串扰、过冲、下冲、上升时间、下降时间、线路阻抗等问题，从而以最小代价发现当前电路设计当中所存在的问题。与电路仿真模型类似，信号完整性分析也是建立在元件的模型基础之上的，这种模型称为
+<strong>S</strong>ignal <strong>I</strong>ntegrity 模型，简称 <strong>SI
+模型</strong>。元件的信号完整性 SI
+模型可以在信号完整性分析之前设定，也可以在信号完整性分析进行的过程中进行设定。</p>
+<h3 id="信号完整性规则设置">信号完整性规则设置</h3>
+<p>Altium Designer 包含有诸多信号完整性分析规则，可以通过菜单栏的
+<strong>Design -&gt; Rules...</strong> 打开 PCB
+规则及约束编辑器，并且切换至如下的<code>Signal Integrity</code>子菜单，按下【New
+Rule】按钮即可新建指定的规则或约束：</p>
+<p><img src="/Electronics/Altium/12-signal-integrity/rules-and-constraints.png"></p>
+<h3 id="信号完整性分析操作">信号完整性分析操作</h3>
+<p>设置完毕信号完整性分析相关的元件 SI
+模型以及规则以后，就可以开始实际的信号完整性分析操作，这项工作一般会分为
+2 个步骤：首先是对目标 PCB 网络进行初步分析，了解哪个部分的 SI
+特性最差；然后筛选出一些信号进行进一步的详细分析。鼠标选择菜单栏上的
+<strong>Tools -&gt; Signal Integrity</strong> 命令或者按下快捷键【T + Y
++ Y】即可进入信号完整性分析界面：</p>
+<p><img src="/Electronics/Altium/12-signal-integrity/signal-integrity.png"></p>
+<h2 id="pcb-后期处理">PCB 后期处理</h2>
+<p>PCB 的布局和布线完成以后，还需要执行 DRC 检查、导出 Geber
+等进行的操作。</p>
+<h3 id="导出-pcb-信息">导出 PCB 信息</h3>
+<p>选择主菜单上的 <strong>Reports -&gt; Board Information</strong>
+进入如下的 PCB 信息对话框，上面的 3
+个选项卡分别用于展示【通用】、【元件】、【网络】的信息：</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/report/1.png"></p>
+<p>继续点击【Report...】按钮，进入 PCB
+报告对话框，然后选择所需要生成的报告内容：</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/report/2.png"></p>
+<p>最后，再次点击 PCB
+报告对话框上的【Report】，生成以<code>.REP</code>作为后缀名的报告文件并在工作区展开：</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/report/3.png"></p>
+<h3 id="drc-检查">DRC 检查</h3>
+<p>PCB 设计完成之后，在正式的输出 Geber
+制板文件之前，还需要进行一次完整的设计规则检查。Altium Designer
+提供的设计规则检查（DRC，Design Rule
+Check）会基于用户设置的规则，检查当前 PCB
+的导线宽度、安全距离、元件间距、过孔类型等设计。选择菜单栏上的
+<strong>Tools -&gt; Design Rule Check...</strong> 命令或者按下快捷键【T
++ D】，打开设计规则检查对话框：</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/drc/checker.png"></p>
+<blockquote>
+<p><strong>注意：</strong>左侧列表中的<code>Report Options</code>是 DRC
+报告设置选项，通常保持默认即可；而<code>Rules To Check</code>则是待检查的
+DRC 规则列表，按需勾选即可。</p>
+</blockquote>
+<h3 id="导出-gerber">导出 Gerber</h3>
+<p>Gerber ['dʒɜ:bə] 是一种符合 EIA 电子工业协会标准，用于将 PCB
+布线数据转换为光绘机可以处理的文件格式。在 PCB
+编辑器界面下选择菜单栏上的 <strong>File -&gt; Fabrication Outputs -&gt;
+Gerber Files</strong> 打开如下 Gerber 设置相关的一系列对话框：</p>
+<p>【General】通用选项卡，用于指定在输出 Gerber
+文件中使用的单位与格式，其中<code>Format</code>栏目下的<code>2:3</code>、<code>2:4</code>、<code>2:5</code>分别代表的是数据精度，例如：<code>2:3</code>表示数据包含了
+2 位整数和 3
+位小数。设计者应该根据自己设计中所使用的单位精度进行选择，精度越高对于
+PCB 制造的工艺要求越高。</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/gerber/general.png"></p>
+<p>【Layer】层选项卡，用于设置需要生成 Gerber 文件的 PCB
+层。左侧的<code>Layers To Plot</code>列表表示需要生成 Gerber
+的层，右侧的<code>Mechanical Layers to Add to All Plots</code>列表用于选择需要加载到各个
+Gerber 层的机械层。</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/gerber/layers.png"></p>
+<p>【Drill Drawing】层选项卡，用于对 PCB 上的钻孔对应的层进行设置。</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/gerber/drill-drawing.png"></p>
+<p>【Apertures】光圈选项卡，用于设置生成 Gerber
+文件时建立的光圈选项，这里默认选择<code>Embedded apertures (RS274X)</code>，即生成
+Gerber 时自动建立光圈。</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/gerber/apertures.png"></p>
+<p>【Advanced】高级选项卡，可以设置光绘胶片的相关选项，例如：胶片尺寸及边框大小、零字符格式、板层在胶片的位置、制造文件生成模式等等。</p>
+<p><img src="/Electronics/Altium/13-pcb-attach/gerber/advanced.png"></p>
+<p>完成 Gereber
+相关的各项设置以后，单击【OK】按钮就会开始自动生成各个图层的 Gerber
+文件，并且在工程的<code>Generated</code>目录当中生成<code>CAMtastic.Cam</code>文件。Altium
+Designer 17 针对不同的 PCB 层生成相应的扩展名，具体请见下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 28%">
+<col style="width: 16%">
+<col style="width: 38%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">PCB 层</th>
+<th style="text-align: left;">Gerber 扩展名</th>
+<th style="text-align: left;">PCB 层</th>
+<th style="text-align: left;">Gerber 扩展名</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Top Overlay</strong></td>
+<td style="text-align: left;"><code>.GTO</code></td>
+<td style="text-align: left;"><strong>Top Paste Mask</strong></td>
+<td style="text-align: left;"><code>.GTP</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Bottom Overlay</strong></td>
+<td style="text-align: left;"><code>.GBO</code></td>
+<td style="text-align: left;"><strong>Bottom Paste Mask</strong></td>
+<td style="text-align: left;"><code>.GBP</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Top Layer</strong></td>
+<td style="text-align: left;"><code>.GTL</code></td>
+<td style="text-align: left;"><strong>Drill Drawing</strong></td>
+<td style="text-align: left;"><code>.GDD</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Bottom Layer</strong></td>
+<td style="text-align: left;"><code>.GBL</code></td>
+<td style="text-align: left;"><strong>Drill Drawing Top to Mid1,
+Mid2...</strong></td>
+<td style="text-align: left;"><code>.GD1</code>，<code>.GD2</code>...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Mid Layer 1, 2...</strong></td>
+<td style="text-align: left;"><code>.G1</code>，<code>.G2</code>...</td>
+<td style="text-align: left;"><strong>Drill Guide</strong></td>
+<td style="text-align: left;"><code>.GDG</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>PowerPlane 1, 2...</strong></td>
+<td style="text-align: left;"><code>.GP1</code>，<code>GP2</code>...</td>
+<td style="text-align: left;"><strong>Drill Guide Top to Mid1,
+Mid2...</strong></td>
+<td style="text-align: left;"><code>.GG1</code>，<code>.GG2</code>...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Mechanical Layer 1,
+2...</strong></td>
+<td style="text-align: left;"><code>.GM1</code>，<code>GM2</code>...</td>
+<td style="text-align: left;"><strong>Pad Master Top</strong></td>
+<td style="text-align: left;"><code>.GPT</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Top Solder Mask</strong></td>
+<td style="text-align: left;"><code>.GTS</code></td>
+<td style="text-align: left;"><strong>Pad Masterr Bottom</strong></td>
+<td style="text-align: left;"><code>.GPB</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Bottom Solder Mask</strong></td>
+<td style="text-align: left;"><code>.GBS</code></td>
+<td style="text-align: left;"><strong>Keep-out Layer</strong></td>
+<td style="text-align: left;"><code>.GKO</code></td>
+</tr>
+</tbody>
+</table>
+</div><div class="article-licensing box"><div class="licensing-title"><p>采用 Altium Designer 17.1 进行 PCB 电路绘制与仿真</p><p><a href="http://www.uinio.com/Electronics/Altium/">http://www.uinio.com/Electronics/Altium/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-08-06</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-02-20</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/EDA/">EDA</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/KiCad_Tutorial/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">开源 EDA 工具 KiCad 6.0 电路设计小书</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Embedded/STM32F401/"><span class="level-item">基于 HAL 与 LL 的 UINIO-MCU-STM32F401 开发实践</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#概览与设置"><span class="level-left"><span class="level-item">1</span><span class="level-item">概览与设置</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#系统设置"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">系统设置</span></span></a></li><li><a class="level is-mobile" href="#原理图设置"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">原理图设置</span></span></a></li><li><a class="level is-mobile" href="#pcb-设置"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">PCB 设置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#工程创建"><span class="level-left"><span class="level-item">2</span><span class="level-item">工程创建</span></span></a></li><li><a class="level is-mobile" href="#原理图元件库"><span class="level-left"><span class="level-item">3</span><span class="level-item">原理图元件库</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建元件"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">新建元件</span></span></a></li><li><a class="level is-mobile" href="#元件规则检查"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">元件规则检查</span></span></a></li><li><a class="level is-mobile" href="#生成元件库"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">生成元件库</span></span></a></li><li><a class="level is-mobile" href="#元件库复制"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">元件库复制</span></span></a></li><li><a class="level is-mobile" href="#实例创建电容"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">实例：创建电容</span></span></a></li><li><a class="level is-mobile" href="#实例创建-adc"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">实例：创建 ADC</span></span></a></li><li><a class="level is-mobile" href="#实例创建放大器"><span class="level-left"><span class="level-item">3.7</span><span class="level-item">实例：创建放大器</span></span></a></li></ul></li><li><a class="level is-mobile" href="#原理图绘制"><span class="level-left"><span class="level-item">4</span><span class="level-item">原理图绘制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#原理图设置-1"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">原理图设置</span></span></a></li><li><a class="level is-mobile" href="#元件操作"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">元件操作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#放置元件"><span class="level-left"><span class="level-item">4.2.1</span><span class="level-item">放置元件</span></span></a></li><li><a class="level is-mobile" href="#选择元件"><span class="level-left"><span class="level-item">4.2.2</span><span class="level-item">选择元件</span></span></a></li><li><a class="level is-mobile" href="#复制元件"><span class="level-left"><span class="level-item">4.2.3</span><span class="level-item">复制元件</span></span></a></li><li><a class="level is-mobile" href="#对齐元件"><span class="level-left"><span class="level-item">4.2.4</span><span class="level-item">对齐元件</span></span></a></li></ul></li><li><a class="level is-mobile" href="#连接操作"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">连接操作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#导线绘制"><span class="level-left"><span class="level-item">4.3.1</span><span class="level-item">导线绘制</span></span></a></li><li><a class="level is-mobile" href="#页连接符"><span class="level-left"><span class="level-item">4.3.2</span><span class="level-item">页连接符</span></span></a></li><li><a class="level is-mobile" href="#添加网络标号"><span class="level-left"><span class="level-item">4.3.3</span><span class="level-item">添加网络标号</span></span></a></li><li><a class="level is-mobile" href="#添加端口"><span class="level-left"><span class="level-item">4.3.4</span><span class="level-item">添加端口</span></span></a></li><li><a class="level is-mobile" href="#添加信号束"><span class="level-left"><span class="level-item">4.3.5</span><span class="level-item">添加信号束</span></span></a></li><li><a class="level is-mobile" href="#总线放置"><span class="level-left"><span class="level-item">4.3.6</span><span class="level-item">总线放置</span></span></a></li><li><a class="level is-mobile" href="#差分标识放置"><span class="level-left"><span class="level-item">4.3.7</span><span class="level-item">差分标识放置</span></span></a></li><li><a class="level is-mobile" href="#no-erc-放置"><span class="level-left"><span class="level-item">4.3.8</span><span class="level-item">No ERC 放置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#辅助信息"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">辅助信息</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#放置注释"><span class="level-left"><span class="level-item">4.4.1</span><span class="level-item">放置注释</span></span></a></li></ul></li><li><a class="level is-mobile" href="#全局编号"><span class="level-left"><span class="level-item">4.5</span><span class="level-item">全局编号</span></span></a></li><li><a class="level is-mobile" href="#批量修改属性"><span class="level-left"><span class="level-item">4.6</span><span class="level-item">批量修改属性</span></span></a></li><li><a class="level is-mobile" href="#查询与跳转"><span class="level-left"><span class="level-item">4.7</span><span class="level-item">查询与跳转</span></span></a></li><li><a class="level is-mobile" href="#多页原理图"><span class="level-left"><span class="level-item">4.8</span><span class="level-item">多页原理图</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#扁平化-flat"><span class="level-left"><span class="level-item">4.8.1</span><span class="level-item">扁平化 Flat</span></span></a></li><li><a class="level is-mobile" href="#层次化-hierarchical"><span class="level-left"><span class="level-item">4.8.2</span><span class="level-item">层次化 Hierarchical</span></span></a></li></ul></li><li><a class="level is-mobile" href="#检查与编译"><span class="level-left"><span class="level-item">4.9</span><span class="level-item">检查与编译</span></span></a></li><li><a class="level is-mobile" href="#物料清单-bom"><span class="level-left"><span class="level-item">4.10</span><span class="level-item">物料清单 BOM</span></span></a></li><li><a class="level is-mobile" href="#输出打印"><span class="level-left"><span class="level-item">4.11</span><span class="level-item">输出打印</span></span></a></li><li><a class="level is-mobile" href="#快捷键总结"><span class="level-left"><span class="level-item">4.12</span><span class="level-item">快捷键总结</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#鼠标"><span class="level-left"><span class="level-item">4.12.1</span><span class="level-item">鼠标</span></span></a></li><li><a class="level is-mobile" href="#视图"><span class="level-left"><span class="level-item">4.12.2</span><span class="level-item">视图</span></span></a></li><li><a class="level is-mobile" href="#排列"><span class="level-left"><span class="level-item">4.12.3</span><span class="level-item">排列</span></span></a></li><li><a class="level is-mobile" href="#其它"><span class="level-left"><span class="level-item">4.12.4</span><span class="level-item">其它</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#pcb-基本结构"><span class="level-left"><span class="level-item">5</span><span class="level-item">PCB 基本结构</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#工作层"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">工作层</span></span></a></li><li><a class="level is-mobile" href="#正负片层"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">正/负片层</span></span></a></li><li><a class="level is-mobile" href="#元件封装-footprint"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">元件封装 Footprint</span></span></a></li><li><a class="level is-mobile" href="#过孔-via"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">过孔 Via</span></span></a></li><li><a class="level is-mobile" href="#焊盘-pad"><span class="level-left"><span class="level-item">5.5</span><span class="level-item">焊盘 Pad</span></span></a></li><li><a class="level is-mobile" href="#铜膜导线-track"><span class="level-left"><span class="level-item">5.6</span><span class="level-item">铜膜导线 Track</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pcb-封装库"><span class="level-left"><span class="level-item">6</span><span class="level-item">PCB 封装库</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#d-封装"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">2D 封装</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#自动向导创建"><span class="level-left"><span class="level-item">6.1.1</span><span class="level-item">自动向导创建</span></span></a></li><li><a class="level is-mobile" href="#手动绘制创建"><span class="level-left"><span class="level-item">6.1.2</span><span class="level-item">手动绘制创建</span></span></a></li></ul></li><li><a class="level is-mobile" href="#从-pcb-文件导出封装"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">从 PCB 文件导出封装</span></span></a></li><li><a class="level is-mobile" href="#复制-pcb-封装"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">复制 PCB 封装</span></span></a></li><li><a class="level is-mobile" href="#封装规则检查"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">封装规则检查</span></span></a></li><li><a class="level is-mobile" href="#集成库"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">集成库</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#分离集成库"><span class="level-left"><span class="level-item">6.5.1</span><span class="level-item">分离集成库</span></span></a></li><li><a class="level is-mobile" href="#安装与卸载"><span class="level-left"><span class="level-item">6.5.2</span><span class="level-item">安装与卸载</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#pcb-工作环境"><span class="level-left"><span class="level-item">7</span><span class="level-item">PCB 工作环境</span></span></a></li><li><a class="level is-mobile" href="#pcb-导入与定义"><span class="level-left"><span class="level-item">8</span><span class="level-item">PCB 导入与定义</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#网络列表-netlist"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">网络列表 Netlist</span></span></a></li><li><a class="level is-mobile" href="#直接导入-pcb"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">直接导入 PCB</span></span></a></li><li><a class="level is-mobile" href="#网表对比导入"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">网表对比导入</span></span></a></li><li><a class="level is-mobile" href="#板框绘制"><span class="level-left"><span class="level-item">8.4</span><span class="level-item">板框绘制</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pcb-布局"><span class="level-left"><span class="level-item">9</span><span class="level-item">PCB 布局</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#自动布局"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">自动布局</span></span></a></li><li><a class="level is-mobile" href="#手动布局"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">手动布局</span></span></a></li><li><a class="level is-mobile" href="#原理图与-pcb-交互设计"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">原理图与 PCB 交互设计</span></span></a></li><li><a class="level is-mobile" href="#d-预览"><span class="level-left"><span class="level-item">9.4</span><span class="level-item">3D 预览</span></span></a></li><li><a class="level is-mobile" href="#网络密度分析"><span class="level-left"><span class="level-item">9.5</span><span class="level-item">网络密度分析</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pcb-布线"><span class="level-left"><span class="level-item">10</span><span class="level-item">PCB 布线</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#自动布线"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">自动布线</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#自动布线规则与约束"><span class="level-left"><span class="level-item">10.1.1</span><span class="level-item">自动布线规则与约束</span></span></a></li><li><a class="level is-mobile" href="#自动布线策略"><span class="level-left"><span class="level-item">10.1.2</span><span class="level-item">自动布线策略</span></span></a></li><li><a class="level is-mobile" href="#自动布线操作"><span class="level-left"><span class="level-item">10.1.3</span><span class="level-item">自动布线操作</span></span></a></li></ul></li><li><a class="level is-mobile" href="#手动布线"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">手动布线</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#拆除布线"><span class="level-left"><span class="level-item">10.2.1</span><span class="level-item">拆除布线</span></span></a></li><li><a class="level is-mobile" href="#手动布线操作"><span class="level-left"><span class="level-item">10.2.2</span><span class="level-item">手动布线操作</span></span></a></li></ul></li><li><a class="level is-mobile" href="#安装孔"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">安装孔</span></span></a></li><li><a class="level is-mobile" href="#覆铜操作"><span class="level-left"><span class="level-item">10.4</span><span class="level-item">覆铜操作</span></span></a></li><li><a class="level is-mobile" href="#补泪滴"><span class="level-left"><span class="level-item">10.5</span><span class="level-item">补泪滴</span></span></a></li></ul></li><li><a class="level is-mobile" href="#spice-电路仿真"><span class="level-left"><span class="level-item">11</span><span class="level-item">SPICE 电路仿真</span></span></a></li><li><a class="level is-mobile" href="#si-信号完整性"><span class="level-left"><span class="level-item">12</span><span class="level-item">SI 信号完整性</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#传输延迟-transmission-delay"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">传输延迟 Transmission Delay</span></span></a></li><li><a class="level is-mobile" href="#反射-reflection"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">反射 Reflection</span></span></a></li><li><a class="level is-mobile" href="#窜扰-crosstalk"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">窜扰 Crosstalk</span></span></a></li><li><a class="level is-mobile" href="#接地反弹-ground-bounce"><span class="level-left"><span class="level-item">12.4</span><span class="level-item">接地反弹 Ground Bounce</span></span></a></li><li><a class="level is-mobile" href="#信号完整性规则设置"><span class="level-left"><span class="level-item">12.5</span><span class="level-item">信号完整性规则设置</span></span></a></li><li><a class="level is-mobile" href="#信号完整性分析操作"><span class="level-left"><span class="level-item">12.6</span><span class="level-item">信号完整性分析操作</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pcb-后期处理"><span class="level-left"><span class="level-item">13</span><span class="level-item">PCB 后期处理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#导出-pcb-信息"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">导出 PCB 信息</span></span></a></li><li><a class="level is-mobile" href="#drc-检查"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">DRC 检查</span></span></a></li><li><a class="level is-mobile" href="#导出-gerber"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">导出 Gerber</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

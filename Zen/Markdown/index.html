@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>一篇简明扼要的 Markdown 魔法速成教程 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Markdown 是一款轻量级的文本标记语言，由约翰·格鲁伯（John Gruber）于 2004 年开发，主要用于在纯文本文档当中添加格式化元素。具有语法简单，易于读写的特点，同时也可以方便的纳入 Git 进行版本控制。其源文件采用 .md 或者 .markdown 扩展名，可以被 Pandoc 等预处理工具渲染为指定 CSS 样式的 HTML 页面。除了使用 VSCode、Sub"><meta property="og:type" content="blog"><meta property="og:title" content="一篇简明扼要的 Markdown 魔法速成教程"><meta property="og:url" content="http://www.uinio.com/Zen/Markdown/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="Markdown 是一款轻量级的文本标记语言，由约翰·格鲁伯（John Gruber）于 2004 年开发，主要用于在纯文本文档当中添加格式化元素。具有语法简单，易于读写的特点，同时也可以方便的纳入 Git 进行版本控制。其源文件采用 .md 或者 .markdown 扩展名，可以被 Pandoc 等预处理工具渲染为指定 CSS 样式的 HTML 页面。除了使用 VSCode、Sub"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-03-12T16:00:00.000Z"><meta property="article:modified_time" content="2024-07-03T18:28:39.892Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Markdown"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Zen/Markdown/"},"headline":"一篇简明扼要的 Markdown 魔法速成教程","image":["http://www.uinio.com/Zen/Markdown/logo.png"],"datePublished":"2024-03-12T16:00:00.000Z","dateModified":"2024-07-03T18:28:39.892Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"Markdown\r 是一款轻量级的文本标记语言，由约翰·格鲁伯（John\r Gruber）于 2004\r 年开发，主要用于在纯文本文档当中添加格式化元素。具有语法简单，易于读写的特点，同时也可以方便的纳入\r Git 进行版本控制。其源文件采用 .md 或者\r .markdown 扩展名，可以被 Pandoc\r 等预处理工具渲染为指定 CSS 样式的 HTML\r 页面。除了使用 VSCode、Sub"}</script><link rel="canonical" href="http://www.uinio.com/Zen/Markdown/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-12T16:00:00.000Z" title="2024/3/13 00:00:00">2024-03-13</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.892Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Zen/">Zen</a></span><span class="level-item">28 分钟读完 (大约4127个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">一篇简明扼要的 Markdown 魔法速成教程</h1><div class="content"><p><a target="_blank" rel="noopener" href="https://www.markdownguide.org/"><strong>Markdown</strong></a>
+是一款轻量级的文本标记语言，由<strong>约翰·格鲁伯</strong>（John
+Gruber）于 <strong>2004</strong>
+年开发，主要用于在<strong>纯文本文档</strong>当中添加格式化元素。具有语法简单，易于读写的特点，同时也可以方便的纳入
+Git 进行版本控制。其源文件采用 <code>.md</code> 或者
+<code>.markdown</code> 扩展名，可以被 <a target="_blank" rel="noopener" href="https://www.pandoc.org/"><strong>Pandoc</strong></a>
+等预处理工具渲染为指定 <strong>CSS</strong> 样式的 <strong>HTML</strong>
+页面。除了使用 <strong>VSCode</strong>、<strong>Sublime</strong>
+等编辑器进行撰写，还可以采用 <a target="_blank" rel="noopener" href="https://markdown.com.cn/editor/">Markdown 在线编辑器</a>，或者借用
+<a target="_blank" rel="noopener" href="https://www.tablesgenerator.com/markdown_tables">Markdown
+在线表格生成器</a> 辅助生成内容。</p>
+<p><img src="/Zen/Markdown/logo.png"></p>
+<p>笔者日常开发设计工作当中，经常需要使用到 <strong>Markdown</strong>
+来撰写各类技术笔记，以及项目的 <code>README.md</code>
+文档。不同于网络上其它琳琅满目的 <strong>Markdown</strong>
+在线教程，这篇文章会在介绍相关语法特性的同时，侧重于体现
+<strong>Markdown</strong> 语法与 <strong>HTML</strong>
+元素之间的映射关系，从而更加清晰的呈现其底层的转换逻辑，便于大家结合自定义的
+<strong>CSS</strong> 样式与 <strong>HTML</strong>
+标签，创造出更加丰富多彩的 Markdown 文本内容。</p>
+<span id="more"></span>
+<h2 id="全体语法速览表">全体语法速览表</h2>
+<p>下面表格当中的 <strong>Markdown 基本元素</strong>，是作者 John Gruber
+最初设计的元素，几乎所有的 Markdown 预处理工具都支持它们。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 基本元素
+</th>
+<th>
+Markdown 语法
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>标题</strong>（Heading）
+</td>
+<td>
+<code> # 标题层级 1 <br> ## 标题层级 2 <br> ### 标题层级 3 <br> ####
+标题层级 4 <br> ##### 标题层级 5 <br> ###### 标题层级 6 </code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>粗体</strong>（Bold）
+</td>
+<td>
+<code>**粗体文本内容**</code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>斜体</strong>（Italic）
+</td>
+<td>
+<code>*斜体文本内容*</code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>引用块</strong>（Blockquote）
+</td>
+<td>
+<code>&gt; 引用的内容</code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>有序列表</strong>（Ordered List）
+</td>
+<td>
+<code>1. 第 1 条有序列表项；</code><br> <code>2. 第 2
+条有序列表项；</code><br> <code>3. 第 3 条有序列表项；</code><br>
+</td>
+</tr>
+<tr>
+<td>
+<strong>无序列表</strong>（Unordered List）
+</td>
+<td>
+<code> - 这是一条无序列表项；<br> - 这是一条无序列表项；<br> -
+这是一条无序列表项；<br> </code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>代码</strong>（Code）
+</td>
+<td>
+<code>`行内代码`</code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>分隔线</strong>（Horizontal Rule）
+</td>
+<td>
+<code>---</code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>链接</strong>（Link）
+</td>
+<td>
+<code>[链接名称](链接地址 "链接标题")</code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>图片</strong>（Image）
+</td>
+<td>
+<code>![图片替代文本](图片地址 "图片标题")</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>而下面表格当中的 <strong>Markdown 扩展元素</strong>，则是由各种
+Markdown 预处理工具自行扩展而来，使用时需要特别注意其兼容性。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 扩展元素
+</th>
+<th>
+Markdown 语法
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>表格</strong>（Table）
+</td>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|    表头    |    表头    |</span><br><span class="line">| :--------: | :--------: |</span><br><span class="line">| 单元格内容 | 单元格内容 |</span><br><span class="line">| 单元格内容 | 单元格内容 |</span><br></pre></td></tr></table></figure>
+</td>
+</tr>
+<tr>
+<td>
+<strong>代码块</strong>（Fenced Code Block）
+</td>
+<td>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">` ` ` json</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;URL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;UinIO.com&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;电子技术实验室&quot;</span> </span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line">` ` `</span><br></pre></td></tr></table></figure>
+</td>
+</tr>
+<tr>
+<td>
+<strong>☀ 脚注</strong>（Footnote）
+</td>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这里是一个带有脚注的句子。[^1]</span><br><span class="line"> [^1]: 这里是脚注的内容。</span><br></pre></td></tr></table></figure>
+</td>
+</tr>
+<tr>
+<td>
+<strong>☀ 标题自定义 ID</strong>（Heading ID）
+</td>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">### 这是一个标题 &#123;#自定义 ID &#125;</span></span><br></pre></td></tr></table></figure>
+</td>
+</tr>
+<tr>
+<td>
+<strong>☀ 定义列表</strong>（Definition List）
+</td>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">专业术语</span><br><span class="line">: 第 1 条术语定义。</span><br><span class="line">: 第 2 条术语定义。</span><br></pre></td></tr></table></figure>
+</td>
+</tr>
+<tr>
+<td>
+<strong>删除线</strong>（Strikethrough）
+</td>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~这是一段带有删除线的文字。~~</span><br></pre></td></tr></table></figure>
+</td>
+</tr>
+<tr>
+<td>
+<strong>任务列表</strong>（Task List）
+</td>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> [x] 第 1 个任务项。</span><br><span class="line"><span class="bullet">-</span> [ ] 第 2 个任务项。</span><br><span class="line"><span class="bullet">-</span> [ ] 第 3 个任务项。</span><br></pre></td></tr></table></figure>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：上述表格当中使用 <strong>☀</strong> 标注的
+<strong>脚注</strong>、<strong>标题自定义
+ID</strong>、<strong>定义列表</strong>，在大部分 Markdown
+预处理工具当中存在有兼容性问题，使用时需要特别注意。</p>
+</blockquote>
+<h2 id="markdown-标题">Markdown 标题</h2>
+<p><strong>Markdown</strong> 通过在内容的前面使用 <code>#</code>
+号来添加标题，其中 <code>#</code>
+的数量代表了标题的<strong>层级</strong>。例如 3 个 <code>#</code>
+号就表示创建了一个三级标题 <code>&lt;h3&gt;</code>。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 标题层级 1</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>标题层级 1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<span style="font-size:1.75em;font-weight: bold;">标题层级 1</span>
+</td>
+</tr>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 标题层级 2</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>标题层级 2<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<span style="font-size:1.5em;font-weight: bold;">标题层级 2</span>
+</td>
+</tr>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">### 标题层级 3</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>标题层级 3<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<span style="font-size:1.25em;font-weight: bold;">标题层级 3</span>
+</td>
+</tr>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">#### 标题层级 4</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>标题层级 4<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<span style="font-size:1.125em;font-weight: bold;">标题层级 4</span>
+</td>
+</tr>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">##### 标题层级 5</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span>标题层级 5<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<span style="font-size:1em;font-weight: bold;">标题层级 5</span>
+</td>
+</tr>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">###### 标题层级 6</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span>标题层级 6<span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<span style="font-size:1em;font-weight: bold;">标题层级 6</span>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：最佳实践是在 <code>#</code>
+号与标题之间使用【<strong>空格</strong>】进行分隔，从而能够规避一些兼容性方面的问题。</p>
+</blockquote>
+<h2 id="markdown-段落">Markdown 段落</h2>
+<p><strong>Markdown</strong>
+使用<strong>一个或者多个的空行</strong>来实现段落的效果。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这是第 1 个段落。</span><br><span class="line"></span><br><span class="line">这是第 2 个段落。</span><br><span class="line"></span><br><span class="line">这是第 3 个段落。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第 1 个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第 2 个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第 3 个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<p>
+这是第 1 个段落。
+</p>
+<p>
+这是第 2 个段落。
+</p>
+<p>
+这是第 3 个段落。
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="markdown-换行">Markdown 换行</h2>
+<p><strong>Markdown</strong>
+在内容的末尾添加<strong>两个或者多个空格</strong>，然后再按下<strong>回车键</strong>，就可以创建出一个换行效果。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这是第 1 行内容。  </span><br><span class="line">这是第 2 行内容。  </span><br><span class="line">这是第 3 行内容。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">  这是第 1 行内容。<span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  这是第 2 行内容。<span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  这是第 3 行内容。</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<p>
+这是第 1 行内容。<br> 这是第 2 行内容。<br> 这是第 3 行内容。
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：某些 <strong>Markdown</strong>
+编辑器的格式化工具，会自动清除内容末尾的空格，从而导致换行不成功，所以推荐使用<strong>段落</strong>来实现类似换行的效果。</p>
+</blockquote>
+<style> 
+  .section .container .columns .column-main .article .content code {
+    padding: 0 !important;
+  }
+</style>
+<h2 id="markdown-强调">Markdown 强调</h2>
+<p><strong>Markdown</strong>
+通过<strong>粗体</strong>和<strong>斜体</strong>来实现强调的效果。其中在内容的前后，分别添加<strong>两个星号</strong>
+<code>**</code> 或者<strong>两条下划线</strong>
+<code>__</code>，就可以实现<strong>粗体</strong>的效果。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用星号的<span class="strong">**粗体内容**</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用星号的<span class="tag">&lt;<span class="name">strong</span>&gt;</span>粗体内容<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+使用星号的<strong>粗体内容</strong>。
+</td>
+</tr>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用下划线的<span class="strong">__粗体内容__</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用下划线的<span class="tag">&lt;<span class="name">strong</span>&gt;</span>粗体内容<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+使用下划线的<strong>粗体内容</strong>。
+</td>
+</tr>
+</tbody>
+</table>
+<p>除此之外在内容的前后，还可以分别添加<strong>一个星号</strong>
+<code>*</code> 或者<strong>一条下划线</strong>
+<code>_</code>，从而实现出<strong>斜体</strong>的效果。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用星号的<span class="emphasis">*斜体内容*</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用星号的<span class="tag">&lt;<span class="name">em</span>&gt;</span>斜体内容<span class="tag">&lt;/<span class="name">em</span>&gt;</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+使用星号的<em>斜体内容</em>。
+</td>
+</tr>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用下划线的<span class="emphasis">_粗体内容_</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用下划线的<span class="tag">&lt;<span class="name">em</span>&gt;</span>斜体内容<span class="tag">&lt;/<span class="name">em</span>&gt;</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+使用下划线的<em>斜体内容</em>。
+</td>
+</tr>
+</tbody>
+</table>
+<p>如果需要同时运用<strong>粗体</strong>加上<strong>斜体</strong>的效果来强调内容，那么可以在该内容前后分别添加<strong>三个星号</strong>
+<code>***</code> 或者<strong>三条下划线</strong>
+<code>___</code>，并且保留一个空格。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用星号的<span class="strong">**<span class="emphasis">*粗体加斜体*</span>**</span>内容。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用星号的<span class="tag">&lt;<span class="name">em</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>粗体加斜体内容<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">em</span>&gt;</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+使用星号的<em><strong>粗体加斜体内容</strong></em>。
+</td>
+</tr>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用下划线的<span class="strong">__<span class="emphasis">_粗体加斜体_</span>__</span>内容。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用下划线的<span class="tag">&lt;<span class="name">em</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>粗体加斜体内容<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">em</span>&gt;</span>。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+使用下划线的 <em><strong>粗体加斜体内容</strong></em> 。
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：某些 <strong>Markdown</strong>
+编辑器的格式化工具，会自动把 <code>_内容_</code> 转换为
+<code>*内容*</code>、<code>__内容__</code> 转换为
+<code>**内容**</code>、<code>***内容***</code> 转换为
+<code>**_内容_**</code>，所以这里推荐遵循如下规则来使用 Markdown
+的强调语法：</p>
+<ol type="1">
+<li><strong>粗体</strong> 使用 <code>**内容**</code> 语法；</li>
+<li><em>斜体</em> 使用 <code>*内容*</code> 语法；</li>
+<li><strong><em>粗体加斜体</em></strong> 使用 <code>**_内容_**</code>
+语法（注意左右两侧需要保留 1 个空格）；</li>
+</ol>
+</blockquote>
+<h2 id="markdown-引用">Markdown 引用</h2>
+<p><strong>Markdown</strong> 通过在内容段落的前面添加 <code>&gt;</code>
+符号来实现<strong>引用</strong>效果。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; 这里引用了一段内容。</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这里引用了一段内容。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<blockquote>
+<p>
+这里引用了一段内容。
+</p>
+</blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p>通过使用一个内容为空的 <code>&gt;</code>
+引用，就可以实现对引用内容的<strong>换行</strong>效果：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 这里是第 1 段引用内容。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 这里是第 2 段引用内容。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这里是第 1 段引用内容。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这里是第 2 段引用内容。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<blockquote>
+<p>
+这里是第 1 段引用内容。
+</p>
+<p>
+这里是第 2 段引用内容。
+</p>
+</blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p>通过重复使用 <code>&gt; 内容</code>
+还可以实现对于引用内容的<strong>嵌套</strong>显示：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 这是最外层的引用内容。</span><br><span class="line">&gt;&gt; 这是第 1 层嵌套的引用内容。</span><br><span class="line">&gt;&gt;&gt; 这是第 2 层嵌套的引用内容。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是最外层的引用内容。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第 1 层嵌套的引用内容。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是第 2 层嵌套的引用内容。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<blockquote>
+<p>
+这是最外层的引用内容。
+</p>
+<blockquote>
+<p>
+这是第 1 层嵌套的引用内容。
+</p>
+<blockquote>
+<p>
+这是第 2 层嵌套的引用内容。
+</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p>除此之外，还可以在 <strong>Markdown</strong>
+的引用当中嵌套<strong>无序列表</strong>和<strong>有序列表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 这是一条引用内容：</span><br><span class="line">&gt; - 这是一条无序列表项；</span><br><span class="line">&gt; - 这是一条无序列表项；</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一条引用内容：<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是一条无序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是一条无序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<blockquote>
+<p>
+这是一条引用内容：
+</p>
+<ul>
+<li>
+这是一条无序列表项；
+</li>
+<li>
+这是一条无序列表项；
+</li>
+</ul>
+</blockquote>
+</td>
+</tr>
+<pre><code>&lt;tr&gt;
+  &lt;td&gt;
+    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 这是一条引用内容：</span><br><span class="line">&gt; 1. 这是第 1 条有序列表项；</span><br><span class="line">&gt; 2. 这是第 2 条有序列表项；</span><br></pre></td></tr></table></figure>
+  &lt;/td&gt;
+  &lt;td&gt;
+    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一条引用内容：<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是第 1 条有序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是第 2 条有序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br></pre></td></tr></table></figure>
+  &lt;/td&gt;
+  &lt;td&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;这是一条引用内容：&lt;/p&gt;
+      &lt;ol&gt;
+        &lt;li&gt;这是第 1 条有序列表项；&lt;/li&gt;
+        &lt;li&gt;这是第 2 条有序列表项；&lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/blockquote&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+<h2 id="markdown-列表">Markdown 列表</h2>
+<p><strong>Markdown</strong> 可以使用
+<code>- 列表项内容</code>（推荐使用）、<code>* 列表项内容</code>、<code>+ 列表项内容</code>
+语法来渲染<strong>无序列表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 这是一条无序列表项；</span><br><span class="line">- 这是一条无序列表项；</span><br><span class="line">- 这是一条无序列表项；</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是一条无序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是一条无序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是一条无序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<ul>
+<li>
+这是一条无序列表项；
+</li>
+<li>
+这是一条无序列表项；
+</li>
+<li>
+这是一条无序列表项；
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>除此之外，<strong>Markdown</strong> 还可以通过
+<code>序数. 列表内容</code> 语法来渲染<strong>有序列表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 这是第 1 条有序列表项；</span><br><span class="line">2. 这是第 2 条有序列表项；</span><br><span class="line">3. 这是第 3 条有序列表项；</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是第 1 条有序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是第 2 条有序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是第 3 条有序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<ol>
+<li>
+这是第 1 条有序列表项；
+</li>
+<li>
+这是第 2 条有序列表项；
+</li>
+<li>
+这是第 3 条有序列表项；
+</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+<p>如需需要在列表当中插入其它内容（包括<code>图片</code>、<code>代码块</code>、<code>其它列表</code>、<code>换行</code>、<code>引用</code>），则需要将该内容缩进<strong>一个制表符</strong>或者<strong>四个空格</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 这是一条无序列表项；</span><br><span class="line">&gt; 这是一个引用。</span><br><span class="line">- 这是一条无序列表项；</span><br><span class="line">- 这是一条无序列表项；</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是一条无序列表项；</span><br><span class="line">    <span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一个引用。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是一条无序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>这是一条无序列表项；<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<ul>
+<li>
+这是一条无序列表项；
+<blockquote>
+<p>
+这是一个引用。
+</p>
+</blockquote>
+<pre><code>      &lt;/li&gt;
+      &lt;li&gt;这是一条无序列表项；&lt;/li&gt;
+      &lt;li&gt;这是一条无序列表项；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</li></ul></td></tr></tbody>
+</table>
+<h2 id="markdown-代码">Markdown 代码</h2>
+<p><strong>Markdown</strong> 使用一个<strong>反引号</strong> `
+语法来展示<strong>行内</strong>的代码片断：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`这是一条行内代码片断`</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">code</span>&gt;</span>这是一条行内代码片断<span class="tag">&lt;/<span class="name">code</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<code>这是一条行内代码片断</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>如果需要在一个行内的代码片断当中，展示反引号内容，则可以将其包裹在两个<strong>反引号</strong>
+`` 当中进行转义。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`` 一行内容 `代码片段` 一行内容 ``</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">code</span>&gt;</span>一行内容 `代码片段` 一行内容<span class="tag">&lt;/<span class="name">code</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<code>一行内容 <code>代码片段</code> 一行内容</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>除此之外，<strong>Markdown</strong>
+支持通过三个<strong>反引号</strong>
+```（推荐使用）或者<strong>波浪号</strong> ~~~
+来展示<strong>块级</strong>的代码片段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">` ` `</span><br><span class="line">int main(void) &#123;</span><br><span class="line">  printf(&quot;Hello UinIO.com!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">` ` `</span><br></pre></td></tr></table></figure>
+<p>如果在第一个 ``` 或 ~~~
+后面，添加当前代码片断所使用的编程语言名称（例如下面例子使用的 <strong>C
+语言</strong>），则可以启用相应的语法高亮：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">` ` ` C</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Hello UinIO.com!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">` ` `</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：上面代码为了避免错误渲染，在 ` 与 `
+之间添加了额外的<strong>空格</strong>，实际使用时需要去除掉这些空格。</p>
+</blockquote>
+<h2 id="markdown-分隔线">Markdown 分隔线</h2>
+<p><strong>Markdown</strong>
+通过在单独的一行上面，使用三个或者多个<strong>星号</strong>
+<code>***</code>、<strong>破折号</strong>
+<code>---</code>、<strong>下划线</strong>
+<code>___</code>（推荐使用）就可以渲染出分隔线：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">---</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<hr style="background:black;">
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="markdown-链接">Markdown 链接</h2>
+<p><strong>Markdown</strong> 当中可以使用
+<code>[链接名称](链接地址 "链接标题")</code>
+格式的语法添加一个超级链接：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">链接名称</span>](<span class="link">链接地址 &quot;链接标题&quot;</span>)</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;链接地址&quot;</span> <span class="attr">title</span>=<span class="string">&quot;链接标题&quot;</span>&gt;</span>链接名称<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<a href="链接地址" title="链接标题">链接名称</a>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<code>链接标题</code>
+是鼠标在链接上悬停时显示的信息，<code>链接名称</code>
+是链接实际渲染时显示的内容，<code>链接地址</code> 则是需要跳转到的目标
+URL 地址。</p>
+</blockquote>
+<p>使用<strong>尖括号</strong> <code>&lt;&gt;</code> 语法，可以方便的将
+<strong>URL 地址</strong>或者 <strong>E-Mail
+地址</strong>转换为链接。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml">&lt;http://www.uinio.com&gt;</span></span><br><span class="line"><span class="language-xml">&lt;uinika@outlook.com&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.uinio.com/&quot;</span>&gt;</span>http://www.uinio.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;mailto:uinika@outlook.com&quot;</span>&gt;</span>uinika@outlook.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<a href="http://www.uinio.com/">http://www.uinio.com</a>
+<a href="mailto:uinika@outlook.com">uinika@outlook.com</a>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="markdown-图片">Markdown 图片</h2>
+<p><strong>Markdown</strong> 里可以通过
+<code>![图片替代文本](图片地址 "图片标题")</code>
+格式语法插入一张图片：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">Logo</span>](<span class="link">./Markdown/logo.png &quot;Markdown&quot;</span>)</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./Markdown/logo.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Logo&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Markdown&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<img src="/Zen/Markdown/logo.png" alt="Logo" title="Markdown">
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<code>图片替代文本</code>
+是图片资源缺失时显示的信息，<code>图片地址</code> 是图片的 URL
+地址，<code>图片标题</code> 则是鼠标悬停时显示的信息。</p>
+</blockquote>
+<p>如果需要为图片添加一个 URL
+链接，则只需要将上述的<strong>图片语法</strong>嵌入至<strong>链接语法</strong>内部即可：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">![Logo</span>](<span class="link">./Markdown/logo.png &quot;Markdown&quot;</span>)](<span class="link">http://www.uinio.com</span>)</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.uinio.com/&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./Markdown/logo.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Logo&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Markdown&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<a href="http://www.uinio.com/"><img src="/Zen/Markdown/logo.png" alt="Logo" title="Markdown"></a>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="markdown-表格">Markdown 表格</h2>
+<p><strong>Markdown</strong> 当中可以通过使用<strong>连字符</strong>
+<code>---</code> 和<strong>管道符</strong> <code>|</code>
+来构建表格。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 表头   | 表头   |</span><br><span class="line">| ------ | ------ |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>表头<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>表头<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<table>
+<thead>
+<tr style="border-bottom: 1px solid gray;">
+<th>
+表头
+</th>
+<th>
+表头
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid gray;">
+<td>
+单元格
+</td>
+<td>
+单元格
+</td>
+</tr>
+<tr style="border-bottom: 1px solid gray;">
+<td>
+单元格
+</td>
+<td>
+单元格
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>通过向 <strong>Markdown</strong>
+表格当中<strong>连字符</strong>的左右两侧添加 <code>:</code>
+<strong>冒号</strong>，就可以控制表格当中文本的<strong>左</strong>、<strong>中心</strong>、<strong>右</strong>对齐（实质是向表格的
+<code>&lt;th&gt;</code>、<code>&lt;td&gt;</code> 标签添加了
+<code>align="left/center/right"</code> 属性）。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|  表头  |  表头  |</span><br><span class="line">| :----: | :----: |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span>表头<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span>表头<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span>单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span>单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span>单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span>单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<table>
+<thead>
+<tr style="border-bottom: 1px solid gray;">
+<th align="center">
+表头
+</th>
+<th align="center">
+表头
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid gray;">
+<td align="center">
+单元格
+</td>
+<td align="center">
+单元格
+</td>
+</tr>
+<tr style="border-bottom: 1px solid gray;">
+<td align="center">
+单元格
+</td>
+<td align="center">
+单元格
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：如果需要在表格当中显示管道符
+<code>|</code>，为了避免语法冲突，则需要改为直接使用 HTML 实体
+<code>&amp;#124;</code>。</p>
+</blockquote>
+<h2 id="markdown-转义字符">Markdown 转义字符</h2>
+<p><strong>Markdown</strong> 当中可以使用<strong>反斜杠</strong>
+<code>\</code> 来转义下面列表当中的这些字符。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">\</th>
+<th style="text-align: center;">`</th>
+<th style="text-align: center;">*</th>
+<th style="text-align: center;">_</th>
+<th style="text-align: center;">#</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>{ }</strong></td>
+<td style="text-align: center;"><strong>[ ]</strong></td>
+<td style="text-align: center;"><strong>( )</strong></td>
+<td style="text-align: center;"><strong>+</strong></td>
+<td style="text-align: center;"><strong>-</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>.</strong></td>
+<td style="text-align: center;"><strong>!</strong></td>
+<td style="text-align: center;"><strong>|</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：对于 <strong>Markdown</strong> 当中出现的
+<code>&lt;</code> 和 <code>&amp;</code> 两个特殊符号，就需要使用其对应的
+HTML 实体形式 <code>&amp;lt;</code> 和 <code>&amp;amp;</code>
+才能够正常显示。</p>
+</blockquote>
+<h2 id="markdown-任务列表">Markdown 任务列表</h2>
+<p><strong>Markdown</strong> 可以基于<strong>减号</strong>
+<code>-</code>、<strong>方括号</strong>
+<code>[ ]</code>、<strong>字母</strong> <code>x</code>
+创建出一个可进行勾选的<strong>任务列表</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> [x] 今天的第 1 个任务项。</span><br><span class="line"><span class="bullet">-</span> [ ] 今天的第 2 个任务项。</span><br><span class="line"><span class="bullet">-</span> [ ] 今天的第 3 个任务项。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">disabled</span>=<span class="string">&quot;&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">checked</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    今天的第 1 个任务项</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">disabled</span>=<span class="string">&quot;&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br><span class="line">    今天的第 2 个任务项。</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">disabled</span>=<span class="string">&quot;&quot;</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br><span class="line">    今天的第 3 个任务项。</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<ul>
+<li>
+<input disabled type="checkbox" checked> 今天的第 1 个任务项
+</li>
+<li>
+<input disabled type="checkbox"> 今天的第 2 个任务项。
+</li>
+<li>
+<input disabled type="checkbox"> 今天的第 3 个任务项。
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="markdown-删除线">Markdown 删除线</h2>
+<p><strong>Markdown</strong>
+可以通过向指定内容的左右两侧，分别添加两个<strong>波浪号</strong>
+<code>~~</code>，从而在这些内容上面显示一条<strong>删除线</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>
+Markdown 语法
+</th>
+<th>
+HTML 语句
+</th>
+<th>
+效果预览
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~这是需要删除的内容~~，而这是正常显示的内容。</span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">del</span>&gt;</span>这是需要删除的内容<span class="tag">&lt;/<span class="name">del</span>&gt;</span>，而这是正常显示的内容。</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</td>
+<td>
+<p>
+<del>
+这是需要删除的内容
+</del>
+，而这是正常显示的内容。
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div><div class="article-licensing box"><div class="licensing-title"><p>一篇简明扼要的 Markdown 魔法速成教程</p><p><a href="http://www.uinio.com/Zen/Markdown/">http://www.uinio.com/Zen/Markdown/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-03-13</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Markdown/">Markdown</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Project/UINIO-MCU-GD32/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Web/Solidity/"><span class="level-item">基于 Solidity、Hardhat、OpenZeppelin 迈向 Web3.0</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#全体语法速览表"><span class="level-left"><span class="level-item">1</span><span class="level-item">全体语法速览表</span></span></a></li><li><a class="level is-mobile" href="#markdown-标题"><span class="level-left"><span class="level-item">2</span><span class="level-item">Markdown 标题</span></span></a></li><li><a class="level is-mobile" href="#markdown-段落"><span class="level-left"><span class="level-item">3</span><span class="level-item">Markdown 段落</span></span></a></li><li><a class="level is-mobile" href="#markdown-换行"><span class="level-left"><span class="level-item">4</span><span class="level-item">Markdown 换行</span></span></a></li><li><a class="level is-mobile" href="#markdown-强调"><span class="level-left"><span class="level-item">5</span><span class="level-item">Markdown 强调</span></span></a></li><li><a class="level is-mobile" href="#markdown-引用"><span class="level-left"><span class="level-item">6</span><span class="level-item">Markdown 引用</span></span></a></li><li><a class="level is-mobile" href="#markdown-列表"><span class="level-left"><span class="level-item">7</span><span class="level-item">Markdown 列表</span></span></a></li><li><a class="level is-mobile" href="#markdown-代码"><span class="level-left"><span class="level-item">8</span><span class="level-item">Markdown 代码</span></span></a></li><li><a class="level is-mobile" href="#markdown-分隔线"><span class="level-left"><span class="level-item">9</span><span class="level-item">Markdown 分隔线</span></span></a></li><li><a class="level is-mobile" href="#markdown-链接"><span class="level-left"><span class="level-item">10</span><span class="level-item">Markdown 链接</span></span></a></li><li><a class="level is-mobile" href="#markdown-图片"><span class="level-left"><span class="level-item">11</span><span class="level-item">Markdown 图片</span></span></a></li><li><a class="level is-mobile" href="#markdown-表格"><span class="level-left"><span class="level-item">12</span><span class="level-item">Markdown 表格</span></span></a></li><li><a class="level is-mobile" href="#markdown-转义字符"><span class="level-left"><span class="level-item">13</span><span class="level-item">Markdown 转义字符</span></span></a></li><li><a class="level is-mobile" href="#markdown-任务列表"><span class="level-left"><span class="level-item">14</span><span class="level-item">Markdown 任务列表</span></span></a></li><li><a class="level is-mobile" href="#markdown-删除线"><span class="level-left"><span class="level-item">15</span><span class="level-item">Markdown 删除线</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

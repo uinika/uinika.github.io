@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>NodeJS 快速上手指南 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="NodeJS 开源项目于 2009 年由 Google Brain 团队的软件工程师 Ryan Dahl 发起创建，后被美国云计算企业 Joyent 招入麾下，2015 年后正式被 NodeJS 基金会 接管，三星公司于 2016 年完成了对 Joyent 的收购。经过将近 10 年的发展，NodeJS 已经成为现代化前端开发过程中不可或缺的基础架构，即可以作为页面渲染的分布式服务器，"><meta property="og:type" content="blog"><meta property="og:title" content="NodeJS 快速上手指南"><meta property="og:url" content="http://www.uinio.com/Web/Nodejs/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="NodeJS 开源项目于 2009 年由 Google Brain 团队的软件工程师 Ryan Dahl 发起创建，后被美国云计算企业 Joyent 招入麾下，2015 年后正式被 NodeJS 基金会 接管，三星公司于 2016 年完成了对 Joyent 的收购。经过将近 10 年的发展，NodeJS 已经成为现代化前端开发过程中不可或缺的基础架构，即可以作为页面渲染的分布式服务器，"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2014-06-20T16:00:00.000Z"><meta property="article:modified_time" content="2014-09-16T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Server"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Web/Nodejs/"},"headline":"NodeJS 快速上手指南","image":["http://www.uinio.com/Web/Nodejs/logo.png"],"datePublished":"2014-06-20T16:00:00.000Z","dateModified":"2014-09-16T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"NodeJS 开源项目于 2009 年由 Google\r Brain 团队的软件工程师 Ryan Dahl 发起创建，后被美国云计算企业\r Joyent 招入麾下，2015 年后正式被\r NodeJS 基金会\r 接管，三星公司于 2016 年完成了对 Joyent 的收购。经过将近 10\r 年的发展，NodeJS\r 已经成为现代化前端开发过程中不可或缺的基础架构，即可以作为页面渲染的分布式服务器，"}</script><link rel="canonical" href="http://www.uinio.com/Web/Nodejs/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2014-06-20T16:00:00.000Z" title="2014/6/21 00:00:00">2014-06-21</time>发表</span><span class="level-item"><time dateTime="2014-09-16T16:00:00.000Z" title="2014/9/17 00:00:00">2014-09-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Web/">Web</a></span><span class="level-item">2 小时读完 (大约14855个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">NodeJS 快速上手指南</h1><div class="content"><p><strong>NodeJS</strong> 开源项目于 2009 年由 <strong>Google
+Brain</strong> 团队的软件工程师 Ryan Dahl 发起创建，后被美国云计算企业
+<a target="_blank" rel="noopener" href="https://www.joyent.com/">Joyent</a> 招入麾下，2015 年后正式被
+<a target="_blank" rel="noopener" href="https://foundation.nodejs.org/">NodeJS 基金会</a>
+接管，三星公司于 2016 年完成了对 Joyent 的收购。经过将近 10
+年的发展，NodeJS
+已经成为现代化前端开发过程中不可或缺的基础架构，即可以作为页面渲染的分布式服务器，也可以作为前端自动化的宿主环境。</p>
+<p><img src="/Web/Nodejs/logo.png"></p>
+<p>本文基于笔者在 2015 年所写的一篇读书笔记整理，彼时 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">node.js</a>
+的版本号还停留在<code>v0.12.x</code>，社区也还未完成与 <a target="_blank" rel="noopener" href="https://iojs.org/en/">io.js</a> 的最终合并，文中出现的部分 API
+时至今日已经被废弃或者迁移。但是这些 API 层面的变化都可以对照 <a target="_blank" rel="noopener" href="https://nodejs.org/dist/latest-v8.x/docs/api/">《官方文档》</a>找到相应说明以及替代
+API，总体上并不会影响通过本文快速了解 NodeJS 的全套技术栈特性。</p>
+<span id="more"></span>
+<h2 id="简单介绍">简单介绍</h2>
+<p>NodeJS 是让 JavaScript
+运行在浏览器之外的平台，它实现了诸如文件系统、模块、包、操作系统
+API、网络通信等原生 JavaScript 没有或不完善的功能。并且内建了对 HTTP
+服务器的支持，充分考虑实时响应、超大规模数据要求下架构的可扩展性。NodeJS
+摒弃依靠多线程实现高并发的设计思路，采用了<strong>单线程</strong>、<strong>异步式
+I/O</strong>、<strong>事件驱动式</strong>程序设计模型，从而带来了可观的性能提升。</p>
+<h3 id="commonjs-规范">CommonJS 规范</h3>
+<p>CommonJS 规范试图拟定一套完整的 JavaScript
+规范，以弥补普通应用程序所需
+API，包括<code>模块(modules)</code>、<code>包(packages)</code>、<code>系统(system)</code>、<code>二进制(binary)</code>、<code>控制台(console)</code>、<code>编码(encodings)</code>、<code>文件系统(filesystems)</code>、<code>套接字(sockets)</code>、<code>单元测试(unit testing)</code>等部分。</p>
+<blockquote>
+<p>NodeJS 和 MongoDB 都是 CommonJS
+的实现，由于这几种技术都处于快速变化期，所以它们并不完全遵循 CommonJS
+规范。</p>
+</blockquote>
+<h3 id="nodejs-的特点">NodeJS 的特点</h3>
+<h4 id="异步式-io">异步式 I/O</h4>
+<p>NodeJS 使用的是单线程模型，对于所有 I/O
+都采用异步式的请求方式，避免了频繁的上下文切换。</p>
+<p>多线程在处理耗时较长的 SQL
+语句时，线程会阻塞等待结果返回。高并发访问的情况下，一方面线程长期阻塞等待，另一方面为应付新请求需要不断增加线程，线程的增加会占用
+CPU 时间处理内存上下文切换，因此会浪费大量 CPU 资源。</p>
+<p>这种场景下，NodeJS
+不会等待结果返回，而是直接继续执行后续语句，直到进入事件循环。当数据库查询结果返回时，会将事件发送到事件队列，等到线程进入事件循环以后，才会调用之前的回调函数继续执行后续逻辑。</p>
+<h4 id="事件驱动">事件驱动</h4>
+<p>NodeJS
+在执行的过程中会维护一个事件队列，程序在执行时进入事件循环等待下一个事件到来，每个异步式
+I/O 请求完成后会被推送到事件队列，等待程序进程进行处理。</p>
+<p>NodeJS 的异步机制是基于事件的，所有磁盘
+I/O、网络通信、数据库查询都以非阻塞的方式进行，返回的结果由事件循环来处理。</p>
+<p>NodeJS
+进程在同一时刻只会处理一个事件，完成后立即进入事件循环检查并处理后面的事件，让
+CPU 和内存在同一时间集中处理一件事，同时尽可能让耗时的 I/O
+操作并行执行。</p>
+<h3 id="nodejs-与-phpnginx-性能对比">NodeJS 与 PHP+Nginx 性能对比</h3>
+<p>在 3000 并发连接 30
+秒的测试下，输出<code>hello world</code>请求：</p>
+<ul>
+<li>PHP
+每秒响应请求数为<code>3624</code>，平均每个请求响应时间为<code>0.39</code>秒；</li>
+<li>NodeJS
+每秒响应请求数为<code>7677</code>，平均每个请求响应时间为<code>0.13</code>秒。</li>
+</ul>
+<p>同样的测试对 MySQL 的查询操作：</p>
+<ul>
+<li>PHP
+每秒响应请求数为<code>1293</code>，平均每个请求响应时间为<code>0.82</code>秒；</li>
+<li>NodeJS
+每秒响应请求数为<code>2999</code>，平均每个请求响应时间为<code>0.33</code>秒。</li>
+</ul>
+<h3 id="nodejs-架构简介">NodeJS 架构简介</h3>
+<p>NodeJS 除了使用 V8 作为 JavaScript 引擎以外，还使用高效的<a target="_blank" rel="noopener" href="http://software.schmorp.de/pkg/libev.html">libev</a>和<a target="_blank" rel="noopener" href="http://software.schmorp.de/pkg/libev.html">libeio</a>库支持事件驱动和异步式
+I/O（<em>Windows 下使用了
+IOCP</em>），并在此基础上抽象出<strong>libuv</strong>层。</p>
+<figure>
+<img src="/Web/Nodejs/architecture.png" alt="NodeJS架构">
+<figcaption aria-hidden="true">NodeJS架构</figcaption>
+</figure>
+<h2 id="快速开始">快速开始</h2>
+<p>新建 1 个 test.js
+文件，编写代码<code>console.log('Hello NodeJS!');</code>，然后保存文件。打开命令行执行<code>node test.js</code>语句，得到结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  node test.js</span><br><span class="line">Hello NodeJS!</span><br></pre></td></tr></table></figure>
+<h3 id="查看帮助">查看帮助</h3>
+<p>通过在控制台输入<code>node --help</code>命令获得关于 node
+命令行的帮助信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">➜  blog git:(master) ✗ node --<span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">Usage: node [options] [ -e script | script.js | - ] [arguments]</span><br><span class="line">       node inspect script.js [arguments]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -v, --version              <span class="built_in">print</span> Node.js version</span><br><span class="line">  -e, --<span class="built_in">eval</span> script          evaluate script</span><br><span class="line">  -p, --<span class="built_in">print</span>                evaluate script and <span class="built_in">print</span> result</span><br><span class="line">  -c, --check                syntax check script without executing</span><br><span class="line">  -i, --interactive          always enter the REPL even <span class="keyword">if</span> stdin</span><br><span class="line">                             does not appear to be a terminal</span><br><span class="line">  -r, --require              module to preload (option can be repeated)</span><br><span class="line">  -                          script <span class="built_in">read</span> from stdin (default; interactive mode <span class="keyword">if</span> a <span class="built_in">tty</span>)</span><br><span class="line">  ...                        ...</span><br></pre></td></tr></table></figure>
+<h3 id="repl-模式">REPL 模式</h3>
+<p><strong>输入-求值-输出循环</strong>（<em>Read-eval-print
+loop</em>）可直接输入并运行 JavaScript
+代码，在控制台执行<code>node</code>即可进入该模式，连续按 2
+次<strong>Ctrl+C</strong>可退出该模式。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  blog git:(master) ✗ node</span><br><span class="line">&gt; console.log(<span class="string">&quot;Hello node v8.9.4!&quot;</span>);</span><br><span class="line">Hello node v8.9.4!</span><br><span class="line">&gt;</span><br><span class="line">(To <span class="built_in">exit</span>, press ^C again or <span class="built_in">type</span> .<span class="built_in">exit</span>)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果运行的是 JavaScript
+函数，会在命令行最后显示该函数返回值，上面例子中<code>undefined</code>是<code>console.log()</code>方法的返回值。</p>
+</blockquote>
+<h3 id="建立-http-服务器">建立 HTTP 服务器</h3>
+<p>新建 app.js 文件，然后编写如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line">http</span><br><span class="line">  .<span class="title function_">createServer</span>(<span class="keyword">function</span>(<span class="params">req, res</span>) &#123;</span><br><span class="line">    res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;</span><br><span class="line">      <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/plain&quot;</span></span><br><span class="line">    &#125;);</span><br><span class="line">    res.<span class="title function_">end</span>(<span class="string">&quot;Hello World\n&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">listen</span>(<span class="number">5000</span>, <span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;HTTP服务运行于http://127.0.0.1:5000/&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>运行<code>node app.js</code>命令，提示信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  /workspace node app.js</span><br><span class="line">HTTP服务运行于http://127.0.0.1:5000/</span><br></pre></td></tr></table></figure>
+<p>打开浏览器访问<code>http://127.0.0.1:5000</code>。</p>
+<figure>
+<img src="/Web/Nodejs/hello-world.png" alt="hello-world">
+<figcaption aria-hidden="true">hello-world</figcaption>
+</figure>
+<blockquote>
+<p>服务启动后，NodeJS
+会一直监听<code>5000</code>端口，按下<strong>Ctrl+C</strong>可以结束
+HTTP 监听服务。</p>
+</blockquote>
+<h3 id="使用-supervisor-或-nodemon">使用 supervisor 或 nodemon</h3>
+<p>NodeJS 只在第 1
+次执行时解析脚本，以后都会直接访问内存，从而避免重复载入。为方便开发和调试，可以通过安装<a target="_blank" rel="noopener" href="https://github.com/petruisfan/node-supervisor">supervisor</a>或者<a target="_blank" rel="noopener" href="https://github.com/remy/nodemon">nodemon</a>来实时载入代码。</p>
+<ol type="1">
+<li>首先，执行命令<code>npm install -g supervisor nodemon</code>安装
+Supervisor 或者 Nodemon 模块到当前目录。</li>
+<li>然后，使用命令<code>supervisor app.js</code>或<code>nodemon app.js</code>启动服务。</li>
+<li>最后，<code>app.js</code>中代码被改动时，运行的脚本会被终止，然后重新启动。</li>
+</ol>
+<blockquote>
+<p>生产环境下推荐使用商业化支持更加良好的<a target="_blank" rel="noopener" href="http://pm2.keymetrics.io/">pm2</a>进程管理工具。</p>
+</blockquote>
+<h2 id="异步式-io-与事件编程">异步式 I/O 与事件编程</h2>
+<p>NodeJS 最大特点是异步式 I/O（<em>或者非阻塞
+I/O</em>）与事件紧密结合的编程模式，该模式与传统同步式 I/O
+的线性编程思路有很大不同，因为控制流需要靠事件和回调函数来组织，一个逻辑要拆分为若干个单元。</p>
+<ul>
+<li><strong>同步式 IO</strong>（<em>阻塞式
+IO</em>）：线程在执行中如果遇到磁盘读写、网络通信、长事务查询等 I/O
+操作，通常需要耗费较长时间，这时操作系统会剥夺该线程 CPU
+控制权，将资源让给其它工作线程。当 I/O
+操作完毕时，操作系统解除该线程阻塞状态，恢复 CPU
+控制权，使其继续执行。</li>
+</ul>
+<figure>
+<img src="/Web/Nodejs/io-synchronization.png" alt="多线程同步式IO">
+<figcaption aria-hidden="true">多线程同步式IO</figcaption>
+</figure>
+<ul>
+<li><strong>异步式 IO</strong>（<em>非阻塞式 IO</em>）：当线程遇到 I/O
+操作时，不会以阻塞方式等待 I/O 操作完成，而只是将 I/O
+请求发送给操作系统，然后继续执行下一条语句。当操作系统完成 I/O
+操作时，以事件形式通知执行 I/O
+操作的线程，线程会在特定时间处理该事件。处理异步 I/O
+的时候，线程必须有事件循环，不断检查有无未处理的事件，然后依次进行处理。</li>
+</ul>
+<figure>
+<img src="/Web/Nodejs/io-asynchronization.png" alt="单线程异步式IO">
+<figcaption aria-hidden="true">单线程异步式IO</figcaption>
+</figure>
+<h3 id="多线程同步式-io-与单线程异步式-io-的比较">多线程同步式 IO
+与单线程异步式 IO 的比较</h3>
+<ol type="1">
+<li>阻塞模式下，1 个线程只能处理 1
+项任务，提高吞吐量必须依靠多线程。非阻塞模式下，1
+个线程永远在执行操作，该线程 CPU 占用率保持 100%，I/O
+完成时以事件方式进行通知。</li>
+<li>阻塞模式下，多线程能够提高系统吞吐量，因为 1
+个线程阻塞时还有其它线程在工作，多线程可以使 CPU
+资源不被阻塞中的线程浪费。非阻塞模式下，线程不会被 I/O 阻塞，永远在利用
+CPU。</li>
+</ol>
+<h3 id="异步式-io-的优缺点">异步式 I/O 的优缺点</h3>
+<p>异步式 I/O
+优点在于免去了多线程的开销。对操作系统来说，创建线程的代价十分昂贵（<em>需要给分配内存、列入调度，线程切换时需要执行内存换页、清空
+CPU 缓存，切换回来的时候再重新从内存中读取数据</em>）。</p>
+<blockquote>
+<p>异步式编程缺点在于不符合一般的程序设计思维，容易让控制流变得晦涩难懂，给编码调试都带来一定困难。</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">同步式 I/O（阻塞式）</th>
+<th style="text-align: left;">异步式 I/O（非阻塞式）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">利用多线程提供吞吐量</td>
+<td style="text-align: left;">单线程即可实现高吞吐量</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">通过事件片分割和线程调度利用多核 CPU</td>
+<td style="text-align: left;">通过功能划分利用多核 CPU</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">需要由操作系统调度多线程使用多核 CPU</td>
+<td style="text-align: left;">可以将单进程绑定到单核 CPU</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">难以充分利用 CPU 资源</td>
+<td style="text-align: left;">可以充分利用 CPU 资源</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">内存轨迹大，数据局部性弱</td>
+<td style="text-align: left;">内存轨迹小，数据局部性强</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">符合线性的编程思维</td>
+<td style="text-align: left;">不符合传统编程思维</td>
+</tr>
+</tbody>
+</table>
+<h3 id="异步与同步-api">异步与同步 API</h3>
+<p><strong>NodeJS
+异步读取文件的例子</strong>：<code>readFile()</code>函数调用时只是将异步式
+I/O
+请求发送给操作系统，然后立即返回并执行后面的语句，执行完后进入事件循环监听事件。当
+fs 接收到 I/O
+请求完成的事件，事件循环会主动调用回调函数以完成后续工作。因此会先看到<code>结束！</code>再看到文件内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="comment">// readFile接收3个参数，第1是文件名，第2是编码方式，第3是回调函数</span></span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;utf-8&quot;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;结束！&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">结束！</span><br><span class="line">文件内容...</span><br></pre></td></tr></table></figure>
+<p><strong>NodeJS
+同步读取文件的例子</strong>：<code>readFileSync()</code>函数以文件名作为参数，阻塞等待读取完成后，将文件内容作为返回值赋给变量<code>data</code>，接下来控制台输出<code>data</code>的内容，最后输出<code>结束！</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> data = fs.<span class="title function_">readFileSync</span>(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;结束！&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">文件内容...</span><br><span class="line">结束！</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NodeJS 并不是所有 API 都提供同步和异步版本，NodeJS 不鼓励使用同步
+I/O。</p>
+</blockquote>
+<h3 id="异步事件">异步事件</h3>
+<p>NodeJS 异步 I/O
+操作完成时会发送一个事件到事件队列，该事件由<code>EventEmitter</code>对象提供。前面例子中<code>readFile()</code>和<code>createServer()</code>的回调函数都是通过<code>EventEmitter</code>实现，下面例子简要说明了<code>EventEmitter</code>的用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">EventEmitter</span> = <span class="built_in">require</span>(<span class="string">&quot;events&quot;</span>).<span class="property">EventEmitter</span>;</span><br><span class="line"><span class="keyword">var</span> event = <span class="keyword">new</span> <span class="title class_">EventEmitter</span>();</span><br><span class="line"><span class="comment">// event 对象注册了事件some_event的监听器</span></span><br><span class="line">event.<span class="title function_">on</span>(<span class="string">&quot;some_event&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;some_event occured!&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//1000毫秒后setTimeout向event对象发送事件some_event调用监听器</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  event.<span class="title function_">emit</span>(<span class="string">&quot;some_event&quot;</span>);</span><br><span class="line">&#125;, <span class="number">5000</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">some_event occured!</span><br></pre></td></tr></table></figure>
+<h3 id="nodejs-事件循环机制">NodeJS 事件循环机制</h3>
+<p>NodeJS 程序从事件循环开始到结束，所有逻辑都是事件回调函数。NodeJS
+从第 1 个事件的回调函数开始进入事件循环，始终处于事件循环中。</p>
+<p>事件回调函数在执行的过程中，可能会发出 I/O
+请求或直接发射(<em>emit</em>)事件，执行完毕后再返回事件循环，事件循环会检查事件队列中有没有未处理的事件，直到程序结束。</p>
+<p>NodeJS
+事件循环对开发者不可见，由<strong>libev</strong>库实现并支持多种类型事件(<code>ev_io、ev_timer</code>、<code>ev_signal、ev_idle</code>等)。NodeJS
+中这些事件均被<code>EventEmitter</code>封装，<strong>libev
+事件循环</strong>的每次迭代在 NodeJS
+中就是一次<em>Tick</em>，<strong>libev</strong>不断检查是否有活动的、可供检测的事件监听器，当检测不到时将退出事件循环并结束进程。</p>
+<h2 id="module-模块">Module 模块</h2>
+<p>模块是 NodeJS 应用程序的基本组成部分，文件与模块一一对应，一个 NodeJS
+文件就是一个模块，该文件可以是 JavaScript 代码、JSON、编译过的
+C/C++扩展。NodeJS
+提供<code>exports</code>对象来公开模块，以及<code>require</code>对象获取模块。</p>
+<h3 id="创建模块">创建模块</h3>
+<p>创建 1 个<code>module.js</code>文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="keyword">var</span> name;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">setName</span> = <span class="keyword">function</span>(<span class="params">targetName</span>) &#123;</span><br><span class="line">  name = targetName;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello &quot;</span> + name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>相同目录下再创建<code>getmodule.js</code>文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// getmodule.js</span></span><br><span class="line"><span class="keyword">var</span> myModule = <span class="built_in">require</span>(<span class="string">&quot;./module&quot;</span>);</span><br><span class="line"></span><br><span class="line">myModule.<span class="title function_">setName</span>(<span class="string">&quot;Hank&quot;</span>);</span><br><span class="line">myModule.<span class="title function_">sayHello</span>();</span><br></pre></td></tr></table></figure>
+<p>命令行执行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  node getmodule.js</span><br><span class="line">Hello Hank</span><br></pre></td></tr></table></figure>
+<h3 id="单次加载">单次加载</h3>
+<p><code>require</code>不会重复加载模块，无论调用多少次<code>require</code>，获得的模块都是同一个。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// loadmodule.js</span></span><br><span class="line"><span class="keyword">var</span> helloHank = <span class="built_in">require</span>(<span class="string">&quot;./module&quot;</span>);</span><br><span class="line">helloHank.<span class="title function_">setName</span>(<span class="string">&quot;Hank&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> helloUinika = <span class="built_in">require</span>(<span class="string">&quot;./module&quot;</span>);</span><br><span class="line">helloUinika.<span class="title function_">setName</span>(<span class="string">&quot;Uinika&quot;</span>);</span><br><span class="line"></span><br><span class="line">helloUinika.<span class="title function_">sayHello</span>();</span><br></pre></td></tr></table></figure>
+<p>输出结果为"Hello
+Uinika"，因为变量<code>helloHank</code>和<code>helloUinika</code>指向同一个实例，所以<code>helloHank.setName()</code>的结果被<code>helloUinika.setName()</code>覆盖，最终输出结果由后者决定。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  node loadmodule.js</span><br><span class="line">Hello Uinika</span><br></pre></td></tr></table></figure>
+<h3 id="覆盖-exports">覆盖 exports</h3>
+<p>接下来将 1 个对象封装到模块中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//singleobject.js</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Hello</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> name;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">setName</span> = <span class="keyword">function</span>(<span class="params">targetName</span>) &#123;</span><br><span class="line">    name = targetName;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello &quot;</span> + name);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">Hello</span> = <span class="title class_">Hello</span>;</span><br></pre></td></tr></table></figure>
+<p>如果直接通过<code>require('./single object').Hello</code>获取<code>Hello</code>对象会显得冗余，可使用如下方法进行简化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//hello.js</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Hello</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> name;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">setName</span> = <span class="keyword">function</span>(<span class="params">targetName</span>) &#123;</span><br><span class="line">    name = targetName;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello &quot;</span> + name);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">Hello</span>;</span><br></pre></td></tr></table></figure>
+<p>模块接口唯一变化是使用<code>module.exports = Hello</code>代替了<code>exports.Hello= Hello</code>，外部引用该模块时，接口对象就是输出的<code>Hello</code>对象本身，而非之前的<code>exports</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gethello.js</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Hello</span> = <span class="built_in">require</span>(<span class="string">&quot;./hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">hello = <span class="keyword">new</span> <span class="title class_">Hello</span>();</span><br><span class="line">hello.<span class="title function_">setName</span>(<span class="string">&quot;Hank&quot;</span>);</span><br><span class="line">hello.<span class="title function_">sayHello</span>();</span><br></pre></td></tr></table></figure>
+<p>exports
+是一个普通的空对象<code>&#123;&#125;</code>，通过它在模块内部建立访问接口。但不能通过对<code>exports</code>直接赋值代替对<code>module.exports</code>赋值，<code>exports</code>实际上只是与<code>module.exports</code>指向同一对象，它本身会在模块执行结束后释放，而<code>module</code>不会，因此只能通过指定<code>module.exports</code>来改变访问接口。</p>
+<h2 id="package-包">Package 包</h2>
+<p>包在模块基础上更进一步抽象，NodeJS 包类似于 Java
+类库，它将某个独立功能封装起来，用于发布、更新、依赖管理、版本控制。NodeJS
+根据 CommonJS 规范实现了包机制，通过 npm 来解决包的发布和获取需求。</p>
+<p>NodeJS
+包是一个目录，其中包含一个说明文件<code>package.json</code>，严格符合
+CommonJS
+规范的包应具备这些特征：<strong><code>package.json</code>必须放在包的根目录、二进制文件保存在<code>bin</code>目录、JavaScript
+代码保存在<code>lib</code>目录、文档放置在<code>doc</code>目录、单元测试保存在<code>test</code>目录</strong>。</p>
+<h3 id="作为文件夹的模块">作为文件夹的模块</h3>
+<p>最简单的包，就是一个作为文件夹的模块。下面的例子中，首先建立名为<code>mypackage</code>的文件夹，并在其中创建<code>index.js</code>文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mypackage/index.js</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">hello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello Node v8.9.4 !&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>然后在<code>mypackage</code>文件夹外建立一个<code>getpackage.js</code>文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// getpackage.js</span></span><br><span class="line"><span class="keyword">var</span> somePackage = <span class="built_in">require</span>(<span class="string">&quot;./mypackage&quot;</span>);</span><br><span class="line">somePackage.<span class="title function_">hello</span>();</span><br></pre></td></tr></table></figure>
+<p>通过上面的操作就可以将<code>mypackage</code>文件夹封装为 1
+个包，包通常是许多模块的集合，并在模块基础上提供更高层的抽象。</p>
+<h3 id="包描述文件-package.json">包描述文件 package.json</h3>
+<p>通过定制<code>package.json</code>，可以创建更复杂、更完善、更符合规范的包。接下来在<code>mypackage</code>文件夹下，继续创建一个<code>package.json</code>描述文件。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./lib/interface.js&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>然后将<code>index.js</code>重命名为<code>interface.js</code>并放入<code>lib</code>子文件夹，最后以同样方式调用该包，得到的结果相同：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  node getpackage.js</span><br><span class="line">Hello Node v8.9.4 !</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NodeJS
+调用某个包时，会首先检查包中<code>package.json</code>文件的<code>main</code>字段，如果<code>package.json</code>或<code>main</code>字段不存在，就会默认尝试寻找<code>index.js</code>或<code>index.node</code>作为包的入口点。</p>
+</blockquote>
+<p><code>package.json</code>是 CommonJS
+规范的包描述文件，完全符合规范应包含如下字段：</p>
+<ul>
+<li><code>name</code>：包的名称(必须是唯一，由小写英文字母、数字和下划线组成，不能包含空格)。</li>
+<li><code>description</code>：包的简要描述。</li>
+<li><code>version</code>：符合语义化版本识别规范的版本字符串。</li>
+<li><code>keywords</code>：关键字数组，通常用于搜索。</li>
+<li><code>maintainers</code>：维护者数组(每个元素包含 name、email、web
+字段)。</li>
+<li><code>contributors</code>：贡献者数组(格式与 maintainers
+相同)。</li>
+<li><code>bugs</code>：提交 bug
+的地址，可以是网址或者电子邮件地址。</li>
+<li><code>licenses</code>：许可证数组(每个元素包含 type、url
+字段)。</li>
+<li><code>repositories</code>：仓库托管地址数组(每个元素包含
+type、url、path 字段)。</li>
+<li><code>dependencies</code>：包的依赖，一个关联数组，由包名称和版本号组成。</li>
+</ul>
+<h2 id="包管理器-npm">包管理器 npm</h2>
+<p>npm 是 NodeJS 官方提供的包管理工具，可用于 NodeJS
+包的发布、传播、依赖控制，npm
+拥有<strong>本地</strong>和<strong>全局</strong>两种安装模式。</p>
+<h3 id="本地模式">本地模式</h3>
+<p>npm 默认会从<a target="_blank" rel="noopener" href="https://www.npmjs.com/">Naughty programmer's
+madness</a>(<em><sup>﹏</sup></em>)搜索并下载依赖包，并将其安装至当前目录的<code>node_modules</code>子目录下。<code>require</code>加载模块时会尝试搜寻<code>node_modules</code>子目录，因此本地模式安装的包可以被直接引用。</p>
+<p>命令格式：<code>npm [install/i] [package_name]</code></p>
+<blockquote>
+<p>npm 会自动解析包的依赖并自动进行相应下载。</p>
+</blockquote>
+<h3 id="全局模式">全局模式</h3>
+<p>npm 也可以通过全局模式进行安装，但是该模式下安装的包不能直接在
+JavaScript 文件中使用。</p>
+<p>命令格式：<code>npm [install/i] -g [package_name]</code></p>
+<h3 id="全局链接">全局链接</h3>
+<p>npm
+还可以在本地和全局包之间创建符号链接，从而打破全局模式安装的包不能直接通过
+require 使用的限制，但是该命令不支持 Windows。</p>
+<p>命令格式：<code>npm link (in package dir)</code></p>
+<h3 id="发布-npm-包">发布 npm 包</h3>
+<p>npm
+可以方便地发布一个包，这里可以使用<code>npm init</code>根据交互式问答产生一个符合标准的
+package.json。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">➜  npm init</span><br><span class="line"></span><br><span class="line">package name: (<span class="built_in">test</span>)</span><br><span class="line">version: (1.0.0)</span><br><span class="line">description:</span><br><span class="line">entry point: (index.js)</span><br><span class="line"><span class="built_in">test</span> <span class="built_in">command</span>:</span><br><span class="line">git repository:</span><br><span class="line">keywords:</span><br><span class="line">author:</span><br><span class="line">license: (ISC)</span><br><span class="line">About to write to /workspace/test/package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="string">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="string">&quot;main&quot;</span>: <span class="string">&quot;index.js&quot;</span>,</span><br><span class="line">  <span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;author&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="string">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来需要通过<code>npm adduser</code>获取一个帐号（<em>需要提前在
+npm 官网注册帐号</em>）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  npm adduser</span><br><span class="line">Username: uinika</span><br><span class="line">Password:</span><br><span class="line">Email: (this IS public) uinika@outlook.com</span><br><span class="line">Logged <span class="keyword">in</span> as uinika on https://registry.npmjs.org/.</span><br></pre></td></tr></table></figure>
+<p>完成后可以使用<code>npm whoami</code>测试是否正确创建了帐号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  npm <span class="built_in">whoami</span></span><br><span class="line">uinika</span><br></pre></td></tr></table></figure>
+<p>如果包将来有更新，只需要修改<code>package.json</code>文件中的<code>version</code>字段，然后重新使用<code>npm publish</code>命令即可。如果对已经发布的包不满意，可以使用<code>npm unpublish</code>命令取消发布。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  npm publish</span><br><span class="line">+ uinika@1.0.0</span><br></pre></td></tr></table></figure>
+<h2 id="命令行调试">命令行调试</h2>
+<p>NodeJS 支持命令行下的单步调试。</p>
+<p>命令格式：<code>node inspect app.js</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  node inspect app.js</span><br><span class="line"></span><br><span class="line">&lt; Debugger listening on ws://127.0.0.1:9229/b16af064-40bb-4d78-99d4-6f5485f8a923</span><br><span class="line">&lt; For <span class="built_in">help</span> see https://nodejs.org/en/docs/inspector</span><br><span class="line">&lt; Debugger attached.</span><br><span class="line"></span><br><span class="line">Break on start <span class="keyword">in</span> app.js:1</span><br><span class="line">&gt; 1 (<span class="keyword">function</span> (exports, require, module, __filename, __dirname) &#123; <span class="keyword">function</span> <span class="function"><span class="title">app</span></span>() &#123;</span><br><span class="line">  2   console.log(<span class="string">&quot;Hello node v8.9.4&quot;</span>);</span><br><span class="line">  3 &#125;</span><br><span class="line">debug&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="nodejs-调试命令">NodeJS 调试命令：</h3>
+<p><code>run</code> 执行脚本，在第一行暂停 <code>restart</code>
+重新执行脚本 <code>cont,c</code> 继续执行，直到遇到下一个断点
+<code>next,n</code> 单步执行 <code>step,s</code> 单步执行并进入函数
+<code>out,o</code> 从函数中步出 <code>setBreakpoint(),sb()</code>
+在当前行设置断点 <code>setBreakpoint('f()'),sb(...)</code> 在函数 f
+的第一行设置断点 <code>setBreakpoint('script.js', 20),sb(...)</code> 在
+script.js 的第 20 行设置断点 <code>clearBreakpoint,cb(...)</code>
+清除所有断点 <code>backtrace,bt</code> 显示当前的调用栈
+<code>list(5)</code> 显示当前执行到的前后 5 行代码
+<code>watch(expr)</code> 把表达式 expr 加入监视列表
+<code>unwatch(expr)</code> 把表达式 expr 从监视列表移除
+<code>watchers</code> 显示监视列表中所有的表达式和值 <code>repl</code>
+在当前上下文打开即时求值环境 <code>kill</code> 终止当前执行的脚本
+<code>scripts</code> 显示当前已加载的所有脚本 <code>version</code> 显示
+V8 的版本</p>
+<h3 id="远程调试">远程调试</h3>
+<p>V8 引擎的调试功能基于 TCP 协议，因此 NodeJS
+可以轻松实现远程调试。</p>
+<ol type="1">
+<li>脚本会正常执行不会暂停，执行过程中调试客户端可以连接至调试服务器。
+<code>node --debug[=port] script.js</code></li>
+<li>调试服务器启动后将立刻暂停执行脚本，等待调试客户端连接。
+<code>node --debug-brk[=port] script.js</code></li>
+</ol>
+<h3 id="第-3-方工具调试">第 3 方工具调试</h3>
+<ol type="1">
+<li>Eclipse 下使用插件<code>Google Chrome Developer Tools</code>。</li>
+<li>Node 在线调试工具<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/node-inspector">node-inspector</a>。</li>
+</ol>
+<h2 id="global-模块">Global 模块</h2>
+<p>浏览器 JavaScript 当中<code>window</code>是全局对象，<strong>NodeJS
+中全局对象是<code>global</code></strong>，<code>global</code>最根本的作用是作为全局变量的宿主（即所有的全局变量都是<code>global</code>对象的属性），因此在所有模块中都可以直接使用而无需包含。</p>
+<p>NodeJS
+中不可能在代码最外层定义全局变量，因为所有自定义代码都是属于当前模块的，
+而模块本身不是 NodeJS 最外层的上下文。</p>
+<blockquote>
+<p>尽量显式的使用<code>var</code>、<code>let</code>、<code>const</code>关键字声明变量，避免直接声明将变量引入全局，污染命名空间，提高耦合风险。</p>
+</blockquote>
+<p><code>global</code>：全局变量的宿主。
+<code>Class: Buffer</code>：用来与 TCP
+数据流、文件系统操作等八位二进制流进行交互的类型。
+<code>__filename</code>：表示当前正在执行的脚本的<strong>文件名</strong>。
+<code>__dirname</code>：表示当前执行脚本所在的<strong>目录</strong>。</p>
+<p><code>console</code>： debug 信息打印控制台。
+<code>require()</code>：获取 NodeJS 模块。 <code>exports()</code>：导出
+NodeJS 模块，该方法是引用了<code>module.exports</code>的快捷类型。
+<code>module</code>：当前 NodeJS 模块的引用。
+<code>process</code>：用于描述当前 NodeJS 进程状态的对象。</p>
+<p><code>setImmediate(callback[, ...args])</code> /
+<code>clearImmediate(immediateObject)</code>：将一些需要长时间运行的操作放在回调函数内，在浏览器完成后面的其他语句后，立刻执行该回调函数。
+<code>setInterval(callback, delay[, ...args])</code> /
+<code>clearInterval(intervalObject)</code>
+：在指定的毫秒数后重复执行指定回调函数，除非显示调用<code>clearInterval</code>关闭。
+<code>setTimeout(callback, delay[, ...args])</code> /
+<code>clearTimeout(timeoutObject)</code>：在指定的毫秒数后执行一次指定的回调函数。</p>
+<h2 id="process-模块">Process 模块</h2>
+<p><code>process</code>是全局变量(<em>即 global
+对象的属性</em>)，用于描述当前 NodeJS 进程状态。</p>
+<p><code>process.argv</code>是命令行参数数组，第 1 个元素是 node，第 2
+个元素是脚本文件名，从第 3 个元素开始每个元素是 1 个运行参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  /workspace node app.js 1985 name=Hank --v uinika</span><br><span class="line">[ <span class="string">&#x27;/opt/nodejs/bin/node&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;/workspace/app.js&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;1985&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;name=Hank&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;--v&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;uinika&#x27;</span> ]</span><br></pre></td></tr></table></figure>
+<p><code>process.stdout</code>是标准输出流，通常使用
+console.log()向标准输出打印字符，而
+process.stdout.write()函数则提供了更为底层的接口。</p>
+<p><code>process.stdin</code>是标准输入流，初始时是被暂停的，要想从标准输入读取数据，必须恢复流，并手动编写流的事件响应函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">process.<span class="property">stdin</span>.<span class="title function_">resume</span>();</span><br><span class="line">process.<span class="property">stdin</span>.<span class="title function_">on</span>(<span class="string">&quot;data&quot;</span>, <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  process.<span class="property">stdout</span>.<span class="title function_">write</span>(<span class="string">&quot;从控制台读取到的输入内容:&quot;</span> + data.<span class="title function_">toString</span>());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  /workspace node app.js</span><br><span class="line">uinika@outlook.com</span><br><span class="line">从控制台读取到的输入内容: uinika@outlook.com</span><br></pre></td></tr></table></figure>
+<p><code>process.nextTick(callback)</code>的功能是为事件循环设置一项任务，NodeJS
+会在下次事件循环调响应时调用
+callback。process.nextTick()可以把复杂的工作拆散，变成一个个较小的事件。</p>
+<blockquote>
+<p><strong>NodeJS 适合 I/O
+密集型的应用，不适合计算密集型应用</strong>。如果 1 个 NodeJS 进程只有 1
+条线程，因此在任何时刻都只有 1 个事件在执行。如果该事件占用大量 CPU
+时间，执行事件循环中的下个事件需要等待很久，因此 NodeJS
+的一个编程原则就是<strong>尽量缩短每个事件的执行时间</strong>。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">doSomething</span>(<span class="params">args, callback</span>) &#123;</span><br><span class="line">  <span class="title function_">somethingComplicated</span>(args); <span class="comment">// 比较耗时的函数</span></span><br><span class="line">  <span class="title function_">callback</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">doSomething</span>(<span class="keyword">function</span> <span class="title function_">onEnd</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">compute</span>(); <span class="comment">// 比较耗时的函数</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上面代码在调用<code>doSomething()</code>时会先执<code>somethingComplicated()</code>，然后立即调用回调函数，在<code>onEnd()</code>中又会执行<code>compute()</code>。</p>
+<p>接下来改写上面的程序，将耗时的操作拆分为 2
+个事件，减少每个单独事件的执行时间，提高事件响应速度：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">doSomething</span>(<span class="params">args, callback</span>) &#123;</span><br><span class="line">  <span class="title function_">somethingComplicated</span>(args);</span><br><span class="line">  process.<span class="title function_">nextTick</span>(callback);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">doSomething</span>(<span class="keyword">function</span> <span class="title function_">onEnd</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">compute</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="console-模块">Console 模块</h2>
+<p>console 用于提供控制台标准输出。</p>
+<p><code>console.log()</code>：向标准输出流打印字符并以换行符结束(<em>如果只有
+1 个参数，则输出该参数的字符串形式；如果有 2 个参数，则以类似于 C
+语言<code>printf()</code>的格式化输出</em>)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello Node&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hank&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Uinika %d&quot;</span>, <span class="number">2018</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">Hello Node</span><br><span class="line">Hank</span><br><span class="line">Uinika 2018</span><br></pre></td></tr></table></figure>
+<p><code>console.error()</code>：与<code>console.log()</code>的用法相同，只是向标准错误流进行输出。</p>
+<p><code>console.trace()</code>：向标准错误流输出当前的调用栈。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">Trace</span><br><span class="line">    at Object.&lt;anonymous&gt; (/workspace/app.js:1:71)</span><br><span class="line">    at Module._compile (module.js:643:30)</span><br><span class="line">    at Object.Module._extensions..js (module.js:654:10)</span><br><span class="line">    at Module.load (module.js:556:32)</span><br><span class="line">    at tryModuleLoad (module.js:499:12)</span><br><span class="line">    at Function.Module._load (module.js:491:3)</span><br><span class="line">    at Function.Module.runMain (module.js:684:10)</span><br><span class="line">    at startup (bootstrap_node.js:187:16)</span><br><span class="line">    at bootstrap_node.js:608:3</span><br></pre></td></tr></table></figure>
+<h2 id="util-模块">Util 模块</h2>
+<p>util 提供常用函数集合，用于弥补核心 JavaScript 功能方面的不足。</p>
+<p><code>util.inherits(constructor, superConstructor)</code>用于实现对象之间的原型继承。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">&quot;util&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Base</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;base&quot;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">base</span> = <span class="number">1985</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Base</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">showName</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Sub</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;sub&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">util.<span class="title function_">inherits</span>(<span class="title class_">Sub</span>, <span class="title class_">Base</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objBase = <span class="keyword">new</span> <span class="title class_">Base</span>();</span><br><span class="line">objBase.<span class="title function_">showName</span>();</span><br><span class="line">objBase.<span class="title function_">sayHello</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objBase);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objSub = <span class="keyword">new</span> <span class="title class_">Sub</span>();</span><br><span class="line">objSub.<span class="title function_">showName</span>();</span><br><span class="line"><span class="comment">//objSub.sayHello();</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objSub);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">base</span><br><span class="line">Hello base</span><br><span class="line">Base &#123; name: <span class="string">&#x27;base&#x27;</span>, base: 1985, sayHello: [Function] &#125;</span><br><span class="line">sub</span><br><span class="line">Sub &#123; name: <span class="string">&#x27;sub&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+<p><code>Sub</code>只继承<code>Base</code>在原型中定义的函数，而构造函数内部创建的<code>base</code>属性和<code>sayHello()</code>函数都没有被
+Sub
+继承。而原型中定义的属性不会被<code>console.log()</code>作为对象属性输出。现在如果去掉
+objSub.sayHello()的注释，将会出现如下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">base</span><br><span class="line">Hello base</span><br><span class="line">Base &#123; name: <span class="string">&#x27;base&#x27;</span>, base: 1985, sayHello: [Function] &#125;</span><br><span class="line">sub</span><br><span class="line">/workspace/app.js:22</span><br><span class="line">objSub.sayHello();</span><br><span class="line">       ^</span><br><span class="line"></span><br><span class="line">TypeError: objSub.sayHello is not a <span class="keyword">function</span></span><br><span class="line">    at Object.&lt;anonymous&gt; (/workspace/app.js:22:8)</span><br><span class="line">    at Module._compile (module.js:643:30)</span><br><span class="line">    at Object.Module._extensions..js (module.js:654:10)</span><br><span class="line">    at Module.load (module.js:556:32)</span><br><span class="line">    at tryModuleLoad (module.js:499:12)</span><br><span class="line">    at Function.Module._load (module.js:491:3)</span><br><span class="line">    at Function.Module.runMain (module.js:684:10)</span><br><span class="line">    at startup (bootstrap_node.js:187:16)</span><br><span class="line">    at bootstrap_node.js:608:3</span><br></pre></td></tr></table></figure>
+<p><code>util.inspect(object,[showHidden],[depth],[colors])</code>用于将任意对象转换为字符串，通常用于调试和错误输出。</p>
+<ul>
+<li>参数 object：需要转换的目标对象。</li>
+<li>参数 howHidden：如果值为 true，将会输出更多隐藏信息。</li>
+<li>参数 depth：表示最大递归的层数，默认递归 2 层，指定为 null
+将完整遍历对象。</li>
+<li>参数 color：如果为 true，输出格式以 ANSI
+颜色编码，通常用于控制台显示效果。</li>
+</ul>
+<p><code>util.inspect</code>并非直接将对象转换为字符串，即使该对象定义了<code>toString()</code>方法也不会被调用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">&quot;util&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;Hank&quot;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">toString</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(util.<span class="title function_">inspect</span>(obj));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(util.<span class="title function_">inspect</span>(obj, <span class="literal">true</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line"></span><br><span class="line">Person &#123; name: <span class="string">&#x27;Hank&#x27;</span>, toString: [Function] &#125;</span><br><span class="line">Person &#123;</span><br><span class="line">  name: <span class="string">&#x27;Hank&#x27;</span>,</span><br><span class="line">  toString:</span><br><span class="line">   &#123; [Function]</span><br><span class="line">     [length]: 0,</span><br><span class="line">     [name]: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">     [arguments]: null,</span><br><span class="line">     [<span class="built_in">caller</span>]: null,</span><br><span class="line">     [prototype]: &#123; [constructor]: [Circular] &#125; &#125; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="events-模块">Events 模块</h2>
+<p><code>events</code>是 NodeJS 最重要的模块，因为 NodeJS
+本身就是基于事件式的架构，该模块提供了唯一接口，所以堪称 NodeJS
+事件编程的基石。<code>events</code>模块不仅用于与下层的事件循环交互，还几乎被所有的模块所依赖。</p>
+<p><code>events</code>模块只提供 1
+个<code>events.EventEmitter</code>对象，<code>EventEmitter</code>对象封装了事件发射和事件监听器。每个<code>EventEmitter</code>事件由
+1 个事件名和若干参数组成，事件名是 1
+个字符串。<code>EventEmitter</code>对每个事件支持若干监听器，事件发射时，注册至该事件的监听器依次被调用，事件参数将作为回调函数参数传递。</p>
+<p>下面例子中，<code>emitter</code>为事件<code>targetEvent</code>注册 2
+个事件监听器，然后发射<code>targetEvent</code>事件，结果 2
+个事件监听器的回调函数被依次先后调用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">&quot;events&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.<span class="title class_">EventEmitter</span>();</span><br><span class="line"></span><br><span class="line">emitter.<span class="title function_">on</span>(<span class="string">&quot;targetEvent&quot;</span>, <span class="keyword">function</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;listener1&quot;</span>, arg1, arg2);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">emitter.<span class="title function_">on</span>(<span class="string">&quot;targetEvent&quot;</span>, <span class="keyword">function</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;listener2&quot;</span>, arg1, arg2);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">emitter.<span class="title function_">emit</span>(<span class="string">&quot;targetEvent&quot;</span>, <span class="string">&quot;Hank&quot;</span>, <span class="number">2018</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  /workspace node app.js</span><br><span class="line">listener1 Hank 2018</span><br><span class="line">listener2 Hank 2018</span><br></pre></td></tr></table></figure>
+<h3 id="eventemitter-常用-api">EventEmitter 常用 API</h3>
+<ul>
+<li><code>EventEmitter.on(event, listener)</code>：为指定事件注册监听器，接受
+1 个字符串事件名 event 和 1 个回调函数 listener。</li>
+<li><code>EventEmitter.emit(event,[arg1],[arg2],[...])</code>：发射
+event 事件，传递若干可选参数到事件监听器的参数列表。</li>
+<li><code>EventEmitter.once(event, listener)</code>：为指定事件注册 1
+个单次监听器，即该监听器最多只会触发一次，触发后立刻解除。</li>
+<li><code>EventEmitter.removeListener(event, listener)</code>：移除指定事件的某个监听器，listener
+必须是该事件已经注册过的监听器。</li>
+<li><code>EventEmitter.removeAllListeners([event])</code>：移除所有事件的所有监听器，如果指定
+event，则移除指定事件的所有监听器。</li>
+</ul>
+<p><code>EventEmitter</code>包含 1
+个定义错误语义的<code>error</code>事件，通常遇到异常时会发射<code>error</code>事件。当<code>error</code>被发射时，如果没有相应的监听器，NodeJS
+会将其当作异常，退出程序并打印调用栈。通常情况下，需要为会发射<code>error</code>事件的对象设置监听器，避免程序遇到错误后崩溃。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">&quot;events&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.<span class="title class_">EventEmitter</span>();</span><br><span class="line"></span><br><span class="line">emitter.<span class="title function_">emit</span>(<span class="string">&quot;error&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">events.js:188</span><br><span class="line">      throw err;</span><br><span class="line">      ^</span><br><span class="line"></span><br><span class="line">Error: Unhandled <span class="string">&quot;error&quot;</span> event. (undefined)</span><br><span class="line">    at EventEmitter.emit (events.js:186:19)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/workspace/app.js:3:9)</span><br><span class="line">    at Module._compile (module.js:643:30)</span><br><span class="line">    at Object.Module._extensions..js (module.js:654:10)</span><br><span class="line">    at Module.load (module.js:556:32)</span><br><span class="line">    at tryModuleLoad (module.js:499:12)</span><br><span class="line">    at Function.Module._load (module.js:491:3)</span><br><span class="line">    at Function.Module.runMain (module.js:684:10)</span><br><span class="line">    at startup (bootstrap_node.js:187:16)</span><br><span class="line">    at bootstrap_node.js:608:3</span><br></pre></td></tr></table></figure>
+<h3 id="继承-eventemitter">继承 EventEmitter</h3>
+<p>通常情况下，不会直接使用<code>EventEmitter</code>，而是在对象中继承，这样做的原因有
+2 点：</p>
+<ol type="1">
+<li>符合语义，事件的监听和发射应该作为 1 个对象的方法。</li>
+<li>JavaScript
+基于原型继承，支持部分多重继承，继承<code>EventEmitter</code>不会打乱原有继承关系。</li>
+</ol>
+<blockquote>
+<p>包括<code>fs</code>、<code>net</code>、<code>http</code>在内，只要是支持事件响应的核心模块都是<code>EventEmitter</code>的子类。</p>
+</blockquote>
+<h2 id="file-system-模块">File System 模块</h2>
+<p><code>fs</code>模块封装了文件操作，提供了文件读取、写入、更名、删除、遍历、链接等
+POSIX 文件系统操作，该模块中所有操作都提供了异步和同步 2 个版本。</p>
+<p><code>fs.readFile(filename,[encoding],[callback(err,data)])</code>用于读取文件，第
+1 个参数<code>filename</code>表示要读取的文件名。第 2
+个参数<code>encoding</code>表示文件的字符编码，第 3
+个参数<code>callback</code>是回调函数，用于接收文件内容。</p>
+<p>回调函数提供<code>err</code>和<code>data</code>两个参数，<code>err</code>表示有无错误发生，<code>data</code>是文件内容。如果指定<code>encoding</code>，<code>data</code>将是
+1
+个解析后的字符串，否则<code>data</code>将会是以<code>Buffe</code>r`形式表示的二进制数据。</p>
+<p>下面的例子当中，从<code>content.txt</code>(<strong>包含汉字"遵义会议"</strong>)中读取数据，不指定编码将输出乱码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&quot;content.txt&quot;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">&lt;Buffer e9 81 b5 e4 b9 89 e4 bc 9a e8 ae ae&gt;</span><br></pre></td></tr></table></figure>
+<p>指定<code>encoding</code>编码后，文本正常编码并输出。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&quot;content.txt&quot;</span>, <span class="string">&quot;utf-8&quot;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="comment">//当读取文件出现错误时，err即是Error对象</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">遵义会议</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NodeJS 异步编程通常以函数最后 1 个参数作为回调，通常 1 个函数只有 1
+个回调。回调函数第 1
+个参数是<code>err</code>，如果没有发生错误，<code>err</code>值为<code>null</code>或<code>undefined</code>；如果有错误发生，<code>err</code>通常是<code>Error</code>对象的实例。</p>
+</blockquote>
+<h3 id="fs.readfilesync">fs.readFileSync()</h3>
+<p>NodeJS
+提供的<code>fs.readFileSync()</code>函数是<code>readFile()</code>的同步版本，两者接受的参数相同，读取到的文件内容会以函数返回值形式返回。如果有错误发生<code>fs</code>将会抛出异常，需要使用<code>try...catch</code>捕捉并处理异常。</p>
+<blockquote>
+<p>与同步 I/O 函数不同，NodeJS 中异步函数大多没有返回值。</p>
+</blockquote>
+<h3 id="fs.open">fs.open()</h3>
+<p><code>fs.open(path,flags,[mode],[callback(err,fd)])</code>封装了
+POSIX 的<code>open()</code>函数，与 C
+语言标准库中<code>fopen()</code>函数类似。该函数接受 2 个必选参数，第 1
+个参数<code>path</code>为文件路径，第 2
+个参数<code>flags</code>代表文件打开模式，第 3
+个参数<code>mode</code>用于创建文件时给文件指定权限（<em>默认
+0666</em>），第 4
+个参数是<strong>回调函数</strong>，函数中需要传递文件描述符<code>fd</code>。</p>
+<h3 id="fs.read">fs.read()</h3>
+<p><code>fs.read(fd,buffer,offset,length,position,[callback(err,bytesRead,buffer)])</code>封装了
+POSIX 的 read
+函数，相比<code>fs.readFile()</code>提供了更底层的接口。</p>
+<p><code>fs.read()</code>的功能是从指定的文件描述符 fd
+中读取数据并写入<code>buffer</code>指向的缓冲区对象。<code>offset</code>是<code>buffer</code>的写入偏移量。<code>length</code>是要从文件中读取的字节数。<code>position</code>是文件读取的起始位置，如果<code>position</code>的值为<code>null</code>，则会从当前文件指针的位置读取。回调函数传递<code>bytesRead</code>和<code>buffer</code>，分别表示读取的<strong>字节数</strong>和<strong>缓冲区对象</strong>。</p>
+<p>下面的例子综合使用了<code>fs.open()</code>和<code>fs.read()</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line">fs.<span class="title function_">open</span>(<span class="string">&quot;content.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="keyword">function</span>(<span class="params">err, fd</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> buf = <span class="keyword">new</span> <span class="title class_">Buffer</span>(<span class="number">8</span>);</span><br><span class="line">  fs.<span class="title function_">read</span>(fd, buf, <span class="number">0</span>, <span class="number">8</span>, <span class="literal">null</span>, <span class="keyword">function</span>(<span class="params">err, bytesRead, buffer</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;读取的byte: &quot;</span> + bytesRead);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(buffer);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line"></span><br><span class="line">读取的byte: 8</span><br><span class="line">&lt;Buffer e9 81 b5 e4 b9 89 e4 bc&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="http-模块">Http 模块</h2>
+<p>NodeJS 标准库提供的<code>http</code>模块封装了一个高效的 HTTP
+服务器<code>http.Server</code>和一个简易的 HTTP
+客户端<code>http.request</code>。</p>
+<p><code>http</code>模块中的 HTTP 服务器对象，核心由 NodeJS 底层依靠
+C++实现，接口使用 JavaScript 封装，兼顾了高性能与简易性。</p>
+<p>下面代码中，<code>http.createServer()</code>创建了一个<code>http.Server</code>实例，并将一个匿名函数作为
+HTTP 请求处理函数。该函数接受两个参数，分别是请求对象
+<code>req</code>和响应对象<code>res</code>。函数体内，<code>res</code>显式的写入响应代码<code>200</code>（<em>表示请求成功</em>），并指定了响应头和响应体，然后通过<code>res.end()</code>结束并发送。最后调用<code>listen()</code>函数，启动服务器并监听<code>3000</code>端口。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line">http</span><br><span class="line">  .<span class="title function_">createServer</span>(<span class="keyword">function</span>(<span class="params">req, res</span>) &#123;</span><br><span class="line">    res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;</span><br><span class="line">      <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/html&quot;</span></span><br><span class="line">    &#125;);</span><br><span class="line">    res.<span class="title function_">write</span>(<span class="string">&quot;&lt;h1&gt;Hank&lt;/h1&gt;&quot;</span>);</span><br><span class="line">    res.<span class="title function_">end</span>(<span class="string">&quot;&lt;p&gt;Hello Node v8.9.4&lt;/p&gt;&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;HTTP正在监听3000端口!&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">HTTP正在监听3000端口!</span><br></pre></td></tr></table></figure>
+<h3 id="http.server-的事件">http.Server 的事件</h3>
+<p><code>http.Server</code>是基于事件的 HTTP
+服务器，所有请求都被封装为独立的事件，开发者只需要对相应事件编写函数即可实现
+HTTP
+服务器的所有功能。它继承自<code>EventEmitter</code>，主要提供了以下几个事件：</p>
+<ol type="1">
+<li><code>request</code>：当客户端请求到来时该事件被触发，提供 2 个参数
+req 和 res，分别是 http.ServerRequest 和 http.ServerResponse
+的实例，表示请求和响应信息。</li>
+<li><code>connection</code>：当 TCP 连接建立时该事件被触发，提供 1
+个参数 socket，是 net.Socke 的实例。connection 事件的粒度要大于
+request，因为客户端在 Keep-Alive 模式下可能会在 1
+次连接内发送多次请求。</li>
+<li><code>close</code>：当服务器关闭时，该事件被触发。</li>
+</ol>
+<p>事件<code>request</code>较常用，因此<code>http</code>提供了快捷方法<code>http.createServer([requestListener])</code>来创建
+HTTP
+服务器，其中<code>requestListener</code>作为<code>request</code>事件的监听函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = <span class="keyword">new</span> http.<span class="title class_">Server</span>();</span><br><span class="line"></span><br><span class="line">server.<span class="title function_">on</span>(<span class="string">&quot;request&quot;</span>, <span class="keyword">function</span>(<span class="params">req, res</span>) &#123;</span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/html&quot;</span></span><br><span class="line">  &#125;);</span><br><span class="line">  res.<span class="title function_">write</span>(<span class="string">&quot;&lt;h1&gt;Hank&lt;/h1&gt;&quot;</span>);</span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&quot;&lt;p&gt;Hello Node v8.9.4 again!&lt;/p&gt;&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;HTTP正在监听3000端口!&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="Nodejs/http-server-event.png"></p>
+<blockquote>
+<p>除此之外还有<code>checkContinue</code>、<code>upgrade</code>、<code>clientError</code>事件，通常不需要开发人员关心，只有在实现复杂
+HTTP 服务器时才会使用。</p>
+</blockquote>
+<h3 id="http.serverrequest">http.serverRequest</h3>
+<p><code>http.ServerRequest</code>是 HTTP
+请求的信息，通常由<code>http.Server</code>的<code>request</code>事件发送，作为第
+1
+个参数传递，通常简称<code>request</code>或<code>req</code>，<code>ServerRequest</code>提供了如下属性：</p>
+<table>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 81%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">名 称</th>
+<th style="text-align: left;">含 义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>complete</code></td>
+<td style="text-align: left;">客户端请求是否已经发送完成</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>httpVersion</code></td>
+<td style="text-align: left;">HTTP
+协议版本，通常是<code>1.0</code>或<code>1.1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>method</code></td>
+<td style="text-align: left;">HTTP
+请求方法，如<code>GET</code>、<code>POST</code>、<code>PUT</code>、<code>DELETE</code>等</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>url</code></td>
+<td style="text-align: left;">原始的请求路径，例如<code>/static/avatar.png</code>或<code>/user?name=Hank</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>connection</code></td>
+<td style="text-align: left;">当前 HTTP
+连接套接字，为<code>net.Socket</code>的实例</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>socket</code></td>
+<td style="text-align: left;"><code>connection</code>属性的别名</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>client</code></td>
+<td style="text-align: left;"><code>client</code>属性的别名</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>trailers</code></td>
+<td style="text-align: left;">HTTP 请求尾</td>
+</tr>
+</tbody>
+</table>
+<p>HTTP
+请求分为<strong>请求头</strong>、<strong>请求体</strong>两部分，请求体可能相对较长，需要一定时间传输，因此<code>http.ServerRequest</code>提供以下
+3 个事件用于控制请求体传输。</p>
+<ul>
+<li><code>data</code>：当请求体数据到来时事件被触发，该事件提供 1 个
+chunk
+参数来表示接收到的数据。如果该事件没有被监听，那么请求体将会被抛弃，该事件可能会被调用多次。</li>
+<li><code>end</code>：当请求体数据传输完成时被触发，此后将不会再有数据到来。</li>
+<li><code>close</code>：当前用户请求结束时被触发，与 end
+不同之处在于即使用户强制终止传输，该事件依然会被调用。</li>
+</ul>
+<h3 id="获取-get-请求">获取 GET 请求</h3>
+<p>GET 请求的参数放置在查询参数中，需要使用 url 模块的 parse
+函数手动进行解析。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">&quot;url&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">&quot;util&quot;</span>);</span><br><span class="line"></span><br><span class="line">http</span><br><span class="line">  .<span class="title function_">createServer</span>(<span class="keyword">function</span>(<span class="params">req, res</span>) &#123;</span><br><span class="line">    res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;</span><br><span class="line">      <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/plain&quot;</span></span><br><span class="line">    &#125;);</span><br><span class="line">    res.<span class="title function_">end</span>(util.<span class="title function_">inspect</span>(url.<span class="title function_">parse</span>(req.<span class="property">url</span>, <span class="literal">true</span>)));</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="Nodejs/http-server-get.png"></p>
+<h3 id="获取-post-请求">获取 POST 请求</h3>
+<p>POST 请求的内容全部都在请求体中，NodeJS
+默认不会解析请求体，需要借助<code>querystring</code>的<code>parse()</code>方法进行解析。<strong>但这种方式不可用于生产环境，因为存在严重的效率和安全问题</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">&quot;util&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> querystring = <span class="built_in">require</span>(<span class="string">&quot;querystring&quot;</span>);</span><br><span class="line"></span><br><span class="line">http</span><br><span class="line">  .<span class="title function_">createServer</span>(<span class="keyword">function</span>(<span class="params">req, res</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> post = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    req.<span class="title function_">on</span>(<span class="string">&quot;data&quot;</span>, <span class="keyword">function</span>(<span class="params">chunk</span>) &#123;</span><br><span class="line">      post += chunk;</span><br><span class="line">    &#125;);</span><br><span class="line">    req.<span class="title function_">on</span>(<span class="string">&quot;end&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      post = querystring.<span class="title function_">parse</span>(post);</span><br><span class="line">      res.<span class="title function_">end</span>(util.<span class="title function_">inspect</span>(post));</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="Nodejs/http-server-post.png"></p>
+<h3 id="http.serverresponse">http.ServerResponse</h3>
+<p>该对象封装了返回给客户端的信息，通常简称为<code>response</code>或<code>res</code>，主要有
+3 个重要的成员函数，用于返回响应头、响应内容、结束请求。</p>
+<ul>
+<li><code>response.writeHead(statusCode,[headers])</code>：向请求的客户端发送响应头。<code>statusCode</code>是
+HTTP 状态码，<code>headers</code>对象表示响应头的每个属性。该函数在 1
+个请求内最多只能调用`次，如果不显式调用，则会自动生成一个响应头。</li>
+<li><code>response.write(data, [encoding])</code>：向请求的客户端发送响应内容。<code>data</code>是<code>Buffer</code>或字符串，表示要发送的内容。如果<code>data</code>是字符串，那么需要通过<code>encoding</code>说明其编码方式(默认是
+utf-8)。在<code>response.end()</code>调用之前，<code>response.write()</code>可以被多次调用。</li>
+<li><code>response.end([data],[encoding])</code>：结束响应，告知客户端全部响应已经完成。当所有响应内容发送完毕后，该函数必须被调用
+1 次。接受 2
+个可选参数，意义与<code>response.write()</code>相同。如果不调用该函数，客户端将永远处于等待状态。</li>
+</ul>
+<h3 id="http-客户端">HTTP 客户端</h3>
+<p>http 模块提供了 2
+个函数<code>http.request()</code>和<code>http.get()</code>，功能是作为客户端向
+HTTP 服务器发起请求。</p>
+<h4 id="http.request">http.request()</h4>
+<p><code>http.request(options,callback)</code>发起 HTTP 请求，接受 2
+个参数，<code>option</code>是一个类似关联数组的对象，表示请求的参数，<code>callback</code>是请求的回调函数；其中<code>option</code>拥有如下常用参数：</p>
+<ul>
+<li><code>host</code>：请求网站的域名或 IP 地址。</li>
+<li><code>port</code>：请求网站的端口，默认 80。</li>
+<li><code>method</code>：请求方法，默认是 GET。</li>
+<li><code>path</code>：请求是相对于根的路径(默认为"/"，包含
+QueryString，例如/search?hank=uinika)。</li>
+<li><code>headers</code>：一个关联数组对象，为请求头的内容。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> querystring = <span class="built_in">require</span>(<span class="string">&quot;querystring&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> contents = querystring.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;Hank&quot;</span>,</span><br><span class="line">  <span class="attr">email</span>: <span class="string">&quot;uinika@163.com&quot;</span>,</span><br><span class="line">  <span class="attr">address</span>: <span class="string">&quot;GuiZhou University&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&quot;www.uinika.com&quot;</span>,</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&quot;/application/nodejs/post.php&quot;</span>,</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123;</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Length&quot;</span>: contents.<span class="property">length</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> req = http.<span class="title function_">request</span>(options, <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">  res.<span class="title function_">setEncoding</span>(<span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">  res.<span class="title function_">on</span>(<span class="string">&quot;data&quot;</span>, <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">req.<span class="title function_">write</span>(contents);</span><br><span class="line">req.<span class="title function_">end</span>(); <span class="comment">// 不能忘记req.end()结束请求，否则服务器将不会收到信息</span></span><br></pre></td></tr></table></figure>
+<h4 id="http.get">http.get()</h4>
+<p>http 模块提供<code>http.get()</code>来更加简便的处理 GET
+请求，这是<code>http.request()</code>的简化版本，区别在于<code>http.get()</code>自动将请求方法设置为<code>GET</code>，同时不需要手动调用<code>req.end()</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line">http.<span class="title function_">get</span>(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&quot;https://uinika.github.io/&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">    res.<span class="title function_">setEncoding</span>(<span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">    res.<span class="title function_">on</span>(<span class="string">&quot;data&quot;</span>, <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h5 id="http.clientrequest">http.ClientRequest</h5>
+<p><code>http.ClientRequest</code>是<code>http.request()</code>或<code>http.get()</code>方法返回产生的对象，表示已经产生的
+HTTP
+请求。提供一个<code>response</code>事件(即<code>http.request()</code>或<code>http.get()</code>第
+2 个参数指定的回调函数所绑定对象)，也可以显式绑定该事件的监听函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> req = http.<span class="title function_">get</span>(&#123;</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&quot;https://uinika.github.io/&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">req.<span class="title function_">on</span>(<span class="string">&quot;response&quot;</span>, <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">  res.<span class="title function_">setEncoding</span>(<span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">  res.<span class="title function_">on</span>(<span class="string">&quot;data&quot;</span>, <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>同<code>http.ServerResponse</code>一样，<code>http.ClientRequest</code>也提供<code>write()</code>和<code>end()</code>函数，用于向服务器发送请求体，通常用于<code>POST</code>、<code>PUT</code>等操作，操作结束后必须手动调用
+end
+函数通知服务器，否则请求无效。<code>http.ClientRequest</code>还提供了以下函数：</p>
+<ul>
+<li><code>request.abort()</code>：终止正在发送的请求。</li>
+<li><code>request.setTimeout(timeout,[callback])</code>：设置请求超时时间，<code>timeout</code>为毫秒数。请求超时后<code>callback</code>会被调用。</li>
+</ul>
+<blockquote>
+<p>还有 request.setNoDelay()、request.setSocketKeepAlive()等函数，可查询
+NodeJS 文档。</p>
+</blockquote>
+<h5 id="http.clientresponse">http.ClientResponse</h5>
+<p><code>http.ClientResponse</code>与<code>http.ServerRequest</code>类似，提供了<code>data</code>、<code>end</code>、<code>close</code>三个事件，分别在数据到达、传输结束、连接结束时触发，其中<code>data</code>事件传递一个参数<code>chunk</code>，表示接收到的数据。</p>
+<p><code>http.ClientResponse</code>也提供了一些属性，用于表示请求的结果状态。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">名 称</th>
+<th style="text-align: left;">含 义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>headers</code></td>
+<td style="text-align: left;">HTTP 请求头</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>trailers</code></td>
+<td style="text-align: left;">HTTP 请求尾</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>statusCode</code></td>
+<td style="text-align: left;">HTTP 状态码，如 200、404、500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>httpVersion</code></td>
+<td style="text-align: left;">HTTP 协议版本，通常是 1.0 或 1.1</td>
+</tr>
+</tbody>
+</table>
+<p><code>http.ClientResponse</code>还提供以下几个特殊函数：</p>
+<ul>
+<li><code>response.setEncoding([encoding])</code>：设置默认编码，当 data
+事件被触发时，数据将以<code>encoding</code>编码。默认值是<code>null</code>，即不编码，以<code>Buffer</code>的形式存储。常用编码为<code>utf8</code>。</li>
+<li><code>response.resume()</code>：从暂停状态中恢复。</li>
+<li><code>response.pause()</code>：暂停接收数据和发送事件，方便实现下载功能。</li>
+</ul>
+<h2 id="express-服务器">Express 服务器</h2>
+<p>NodeJS 提供的 http 模块仅仅是 1 个 HTTP
+服务器内核的简单封装，如果需要使用它直接开发网站，那么必须手动实现所有功能（<em>POST
+请求、Cookie、会话管理</em>）。npm 提供的轻量级 Web 开发框架<a target="_blank" rel="noopener" href="http://expressjs.com/">Express</a>（<em>截止到 2018 年 2
+月其最新版本为
+4.16.0</em>），为<code>http</code>模块提供了更高层的接口，还实现了许多功能（包括<code>用户会话</code>、<code>路由控制</code>、<code>模板解析支持</code>、<code>动态视图</code>、<code>CSRF保护</code>、<code>静态文件服务</code>、<code>错误控制器</code>、<code>缓存</code>、<code>插件支持</code>、<code>访问日志</code>等）。</p>
+<h3 id="express4-核心方法与对象">Express4 核心方法与对象</h3>
+<h4 id="express">express()</h4>
+<p><code>express()</code>方法是 express 模块的最顶层函数，用于建立 1 个
+Express 应用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="application-对象">Application 对象</h4>
+<p><code>Application</code>对象通常用来表示 Express 应用，通过调用
+express
+模块暴露出的<code>express()</code>方法可以获取该对象并赋值给变量<code>app</code>。<code>app</code>对象中的方法可以用来路由
+HTTP
+请求(<em><code>app.METHOD</code>、<code>app.param</code></em>)，配置中间件(<em><code>app.route</code></em>)，渲染
+HTML
+视图(<em><code>app.render</code></em>)，注册模板引擎(<em><code>app.engine</code></em>)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/&quot;</span>, <span class="keyword">function</span>(<span class="params">req, res</span>) &#123;</span><br><span class="line">  res.<span class="title function_">send</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="request-response-对象">Request / Response 对象</h4>
+<p><code>Request/Response</code>对象分别用来表示
+HTTP<strong>请求</strong>与<strong>响应</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/user/:id&quot;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>) &#123;</span><br><span class="line">  response.<span class="title function_">send</span>(<span class="string">&quot;user &quot;</span> + request.<span class="property">params</span>.<span class="property">id</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="router-对象">Router 对象</h4>
+<p><code>Router</code>对象是执行路由功能和起中间件作用的独立实例，可通过顶层
+express
+对象的<code>Router()</code>函数建立新的<code>router</code>对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>([options]);</span><br></pre></td></tr></table></figure>
+<p>其中，<code>options</code>参数用于指定该路由的具体行为：</p>
+<ul>
+<li><code>caseSensitive</code>：启动大小写敏感，默认是关闭的，即<code>"/HANK"</code>与<code>"/hank"</code>等效。</li>
+<li><code>mergeParams</code>：保存父级<code>Router</code>的<code>req.params</code>值，如果父级或子级存在参数名冲突，则子级<code>Router</code>的属性值优先使用，该选项默认为<code>false</code>。</li>
+<li><code>strict</code>：是否允许严格路由，默认关闭，即<code>"/uinika/"</code>与<code>"/uinika"</code>等效。</li>
+</ul>
+<p>可以象应用程序一样，增加中间件和 Http 方法到该路由。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 被传入至该router的所有请求调用</span></span><br><span class="line">router.<span class="title function_">use</span>(<span class="keyword">function</span>(<span class="params">req, res, next</span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="title function_">next</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取/uinika下的任意请求</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&quot;/uinika&quot;</span>, <span class="keyword">function</span>(<span class="params">req, res, next</span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>接下来所有发送至<code>/hank</code>相应路径的请求都会分发至<code>router</code>，从而分离应用路由至若干文件，或全部放置在一个文件中成为独立应用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只有发送到/hank/*地址的请求，才会转发至指定的router</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&quot;/hank&quot;</span>, router);</span><br></pre></td></tr></table></figure>
+<h3 id="生产环境下的-express">生产环境下的 Express</h3>
+<p>NodeJS 和 Express
+在生产环境使用时，需要注意到这些方面的问题：不支持故障恢复、没有日志、<strong>无法利用多核提高性能</strong>、独占端口、需要手动启动。</p>
+<p>Express 支持开发和产品 2 种运行模式，生产环境下需要使用产品模式，设置
+NODE_ENV 环境变量等于<code>production</code>即可。</p>
+<p>接下来实现访问日志（<em>用户对服务器的请求信息</em>）、错误日志功能（<em>记录发生的错误信息</em>），Express
+提供了日志访问中间件，只需指定其<code>stream</code>参数为一个输出流即可将访问日志写入文件。</p>
+<p>首先在示例项目的<code>app.js</code>文件最上方加入如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> accessLogfile = fs.<span class="title function_">createWriteStream</span>(<span class="string">&quot;access.log&quot;</span>, &#123; <span class="attr">flags</span>: <span class="string">&quot;a&quot;</span> &#125;);</span><br><span class="line"><span class="keyword">var</span> errorLogfile = fs.<span class="title function_">createWriteStream</span>(<span class="string">&quot;error.log&quot;</span>, &#123; <span class="attr">flags</span>: <span class="string">&quot;a&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>然后在<code>app.js</code>的<code>app.configure()</code>函数第一行添加登录日志处理代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">logger</span>(&#123; <span class="attr">stream</span>: accessLogfile &#125;));</span><br></pre></td></tr></table></figure>
+<p>最后错误日志需要通过<code>app.error</code>注册错误响应函数，将错误信息写入错误日志流。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">configure</span>(<span class="string">&quot;production&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  app.<span class="title function_">error</span>(<span class="keyword">function</span>(<span class="params">err, req, res, next</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> meta = <span class="string">&quot;[&quot;</span> + <span class="keyword">new</span> <span class="title class_">Date</span>() + <span class="string">&quot;] &quot;</span> + req.<span class="property">url</span> + <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    errorLogfile.<span class="title function_">write</span>(meta + err.<span class="property">stack</span> + <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="title function_">next</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>重新启动服务器，即可在<code>app.js</code>同目录下的<code>access.log</code>和<code>error.log</code>文件中查看到相应的错误信息。</p>
+<h2 id="模块加载机制">模块加载机制</h2>
+<p>NodeJS
+模块分为是<strong>核心模块</strong>、<strong>文件模块</strong>2
+大类：</p>
+<ul>
+<li><p><strong>核心模块</strong>：NodeJS 标准 API 提供的模块（例如
+fs、http、net、vm 等），可以直接通过 require 直接获取，例如
+require('fs')。核心模块拥有最高的加载优先级，即如果有模块与其命名冲突，NodeJS
+总会优先加载核心模块。</p></li>
+<li><p><strong>文件模块</strong>：存储为单独文件或文件夹的模块（<em>JavaScript
+代码、JSON、编译的
+C/C++代码</em>）。文件模块的加载方法复杂但是灵活，尤其是与 npm
+结合使用时。在不显式指定文件模块扩展名时，NodeJS
+会试图加上<code>.js</code>、<code>.json</code>、<code>.node</code>扩展名。</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">模块类别</th>
+<th style="text-align: left;">加载顺序</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">文件模块</td>
+<td style="text-align: left;">首先<code>.js</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JSON</td>
+<td style="text-align: left;">其次<code>.json</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C/C++扩展</td>
+<td style="text-align: left;">最后<code>.node</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="文件模块加载方式">文件模块加载方式</h3>
+<p><strong>按路径加载</strong>：如果 require
+参数以/开头，就以绝对路径方式查找，例如
+require('/hank/uinika')将会按优先级依次尝试加载/hank/uinika.js、uinika.json、uinika.node。
+如果以./或../开头，则以相对路径方式查找，例如
+require('./uinika')用来加载相同文件夹下的 uinika.js。</p>
+<p><strong>查找<code>node_modules</code>加载</strong>：如果<code>require()</code>函数参数不以<code>/、./、../</code>开头，该模块又不是核心模块，那么需要通过查找<code>node_modules</code>加载模块（<em>npm
+获取的包就是以这种方式加载</em>）。</p>
+<blockquote>
+<p>例如<code>node_modules</code>目录之外的<code>app.js</code>可以直接使用<code>require('express')</code>代替<code>require('./node_modules/express')</code>。</p>
+</blockquote>
+<p>当<code>require()</code>遇到一个既非核心模块，又不以路径表示的模块时，会试图在当前目录下的<code>node_modules</code>当中进行查找。如果没有找到，则会进入上一层目录的<code>node_modules</code>继续查找，直至遇到根目录。</p>
+<blockquote>
+<p>例如，在<code>/hank/app.js</code>中使用<code>require('test.js'))</code>，NodeJS
+会依次查找：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/home/hank/node_modules/test.js</span><br><span class="line">/home/node_modules/test.js</span><br><span class="line">/node_modules/test.js</span><br></pre></td></tr></table></figure>
+<h3 id="加载缓存">加载缓存</h3>
+<p><strong>NodeJS 模块不会被重复加载，因为 NodeJS
+通过文件名缓存所有加载过的文件模块，再次访问时将不会重复加载</strong>。</p>
+<p>NodeJS
+根据实际文件名缓存模块，而非基于<code>require()</code>提供的参数进行缓存，即使分别通过<code>require('express')</code>和<code>require('./node_modules/express')</code>加载
+2 次，尽管路径参数不同，但实际解析的文件依然是同一个。</p>
+<h2 id="异步模式下的流程控制">异步模式下的流程控制</h2>
+<p>基于异步 I/O
+的事件式编程需要将应用逻辑进行分拆，将会给应用程序的控制逻辑带来许多障碍，主要体现在如下两方面：</p>
+<h3 id="循环中回调函数的陷阱">循环中回调函数的陷阱</h3>
+<p>下面代码通过<code>app.js</code>依次读取文件<code>a.txt</code>、<code>b.txt</code>、<code>c.txt</code>，然后分别输出文件名和内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  tree</span><br><span class="line">.</span><br><span class="line">├── app.js</span><br><span class="line">├── a.txt</span><br><span class="line">├── b.txt</span><br><span class="line">└── c.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> files = [<span class="string">&quot;a.txt&quot;</span>, <span class="string">&quot;b.txt&quot;</span>, <span class="string">&quot;c.txt&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; files.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  fs.<span class="title function_">readFile</span>(files[i], <span class="string">&quot;utf-8&quot;</span>, <span class="keyword">function</span>(<span class="params">err, contents</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(files[i] + <span class="string">&quot;: &quot;</span> + contents);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">undefined: AAAAA</span><br><span class="line">undefined: CCCCC</span><br><span class="line">undefined: BBBBB</span><br></pre></td></tr></table></figure>
+<p>控制台输出结果当中，文件内容正确，但是文件名称却错误。接下来，将数据分别打印出来，在回调函数中分别输出<code>files</code>、<code>i</code>、<code>files[i]</code>的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> files = [<span class="string">&quot;a.txt&quot;</span>, <span class="string">&quot;b.txt&quot;</span>, <span class="string">&quot;c.txt&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; files.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  fs.<span class="title function_">readFile</span>(files[i], <span class="string">&quot;utf-8&quot;</span>, <span class="keyword">function</span>(<span class="params">err, contents</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;files : &quot;</span> + files);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;i : &quot;</span> + i);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;files[i] : &quot;</span> + files[i]);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">files : a.txt,b.txt,c.txt</span><br><span class="line">i : 3</span><br><span class="line">files[i] : undefined</span><br><span class="line">files : a.txt,b.txt,c.txt</span><br><span class="line">i : 3</span><br><span class="line">files[i] : undefined</span><br><span class="line">files : a.txt,b.txt,c.txt</span><br><span class="line">i : 3</span><br><span class="line">files[i] : undefined</span><br></pre></td></tr></table></figure>
+<p>可以发现<code>i</code>的输出一直是<code>3</code>，明显超出了<code>files</code>的长度，因此<code>files[i]</code>的值为<code>undefined</code>。这说明<code>readFile()</code>回调函数中访问到的<code>i</code>值都是循环退出后的结果。因为<code>files[i]</code>作为<code>fs.readFile</code>的第<code>1</code>个参数，并不是处于异步执行的回调函数中，所以能够正确定位文件。</p>
+<p>这里可以通过手动建立闭包来解决这个问题，下面代码在<code>for</code>循环内建立了一个匿名函数，将循环迭代变量<code>i</code>作为函数参数传递进去。由于闭包的存在，匿名函数中定义的变量和参数在内部<code>fs.readFile()</code>回调函数执行完毕前都不会被释放，因此回调函数内访问的
+i 分属不同的闭包实例，从而保留不同的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> files = [<span class="string">&quot;a.txt&quot;</span>, <span class="string">&quot;b.txt&quot;</span>, <span class="string">&quot;c.txt&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; files.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  (<span class="keyword">function</span>(<span class="params">i</span>) &#123;</span><br><span class="line">    fs.<span class="title function_">readFile</span>(files[i], <span class="string">&quot;utf-8&quot;</span>, <span class="keyword">function</span>(<span class="params">err, contents</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(files[i] + <span class="string">&quot;: &quot;</span> + contents);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  node app.js</span><br><span class="line">a.txt: AAAAA</span><br><span class="line">b.txt: BBBBB</span><br><span class="line">c.txt: CCCCC</span><br></pre></td></tr></table></figure>
+<p>因为上面这种方式降低了程序可读性，不推荐使用，推荐使用数组的<code>forEach()</code>方法解决该问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> files = [<span class="string">&quot;a.txt&quot;</span>, <span class="string">&quot;b.txt&quot;</span>, <span class="string">&quot;c.txt&quot;</span>];</span><br><span class="line"></span><br><span class="line">files.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">filename</span>) &#123;</span><br><span class="line">  fs.<span class="title function_">readFile</span>(filename, <span class="string">&quot;utf-8&quot;</span>, <span class="keyword">function</span>(<span class="params">err, contents</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(filename + <span class="string">&quot;: &quot;</span> + contents);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="回调函数深层嵌套">回调函数深层嵌套</h3>
+<p>除了循环的陷阱，NodeJS
+异步式编程还存在一个显著的问题：深层的回调函数嵌套。这种情况下，很难理清回调函数之间的关系，当程序规模扩大时必须降低耦合度，以增强代码可读性。</p>
+<p>NodeJS 提供了如下第三方模块来解决该问题：</p>
+<ul>
+<li><code>async</code>是 1
+个控制流解耦模块，提供了一系列函数来代替回调函数嵌套，但必须遵循其编程风格。</li>
+<li><code>streamlinejs</code>、<code>jscex</code>模块实现了一个
+JavaScript
+的编译器，其思想是<strong>变同步为异步</strong>，用户可以使用同步方式编写代码，但是编译后执行时却是异步的。</li>
+<li><code>eventproxy</code>模块对事件发射器进行了深度封装，采用完全基于事件松散耦合的方式来实现控制流的梳理。</li>
+</ul>
+<blockquote>
+<p>第三方模块的实现手段具有侵入性，可能引入更加复杂的语法，需要酌情使用。</p>
+</blockquote>
+<h2 id="cluster-模块">Cluster 模块</h2>
+<p>NodeJS
+提供<code>cluster</code>核心模块，用于生成与当前进程相同的子进程，并且允许父进程和子进程之间共享端口。</p>
+<blockquote>
+<p><strong>NodeJS
+另一核心模块<code>child_process</code>也提供了类似功能，两者最大区别在于<code>cluster</code>允许跨进程端口复用</strong>。</p>
+</blockquote>
+<p>如果在其它模块当中调用<code>app.js</code>，需要禁止服务器自动启动。可以修改<code>app.js</code>，并在<code>app.listen(3000);</code>附近添加如下判断语句：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="variable language_">module</span>.<span class="property">parent</span>) &#123;</span><br><span class="line">  app.<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br><span class="line">  <span class="comment">// 打印输出：Express正在以test模式监听端口3000！</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">    <span class="string">&quot;Express正在以%s模式监听端口%d！&quot;</span>,,</span><br><span class="line">    app.<span class="property">settings</span>.<span class="property">env</span>,</span><br><span class="line">    app.<span class="title function_">address</span>().<span class="property">port</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码判断当前模块是否由其它模块调用，如果是则不自动启动服务器，如果不是则直接启动调试服务器。经过上面修改，以后执行<code>node app.js</code>的时候，服务器会直接运行，但是在其它模块调用<code>"require('./app')"</code>则不会自动启动，而需要去显式调用<code>listen()</code>。</p>
+<p>接下来通过<code>cluster</code>调用<code>app.js</code>，并创建<code>cluster.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cluster = <span class="built_in">require</span>(<span class="string">&quot;cluster&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> os = <span class="built_in">require</span>(<span class="string">&quot;os&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取CPU 的数量</span></span><br><span class="line"><span class="keyword">var</span> numCPUs = os.<span class="title function_">cpus</span>().<span class="property">length</span>;</span><br><span class="line"><span class="keyword">var</span> workers = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cluster.<span class="property">isMaster</span>) &#123;</span><br><span class="line">  <span class="comment">// 主进程分支</span></span><br><span class="line">  cluster.<span class="title function_">on</span>(<span class="string">&quot;death&quot;</span>, <span class="keyword">function</span>(<span class="params">worker</span>) &#123;</span><br><span class="line">    <span class="comment">// 当一个工作进程结束时，重启工作进程</span></span><br><span class="line">    deleteworkers[worker.<span class="property">pid</span>];</span><br><span class="line">    worker = cluster.<span class="title function_">fork</span>();</span><br><span class="line">    workers[worker.<span class="property">pid</span>] = worker;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 初始开启与CPU 数量相同的工作进程</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; numCPUs; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> worker = cluster.<span class="title function_">fork</span>();</span><br><span class="line">    workers[worker.<span class="property">pid</span>] = worker;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 工作进程分支，启动服务器</span></span><br><span class="line">  <span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">&quot;./app&quot;</span>);</span><br><span class="line">  app.<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当主进程被终止时，关闭所有工作进程</span></span><br><span class="line">process.<span class="title function_">on</span>(<span class="string">&quot;SIGTERM&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> pid <span class="keyword">in</span> workers) &#123;</span><br><span class="line">    process.<span class="title function_">kill</span>(pid);</span><br><span class="line">  &#125;</span><br><span class="line">  process.<span class="title function_">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>cluster.js</code>的功能是创建与 CPU
+核心个数相同的服务器进程，以确保充分利用多核 CPU
+资源。主进程生成若干工作进程，并监听工作进程结束事件，当工作进程结束时，重新启动一个工作进程。分支进程产生时会自顶向下重新执行当前程序，并通过判断进入工作进程分支，最后在其中读取模块并启动服务器。</p>
+<p>通过<code>cluster</code>启动的工作进程可以直接实现端口复用，所有工作进程只需监听相同端口。当主进程终止时，还要主动关闭其它工作进程。</p>
+<p>在控制台执行<code>node cluster.js</code>，可以看到在 8 核 CPU
+上启动了多个进程。如果终止工作进程，新的工作进程会立即启动，终止主进程，所有工作进程也会同时结束。这样，既能利用多核资源，又有实现故障恢复的服务器就诞生了。</p>
+<blockquote>
+<p>NodeJS
+由于其单线程性的特性，必须通过多进程的方法才能充分利用多核资源。</p>
+</blockquote>
+<h2 id="nodejs-的瓶颈">NodeJS 的瓶颈</h2>
+<h3 id="计算密集型程序">计算密集型程序</h3>
+<p>NodeJS
+不善于处理计算密集型应用，当事件回调函数需要进行复杂运算，那么事件循环中所有请求都要等待计算完成之后才能响应。解决这个问题，需要将复杂运算拆解成若干逻辑，但这样又会提高代码的复杂度。</p>
+<h3 id="单用户多任务型应用">单用户多任务型应用</h3>
+<p>单用户多任务的情况下，需要进程之间相互协作，NodeJS
+当中处理类似场景不方便。NodeJS
+多进程往往是在执行同一任务，通过多进程来利用多核处理器资源，但当遇到多进程需要相互协作的时候，就显得捉襟见肘。</p>
+<h3 id="逻辑复杂的事务">逻辑复杂的事务</h3>
+<p>NodeJS
+的控制流被一个个事件拆散，是非线性的，但是人类思维是线性的，这样容易造成开发复杂度的提高。NodeJS
+更善于处理逻辑简单但访问频繁的任务，而不适合完成逻辑十分复杂的工作。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>NodeJS 快速上手指南</p><p><a href="http://www.uinio.com/Web/Nodejs/">http://www.uinio.com/Web/Nodejs/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2014-06-21</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2014-09-17</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Server/">Server</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Zen/Auto/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">现代汽车机械电气结构与驾驶技术分享</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/C&amp;C++/C/"><span class="level-item">Linux C 标准程序设计语言</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#简单介绍"><span class="level-left"><span class="level-item">1</span><span class="level-item">简单介绍</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#commonjs-规范"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">CommonJS 规范</span></span></a></li><li><a class="level is-mobile" href="#nodejs-的特点"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">NodeJS 的特点</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#异步式-io"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">异步式 I/O</span></span></a></li><li><a class="level is-mobile" href="#事件驱动"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">事件驱动</span></span></a></li></ul></li><li><a class="level is-mobile" href="#nodejs-与-phpnginx-性能对比"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">NodeJS 与 PHP+Nginx 性能对比</span></span></a></li><li><a class="level is-mobile" href="#nodejs-架构简介"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">NodeJS 架构简介</span></span></a></li></ul></li><li><a class="level is-mobile" href="#快速开始"><span class="level-left"><span class="level-item">2</span><span class="level-item">快速开始</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#查看帮助"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">查看帮助</span></span></a></li><li><a class="level is-mobile" href="#repl-模式"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">REPL 模式</span></span></a></li><li><a class="level is-mobile" href="#建立-http-服务器"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">建立 HTTP 服务器</span></span></a></li><li><a class="level is-mobile" href="#使用-supervisor-或-nodemon"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">使用 supervisor 或 nodemon</span></span></a></li></ul></li><li><a class="level is-mobile" href="#异步式-io-与事件编程"><span class="level-left"><span class="level-item">3</span><span class="level-item">异步式 I/O 与事件编程</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#多线程同步式-io-与单线程异步式-io-的比较"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">多线程同步式 IO
+与单线程异步式 IO 的比较</span></span></a></li><li><a class="level is-mobile" href="#异步式-io-的优缺点"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">异步式 I/O 的优缺点</span></span></a></li><li><a class="level is-mobile" href="#异步与同步-api"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">异步与同步 API</span></span></a></li><li><a class="level is-mobile" href="#异步事件"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">异步事件</span></span></a></li><li><a class="level is-mobile" href="#nodejs-事件循环机制"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">NodeJS 事件循环机制</span></span></a></li></ul></li><li><a class="level is-mobile" href="#module-模块"><span class="level-left"><span class="level-item">4</span><span class="level-item">Module 模块</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#创建模块"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">创建模块</span></span></a></li><li><a class="level is-mobile" href="#单次加载"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">单次加载</span></span></a></li><li><a class="level is-mobile" href="#覆盖-exports"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">覆盖 exports</span></span></a></li></ul></li><li><a class="level is-mobile" href="#package-包"><span class="level-left"><span class="level-item">5</span><span class="level-item">Package 包</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#作为文件夹的模块"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">作为文件夹的模块</span></span></a></li><li><a class="level is-mobile" href="#包描述文件-package.json"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">包描述文件 package.json</span></span></a></li></ul></li><li><a class="level is-mobile" href="#包管理器-npm"><span class="level-left"><span class="level-item">6</span><span class="level-item">包管理器 npm</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#本地模式"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">本地模式</span></span></a></li><li><a class="level is-mobile" href="#全局模式"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">全局模式</span></span></a></li><li><a class="level is-mobile" href="#全局链接"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">全局链接</span></span></a></li><li><a class="level is-mobile" href="#发布-npm-包"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">发布 npm 包</span></span></a></li></ul></li><li><a class="level is-mobile" href="#命令行调试"><span class="level-left"><span class="level-item">7</span><span class="level-item">命令行调试</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#nodejs-调试命令"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">NodeJS 调试命令：</span></span></a></li><li><a class="level is-mobile" href="#远程调试"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">远程调试</span></span></a></li><li><a class="level is-mobile" href="#第-3-方工具调试"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">第 3 方工具调试</span></span></a></li></ul></li><li><a class="level is-mobile" href="#global-模块"><span class="level-left"><span class="level-item">8</span><span class="level-item">Global 模块</span></span></a></li><li><a class="level is-mobile" href="#process-模块"><span class="level-left"><span class="level-item">9</span><span class="level-item">Process 模块</span></span></a></li><li><a class="level is-mobile" href="#console-模块"><span class="level-left"><span class="level-item">10</span><span class="level-item">Console 模块</span></span></a></li><li><a class="level is-mobile" href="#util-模块"><span class="level-left"><span class="level-item">11</span><span class="level-item">Util 模块</span></span></a></li><li><a class="level is-mobile" href="#events-模块"><span class="level-left"><span class="level-item">12</span><span class="level-item">Events 模块</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#eventemitter-常用-api"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">EventEmitter 常用 API</span></span></a></li><li><a class="level is-mobile" href="#继承-eventemitter"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">继承 EventEmitter</span></span></a></li></ul></li><li><a class="level is-mobile" href="#file-system-模块"><span class="level-left"><span class="level-item">13</span><span class="level-item">File System 模块</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#fs.readfilesync"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">fs.readFileSync()</span></span></a></li><li><a class="level is-mobile" href="#fs.open"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">fs.open()</span></span></a></li><li><a class="level is-mobile" href="#fs.read"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">fs.read()</span></span></a></li></ul></li><li><a class="level is-mobile" href="#http-模块"><span class="level-left"><span class="level-item">14</span><span class="level-item">Http 模块</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#http.server-的事件"><span class="level-left"><span class="level-item">14.1</span><span class="level-item">http.Server 的事件</span></span></a></li><li><a class="level is-mobile" href="#http.serverrequest"><span class="level-left"><span class="level-item">14.2</span><span class="level-item">http.serverRequest</span></span></a></li><li><a class="level is-mobile" href="#获取-get-请求"><span class="level-left"><span class="level-item">14.3</span><span class="level-item">获取 GET 请求</span></span></a></li><li><a class="level is-mobile" href="#获取-post-请求"><span class="level-left"><span class="level-item">14.4</span><span class="level-item">获取 POST 请求</span></span></a></li><li><a class="level is-mobile" href="#http.serverresponse"><span class="level-left"><span class="level-item">14.5</span><span class="level-item">http.ServerResponse</span></span></a></li><li><a class="level is-mobile" href="#http-客户端"><span class="level-left"><span class="level-item">14.6</span><span class="level-item">HTTP 客户端</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#http.request"><span class="level-left"><span class="level-item">14.6.1</span><span class="level-item">http.request()</span></span></a></li><li><a class="level is-mobile" href="#http.get"><span class="level-left"><span class="level-item">14.6.2</span><span class="level-item">http.get()</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#http.clientrequest"><span class="level-left"><span class="level-item">14.6.2.1</span><span class="level-item">http.ClientRequest</span></span></a></li><li><a class="level is-mobile" href="#http.clientresponse"><span class="level-left"><span class="level-item">14.6.2.2</span><span class="level-item">http.ClientResponse</span></span></a></li></ul></li></ul></li></ul></li><li><a class="level is-mobile" href="#express-服务器"><span class="level-left"><span class="level-item">15</span><span class="level-item">Express 服务器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#express4-核心方法与对象"><span class="level-left"><span class="level-item">15.1</span><span class="level-item">Express4 核心方法与对象</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#express"><span class="level-left"><span class="level-item">15.1.1</span><span class="level-item">express()</span></span></a></li><li><a class="level is-mobile" href="#application-对象"><span class="level-left"><span class="level-item">15.1.2</span><span class="level-item">Application 对象</span></span></a></li><li><a class="level is-mobile" href="#request-response-对象"><span class="level-left"><span class="level-item">15.1.3</span><span class="level-item">Request / Response 对象</span></span></a></li><li><a class="level is-mobile" href="#router-对象"><span class="level-left"><span class="level-item">15.1.4</span><span class="level-item">Router 对象</span></span></a></li></ul></li><li><a class="level is-mobile" href="#生产环境下的-express"><span class="level-left"><span class="level-item">15.2</span><span class="level-item">生产环境下的 Express</span></span></a></li></ul></li><li><a class="level is-mobile" href="#模块加载机制"><span class="level-left"><span class="level-item">16</span><span class="level-item">模块加载机制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#文件模块加载方式"><span class="level-left"><span class="level-item">16.1</span><span class="level-item">文件模块加载方式</span></span></a></li><li><a class="level is-mobile" href="#加载缓存"><span class="level-left"><span class="level-item">16.2</span><span class="level-item">加载缓存</span></span></a></li></ul></li><li><a class="level is-mobile" href="#异步模式下的流程控制"><span class="level-left"><span class="level-item">17</span><span class="level-item">异步模式下的流程控制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#循环中回调函数的陷阱"><span class="level-left"><span class="level-item">17.1</span><span class="level-item">循环中回调函数的陷阱</span></span></a></li><li><a class="level is-mobile" href="#回调函数深层嵌套"><span class="level-left"><span class="level-item">17.2</span><span class="level-item">回调函数深层嵌套</span></span></a></li></ul></li><li><a class="level is-mobile" href="#cluster-模块"><span class="level-left"><span class="level-item">18</span><span class="level-item">Cluster 模块</span></span></a></li><li><a class="level is-mobile" href="#nodejs-的瓶颈"><span class="level-left"><span class="level-item">19</span><span class="level-item">NodeJS 的瓶颈</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#计算密集型程序"><span class="level-left"><span class="level-item">19.1</span><span class="level-item">计算密集型程序</span></span></a></li><li><a class="level is-mobile" href="#单用户多任务型应用"><span class="level-left"><span class="level-item">19.2</span><span class="level-item">单用户多任务型应用</span></span></a></li><li><a class="level is-mobile" href="#逻辑复杂的事务"><span class="level-left"><span class="level-item">19.3</span><span class="level-item">逻辑复杂的事务</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

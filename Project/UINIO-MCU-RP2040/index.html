@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="树莓派 RP2040 是一款采用 ARM Cortex-M0+ 双核心的微控制器，运行频率高达 133MHz，片上内置有 264KB 容量的 SRAM 内存，并且能够外接高达 16MB 容量的片外 Flash 闪存（通过 QSPI 总线连接），内部还集成有 DMA 控制器，以及 30 个 GPIO 引脚（其中 4 个可用作模拟输入）。除此之外，片上还拥有 2 个 UART 控制器、2"><meta property="og:type" content="blog"><meta property="og:title" content="基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪"><meta property="og:url" content="http://www.uinio.com/Project/UINIO-MCU-RP2040/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="树莓派 RP2040 是一款采用 ARM Cortex-M0+ 双核心的微控制器，运行频率高达 133MHz，片上内置有 264KB 容量的 SRAM 内存，并且能够外接高达 16MB 容量的片外 Flash 闪存（通过 QSPI 总线连接），内部还集成有 DMA 控制器，以及 30 个 GPIO 引脚（其中 4 个可用作模拟输入）。除此之外，片上还拥有 2 个 UART 控制器、2"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-01-14T16:00:00.000Z"><meta property="article:modified_time" content="2024-07-03T18:28:39.735Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Project/UINIO-MCU-RP2040/"},"headline":"基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪","image":["http://www.uinio.com/Project/UINIO-MCU-RP2040/logo.png"],"datePublished":"2024-01-14T16:00:00.000Z","dateModified":"2024-07-03T18:28:39.735Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"树莓派 RP2040 是一款采用 ARM\r Cortex-M0+ 双核心的微控制器，运行频率高达\r 133MHz，片上内置有 264KB 容量的\r SRAM 内存，并且能够外接高达 16MB\r 容量的片外 Flash 闪存（通过 QSPI\r 总线连接），内部还集成有 DMA 控制器，以及 30 个 GPIO\r 引脚（其中 4 个可用作模拟输入）。除此之外，片上还拥有 2 个\r UART 控制器、2"}</script><link rel="canonical" href="http://www.uinio.com/Project/UINIO-MCU-RP2040/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-01-14T16:00:00.000Z" title="2024/1/15 00:00:00">2024-01-15</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.735Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">22 分钟读完 (大约3286个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪</h1><div class="content"><p>树莓派 <strong>RP2040</strong> 是一款采用 <strong>ARM
+Cortex-M0+</strong> 双核心的微控制器，运行频率高达
+<code>133MHz</code>，片上内置有 <code>264KB</code> 容量的
+<strong>SRAM</strong> 内存，并且能够外接高达 <code>16MB</code>
+容量的片外 <strong>Flash</strong> 闪存（通过 QSPI
+总线连接），内部还集成有 DMA 控制器，以及 30 个 <strong>GPIO</strong>
+引脚（其中 4 个可用作模拟输入）。除此之外，片上还拥有 2 个
+<strong>UART</strong> 控制器、2 个 <strong>SPI</strong> 控制器、2 个
+<strong>I²C</strong> 控制器、16 个 <strong>PWM</strong> 通道，以及 2
+个可编程 <strong>PIO</strong>（Programmable I/O）块，并且支持
+<strong>USB 1.1</strong> 主机和设备模式。</p>
+<p><img src="/Project/UINIO-MCU-RP2040/logo.png"></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-RP2040"><strong>UINIO-MCU-RP2040</strong></a>
+是一款基于 <strong>RP2040</strong> 的开发板，板载 Flash 采用更为小巧的
+<code>WSON8</code> 封装，添加 <code>SOD123</code>
+封装的<strong>肖特基势垒二极管</strong>防止正负级反接，同时增加用于全局异步复位的
+<strong>RESET</strong> 按钮，并且引出了官方 Pico 开发板所没有的
+<code>GPIO23</code> 和 <code>GPIO24</code>
+两个引脚资源。除此之外，由于模数转换引脚内部集成有连接至
+<code>IOVDD</code> 的反向二极管，所以采用 FET 场效应管
+<strong>DMG1012T</strong> 防止 RP2040 未上电时，这些引脚上施加的电压通过
+<code>ADC3</code> 引脚泄露至 <code>3.3V</code> 电源网络。</p>
+<span id="more"></span>
+<h2 id="硬件设计概要">硬件设计概要</h2>
+<p><strong>树莓派基金会</strong>于 2021 年初推出的
+<strong>RP2040</strong> 是一款基于台积电 <code>40nm</code>
+工艺的低成本、高性能微控制器产品，采用了高达 <code>133MHz</code>
+主频的双核心 <strong>ARM Cortex-M0+</strong> 内核架构，拥有多达 30
+个多功能 <strong>GPIO</strong> 引脚（其中 4
+个可以用作<strong>模拟输入</strong>），片上载有 <code>264kB</code>
+的静态随机存储器 <strong>SRAM</strong>。除此之外，通过 <code>QSPI</code>
+总线还可以支持高达 <code>16MB</code> 的片外 <strong>Flash</strong>
+闪存，下图展示了 <strong>RP2040</strong> 芯片各个功能引脚的分布：</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Overview-1.png"></p>
+<p>而接下来的表格，则描述了上图当中 <strong>RP2040</strong>
+各个引脚的具体功能：</p>
+<table>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 81%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">引脚名称</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>GPIOx</strong></td>
+<td style="text-align: left;">通用数字输入输出引脚，可以将多个内部外设映射至
+GPIO。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>GPIOx</strong>/<strong>ADCy</strong></td>
+<td style="text-align: left;">具有模数转换功能的通用数字输入输出引脚，用于采集电压信号。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>QSPIx</strong></td>
+<td style="text-align: left;">用于连接 SPI、Dual-SPI、Quad-SPI 接口的
+Flash 存储芯片，如果未连接，则也可以复用为可编程的 GPIO 引脚。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>USB_DM</strong> 和
+<strong>USB_DP</strong></td>
+<td style="text-align: left;">USB
+控制器引脚，支持全速的设备（Device）模式，以及全速/低速的主机（Host）模式，必须分别串接
+27Ω 的终端电阻。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>XIN</strong> 和
+<strong>XOUT</strong></td>
+<td style="text-align: left;">用于连接 12MHz 频率的晶体振荡器。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>RUN</strong></td>
+<td style="text-align: left;">全局异步复位引脚（低电平复位，高电平运行），如果不需要外部复位，则该引脚可以连接至
+<code>IOVDD</code>。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SWCLK</strong> 和
+<strong>SWDIO</strong></td>
+<td style="text-align: left;">SW 串行调试引脚，用于调试和下载固件。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TESTEN</strong></td>
+<td style="text-align: left;">工厂调试模式引脚，需要接入
+<code>GND</code> 使用。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>GND</strong></td>
+<td style="text-align: left;">外部接地引脚。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>IOVDD</strong></td>
+<td style="text-align: left;">GPIO 的数字电源引脚，额定电压介于
+<code>1.8V ~ 3.3V</code> 范围。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>USB_VDD</strong></td>
+<td style="text-align: left;">内部 USB 全速 PHY 电源引脚，额定电压为
+<code>3.3V</code>。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>ADC_AVDD</strong></td>
+<td style="text-align: left;">模数转换器电源引脚，额定工作电压为
+<code>3.3V</code>。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>VREG_VIN</strong></td>
+<td style="text-align: left;">RP2040
+内核稳压器电源<strong>输入</strong>引脚，额定电压介于
+<code>1.8V ~ 3.3V</code> 范围。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>VREG_VOUT</strong></td>
+<td style="text-align: left;">RP2040
+内核稳压器电源<strong>输出</strong>引脚，额定电压为
+<code>1.1V</code>，最大输出电流为 <code>100mA</code>。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>DVDD</strong></td>
+<td style="text-align: left;">数字核心电源引脚，额定电压为
+<code>1.1V</code>，可以连接至上面的 <code>VREG_VOUT</code>。</td>
+</tr>
+</tbody>
+</table>
+<p>下面展示了 <strong>RP2040</strong>
+微控制器芯片内部的系统结构框图：</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Overview-2.png"></p>
+<ul>
+<li>内嵌的 <code>264kB</code> 容量 SRAM 分布在 6 个独立的 Bank
+区块，可以通过专用的 AHB 总线进行访问；</li>
+<li>固件程序运行在采用 QSPI 接口的外部 Flash
+存储器当中，调试工作则需要通过 SWD 串行线进行。</li>
+<li>分别拥有 <code>2</code> 个 <strong>UART</strong>、<code>2</code> 个
+<strong>SPI</strong>、<code>2</code> 个 <strong>I²C</strong>
+总线控制器，以及 <code>16</code> 条 <strong>PWM</strong> 通道；</li>
+<li>支持 <code>Host</code> 和 <code>Device</code> 模式的 USB 1.1
+控制器以及用于物理信号转换的 <strong>PHY</strong>（Physical
+Layer）接口；</li>
+<li>通过 2 个 PLL <strong>锁相环</strong>来生成 USB
+以及内核的时钟信号；</li>
+</ul>
+<p><strong>UINIO-MCU-RP2040</strong>
+的最小系统主要由<strong>电源</strong>、<strong>Flash
+存储器</strong>、<strong>晶振</strong>、<strong>输入输出</strong>四个部分构成，接下来的内容将会分别进行讨论。</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Overview-3.png"></p>
+<h2 id="v-线性稳压电路">3.3V 线性稳压电路</h2>
+<p><strong>UINIO-MCU-RP2040</strong> 采用 <a target="_blank" rel="noopener" href="https://cn.sg-micro.com/"><strong>北京圣邦微电子</strong></a>
+推出的 <a target="_blank" rel="noopener" href="https://cn.sg-micro.com/uploads/soft/20190906/1567744517.pdf">SGM2019-3.3YN5G</a>
+低压差线性稳压芯片，采用 <code>SOT-23-5</code> 封装，能够提供最大
+<code>300mA</code> 的输出电流（此时压差为
+<code>400mV</code>），输入电压范围为
+<code>2.5V ~ 5.5V</code>，输出电压为 <code>3.3V</code>，下图是官方提供的
+SGM2019-3.3YN5G 的典型应用电路：</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/LDO-1.png"></p>
+<p>圣邦微的 <code>SGM2019-3.3YN5G</code> 相比于微盟电子的
+<code>ME6211C33M5G</code> 线性稳压芯片，其最大的特点在于提供了一个
+<code>EN</code> 输入使能引脚，<strong>UINIO-MCU-RP2040</strong>
+已经将该引脚连接至杜邦排针，并且与核心板的 <code>GND</code>
+相毗邻，可以方便的使用跳线帽禁用电源输入，当然也可以用于逻辑控制核心板的运行与停止。下面的表格，提供了
+<code>SGM2019-3.3YN5G</code> 全部引脚的功能说明：</p>
+<table>
+<colgroup>
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">引脚编号</th>
+<th style="text-align: left;">引脚名称</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: left;"><strong>IN</strong></td>
+<td style="text-align: left;">稳压输入引脚
+<code>2.5V ~ 5.5V</code>，需要连接 <code>1uF</code> 的接地电容。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>2</code></td>
+<td style="text-align: left;"><strong>GND</strong></td>
+<td style="text-align: left;">接地引脚。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>3</code></td>
+<td style="text-align: left;"><strong>EN</strong></td>
+<td style="text-align: left;">输入使能引脚，低电平时可以将输入电流降低至
+<code>10nA</code>，通常将其连接至输入电压引脚 <code>IN</code>。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>4</code></td>
+<td style="text-align: left;"><strong>BP/FB</strong></td>
+<td style="text-align: left;">参考噪声旁路(仅限固定电压版本)。旁路采用低漏
+0.01μF 陶瓷电容，降低输出噪声。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>5</code></td>
+<td style="text-align: left;"><strong>OUT</strong></td>
+<td style="text-align: left;"><code>3.3V</code> 稳压输出引脚。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/LDO-2.png"></p>
+<blockquote>
+<p><strong>注意</strong>：树莓派 <strong>RP2040</strong>
+需要使用到两种不同的工作电压，其中 <code>3.3V</code>
+主要用于输入输出，而 <code>1.1V</code>
+则是用于数字核心。由于芯片内部已经集成有 <code>3.3V</code> 转
+<code>1.1V</code> 的 LDO 低压差线性稳压器，所以硬件电路当中不需要再考虑
+<code>1.1V</code> 电压的供电问题，直接把 <strong>VREG_VOUT</strong> 与
+<strong>DVDD</strong> 连接起来即可。</p>
+</blockquote>
+<h2 id="电源去耦电容">电源去耦电容</h2>
+<p>除此之外，电源设计当中另外一个需要关注的方面在于
+<strong>RP2040</strong>
+电源引脚的去耦电容，它们在电路当中可以提供如下两个基本功能：</p>
+<ol type="1">
+<li>过滤掉一部分电源噪声纹波；</li>
+<li>防止电流需求突然增大时，电源网络产生过大的压降；</li>
+</ol>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Capacitor-1.png"></p>
+<p><strong>UINIO-MCU-RP2040</strong> 采用官方推荐的容值分别为
+<code>0.1uF</code>（有效滤除 <code>10MHz</code> 以下的电源纹波）和
+<code>2.2uF</code>（有效滤除 <code>20MHz</code>
+以上的高频纹波）的贴片陶瓷电容器（<strong>0402</strong>
+封装）作为去耦电容，并且将它们全部放置在靠近 <strong>RP2040</strong>
+芯片电源引脚的位置：</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Capacitor-2.png"></p>
+<p>除此之外，由于 <strong>RP2040</strong> 需要通过
+<code>SGM2019-3.3YN5G</code> 线性稳压器，将输入到 <code>VREG_IN</code>
+引脚的 <code>3.3V</code> 电压转换为 <code>VREG_OUT</code> 输出的
+<code>1.1V</code> 电压（最大输出电流为
+<code>100mA</code>），所以这里需要将 <code>VREG_OUT</code>
+连接至<strong>数字核心</strong>的 <code>1.1V</code> 电源输入引脚
+<code>DVDD</code>，此时依然分别需要添加相应的去耦电容。</p>
+<h2 id="flash-存储器">Flash 存储器</h2>
+<p><strong>RP2040</strong> 微控制器运行的固件程序代码都被保存外部的
+Flash 存储器当中，<strong>UINIO-MCU-RP2040</strong> 核心板采用 <a target="_blank" rel="noopener" href="https://www.winbond.com/hq/product/code-storage-flash-memory/serial-nor-flash?__locale=zh"><strong>台湾华邦电子</strong></a>
+推出的 <code>W25Q128JVP</code> 型 Flash 存储器，封装形式为更加小巧的
+<code>WSON8</code>，选型容量为 <code>128Mbit</code>（即
+<code>16MB</code>），也就是 <strong>RP2040</strong>
+微控制器可以支持的<strong>最大存储容量</strong>：</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Flash-1.png"></p>
+<p><code>QSPI_SS</code> 片选引脚连接的 <code>1.5kΩ</code> 电阻为连接到
+<code>3.3V</code> 电源的<strong>上拉电阻</strong>，虽然
+<code>QSPI_SS</code> 引脚自动默认为上拉，但是在 <strong>RP2040</strong>
+上电的某个瞬间，无法确保其始终的处于高电平状态，所以这里增加了一枚上拉电阻器来确保该片选引脚始终处于上拉状态。除此之外，在靠近
+Flash 存储芯片的电源引脚位置，同样也添加了一枚 <code>0.1uF</code>
+的去耦电容。</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Flash-2.png"></p>
+<blockquote>
+<p><strong>注意</strong>： 由于连接 Flash 存储器的 <strong>QSPI</strong>
+总线频率较高，需要采用尽可能短的 PCB
+走线距离，从而确保信号的完整性，并减少周边电路带来的<strong>串扰</strong>。</p>
+</blockquote>
+<h2 id="boot-与-reset-按键">BOOT 与 RESET 按键</h2>
+<p>相较于官方的 <strong>Raspberry Pi Pico</strong>
+开发板只拥有一枚【BOOT】按键，为了方便日常开发使用，<strong>UINIO-MCU-RP2040</strong>
+核心板同时提供了【BOOT】和【REST】两枚按键，其原理图与功能说明分别如下所示：</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Key.png"></p>
+<ol type="1">
+<li><strong>【BOOT】按键</strong>：通过一枚 <code>1kΩ</code> 电阻连接至
+Flash 存储芯片的 SPI 片选引脚，用于失能 Flash 片选信号，从而选择强制从
+USB 启动。此时 <strong>RP2040</strong> 会呈现为 USB
+大容量存储设备，可以用于直接复制下载固件。</li>
+<li><strong>【REST】按键</strong>：默认情况下 <code>RUN</code> 引脚通过
+<code>10kΩ</code>
+上拉电阻钳位在高电平，从而保持核心板处于正常运行状态。而该按键可以将<strong>全局异步复位引脚</strong><code>RUN</code>
+下拉为低电平状态，从而配合【BOOT】按键进入下载引导模式。</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：按键并联的 <code>0.1uF</code>
+电容用于滤除被按下时产生的抖动信号，实际应用时可以选择不进行贴装。</p>
+</blockquote>
+<h2 id="晶振电路">晶振电路</h2>
+<p>虽然 <strong>RP2040</strong>
+拥有内部的时钟源，但是其工作状态容易受到电源电压和温度的影响，因此官方建议使用一个更加稳定和精确的外部时钟源。<strong>RP2040</strong>
+微控制器的<strong>外部时钟源</strong>可以通过如下两种方式进行提供：</p>
+<ol type="1">
+<li>将输出 <code>3.3V</code> 方波信号的时钟源连接至 RP2040 的
+<code>XIN</code> 引脚；</li>
+<li>在 RP2040 芯片的 <code>XIN</code> 和 <code>XOUT</code> 引脚之间加入
+<code>12MHz</code> 晶体振荡器（首选）；</li>
+</ol>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/Oscillator-1.png"></p>
+<p><strong>UINIO-MCU-RP2040</strong>
+选用的是外置石英晶振方案，该款石英晶振的负载电容为
+<code>11pF</code>。晶振的<strong>负载电容</strong>是指与该晶振<strong>并联</strong>的全部有效电容的总和，可以将其视为晶振电路上<strong>串联</strong>的一枚电容器，其主要作用是稳定晶振的<code>谐振频率</code>和<code>输出幅度</code>，根据两个电容器并联之后总电容的计算公式：</p>
+<p><span class="math display">\[
+C_{负载电容} = \frac{C_{对地电容1} \times C_{对地电容2}}{C_{对地电容1} +
+C_{对地电容2}} + C_{PCB 杂散电容}
+\]</span></p>
+<p>由于 <span class="math inline">\(C_{对地电容1}\)</span> 与 <span class="math inline">\(C_{对地电容2}\)</span> 两枚并联电容的容值相等，而
+<span class="math inline">\(C_{PCB 杂散电容}\)</span> 的容值通常选取在
+<code>3pF ~ 5pF</code> 范围，从而可以得到晶振两枚并联的 <span class="math inline">\(C_{对地电容}\)</span> 的容值计算公式：</p>
+<p><span class="math display">\[
+C_{对地电容} = (C_{负载电容} - C_{PCB 杂散电容}) \times 2
+\]</span></p>
+<p>这里选择 <span class="math inline">\(C_{PCB 杂散电容}\)</span>
+为典型值 <code>5pF</code>，而负载电容 <span class="math inline">\(C_{负载电容}\)</span> 为
+<code>11pF</code>，从而就可以计算得到两枚接地电容的容值分别为：</p>
+<p><span class="math display">\[
+C_{对地电容} = (11pF - 5pF) \times 2 = 12pF
+\]</span></p>
+<h2 id="usb-接口电路">USB 接口电路</h2>
+<p><strong>RP2040</strong> 微控制器提供有 <code>USB_DM</code> 和
+<code>USB_DP</code>
+两个引脚（无需额外的上拉和下拉），用于<strong>全速</strong>（FS，Full
+Speed）或者<strong>低速</strong>（LS，Low Speed）的 USB 通信，即可以作为
+USB Host（主机），也可以作为 USB Device（设备）。虽然 RP2040 的全速 USB
+通信速率被限制为 <code>12Mbps</code> 兆位/秒，但是为了满足 USB
+的阻抗规范，依然需要分别串联 <code>27Ω</code>
+的终端电阻，并且尽量靠近芯片放置。同时走线需要尽可能的遵循
+<code>90Ω</code> 的 <strong>USB
+差分阻抗规范</strong>，并且走线下方尽量<strong>保持一个完整的接地平面</strong>。</p>
+<p><img src="/Project/UINIO-MCU-RP2040/Hardware/USB-1.png"></p>
+<p>自从 USB Type-C 标准开始，USB 增加了 <code>CC1</code> 和
+<code>CC2</code> 两个配置通道（Configuration Channel），当其串联上
+<code>5.1kΩ</code> 下拉电阻的时候，表明
+<strong>UINIO-MCU-RP2040</strong> 当前已经被配置为
+<strong>上行接口</strong>（UFP，Upstream Facing Port）用电端，从而提升
+USB Type-C 与传统 USB 接口的电源兼容性。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>基于树莓派 UINIO-MCU-RP2040 核心板制作逻辑分析仪</p><p><a href="http://www.uinio.com/Project/UINIO-MCU-RP2040/">http://www.uinio.com/Project/UINIO-MCU-RP2040/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-01-15</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Web/Solidity/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">基于 Solidity、Hardhat、OpenZeppelin 迈向 Web3.0</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Project/UINIO-Monitor/"><span class="level-item">运用 U8G2 与 TFT_eSPI 玩转 UINIO-Monitor 显示屏</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#硬件设计概要"><span class="level-left"><span class="level-item">1</span><span class="level-item">硬件设计概要</span></span></a></li><li><a class="level is-mobile" href="#v-线性稳压电路"><span class="level-left"><span class="level-item">2</span><span class="level-item">3.3V 线性稳压电路</span></span></a></li><li><a class="level is-mobile" href="#电源去耦电容"><span class="level-left"><span class="level-item">3</span><span class="level-item">电源去耦电容</span></span></a></li><li><a class="level is-mobile" href="#flash-存储器"><span class="level-left"><span class="level-item">4</span><span class="level-item">Flash 存储器</span></span></a></li><li><a class="level is-mobile" href="#boot-与-reset-按键"><span class="level-left"><span class="level-item">5</span><span class="level-item">BOOT 与 RESET 按键</span></span></a></li><li><a class="level is-mobile" href="#晶振电路"><span class="level-left"><span class="level-item">6</span><span class="level-item">晶振电路</span></span></a></li><li><a class="level is-mobile" href="#usb-接口电路"><span class="level-left"><span class="level-item">7</span><span class="level-item">USB 接口电路</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

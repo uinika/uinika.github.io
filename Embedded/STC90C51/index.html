@@ -1,0 +1,2700 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>宏晶 STC90C516RD+ 数据手册精读 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="8051 微处理器是指兼容Intel MCS-51体系架构的一系列单片机，全球有众多的半导体厂商都有基于这一体系架构的产品，例如：Atmel 的AT89C52、NXP 的P89V51、宏晶科技的STC89&amp;#x2F;90系列等。截至本篇文章成文之前，意法半导体推出的STM8系列单片机风头正劲，同为 8 位单片机产品，虽然 8051 在架构、功耗乃至价格上基本已无优势，但作为比较经典的嵌入式微处理器"><meta property="og:type" content="blog"><meta property="og:title" content="宏晶 STC90C516RD+ 数据手册精读"><meta property="og:url" content="http://www.uinio.com/Embedded/STC90C51/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="8051 微处理器是指兼容Intel MCS-51体系架构的一系列单片机，全球有众多的半导体厂商都有基于这一体系架构的产品，例如：Atmel 的AT89C52、NXP 的P89V51、宏晶科技的STC89&amp;#x2F;90系列等。截至本篇文章成文之前，意法半导体推出的STM8系列单片机风头正劲，同为 8 位单片机产品，虽然 8051 在架构、功耗乃至价格上基本已无优势，但作为比较经典的嵌入式微处理器"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2010-12-23T16:00:00.000Z"><meta property="article:modified_time" content="2013-03-26T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Embedded/STC90C51/"},"headline":"宏晶 STC90C516RD+ 数据手册精读","image":["http://www.uinio.com/Embedded/STC90C51/logo.png"],"datePublished":"2010-12-23T16:00:00.000Z","dateModified":"2013-03-26T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"8051 微处理器是指兼容Intel\r MCS-51体系架构的一系列单片机，全球有众多的半导体厂商都有基于这一体系架构的产品，例如：Atmel\r 的AT89C52、NXP\r 的P89V51、宏晶科技的STC89&#x2F;90系列等。截至本篇文章成文之前，意法半导体推出的STM8系列单片机风头正劲，同为\r 8 位单片机产品，虽然 8051\r 在架构、功耗乃至价格上基本已无优势，但作为比较经典的嵌入式微处理器"}</script><link rel="canonical" href="http://www.uinio.com/Embedded/STC90C51/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2010-12-23T16:00:00.000Z" title="2010/12/24 00:00:00">2010-12-24</time>发表</span><span class="level-item"><time dateTime="2013-03-26T16:00:00.000Z" title="2013/3/27 00:00:00">2013-03-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Embedded/">Embedded</a></span><span class="level-item">2 小时读完 (大约20424个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">宏晶 STC90C516RD+ 数据手册精读</h1><div class="content"><p>8051 微处理器是指兼容<strong>Intel
+MCS-51</strong>体系架构的一系列单片机，全球有众多的半导体厂商都有基于这一体系架构的产品，例如：Atmel
+的<code>AT89C52</code>、NXP
+的<code>P89V51</code>、宏晶科技的<code>STC89/90系列</code>等。截至本篇文章成文之前，意法半导体推出的<code>STM8</code>系列单片机风头正劲，同为
+8 位单片机产品，虽然 8051
+在架构、功耗乃至价格上基本已无优势，但作为比较经典的嵌入式微处理器解决方案，依然具备着不错的学习价值。</p>
+<p><img src="/Embedded/STC90C51/logo.png"></p>
+<p>本文介绍的<code>STC90C516RD+</code>属于<code>5V</code>单片机（<em>工作电压为<code>5.5V-3.3V</code></em>），属于相对比较廉价和常见的国产单片机解决方案，片上拥有<code>中央处理器CPU</code>、<code>程序存储器Flash</code>、<code>数据存储器RAM</code>、<code>定时/计数器</code>、<code>UART串口</code>、<code>IO接口</code>、<code>EEPROM</code>、<code>看门狗</code>等常用资源。</p>
+<span id="more"></span>
+<h1 id="单片机最小系统">单片机最小系统</h1>
+<p><strong>电源</strong>、<strong>晶振</strong>、<strong>复位</strong>是构成
+<strong>STC90C516RD+</strong> 单片机最小系统不可或缺的 3 个部分。</p>
+<figure>
+<img src="/Embedded/STC90C51/minimum.png" alt="minimum">
+<figcaption aria-hidden="true">minimum</figcaption>
+</figure>
+<h2 id="电源电路">电源电路</h2>
+<p><strong>STC90C516RD+</strong>
+单片机的工作电压为<code>5.5-3.3V</code>，其中 P0
+口的灌电流（<em>单片机引脚低电平时对外吸收的电流</em>）最大为<code>12mA</code>，其它
+I/O
+口灌电流最大为<code>6mA</code>。而拉电流（<em>单片机引脚高电平时对外输出的电流</em>）则通常低于<code>1mA</code>，万用表实测开发板
+LED 电路 P0
+口实际输出仅为<code>0.22mA</code>。单片机的供电引脚分别位于<code>40</code>脚和<code>20</code>脚，其中<code>40</code>脚接+5V，通常称为<strong>VCC</strong>代表电源正极，<code>20</code>脚接<strong>GND</strong>代表电源负极。</p>
+<figure>
+<img src="/Embedded/STC90C51/power.png" alt="power">
+<figcaption aria-hidden="true">power</figcaption>
+</figure>
+<blockquote>
+<p>单片机基本都采用 TTL 电平规范，STM32 单片机属于 3V 单片机，STC90C51
+属于 5V 单片机，单片机电路出现 CMOS 器件的机率比较小。</p>
+</blockquote>
+<h2 id="晶振电路">晶振电路</h2>
+<p>晶体振荡器（<em>crystal oscillator
+['ɒsɪleɪtə(r)]</em>），启动后会一直不停振荡，从而为单片机系统提供基准时钟信号（<em>单片机内部以该时钟信号为基准进行工作</em>）。STC90C516RD+的第
+18 脚<code>XTAL2</code>和第 19
+脚<code>XTAL1</code>是晶振引脚，电路中使用了<code>12MHz</code>的晶振（<em>每秒振荡
+1200
+万次</em>），外加两个<code>33pF</code>电容帮助晶振起振，并维持振荡信号稳定。</p>
+<figure>
+<img src="/Embedded/STC90C51/scm.png" alt="MCU">
+<figcaption aria-hidden="true">MCU</figcaption>
+</figure>
+<h2 id="复位电路">复位电路</h2>
+<p>下图的复位电路接到了单片机<code>9脚</code>的 RST
+复位引脚上，单片机复位一般发生在下面 3 种情况：</p>
+<ol type="1">
+<li><strong>上电复位</strong>：保证单片机每次都从一个固定的相同的状态开始工作。</li>
+<li><strong>手动复位</strong>：按下复位按键，让程序重新初始化重新运行。</li>
+<li><strong>程序自动复位</strong>：程序长时间失去响应，看门狗模块会自动重启复位单片机。</li>
+</ol>
+<figure>
+<img src="/Embedded/STC90C51/reset.png" alt="reset">
+<figcaption aria-hidden="true">reset</figcaption>
+</figure>
+<p>针对于手动复位的情况，当上面的开发板电路处于稳态时，电容将起到隔离直流的作用，复位按键此时处于弹起状态，电路没有产生电压差，HRST
+端的电位与 GND 相等，由于 <strong>STC90C516RD+</strong>
+单片机是高电平复位，低电平正常工作，因而此时单片机复位端口电压为低电平
+0V 处于正常工作状态。</p>
+<p>而对于上电复位的情况，上述电路在上电瞬间，电容 C5
+将会逐步充电，电路的电压差将从电容刚开始充电时的 5V 逐步过渡至充满后的
+0V。直至电容充满后电路上没有电流流动。由于 <strong>STC90C516RD+</strong>
+的上电复位要求 RST
+引脚先保持一小段时间高电平然后再切换至低电平，因而在开发板电路上电的过程当中，单片机实质上也就完成了上电复位操作。</p>
+<p>当复位按键按下时，也就是手动复位时，会经历两个过程：按键被按下之前单片机
+RST 引脚为低电平，按下之后电路将会导通，电容 C5 将会瞬间完成放电，RST
+此时将处于高电平复位状态，然后当按键松开弹起后，复位端口电压又将会处于低电平状态，此时实质上已经完成了一个上电复位的操作。按键接下的瞬间通常有数百毫秒，这个时间足够完成复位，但是伴随电容
+C5 两端的 5V
+电压被直接接通，将会形成一个较大的电流冲击，并在局部形成电磁干扰，为了抑制瞬间大电流产生的干扰，开发板在
+HRST 后放置了一个 100 欧的电阻和型号为 8550 的 PNP
+型三极管进行限流。</p>
+<h1 id="片上存储资源">片上存储资源</h1>
+<p><strong>STC90C516RD+</strong>
+系列单片机的<strong>程序存储器</strong>（Flash）和<strong>数据存储器</strong>（RAM）分别独立进行编址，而日常开发需要频繁使用的<strong>特殊功能寄存器
+SFR</strong>则属于 RAM 内特殊的一块区域，下面一一就其功能进行解释。</p>
+<h2 id="程序存储器-flash">程序存储器 Flash</h2>
+<p><strong>Flash 闪存</strong>（<em>Flash Memory</em>）主要包括
+<strong>NOR</strong> 和 <strong>NADN</strong>
+两种类型，可以在断电条件下存放用户的程序和数据，STC90C516RD+内部集成<code>61K</code>字节的
+Flash
+程序存储器，此外还具备访问<code>64KB</code>外部程序存储器的能力。当单片机复位之后，程序计数器
+PC 初始值为
+<code>0000H</code>，单片机将会从该位置运行代码。开发人员可以通过控制单片机的<strong>EA</strong>引脚来选择需要访问的是<code>61K</code><strong>片内</strong>程序存储器（<em>高电平</em>），还是访问<code>64KB</code>的片外程序存储器（<em>高电平</em>）。如果访问的是<strong>片内</strong>程序存储器，就会从其
+0000H 单元开始执行，当 PC 的值超出地址上限 3FFFH
+时，单片机将自动跳转至<strong>片外</strong>程序存储器（<em>如果存在</em>）的起始地址<code>4000H</code>继续执行。</p>
+<figure>
+<img src="/Embedded/STC90C51/flash.png" alt="flash">
+<figcaption aria-hidden="true">flash</figcaption>
+</figure>
+<p>中断服务程序的入口地址（<em>中断向量</em>）也位于程序存储器，每个中断都会在程序存储器当中拥有一个固定的入口地址，当中断发生并且冰屑得到响应之后，单片机就会自动跳转至相应的中断入口地址执行代码。外部中断
+0 的中断服务程序入口地址位于<code>0003H</code>，定时器/计数器 0
+的中断服务程序入口地址位于<code>000BH</code>,外部中断 1
+的中断程序入口地址位于<code>0013H</code>，定时器/计数器 1
+的中断入口地址是<code>001BH</code>等等。由于相邻的中断入口地址仅仅间隔 8
+个字节，通常无法保存完整的中断服务程序，因此会在中断响应的地址区域存放一条指向真正存放中断服务程序地址空间的强制跳转指令。</p>
+<blockquote>
+<p>早期单片机使用老式的 ROM 存储器(Read Only
+Memory)来保存程序数据，由于只能读不能写而逐步被市场淘汰。近年来可反复擦写十万次以上的
+Flash 全面代替了 ROM 在嵌入式系统中的地位，用作存储 Bootloader
+以及操作系统或程序代码。</p>
+</blockquote>
+<h2 id="数据存储器-ram">数据存储器 RAM</h2>
+<p><strong>RAM 随机存取存储器 </strong>（<em>Random Access
+Memory</em>）用于存放程序执行的中间结果和过程数据，掉电后存储内容丢失，<em>消费类电子产品上广泛使用的
+DDR(Double Data Rate SDRAM)就属于 RAM
+中的一种</em>。STC90C516RD+内部集成了<code>1280</code>字节的
+RAM，并在物理和逻辑上分为两个地址空间：256 字节的<strong>内部</strong>
+RAM 和 1024 字节的<strong>内部扩展</strong>
+RAM，此外还可以访问片外扩展的 64KB
+<strong>外部扩展</strong>RAM（<em>如果存在</em>）。</p>
+<figure>
+<img src="/Embedded/STC90C51/ram-1.png" alt="ram">
+<figcaption aria-hidden="true">ram</figcaption>
+</figure>
+<p>内部 RAM 一共 256 字节，分为三部分：<strong>低 128 字节
+RAM</strong>(<em>兼容传统 8051
+架构，既可直接寻址也可间接寻址</em>)、<strong>高 128 字节
+RAM</strong>(<em>扩展自 8052
+架构，只能间接寻址</em>)、<strong>特殊功能寄存器区</strong>（<em>只可直接寻址</em>）；高
+128 字节 RAM
+与特殊功能寄存器区地址空间虽然近似重叠，但是物理上是独立的，使用时通过不同寻址方式加以区分。</p>
+<figure>
+<img src="/Embedded/STC90C51/ram-2.png" alt="ram">
+<figcaption aria-hidden="true">ram</figcaption>
+</figure>
+<p>低 128 字节 RAM 也称为<strong>通用 RAM
+区</strong>，分为<strong>工作寄存器组区</strong>、<strong>可位寻址区</strong>、<strong>用户
+RAM 区</strong>、<strong>堆栈区</strong>。</p>
+<ul>
+<li><strong>工作寄存器组区</strong>地址从<code>00H-1FH</code>共 32
+字节，分为 4 个寄存器组，每组包含 8 个 8 位工作寄存器，编号分别为 R0 ~
+R7，由程序状态字寄存器 PSW 中的 RS1 和 RS0
+组合选择当前使用的工作寄存器组，使用工作寄存器可以提高运算速度。</li>
+<li><strong>可位寻址区地址</strong>从<code>20H-2FH</code>占用<code>16</code>字节共<code>16*8=128</code>位，既可以按字节存取，也能够进行位操作（<em>位地址指向的是一个位，字节地址指向的是一个字节单元，汇编程序中会使用不同的指令进行区分</em>）。</li>
+<li><strong>用户 RAM
+区</strong>和<strong>堆栈区</strong>位于<code>30H-7FH</code>，一个 8
+位的堆栈指针 SP 指向堆栈区，单片机复位后堆栈指针 SP 为 07H,
+指向工作寄存器组 0 当中的 R7；因此，用户初始化程序应对 SP
+设置初值，一般设置为 80H 以后的单元。</li>
+</ul>
+<h2 id="特殊功能寄存器-sfr">特殊功能寄存器 SFR</h2>
+<p><strong>SFR 特殊功能寄存器</strong>（<em>Special Function
+Register</em>），对片内各功能模块进行管理、控制、监视的<code>控制寄存器</code>和<code>状态寄存器</code>，特殊功能寄存器的操作主要通过汇编或
+C 语言代码来进行。</p>
+<h3 id="程序状态寄存器-program-status-word">程序状态寄存器 Program
+Status Word</h3>
+<p><strong>程序状态寄存器 PSW</strong>
+是微处理器核心部件运算器的组成部分，主要用来存放体现当前指令执行结果的各种状态信息（有无进位，有无溢出等）以及存放控制信息（如允许中断位，跟踪标志位等）。51
+单片机的 PSW 是一个 8 位寄存器，用来存放指令执行后的一些的状态，通常由
+CPU 进行控制，但是开发人员也可以手动改变各个状态位的值。</p>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">程序状态字寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">WPS</td>
+<td style="text-align: left;">CY</td>
+<td style="text-align: left;">AC</td>
+<td style="text-align: left;">F0</td>
+<td style="text-align: left;">RS1</td>
+<td style="text-align: left;">RS0</td>
+<td>OV</td>
+<td>F1</td>
+<td>P</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">释义</td>
+<td style="text-align: left;">进位标志位</td>
+<td style="text-align: left;">进位辅助标志位</td>
+<td style="text-align: left;">用户标志位 0</td>
+<td style="text-align: left;">工作寄存器组选择位</td>
+<td style="text-align: left;">工作寄存器组选择位</td>
+<td>溢出标志位</td>
+<td>用户标志位 1</td>
+<td>奇偶标志位</td>
+</tr>
+</tbody>
+</table>
+<h3 id="堆栈指针-stack-pointer">堆栈指针 Stack Pointer</h3>
+<p><strong>堆栈指针 SP</strong> 是一个 8
+位专用寄存器，用于标识堆栈顶部在内部 RAM
+当中的位置，系统复位后堆栈指针初始化为 07H，使得堆栈实际从 08H
+存储单元开始。考虑 08H-1FH 单元分别属于工作寄存器组
+1-3，程序设计时最好将 SP 值修改为 80H
+或更大的值。STC89C52RC+单片机的堆栈向上生长，即数据压入堆栈后，SP
+当中的内容将会增大。</p>
+<h1 id="io-管脚工作模式">IO 管脚工作模式</h1>
+<p><strong>STC90C516RD+</strong> 单片机的每个 IO
+口输出的驱动电流均可达到<code>20mA</code>，但是官方建议整个单片机 IO
+的输出电流一共最大不宜超过<code>120mA</code>。STC90C516RD+拥有<strong>准双向/弱上拉</strong>、<strong>强推挽/强上拉</strong>、<strong>开漏输出</strong>、<strong>仅输入/高阻态</strong>这
+4 种工作模式，接下来的示意图将使用电压驱动的 MOS
+管来说明其工作原理，由于 MOS
+管特性与三极管类似，某些书籍也为会使用三极管符号代替。</p>
+<h2 id="准双向">准双向</h2>
+<p><strong>STC90C516RD+</strong> 的 P1、P2、P3 都是准双向 IO
+口，如果内部输出高电平，那么经过一个<strong>反向器</strong>后将会被转换为低电平，此时
+MOS 管不会导通，VCC
+经过内部上拉电阻之后直接向外输出高电平。与之相反，如果内部输出低电平，那么经过<strong>反向器</strong>后转换为高电平，此时
+MOS 管导通，VCC 经过内部上拉电阻之后直接与 GND
+连接从而对外输出低电平。准双向模式与后面将要提到的开漏模式唯一区别在于：<strong>准双向模式内部拥有上拉电阻，而开漏模式则没有</strong>。</p>
+<p><img src="/Embedded/STC90C51/io/quasi-bidirectional.png"></p>
+<h2 id="开漏">开漏</h2>
+<p><strong>STC90C516RD+</strong> 的 P0
+在上电复位后就属于开漏输出，即片内如果输出高电平，经过<strong>反向器</strong>后转换为低电平，此时
+MOS 管不导通，由于没有内部上拉电阻，导致 VCC
+直接与工作电压相同的外围电路相连，所以 IO
+口不会输出任何信号。相反的，如果内部输出低电平，经过<strong>反向器</strong>后转换为高电平，此时
+MOS 管导通，VCC 直接与 GND
+相连并且对外输出低电平。概而言之，STC90C516RD+的 P0
+脚在开漏输出模式下，<strong>只能输出低电平不能输出高电平</strong>，要输出高电平必须在外部电路增加一个上拉电阻。</p>
+<p><img src="/Embedded/STC90C51/io/open-drain.png"></p>
+<h2 id="强推挽">强推挽</h2>
+<p>强推挽输出拥有比较强的电流驱动能力，当内部输出高电平的时候，由 MOS
+管直接输出电流，由于不存在限流电阻，所以电流输出能力较大。同样的，如果内部输出低电平的时候，其反向通过的电流也可以较大。</p>
+<p><img src="/Embedded/STC90C51/io/push-pull.png"></p>
+<h2 id="高阻态">高阻态</h2>
+<p>如果需要将 <strong>STC90C516RD+</strong> 的 IO
+口做为输入引脚，那么可以考虑将其设置为高阻态，高阻态引脚悬空的时候，万用表测量结果可能是高也可能是低，其状态完全取决于外部输入的电平信号，高阻态引脚对
+GND 的等效电阻极大，因而被称为高阻。</p>
+<h2 id="io-与上下拉电阻">IO 与上下拉电阻</h2>
+<p>当 <strong>STC90C516RD+</strong>
+管脚工作模式被设置为开漏输出的高电平或者高阻态时，会产生一个不确定的电平信号。此时<strong>上拉电阻</strong>会将这个不确定的信号通过一个电阻上拉至高电平，此时电阻本身也起到一个限流作用，上拉电阻通常串接在<strong>VCC</strong>一侧。相反的，<strong>下拉电阻</strong>就是将不确定信号下拉至低电平，通常被串接在<strong>GND</strong>一侧。连接至单片机
+IO 管脚的上下拉电阻主要具有如下四类用处：</p>
+<ol type="1">
+<li>类似于开漏输出这样的<strong>OC</strong>门电路，如果需要要输出高电平，必须通过外部加上拉电阻才能正常工作。</li>
+<li>增大普通 IO 管脚的电流驱动能力，标准 51 单片机的内部 IO
+管脚上拉电阻一般在数十千欧，通过外部添加上拉电阻，可以形成与内部上拉电阻的并联，从而增大高电平时的电流输出能力。</li>
+<li>诸如<code>5V</code>转<code>12V</code>这样的常见电平转换电路中，上拉电阻起到的实质是限流电阻的作用。</li>
+<li>IO
+管脚未使用处于悬空状态时，容易受到电磁干扰处于紊乱状态，虽然不会影响程序正常工作，但是会增加单片机功耗，此时通过添加一个对<strong>VCC</strong>的上拉电阻或者一个对<strong>GND</strong>的下拉电阻，可以有效的抵御电磁干扰。</li>
+</ol>
+<p>电路设计时，上下拉电阻阻值的选取主要参考以下情况：</p>
+<ol type="1">
+<li>从降低功耗的方面考虑应当足够大，因为电阻越大，电流越小。</li>
+<li>从确保足够的引脚驱动能力考虑应当足够小，电阻小了，电流才能大。</li>
+<li>在开漏输出时，过大的上拉电阻会导致信号上升沿变缓，从而影响信号的正确传递。</li>
+</ol>
+<p><img src="/Embedded/STC90C51/io/rising-edge.png"></p>
+<blockquote>
+<p>综合考量多种情况之后，STC90C516RD+ 单片机电路通常选取 1k 至 10k
+欧姆的上下拉电阻，具体的阻值可以根据实际需求选取，并非一成不变的固定值。</p>
+</blockquote>
+<h1 id="复位">复位</h1>
+<p><strong>STC90C516RD+</strong> 系列单片机支持<strong>外部 RST
+引脚复位</strong>、<strong>软件复位</strong>、<strong>掉电/上电复位</strong>、<strong>看门狗复位</strong>四种复位方式。</p>
+<h2 id="外部-rst-引脚复位">外部 RST 引脚复位</h2>
+<p>向单片机的 RST 引脚施加高电平至少 24 个时钟加 10us
+后，就可以使单片机进行复位状态。将 RST
+引脚拉回低电平后，单片机结束复位状态并从用户程序区的 0000H
+处开始正常工作。</p>
+<h2 id="软件复位">软件复位</h2>
+<p>嵌入式应用程序运行过程当中，有时会需要使单片机系统软复位（<em>热启动</em>），传统
+8051 架构并没有提供硬件上的支持，用户必须通过复杂的代码模拟这一行为。STC
+在传统 8051
+架构的基础上，增加了特殊功能寄存器<strong>ISP_CONTR</strong>支持，通过控制它的
+SWBS 和 SWRST
+两位就可以实现软件复位（单片机所有特殊功能寄存器都会复位至初始值，I/O
+口状态也会被初始化）。</p>
+<table>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 7%">
+<col style="width: 16%">
+<col style="width: 14%">
+<col style="width: 16%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">寄存器名称</th>
+<th style="text-align: left;">地址</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ISP_CONTR</td>
+<td style="text-align: left;">E7H</td>
+<td style="text-align: left;"><strong>ISPEN</strong></td>
+<td style="text-align: left;"><strong>SWBS</strong></td>
+<td style="text-align: left;"><strong>SWRST</strong></td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td>WT2</td>
+<td>WT1</td>
+<td>WT0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>ISPEN</strong>：<u>ISP/IAP
+功能允许位</u>，禁止（<code>ISPEN=0</code>）或允许（<code>ISPEN=1</code>）ISP/IAP
+读写并擦除程序存储器 Flash 或者 EEPROM。</li>
+<li><strong>SWBS</strong>：选择从用户应用程序区启动(0)，还是从 ISP
+程序区启动(1)。</li>
+<li><strong>SWRST</strong>：<code>SWRST=0</code>不操作，<code>SWRST=1</code>产生软件系统复位，由硬件自动清零。</li>
+</ul>
+<h2 id="掉电上电复位">掉电/上电复位</h2>
+<p>当单片机电源电压 VCC
+低于上电/掉电复位电路的门槛检测电压时就会发生复位，VCC
+恢复正常电压然并延迟 32768
+个时钟之后，上电/掉电复位结束。进入掉电模式之后，上电/掉电复位功能将会暂时关闭。</p>
+<h2 id="看门狗复位">看门狗复位</h2>
+<p>高可靠性嵌入式系统当中，为了防止微控制器由于代码错误导致程序跑飞，通常需要引入看门狗（<em>WDT，Watch
+Dog
+Timer</em>）让硬件复位。看门狗本质是一个计数器，如果微处理器不在规定时间内按访问看门狗，看门狗就会认为当前处于异常状态而进行复位重新执行用户代码。STC89C52RC+系列单片机内置了支持看门狗功能的特殊功能寄存器<strong>WDT_CONTR</strong>。</p>
+<table>
+<colgroup>
+<col style="width: 28%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">看门狗控制寄存器</th>
+<th style="text-align: left;">地址</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">WDT_CONTR</td>
+<td style="text-align: left;">E1H</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">EN_WDT</td>
+<td style="text-align: left;">CLR_WDT</td>
+<td style="text-align: left;">IDLE_WDT</td>
+<td>PS2</td>
+<td>PS1</td>
+<td>PS0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>EN_WDT</strong>：<u>看门狗允许位</u>，设置为<code>1</code>时启动看门狗。</li>
+<li><strong>CLR_WDT</strong>：<u>看门狗清零位</u>，设置为<code>1</code>时，看门狗会重新计数，然后由硬件自动清零。</li>
+<li><strong>IDLE_WDT</strong>：<u>看门狗空闲模式位</u>，设置为<code>1</code>时,
+看门狗定时器在空闲模式计数，设置为<code>0</code>时,
+看门狗定时器在空闲模式时不计数。</li>
+<li><strong>PS2/PS1/PS0</strong>：通过这三个位的组合来设置看门狗定时器的预分频值。</li>
+</ul>
+<h1 id="省电模式">省电模式</h1>
+<p><strong>STC90C516RD+</strong> 可以运行<strong>空闲模式（Idle
+Mode）</strong>、<strong>掉电模式（Power
+Down）</strong>两种省电模式以降低功耗，正常工作模式下单片机功耗为<code>4mA-7mA</code>，掉电模式典型功耗小于<code>0.1uA</code>，空闲模式下典型功耗是<code>2mA</code>，STC
+官方文档不建议使用空闲模式。单片机省电模式的选择由电源控制寄存器 PCON
+进行控制。</p>
+<table>
+<colgroup>
+<col style="width: 29%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">电源控制寄存器</th>
+<th style="text-align: left;">地址</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PCON</td>
+<td style="text-align: left;">87H</td>
+<td style="text-align: left;">SMOD</td>
+<td style="text-align: left;">SMOD0</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">POF</td>
+<td style="text-align: left;">GF1</td>
+<td>GF0</td>
+<td>PD</td>
+<td><em>IDL</em></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>SMOD, SMOD0</strong>：串口控制相关位，与电源控制无关。</li>
+<li><strong>POF</strong>：<u>上电复位标志位</u>，单片机停电后，上电复位标志位置<code>1</code>，此时可以通过软件清零。</li>
+<li><strong>GF1,GF0</strong>：<u>通用工作标志位</u>，用户可以酌情使用。</li>
+<li><strong>PD</strong>：置<code>1</code>时进入掉电模式，可由外部中断低电平触发或下降沿触发唤醒；进入掉电模式后，内部时钟停振，处理器、定时器、串口等部件停止工作，所有
+IO
+口、特殊功能寄存器维持进入掉电模式前的状态不变。由于掉电模式可由外部中断唤醒，所以仅外部中断会在掉电后继续工作，这里可以将单片机从掉电模式唤醒的管脚有<code>INT0/P3.2</code>、<code>INT1/P3.3</code>、<code>INT2/P4.3</code>、<code>INT3/P4.2</code>；此外，外部复位也可以将单片机从掉电模式唤醒，复位唤醒后的单片机将从用户程序的
+0000H 位置开始执行。</li>
+<li><strong>IDL</strong>：置<code>1</code>后进入空闲模式，除处理器不工作以外，其余片内功能继续工作，并可由任意中断唤醒。</li>
+</ul>
+<h1 id="指令寻址方式">指令寻址方式</h1>
+<p>寻址方式是嵌入式微控制器指令集当中必不可少的部分，寻址方式规定了处理器指令所操作数据的来源和目的地，STC90C516RD+单片机的寻址方式可概括为如下
+7 种：</p>
+<h2 id="立即寻址">立即寻址</h2>
+<p>在指令操作数中直接给出参与运算的操作数（<em>即立即数</em>），该寻址方式会将<code>#</code>号放在立即数前，从而标识当前寻址方式为立即寻址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV A, #70H   ; 将立即数70H传递给累加器A。</span><br></pre></td></tr></table></figure>
+<h2 id="直接寻址">直接寻址</h2>
+<p>操作数是参加运算操作数的地址，该方式只能用来表示特殊功能寄存器、位地址空间、内部数据寄存器，并且前两者只能使用直接寻址方式进行访问。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ANL 70H, #48H   ; 表示位于内部数据存储器RAM当中的直接地址为70H单元中的值与立即数48H与运算，并将结果存放至70H单元。</span><br></pre></td></tr></table></figure>
+<h2 id="间接寻址">间接寻址</h2>
+<p>间接寻址建立在直接寻址基础之上，如前所述，直接寻址得到的数据是一个地址，间接寻址会通过该地址再找到最终数据，即进行两次寻址，第
+1 次得到地址，第 2 次获取目标数据。在 8051
+架构单片机当中，为了区别<strong>寄存器寻址</strong>和<strong>寄存器间接寻址</strong>，会在寄存器名称前添加<code>@</code>符号表示寄存器间接寻址。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV A, @R1   ; 假如R1中的数据为内部数据存储单元的地址40H，那么这段代码会将该地址单元里存储的数据55H传送至累加器。</span><br></pre></td></tr></table></figure>
+<h2 id="寄存器寻址">寄存器寻址</h2>
+<p>操作数全部位于寄存器当中，根据指令操作码低三位的值以及程序状态寄存器
+PSW 当中 RS1 和 RS0
+的状态，选中指定寄存器之后进行相应指令操作。由于操作数都存储在寄存器，减少了指令执行过程中读写存储器单元的次数，所以使用该寻址方式的指令执行速度较快，使用汇编语言开发程序时，可以尽量考虑使用这种寻址方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV AX, 1234h   ; 将源操作数1234h中的数据传递至寄存器AX中。</span><br></pre></td></tr></table></figure>
+<h2 id="相对寻址">相对寻址</h2>
+<p>使用程序计数器 PC
+的当前值为基地址，并以指令中的地址标号作为偏移量，将两者相加后形成新的
+PC 值。相对寻址主要用于修改 PC 值，常用于实现程序的分支转移。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SJMP 80H   ; 以PC当前值为基地址，加上偏移量08H所得结果，即为指令转移的目的地址。</span><br></pre></td></tr></table></figure>
+<h2 id="变址寻址">变址寻址</h2>
+<p>以指定寄存器内容为基地址，然后加上变址寄存器的内容作为修改量，最后形成真正的操作数地址。这种寻址方式用于频繁修改地址时，无需修改指令，只需修改变址值既可。由于变址寻址只能操作程序存储器中的数据，所以常用于访问程序存储存器当中的数据表格。由于程序存储器只读，因而变址寻址只有读而无写操作，使用时以<code>MOVC</code>作为指令符号。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOVC A, @A+DPTR   ; 累加器A为偏移量寄存器，其内容与地址寄存器DPTR中内容相加，结果即为操作数的地址，取出该地址单元的内容送入累加器A。</span><br></pre></td></tr></table></figure>
+<h2 id="位寻址">位寻址</h2>
+<p>用于对内部数据存储器 RAM
+的某些区域、特殊功能寄存器进行位操作，位寻址其实是一种直接寻址方式，不过其操作地址是位地址，使用时主要以操作码加以区分。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV C, 20H   ；将立即数20H传递给进位位C</span><br></pre></td></tr></table></figure>
+<h1 id="keil-uvision-5">Keil uVision 5</h1>
+<p>2013 年 10 月 ARM 公司发布最新集成开发环境 RealView MDK
+开发工具中集成了最新版本的 Keil uVision
+5，让编译器、软件模拟与性能分析等调试工具与 ARM 处理器完美匹配。</p>
+<figure>
+<img src="/Embedded/STC90C51/keil/logo.png" alt="logo">
+<figcaption aria-hidden="true">logo</figcaption>
+</figure>
+<h2 id="界面布局">界面布局</h2>
+<p>Keil µVision
+的图形界面提供了用于选择命令的菜单以及带有命令按钮的工具栏，位于窗口底部的状态栏用于显示当前执行命令的信息和消息。编辑器当中的窗口可以重新定位并停靠在另一个物理屏幕，窗口布局会为每个项目自动保存，并在下次使用项目时恢复，如果需要也可以使用菜单里的<code>Reset View to Defaults</code>恢复默认布局。Keil
+拥有创建应用程序的<strong>构建模式</strong>和用于分析应用程序的<strong>调试模式</strong>两种操作方式，它们各自提供了额外的窗口和对话框，下面的截图展示了构建模式当中的一些主要窗口：</p>
+<figure>
+<img src="/Embedded/STC90C51/keil/keil-build.png" alt="keil-build">
+<figcaption aria-hidden="true">keil-build</figcaption>
+</figure>
+<p>Keil 上对当前项目设置晶振频率，并在目标选项的 Debug
+选项卡下勾选<code>Use Simulator</code>以后，就可以通过工具栏上的【Debug】按钮进入调试模式。</p>
+<figure>
+<img src="/Embedded/STC90C51/keil/keil-debug.png" alt="keil-debug">
+<figcaption aria-hidden="true">keil-debug</figcaption>
+</figure>
+<h2 id="减少代码长度">减少代码长度</h2>
+<p>Keil C 软件中选择目标选项的【C51】选项卡，可以将编译后生成的 HEX
+文件尺寸最大减少 10K 左右，可以有效降低占用程序存储器 Flash 的空间。</p>
+<figure>
+<img src="/Embedded/STC90C51/keil/performance.png" alt="keil-performance">
+<figcaption aria-hidden="true">keil-performance</figcaption>
+</figure>
+<h2 id="代码格式化">代码格式化</h2>
+<p>Keil
+本身并没有提供代码格式化功能，当代码量较大的时候，维护代码格式会给开发人员带来额外的负担，因此接下来将会基于开源格式化工具<a target="_blank" rel="noopener" href="http://astyle.sourceforge.net/">Astyle</a>，为 Keil
+添加上自定义的格式化命令以及对应的快捷键。</p>
+<figure>
+<img src="/Embedded/STC90C51/keil/format-1.png" alt="keil-format-1">
+<figcaption aria-hidden="true">keil-format-1</figcaption>
+</figure>
+<h2 id="输出日志">输出日志</h2>
+<p>Keil uVision 编译二进制文件之后，会输出如下的日志信息：</p>
+<ul>
+<li><strong>data</strong>：可寻址片内 RAM 占用空间。</li>
+<li><strong>xdata</strong>：可寻址片外 RAM 占用空间。</li>
+<li><strong>code</strong>：编译后的<code>.hex</code>文件烧写至单片机后占用的
+Flash 存储空间。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Rebuild target <span class="string">&#x27;hank&#x27;</span></span><br><span class="line">compiling main.c...</span><br><span class="line">assembling STARTUP.A51...</span><br><span class="line">linking...</span><br><span class="line">Program Size: data=9.0 xdata=0 code=29</span><br><span class="line">creating hex file from <span class="string">&quot;.\Objects\stc&quot;</span>...</span><br><span class="line"><span class="string">&quot;.\Objects\stc&quot;</span> - 0 Error(s), 0 Warning(s).</span><br><span class="line">Build Time Elapsed:  00:00:00</span><br></pre></td></tr></table></figure>
+<p>其中，<code>data + xdata</code>是占用的数据存储器 RAM
+的大小，相当于运行时占用的内存；<code>code</code>则是占用程序存储器
+Flash 的大小，即程序本身烧写到单片机后所占用的空间。</p>
+<h1 id="c-语言">8051C 语言</h1>
+<p>传统使用汇编语言进行单片机开发，编译后的机器语言虽然文件体积较小，但是代码可读性较差。8051C
+代码虽然编译后体积较大，但是可读性更优秀，更加适合工程化开发。<strong>Keil
+uVision 5</strong>提供的 IDE 包含了 8051 开发环境以及 C51
+交叉编译器，可以在 Windows 操作系统上交叉编译出可供 STC
+单片机运行的程序。</p>
+<h2 id="数据类型">数据类型</h2>
+<p>8051C 兼容传统的 C
+语言数据类型，并且额外提供了一些单片机开发所需的特殊数据类型。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">数据类型</th>
+<th style="text-align: left;">位</th>
+<th style="text-align: left;">字节</th>
+<th style="text-align: left;">取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>bit</code></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>0 ‖ 1</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>signed char</code></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><code>-128 ➠ +127</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>unsigned char</code></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><code>0 ➠ 255</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>enum</code></td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>-32768 ➠ +32767</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>signed short</code></td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>-32768 ➠ +32767</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>unsigned short</code></td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>0 ➠ 65535</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>signed int</code></td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>-32768 ➠ +32767</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>unsigned int</code></td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>0 ➠ 65535</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>signed long</code></td>
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><code>-2,147,483,648 ➠ +2,147,483,647</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>unsigned long</code></td>
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><code>0 ➠ 4,294,967,295</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><code>±1.175494E-38 ➠ ±3.402823E+38</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sbit</code></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>0 ‖ 1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>sfr</code></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><code>0 ➠ 255</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sfr16</code></td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>0 ➠ 65535</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>bit</code>关键字用来声明一个由<code>0</code>或<code>1</code>组成的可供
+STC 单片机进行位寻址（<em>即处于<code>20H~2FH</code>范围的 byte
+位或者处于<code>00H~7FH</code>范围的 bit 位</em>）的变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bit flag = <span class="number">0</span>;  <span class="comment">// 声明一个bit变量，并将其值赋为0</span></span><br></pre></td></tr></table></figure>
+<p><code>sbit</code>关键字类似于<code>bit</code>类型，用来指定单片机特殊功能寄存器（<em><code>BIT Register</code></em>）当中一个位地址（<code>bit address</code>）的值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbit P0 = PSW^<span class="number">0</span>; <span class="comment">// 声明sbit变量，并将其指定到PWS特殊功能寄存器上第0位的位置</span></span><br></pre></td></tr></table></figure>
+<p><code>sfr</code>关键字用于声明特殊功能寄存器（<em><code>BYTE Register</code></em>）当中的一个字节地址（<code>byte address</code>）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sfr PSW = <span class="number">0xD0</span>;  <span class="comment">// 并将其引用至位地址(D0)H</span></span><br></pre></td></tr></table></figure>
+<p><code>sfr16</code>关键字用来声明一个特殊功能寄存器的<strong>16
+位</strong>字节地址，而 <code>sfr</code> 数据类型声明的只是一个<strong>8
+位</strong>字节地址。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sfr16 <span class="variable constant_">DPTR</span> = <span class="number">0x82</span>;  <span class="comment">// 声明单片机内部DPL寄存器的地址</span></span><br></pre></td></tr></table></figure>
+<p>8051
+体系结构的单片机包含有独立的标志位、状态位、控制位等可位寻址的特殊功能寄存器，这些特殊功能寄存器的地址都已经被预先声明到
+Keil
+编译器所提供的<code>&lt;reg51.h&gt;</code>头文件当中，直接使用头文件可以简化代码并提升可读性，该头文件当中声明的内容请参考如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __REG51_H__</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __REG51_H__</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  字节寄存器  */</span></span><br><span class="line">sfr P0   = <span class="number">0x80</span>;      sfr PSW  = <span class="number">0xD0</span>;      sfr DPL  = <span class="number">0x82</span>;      sfr TMOD = <span class="number">0x89</span>;      sfr TH1  = <span class="number">0x8D</span>;      sfr SBUF = <span class="number">0x99</span>;</span><br><span class="line">sfr P1   = <span class="number">0x90</span>;      sfr ACC  = <span class="number">0xE0</span>;      sfr DPH  = <span class="number">0x83</span>;      sfr TL0  = <span class="number">0x8A</span>;      sfr IE   = <span class="number">0xA8</span>;</span><br><span class="line">sfr P2   = <span class="number">0xA0</span>;      sfr B    = <span class="number">0xF0</span>;      sfr PCON = <span class="number">0x87</span>;      sfr TL1  = <span class="number">0x8B</span>;      sfr IP   = <span class="number">0xB8</span>;</span><br><span class="line">sfr P3   = <span class="number">0xB0</span>;      sfr SP   = <span class="number">0x81</span>;      sfr TCON = <span class="number">0x88</span>;      sfr TH0  = <span class="number">0x8C</span>;      sfr SCON = <span class="number">0x98</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*  位寄存器  */</span></span><br><span class="line"><span class="comment">/*  PSW   */</span>          <span class="comment">/*  TCON  */</span>          <span class="comment">/*  IE   */</span>           <span class="comment">/*  IP   */</span>           <span class="comment">/*  P3  */</span>            <span class="comment">/*  SCON  */</span></span><br><span class="line">sbit CY   = <span class="number">0xD7</span>;     sbit TF1  = <span class="number">0x8F</span>;     sbit EA   = <span class="number">0xAF</span>;     sbit PS   = <span class="number">0xBC</span>;     sbit RD   = <span class="number">0xB7</span>;     sbit SM0  = <span class="number">0x9F</span>;</span><br><span class="line">sbit AC   = <span class="number">0xD6</span>;     sbit TR1  = <span class="number">0x8E</span>;     sbit ES   = <span class="number">0xAC</span>;     sbit PT1  = <span class="number">0xBB</span>;     sbit WR   = <span class="number">0xB6</span>;     sbit SM1  = <span class="number">0x9E</span>;</span><br><span class="line">sbit F0   = <span class="number">0xD5</span>;     sbit TF0  = <span class="number">0x8D</span>;     sbit ET1  = <span class="number">0xAB</span>;     sbit PX1  = <span class="number">0xBA</span>;     sbit T1   = <span class="number">0xB5</span>;     sbit SM2  = <span class="number">0x9D</span>;</span><br><span class="line">sbit RS1  = <span class="number">0xD4</span>;     sbit TR0  = <span class="number">0x8C</span>;     sbit EX1  = <span class="number">0xAA</span>;     sbit PT0  = <span class="number">0xB9</span>;     sbit T0   = <span class="number">0xB4</span>;     sbit REN  = <span class="number">0x9C</span>;</span><br><span class="line">sbit RS0  = <span class="number">0xD3</span>;     sbit IE1  = <span class="number">0x8B</span>;     sbit ET0  = <span class="number">0xA9</span>;     sbit PX0  = <span class="number">0xB8</span>;     sbit INT1 = <span class="number">0xB3</span>;     sbit TB8  = <span class="number">0x9B</span>;</span><br><span class="line">sbit OV   = <span class="number">0xD2</span>;     sbit IT1  = <span class="number">0x8A</span>;     sbit EX0  = <span class="number">0xA8</span>;                           sbit INT0 = <span class="number">0xB2</span>;     sbit RB8  = <span class="number">0x9A</span>;</span><br><span class="line">sbit P    = <span class="number">0xD0</span>;     sbit IE0  = <span class="number">0x89</span>;                                                 sbit TXD  = <span class="number">0xB1</span>;     sbit TI   = <span class="number">0x99</span>;</span><br><span class="line">                      sbit IT0  = <span class="number">0x88</span>;                                                 sbit RXD  = <span class="number">0xB0</span>;     sbit RI   = <span class="number">0x98</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="存储类型与存储模型">存储类型与存储模型</h2>
+<p>8051
+单片机包含了多种内存空间，包含内外部的代码或数据存储器。因此，声明一个变量的时候，需要搞清楚这些变量归属于哪一类存储单元。下面的表格</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">存储类型</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>code</code></td>
+<td style="text-align: left;">代码存储器（<em>64K 字节</em>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>data</code></td>
+<td style="text-align: left;">可直接寻址的内部数据存储器（<em>128
+字节</em>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>idata</code></td>
+<td style="text-align: left;">可直接寻址的内部数据存储器（<em>256
+字节</em>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>bdata</code></td>
+<td style="text-align: left;">位寻址数据存储器（<em>16 字节</em>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>xdata</code></td>
+<td style="text-align: left;">外部数据存储器（<em>64K 字节</em>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>pdata</code></td>
+<td style="text-align: left;">被分页的外部数据存储器（<em>256
+字节</em>）</td>
+</tr>
+</tbody>
+</table>
+<p>可以使用上面表格中提供的<code>code</code>关键字，去声明一个放置在<strong>代码存储区</strong>的变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> code message[] = <span class="string">&quot;An error occurred!&quot;</span>;  <span class="comment">// 声明一个放置在代码存储区的字符数组</span></span><br></pre></td></tr></table></figure>
+<p>如果需要声明一个位于<strong>数据存储区</strong>的变量，则可以使用上表中的另外的
+5 个关键字。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">signed</span> <span class="type">int</span> data name;</span><br><span class="line">bit bdata name;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> xdata name;</span><br></pre></td></tr></table></figure>
+<p>如果声明变量的时候忘记指定存储类型，或是希望所有声明的变量都被指定为一个默认存储类型（<em>Memory
+Model</em>），那么可以通过 C 语言的<code>#Small</code>指令或者 Keil
+的<code>target</code>编译选项来指定存储模型，具体模型及描述请参见下面列表：</p>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">存储模型</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>Small</code></td>
+<td style="text-align: left;">变量默认指定到内部数据存储单元（<em>data</em>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Compact</code></td>
+<td style="text-align: left;">变量默认指定到扩展数据存储单元的前 256
+个字节，也就是存储器分页的第 1 页（<em>pdata</em>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Large</code></td>
+<td style="text-align: left;">变量默认指定到扩展数据存储器（<em>xdata</em>）</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img src="/Embedded/STC90C51/keil/memory-model.png" alt="memory-model">
+<figcaption aria-hidden="true">memory-model</figcaption>
+</figure>
+<blockquote>
+<p>实际开发环境下，通常会使用<code>Small</code>模型，生成的代码最快体积最小，仅在不适用的场景才会选择<code>Compact</code>或<code>Large</code>模型。</p>
+</blockquote>
+<h2 id="数组">数组</h2>
+<p>数组可以用来存放<strong>相同数据类型</strong>的一组数据，例如下表展现了
+10 进制数在 ASCII 当中的 16 进制编码。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">二进制数</th>
+<th style="text-align: left;">十六进制 ASCII 编码</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;"><code>30H</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;"><code>31H</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>2</code></td>
+<td style="text-align: left;"><code>32H</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>3</code></td>
+<td style="text-align: left;"><code>33H</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>4</code></td>
+<td style="text-align: left;"><code>34H</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>5</code></td>
+<td style="text-align: left;"><code>35H</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>6</code></td>
+<td style="text-align: left;"><code>36H</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>7</code></td>
+<td style="text-align: left;"><code>37H</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>8</code></td>
+<td style="text-align: left;"><code>38H</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>9</code></td>
+<td style="text-align: left;"><code>39H</code></td>
+</tr>
+</tbody>
+</table>
+<p>在 8051C 程序当中，上面表格内的这些数据就可以存储为一个数组：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> table[<span class="number">10</span>] = &#123;<span class="number">0x30</span>, <span class="number">0x31</span>, <span class="number">0x32</span>, <span class="number">0x33</span>, <span class="number">0x34</span>, <span class="number">0x35</span>, <span class="number">0x36</span>, <span class="number">0x37</span>, <span class="number">0x38</span>, <span class="number">0x39</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="结构体">结构体</h2>
+<p>结构体用来存放一组<strong>不同数据类型</strong>的数据，可以使用<code>struct</code>关键字进行声明。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明person结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></span><br><span class="line">  <span class="type">char</span> name[<span class="number">4</span>];  <span class="comment">// C语言没有专门的字符串类型，需要以字符数组来代替</span></span><br><span class="line">  <span class="type">int</span> age;</span><br><span class="line">  <span class="type">long</span> birthday;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对person结构体进行赋值</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> <span class="title">author</span> =</span> &#123;<span class="string">&quot;Hank&quot;</span>, <span class="number">26</span>, <span class="number">1985</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印person结构体的成员</span></span><br><span class="line"><span class="built_in">printf</span>(author.name);</span><br></pre></td></tr></table></figure>
+<h2 id="指针">指针</h2>
+<p>8051
+程序在编译阶段，寄存器可能需要存放一些数据的确切内存地址，当对这些寄存器进行操作的时候，就需要使用到指针。C
+语言当中，<strong>指针</strong>（<em>pointer</em>）是指用来存储数据的一种数据类型，而<strong>指针变量</strong>（<em>pointer
+variable</em>）则是已经存放了数据地址的变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> number = <span class="number">2018</span>;</span><br><span class="line"><span class="type">int</span> *numberPointer = &amp;number; <span class="comment">// 指针所指向数据的数据类型 *指针名称</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, number);          <span class="comment">// 2018</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, &amp;number);         <span class="comment">// 6422316</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, numberPointer);   <span class="comment">// 6422316</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, &amp;numberPointer);  <span class="comment">// 6422312</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, *numberPointer);  <span class="comment">// 2018</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>值得注意的是，指针变量<code>numberPointer</code>当中存放的是<code>number</code>变量的内存地址，而非变量本身。</p>
+</blockquote>
+<h3 id="指针的存储类型">指针的存储类型</h3>
+<p>由于指针本身也属于一种数据类型，那么定义变量的时候也可以声明其存储类型，例如上面<code>numberPointer</code>的示例可以修改为下面这样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> * xdata numberPointer = &amp;number;  <span class="comment">// 符号*后的xdata声明指定该变量会被存放至外部数据存储器</span></span><br></pre></td></tr></table></figure>
+<p>根据指针指向数据存储类型的不同，又可以将指针分为<strong>类型化指针</strong>和<strong>非类型化指针</strong>。</p>
+<h3 id="类型化指针">类型化指针</h3>
+<p>显式指定了<strong>指针所指向数据</strong>的存储类型的指针称为<strong>类型化指针</strong>，指针符号<code>*</code>之前的的存储类型说明符<code>data</code>用于指定<strong>指针所指向数据</strong>的存储器类型，而<code>*</code>之后的存储类型说明符<code>xdata</code>用于指定<strong>指针本身</strong>的存储类型。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> data * xdata numberPointer = &amp;number;  <span class="comment">// 指针变量`numberPointer`本身位于外部数据内存`xdata`，但是指向的数据存储在内部数据内存`data`当中</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>类型化指针占用的空间大小依赖于数据存储的类型，通常在<code>1</code>或<code>2</code>个字节。</p>
+</blockquote>
+<h3 id="非类型化指针">非类型化指针</h3>
+<p>非类型化指针是指<strong>未显式声明指针所指向数据</strong>存储类型的指针，通常由<strong>3
+个字节</strong>组成。由于其数据存储类型只有在程序运行时才能确切知道，所以运行速度相对<strong>类型化指针</strong>略慢。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> * xdata numberPointer = &amp;number; <span class="comment">// 没有显式声明指针所指向数据的存储类型，因此这是一个非类型化的指针</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>非类型化指针的第<code>1</code>个字节用于指定其数据存储类型（<em>参见下表</em>），第<code>2</code>、<code>3</code>个字节分别是指针所指向字节地址的高、低位。</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">值</th>
+<th style="text-align: left;">数据存储类型</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;"><code>idata</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>2</code></td>
+<td style="text-align: left;"><code>xdata</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>3</code></td>
+<td style="text-align: left;"><code>pdata</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>4</code></td>
+<td style="text-align: left;"><code>data</code>、<code>bdata</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>5</code></td>
+<td style="text-align: left;"><code>code</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="函数">函数</h2>
+<p>8051 C 语言当中函数的声明基本与标准 C
+基本相同，但是也存在一些明显的区别：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">返回类型 函数名称( 参数列表 ) memory/reentrant/interrupt/using &#123;</span><br><span class="line">  <span class="keyword">return</span> 返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>8051 C 语言在函数名称后面增加了如下四个可选的关键字声明：</p>
+<ul>
+<li><code>memory</code>：指定一个显式的存储模型（<code>small</code>、<code>compact</code>、<code>large</code>），缺省时默认值为<code>small</code>。</li>
+<li><code>reentrant</code>：表示函数是否可重入（<em>递
+归</em>），缺省时默认值为不可重入。</li>
+<li><code>interrupt</code>：声明该函数为一个中断服务程序，缺省时默认值为。</li>
+<li><code>using</code>：指定当前使用的寄存器区域（<em>register
+bank</em>），缺省时默认值为。</li>
+</ul>
+<blockquote>
+<p>8051 C
+函数的参数和变量都保存在固定的地址，为了确保其值不被递归操作覆盖，所以默认不可进行递归调用。声明<code>reentrant</code>关键字后，函数不但可以递归调用，并且可被多个进程同时调用。</p>
+</blockquote>
+<p>下面的函数当中，省略了<code>memory</code>、<code>reentrant</code>、<code>interrupt</code>、<code>using</code>关键字的声明，此时函数会使用这些关键字的默认值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 存储模型为small，不可重入与递归，非中断函数，存放在内部数据存储区，默认寄存器区域为0。</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="参数传递">参数传递</h3>
+<p>8051 C
+语言当中，函数参数都是通过<strong>寄存器</strong>或<strong>内存</strong>进行传递的，其中通过<strong>寄存器</strong>传递参数更加快速，并且是默认的执行方式，下面的列表详细描述了参数传递相关的寄存器及其用途：</p>
+<table>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 26%">
+<col style="width: 23%">
+<col style="width: 32%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">参数个数</th>
+<th style="text-align: left;">字符型 <code>char</code> /1 字节指针</th>
+<th>整型 <code>int</code> /2 字符指针</th>
+<th>长整型 <code>long</code> / 浮点型 <code>float</code></th>
+<th>通用指针</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;">R7</td>
+<td>R6 &amp; R7</td>
+<td>R4-R7</td>
+<td>R1-R3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;">R5</td>
+<td>R4 &amp; R5</td>
+<td>R4-R7</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;">R3</td>
+<td>R2 &amp; R3</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>如果需要自定义具体的参数传递方式，那么可以通过<code>REGPARMs</code>控制指令指定所有参数都通过<strong>寄存器</strong>传递，或者使用<code>NOREGPARMs</code>控制指令指定所有参数都通过<strong>内存</strong>进行传递。由于
+51
+系列单片机只拥有<strong>8</strong>个寄存器，因此某些情况下可能没有足够的寄存器来传递参数，发生这种情况时，就可以将剩余的参数通过固定的内存地址传递。</p>
+<h3 id="返回值">返回值</h3>
+<p>8051 C
+的函数返回值必须通过<strong>寄存器</strong>进行返回，下面的列表展示了不同类型函数返回值所使用到的寄存器：</p>
+<table>
+<colgroup>
+<col style="width: 51%">
+<col style="width: 13%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">返回值</th>
+<th style="text-align: left;">寄存器</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">位 <code>bit</code></td>
+<td style="text-align: left;">进位标记（<em>C</em>）</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">字符型 <code>char</code> / 无符号字符型
+<code>unsigned char</code> / 1 字节指针</td>
+<td style="text-align: left;">R7</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">整型 <code>int</code> / 无符号整型
+<code>unsigned int</code>/ 2 字节指针</td>
+<td style="text-align: left;">R6 &amp; R7</td>
+<td style="text-align: left;">最高位在 R6，最低位在 R7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">长整型 <code>long</code> / 无符号长整型
+<code>unsigned long</code></td>
+<td style="text-align: left;">R4 ~ R7</td>
+<td style="text-align: left;">最高位在 R4，最低位在 R7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">浮点型 <code>float</code></td>
+<td style="text-align: left;">R4 ~ R7</td>
+<td style="text-align: left;">32 位 IEEE 格式</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">通用指针</td>
+<td style="text-align: left;">R1 ~ R3</td>
+<td style="text-align: left;">存储类型在 R3，最高位在 R2，最低位在
+R1</td>
+</tr>
+</tbody>
+</table>
+<h1 id="中断机制">中断机制</h1>
+<p>中断是单片机的一种运行机制，当单片机正在处理某个任务的时候，发生了优先级更高的事件要求暂停当前任务，转而去处理这个高优先级任务，处理完成后再回到上次发生中断的位置继续处理之前任务，这样的过程被称为<strong>中断</strong>，向单片机请求中断的来源则被称为<strong>中断源</strong>。</p>
+<p>单片机的中断机制通常会拥有多个中断源，当这些中断源同时请求中断时，要求单片机处理中断任务的时候，会根据<strong>中断源的优先级</strong>，优先去处理高优先级的任务。当单片机正在处理一个中断任务及其对应中断服务程序的时候，发生了一个优先级比当前中断更高的事件，则单片机会转而处理该优先级更高的任务，完成后再返回继续处理之前的低优先级任务，这个过程被称为<strong>中断嵌套</strong>。</p>
+<blockquote>
+<p>能够执行这种嵌套中断任务的单片机系统称为<strong>多级中断系统</strong>，否则就认为是属于<strong>单级中断系统</strong>。</p>
+</blockquote>
+<p><strong>STC90C516RD+</strong> 系列单片机提供了 <strong>4</strong>
+个中断优先级和 <strong>8</strong> 个中断请求源：<u>外部中断
+0(INT0)</u>、<u>定时器 0 中断</u>、<u>外部中断(INT1)</u>、<u>定时器 1
+中断</u>、<u>定时器 2
+中断</u>、<u>串口(<em>UART</em>)中断</u>、<u>外部中断
+2(INT2)</u>、<u>外部中断
+3(INT3)</u>。如果发生中断的中断源优先级相同，那么就会根据单片机的查询次序来决定首先响应哪个中断，这些中断源的的查询次序如下：</p>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中断源</th>
+<th style="text-align: left;">中断向量地址</th>
+<th style="text-align: left;">中断查询次序号</th>
+<th style="text-align: left;">中断优先级设置</th>
+<th style="text-align: left;">优先级 0 ← 低</th>
+<th style="text-align: left;">优先级 1</th>
+<th style="text-align: left;">优先级 2</th>
+<th style="text-align: left;">优先级 3 → 高</th>
+<th style="text-align: left;">中断请求标志位</th>
+<th style="text-align: left;">中断允许控制位</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">外部中断 0(<em>INT0</em>)</td>
+<td style="text-align: left;">0003H</td>
+<td style="text-align: left;"><strong>0</strong> ↑ 高优先级</td>
+<td style="text-align: left;">PX0H, PX0</td>
+<td style="text-align: left;"><code>0</code>, <code>0</code></td>
+<td style="text-align: left;"><code>0</code>, <code>1</code></td>
+<td style="text-align: left;"><code>1</code>, <code>0</code></td>
+<td style="text-align: left;"><code>1</code>, <code>1</code></td>
+<td style="text-align: left;">IE0</td>
+<td style="text-align: left;">EX0/EA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">定时器 0 中断</td>
+<td style="text-align: left;">000BH</td>
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;">PT0H, PT0</td>
+<td style="text-align: left;"><code>0</code>, <code>0</code></td>
+<td style="text-align: left;"><code>0</code>, <code>1</code></td>
+<td style="text-align: left;"><code>1</code>, <code>0</code></td>
+<td style="text-align: left;"><code>1</code>, <code>1</code></td>
+<td style="text-align: left;">TF0</td>
+<td style="text-align: left;">ET0/EA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">外部中断 1(<em>INT1</em>)</td>
+<td style="text-align: left;">0013H</td>
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;">PX1H, PX1</td>
+<td style="text-align: left;"><code>0</code>, <code>0</code></td>
+<td style="text-align: left;"><code>0</code>, <code>1</code></td>
+<td style="text-align: left;"><code>1</code>, <code>0</code></td>
+<td style="text-align: left;"><code>1</code>, <code>1</code></td>
+<td style="text-align: left;">IE1</td>
+<td style="text-align: left;">EX1/EA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">定时器 1 中断</td>
+<td style="text-align: left;">001BH</td>
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;">PT1H, PT1</td>
+<td style="text-align: left;"><code>0</code>, <code>0</code></td>
+<td style="text-align: left;"><code>0</code>, <code>1</code></td>
+<td style="text-align: left;"><code>1</code>, <code>0</code></td>
+<td style="text-align: left;"><code>1</code>, <code>1</code></td>
+<td style="text-align: left;">TF1</td>
+<td style="text-align: left;">ET1/EA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">串口中断(<em>UART</em>)</td>
+<td style="text-align: left;">0023H</td>
+<td style="text-align: left;"><strong>4</strong></td>
+<td style="text-align: left;">PSH, PS</td>
+<td style="text-align: left;"><code>0</code>, <code>0</code></td>
+<td style="text-align: left;"><code>0</code>, <code>1</code></td>
+<td style="text-align: left;"><code>1</code>, <code>0</code></td>
+<td style="text-align: left;"><code>1</code>, <code>1</code></td>
+<td style="text-align: left;">RI+TI</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">定时器 2 中断</td>
+<td style="text-align: left;">002BH</td>
+<td style="text-align: left;"><strong>5</strong></td>
+<td style="text-align: left;">PT2H, PT2</td>
+<td style="text-align: left;"><code>0</code>, <code>0</code></td>
+<td style="text-align: left;"><code>0</code>, <code>1</code></td>
+<td style="text-align: left;"><code>1</code>, <code>0</code></td>
+<td style="text-align: left;"><code>1</code>, <code>1</code></td>
+<td style="text-align: left;">TF2+EXF2</td>
+<td style="text-align: left;">ET2/EA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">外部中断 2(<em>INT2</em>)</td>
+<td style="text-align: left;">0033H</td>
+<td style="text-align: left;"><strong>6</strong></td>
+<td style="text-align: left;">PX2H, PX2</td>
+<td style="text-align: left;"><code>0</code>, <code>0</code></td>
+<td style="text-align: left;"><code>0</code>, <code>1</code></td>
+<td style="text-align: left;"><code>1</code>, <code>0</code></td>
+<td style="text-align: left;"><code>1</code>, <code>1</code></td>
+<td style="text-align: left;">IE2</td>
+<td style="text-align: left;">EX2/EA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">外部中断 3(<em>INT3</em>)</td>
+<td style="text-align: left;">003BH</td>
+<td style="text-align: left;"><strong>7</strong> ↓ 低优先级</td>
+<td style="text-align: left;">PX3H, PX3</td>
+<td style="text-align: left;"><code>0</code>, <code>0</code></td>
+<td style="text-align: left;"><code>0</code>, <code>1</code></td>
+<td style="text-align: left;"><code>1</code>, <code>0</code></td>
+<td style="text-align: left;"><code>1</code>, <code>1</code></td>
+<td style="text-align: left;">IE3</td>
+<td style="text-align: left;">EX3/EA</td>
+</tr>
+</tbody>
+</table>
+<p>使用 8051C
+语言进行开发的时候，上面表格中的中断查询次序号码就是中断函数声明当中的中断号：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">event0</span><span class="params">()</span> interrupt 0;</span><br><span class="line"><span class="type">void</span> <span class="title function_">event1</span><span class="params">()</span> interrupt 1;</span><br><span class="line"><span class="type">void</span> <span class="title function_">event2</span><span class="params">()</span> interrupt 2;</span><br><span class="line"><span class="type">void</span> <span class="title function_">event3</span><span class="params">()</span> interrupt 3;</span><br><span class="line"><span class="type">void</span> <span class="title function_">event4</span><span class="params">()</span> interrupt 4;</span><br><span class="line"><span class="type">void</span> <span class="title function_">event5</span><span class="params">()</span> interrupt 5;</span><br><span class="line"><span class="type">void</span> <span class="title function_">event6</span><span class="params">()</span> interrupt 6;</span><br><span class="line"><span class="type">void</span> <span class="title function_">event7</span><span class="params">()</span> interrupt 7;</span><br></pre></td></tr></table></figure>
+<h2 id="中断系统结构">中断系统结构</h2>
+<p><strong>STC90C516RD+</strong> 系列单片机的中断系统结构图如下：</p>
+<p><img src="/Embedded/STC90C51/interrupt/structure.png"></p>
+<p>上图展示了 <strong>STC90C516RD+</strong>
+中断系统的结构与触发流程，为了更加清晰的展示中断产生的条件，进一步将 8
+种中断类型的触发条件总结为下表：</p>
+<table>
+<colgroup>
+<col style="width: 7%">
+<col style="width: 92%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中断源</th>
+<th style="text-align: left;">触发条件</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">外部中断 0 (INT0)</td>
+<td style="text-align: left;"><code>IT0/TCON.0 = 1</code>（下降沿触发）、<code>IT1/TCON.0 = 0</code>（低电平触发）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">外部中断 1 (INT1)</td>
+<td style="text-align: left;"><code>IT1/TCON.2 = 1</code>（下降沿触发）、<code>IT1/TCON.2 = 0</code>（低电平触发）。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">外部中断 2 (INT2)</td>
+<td style="text-align: left;"><code>IT2/XICON.0 = 1</code>（下降沿触发）、<code>IT2/XICON.0 = 0</code>（低电平触发）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">外部中断 3 (INT3)</td>
+<td style="text-align: left;"><code>IT3/XICON.4 = 1</code>（下降沿触发）、<code>IT3/XICON.4 = 0</code>（低电平触发）。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">定时器 0 中断</td>
+<td style="text-align: left;">中断请求标志位是 TF0，当定时寄存器 TH0/TL0
+发生溢出时，溢出标志位 TF0
+会被置为<code>1</code>，引发中断并执行相应中断程序后会重新将 TF0
+置为<code>0</code>。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">定时器 1 中断</td>
+<td style="text-align: left;">中断请求标志位是 TF1，当定时寄存器 TH1/TL1
+发生溢出时，溢出标志位 TF1
+会被置为<code>1</code>，引发中断并执行相应中断程序后会重新将 TF1
+置为<code>0</code>。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">定时器 2 中断</td>
+<td style="text-align: left;">中断请求标志位是 TF2 和 EXF2；当定时寄存器
+TH2/TL2 发生溢出时，溢出标志位 TF2
+会被置为<code>1</code>，引发中断并执行相应中断程序后会重新将 TF2
+置为<code>0</code>；当 EXEN2 被置为<code>1</code>并且 T2EX
+的负跳变发生捕获或重装时，EXF2 会进行置位并引发中断。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">UART</td>
+<td style="text-align: left;">当 RI（串口接收中断请求标志位）和
+TI（串口发送中断请求标志位）任何一位被置为<code>1</code>，就会触发串口中断。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>数字电路中，数字电平由高电平<code>1</code>变为低电平<code>0</code>的一瞬间称为<strong>下降沿</strong>，逻辑电平由高向低变化时所产生的触发行为就被称为<strong>下降沿触发</strong>，即检测到的电位信号由高向低下降时就会产生的触发。相反的，由高电平<code>0</code>变为低电平<code>1</code>的瞬间称为<strong>上升沿</strong>，<strong>上升沿触发</strong>就是指电位信号由低向高上升时产生的触发。</p>
+</blockquote>
+<h2 id="中断涉及的寄存器">中断涉及的寄存器</h2>
+<p>下面的表格，列出了 <strong>STC90C516RD+</strong>
+单片机中断机制相关的全部寄存器，然后会逐一进行介绍：</p>
+<table>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 24%">
+<col style="width: 3%">
+<col style="width: 33%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">符号</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">地址</th>
+<th style="text-align: left;">最高有效位 ← 位地址及符号 →
+最低有效位</th>
+<th style="text-align: left;">复位值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>IE</strong>（Interrupt
+Enable）</td>
+<td style="text-align: left;">中断允许寄存器</td>
+<td style="text-align: left;">A8H</td>
+<td style="text-align: left;"><code>EA - ET2 ES ET1 EX1 ET0 EX0</code></td>
+<td style="text-align: left;">0x00 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>XICON</strong>（Auxiliary Interupt
+Control）</td>
+<td style="text-align: left;">辅助中断控制寄存器</td>
+<td style="text-align: left;">C0H</td>
+<td style="text-align: left;"><code>PX3 EX3 IE3 IT3 PX2 EX2 IE2 IT2</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>IP</strong>（Interrupt Priority
+Low）</td>
+<td style="text-align: left;">中断优先级控制寄存器（低）</td>
+<td style="text-align: left;">B8H</td>
+<td style="text-align: left;"><code>- - PT2 PS PT1 PX1 PT0 PX0</code></td>
+<td style="text-align: left;">xx00 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>IPH</strong>（Interrupt Priority
+High）</td>
+<td style="text-align: left;">中断优先级控制寄存器（高）</td>
+<td style="text-align: left;">B7H</td>
+<td style="text-align: left;"><code>PX3H PX2H PT2H PSH PT1H PX1H PT0H PX0H</code></td>
+<td style="text-align: left;">0000,0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TCON</strong>（Timer/Counter 0
+&amp; 1 Control）</td>
+<td style="text-align: left;">定时器/计数器 0 和 1 控制寄存器</td>
+<td style="text-align: left;">88H</td>
+<td style="text-align: left;"><code>TF1 TR1 TF0 TR0 IE1 IT1 IE0 IT0</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>T2CON</strong>（Timer/Counter 2
+Control）</td>
+<td style="text-align: left;">定时器/计数器 2 控制寄存器</td>
+<td style="text-align: left;">C8H</td>
+<td style="text-align: left;"><code>TF2 EXF2 RCLK TCLK EXEN2 TR2 C/T2 CP/RL2</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SCON</strong>（Serial
+Control）</td>
+<td style="text-align: left;">串口控制寄存器</td>
+<td style="text-align: left;">98H</td>
+<td style="text-align: left;"><code>SM0/FE SM1 SM2 REN TB8 RB8 TI RI</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+</tbody>
+</table>
+<h3 id="中断允许相关寄存器-ie-和-xicon">中断允许相关寄存器 IE 和
+XICON</h3>
+<h4 id="ie-中断允许寄存器">IE 中断允许寄存器</h4>
+<p>指定当前哪个中断源被允许使用，可位寻址。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中断允许寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>IE</strong></td>
+<td style="text-align: left;">EA</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">ET2</td>
+<td style="text-align: left;">ES</td>
+<td style="text-align: left;">ET1</td>
+<td>EX1</td>
+<td>ET0</td>
+<td>EX0</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><strong>EA</strong>：<u>总中断允许控制位</u>，<code>EA=1</code>开放中断，<code>EA=0</code>屏蔽所有中断。</li>
+<li><strong>ET2</strong>：<u>定时/计数器 T2
+溢出中断允许控制位</u>，<code>ET2=1</code>允许中断，<code>ET2=0</code>禁止中断。</li>
+<li><strong>ES</strong>：<u>串行口中断允许控制位</u>，<code>ES=1</code>允许串口中断，<code>ES=0</code>禁止串口中断。</li>
+<li><strong>ET1</strong>：<u>定时/计数器 T1
+溢出中断允许控制位</u>，<code>ET1=1</code>允许中断，<code>ET1=0</code>禁止中断。</li>
+<li><strong>EX1</strong>：<u>外部中断 1
+中断允许控制位</u>，<code>EX1=1</code>允许中断，<code>EX1=0</code>禁止中断。</li>
+<li><strong>ET0</strong>：<u>定时/计数器 T0
+溢出中断允许控制位</u>，<code>ET0=1</code>允许中断，<code>ET0=0</code>禁止中断。</li>
+<li><strong>EX0</strong>：<u>外部中断 0
+中断允许控制位</u>，<code>EX0=1</code>允许中断，<code>EX0=0</code>禁止中断。</li>
+</ol>
+<h4 id="xicon-辅助中断控制寄存器">XICON 辅助中断控制寄存器</h4>
+<p>中断源使能的一些辅助控制，可位寻址。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">辅助中断控制寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>XICON</strong></td>
+<td style="text-align: left;">PX3</td>
+<td style="text-align: left;">EX3</td>
+<td style="text-align: left;">IE3</td>
+<td style="text-align: left;">IT3</td>
+<td style="text-align: left;">PX2</td>
+<td>EX2</td>
+<td>IE2</td>
+<td>IT2</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><strong>PX3</strong>：<u>外部中断 3 中断优先级控制</u>，与 IP
+中断优先级控制器的 PX3H 位一起决定外部中断 3 的优先级。</li>
+<li><strong>EX3</strong>：<u>外部中断 3
+中断允许控制位</u>，<code>EX3=1</code>允许中断，<code>EX3=0</code>禁止中断。</li>
+<li><strong>IE3</strong>：<u>外部中断 3
+中断请求标志位</u>，中断条件成立以后<code>IE3=1</code>，可由硬件自动清零。</li>
+<li><strong>IT3</strong>：<u>外部中断 3
+触发方式控制位</u>，当<code>IT3=1</code>时设置外部中断 3
+为下降沿触发，当<code>IT3=0</code>时则为低电平触发。</li>
+<li><strong>PX2</strong>：<u>外部中断 2 中断优先级控制</u>，与 IP
+中断优先级控制器的 PX2H 位一起决定外部中断 2 的优先级。</li>
+<li><strong>EX2</strong>：<u>外部中断 2
+中断允许控制位</u>，<code>EX2=1</code>允许中断，<code>EX2=0</code>禁止中断。</li>
+<li><strong>IE2</strong>：<u>外部中断 2
+中断请求标志位</u>，中断条件成立以后<code>IE2=1</code>，可由硬件自动清零。</li>
+<li><strong>IT2</strong>：<u>外部中断 2
+触发方式控制位</u>，当<code>IT2=1</code>时设置外部中断 2
+为下降沿触发，当<code>IT2=0</code>时则为低电平触发。</li>
+</ol>
+<blockquote>
+<p><strong>STC90C516RD+</strong>
+系列单片机复位之后<strong>IE</strong>和<strong>XICON</strong>将会被清<code>0</code>。</p>
+</blockquote>
+<h3 id="中断优先级涉及寄存器-ipiphxicon">中断优先级涉及寄存器
+IP、IPH、XICON</h3>
+<h4 id="ip-中断优先级控制寄存器低">IP 中断优先级控制寄存器（低）</h4>
+<p>标准 8051
+架构单片机通过设置<strong>IP</strong>可以拥有高、低<strong>2</strong>个中断优先级，可以实现两级中断嵌套，可位寻址。</p>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中断优先级控制寄存器（低）</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>IP</strong></td>
+<td style="text-align: left;">保留</td>
+<td style="text-align: left;">保留</td>
+<td style="text-align: left;">PT2</td>
+<td style="text-align: left;">PS</td>
+<td style="text-align: left;">PT1</td>
+<td>PX1</td>
+<td>PT0</td>
+<td>PX0</td>
+</tr>
+</tbody>
+</table>
+<h4 id="iph-中断优先级控制寄存器高">IPH 中断优先级控制寄存器（高）</h4>
+<p><strong>STC90C516RD+</strong>
+单片机新增的<strong>IPH</strong>特殊功能寄存器可以将优先级设置为<strong>4</strong>个，不可位寻址。</p>
+<table>
+<colgroup>
+<col style="width: 45%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中断优先级控制寄存器（高）</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>IPH</strong></td>
+<td style="text-align: left;">PX3H</td>
+<td style="text-align: left;">PX2H</td>
+<td style="text-align: left;">PT2H</td>
+<td style="text-align: left;">PSH</td>
+<td style="text-align: left;">PT1H</td>
+<td>PX1H</td>
+<td>PT0H</td>
+<td>PX0H</td>
+</tr>
+</tbody>
+</table>
+<h4 id="xicon-中断辅助控制寄存器">XICON 中断辅助控制寄存器</h4>
+<p>辅助中断的控制寄存器，可位寻址。</p>
+<table>
+<colgroup>
+<col style="width: 42%">
+<col style="width: 12%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 12%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">XICON 中断辅助控制寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>XICON</strong></td>
+<td style="text-align: left;"><strong>PX3</strong></td>
+<td style="text-align: left;">EX3</td>
+<td style="text-align: left;">IE3</td>
+<td style="text-align: left;">IT3</td>
+<td style="text-align: left;"><strong>PX2</strong></td>
+<td>EX2</td>
+<td>IE2</td>
+<td>IT2</td>
+</tr>
+</tbody>
+</table>
+<h4 id="中断优先级配置">中断优先级配置</h4>
+<ul>
+<li><strong>PX0H、PX0</strong>：<u>外部中断 0
+优先级控制</u>（<code>0, 0</code>优先级零，<code>0, 1</code>优先级一，<code>1, 0</code>优先级二，<code>1, 1</code>优先级三）。</li>
+<li><strong>PX1H、PX1</strong>：<u>外部中断 1
+优先级控制</u>（<code>0, 0</code>优先级零，<code>0, 1</code>优先级一，<code>1, 0</code>优先级二，<code>1, 1</code>优先级三）。</li>
+<li><strong>PX2H、PX2</strong>：<u>外部中断 2
+优先级控制</u>（<code>0, 0</code>优先级零，<code>0, 1</code>优先级一，<code>1, 0</code>优先级二，<code>1, 1</code>优先级三）。</li>
+<li><strong>PX3H、PX3</strong>：<u>外部中断 3
+优先级控制</u>（<code>0, 0</code>优先级零，<code>0, 1</code>优先级一，<code>1, 0</code>优先级二，<code>1, 1</code>优先级三）。</li>
+<li><strong>PT1H、PT1</strong>：<u>定时器 1
+中断优先级控制</u>（<code>0, 0</code>优先级零，<code>0, 1</code>优先级一，<code>1, 0</code>优先级二，<code>1, 1</code>优先级三）。</li>
+<li><strong>PT0H、PT0</strong>：<u>定时器 0
+优先级控制</u>（<code>0, 0</code>优先级零，<code>0, 1</code>优先级一，<code>1, 0</code>优先级二，<code>1, 1</code>优先级三）。</li>
+<li><strong>PT2H、PT2</strong>：<u>定时器 2
+优先级控制</u>（<code>0, 0</code>优先级零，<code>0, 1</code>优先级一，<code>1, 0</code>优先级二，<code>1, 1</code>优先级三）。</li>
+<li><strong>PSH、PS</strong>：<u>串口中断优先级控制</u>（<code>0, 0</code>优先级零，<code>0, 1</code>优先级一，<code>1, 0</code>优先级二，<code>1, 1</code>优先级三）。</li>
+</ul>
+<blockquote>
+<p>中断优先级控制寄存器 IP 和 IPH
+的各个位都由可以通过代码设置为<code>1</code>或者<code>0</code>，但是 IP
+可以进行位操作，而 IPH
+只能使用字节操作指令进行更新。STC89C52RC+单片机复位后 IP 和 IPH 均为
+00H，各中断源均为低优先级中断。</p>
+</blockquote>
+<h3 id="scon-串口控制寄存器">SCON 串口控制寄存器</h3>
+<p>SCON 寄存器与中断有关的只有 TI 和 RI
+两位，其它位与中断机制无关，可位寻址。</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 12%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">串口控制寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>SCON</strong></td>
+<td style="text-align: left;">SM0/FE</td>
+<td style="text-align: left;">SM1</td>
+<td style="text-align: left;">SM2</td>
+<td style="text-align: left;">REN</td>
+<td style="text-align: left;">TB8</td>
+<td>RB8</td>
+<td><strong>TI</strong></td>
+<td><strong>RI</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>RI</strong>：<u>串口接收中断标志位</u>，若串口允许接收数据并且以方式
+0 工作，则每当接收到第 8 位数据时被置为 <code>1</code>；如果以方式
+1、2、3 工作并且 <code>SM2=0</code> 时，则每当接收到停止位中间时 RI 置为
+1；当以方式 2、3 工作并且<code>SM2=1</code>时，则仅当接收到的第 9 位数据
+RB8 等于<code>1</code>以后，同时还要在接收到停止位的中间时将 RI
+置<code>1</code>。<code>RI=1</code>表示串行口正在向单片机申请中断，然后必须在中断服务程序当中手动清零。</li>
+<li><strong>TI</strong>：<u>串口发送中断标志位</u>，串行口以方式 0
+发送时，每当发送完 8 位数据后由硬件置<code>1</code>；若以方式 1、2、3
+发送时，则会在开始发送停止位时置
+<code>1</code>。<code>TI=1</code>表示串行口正在向单片机申请中断，但需要注意单片机响应中断请求并转向中断服务程序的执行时并不会将
+TI 清零，必须由用户手动在中断服务程序当中清零。</li>
+</ul>
+<blockquote>
+<p>关于 SCON 的进一步讲解将在后续串行口通信章节进行。</p>
+</blockquote>
+<h3 id="tcont2con-定时器计数器控制寄存器">TCON/T2CON
+定时器/计数器控制寄存器</h3>
+<p>定时器/计数器 T0、T1 是标准 8051 架构的配置，而定时器/计数器 T2 则是
+8052 架构单片机所进行的增强，而 <strong>STC90C516RD+</strong> 提供了对
+T2 定时器的支持，相关寄存器的解析请参见下一章节的内容。</p>
+<h2 id="中断优先级">中断优先级</h2>
+<p><strong>STC90C516RD+</strong> 的所有中断都具备 4
+个中断优先级（<em>高优先级、低优先级</em>），并可实现 2
+级中断嵌套，正在执行的低优先级会被高优先级中断，但不能被另一个低优先级中断，这个过程会一直持续至遇到返回指令<code>RETI</code>执行结束。</p>
+<p>当同时收到多个相同优先级的中断请求时，执行的先后顺序取决于内部的查询次序号，相关的次序以及
+C 语言中断关键字声明如下表：</p>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">◄ 高 0</th>
+<th style="text-align: left;">高 1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+<th style="text-align: left;">5</th>
+<th>6</th>
+<th>7 低 ►</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">外部中断 0(INT0)</td>
+<td style="text-align: left;">定时器 0 中断(T0)</td>
+<td style="text-align: left;">外部中断 1(INT1)</td>
+<td style="text-align: left;">定时器 1 中断(T1)</td>
+<td style="text-align: left;">串口中断(UART)</td>
+<td style="text-align: left;">定时器 2 中断(T2)</td>
+<td>外部中断 2(INT2)</td>
+<td>外部中断 3(INT3)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>void myTest0() interrupt0</code></td>
+<td style="text-align: left;"><code>void myTest1() interrupt1</code></td>
+<td style="text-align: left;"><code>void myTest2() interrupt2</code></td>
+<td style="text-align: left;"><code>void myTest3() interrupt3</code></td>
+<td style="text-align: left;"><code>void myTest4() interrupt4</code></td>
+<td style="text-align: left;"><code>void myTest5() interrupt5</code></td>
+<td><code>void myTest6() interrupt6</code></td>
+<td><code>void myTest7() interrupt7</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="中断向量与汇编指令执行流程">中断向量与汇编指令执行流程</h2>
+<p>当某个中断被响应时，该中断源对应服务程序的起始地址将会被装载到程序计数器<strong>PC</strong>中，该中断源服务程序的入口地址就称为<strong>中断向量</strong>。</p>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 10%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">◄ 高 0</th>
+<th style="text-align: left;">◄ 高 1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+<th style="text-align: left;">5</th>
+<th>6</th>
+<th>7 低 ►</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">外部中断 0(INT0)</td>
+<td style="text-align: left;">定时器 0 中断(T0)</td>
+<td style="text-align: left;">外部中断 1(INT1)</td>
+<td style="text-align: left;">定时器 1 中断(T1)</td>
+<td style="text-align: left;">串口中断(UART)</td>
+<td style="text-align: left;">定时器 2 中断(T2)</td>
+<td>外部中断 2(INT2)</td>
+<td>外部中断 3(INT3)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0003H</td>
+<td style="text-align: left;">000BH</td>
+<td style="text-align: left;">0013H</td>
+<td style="text-align: left;">001BH</td>
+<td style="text-align: left;">0023H</td>
+<td style="text-align: left;">002BH</td>
+<td>0033H</td>
+<td>003BH</td>
+</tr>
+</tbody>
+</table>
+<p>单片机响应中断以后，原来的主程序执行流程会被打断，接下来执行一系列如下操作：</p>
+<ol type="1">
+<li>单片机中断事件发生；</li>
+<li>单片机检测到中断触发信号之后，首先执行完当前执行的指令，然后将下一条指令的地址压入程序计数器
+PC 堆栈；</li>
+<li>单片机进入中断服务程序 ISR
+的入口地址（中断向量），开始执行中断服务程序；</li>
+<li>中断服务程序执行完成，
+最后执行一条<code>RETI</code>中断返回指令；</li>
+<li>程序计数器 PC
+堆栈弹出之前保存的地址，返回中断前的指令继续执行。</li>
+</ol>
+<blockquote>
+<p>中断开始执行时，引发中断的相应标志位将会由硬件自动清零。又由于中断向量的地址通常位于程序存储器开始的位置，所以主程序的首条汇编指令通常为越过中断向量区的跳转指令<code>LJMP MAIN</code>。</p>
+</blockquote>
+<h2 id="外部中断">外部中断</h2>
+<p>外部中断 0(INT0)、外部中断 1(INT1)、外部中断 2(INT2)、外部中断
+3(INT3)都拥有 2
+种触发方式：<strong>下降沿触发方式</strong>和<strong>低电平触发方式</strong>。接下来，总结一下外部中断相关的寄存器配置：</p>
+<ol type="1">
+<li>请求上述 4 个外部中断的标志位是位于寄存器 TCON
+当中的<code>IE0/TCON.1、IE1/TCON.3、IE2/XICON.2、IE3/XICON.5</code>。</li>
+<li>当外部中断服务程序被单片机响应之后，中断请求标志位<code>IE0、IE1、IE2、IE3</code>将会由硬件自动清零。</li>
+<li>寄存器 TCON
+中的<code>IT0/TCON.0、IT1/TCON.2、IT2/XICON.0、IT3/XICON.4</code>决定了
+4 个外部中断是低电平触发还是下降沿触发方式。
+<ul>
+<li>如果 IT(0,1,2,3) = 0，那么
+INT(0,1,2,3)脚探测到<strong>低电平</strong>后产生外部中断。</li>
+<li>如果 IT(0,1,2,3) = 1，那么
+INT(0,1,2,3)脚探测<strong>下降沿</strong>后发生外部中断。</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>STC90C516RD+</strong> 的 4
+个外部中断还可以用于将单片机从掉电模式唤醒。由于单片机每 1
+个系统时钟对外部中断引脚采样 1
+次，为了确保中断被正确检测，输入信号应该至少维持 2
+个系统时钟。如果外部中断是下降沿触发，那么必须在相应引脚维持高、低电平分别至少
+1
+个系统时钟。同样，如果外部中断是低电平触发，则要求相应引脚维持低电平至少
+2 个系统时钟。</p>
+</blockquote>
+<h1 id="定时器计数器-t0-与-t1">定时器/计数器 T0 与 T1</h1>
+<p>前一节内容讨论的中断是单片机的一种运行机制，而本节内容将要讨论的定时器/计数器则是单片机内部真实存在的资源，只是在使用过程当中可以触发中断，但是并不能将两个概念混为一谈。STC89C52RC+内置两个
+16 位定时器/计数器模块<strong>T0</strong>和<strong>T1</strong>（<em>T 是
+Timer
+的缩写，同时具备定时和计数两种工作方式，为了书写方便，后续统一简称为<strong>定时器</strong></em>），其核心部件是一个对脉冲进行计数的加法计数器，每接收到一个脉冲计数器自动加<code>1</code>。如果脉冲来源于系统时钟则工作在定时方式，如果来自单片机
+IO 引脚则工作在计数方式。定时器操作相关的寄存器如下表：</p>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 4%">
+<col style="width: 56%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">符号</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">地址</th>
+<th style="text-align: left;">最高有效位 MSB ←-- 符号与位地址 --→ LSB
+最低有效位</th>
+<th style="text-align: left;">复位值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>TCON</strong></td>
+<td style="text-align: left;">定时器控制寄存器</td>
+<td style="text-align: left;">88H</td>
+<td style="text-align: left;"><code>TF1 TR1 TF0 TR0 IE1 IT1 IE0 IT0</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TMOD</strong></td>
+<td style="text-align: left;">定时器模式寄存器</td>
+<td style="text-align: left;">89H</td>
+<td style="text-align: left;"><code>GATE C/T M1 M0 GATE C/T M1 M0</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TL0</strong></td>
+<td style="text-align: left;">定时器 0 低位</td>
+<td style="text-align: left;">8AH</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TH0</strong></td>
+<td style="text-align: left;">定时器 0 高位</td>
+<td style="text-align: left;">8BH</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TL1</strong></td>
+<td style="text-align: left;">定时器 1 低位</td>
+<td style="text-align: left;">8CH</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TH1</strong></td>
+<td style="text-align: left;">定时器 1 高位</td>
+<td style="text-align: left;">8DH</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>TL0 与 TH0 以及 TL1 与 TH1
+通常称为<strong>定时值存储寄存器</strong>，用于存储定时器/计数器的计数值，其中<code>TH0/TL0</code>用于<code>T0</code>，
+<code>TH1/TL1</code>用于<code>T1</code>。</p>
+</blockquote>
+<p>定时器的<strong>定时值存储寄存器</strong>每经过一个机器周期的时间（即<span class="math inline">\({0.0000001}\)</span>秒）就会自动加<code>1</code>，直至达到上限值发生溢出然后重新归<code>0</code>进行计数。因此，在正式进入定时器的讨论之前，需要先明确机器周期及其相关概念：</p>
+<ul>
+<li><strong>时钟周期</strong>：<strong>时序</strong>中的最<strong>小</strong>时间单位，计算方法为<span class="math inline">\(1\over 时钟源频率\)</span>；由于当前
+<strong>STC90C516RD+</strong>
+电路板使用的时钟晶振频率为<code>12MHz</code>，那么对应的时钟周期就等于<span class="math inline">\({1\over{12\times10^6}} =
+{1\over12000000}\)</span>秒。</li>
+<li><strong>机器周期</strong>：<strong>汇编</strong>语言每条语句的执行时间都会是机器周期的整数倍，由于
+C 语言代码执行时间的不确定性，通常规定 8051 标准架构下<span class="math inline">\(1个机器周期=12个时钟周期\)</span>，那么当前
+<strong>STC90C516RD+</strong> 电路板的机器周期是<span class="math inline">\({12\times{1\over{12\times10^6}}} =
+{12\over12000000}\)</span>秒。</li>
+<li><strong>指令周期</strong>：<strong>时序</strong>中的最<strong>大</strong>时间单位，是指取出一条指令并分析执行的时间，通常由若干个机器周期组成。8051
+标准架构是单周期指令，即<span class="math inline">\(指令周期 =
+机器周期\)</span>，那么 <strong>STC90C516RD+</strong>
+电路板的指令周期为<span class="math inline">\({12\over12000000}={1\over1000000}={0.0000001}\)</span>秒。</li>
+</ul>
+<blockquote>
+<p><strong>STC90C516RD+</strong>
+单片机的定时器拥有两种计数速率，一种是<strong>12T</strong>模式，每 12
+个时钟<code>+1</code>，与传统 8051
+架构单片机相同；另一种是<strong>6T</strong>模式，每 6
+个时钟<code>+1</code>，速度是传统 8051 的两倍，具体的速率可以通过
+STC-ISP 烧写工具进行设置。</p>
+</blockquote>
+<h2 id="tcon-定时器控制寄存器">TCON 定时器控制寄存器</h2>
+<p>定时器 T0、T1
+的<strong>控制寄存器</strong>，同时也锁存溢出中断源以及外部请求中断源等，可位寻址。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">定时器控制寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>TCON</strong></td>
+<td style="text-align: left;">TF1</td>
+<td style="text-align: left;">TR1</td>
+<td style="text-align: left;">TF0</td>
+<td style="text-align: left;">TR0</td>
+<td style="text-align: left;">IE1</td>
+<td>IT1</td>
+<td>IE0</td>
+<td>IT0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>TF1</strong>: <u>T1
+溢出标志位</u>，从初值开始加<code>1</code>计数，当最高位发生溢出时由硬件置<code>1</code>并向
+CPU 去请求中断，一直保持到 CPU
+响应中断后才由硬件清零（也可以用程序手动清零）。</li>
+<li><strong>TR1</strong>: <u>T1
+运行控制位</u>，该位由软件置位和清零，当<code>TR1=1</code>并且<code>TMOD.7=0</code>时就会允许
+T1
+开始计数，<code>TR1=0</code>时则禁止计数。当<code>TR1=1</code>并且<code>TMOD.7=1</code>时，且
+INT1 输入高电平时才允许 T1 计数。</li>
+<li><strong>TF0</strong>: <u>T0
+溢出标志位</u>，从初值开始加<code>1</code>计数，当最高位发生溢出时由硬件置<code>1</code>并向
+CPU 请求中断，然后一直保持到 CPU
+响应中断后才由硬件清零（或者程序手动清零）。</li>
+<li><strong>TR0</strong>: <u>T0
+运行控制位</u>，该位由软件置位和清零，当<code>TR0=1</code>并且<code>TMOD.3=0</code>时就允许
+T0
+开始计数，<code>TR0=0</code>时则禁止计数。当<code>TR0=1</code>并且<code>TMOD.3=1</code>时，且
+INT0 输入高电平时才允许 T0 计数。</li>
+<li><strong>IE1</strong>：<u>外部中断请求源 INT1
+的标志位</u>，当<code>IE1=1</code>时外部中断向 CPU 请求中断，当 CPU
+响应该中断时 IE1 由硬件清零。</li>
+<li><strong>IT1</strong>：<u>外部中断请求源 INT1
+的触发方式控制位</u>，<code>IT1=0</code>时 INT1
+为低电平触发方式，即该引脚上施加低电平可触发外部中断
+0。而<code>IT1=1</code>时外部中断 0 为下降沿触发方式。</li>
+<li><strong>IE0</strong>：<u>外部中断请求源 INT0
+的标志位</u>，当<code>IE1=1</code>时外部中断向 CPU 请求中断，当 CPU
+响应该中断时 IE0 由硬件清零。</li>
+<li><strong>IT0</strong>：<u>外部中断请求源 INT0
+的触发方式控制位</u>，<code>IT0=0</code>时 INT0
+为低电平触发方式，即该引脚上施加低电平可触发外部中断
+0。而<code>IT0=1</code>时外部中断 0 为下降沿触发方式。</li>
+</ul>
+<blockquote>
+<p><strong>边沿触发</strong>是指电平由高向低或由低向高瞬间所引起的触发动作，不能与前面提到的<strong>上升沿触发</strong>、<strong>下降沿触发</strong>单独等同为一个概念。</p>
+</blockquote>
+<h2 id="tmod-定时器工作模式寄存器">TMOD 定时器工作模式寄存器</h2>
+<p>定时器 T0、T1 的<strong>工作模式寄存器</strong>，共有 4
+种可供选择的模式，但是该寄存器<strong>不可进行位寻址</strong>。</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">定时器工作模式寄存器</th>
+<th style="text-align: left;">定时器 1</th>
+<th style="text-align: left;">定时器 1</th>
+<th style="text-align: left;">定时器 1</th>
+<th style="text-align: left;">定时器 1</th>
+<th style="text-align: left;">定时器 0</th>
+<th>定时器 0</th>
+<th>定时器 0</th>
+<th>定时器 0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">序号</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TMOD</td>
+<td style="text-align: left;">GATE</td>
+<td style="text-align: left;">C/T</td>
+<td style="text-align: left;">M1</td>
+<td style="text-align: left;">M0</td>
+<td style="text-align: left;">GATE</td>
+<td>C/T</td>
+<td>M1</td>
+<td>M0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>TOMD.0 / TMOD.1</strong>（<em>M1/M0</em>）：<u>选择定时器 0
+的操作模式</u>。
+<ol type="1">
+<li><code>0</code> <code>0</code>：<u>13 位定时器</u>，仅使用 TL0 的低 5
+位和 TH0 的全部 8 位。</li>
+<li><code>0</code> <code>1</code>：<u>16 位定时器</u>，TL0 和 TH0
+全部使用。</li>
+<li><code>1</code> <code>0</code>：<u>8 位自动重装模式</u>，发生溢出时将
+TH0 的值自动重装至 TL0。</li>
+<li><code>1</code> <code>1</code>：<u>双 8 位定时器</u>，TL0 作为一个 8
+位定时器由 T0 的控制位进行控制，TH0 作为另一个 8 位定时器由 T1
+的控制位进行控制。</li>
+</ol></li>
+<li><strong>TMOD.2</strong>（<span class="math inline">\(C/\overline{T}\)</span>）：<u>选择定时器 0
+的使用方式</u>，设置为<code>0</code>将作为定时器使用（<em>计数脉冲由系统时钟输入</em>），设置为<code>1</code>则作为计数器使用（<em>计数脉冲从
+T0/P3.4 引脚输入</em>）。</li>
+<li><strong>TMOD.3</strong>（<em>GATE</em>）：<u>控制定时器
+0</u>，当该位设置为<code>1</code>时，需要同时将 INT0
+设置为高电平且<code>TR1=1</code>时才能正确开启定时器 0。</li>
+<li><strong>TOMD.4 / TMOD.5</strong>（<em>M1/M0</em>）：<u>选择定时器 1
+的操作模式</u>。
+<ol type="1">
+<li><code>0</code> <code>0</code>：<u>13 位定时器</u>，仅使用 TL1 的低 5
+位和 TH1 的全部 8 位。</li>
+<li><code>0</code> <code>1</code>：<u>16 位定时器</u>，TL1 和 TH1
+全部使用。</li>
+<li><code>1</code> <code>0</code>：<u>8
+位自动重载定时器</u>，发生溢出时将 TH1 的值自动重装至 TL1。</li>
+<li><code>1</code> <code>1</code>：<u>定时器 1
+无效</u>，即停止计数。</li>
+</ol></li>
+<li><strong>TMOD.6</strong>（<span class="math inline">\(C/\overline{T}\)</span>）：<u>选择定时器 1
+的使用方式</u>，设置为<code>0</code>将作为定时器使用（<em>计数脉冲由系统时钟输入</em>），设置为<code>1</code>则作为计数器使用（<em>计数脉冲从
+T1/P3.5 引脚输入</em>）。</li>
+<li><strong>TMOD.7</strong>（<em>GATE</em>）：<u>控制定时器
+1</u>，当该位设置为<code>1</code>时，需要同时将 INT1
+设置为高电平且<code>TR1=1</code>时才能正确开启定时器 1。</li>
+</ul>
+<h2 id="定时器-0-工作模式">定时器 0 工作模式</h2>
+<p>通过设置寄存器 TMOD 的 M0(TMOD.0)、M1(TMOD.1)，定时器 0 可以有如下 4
+种不同工作模式：</p>
+<h3 id="位定时器">13 位定时器</h3>
+<p>由 TL0 的低 5 位与 TH0 的全部 8 位构成，当 TL0 低 5 位溢出时向 TH0
+进位，TH0 溢出时置位 TCON 中的溢出标志位
+TF0。当<code>GATE/TMOD.3=0</code>
+时，如果<code>TR0=1</code>则定时器开始计数。当<code>GATE/TMOD.3=1</code>时，允许外部输入
+INT0 控制定时器。TR0 是 TCON 寄存器里的定时器 0
+运行控制位。当<code>C/T=0</code>时，多路开关连接到系统时钟的分频输出，T0
+对时钟周期计数工作在定时方式。当<code>C/T=1</code>时，多路开关连接至外部脉冲输入（即单片机的
+P3.4/T0 引脚），此时 T0 工作在计数方式。</p>
+<p><img src="/Embedded/STC90C51/timer/T0-Model-0.png"></p>
+<h3 id="位定时器-1">16 位定时器</h3>
+<p>定时值存储寄存器由 TL0 与 TH0 的全部 8
+位组成，除此之外，其它方面与上面的模式 0 完全相同。</p>
+<p><img src="/Embedded/STC90C51/timer/T0-Model-1.png"></p>
+<h3 id="位自动重装模式">8 位自动重装模式</h3>
+<p>可自动进行重装的 8 位计数器模式，即 TL0 的溢出不仅会置位 TF0，还会将
+TH0 的内容重新装载到 TL0，其中 TH0 的内容由软件预置，重装时 TH0
+的内容保持不变。</p>
+<p><img src="/Embedded/STC90C51/timer/T0-Model-2.png"></p>
+<h3 id="双-8-位定时器">双 8 位定时器</h3>
+<p>定时器 0 的 TL0 和 TH0 将会作为两个独立的定时器进行使用。</p>
+<p><img src="/Embedded/STC90C51/timer/T0-Model-3.png"></p>
+<h2 id="定时器-1-工作模式">定时器 1 工作模式</h2>
+<p>通过设置寄存器 TMOD 的 M0(TMOD.4)、M1(TMOD.5)，定时器 0 可以有如下 3
+种不同的工作模式：</p>
+<h3 id="位定时器-2">13 位定时器</h3>
+<p>同定时器 0 的 13 位定时器工作模式操作基本相同，溢出时会置位 TCON
+中的溢出标志位 TF1。当<code>GATE/TMOD.7=0</code>
+时，如果<code>TR1=1</code>则定时器开始计数。当<code>GATE/TMOD.7=1</code>时，就允许外部输入
+INT1 控制定时器。TR1 是 TCON 寄存器里的定时器 1
+运行控制位。通过<code>C/T</code>设置当前处于定时器还是计数器的方式与前述基本相同。</p>
+<p><img src="/Embedded/STC90C51/timer/T1-Model-0.png"></p>
+<h3 id="位定时器-3">16 位定时器</h3>
+<p>定时值存储寄存器由 TL0 与 TH0 全部 8 位组成，其它方面与 13
+位定时器的使用完全相同。</p>
+<p><img src="/Embedded/STC90C51/timer/T1-Model-1.png"></p>
+<h3 id="位自动重装模式-1">8 位自动重装模式</h3>
+<p>可自动进行重装的 8 位计数器模式，操作方式基本与上一节讲述的定时器 T0
+的自动重装模式相同。</p>
+<p><img src="/Embedded/STC90C51/timer/T1-Model-2.png"></p>
+<h1 id="定时器计数器-t2">定时器/计数器 T2</h1>
+<p>虽然定时器 T2 不属于标准 8051 架构，但是其功能比标准的 T0、T1
+更加强大，是一个具有自动重装和捕获能力的 16
+位定时器，计数时钟源同样可以来自内部机器周期，或是 P1.0
+输入的外部时钟脉冲。下面的表格展示了定时器 T2 相关的寄存器：</p>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 25%">
+<col style="width: 4%">
+<col style="width: 50%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">符号</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">地址</th>
+<th style="text-align: left;">最高有效位 MSB ←-- 符号与位地址 --→ LSB
+最低有效位</th>
+<th style="text-align: left;">复位值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>T2CON</strong></td>
+<td style="text-align: left;">定时器 2 控制寄存器</td>
+<td style="text-align: left;">C8H</td>
+<td style="text-align: left;"><code>TF2 EXF2 RCLK TCLK EXEN2 TR2 C/T2 CP/RL2</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>T2MOD</strong></td>
+<td style="text-align: left;">定时器 2 模式寄存器</td>
+<td style="text-align: left;">C9H</td>
+<td style="text-align: left;"><code>--- ---- ---- ---- ----- --- T2OE DECN</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RCAP2L</strong></td>
+<td style="text-align: left;">定时器 2 重载与捕获低字节</td>
+<td style="text-align: left;">CAH</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>RCAP2H</strong></td>
+<td style="text-align: left;">定时器 2 重载与捕获高字节</td>
+<td style="text-align: left;">CBH</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TL2</strong></td>
+<td style="text-align: left;">定时器 2 低字节</td>
+<td style="text-align: left;">CCH</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TH2</strong></td>
+<td style="text-align: left;">定时器 2 高字节</td>
+<td style="text-align: left;">CDH</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+</tbody>
+</table>
+<h2 id="t2con-定时器-2-控制寄存器可位寻址">T2CON 定时器 2
+控制寄存器（可位寻址）</h2>
+<table>
+<colgroup>
+<col style="width: 36%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">定时器 2 控制寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>T2CON</strong></td>
+<td style="text-align: left;">TF2</td>
+<td style="text-align: left;">EXF2</td>
+<td style="text-align: left;">RCLK</td>
+<td style="text-align: left;">TCLK</td>
+<td style="text-align: left;">EXEN2</td>
+<td>TR2</td>
+<td>C/T2</td>
+<td>CP/RL2</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>TF2</strong>：<u>定时器 2 溢出标志位</u>，定时器 2
+溢出时置位，必须通过代码清除。当<code>RCLK=1</code>或<code>TCLK=1</code>时，TF2
+将不会置位。</li>
+<li><strong>EXF2</strong>：<u>定时器 2
+外部标志位</u>，当<code>EXEN2=1</code>并且 T2EX/P1.1
+的负跳变产生捕获或重装时被置位。</li>
+<li><strong>RCLK</strong>：<u>定时器 2
+接收时钟标志位</u>，当<code>RCLK=1</code>定时器 2
+的溢出脉冲将作为串口模式 1 和 3
+的<strong>接收</strong>时钟。当<code>RCLK=0</code>时，定时器 1
+的溢出脉冲将作为串口模式 1 与 3 <strong>接收</strong>时钟。</li>
+<li><strong>TCLK</strong>：<u>定时器 2
+发送时钟标志位</u>，当<code>TCLK=1</code>定时器 2
+的溢出脉冲将作为串口模式 1 和 3
+的<strong>发送</strong>时钟。当<code>TCLK=0</code>时，定时器 1
+的溢出脉冲将作为串口模式 1 与 3 <strong>发送</strong>时钟。</li>
+<li><strong>EXEN2</strong>：<u>定时器 2
+外部使能标志位</u>，当<code>EXEN2=1</code>并且定时器 2
+未作为串口时钟时，允许 T2EX
+的负跳变产生捕获或重装。而当<code>EXEN2=0</code>时，T2EX 的跳变对定时器
+2 无效。</li>
+<li><strong>TR2</strong>：<u>定时器 2
+启动/停止控制位</u>，<code>TR2=1</code>时将会启动定时器 2。</li>
+<li><strong>C/T2</strong>：<u>定时器 2
+功能选择位</u>，当<code>C/T2=0</code>时定时器 2
+将会作为内部定时器，<code>C/T2=1</code>则会作为外部事件计数器。</li>
+<li><strong>CP/RL2</strong>：<u>定时器 2
+捕获/重装标志位</u>，<code>EXEN2=1</code>时，T2EX
+的负跳变产生捕获；<code>EXEN2=0</code>时，溢出或 T2EX 负跳变都会让定时器
+2
+自动重装。如果<code>RCLK=1</code>或<code>TCLK=1</code>，该位无效且定时器
+2 强制为溢出时自动重装。</li>
+</ul>
+<blockquote>
+<p><strong>正跳变</strong>实质上就是之前提到的电平从高到低的上升沿，<strong>负跳变</strong>则是由低到高的下降沿。</p>
+</blockquote>
+<h2 id="t2mod-定时器-2-模式选择寄存器不可位寻址">T2MOD 定时器 2
+模式选择寄存器（不可位寻址）</h2>
+<table>
+<colgroup>
+<col style="width: 42%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">定时器 2 模式寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>T2MOD</strong></td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td>-</td>
+<td>T2OE</td>
+<td>DCEN</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>T2OE</strong>：<u>定时器 2 输出使能位</u>。</li>
+<li><strong>DECN</strong>：<u>定时器 2 计数方式使能位</u>。</li>
+</ul>
+<h2 id="定时器-2-工作模式">定时器 2 工作模式</h2>
+<p>定时器 2
+具有<strong>捕获</strong>、<strong>自动重新装载</strong>(<em>递增或递减计数</em>)、<strong>波特率发生器</strong>三种工作模式，开发人员可以通过
+T2CON 当中的位进行选择：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">模式</th>
+<th style="text-align: left;">RCLK+TCLK</th>
+<th style="text-align: left;">CP/RL2</th>
+<th style="text-align: left;">TR2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>16 位捕获</strong></td>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;"><code>1</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>16 位自动重装</strong></td>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;"><code>1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>波特率发生器</strong></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;"><code>x</code></td>
+<td style="text-align: left;"><code>1</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>关闭</strong></td>
+<td style="text-align: left;"><code>x</code></td>
+<td style="text-align: left;"><code>x</code></td>
+<td style="text-align: left;"><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="位捕获模式">16 位捕获模式</h3>
+<p>当 T2CON 中的<code>EXEN2=0</code>，定时器 2 作为 16
+位定时器或计数器（<em>通过 T2CON 的 C/T2 位选择</em>）使用，溢出时置位
+TF2，该位可以产生中断。而当<code>EXEN2=1</code>时，功能与以上相同，但增加了一个特性：外部输入
+T2EX 的电平由高向低正跳变时，定时器 2 中 TL2、TH2
+的当前值将会<strong>捕获</strong>到 RCAP2L、RCAP2H。另外，T2EX
+由低向高负跳变会使 T2CON 的 EXF2 置位为<code>1</code>，EXF2 也与 TF2
+一样能够产生中断，其向量与定时器 2 溢出中断地址相同，定时器 2
+中断服务程序通过查询 TF2 和 EXF2 来确定引起中断的事件。</p>
+<p><img src="/Embedded/STC90C51/timer/T2-Model-0.png"></p>
+<h3 id="位自动重装">16 位自动重装</h3>
+<p>定时器 2 可以通过 C/T2 配置为定时器或计数器，此时可以通过 T2MOD
+寄存器的 DCEN 使能计数方式，然后再通过 T2EX
+控制具体的计数方向是递增还是递减。</p>
+<p>当<code>DCEN=0</code>时，定时器 2 自动递增计数，该模式下可以设置
+EXEN2 位进行选择。如果<code>EXEN2=0</code>那么定时器 2 会递增计数至
+0FFFFH，并在溢出后将 TF2 置为<code>1</code>，然后将 RCAP2L 和 RCAP2H
+中的 16 位值（<em>通过软件预设</em>）重新装载到定时器
+2；如果<code>EXEN2=1</code>，定时器 2 处于外部中断使能模式，此时 16
+位重载会通过溢出或者 T2EX
+从高电平<code>1</code>向低电平<code>0</code>的负跳变来实现，该负跳变会同时向
+EXF2 置位；处于中断使能模式下的定时器 2，当 TF2 或者 EXF2
+被置<code>1</code>时就会发生中断。</p>
+<p><img src="/Embedded/STC90C51/timer/T2-Model-1-DCEN-0.png"></p>
+<p>当<code>DCEN=1</code>时，可以通过 T2EX
+控制计数方向是递增还是递减的。当<code>T2EX=1</code>时，定时器 2
+递增计数，计数到 0FFFFH 后溢出并置位
+TF2，同时产生中断(如果中断被使能)。定时器 2 的溢出将会使 RCAP2L 和
+RCAP2H 中的 16 位值作为重新装载值放入 TL2 和
+TH2。当<code>T2EX=0</code>时，TL2 和 TH2 计数到等于 RCAP2L 和 RCAP2H
+中的 16 位值时，定时器 2 将产生中断。</p>
+<p><img src="/Embedded/STC90C51/timer/T2-Model-1-DCEN-1.png"></p>
+<h3 id="串口波特率发生器">串口波特率发生器</h3>
+<p>T2CON 寄存器的 TCLK、RCLK 可以从定时器 1 或 2
+获取串行口发送和接收的波特率。当<code>TCLK=0</code>或者<code>TCLK=1</code>
+时，定时器 1 和定时器 2 分别可以
+作为串口<strong>发送波特率</strong>的发生器，RCLK
+对于串行口<strong>接收波特率</strong>具有相同效果。定时器 2
+的独立波特率发生器模式与其自动重装模式类似，TH2
+溢出时，波特率发生器模式会使定时器 2 寄存器重新装载寄存器 RCAP2H 和
+RCAP2L 的 16 位值(由软件预置)。</p>
+<p><img src="/Embedded/STC90C51/timer/T2-Model-2.png"></p>
+<p>当定时器 2 工作在波特率发生器模式，如果外部时钟信号由 T2
+脚进入，此时波特率计算公式如下：</p>
+<p><span class="math display">\[\mathsf{波特率=\frac{定时器2溢出速率}{16}}\]</span></p>
+<p>如果定时器 2 采用内 公式如下：</p>
+<p><span class="math display">\[\mathsf{波特率=\frac{SYSclk}{n\times[65536-(RCAP2H,RCAP2L)]}}\]</span></p>
+<h1 id="串行通信">串行通信</h1>
+<p><strong>STC90C516RD+</strong>
+内部集成有一个<strong>全双工</strong>串行通信模块，可以通过查询或中断方式对串行接收/发送进行处理。拥有
+2 种波特率固定以及 2 种波特率可变的共 4
+种工作方式，波特率由单片机内部的定时/计数器产生，其工作方式和波特率都可以通过寄存器进行配置。</p>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 19%">
+<col style="width: 2%">
+<col style="width: 44%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">符号</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">地址</th>
+<th style="text-align: left;">最高有效位 MSB ←-- 符号与位地址 --→ LSB
+最低有效位</th>
+<th style="text-align: left;">复位值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>SCON</strong>（Serial
+Control）</td>
+<td style="text-align: left;">串行控制寄存器</td>
+<td style="text-align: left;">98H</td>
+<td style="text-align: left;"><code>SM0/FE SM1 SM2 REN TB8 RB8 TI RI</code></td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SBUF</strong>（Serial
+Buffer）</td>
+<td style="text-align: left;">串行数据缓冲寄存器</td>
+<td style="text-align: left;">99H</td>
+<td style="text-align: left;">两个分别用于读写数据的缓冲器，可通过两个寄存器分别进行控制。</td>
+<td style="text-align: left;">xxxx xxxxB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>PCON</strong>（Power
+Control）</td>
+<td style="text-align: left;">电源控制寄存器</td>
+<td style="text-align: left;">87H</td>
+<td style="text-align: left;"><code>SMOD SMOD0 - POF GF1 GF0 PD IDL</code></td>
+<td style="text-align: left;">00x1 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>IE</strong>（Interrupt
+Enable）</td>
+<td style="text-align: left;">中断允许寄存器</td>
+<td style="text-align: left;">A8H</td>
+<td style="text-align: left;"><code>EA - ET2 ES ET1 EX1 ET0 EX0</code></td>
+<td style="text-align: left;">0x00 0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>IP</strong>（Interrupt Priority
+Low）</td>
+<td style="text-align: left;">中断优先级控制寄存器（低）</td>
+<td style="text-align: left;">B8H</td>
+<td style="text-align: left;"><code>- - PT2 PS PT1 PX1 PT0 PX0</code></td>
+<td style="text-align: left;">xx00 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>IPH</strong>（Interrupt Priority
+High）</td>
+<td style="text-align: left;">中断优先级控制寄存器（高）</td>
+<td style="text-align: left;">B7H</td>
+<td style="text-align: left;"><code>PX3H PX2H PT2H PSH PT1H PX1H PT0H PX0H</code></td>
+<td style="text-align: left;">0000,0000B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SADEN</strong>（Slave Address
+Mask）</td>
+<td style="text-align: left;">电源控制寄存器</td>
+<td style="text-align: left;">B9H</td>
+<td style="text-align: left;">从机地址掩模寄存器</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SADDR</strong>（Slave
+Address）</td>
+<td style="text-align: left;">电源控制寄存器</td>
+<td style="text-align: left;">A9H</td>
+<td style="text-align: left;">从机地址寄存器</td>
+<td style="text-align: left;">0000 0000B</td>
+</tr>
+</tbody>
+</table>
+<h2 id="scon-串行控制寄存器">SCON 串行控制寄存器</h2>
+<p>选择串行通信的工作方式等其它控制功能，可位寻址。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">串行控制寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>SCON</strong></td>
+<td style="text-align: left;">SM0/FE</td>
+<td style="text-align: left;">SM1</td>
+<td style="text-align: left;">SM2</td>
+<td style="text-align: left;">REN</td>
+<td style="text-align: left;">TB8</td>
+<td>RB8</td>
+<td>TI</td>
+<td>RI</td>
+</tr>
+</tbody>
+</table>
+<p><strong>SM0/FE</strong>：当寄存器 PCON
+中的<code>SMOD0/PCON.6=1</code>时，该位用于帧错误检测。
+<strong>SM1</strong>：当寄存器 PCON
+中的<code>SMOD0/PCON.6=0</code>时，该位与 SM0
+一起用于指定串行通信工作方式。 <strong>SM2</strong>：串行通信工作方式 2
+或者 3 多机通信控制位。
+<strong>REN</strong>：<u>允许/禁止串行接收控制位</u>，<code>REN=1</code>时允许启用
+RxD 进行串行接收，当<code>REN=0</code>时则禁止接收。
+<strong>TB8</strong>： 处于串行通信工作方式 2 或者 3
+时，该位为需要发送的第 9 位数据。 <strong>RB8</strong>：
+处于串行通信工作方式 2 或者 3 时，该位为接收到的第 9 位数据。
+<strong>TI</strong>： <u>发送中断请求标志位</u>，串行通信工作方式 0
+当中，当串行数据第 8
+位发送结束时，由硬件自动置位<code>TI=1</code>，并向单片机请求中断，中断响应完成后程序代码必须手动复位<code>TI=0</code>。其它方式当中，将会在停止位发送时由硬件自动置位，然后通过程序手动复位。
+<strong>RI</strong>： <u>接收中断请求标志位</u>，串行通信工作方式 0
+当中，当串行数据第 8
+位发送结束时，由硬件自动置位<code>RI=1</code>，并向单片机请求中断，中断响应完成后程序代码必须手动复位<code>RI=0</code>。其它方式当中，将会接收到停止位的中间时刻由硬件自动置位，然后必须通过程序手动复位。</p>
+<p>通过<strong>SM0/FE</strong>、<strong>SM1</strong>可选择的四种串行通信工作方式，以及相应配置方法如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 9%">
+<col style="width: 27%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">SM0</th>
+<th style="text-align: left;">SM1</th>
+<th style="text-align: left;">工作方式</th>
+<th style="text-align: left;">功能说明</th>
+<th style="text-align: left;">波特率</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;">方式 0</td>
+<td style="text-align: left;">同步移位寄存器。</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{单片机系统时钟频率}{12}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;">方式 1</td>
+<td style="text-align: left;">8 位 UART，波特率可变。</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{2^{SMOD}}{32}\times{定时器1溢出率}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;">方式 2</td>
+<td style="text-align: left;">9 位 UART。</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{2^{SMOD}}{64}\times{单片机系统时钟频率}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;">方式 3</td>
+<td style="text-align: left;">9 位 UART，波特率可变。</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{2^{SMOD}}{32}\times{定时器1溢出率}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>当单片机工作在<code>6T</code>模式时, 定时器 1
+的溢出率等于<code>单片机时钟频率 ÷ 6 ÷ (256-TH1)</code>。</li>
+<li>当单片机工作在<code>12T</code>模式时，定时器 1
+的溢出率等于<code>单片机时钟频率 ÷ 12 ÷ (256-TH1)</code>。</li>
+</ul>
+<h2 id="pcon-电源控制寄存器">PCON 电源控制寄存器</h2>
+<p>电源控制寄存器中的<strong>SMOD/PCON.7</strong>用于设置方式 1、方式
+2、方式 3 的波特率是否加倍。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">电源控制寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>PCON</strong></td>
+<td style="text-align: left;">SMOD</td>
+<td style="text-align: left;">SMOD0</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">POF</td>
+<td style="text-align: left;">GF1</td>
+<td>GF0</td>
+<td>PD</td>
+<td>IDL</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>SMOD/PCON.7</strong>：<u>波特率选择位</u>。当程序中<code>SMOD=1</code>时，串行通信方式
+1、2、3
+的波特率将会加倍；当<code>SMOD=0</code>时，各个工作方式的波特率都会加倍。</li>
+<li><strong>SMOD0/PCON.6</strong>：<u>帧错误检测有效控制位</u>。当程序中<code>SMOD0=1</code>时，寄存器
+SCON 中的 SM0/FE
+位将用于帧错误检测功能；而当<code>SMOD0=0</code>的时候，寄存器 SCON 中的
+SM0/FE 位将会用于 SM0，并与 SM1 一起指定串行口的工作方式。</li>
+</ul>
+<h2 id="ieipiph-串行中断相关寄存器">IE/IP/IPH 串行中断相关寄存器</h2>
+<p>串行口中断允许位<strong>ES</strong>位于中断允许寄存器<strong>IE</strong>当中：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中断允许寄存器</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">** B4**</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>IE</strong></td>
+<td style="text-align: left;">EA</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">ET2</td>
+<td style="text-align: left;">** ES**</td>
+<td style="text-align: left;">ET1</td>
+<td>EX1</td>
+<td>ET0</td>
+<td>EX0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>EA</strong>：总中断允许控制位，当<code>EA=1</code>时开启总中断，<code>EA=0</code>关闭总中断。</li>
+<li><strong>ES</strong>：串行口中断允许位，当<code>ES=1</code>时允许串行口中断，<code>ES=0</code>禁止串行口中断。</li>
+</ul>
+<p>串行中断优先级控制位<strong>PS</strong>和<strong>PSH</strong>分别位于中断优先级控制寄存器<strong>IP</strong>和<strong>IPH</strong>当中：</p>
+<table>
+<colgroup>
+<col style="width: 47%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中断优先级控制寄存器（低）</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>IP</strong></td>
+<td style="text-align: left;">保留</td>
+<td style="text-align: left;">保留</td>
+<td style="text-align: left;">PT2</td>
+<td style="text-align: left;"><strong>PS</strong></td>
+<td style="text-align: left;">PT1</td>
+<td>PX1</td>
+<td>PT0</td>
+<td>PX0</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中断优先级控制寄存器（高）</th>
+<th style="text-align: left;">B7</th>
+<th style="text-align: left;">B6</th>
+<th style="text-align: left;">B5</th>
+<th style="text-align: left;">B4</th>
+<th style="text-align: left;">B3</th>
+<th>B2</th>
+<th>B1</th>
+<th>B0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>IPH</strong></td>
+<td style="text-align: left;">PX3H</td>
+<td style="text-align: left;">PX2H</td>
+<td style="text-align: left;">PT2H</td>
+<td style="text-align: left;"><strong>PSH</strong></td>
+<td style="text-align: left;">PT1H</td>
+<td>PX1H</td>
+<td>PT0H</td>
+<td>PX0H</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>当<strong>PSH=0</strong>并且<strong>PS=0</strong>时，串口 1
+中断为最低优先级中断(优先级 0)。</li>
+<li>当<strong>PSH=0</strong>并且<strong>PS=1</strong>时，串口 1
+中断为较低优先级中断(优先级 1)。</li>
+<li>当<strong>PSH=1</strong>并且<strong>PS=0</strong>时，串口 1
+中断为较高优先级中断(优先级 2)。</li>
+<li>当<strong>PSH=1</strong>并且<strong>PS=1</strong>时，串口 1
+中断为最高优先级中断(优先级 3)。</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>宏晶 STC90C516RD+ 数据手册精读</p><p><a href="http://www.uinio.com/Embedded/STC90C51/">http://www.uinio.com/Embedded/STC90C51/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2010-12-24</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2013-03-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Math/Algebra/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">初等代数常用公式与图像汇总</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/English/NCE-1/"><span class="level-item">理工科学生的《新概念英语》第 1 册教程</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#单片机最小系统"><span class="level-left"><span class="level-item">1</span><span class="level-item">单片机最小系统</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电源电路"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">电源电路</span></span></a></li><li><a class="level is-mobile" href="#晶振电路"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">晶振电路</span></span></a></li><li><a class="level is-mobile" href="#复位电路"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">复位电路</span></span></a></li></ul></li><li><a class="level is-mobile" href="#片上存储资源"><span class="level-left"><span class="level-item">2</span><span class="level-item">片上存储资源</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#程序存储器-flash"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">程序存储器 Flash</span></span></a></li><li><a class="level is-mobile" href="#数据存储器-ram"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">数据存储器 RAM</span></span></a></li><li><a class="level is-mobile" href="#特殊功能寄存器-sfr"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">特殊功能寄存器 SFR</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#程序状态寄存器-program-status-word"><span class="level-left"><span class="level-item">2.3.1</span><span class="level-item">程序状态寄存器 Program
+Status Word</span></span></a></li><li><a class="level is-mobile" href="#堆栈指针-stack-pointer"><span class="level-left"><span class="level-item">2.3.2</span><span class="level-item">堆栈指针 Stack Pointer</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#io-管脚工作模式"><span class="level-left"><span class="level-item">3</span><span class="level-item">IO 管脚工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#准双向"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">准双向</span></span></a></li><li><a class="level is-mobile" href="#开漏"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">开漏</span></span></a></li><li><a class="level is-mobile" href="#强推挽"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">强推挽</span></span></a></li><li><a class="level is-mobile" href="#高阻态"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">高阻态</span></span></a></li><li><a class="level is-mobile" href="#io-与上下拉电阻"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">IO 与上下拉电阻</span></span></a></li></ul></li><li><a class="level is-mobile" href="#复位"><span class="level-left"><span class="level-item">4</span><span class="level-item">复位</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外部-rst-引脚复位"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">外部 RST 引脚复位</span></span></a></li><li><a class="level is-mobile" href="#软件复位"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">软件复位</span></span></a></li><li><a class="level is-mobile" href="#掉电上电复位"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">掉电/上电复位</span></span></a></li><li><a class="level is-mobile" href="#看门狗复位"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">看门狗复位</span></span></a></li></ul></li><li><a class="level is-mobile" href="#省电模式"><span class="level-left"><span class="level-item">5</span><span class="level-item">省电模式</span></span></a></li><li><a class="level is-mobile" href="#指令寻址方式"><span class="level-left"><span class="level-item">6</span><span class="level-item">指令寻址方式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#立即寻址"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">立即寻址</span></span></a></li><li><a class="level is-mobile" href="#直接寻址"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">直接寻址</span></span></a></li><li><a class="level is-mobile" href="#间接寻址"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">间接寻址</span></span></a></li><li><a class="level is-mobile" href="#寄存器寻址"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">寄存器寻址</span></span></a></li><li><a class="level is-mobile" href="#相对寻址"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">相对寻址</span></span></a></li><li><a class="level is-mobile" href="#变址寻址"><span class="level-left"><span class="level-item">6.6</span><span class="level-item">变址寻址</span></span></a></li><li><a class="level is-mobile" href="#位寻址"><span class="level-left"><span class="level-item">6.7</span><span class="level-item">位寻址</span></span></a></li></ul></li><li><a class="level is-mobile" href="#keil-uvision-5"><span class="level-left"><span class="level-item">7</span><span class="level-item">Keil uVision 5</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#界面布局"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">界面布局</span></span></a></li><li><a class="level is-mobile" href="#减少代码长度"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">减少代码长度</span></span></a></li><li><a class="level is-mobile" href="#代码格式化"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">代码格式化</span></span></a></li><li><a class="level is-mobile" href="#输出日志"><span class="level-left"><span class="level-item">7.4</span><span class="level-item">输出日志</span></span></a></li></ul></li><li><a class="level is-mobile" href="#c-语言"><span class="level-left"><span class="level-item">8</span><span class="level-item">8051C 语言</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数据类型"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">数据类型</span></span></a></li><li><a class="level is-mobile" href="#存储类型与存储模型"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">存储类型与存储模型</span></span></a></li><li><a class="level is-mobile" href="#数组"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">数组</span></span></a></li><li><a class="level is-mobile" href="#结构体"><span class="level-left"><span class="level-item">8.4</span><span class="level-item">结构体</span></span></a></li><li><a class="level is-mobile" href="#指针"><span class="level-left"><span class="level-item">8.5</span><span class="level-item">指针</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#指针的存储类型"><span class="level-left"><span class="level-item">8.5.1</span><span class="level-item">指针的存储类型</span></span></a></li><li><a class="level is-mobile" href="#类型化指针"><span class="level-left"><span class="level-item">8.5.2</span><span class="level-item">类型化指针</span></span></a></li><li><a class="level is-mobile" href="#非类型化指针"><span class="level-left"><span class="level-item">8.5.3</span><span class="level-item">非类型化指针</span></span></a></li></ul></li><li><a class="level is-mobile" href="#函数"><span class="level-left"><span class="level-item">8.6</span><span class="level-item">函数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#参数传递"><span class="level-left"><span class="level-item">8.6.1</span><span class="level-item">参数传递</span></span></a></li><li><a class="level is-mobile" href="#返回值"><span class="level-left"><span class="level-item">8.6.2</span><span class="level-item">返回值</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#中断机制"><span class="level-left"><span class="level-item">9</span><span class="level-item">中断机制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#中断系统结构"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">中断系统结构</span></span></a></li><li><a class="level is-mobile" href="#中断涉及的寄存器"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">中断涉及的寄存器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#中断允许相关寄存器-ie-和-xicon"><span class="level-left"><span class="level-item">9.2.1</span><span class="level-item">中断允许相关寄存器 IE 和
+XICON</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#ie-中断允许寄存器"><span class="level-left"><span class="level-item">9.2.1.1</span><span class="level-item">IE 中断允许寄存器</span></span></a></li><li><a class="level is-mobile" href="#xicon-辅助中断控制寄存器"><span class="level-left"><span class="level-item">9.2.1.2</span><span class="level-item">XICON 辅助中断控制寄存器</span></span></a></li></ul></li><li><a class="level is-mobile" href="#中断优先级涉及寄存器-ipiphxicon"><span class="level-left"><span class="level-item">9.2.2</span><span class="level-item">中断优先级涉及寄存器
+IP、IPH、XICON</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#ip-中断优先级控制寄存器低"><span class="level-left"><span class="level-item">9.2.2.1</span><span class="level-item">IP 中断优先级控制寄存器（低）</span></span></a></li><li><a class="level is-mobile" href="#iph-中断优先级控制寄存器高"><span class="level-left"><span class="level-item">9.2.2.2</span><span class="level-item">IPH 中断优先级控制寄存器（高）</span></span></a></li><li><a class="level is-mobile" href="#xicon-中断辅助控制寄存器"><span class="level-left"><span class="level-item">9.2.2.3</span><span class="level-item">XICON 中断辅助控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#中断优先级配置"><span class="level-left"><span class="level-item">9.2.2.4</span><span class="level-item">中断优先级配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#scon-串口控制寄存器"><span class="level-left"><span class="level-item">9.2.3</span><span class="level-item">SCON 串口控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#tcont2con-定时器计数器控制寄存器"><span class="level-left"><span class="level-item">9.2.4</span><span class="level-item">TCON/T2CON
+定时器/计数器控制寄存器</span></span></a></li></ul></li><li><a class="level is-mobile" href="#中断优先级"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">中断优先级</span></span></a></li><li><a class="level is-mobile" href="#中断向量与汇编指令执行流程"><span class="level-left"><span class="level-item">9.4</span><span class="level-item">中断向量与汇编指令执行流程</span></span></a></li><li><a class="level is-mobile" href="#外部中断"><span class="level-left"><span class="level-item">9.5</span><span class="level-item">外部中断</span></span></a></li></ul></li><li><a class="level is-mobile" href="#定时器计数器-t0-与-t1"><span class="level-left"><span class="level-item">10</span><span class="level-item">定时器/计数器 T0 与 T1</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#tcon-定时器控制寄存器"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">TCON 定时器控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#tmod-定时器工作模式寄存器"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">TMOD 定时器工作模式寄存器</span></span></a></li><li><a class="level is-mobile" href="#定时器-0-工作模式"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">定时器 0 工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#位定时器"><span class="level-left"><span class="level-item">10.3.1</span><span class="level-item">13 位定时器</span></span></a></li><li><a class="level is-mobile" href="#位定时器-1"><span class="level-left"><span class="level-item">10.3.2</span><span class="level-item">16 位定时器</span></span></a></li><li><a class="level is-mobile" href="#位自动重装模式"><span class="level-left"><span class="level-item">10.3.3</span><span class="level-item">8 位自动重装模式</span></span></a></li><li><a class="level is-mobile" href="#双-8-位定时器"><span class="level-left"><span class="level-item">10.3.4</span><span class="level-item">双 8 位定时器</span></span></a></li></ul></li><li><a class="level is-mobile" href="#定时器-1-工作模式"><span class="level-left"><span class="level-item">10.4</span><span class="level-item">定时器 1 工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#位定时器-2"><span class="level-left"><span class="level-item">10.4.1</span><span class="level-item">13 位定时器</span></span></a></li><li><a class="level is-mobile" href="#位定时器-3"><span class="level-left"><span class="level-item">10.4.2</span><span class="level-item">16 位定时器</span></span></a></li><li><a class="level is-mobile" href="#位自动重装模式-1"><span class="level-left"><span class="level-item">10.4.3</span><span class="level-item">8 位自动重装模式</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#定时器计数器-t2"><span class="level-left"><span class="level-item">11</span><span class="level-item">定时器/计数器 T2</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#t2con-定时器-2-控制寄存器可位寻址"><span class="level-left"><span class="level-item">11.1</span><span class="level-item">T2CON 定时器 2
+控制寄存器（可位寻址）</span></span></a></li><li><a class="level is-mobile" href="#t2mod-定时器-2-模式选择寄存器不可位寻址"><span class="level-left"><span class="level-item">11.2</span><span class="level-item">T2MOD 定时器 2
+模式选择寄存器（不可位寻址）</span></span></a></li><li><a class="level is-mobile" href="#定时器-2-工作模式"><span class="level-left"><span class="level-item">11.3</span><span class="level-item">定时器 2 工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#位捕获模式"><span class="level-left"><span class="level-item">11.3.1</span><span class="level-item">16 位捕获模式</span></span></a></li><li><a class="level is-mobile" href="#位自动重装"><span class="level-left"><span class="level-item">11.3.2</span><span class="level-item">16 位自动重装</span></span></a></li><li><a class="level is-mobile" href="#串口波特率发生器"><span class="level-left"><span class="level-item">11.3.3</span><span class="level-item">串口波特率发生器</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#串行通信"><span class="level-left"><span class="level-item">12</span><span class="level-item">串行通信</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#scon-串行控制寄存器"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">SCON 串行控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#pcon-电源控制寄存器"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">PCON 电源控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#ieipiph-串行中断相关寄存器"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">IE/IP/IPH 串行中断相关寄存器</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

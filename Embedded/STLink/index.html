@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>STLink V2 调试编程器应用图解 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="STLink 是由意法半导体公司推出的在线调试编程器，采用5V的USB2.0全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以 JTAG 或 SWD 模式连接至 STM32 系列微控制器，或者以 SWIM 模式连接至 STM8 系列微控制器，操作温度介于0 ~ 50℃之间。由于 ST 公司极为重视中国市场，因此 STLink 的销售价格相对其它国外大厂的在线仿真设备要"><meta property="og:type" content="blog"><meta property="og:title" content="STLink V2 调试编程器应用图解"><meta property="og:url" content="http://www.uinio.com/Embedded/STLink/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="STLink 是由意法半导体公司推出的在线调试编程器，采用5V的USB2.0全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以 JTAG 或 SWD 模式连接至 STM32 系列微控制器，或者以 SWIM 模式连接至 STM8 系列微控制器，操作温度介于0 ~ 50℃之间。由于 ST 公司极为重视中国市场，因此 STLink 的销售价格相对其它国外大厂的在线仿真设备要"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2019-05-16T16:00:00.000Z"><meta property="article:modified_time" content="2019-12-29T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Embedded/STLink/"},"headline":"STLink V2 调试编程器应用图解","image":["http://www.uinio.com/Embedded/STLink/logo.png"],"datePublished":"2019-05-16T16:00:00.000Z","dateModified":"2019-12-29T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"STLink\r 是由意法半导体公司推出的在线调试编程器，采用5V的USB2.0全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以\r JTAG 或 SWD 模式连接至 STM32\r 系列微控制器，或者以 SWIM 模式连接至 STM8\r 系列微控制器，操作温度介于0 ~ 50℃之间。由于 ST\r 公司极为重视中国市场，因此 STLink\r 的销售价格相对其它国外大厂的在线仿真设备要"}</script><link rel="canonical" href="http://www.uinio.com/Embedded/STLink/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-05-16T16:00:00.000Z" title="2019/5/17 00:00:00">2019-05-17</time>发表</span><span class="level-item"><time dateTime="2019-12-29T16:00:00.000Z" title="2019/12/30 00:00:00">2019-12-30</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Embedded/">Embedded</a></span><span class="level-item">11 分钟读完 (大约1587个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">STLink V2 调试编程器应用图解</h1><div class="content"><p>STLink
+是由意法半导体公司推出的在线调试编程器，采用<code>5V</code>的<strong>USB2.0</strong>全速接口进行供电与数据传输，可以方便的对内部固件进行升级，同时支持以
+<strong>JTAG</strong> 或 <strong>SWD</strong> 模式连接至 STM32
+系列微控制器，或者以 <strong>SWIM</strong> 模式连接至 STM8
+系列微控制器，操作温度介于<code>0 ~ 50℃</code>之间。由于 ST
+公司极为重视中国市场，因此 STLink
+的销售价格相对其它国外大厂的在线仿真设备要实惠许多，基本成为国内嵌入式工程师人手上必备的工具。</p>
+<p><img src="/Embedded/STLink/logo.png"></p>
+<p>本文详细介绍 Keil uVision 5 开发环境下 ST-LINK/V2
+版本的调试编程器使用方法，并介绍了相关接口的详细定义与接线方法，文中部分内容翻译至意法半导体官方提供的<a target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/st-link-v2.html">《用于
+STM8 与 STM32 的 ST-LINK/V2
+在线调试编程器用户手册》</a>，以确保使用方法与解释的规范性。</p>
+<span id="more"></span>
+<h1 id="配件说明">配件说明</h1>
+<p>ST-LINK/V2
+基于意法半导体自己的<strong>STM32F103C8</strong>微控制器，主要提供了一个用于
+STM32 的<strong>JTAG</strong>与<strong>SWD/SWV</strong>连接器（下图标识
+A）和一个用于 STM8 的<strong>SWIM</strong>连接器（下图标识
+B）两种连接方式，并带有一枚通信指示灯（下图标识
+D）。其中，<strong>SWIM</strong>模式下支持<code>1.65V ~ 5.5V</code>应用电压，支持低速（<code>9.7 Kbytes/s</code>）和高速模式（<code>12.8 Kbytes/s</code>）编程，可使用
+ERNI 标准的垂直/水平连接器，以及 2.54
+毫米的连接插座。<strong>JTAG/SWD</strong>模式下支持<code>1.65V ~ 3.6V</code>的应用电压与<code>5V</code>容错输入，支持间距<code>2.54mm</code>的
+20 针 JTAG 连接器，以及 SWD 和串行线查看器（SWV）通信。</p>
+<p><img src="/Embedded/STLink/stlink-v2-1.png"></p>
+<p>ST-LINK/V2 调试编程器包含如下所示的配件与设备：</p>
+<ul>
+<li>（<strong>A</strong>）Mini USB 数据线。</li>
+<li>（<strong>B</strong>）ST-LINK/V2 调试编程器。</li>
+<li>（<strong>C</strong>）低成本 SWIM 连接器。</li>
+<li>（<strong>D</strong>）带有标准 ERNI 连接器的 SWIM 排线。</li>
+<li>（<strong>E</strong>）带有 20 针连接器的 JTAG 或 SWD排线。</li>
+</ul>
+<p><img src="/Embedded/STLink/stlink-v2-2.png"></p>
+<h1 id="固件升级">固件升级</h1>
+<p>前往意法半导体官方网站<a target="_blank" rel="noopener" href="https://www.st.com/zh/development-tools/st-link-v2.html">ST-LINK/V2</a>下载
+USB
+驱动程序与升级工具，安装驱动程序之后运行<code>ST-LinkUpgrade.exe</code>升级工具：</p>
+<p><img src="/Embedded/STLink/upgrade.png"></p>
+<p>点击【Device Connect】连接 STLink（如果未连接成功，请将 Mini USB
+数据线拔出后重新上电），连接成功后查看当前 STLink
+的版本号，然后点击【Yes
+&gt;&gt;&gt;&gt;】按钮开始升级，完成以后将会弹出升级成功的提示。</p>
+<h1 id="指示灯状态说明">指示灯状态说明</h1>
+<p>STLink 上 LED 指示灯用于提示当前的工作状态，具体情况如下：</p>
+<ul>
+<li>LED 闪烁<strong>红色</strong>：STLink 已经连接至计算机。</li>
+<li>LED 保持<strong>红色</strong>：计算机已经成功与 STLink
+建立通信连接。</li>
+<li>LED
+交替闪烁<strong>红色</strong>和<strong>绿色</strong>：数据正在传输。</li>
+<li>LED 保持<strong>绿色</strong>：最后一次通信是成功的。</li>
+<li>LED 为橘<strong>黄色</strong>：最后一次通信失败。</li>
+</ul>
+<h1 id="连接-stm8">连接 STM8</h1>
+<p>开发 STM8 微控制器应用程序时，STLink 可以使用一端带有 ERNI
+连接器的排线、以及间距 2.54
+毫米的双排四针排线，共两种方式连接至开发板：</p>
+<p><img src="/Embedded/STLink/connect-to-stm8.png"></p>
+<p>下面的表格是官方文档里对于 SWIM 四针连接器的针脚功能说明：</p>
+<p><img src="/Embedded/STLink/swim-pin.png"></p>
+<h1 id="连接-stm32">连接 STM32</h1>
+<p>开发 STM32 微控制器应用程序时，需要使用 20 针的 JTAG 排线将 STLink
+连接至开发板。</p>
+<p><img src="/Embedded/STLink/connect-to-stm32.png"></p>
+<p>下面的表格对于 20 针 JTAG 排线的针脚功能进行了说明：</p>
+<p><img src="/Embedded/STLink/jtag-pin.png"></p>
+<h1 id="keil-uvision-5-配置">Keil uVision 5 配置</h1>
+<p><strong>JTAG</strong>（联合测试行动小组，Joint Test Action
+Group）是一种国际标准测试协议，标准 JTAG 接口采用 4
+枚针脚，但是目前较为常用的是 14、20 个针脚，笔者之前《J-Link
+仿真器固件恢复小记》一文中使用的 JLink 就是采用了 20 针的 JTAG
+调试协议，当前使用的 STLink V2 也同样采用了该种 20
+针接口，这里直接将其插入 STM32F103C8T6 实验电路中的调试插座，然后打开
+Keil uVision 5 界面上的【Options for
+Target】对编译目标进行设置，选择【Debug】选项卡并选中【Use ST-Link
+Debugger】选项。</p>
+<p><img src="/Embedded/STLink/keil-1.png"></p>
+<p>接下来再点击界面上的【Settings】选项，在弹出的【Cortex-M Target
+Driver Setup】设置界面当中，将【Debug】标签下的【Target
+Com】选择为<strong>JTAG</strong>，点击【确定】按钮以后退出。</p>
+<p><img src="/Embedded/STLink/keil-2.png"></p>
+<p>接下来再打开【Options for
+Target】界面上的【Utilities】选项卡，将【Use Target Driver for Flash
+Programming】选中为<strong>ST-Link Debugger</strong>。</p>
+<p><img src="/Embedded/STLink/keil-3.png"></p>
+<p>最后点击选项菜单后面的【Settings】按钮，重新进入【Cortex-M Target
+Driver Setup】设置界面，点击【Add】添加合适的 Flash
+编程算法，确定后保存退出。</p>
+<p><img src="/Embedded/STLink/keil-4.png"></p>
+<blockquote>
+<p>注意：当前运行的 STM32
+程序当中不能出现类似<code>GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE)</code>会造成禁用
+JTAG 或 SW 接口的语句，并且同时需要注意将 STM32
+的下载模式切换至<strong>FLASH ISP</strong>模式。</p>
+</blockquote>
+<p><strong>SWD</strong>（串行调试，Serial Wire Debug）拥有 4
+个针脚，高速模式下 SWD 比 JTAG
+接口更加稳定可靠，占用引脚数量更少且调试更为方便。</p>
+<h1 id="keil-uvision-5-使用">Keil uVision 5 使用</h1>
+<p>点击 Keil uVision 5 菜单栏上的【Download】按钮，可以通过 STLink
+将程序烧写至微控制器的<strong>Flash</strong>当中并且运行，这与 ISP
+下载软件的作用完全相同。完成下载之后，程序可以脱离 STLink 独立运行 FLASH
+当中。</p>
+<p><img src="/Embedded/STLink/keil-5.png"></p>
+<p>点击 Keil uVision 5 菜单栏上的【Start/Stop
+Debug】按钮图标，就可以进入仿真模式。</p>
+<p><img src="/Embedded/STLink/keil-6.png"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>STLink V2 调试编程器应用图解</p><p><a href="http://www.uinio.com/Embedded/STLink/">http://www.uinio.com/Embedded/STLink/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-05-17</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2019-12-30</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Embedded/Android/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Android 物联网应用开发实例</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Linux/CMake/"><span class="level-item">从 GNU Make 到 CMake 快速入门</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#配件说明"><span class="level-left"><span class="level-item">1</span><span class="level-item">配件说明</span></span></a></li><li><a class="level is-mobile" href="#固件升级"><span class="level-left"><span class="level-item">2</span><span class="level-item">固件升级</span></span></a></li><li><a class="level is-mobile" href="#指示灯状态说明"><span class="level-left"><span class="level-item">3</span><span class="level-item">指示灯状态说明</span></span></a></li><li><a class="level is-mobile" href="#连接-stm8"><span class="level-left"><span class="level-item">4</span><span class="level-item">连接 STM8</span></span></a></li><li><a class="level is-mobile" href="#连接-stm32"><span class="level-left"><span class="level-item">5</span><span class="level-item">连接 STM32</span></span></a></li><li><a class="level is-mobile" href="#keil-uvision-5-配置"><span class="level-left"><span class="level-item">6</span><span class="level-item">Keil uVision 5 配置</span></span></a></li><li><a class="level is-mobile" href="#keil-uvision-5-使用"><span class="level-left"><span class="level-item">7</span><span class="level-item">Keil uVision 5 使用</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>UINIO-MCU-ESP32 系列核心板电路设计 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="UINIO-MCU-ESP32C3 和 UINIO-MCU-ESP32S3 两款开源核心板，分别采用了上海乐鑫科技 推出的 ESP32-C3 以及 ESP32-S3 微控制器，两者均支持 2.4GHz Wi-Fi 与 Bluetooth 5.0 无线网络连接。本文旨在介绍两块核心板各个功能单元的硬件电路设计原理，其中 ESP32-C3 微控制器基于开源的 RISC-V 内核架构，拥"><meta property="og:type" content="blog"><meta property="og:title" content="UINIO-MCU-ESP32 系列核心板电路设计"><meta property="og:url" content="http://www.uinio.com/Project/UINIO-MCU-ESP32/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="UINIO-MCU-ESP32C3 和 UINIO-MCU-ESP32S3 两款开源核心板，分别采用了上海乐鑫科技 推出的 ESP32-C3 以及 ESP32-S3 微控制器，两者均支持 2.4GHz Wi-Fi 与 Bluetooth 5.0 无线网络连接。本文旨在介绍两块核心板各个功能单元的硬件电路设计原理，其中 ESP32-C3 微控制器基于开源的 RISC-V 内核架构，拥"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2023-03-19T16:00:00.000Z"><meta property="article:modified_time" content="2024-07-03T18:28:39.681Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Project/UINIO-MCU-ESP32/"},"headline":"UINIO-MCU-ESP32 系列核心板电路设计","image":["http://www.uinio.com/Project/UINIO-MCU-ESP32/logo.png"],"datePublished":"2023-03-19T16:00:00.000Z","dateModified":"2024-07-03T18:28:39.681Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"UINIO-MCU-ESP32C3\r 和 UINIO-MCU-ESP32S3\r 两款开源核心板，分别采用了上海乐鑫科技\r 推出的 ESP32-C3 以及 ESP32-S3\r 微控制器，两者均支持 2.4GHz Wi-Fi 与 Bluetooth\r 5.0\r 无线网络连接。本文旨在介绍两块核心板各个功能单元的硬件电路设计原理，其中\r ESP32-C3 微控制器基于开源的 RISC-V\r 内核架构，拥"}</script><link rel="canonical" href="http://www.uinio.com/Project/UINIO-MCU-ESP32/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-03-19T16:00:00.000Z" title="2023/3/20 00:00:00">2023-03-20</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.681Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">1 小时读完 (大约7437个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">UINIO-MCU-ESP32 系列核心板电路设计</h1><div class="content"><p><a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-ESP32C3"><strong>UINIO-MCU-ESP32C3</strong></a>
+和 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-ESP32S3"><strong>UINIO-MCU-ESP32S3</strong></a>
+两款开源核心板，分别采用了<a target="_blank" rel="noopener" href="https://www.espressif.com.cn"><strong>上海乐鑫科技</strong></a>
+推出的 <strong>ESP32-C3</strong> 以及 <strong>ESP32-S3</strong>
+微控制器，两者均支持 <strong>2.4GHz Wi-Fi</strong> 与 <strong>Bluetooth
+5.0</strong>
+无线网络连接。本文旨在介绍两块核心板各个功能单元的硬件电路设计原理，其中
+<strong>ESP32-C3</strong> 微控制器基于开源的 <strong>RISC-V</strong>
+内核架构，拥有 <strong>22</strong> 个 GPIO 接口，主频高达
+<code>160MHz</code>，板载 <code>384KB</code> 容量的 ROM，以及
+<code>400KB</code> 容量的 SRAM 和 <code>8KB</code> 容量的 RTC
+SRAM，支持的数字外设接口有
+<code>3 × SPI</code>、<code>2 × UART</code>、<code>1 × I²C</code>、<code>1 × I²S</code>，而<strong>模拟外设接口</strong>则采用了
+<strong>6</strong> 通道的 <code>2 × 12</code> 位 SAR 模/数转换器。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/logo.png"></p>
+<p>稍晚一些推出的 <strong>ESP32-S3</strong> 微控制器则是基于
+<strong>Cadence</strong> 公司的 <strong>Xtensa Dual-Core 32-bit
+LX7</strong> 架构，拥有 <strong>45</strong> 个 GPIO 接口，主频高达
+<code>240MHz</code>，板载有 <code>384KB</code> 容量的 ROM，以及
+<code>512KB</code> 容量的 SRAM 和 <code>16KB</code> 容量的 RTC
+SRAM，支持的<strong>数字外设接口</strong>有
+<code>4 × SPI</code>、<code>3 × UART</code>、<code>2 × I²C</code>、<code>2 × I²S</code>。而<strong>模拟外设接口</strong>采用了
+<strong>20</strong> 通道的 <code>2 × 12</code> 位 SAR
+模/数转换器。核心板的 <strong>KiCad</strong> 原理图以及 PCB
+源文件，可以在我的 <a target="_blank" rel="noopener" href="https://github.com/uinika"><strong>GitHub</strong></a>
+仓库当中进行获取。</p>
+<span id="more"></span>
+<h1 id="uinio-mcu-esp32c3-硬件设计">UINIO-MCU-ESP32C3 硬件设计</h1>
+<p><a target="_blank" rel="noopener" href="https://www.espressif.com.cn"><strong>上海乐鑫科技</strong></a>
+推出的 <strong>ESP32-C3</strong> 微控制器基于 <strong>RISC-V</strong>
+架构，拥有 <strong>22</strong> 个 GPIO 接口，主频高达
+<code>160MHz</code>，板载有 <code>384KB</code> 容量的 ROM，以及
+<code>400KB</code> 容量的 SRAM 和 <code>8KB</code> 容量的 RTC
+SRAM，支持的数字外设接口有
+<code>3 × SPI</code>、<code>2 × UART</code>、<code>1 × I²C</code>、<code>1 × I²S</code>，而<strong>模拟外设接口</strong>方面则支持多达
+6 通道的 <code>2 × 12</code> 位 SAR 模/数转换器。</p>
+<p><strong>ESP32-C3</strong> 的外围电路设计较为简单，仅仅只需要
+<strong>20</strong> 个左右的贴片电阻、电容、电感，以及
+<strong>1</strong> 个无源晶振、<strong>1</strong> 个 SPI 接口的 Flash
+存储芯片。其核心电路主要包括
+<code>电源</code>、<code>上电时序与复位</code>、<code>Flash 存储器</code>、<code>时钟源</code>、<code>射频天线</code>、<code>UART 串行通信</code>、<code>ADC 模/数转换</code>、<code>Strapping 引脚</code>、<code>GPIO 引脚</code>、<code>UART0 自动下载电路</code>
+等部分，下面展示了 <strong>ESP32-C3</strong> 官方给出的参考原理图：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/0.png"></p>
+<h2 id="电源管理">电源管理</h2>
+<p><strong>ESP32-C3</strong> 一共拥有 <code>VDDA1</code> 和
+<code>VDDA2</code>（<strong>模拟电源</strong>）、<code>VDD3P3_RTC</code>（<strong>RTC
+电源</strong>）、<code>VDD3P3_CPU</code>（<strong>MCU 电源</strong>）
+四组电源输入引脚，以及一组 <code>VDD_SPI</code>
+引脚（<strong>电源输入/输出管脚</strong>，由 <code>VDD3P3_CPU</code>
+通过电阻 <span class="math inline">\(R_{SPI}\)</span>
+进行供电，因而会相对于 <code>VDD3P3_CPU</code>
+存在着一定的电压降）。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/1.png"></p>
+<blockquote>
+<p><strong>注意</strong>：当 <code>VDD_SPI</code>
+无需为外部进行供电时，也可以将其复用为 <code>GPIO11</code>
+来进行使用。</p>
+</blockquote>
+<h3 id="数字电源">数字电源</h3>
+<p><strong>ESP32-C3</strong> 的典型<strong>工作电压</strong>为
+<code>3.3V</code>，而<strong>工作电流</strong>则需要达到
+<code>500mA</code> 及以上。在 <strong>UINIO-MCU-ESP32C3</strong>
+原理图当中，<strong>ESP32-C3</strong> 的第 <code>11</code> 和
+<code>17</code> 引脚分别为 <strong>RTC 电源引脚</strong>和 <strong>MCU
+电源引脚</strong>，工作电压介于 <code>3.0V ~ 3.6V</code>
+范围之间，并且分别添加了 <code>0.1µF</code> 以及 <code>1µF</code>
+的对地滤波电容。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/2.png"></p>
+<blockquote>
+<p><strong>注意</strong>：当使用 <code>VDD_SPI</code> 作为外部 Flash
+存储器的电源时，需要满足该款 Flash
+存储芯片的最低工作电压要求，通常应当保证其电压值处于 <code>3.0V</code>
+及以上的值。</p>
+</blockquote>
+<h3 id="模拟电源">模拟电源</h3>
+<p><strong>ESP32-C3</strong> 芯片的第
+<code>2</code>、<code>3</code>、<code>31</code>、<code>32</code>
+为模拟电源引脚，工作电压同样介于 <code>3.0V ~ 3.6V</code> 范围。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/3.png"></p>
+<blockquote>
+<p><strong>注意</strong>：当 <strong>ESP32-C3</strong> 工作在
+<code>TX</code>
+状态下时，由于瞬时电流较大，可能会导致<strong>电源轨道塌陷</strong>（当<strong>电源</strong>与<strong>地</strong>之间的电流发生变化时，电源路径与接地路径之间的阻抗会产生一个压降，从而导致提供给芯片的工作电压被降低），所以官方建议在电源走线上增加了一个
+<code>10µF</code> 电容，并且将其与 <code>0.1µF</code>、<code>1µF</code>
+电容并联起来搭配使用。</p>
+</blockquote>
+<h2 id="上电时序-复位">上电时序 &amp; 复位</h2>
+<h3 id="上电时序">上电时序</h3>
+<p><strong>ESP32-C3</strong> 的上电时序需要遵循：编号为 <code>7</code>
+的<strong>使能引脚</strong>
+<code>CHIP_EN</code>，上电时间必须晚于<strong>系统电源</strong>
+<code>3.3V</code> 的上电时间。</p>
+<table>
+<colgroup>
+<col style="width: 5%">
+<col style="width: 81%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">参数</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: center;">最小值(微秒)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(t_0\)</span></td>
+<td style="text-align: left;"><code>CHIP_EN</code> 管脚上电时间晚于
+<code>VDDA</code>、<code>VDD3P3</code>、<code>VDD3P3_RTC</code>、<code>VDD3P3_CPU</code>；</td>
+<td style="text-align: center;"><code>50微秒</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(t_1\)</span></td>
+<td style="text-align: left;"><code>CHIP_EN</code> 引脚的电平低于 <span class="math inline">\(V_{IL\_{nRST}}\)</span> 的时间；</td>
+<td style="text-align: center;"><code>50微秒</code></td>
+</tr>
+</tbody>
+</table>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/4.png"></p>
+<blockquote>
+<p><strong>注意</strong>：为了确保 <strong>ESP32-C3</strong>
+在上电时电源的正常供电，<code>CHIP_EN</code> 引脚需要添加 <strong>RC
+延时电路</strong>（典型取值为
+<code>R = 10 kΩ</code>，<code>C = 1 µF</code>，具体数值需要根据电源的<strong>上电时序</strong>和芯片的<strong>上电复位时序</strong>进行调整）。</p>
+</blockquote>
+<h3 id="复位">复位</h3>
+<p><strong>ESP32-C3</strong> 可以通过 <code>CHIP_EN</code>
+引脚进行复位，当 <code>CHIP_EN</code>
+为低电平的时候，建议<strong>复位电平</strong> <span class="math inline">\(V_{IL\_{nRST}}\)</span> 的取值范围为 <span class="math inline">\((–0.3 \sim 0.25) \times VDD\)</span>
+伏。除此之外，为了防止外界干扰导致系统重启，建议尽量缩短
+<code>CHIP_EN</code> 的 PCB 走线，并且添加<strong>上拉电阻</strong>
+<span class="math inline">\(R_2\)</span>
+以及对地<strong>去耦电容</strong> <span class="math inline">\(C_9\)</span>。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/5.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>ESP32-C3</strong> 的
+<code>CHIP_EN</code> 引脚不可以处于<strong>浮空</strong>状态。</p>
+</blockquote>
+<h2 id="flash-存储器">Flash 存储器</h2>
+<p><strong>ESP32-C3</strong> 最大支持 <code>16MB</code> 容量的 Flash
+存储器，可以选择使用 <code>VDD_SPI</code> 引脚输出的电源进行供电。在
+<strong>UINIO-MCU-ESP32C3</strong> 当中，直接选择将 <strong>LDO
+线性稳压器</strong>输出的 <code>VDD_3.3V</code> 作为 Flash
+存储芯片的工作电源。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/6.png"></p>
+<blockquote>
+<p><strong>注意</strong>：如果采用了 <code>VDD_SPI</code>
+作为电源，那么建议在 SPI 总线引脚上预留一个 <code>0Ω</code>
+串联电阻的封装位置，用于降低驱动电流、减小串扰、调节时序等后续调试工作。</p>
+</blockquote>
+<h2 id="时钟源">时钟源</h2>
+<p><strong>ESP32-C3</strong>
+可以使用<strong>外部晶振</strong>和<strong>外部
+RTC</strong>两个时钟源。</p>
+<h3 id="外部晶振时钟源">外部晶振时钟源</h3>
+<p><strong>ESP32-C3</strong> 只支持 <code>40MHz</code> 晶振（精度为
+<span class="math inline">\(\pm 10 ppm\)</span>），匹配电容
+<code>C15</code> 和 <code>C17</code>
+的取值需要经过测试之后再行确定。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/7.png"></p>
+<h3 id="外部-rtc-时钟源">外部 RTC 时钟源</h3>
+<p><strong>ESP32-C3</strong> 支持将 <code>XTAL_32K_P</code> 和
+<code>XTAL_32K_N</code> 引脚，连接至外部的 <code>32.768 kHz</code>
+晶振作为 <strong>RTC 实时时钟</strong>。而
+<strong>UINIO-MCU-ESP32C3</strong> 为了获得更多的 GPIO 资源，索性直接将
+<code>XTAL_32K_P</code> 和 <code>XTAL_32K_N</code> 引脚复用为
+<code>GPIO0</code> 和 <code>GPIO1</code> 进行使用。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/8.png"></p>
+<h2 id="射频天线">射频天线</h2>
+<p><strong>UINIO-MCU-ESP32C3</strong> 在引出射频天线时，预留了
+<strong>CLC</strong> 结构的 <span class="math inline">\(\pi\)</span>
+<strong>型阻抗匹配网络</strong>（具体参数需要根据实际天线的 PCB
+布局来测定），以期获得最佳的发射功率：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/9.png"></p>
+<h2 id="strapping-引脚">Strapping 引脚</h2>
+<p><strong>ESP32-C3</strong>
+在<strong>复位过程</strong>当中（<code>上电复位</code>、<code>RTC 看门狗复位</code>、<code>欠压复位</code>、<code>模拟超级看门狗复位</code>、<code>晶振时钟毛刺检测复位</code>），<strong>Strapping
+引脚</strong>会将引脚上的电平状态采样并且存储到锁存器当中（锁存值为
+<code>0</code> 或 <code>1</code>
+），并且会一直保持到芯片<strong>掉电</strong>或者<strong>关闭</strong>。<strong>ESP32-C3</strong>
+一共拥有 <code>GPIO2</code>、<code>GPIO8</code>、<code>GPIO9</code> 三个
+<strong>Strapping 引脚</strong>（可以通过读取
+<code>GPIO_STRAP_REG</code> 寄存器上的 <code>GPIO_STRAPPING</code>
+字段，获得这三个引脚上面的状态值）。</p>
+<p>使用<strong>外接上下拉电阻</strong>或者直接经由
+<strong>GPIO</strong>，可以直接控制复位时 Strapping
+引脚的电平状态。在复位完成之后，Strapping 引脚会转变为普通引脚。其中
+<code>GPIO9</code>
+默认连接内部的上拉电阻，如果该引脚悬空或者连接到外部的高阻抗电路，则锁存值默认为
+<code>1</code>。<strong>ESP32-C3</strong> 的 Strapping
+引脚启动模式配置，可以参考下面的表格：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">引脚</th>
+<th style="text-align: center;">默认</th>
+<th style="text-align: center;">SPI 启动模式</th>
+<th style="text-align: center;">下载启动模式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>GPIO2</strong></td>
+<td style="text-align: center;">无</td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>1</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>GPIO8</strong></td>
+<td style="text-align: center;">无</td>
+<td style="text-align: center;">无关</td>
+<td style="text-align: center;"><code>1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>GPIO9</strong></td>
+<td style="text-align: center;">内部上拉</td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>下图展示了 <code>CHIP_EN</code> 在上电前后，Strapping
+引脚的<strong>建立时间</strong> <span class="math inline">\(t_0\)</span>（最少保持 <code>0</code>
+毫秒）和<strong>保持时间</strong> <span class="math inline">\(t_1\)</span>（最少保持 <code>3</code>
+毫秒）之间的关系：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/10.png"></p>
+<h2 id="gpio-引脚">GPIO 引脚</h2>
+<p><strong>ESP32-C3</strong> 一共拥有 <strong>22</strong> 个 GPIO
+引脚，通过配置对应的寄存器，可以为这些引脚指定不同的功能。除了作为数字信号引脚之外，一部分
+GPIO 引脚也可以配置为 ADC 模拟引脚。所有 GPIO
+都可以在内部被设置为<strong>上拉</strong>、<strong>下拉</strong>、<strong>高阻</strong>，当
+GPIO
+被配置为<strong>输入状态</strong>，则可以通过读取寄存器获取该状态值。已经被设置为<strong>输入状态</strong>的
+GPIO
+引脚，可以产生出<code>信号边缘触发</code>或者<code>电平状态触发</code>中断。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>ESP32-C3</strong> 的数字 GPIO
+引脚都是<strong>双向</strong>、<strong>非反相</strong>、<strong>三态</strong>的，因而这些引脚也可以被复用为
+<code>UART</code>、<code>SPI</code> 等其它用途。</p>
+</blockquote>
+<p><strong>ESP32-C3</strong> 的 <strong>IO MUX</strong> 和 <strong>GPIO
+交换矩阵</strong>用于将信号从外设传输至 GPIO 引脚，两者共同控制着
+<strong>ESP32-C3</strong> 的输入输出：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/11.png"></p>
+<p>下面的表格展示了所有通过 <strong>IO MUX</strong> 和 <strong>GPIO
+交换矩阵</strong> 所映射出的引脚功能：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/12.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<code>GPIO12</code> 和 <code>GPIO13</code> 在
+<strong>Arduino</strong> 的 <strong>QIO</strong> 模式下被复用为
+<strong>SPI</strong> 总线的 <code>SPIHD</code> 和 <code>SPIWP</code>
+信号线，为了增加可用的 GPIO 数量，<strong>UINIO-MCU-ESP32C3</strong>
+采用了两线制 SPI 的 <strong>DIO</strong> 模式，使用时需要注意将 Flash
+配置为 <strong>DIO</strong> 模式。除此之外，<code>GPIO11</code> 默认为
+<strong>SPI Flash</strong> 的 <code>VDD_SPI</code>
+引脚，需要配置之后才能够复用为 <strong>GPIO</strong> 使用。</p>
+</blockquote>
+<p>下面展示了上述表格当中，<strong>复位</strong>一栏各个符号所代表的含义：</p>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 89%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"> 复位状态序列号 </th>
+<th style="text-align: left;">默认配置说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: left;">输入关闭，高阻 (<code>IE = 0</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: left;">输入使能，高阻 (<code>IE = 1</code>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: left;">输入使能，下拉电阻使能
+(<code>IE = 1</code>，<code>WPD = 1</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: left;">输入使能，上拉电阻使能
+(<code>IE = 1</code>，<code>WPU = 1</code>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: left;">输出使能，上拉电阻使能
+(<code>OE = 1</code>, <code>WPU = 1</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0*</strong></td>
+<td style="text-align: left;">输入关闭，上拉电阻使能
+(<code>IE = 0</code>，<code>WPU = 0</code>，<code>USB_WPU = 1</code>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>1*</strong></td>
+<td style="text-align: left;">当 <strong>eFuse</strong> 的
+<code>EFUSE_DIS_PAD_JTAG</code> 位为 <code>0</code>
+时(默认值)，引脚复位之后<strong>输入使能</strong>，<strong>上拉电阻使能</strong>
+(<code>IE = 1</code>，<code>WPU = 1</code>)；<br>而当
+<code>EFUSE_DIS_PAD_JTAG</code> 被置为 <code>1</code>
+时，引脚复位之后<strong>输入使能</strong>，且处于高阻状态
+(<code>IE = 1</code>)。</td>
+</tr>
+</tbody>
+</table>
+<p>在上面表格当中，<strong>说明</strong>一栏里符号所代表的含义如下所示：</p>
+<ul>
+<li><strong>R</strong>：该引脚具有模拟功能；</li>
+<li><strong>G</strong>：该引脚在芯片上电过程当中存在毛刺；</li>
+<li><strong>USB</strong>：<code>GPIO18</code> 和 <code>GPIO19</code>
+属于 USB 引脚，其上拉电阻由引脚上拉和 USB 上拉共同控制，当其中任意一个为
+<code>1</code> 时，对应引脚的上拉电阻使能；USB 上拉由
+<code>USB_SERIAL_JTAG_DP_PULLUP</code> 位进行控制；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：建议将处于<strong>高阻状态</strong>的引脚配置为<code>上拉</code>或者<code>下拉</code>，从而避免不必要的电能消耗。</p>
+</blockquote>
+<h2 id="uart0-自动下载">UART0 自动下载</h2>
+<p>当 <strong>ESP32-C3</strong> 复位完成之后，就可以通过
+<code>GPIO2</code>、<code>GPIO8</code>、<code>GPIO9</code> 三个
+Strapping 引脚共同控制 Boot 模式：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/13.png"></p>
+<ul>
+<li>在 <strong>SPI Boot</strong> 模式下，<strong>ESP32-C3</strong>
+会通过从 SPI Flash
+存储器当中读取程序进行启动，此模式下可以进一步细分为<strong>常规 Flash
+启动方式</strong>（支持安全启动，程序运行在 RAM
+中）和<strong>直接启动方式</strong>（不支持安全启动，程序直接运行在
+Flash 中）这两种启动方式；</li>
+<li>在 <strong>Download Boot</strong> 模式下，可以通过
+<code>UART0</code> 或者 <strong>USB</strong> 接口将代码下载至
+Flash，或者将程序加载至 SRAM 并在 SRAM 当中运行（确保 <code>.bin</code>
+文件当中地址为 <code>0x42000000</code> 的前两个字为
+<code>0xaedb041d</code>）；</li>
+</ul>
+<p><strong>UINIO-MCU-ESP32C3</strong> 的 <code>GPIO2</code>
+在默认情况下，已经在内部被弱上拉为 <code>3.3V</code>
+高电平（<em>此处存疑，因为根据官方文档，该引脚实际上为输入高阻状态，并非处于高电平，可能文档撰写过程当中存在着谬误，了解该问题的同学可以联系我</em>）；而
+<code>GPIO8</code> 通过外接上拉电阻 <code>R4</code>
+也被钳制为高电平。此时 <strong>ESP32-C3</strong>
+进入【<strong>下载启动模式</strong>】的条件就转变为：当
+<code>CHIP_EN</code>
+引脚上面的信号处于<strong>上升沿</strong>的时候，Strapping 引脚
+<code>GPIO9</code> 必须保持为低电平 <code>0</code>。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/14.png"></p>
+<p>通过上面的原理图可以看到，<code>GPIO9/BOOT</code> 和
+<code>CHIP_EN</code> 分别连接至 <strong>ESP32-C3</strong> 的集电极，此时
+USB 转串口芯片 <code>DTR</code> 与 <code>DTR</code> 引脚，以及三极管
+<strong>Q1</strong> 与 <strong>Q2</strong> 和 <strong>ESP32-C3</strong>
+的 <code>CHIP_EN</code>、<code>GPIO9</code>
+引脚之间的逻辑关系如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 32%">
+<col style="width: 32%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">串口 DTR 和 DTR 状态</th>
+<th style="text-align: center;">三极管 Q1 和 Q2 状态</th>
+<th style="text-align: center;">ESP32-C3 引脚状态</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>DTR = 0</code> 并且
+<code>RTS = 0</code></td>
+<td style="text-align: center;"><strong>Q1</strong>
+截止，<strong>Q2</strong> 截止</td>
+<td style="text-align: center;"><code>CHIP_EN = 1</code>、<code>GPIO9 = 1</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>DTR = 0</code> 并且
+<code>RTS = 1</code></td>
+<td style="text-align: center;"><strong>Q1</strong>
+截止，<strong>Q2</strong> 导通</td>
+<td style="text-align: center;"><code>CHIP_EN = 1</code>、<code>GPIO9 = 0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>DTR = 1</code> 并且
+<code>RTS = 0</code></td>
+<td style="text-align: center;"><strong>Q1</strong>
+导通，<strong>Q2</strong> 截止</td>
+<td style="text-align: center;"><code>CHIP_EN = 0</code>、<code>GPIO9 = 1</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>DTR = 1</code> 并且
+<code>RTS = 1</code></td>
+<td style="text-align: center;"><strong>Q1</strong>
+截止，<strong>Q2</strong> 截止</td>
+<td style="text-align: center;"><code>CHIP_EN = 1</code>、<code>GPIO9 = 1</code></td>
+</tr>
+</tbody>
+</table>
+<p>概而言之，当 USB 转串口芯片的 <code>DTR</code> 和 <code>RTS</code>
+同时为 <code>0</code> 或者 <code>1</code> 的时候，三极管
+<strong>Q1</strong> 和 <strong>Q2</strong> 均处于截止状态，此时
+<code>CHIP_EN</code> 和 <code>GPIO9</code>
+的状态由内外部的上下拉电阻决定。而当串口芯片的 <code>DTR</code> 和
+<code>RTS</code> 不同时为 <code>0</code> 或者 <code>1</code>
+时，<code>CHIP_EN</code> 与 <code>RTS</code> 的电平状态，以及
+<code>GPIO9</code> 与 <code>DTR</code> 的电平状态完全相同。这就意味着
+<code>CHIP_EN</code> 与 <code>IO0</code> 不可能同时为
+<code>0</code>，然而进入下载模式需要 <code>CHIP_EN</code> 在从
+<code>0</code> 向 <code>1</code> 跳变时，<code>GPIO9</code>
+的电平状态持续等于
+<code>0</code>。为了满足这个条件，<strong>ESP32-C3</strong> 的
+<code>CHIP_EN</code> 引脚被连接到了一个 <strong>RC
+充放电</strong>电路上面，具体可以参见 <strong>UINIO-MCU-ESP32C3</strong>
+的原理图：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/C3/15.png"></p>
+<p>由于电容具有充放电效应，电平状态并不会马上切变为高电平，而是会从
+<code>0</code> 缓慢上升至 <code>1</code>，在这个过程当中
+<code>GPIO9</code> 维持低电平 <code>0</code> 状态，即当串口芯片的
+<code>DTR = 0</code> 并且 <code>RTS = 1</code> 的时候，就可以实现
+<strong>ESP32-C3</strong> 的自动串口下载。</p>
+<p>除此之外，<strong>UINIO-MCU-ESP32C3</strong> 板载的 <code>SW1</code>
+和 <code>SW2</code>
+两颗按键，分别是实现复位功能的【复位按键】，以及实现下载功能的【下载按键】，具体用途可以参考下面的表格：</p>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 57%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">按键位号</th>
+<th style="text-align: left;">功能说明</th>
+<th style="text-align: center;">有效值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>SW1</code></td>
+<td style="text-align: left;">按键按下时 <strong>ESP32-C3</strong>
+开始复位</td>
+<td style="text-align: center;"><strong>低电平</strong> <code>0</code>
+有效</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>SW2</code></td>
+<td style="text-align: left;">按键按下时 <strong>ESP32-C3</strong>
+进入下载模式</td>
+<td style="text-align: center;"><strong>低电平</strong> <code>0</code>
+有效</td>
+</tr>
+</tbody>
+</table>
+<h1 id="uinio-mcu-esp32s3-硬件设计">UINIO-MCU-ESP32S3 硬件设计</h1>
+<p><a target="_blank" rel="noopener" href="https://www.espressif.com.cn"><strong>上海乐鑫科技</strong></a>
+推出的 <strong>ESP32-S3</strong> 微控制器基于 <strong>Cadence</strong>
+公司的 <strong>Xtensa® Dual-Core 32-bit LX7</strong> 架构，拥有
+<strong>45</strong> 个 GPIO 接口，主频高达 <code>240MHz</code>，板载有
+<code>384KB</code> 容量的 ROM，以及 <code>512KB</code> 容量的 SRAM 和
+<code>16KB</code> 容量的 RTC SRAM，支持的<strong>数字外设接口</strong>有
+<code>4 × SPI</code>、<code>3 × UART</code>、<code>2 × I²C</code>、<code>2 × I²S</code>。而<strong>模拟外设接口</strong>方面则支持多达
+20 通道的 <code>2 × 12</code> 位 SAR 模/数转换器。</p>
+<p><strong>ESP32-S3</strong> 的核心电路与 <strong>ESP32-C3</strong>
+非常相似，同样仅需要 <strong>20</strong>
+个左右的贴片电阻、电容、电感，以及 <strong>1</strong>
+个无源晶振、<strong>1</strong> 个 SPI 接口的 Flash 存储芯片和
+<strong>1</strong> 个可选的 PSRAM 存储芯片。下面展示的是
+<strong>ESP32-S3</strong> 的官方参考原理图（基于<strong>四线制</strong>
+<code>3.3V</code> 工作电压的外部 <strong>Flash</strong> 和
+<strong>PSRAM</strong> 存储器进行设计）：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/0.png"></p>
+<h2 id="电源">电源</h2>
+<p><strong>ESP32-S3</strong> 的正常工作电压为
+<code>3.3V</code>，正常工作所需的最大电流在 <code>500mA</code>
+以上，并且电源入口位置建议添加<strong>静电释放</strong>（ESD，Electro-Static
+Discharge）保护元件。整体上看，<strong>ESP32-S3</strong> 与上面介绍的
+<strong>ESP32-C3</strong>
+在电路设计方面的整体区别不大，因而本节内容主要介绍两者在<strong>供电电源</strong>、<strong>系统复位</strong>、<strong>Flash
+与 PSRAM 存储器</strong>、<strong>Strapping 引脚</strong>、<strong>USB
+自动下载</strong>等方面的主要差别。</p>
+<h3 id="数字电源-1">数字电源</h3>
+<p><strong>ESP32-S3</strong> 的第 <strong>46</strong> 引脚
+<code>VDD3P3_CPU</code> 属于微控制器的 <strong>VDD</strong>
+数字电源引脚，其工作电压范围为
+<code>3.0V ~ 3.6V</code>，设计时需要在靠近该引脚的位置添加
+<code>0.1µF</code> 去耦电容。而第 <strong>29</strong> 引脚
+<code>VDD_SPI</code> 可以被配置为 <code>1.8V</code> 输出（启动时配置
+<strong>GPIO45</strong> 的电平状态为 <code>1</code>）或者
+<code>3.3V</code> 输出（启动时配置 <strong>GPIO45</strong> 的电平状态为
+<code>0</code>，即默认状态）给外部电路使用，并且添加 <code>0.1µF</code>
+和 <code>1µF</code> 的去耦电容。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/1.png"></p>
+<ul>
+<li>当 <code>VDD_SPI</code> 处于 <code>1.8V</code> 模式，由
+<strong>ESP32-S3</strong> 内部的 <strong>Flash Voltage
+Regulator</strong> 进行供电（最大电流 <code>40mA</code>）；</li>
+<li>当 <code>VDD_SPI</code> 处于 <code>3.3V</code> 模式，由
+<strong>VDD3P3_RTC</strong> 经过 <span class="math inline">\(R_{SPI}\)</span> 电阻进行供电，因此
+<code>VDD_SPI</code> 相对于 <code>VDD3P3_RTC</code>
+会存在一定的电压降；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：<strong>UINIO-MCU-ESP32S3</strong> 的
+<code>VDD_SPI</code> 串联有一枚 <code>10KΩ</code> 的电阻 <span class="math inline">\(R_6\)</span>，如果采用 <code>3.3V</code>
+工作电压的 Flash 存储芯片，则需要移除 <span class="math inline">\(R_6\)</span> 电阻，使得 <strong>GPIO45</strong>
+的电平状态默认为 <code>0</code>。</p>
+</blockquote>
+<h3 id="模拟电源-1">模拟电源</h3>
+<p><strong>ESP32-S3</strong> 的第
+<strong>2</strong>、<strong>3</strong>、<strong>55</strong>、<strong>56</strong>
+引脚为 <strong>VDDA</strong> 模拟电源引脚，其工作电压范围为
+<code>3.0V ~ 3.6V</code>。类似于 <strong>ESP32-C3</strong>，为了防止
+<code>TX</code>
+状态下瞬时电流增大导致的<strong>电源轨道塌陷</strong>，所以
+<strong>UINIO-MCU-ESP32S3</strong> 在 <code>VDD3P3_CPU</code>
+的电源走线上增加了一枚 <code>10µF</code> 电容，并且将其与
+<code>1µF</code>、<code>0.1µF</code> 电容并联起来使用。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/2.png"></p>
+<h3 id="rtc-电源">RTC 电源</h3>
+<p><strong>ESP32-S3</strong> 的第 <strong>20</strong> 引脚
+<code>VDD3P3_RTC</code> 属于 RTC
+电源引脚，<strong>UINIO-MCU-ESP32S3</strong> 在该引脚位置添加了一枚
+<code>0.1µF</code> 的去耦电容。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/3.png"></p>
+<h3 id="复位-1">复位</h3>
+<p>不同于 <strong>ESP32-C3</strong> 通过 <code>CHIP_EN</code>
+引脚进行复位，<strong>ESP32-S3</strong> 的复位引脚被称为
+<code>CHIP_PU</code>。两者除了命名上的不同，其它参数乃至于使用方法基本一致。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/4.png"></p>
+<h3 id="flash-与-psram">Flash 与 PSRAM</h3>
+<p><strong>ESP32-S3</strong> 支持的片外 <strong>Flash</strong> 和
+<strong>PSRAM</strong> 最大分别可以达到 <code>1GB</code>
+存储容量，在元件选型时需要特别注意根据 <code>VDD_SPI</code>
+的输出电压，选择相应工作电压的 <strong>Flash</strong> 和
+<strong>PSRAM</strong> 存储器芯片。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/5.png"></p>
+<h2 id="strapping-引脚-1">Strapping 引脚</h2>
+<p><strong>ESP32-S3</strong> 拥有
+<strong>GPIO0</strong>、<strong>GPIO45</strong>、<strong>GPIO46</strong>、<strong>GPIO3</strong>
+一共四个 Strapping 引脚，也可以像 <strong>ESP32-C3</strong>
+那样通过寄存器 <code>GPIO_STRAPPING</code> 读取这几个引脚的状态值。</p>
+<p>在 <strong>ESP32-S3</strong> 的复位过程当中（上电复位、RTC
+看门狗复位、欠压复位、模拟超级看门狗复位、晶振时钟毛刺检测复位），Strapping
+引脚会采样当前的电平状态并且存储至<strong>锁存器</strong>（锁存值为
+<code>0</code> 或 <code>1</code>），并一直保持到芯片掉电或者关闭。</p>
+<ul>
+<li><strong>GPIO0</strong>、<strong>GPIO45</strong>、<strong>GPIO46</strong>
+默认连接着内部的<strong>弱上下拉</strong>电阻，如果这些引脚没有连接外部电路，或者连接的是高阻抗状态，则内部的弱上下拉状态就会决定其输入电平的默认值；</li>
+<li><strong>GPIO3</strong> 默认处于<strong>浮空状态</strong>，其
+Strapping 状态可以用于切换内部的 JTAG 信号来源，此时 Strapping
+值由外部电路进行控制（这时的外部电路不能处于高阻抗状态）；</li>
+</ul>
+<p>下面表格列出了用于选择 JTAG 信号来源的
+<code>EFUSE_DIS_USB_JTAG</code>、<code>EFUSE_DIS_PAD_JTAG</code>、<code>EFUSE_STRAP_JTAG_SEL</code>
+全部寄存器配置组合：</p>
+<table>
+<colgroup>
+<col style="width: 29%">
+<col style="width: 25%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">JTAG 信号源</th>
+<th style="text-align: center;"><code>EFUSE_STRAP_JTAG_SEL</code></th>
+<th style="text-align: center;"><code>EFUSE_DIS_USB_JTAG</code></th>
+<th style="text-align: center;"><code>EFUSE_DIS_PAD_JTAG</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">见后表</td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><code>0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>USB Serial/JTAG
+控制器</strong></td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><code>0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>USB Serial/JTAG
+控制器</strong></td>
+<td style="text-align: center;">无关</td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><code>1</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>片上 JTAG 引脚</strong></td>
+<td style="text-align: center;">无关</td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">无</td>
+<td style="text-align: center;">无关</td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>可以通过外部上下拉电阻，或者 GPIO 控制 <strong>ESP32-S3</strong>
+上电复位时的 Strapping 引脚电平。而在复位放开之后，Strapping
+引脚就会恢复为普通功能引脚。接下来的表格展示了 <strong>ESP32-S3</strong>
+全部 Strapping 引脚的配置含义。</p>
+<p>通过配置 <strong>GPIO45</strong> 这个 Strapping
+引脚的状态，就可以控制 <code>VDD_SPI</code> 的输出电压：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">引脚</th>
+<th style="text-align: center;">默认状态</th>
+<th style="text-align: center;">3.3V</th>
+<th style="text-align: center;">1.8V</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>GPIO45</strong></td>
+<td style="text-align: center;">下拉</td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>而通过控制 <strong>GPIO0</strong> 和 <strong>GPIO46</strong> 这两个
+Strapping 引脚的状态，则可以选择 <strong>ESP32-S3</strong>
+的系统启动模式：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">引脚</th>
+<th style="text-align: center;">默认状态</th>
+<th style="text-align: center;">SPI 启动模式</th>
+<th style="text-align: center;">下载启动模式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>GPIO0</strong></td>
+<td style="text-align: center;">上拉</td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>GPIO46</strong></td>
+<td style="text-align: center;">下拉</td>
+<td style="text-align: center;">无关</td>
+<td style="text-align: center;"><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>当
+<code>EFUSE_DIS_USB_JTAG = 0</code>、<code>EFUSE_DIS_PAD_JTAG = 0</code>、<code>EFUSE_STRAP_JTAG_SEL=1</code>
+的时候，则可以通过 <strong>GPIO46</strong> 选择 JTAG 信号的来源：</p>
+<table>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 37%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">引脚</th>
+<th style="text-align: center;">默认状态</th>
+<th style="text-align: center;">引脚状态值为 0</th>
+<th style="text-align: center;">引脚状态值为 1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>GPIO46</strong></td>
+<td style="text-align: center;">下拉</td>
+<td style="text-align: center;">JTAG 信号来源于芯片上的 JTAG 引脚</td>
+<td style="text-align: center;">JTAG 信号来源于 USB Serial/JTAG
+控制器</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gpio-引脚-1">GPIO 引脚</h2>
+<p><strong>ESP32-S3</strong> 一共拥有 <strong>45</strong> 个 GPIO
+数字引脚，它们可以被分配为 <span class="math inline">\(F_{0 \sim
+4}\)</span> 这几种不同类型的功能：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/6.png"></p>
+<p>上面表格当中，每一项<strong>数字功能</strong> <span class="math inline">\(F_{0 \sim 4}\)</span> 的含义如下所示：</p>
+<ul>
+<li><strong>O</strong>：仅仅只是<strong>输出</strong>；</li>
+<li><strong>O/T</strong>：包含<strong>输出</strong>与<strong>高抗阻</strong>的组合；</li>
+<li><strong>I/O/T</strong>：包含<strong>输入</strong>、<strong>输出</strong>、<strong>高抗阻</strong>的组合；</li>
+<li><strong>I1</strong>：只是<strong>输入</strong>（如果该引脚分配了
+<span class="math inline">\(F_{0 \sim 4}\)</span> 以外的功能，则 <span class="math inline">\(F_{0 \sim 4}\)</span> 的输入信号恒为
+<code>1</code>）；</li>
+<li><strong>I1/O/T</strong>：该功能信号包含<strong>输入</strong>、<strong>输出</strong>、<strong>高抗阻</strong>的组合（如果该引脚分配了
+<span class="math inline">\(F_{0 \sim 4}\)</span> 以外的功能，则 <span class="math inline">\(F_{0 \sim 4}\)</span> 的输入信号恒为
+<code>1</code>）；</li>
+<li><strong>I0/O/T</strong>：该功能信号包含<strong>输入</strong>、<strong>输出</strong>、<strong>高抗阻</strong>的组合（如果该引脚分配了
+<span class="math inline">\(F_{0 \sim 4}\)</span> 以外的功能，则 <span class="math inline">\(F_{0 \sim 4}\)</span> 的输入信号恒为
+<code>0</code>）；</li>
+</ul>
+<p>而上述表格当中，引脚<strong>复位状态</strong>的具体含义如下所示：</p>
+<ul>
+<li><strong>IE0</strong>：输入关闭；</li>
+<li><strong>IE1</strong>：输入使能；</li>
+<li><strong>IE1,
+WPD1</strong>：输入使能，内部弱<strong>下拉电阻</strong>使能；</li>
+<li><strong>IE1,
+WPU1</strong>：输入使能，内部弱<strong>上拉电阻</strong>使能；</li>
+<li><strong>IE1</strong>, 或者 <strong>IE1&amp;WPU1</strong>：当
+<code>EFUSE_DIS_PAD_JTAG</code> 的 <code>eFuse</code> 位为
+<code>1</code> 时，芯片复位之后 <code>MTCK</code>
+浮空（<code>IE1</code>），而 <code>eFuse</code> 位为 <code>0</code>
+时，芯片复位之后 <code>MTCK</code>
+连接至内部的弱上拉电阻（<code>IE1</code>&amp;<code>WPU1</code>）。</li>
+</ul>
+<p>上面表格当中，<strong>备注</strong>一栏里各个符号的功能说明如下所示：</p>
+<ul>
+<li><code>R</code>：该引脚具有 RTC 或模拟功能；</li>
+<li><code>G</code>：该引脚在芯片上电过程中存在着毛刺；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：<code>GPIO19 ~ GPIO20</code>
+的默认驱动电流接近 <code>40mA</code>，除此之外其它引脚的默认驱动电流接近
+<code>20mA</code>。</p>
+</blockquote>
+<h2 id="uart0-自动下载-1">UART0 自动下载</h2>
+<p>当 <strong>ESP32-S3</strong> 复位完成之后，就可以通过
+<code>GPIO0</code>、<code>GPIO46</code> 两个 Strapping 引脚共同控制 Boot
+模式：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/7.png"></p>
+<ul>
+<li>在 <strong>SPI Boot</strong> 模式下，<strong>ESP32-S3</strong>
+会通过从 SPI Flash
+存储器当中读取程序进行启动，此模式下可以进一步细分为<strong>常规 Flash
+启动方式</strong>（支持安全启动，程序运行在 RAM
+中）和<strong>直接启动方式</strong>（不支持安全启动，程序直接运行在
+Flash 中）这两种启动方式；</li>
+<li>在 <strong>Download Boot</strong> 模式下，可以通过
+<strong>UART0</strong> 或者 <strong>USB OTG</strong> 接口将代码下载至
+Flash 存储器，或者将程序加载至 SRAM 并在 SRAM 当中运行（需要确保
+<code>.bin</code> 文件里地址为 <code>0x42000000</code> 的前两个字为
+<code>0xaedb041d</code>）；</li>
+</ul>
+<p><strong>UINIO-MCU-ESP32S3</strong> 的 <code>GPIO46</code>
+会在复位之后处于<strong>输入和内部弱下拉电阻使能</strong>状态（<code>IE1</code>、<code>WPD1</code>），即电平状态被下拉为
+<code>0</code>，此时 <strong>ESP32-S3</strong>
+进入【下载启动模式】的条件就变为：当 <code>CHIP_PU</code>
+引脚上面的信号处于上升沿的时候，Strapping 引脚 <code>GPIO0</code>
+必须保持为低电平 <code>0</code>。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/8.png"></p>
+<p>类似于之前介绍的 <strong>UINIO-MCU-ESP32C3</strong>
+自动下载电路，<strong>ESP32-S3</strong> 的 <code>CHIP_PU</code>
+引脚也连接有一个 RC 充放电电路，同样利用了电容的充放电效应，在
+<code>CHIP_PU</code> 从 <code>0</code> 向 <code>1</code>
+跳变的过程中，将 <code>GPIO0</code> 的电平状态维持为低电平
+<code>0</code>。这样当串口芯片的 <code>DTR = 0</code> 并且
+<code>RTS = 1</code> 时，就可以实现 <strong>ESP32-S3</strong>
+的自动下载。</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/9.png"></p>
+<p><strong>UINIO-MCU-ESP32S3</strong> 自动下载电路的不同之处，在于将
+<strong>UINIO-MCU-ESP32C3</strong> 当中由 <strong>Q1</strong> 和
+<strong>Q2</strong> 两个 NPN 三极管组成的下载逻辑电路，简化为了一颗<a target="_blank" rel="noopener" href="https://www.lrc.cn/"><strong>乐山无线电</strong></a>生产的 <a target="_blank" rel="noopener" href="https://www.lrc.cn/Upload/PDF/Product/SWBJ/LMBT3904DW1T1G.pdf"><strong>LMBT3904DW1T1G</strong></a>
+双 NPN 晶体管阵列芯片，该芯片的内部电路与
+<strong>UINIO-MCU-ESP32C3</strong> 的下载逻辑电路接法基本保持一致：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/10.png"></p>
+<p>除此之外，<strong>UINIO-MCU-ESP32S3</strong> 同样板载了
+<code>SW1</code> 和 <code>SW2</code>
+两颗分别用于实现下载功能和复位功能的按键：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/11.png"></p>
+<p>它们的具体用途，与 <strong>UINIO-MCU-ESP32C3</strong> 上面的两颗按键
+<code>SW1</code> 和 <code>SW2</code> 完全保持一致：</p>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 57%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">按键位号</th>
+<th style="text-align: left;">功能说明</th>
+<th style="text-align: center;">有效值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>SW1</code></td>
+<td style="text-align: left;">按键按下时 <strong>ESP32-C3</strong>
+开始复位</td>
+<td style="text-align: center;"><strong>低电平</strong> <code>0</code>
+有效</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>SW2</code></td>
+<td style="text-align: left;">按键按下时 <strong>ESP32-C3</strong>
+进入下载模式</td>
+<td style="text-align: center;"><strong>低电平</strong> <code>0</code>
+有效</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usb-otg-自动下载">USB OTG 自动下载</h2>
+<p><strong>ESP32-S3</strong> 集成了一颗携带有收发器，并且符合
+<strong>USB2.0</strong> 规范的全速 <strong>USB On-The-Go</strong>
+外设（<strong>OTG</strong>），其中 <code>GPIO19</code> 和
+<code>GPIO20</code> 引脚可以分别用于接入 USB
+的<strong>差分信号线</strong> <code>D-</code> 和 <code>D+</code>：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/12.png"></p>
+<p>利用 <strong>ESP32-S3</strong> 集成的 USB OTG 外设功能，就可以通过
+USB 接口直接进行固件的下载，而无需再借助 <strong>CH343P</strong> 这类
+USB 转串口芯片。<strong>UINIO-MCU-ESP32S3</strong> 为了同时兼容
+<strong>UART0</strong> 和 <strong>USB OTG</strong>
+两种下载方式，专门加入了一颗由 <a target="_blank" rel="noopener" href="https://run-ic.com/"><strong>江苏润石科技</strong></a>
+提供的高速低功耗<strong>双刀双掷</strong>（DPDT，Double Pole Double
+Throw）模拟开关 <a target="_blank" rel="noopener" href="https://run-ic.com/details/144/23.html"><strong>RS2227XUTQK10</strong></a>，其工作电压在
+<code>1.8V ~ 5.5V</code> 范围，采用 <code>WQFN-10</code>
+封装，内部原理与引脚连接如下图所示：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/13.png"></p>
+<p>上图当中的 <code>D+</code> 和 <code>D-</code> 是 <strong>USB
+差分信号输入引脚</strong>，而 <code>HSD1+</code> 和
+<code>HSD1-</code>、<code>HSD2+</code> 和 <code>HSD2-</code> 则分别是
+<strong>USB 差分信号输出引脚</strong>，通过编号为 <code>10</code> 的
+<code>S</code> 引脚可以选择当前是使用 <strong>HSD1</strong> 还是
+<strong>HSD2</strong> 进行 USB
+差分信号输出，下面的表格是该芯片各个引脚功能的真值表：</p>
+<p><img src="/Project/UINIO-MCU-ESP32/S3/14.png"></p>
+<blockquote>
+<p><strong>注意</strong>：通过原理图当中位号为 <code>J1</code>
+的跳线座，就可以指定 <strong>UINIO-MCU-ESP32S3</strong>
+当前所使用的下载方式。</p>
+</blockquote>
+<h1 id="pcb-板图布局注意事项">PCB 板图布局注意事项</h1>
+<p>当采用<strong>两层 PCB</strong>
+进行设计时，可以遵循如下的层功能划分：</p>
+<ol type="1">
+<li>第 1 层为<strong>顶层</strong>，主要用于放置元件和走线；</li>
+<li>第 2
+层为<strong>底层</strong>，尽量不要放置元件，走线越少越好，在确保射频与晶振拥有完整地平面的情况下，可以适度走信号线；</li>
+</ol>
+<p>而采用<strong>四层 PCB</strong>
+进行设计时，则可以遵循下面的层功能划分：</p>
+<ol type="1">
+<li>第 1 层为<strong>顶层</strong>，用于信号线和放置元件；</li>
+<li>第 2
+层为<strong>地层</strong>，不走信号线，确保一个完整的地平面；</li>
+<li>第 3 层为<strong>电源层</strong>，铺地平面，将电源走在该层；</li>
+<li>第 4
+层为<strong>底层</strong>，铺地平面，不建议放置元件，在确保射频与晶振拥有完整地平面的情况下，可以适度走信号线；</li>
+</ol>
+<p><img src="/Project/UINIO-MCU-ESP32/PCB/0.png"></p>
+<ul>
+<li><strong>天线</strong>：PCB 微带天线尽量靠近 PCB
+边缘进行摆放，并且禁止底部覆铜，同时需要注意外壳对于天线射频性能的影响；</li>
+<li><strong>晶振</strong>：让 <strong>ESP32</strong>
+主控芯片与晶振保持一定的距离避免相互干扰，周围不能出现电感之类的磁感应元器件；晶振的信号线最好进行<strong>包地</strong>处理，并且尽可能的避免走线出现过孔，同时晶振下方禁止通过高频数字信号；</li>
+<li><strong>射频天线</strong>：射频走线需要做 <code>50Ω</code>
+的单端阻抗控制，参考平面为第二层，射频走线上的 <span class="math inline">\(\pi\)</span> 型阻抗匹配网络需要呈
+<strong>Z</strong>
+字型摆放；射频走线必须保证相邻层拥有完整的地平面，并且走线下方尽可能不要出现任何的走线；射频走线必须远离晶振、DDR、USB
+转串口等高频元器件；</li>
+<li><strong>Flash 存储器</strong>：SPI
+总线的时钟与数据走线，最好都进行单独的<strong>包地</strong>处理；</li>
+<li><strong>USB 转 UART</strong>：USB
+按照差分信号进行走线，保持<strong>平行等长</strong>，拥有完整的参考地平面；而
+<code>U0TXD</code> 和 <code>U0RXD</code>
+走线要尽量缩短，并且最好是进行包地处理；</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>UINIO-MCU-ESP32 系列核心板电路设计</p><p><a href="http://www.uinio.com/Project/UINIO-MCU-ESP32/">http://www.uinio.com/Project/UINIO-MCU-ESP32/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-03-20</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/LDO/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">常见 LDO 线性稳压芯片的对比选型</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Project/UINIO-Logic-24MHz/"><span class="level-item">快速上手 UINIO-Logic-24MHz 逻辑分析仪</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#uinio-mcu-esp32c3-硬件设计"><span class="level-left"><span class="level-item">1</span><span class="level-item">UINIO-MCU-ESP32C3 硬件设计</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电源管理"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">电源管理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数字电源"><span class="level-left"><span class="level-item">1.1.1</span><span class="level-item">数字电源</span></span></a></li><li><a class="level is-mobile" href="#模拟电源"><span class="level-left"><span class="level-item">1.1.2</span><span class="level-item">模拟电源</span></span></a></li></ul></li><li><a class="level is-mobile" href="#上电时序-复位"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">上电时序 &amp; 复位</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#上电时序"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">上电时序</span></span></a></li><li><a class="level is-mobile" href="#复位"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">复位</span></span></a></li></ul></li><li><a class="level is-mobile" href="#flash-存储器"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">Flash 存储器</span></span></a></li><li><a class="level is-mobile" href="#时钟源"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">时钟源</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外部晶振时钟源"><span class="level-left"><span class="level-item">1.4.1</span><span class="level-item">外部晶振时钟源</span></span></a></li><li><a class="level is-mobile" href="#外部-rtc-时钟源"><span class="level-left"><span class="level-item">1.4.2</span><span class="level-item">外部 RTC 时钟源</span></span></a></li></ul></li><li><a class="level is-mobile" href="#射频天线"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">射频天线</span></span></a></li><li><a class="level is-mobile" href="#strapping-引脚"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">Strapping 引脚</span></span></a></li><li><a class="level is-mobile" href="#gpio-引脚"><span class="level-left"><span class="level-item">1.7</span><span class="level-item">GPIO 引脚</span></span></a></li><li><a class="level is-mobile" href="#uart0-自动下载"><span class="level-left"><span class="level-item">1.8</span><span class="level-item">UART0 自动下载</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-esp32s3-硬件设计"><span class="level-left"><span class="level-item">2</span><span class="level-item">UINIO-MCU-ESP32S3 硬件设计</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电源"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">电源</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数字电源-1"><span class="level-left"><span class="level-item">2.1.1</span><span class="level-item">数字电源</span></span></a></li><li><a class="level is-mobile" href="#模拟电源-1"><span class="level-left"><span class="level-item">2.1.2</span><span class="level-item">模拟电源</span></span></a></li><li><a class="level is-mobile" href="#rtc-电源"><span class="level-left"><span class="level-item">2.1.3</span><span class="level-item">RTC 电源</span></span></a></li><li><a class="level is-mobile" href="#复位-1"><span class="level-left"><span class="level-item">2.1.4</span><span class="level-item">复位</span></span></a></li><li><a class="level is-mobile" href="#flash-与-psram"><span class="level-left"><span class="level-item">2.1.5</span><span class="level-item">Flash 与 PSRAM</span></span></a></li></ul></li><li><a class="level is-mobile" href="#strapping-引脚-1"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">Strapping 引脚</span></span></a></li><li><a class="level is-mobile" href="#gpio-引脚-1"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">GPIO 引脚</span></span></a></li><li><a class="level is-mobile" href="#uart0-自动下载-1"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">UART0 自动下载</span></span></a></li><li><a class="level is-mobile" href="#usb-otg-自动下载"><span class="level-left"><span class="level-item">2.5</span><span class="level-item">USB OTG 自动下载</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pcb-板图布局注意事项"><span class="level-left"><span class="level-item">3</span><span class="level-item">PCB 板图布局注意事项</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

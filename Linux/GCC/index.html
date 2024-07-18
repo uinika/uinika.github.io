@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>基于 Linux 的 GCC 与 GDB 应用程序调试 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="GNU 的正确发音为[g&amp;#39;noo]，名称由英文句子GNU&amp;#39;s Not Unix递归缩写组成，是一项由自由软件基金会推动的操作系统计划。GNU 计划最早开始于 1984 年 1 月，目标是完成一个由Hurd内核与一系列应用程序、系统库、开发工具组成的GNU 操作系统。但由于 Hurd 的开发工作迟迟未能完成，因而普遍选择采用 Linux Kernel 作为操作系统的内核，这一套技术组合正是"><meta property="og:type" content="blog"><meta property="og:title" content="基于 Linux 的 GCC 与 GDB 应用程序调试"><meta property="og:url" content="http://www.uinio.com/Linux/GCC/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="GNU 的正确发音为[g&amp;#39;noo]，名称由英文句子GNU&amp;#39;s Not Unix递归缩写组成，是一项由自由软件基金会推动的操作系统计划。GNU 计划最早开始于 1984 年 1 月，目标是完成一个由Hurd内核与一系列应用程序、系统库、开发工具组成的GNU 操作系统。但由于 Hurd 的开发工作迟迟未能完成，因而普遍选择采用 Linux Kernel 作为操作系统的内核，这一套技术组合正是"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2018-06-20T16:00:00.000Z"><meta property="article:modified_time" content="2018-06-30T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="GCC/GDB"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Linux/GCC/"},"headline":"基于 Linux 的 GCC 与 GDB 应用程序调试","image":["http://www.uinio.com/Linux/GCC/logo.png"],"datePublished":"2018-06-20T16:00:00.000Z","dateModified":"2018-06-30T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"GNU\r 的正确发音为[g&#39;noo]，名称由英文句子GNU&#39;s Not Unix递归缩写组成，是一项由自由软件基金会推动的操作系统计划。GNU\r 计划最早开始于 1984 年 1\r 月，目标是完成一个由Hurd内核与一系列应用程序、系统库、开发工具组成的GNU\r 操作系统。但由于 Hurd 的开发工作迟迟未能完成，因而普遍选择采用\r Linux Kernel 作为操作系统的内核，这一套技术组合正是"}</script><link rel="canonical" href="http://www.uinio.com/Linux/GCC/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-06-20T16:00:00.000Z" title="2018/6/21 00:00:00">2018-06-21</time>发表</span><span class="level-item"><time dateTime="2018-06-30T16:00:00.000Z" title="2018/7/1 00:00:00">2018-07-01</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">33 分钟读完 (大约4996个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">基于 Linux 的 GCC 与 GDB 应用程序调试</h1><div class="content"><p><a target="_blank" rel="noopener" href="https://www.gnu.org/"><strong>GNU</strong></a>
+的正确发音为<code>[g'noo]</code>，名称由英文句子<code>GNU's Not Unix</code>递归缩写组成，是一项由<a target="_blank" rel="noopener" href="https://www.fsf.org/">自由软件基金会</a>推动的操作系统计划。GNU
+计划最早开始于 1984 年 1
+月，目标是完成一个由<strong>Hurd</strong>内核与一系列应用程序、系统库、开发工具组成的<strong>GNU
+操作系统</strong>。但由于 Hurd 的开发工作迟迟未能完成，因而普遍选择采用
+Linux Kernel 作为操作系统的内核，这一套技术组合正是闻名遐迩的
+<strong>GNU/Linux</strong> 操作系统。</p>
+<p><img src="/Linux/GCC/logo.png"></p>
+<p>由 <a target="_blank" rel="noopener" href="https://gcc.gnu.org/"><strong>GCC</strong></a> 与 <a target="_blank" rel="noopener" href="http://www.gnu.org/software/gdb/"><strong>GDB</strong></a>
+组成的编译套件正是 GNU 计划下诞生的优秀开源项目，也是 GNU/Linux
+技术体系不可或缺的构成要素。虽然当前 <a target="_blank" rel="noopener" href="http://clang.llvm.org/"><strong>Clang</strong></a> 与 <a target="_blank" rel="noopener" href="https://www.llvm.org/"><strong>LLVM</strong></a>
+编译套件的发展风头正劲，但是由于嵌入式 Linux 设备通常只提供基于 GCC
+的交叉编译工具链，加之两者在使用上差异不大，而 GDB
+又同时提供了两者编译后程序的完整 Debug 支持，因而笔者依然选择
+<strong>GCC</strong> 与 <strong>GDB</strong>
+组合来作为本文的撰写的目标。</p>
+<span id="more"></span>
+<h1 id="gcc概述">【GCC】概述</h1>
+<p><strong>GNU 编译器套件</strong>（<strong>GCC</strong>，<em>GNU
+Compiler Collection</em>）最初的目标是作为一款 GNU
+操作系统的通用编译器，包含有
+C、C++、Objective-C、Objective-C++、Fortran、Ada、Go、BRIG(HSAIL)等语言的前端及其相关的<code>libstdc++</code>、<code>libgcj</code>等库，目前已经移植到
+Windows、Mac OS X 等商业化操作系统。GCC
+编译器套件当中包含了诸多的软件包，主要的软件包如下面表格所示：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><em>cpp</em></td>
+<td style="text-align: left;">C 预处理器。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>gcc</em></td>
+<td style="text-align: left;">C 编译器。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>g++</em></td>
+<td style="text-align: left;">C++ 编译器。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>gccbug</em></td>
+<td style="text-align: left;">用于创建 BUG 报告的 Shell 脚本。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>gcov</em></td>
+<td style="text-align: left;">覆盖测试工具，用于分析程序需要优化的位置。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>libgcc</em></td>
+<td style="text-align: left;">GCC 运行库。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>libstdc++</em></td>
+<td style="text-align: left;">标准 C++库。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>libsupc++</em></td>
+<td style="text-align: left;">C++语言支持函数库。</td>
+</tr>
+</tbody>
+</table>
+<p>Ubuntu、Mint 等使用 deb 格式软件包的 Linux 发行版通常会默认安装 GCC
+编译器，但是由于相关的软件包可能并不完整，因此可以通过如下命令安装完整的
+GCC 编译环境。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br></pre></td></tr></table></figure>
+<h1 id="基本使用">基本使用</h1>
+<p>由于当前需要编译的是 C
+语言程序，因此需要使用到<code>gcc</code>软件包提供的命令，这些命令的基本使用格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc [-options] [filename]</span><br></pre></td></tr></table></figure>
+<p>将上一节编写的 Hello World
+程序保存至一个<code>main.c</code>源代码文件当中，然后执行<code>gcc</code>编译命令得到可执行的<code>a.out</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc main.c</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">a.out  main.c</span><br><span class="line"></span><br><span class="line">➜  ./a.out</span><br><span class="line">hello world!</span><br></pre></td></tr></table></figure>
+<p>如果需要指定输出的可执行文件名称，那么可以添加<code>-o</code>选项：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc main.c -o main</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">main  main.c</span><br><span class="line"></span><br><span class="line">➜  ./main</span><br><span class="line">hello world!</span><br></pre></td></tr></table></figure>
+<h1 id="编译信息">编译信息</h1>
+<p>如果需要查看编译的过程，那么可以使用<code>-v</code>命令选项：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc -v main.c</span><br><span class="line">Using built-in specs.</span><br><span class="line">COLLECT_GCC=gcc</span><br><span class="line">COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper</span><br><span class="line">OFFLOAD_TARGET_NAMES=nvptx-none</span><br><span class="line">OFFLOAD_TARGET_DEFAULT=1</span><br><span class="line">Target: x86_64-linux-gnu</span><br><span class="line">Configured with: ../src/configure -v --with-pkgversion=<span class="string">&#x27;Ubuntu 7.3.0-27ubuntu1~18.04&#x27;</span> --with-bugurl=file:///usr/share/doc/gcc-7/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++ --prefix=/usr --with-gcc-major-version-only --program-suffix=-7 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=<span class="built_in">yes</span> --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu</span><br><span class="line">Thread model: posix</span><br><span class="line">gcc version 7.3.0 (Ubuntu 7.3.0-27ubuntu1~18.04)</span><br><span class="line">COLLECT_GCC_OPTIONS=<span class="string">&#x27;-v&#x27;</span> <span class="string">&#x27;-mtune=generic&#x27;</span> <span class="string">&#x27;-march=x86-64&#x27;</span></span><br><span class="line"> /usr/lib/gcc/x86_64-linux-gnu/7/cc1 -quiet -v -imultiarch x86_64-linux-gnu main.c -quiet -dumpbase main.c -mtune=generic -march=x86-64 -auxbase main -version -fstack-protector-strong -Wformat -Wformat-security -o /tmp/cc9yluga.s</span><br><span class="line">GNU C11 (Ubuntu 7.3.0-27ubuntu1~18.04) version 7.3.0 (x86_64-linux-gnu)</span><br><span class="line">	compiled by GNU C version 7.3.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP</span><br><span class="line">... ...</span><br></pre></td></tr></table></figure>
+<h1 id="优化选项">优化选项</h1>
+<p>GCC
+编译优化等级由低到高分为<code>-O0</code>、<code>-O1</code>、<code>-O2</code>、<code>-O3</code>，<code>o</code>即单词
+Optimization
+的首字母，不同优化等级下得到的文件体积与执行效率各不相同。此外，嵌入式开发当中还经常使用到一个<code>-Os</code>，其优化等级介于<code>-O2</code>和<code>-O3</code>之间。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc -os main.c -o main</span><br><span class="line">➜  ll</span><br><span class="line">总用量 16K</span><br><span class="line">-rwxrwxr-x 1 hank hank 8.2K 2月  24 17:51 main</span><br><span class="line">-rw-rw-r-- 1 hank hank  136 2月  21 18:12 main.c</span><br></pre></td></tr></table></figure>
+<h1 id="调试信息">调试信息</h1>
+<p>开启优化选项后编译的代码，并不会保留任何关于调试与 debug
+的信息，如果需要保留这些信息，可以开启<code>-g</code>选项（<em>gdb</em>），此时得到的文件体积会增大。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc main.c</span><br><span class="line">➜  ll</span><br><span class="line">-rwxrwxr-x 1 hank hank 8.2K 2月  24 17:58 a.out</span><br><span class="line"></span><br><span class="line">➜  gcc -g main.c</span><br><span class="line">➜  ll</span><br><span class="line">-rwxrwxr-x 1 hank hank 11K 2月  24 17:58 a.out</span><br></pre></td></tr></table></figure>
+<h1 id="包含头文件">包含头文件</h1>
+<p>Linux C 语言程序当中存在如下两种头文件的包含情况：</p>
+<ul>
+<li><code>#include &lt;head.h&gt;</code>：预处理程序会在<strong>编译系统指定的目录</strong>当中去搜索头文件。</li>
+<li><code>#include "head.h"</code>：预处理器会在当前<strong>目标文件所在的文件夹内</strong>搜索头文件，如果未找到则进入编译系统指定目录搜索。</li>
+</ul>
+<p>GCC
+当中可以通过<code>-I</code>参数（<em>include</em>）将指定目录添加到头文件的搜索列表当中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc -v main.c -I /workspace</span><br><span class="line"><span class="comment">#include &quot;...&quot; search starts here:</span></span><br><span class="line"><span class="comment">#include &lt;...&gt; search starts here:</span></span><br><span class="line"> /workspace</span><br><span class="line"> /usr/lib/gcc/x86_64-linux-gnu/7/include</span><br><span class="line"> /usr/local/include</span><br><span class="line"> /usr/lib/gcc/x86_64-linux-gnu/7/include-fixed</span><br><span class="line"> /usr/include/x86_64-linux-gnu</span><br><span class="line"> /usr/include</span><br></pre></td></tr></table></figure>
+<h1 id="编译步骤">编译步骤</h1>
+<p>实质上从<code>hello.c</code>源代码到<code>hello</code>或<code>a.out</code>可执行文件，GCC
+的编译过程大致经历了下面 4 个步骤：</p>
+<p><img src="/Linux/GCC/gcc-compilation-process.png"></p>
+<ul>
+<li><strong>预处理</strong>：C
+编译器对各种预处理命令进行处理，包括头文件包含、宏定义的扩展、条件编译的选择等（<em>使用<code>gcc -E</code></em>）；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc -E main.c -o main.i</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">main.c  main.i</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>编译</strong>：对预处理得到的源代码文件进行翻译转换，产生由机器语言描述的<strong>汇编文件</strong>（<em>使用<code>gcc -S</code></em>）；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc -S main.i</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">main.c  main.i  main.s</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>汇编</strong>：将汇编代码转译成为<strong>机器码</strong>（<em>使用<code>gcc -c</code></em>）；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc -c main.s</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">main.c  main.i  main.s  main.o</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>链接</strong>：将机器码中的各种符号引用与定义转换为<strong>可执行文件</strong>中的相应信息（例如虚拟地址）；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc main.o -o main</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">main.c  main.i  main.o  main.s  main</span><br></pre></td></tr></table></figure>
+<p>为了便于查找，下表列出了编译和链接 C/C++
+程序时各类文件扩展名的释义：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">后缀名称</th>
+<th style="text-align: left;">描述内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>.c</code></td>
+<td style="text-align: left;">C 语言源码，必须经过预处理。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.C</code>、<code>.cc</code>、<code>.cxx</code></td>
+<td style="text-align: left;">C++源代码，必须经过预处理。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.h</code></td>
+<td style="text-align: left;">C/C++语言源代码的头文件。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.i</code></td>
+<td style="text-align: left;">由<code>.c</code>文件预处理后生成。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.ii</code></td>
+<td style="text-align: left;">由<code>.C</code>、<code>.cc</code>、<code>.cxx</code>源码预处理后生成。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.s</code></td>
+<td style="text-align: left;">汇编语言文件，是<code>.i</code>文件编译后得到的中间文件。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.o</code></td>
+<td style="text-align: left;">目标文件，是编译过程得到的中间文件。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>.a</code></td>
+<td style="text-align: left;">由目标文件构成的文件库，也称为<strong>静态库</strong>。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>.so</code></td>
+<td style="text-align: left;">共享对象库，也称为<strong>动态库</strong>。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="链接库文件">链接库文件</h1>
+<p>GCC
+对于库文件的链接存在<strong>动态</strong>和<strong>静态</strong>两种方式：</p>
+<ul>
+<li><strong>静态链接方式</strong>：使用<strong>静态链接库</strong>进行链接，由于包含了程序运行所需的所有库，因此生成的文件体积较大但是能够直接运行。</li>
+<li><strong>动态链接方式</strong>：使用<strong>动态链接库</strong>进行链接，类似于
+Windows
+系统下的<code>.dll</code>文件，执行时需要依赖相应的动态链接库。</li>
+</ul>
+<p>GCC
+默认使用动态链接<code>-shared</code>方式，可以通过加入<code>-static</code>参数来指定使用静态链接方式。注意观察下面以不同方式编译代码后，所得到的可执行文件的体积：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc main.c</span><br><span class="line">➜  ll</span><br><span class="line">总用量 16K</span><br><span class="line">-rwxrwxr-x 1 hank hank 8.2K 2月  22 18:25 a.out</span><br><span class="line">-rw-rw-r-- 1 hank hank  136 2月  21 18:12 main.c</span><br><span class="line"></span><br><span class="line">➜  gcc main.c -static</span><br><span class="line">➜  ll</span><br><span class="line">总用量 832K</span><br><span class="line">-rwxrwxr-x 1 hank hank 825K 2月  22 18:25 a.out</span><br><span class="line">-rw-rw-r-- 1 hank hank  136 2月  21 18:12 main.c</span><br></pre></td></tr></table></figure>
+<h2 id="创建静态链接库">创建静态链接库</h2>
+<p>静态链接库是由 GCC
+在汇编阶段产生的<code>.o</code>文件构成的集合，以<code>.a</code>作为文档后缀名称，Linux
+下也称存档（<em>archive</em>），通常使用<code>ar</code>工具命令来进行打包管理。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">func1.c  func2.c  main.c</span><br><span class="line"></span><br><span class="line">➜  gcc -c func1.c func2.c</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">func1.c  func1.o  func2.c  func2.o  main.c</span><br><span class="line"></span><br><span class="line">➜  ar -r libmain.a func1.o func2.o</span><br><span class="line">ar: 正在创建 libmain.a</span><br><span class="line">➜  ll</span><br><span class="line">总用量 36K</span><br><span class="line">-rw-rw-r-- 1 hank hank   84 2月  24 20:06 func1.c</span><br><span class="line">-rw-rw-r-- 1 hank hank 1.6K 2月  24 20:16 func1.o</span><br><span class="line">-rw-rw-r-- 1 hank hank   84 2月  24 20:16 func2.c</span><br><span class="line">-rw-rw-r-- 1 hank hank 1.6K 2月  24 20:16 func2.o</span><br><span class="line">-rw-rw-r-- 1 hank hank 3.3K 2月  24 20:16 libmain.a</span><br><span class="line">-rw-rw-r-- 1 hank hank  136 2月  21 18:12 main.c</span><br></pre></td></tr></table></figure>
+<h2 id="创建动态链接库">创建动态链接库</h2>
+<p>动态链接库也称为共享对象（<em>shared
+object</em>），通常以<code>.so</code>作为文件后缀名，由 GCC
+编译器通过添加<code>-fpic</code>参数（<em>pic 指位置独立代码，即
+Position Independent Code
+缩写</em>）方式生成，共享对象模块的每个地址（<em>函数调用和变量引用</em>）都是相对地址，允许程序在执行时动态的加载与运行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">func1.c  func2.c  main.c</span><br><span class="line"></span><br><span class="line">➜  gcc -c -fpic func1.c func2.c</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">func1.c  func1.o  func2.c  func2.o  main.c</span><br><span class="line"></span><br><span class="line">➜  gcc -shared func1.o func2.o -o libmain.so</span><br><span class="line">➜  ll</span><br><span class="line">总用量 28K</span><br><span class="line">-rw-rw-r-- 1 hank hank   84 2月  24 20:06 func1.c</span><br><span class="line">-rw-rw-r-- 1 hank hank 1.6K 2月  24 21:31 func1.o</span><br><span class="line">-rw-rw-r-- 1 hank hank   84 2月  24 20:16 func2.c</span><br><span class="line">-rw-rw-r-- 1 hank hank 1.6K 2月  24 21:31 func2.o</span><br><span class="line">-rwxrwxr-x 1 hank hank 7.8K 2月  24 21:32 libmain.so</span><br><span class="line">-rw-rw-r-- 1 hank hank  136 2月  21 18:12 main.c</span><br></pre></td></tr></table></figure>
+<p>上面的步骤比较繁琐，可以将<strong>汇编</strong>和<strong>链接</strong>两条命令合并为一条命令，编译
+C 语言代码的同时得到<code>.so</code>动态链接库文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">func1.c  func2.c  main.c</span><br><span class="line">➜  gcc -fpic -shared func1.c func2.c -o libmain.so</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">func1.c  func2.c  main.c  libmain.so</span><br></pre></td></tr></table></figure>
+<h1 id="指定编译规范">指定编译规范</h1>
+<p>由于 GCC 同时支持多套 C
+程序语言规范，因而编译时可以通过选项指定当前需要遵循的语言规范，具体请参考下表：</p>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 48%">
+<col style="width: 11%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">规范</th>
+<th style="text-align: left;">规范</th>
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">补充</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">C89 / C90</td>
+<td style="text-align: left;">ANSI C (X3.159-1989) 或 ISO/IEC
+9899:1990</td>
+<td style="text-align: left;"><code>-std=c90</code></td>
+<td style="text-align: left;"><code>-std=iso9899:1990</code>、<code>-ansi</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C94 / C95</td>
+<td style="text-align: left;">95 年发布的 C89/C90
+修正版，此次修正通常称作 AMD1</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>-std=iso9899:199409</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C99</td>
+<td style="text-align: left;">ISO/IEC 9899:1999</td>
+<td style="text-align: left;"><code>-std=c99</code></td>
+<td style="text-align: left;"><code>-std=iso9899:1999</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C11</td>
+<td style="text-align: left;">ISO/IEC 9899:2011</td>
+<td style="text-align: left;"><code>-std=c11</code></td>
+<td style="text-align: left;"><code>-std=iso9899:2011</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GNU C89 / C90</td>
+<td style="text-align: left;">带 GNU 扩展的 C89/C90</td>
+<td style="text-align: left;"><code>-std=gnu90</code></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GNU C99</td>
+<td style="text-align: left;">带 GNU 扩展的 C99</td>
+<td style="text-align: left;"><code>-std=gnu99</code></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GNU C11</td>
+<td style="text-align: left;">带 GNU 扩展的 C11</td>
+<td style="text-align: left;"><code>-std=gnu11</code></td>
+<td style="text-align: left;">-</td>
+</tr>
+</tbody>
+</table>
+<p>例如下面代码当中，指定了 GCC 的编译过程遵循 C89/C90
+规范，结果编译时提示错误信息：<code>C++ style comments are not allowed in ISO C90</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc main.c -std=c90</span><br><span class="line"></span><br><span class="line">main.c: In <span class="keyword">function</span> ‘main’:</span><br><span class="line">main.c:7:36: error: C++ style comments are not allowed <span class="keyword">in</span> ISO C90</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;hello world!\n&quot;</span>);      // 行注释</span><br><span class="line">                                    ^</span><br><span class="line">main.c:7:36: error: (this will be reported only once per input file)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>缺省情况下，GCC 默认使用的是<code>-std=gnu11</code>规范，即携带 GNU
+扩展的 C11 标准。</p>
+</blockquote>
+<h1 id="gdb概述">【GDB】概述</h1>
+<p><strong>GNU 项目调试器</strong>（<strong>GDB</strong>，<em>GNU
+Project Debugger</em>）是一款可以调试
+Ada、汇编、C++、D、Fortran、Go、Objective-C、OpenCL、Modula-2、Pascal、Rust
+等多种语言的跨平台程序调试工具。为了捕获程序中的各类 Bug，GNU
+项目调试器可以胜任下面 4 方面的工作：</p>
+<ul>
+<li>启动程序，并指定能够影响其行为的任意内容。</li>
+<li>在指定条件下停止程序的执行。</li>
+<li>当程序停止时，检查发生了什么问题。</li>
+<li>通过修改程序中的内容，从而尝试修复 bug。</li>
+</ul>
+<p>向 Linux 命令控制台键入<code>gdb</code>即可运行 GDB 调试程序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">➜  gdb</span><br><span class="line"></span><br><span class="line">GNU gdb (Ubuntu 8.1-0ubuntu3) 8.1.0.20180409-git</span><br><span class="line">Copyright (C) 2018 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.  Type <span class="string">&quot;show copying&quot;</span></span><br><span class="line">and <span class="string">&quot;show warranty&quot;</span> <span class="keyword">for</span> details.</span><br><span class="line">This GDB was configured as <span class="string">&quot;x86_64-linux-gnu&quot;</span>.</span><br><span class="line">Type <span class="string">&quot;show configuration&quot;</span> <span class="keyword">for</span> configuration details.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line">For <span class="built_in">help</span>, <span class="built_in">type</span> <span class="string">&quot;help&quot;</span>.</span><br><span class="line">Type <span class="string">&quot;apropos word&quot;</span> to search <span class="keyword">for</span> commands related to <span class="string">&quot;word&quot;</span>.</span><br><span class="line">(gdb) |</span><br></pre></td></tr></table></figure>
+<p>进入 GDB
+之后直接输入<code>help</code>即可以获取各类型命令的使用帮助，如果需要进一步查看指定类型命令的帮助则可以键入相应的命令分类，例如<code>help data</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">(gdb) <span class="built_in">help</span></span><br><span class="line">List of classes of commands:</span><br><span class="line"></span><br><span class="line">aliases -- Aliases of other commands</span><br><span class="line">breakpoints -- Making program stop at certain points</span><br><span class="line">data -- Examining data</span><br><span class="line">files -- Specifying and examining files</span><br><span class="line">internals -- Maintenance commands</span><br><span class="line">obscure -- Obscure features</span><br><span class="line">running -- Running the program</span><br><span class="line">stack -- Examining the stack</span><br><span class="line">status -- Status inquiries</span><br><span class="line">support -- Support facilities</span><br><span class="line">tracepoints -- Tracing of program execution without stopping the program</span><br><span class="line">user-defined -- User-defined commands</span><br><span class="line"></span><br><span class="line">Type <span class="string">&quot;help&quot;</span> followed by a class name <span class="keyword">for</span> a list of commands <span class="keyword">in</span> that class.</span><br><span class="line">Type <span class="string">&quot;help all&quot;</span> <span class="keyword">for</span> the list of all commands.</span><br><span class="line">Type <span class="string">&quot;help&quot;</span> followed by <span class="built_in">command</span> name <span class="keyword">for</span> full documentation.</span><br><span class="line">Type <span class="string">&quot;apropos word&quot;</span> to search <span class="keyword">for</span> commands related to <span class="string">&quot;word&quot;</span>.</span><br><span class="line">Command name abbreviations are allowed <span class="keyword">if</span> unambiguous.</span><br></pre></td></tr></table></figure>
+<p>如果需要退出当前的 GDB
+命令行调试界面，则可以输入<code>quit</code>，下面的表格列出了 GDB
+当中常用的一些命令：</p>
+<table>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 44%">
+<col style="width: 7%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">命令</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">命令</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>break</code></td>
+<td style="text-align: left;">设置断点，<code>break 断点所在行号</code>。</td>
+<td style="text-align: left;"><code>list</code></td>
+<td style="text-align: left;">列出产生执行文件的部分源码。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>clear</code></td>
+<td style="text-align: left;">清除断点，<code>clear 断点所在行号</code>。</td>
+<td style="text-align: left;"><code>next</code></td>
+<td style="text-align: left;">执行一行源码，但是不进入函数内部。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>delete</code></td>
+<td style="text-align: left;">清除断点和自动显示的表达式</td>
+<td style="text-align: left;"><code>step</code></td>
+<td style="text-align: left;">执行一行源码，并且进入函数内部。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>disable</code></td>
+<td style="text-align: left;">使所设断点暂时失效，多个行号可用空格分隔。</td>
+<td style="text-align: left;"><code>run</code></td>
+<td style="text-align: left;">正常执行当前被调试的程序。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>enable</code></td>
+<td style="text-align: left;">生效所设的断点，与<code>disable</code>作用相反。</td>
+<td style="text-align: left;"><code>quit</code></td>
+<td style="text-align: left;">退出当前 GDB 命令行调试。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>run</code></td>
+<td style="text-align: left;">运行调试程序。</td>
+<td style="text-align: left;"><code>watch</code></td>
+<td style="text-align: left;">监视指定变量的值。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>countinue</code></td>
+<td style="text-align: left;">继续执行正在调试的程序。</td>
+<td style="text-align: left;"><code>make</code></td>
+<td style="text-align: left;">在 GDB 重新生成可执行文件。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">装载需要调试的可执行文件。</td>
+<td style="text-align: left;"><code>shell</code></td>
+<td style="text-align: left;">在 GDB 当中执行 UNIX Shell 命令。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>kill</code></td>
+<td style="text-align: left;">终止正在调试的程序。</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">加载可执行的文件。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>提示：GDB 当中即可以像 Bash 或 Z-Shell 那样使用 Tab
+键命令自动补齐，也能够通过方向键上下翻阅历史命令。</p>
+</blockquote>
+<h1 id="调试范例">调试范例</h1>
+<p>接下来，下面例程用于打印当前执行程序的名称以及命令行执行时所携带的参数，我们将会通过它来演示
+GDB 调试程序的过程。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> &#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;当前执行程序的名称：%s\n&quot;</span>, argv[<span class="number">0</span>]);</span><br><span class="line">  <span class="type">int</span> index;</span><br><span class="line">  <span class="keyword">for</span> (index = <span class="number">1</span>; index &lt; argc; index++) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;执行命令时输入的第%d个参数为：%s\n&quot;</span>, index, argv[index]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（1）首先需要使用<code>gcc -g main.c</code>命令编译程序并保留调试
+debug 信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  gcc -g main.c</span><br><span class="line">➜  <span class="built_in">ls</span></span><br><span class="line">a.out  main.c</span><br></pre></td></tr></table></figure>
+<p>（2）进入 GDB 然后装载需要进行调试的可执行文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  gdb</span><br><span class="line">... ...</span><br><span class="line">(gdb) file a.out</span><br><span class="line">Reading symbols from a.out...done.</span><br></pre></td></tr></table></figure>
+<p>（3）输入 GDB 的<code>run</code>命令，执行已经装载的 bugging
+文件，并在命令后跟随需要传入程序的参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) run 这是一个Hank的测试程序！</span><br><span class="line">Starting program: /workspace/c-test/a.out 这是一个Hank的测试程序！</span><br><span class="line">当前执行程序的名称：/workspace/c-test/a.out</span><br><span class="line">执行命令时输入的第1个参数为：这是一个Hank的测试程序！</span><br><span class="line">[Inferior 1 (process 7997) exited normally]</span><br></pre></td></tr></table></figure>
+<p>（4）通过<code>where</code>命令，查看程序运行中出现的错误堆栈：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) <span class="built_in">where</span></span><br><span class="line">No stack.</span><br></pre></td></tr></table></figure>
+<p>（5）使用<code>list</code>命令查看当前执行程序的源码，每次能够查看 10
+行，需要查看更多可以直接回车重新执行上一次输入的命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(gdb) list</span><br><span class="line">1 <span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line">2</span><br><span class="line">3 int main(int argc, char *argv[]) &#123;</span><br><span class="line">4   <span class="built_in">printf</span>(<span class="string">&quot;当前执行程序的名称：%s\n&quot;</span>, argv[0]);</span><br><span class="line">5   int index;</span><br><span class="line">6   <span class="keyword">for</span> (index = 1; index &lt; argc; index++) &#123;</span><br><span class="line">7     <span class="built_in">printf</span>(<span class="string">&quot;执行命令时输入的第%d个参数为：%s\n&quot;</span>, index, argv[index]);</span><br><span class="line">8   &#125;</span><br><span class="line">9   <span class="built_in">return</span> 0;</span><br><span class="line">10 &#125;(gdb)</span><br></pre></td></tr></table></figure>
+<p>（6）利用<code>break</code>命令在程序的第 5 行位置设置一个断点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) <span class="built_in">break</span> 5</span><br><span class="line">Breakpoint 1 at 0x555555554674: file main.c, line 5.</span><br></pre></td></tr></table></figure>
+<p>（7）重新输入<code>run</code>命令，此时程序会运行到第 5
+行断点位置并停止：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) run</span><br><span class="line">Starting program: /workspace/c-test/a.out 这是一个Hank的测试程序！</span><br><span class="line">当前执行程序的名称：/workspace/c-test/a.out</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main (argc=2, argv=0x7fffffffded8) at main.c:6</span><br><span class="line">6   <span class="keyword">for</span> (index = 1; index &lt; argc; index++) &#123;</span><br></pre></td></tr></table></figure>
+<p>（8）输入<code>next</code>命令，在断点位置开始单步执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) next</span><br><span class="line">7     <span class="built_in">printf</span>(<span class="string">&quot;执行命令时输入的第%d个参数为：%s\n&quot;</span>, index, argv[index]);</span><br><span class="line">(gdb) next</span><br><span class="line">执行命令时输入的第1个参数为：这是一个Hank的测试程序！</span><br><span class="line">6   <span class="keyword">for</span> (index = 1; index &lt; argc; index++) &#123;</span><br></pre></td></tr></table></figure>
+<p>（9）断点执行过程中，可以使用<code>print</code>命令查看程序中指定变量的当前值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) <span class="built_in">print</span> index</span><br><span class="line"><span class="variable">$1</span> = 1</span><br><span class="line">(gdb) <span class="built_in">print</span> argc</span><br><span class="line"><span class="variable">$2</span> = 2</span><br><span class="line">(gdb) <span class="built_in">print</span> argv</span><br><span class="line"><span class="variable">$3</span> = (char **) 0x7fffffffded8</span><br></pre></td></tr></table></figure>
+<p>（10）当发现程序状态出现错误的原因之后，就可以使用<code>kill</code>退出当前
+debug 的程序，然后<code>quit</code>离开 GDB 调试器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb) <span class="built_in">kill</span></span><br><span class="line">Kill the program being debugged? (y or n) y</span><br><span class="line">(gdb) quit</span><br></pre></td></tr></table></figure>
+<h1 id="tui-模式">TUI 模式</h1>
+<p>直接通过 GDB 命令行进行 debug 工作显然比较繁琐，因此 GDB 内置的<a target="_blank" rel="noopener" href="https://sourceware.org/gdb/current/onlinedocs/gdb/TUI.html#TUI"><strong>TUI</strong></a>（<em>TextUser
+Interface</em>）模式提供了一套文本 UI
+界面，能够方便的显示源码、汇编、寄存器的状态。可以直接通过<code>gcb -tui</code>命令直接进入
+TUI 模式，或者在进入 GDB 命令行后使用 CTRL+X+A 快捷键进入。进入 TUI
+模式后，GDB 窗口划分为<em>源代码查看</em>和<em>GDB
+命令行</em>两个子窗口。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">   ┌──main.c───────────────────────────────────────────────────────────────────┐</span><br><span class="line">   │1       <span class="comment">#include &lt;stdio.h&gt;                                                 │</span></span><br><span class="line">   │2                                                                          │</span><br><span class="line">   │3       int main(int argc, char *argv[]) &#123;                                 │</span><br><span class="line">   │4         <span class="built_in">printf</span>(<span class="string">&quot;当前执行程序的名称：%s\n&quot;</span>, argv[0]);                       │</span><br><span class="line">   │5         int index;                                                       │</span><br><span class="line">   │6         <span class="keyword">for</span> (index = 1; index &lt; argc; index++) &#123;                         │</span><br><span class="line">   │7           <span class="built_in">printf</span>(<span class="string">&quot;执行命令时输入的第%d个参数为：%s\n&quot;</span>, index, argv[index]); │</span><br><span class="line">   │8         &#125;                                                                │</span><br><span class="line">   │9         <span class="built_in">return</span> 0;                                                        │</span><br><span class="line">   │10      &#125;^?                                                                │</span><br><span class="line">   │11                                                                         │</span><br><span class="line">   │12                                                                         │</span><br><span class="line">   │13                                                                         │</span><br><span class="line">   │14                                                                         │</span><br><span class="line">   └───────────────────────────────────────────────────────────────────────────┘</span><br><span class="line"><span class="built_in">exec</span> No process In:                                                L??   PC: ??</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line">For <span class="built_in">help</span>, <span class="built_in">type</span> <span class="string">&quot;help&quot;</span>.</span><br><span class="line">Type <span class="string">&quot;apropos word&quot;</span> to search <span class="keyword">for</span> commands related to <span class="string">&quot;word&quot;</span>...</span><br><span class="line">Reading symbols from a.out...done.</span><br><span class="line">---Type &lt;<span class="built_in">return</span>&gt; to <span class="built_in">continue</span>, or q &lt;<span class="built_in">return</span>&gt; to quit---2 <span class="keyword">in</span> /workspace/c-test/main.c</span><br><span class="line">(gdb) |</span><br></pre></td></tr></table></figure>
+<h1 id="ddd-图形前端">DDD 图形前端</h1>
+<p><strong>DDD</strong>（<em>Data Display Debugger</em>） 是一款简洁的
+GDB 图形调试界面，Ubuntu 系统当中可以通过如下命令进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ddd</span><br></pre></td></tr></table></figure>
+<p>DDD 的使用与 TUI 类似，窗口依然被划分为<em>源代码查看</em>和<em>GDB
+命令行</em>两个子窗口，同时右侧还增加了一个方便的操作面板。</p>
+<p><img src="/Linux/GCC/ddd.png"></p>
+<blockquote>
+<p>注意：DDD
+不支持中文注释，如果打开携带有中文注释的源代码，会导致这些代码在 DDD
+窗口显示不完整。</p>
+</blockquote>
+<h2 id="cgdb">CGDB</h2>
+<p><a target="_blank" rel="noopener" href="http://cgdb.github.io/">cgdb</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>基于 Linux 的 GCC 与 GDB 应用程序调试</p><p><a href="http://www.uinio.com/Linux/GCC/">http://www.uinio.com/Linux/GCC/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2018-06-21</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2018-07-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/GCC-GDB/">GCC/GDB</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/C&amp;C++/C++/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">面向对象的 C++ 11 程序设计语言</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Python/Python3/"><span class="level-item">言简意赅 の Python3</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#gcc概述"><span class="level-left"><span class="level-item">1</span><span class="level-item">【GCC】概述</span></span></a></li><li><a class="level is-mobile" href="#基本使用"><span class="level-left"><span class="level-item">2</span><span class="level-item">基本使用</span></span></a></li><li><a class="level is-mobile" href="#编译信息"><span class="level-left"><span class="level-item">3</span><span class="level-item">编译信息</span></span></a></li><li><a class="level is-mobile" href="#优化选项"><span class="level-left"><span class="level-item">4</span><span class="level-item">优化选项</span></span></a></li><li><a class="level is-mobile" href="#调试信息"><span class="level-left"><span class="level-item">5</span><span class="level-item">调试信息</span></span></a></li><li><a class="level is-mobile" href="#包含头文件"><span class="level-left"><span class="level-item">6</span><span class="level-item">包含头文件</span></span></a></li><li><a class="level is-mobile" href="#编译步骤"><span class="level-left"><span class="level-item">7</span><span class="level-item">编译步骤</span></span></a></li><li><a class="level is-mobile" href="#链接库文件"><span class="level-left"><span class="level-item">8</span><span class="level-item">链接库文件</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#创建静态链接库"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">创建静态链接库</span></span></a></li><li><a class="level is-mobile" href="#创建动态链接库"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">创建动态链接库</span></span></a></li></ul></li><li><a class="level is-mobile" href="#指定编译规范"><span class="level-left"><span class="level-item">9</span><span class="level-item">指定编译规范</span></span></a></li><li><a class="level is-mobile" href="#gdb概述"><span class="level-left"><span class="level-item">10</span><span class="level-item">【GDB】概述</span></span></a></li><li><a class="level is-mobile" href="#调试范例"><span class="level-left"><span class="level-item">11</span><span class="level-item">调试范例</span></span></a></li><li><a class="level is-mobile" href="#tui-模式"><span class="level-left"><span class="level-item">12</span><span class="level-item">TUI 模式</span></span></a></li><li><a class="level is-mobile" href="#ddd-图形前端"><span class="level-left"><span class="level-item">13</span><span class="level-item">DDD 图形前端</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#cgdb"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">CGDB</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

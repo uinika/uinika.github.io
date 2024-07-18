@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>玩转 Raspberry Pi 4B 开源硬件 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="万众期待的 Raspberry Pi 4B 终于发布，之前由于产品原型的需要，一直计划采购 3B+，后来供应商透露新版 4B 稍晚就会面市，所以稍微等待了一段时间，今天终于拿到了一块 2G 内存的板子。一直以为 4B 只会简单的更新一下 SoC 并增大 DDR 容量，但是实际上还带来了 Type-C、Bluetooth 5.0、Micro HDMI、USB 3.0 乃至 DDR4"><meta property="og:type" content="blog"><meta property="og:title" content="玩转 Raspberry Pi 4B 开源硬件"><meta property="og:url" content="http://www.uinio.com/Embedded/RaspberryPi/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="万众期待的 Raspberry Pi 4B 终于发布，之前由于产品原型的需要，一直计划采购 3B+，后来供应商透露新版 4B 稍晚就会面市，所以稍微等待了一段时间，今天终于拿到了一块 2G 内存的板子。一直以为 4B 只会简单的更新一下 SoC 并增大 DDR 容量，但是实际上还带来了 Type-C、Bluetooth 5.0、Micro HDMI、USB 3.0 乃至 DDR4"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2020-05-17T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-26T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Embedded/RaspberryPi/"},"headline":"玩转 Raspberry Pi 4B 开源硬件","image":["http://www.uinio.com/Embedded/RaspberryPi/logo.png"],"datePublished":"2020-05-17T16:00:00.000Z","dateModified":"2020-11-26T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"万众期待的 Raspberry Pi 4B\r 终于发布，之前由于产品原型的需要，一直计划采购\r 3B+，后来供应商透露新版 4B\r 稍晚就会面市，所以稍微等待了一段时间，今天终于拿到了一块\r 2G 内存的板子。一直以为 4B\r 只会简单的更新一下 SoC 并增大 DDR\r 容量，但是实际上还带来了 Type-C、Bluetooth\r 5.0、Micro HDMI、USB 3.0 乃至\r DDR4"}</script><link rel="canonical" href="http://www.uinio.com/Embedded/RaspberryPi/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-05-17T16:00:00.000Z" title="2020/5/18 00:00:00">2020-05-18</time>发表</span><span class="level-item"><time dateTime="2020-11-26T16:00:00.000Z" title="2020/11/27 00:00:00">2020-11-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Embedded/">Embedded</a></span><span class="level-item">1 小时读完 (大约13159个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">玩转 Raspberry Pi 4B 开源硬件</h1><div class="content"><p>万众期待的 <strong>Raspberry Pi 4B</strong>
+终于发布，之前由于产品原型的需要，一直计划采购
+<strong>3B+</strong>，后来供应商透露新版 <strong>4B</strong>
+稍晚就会面市，所以稍微等待了一段时间，今天终于拿到了一块
+<strong>2G</strong> 内存的板子。一直以为 <strong>4B</strong>
+只会简单的更新一下 SoC 并增大 <strong>DDR</strong>
+容量，但是实际上还带来了 <strong>Type-C</strong>、<strong>Bluetooth
+5.0</strong>、<strong>Micro HDMI</strong>、<strong>USB 3.0</strong> 乃至
+<strong>DDR4</strong>
+等诸多崭新升级。而官方推荐的应用范围，开始从教育渗透至工业领域，逐步发展为一套完整的嵌入式生态链。</p>
+<p><img src="/Embedded/RaspberryPi/logo.png"></p>
+<p>本文基于树莓派基金会官方提供的 <a target="_blank" rel="noopener" href="https://www.raspberrypi.org/documentation/">《Raspberry Pi
+Documentation》</a>，笔者翻译了其中较为常用的配置章节，便于读者拿到板子以后能够快速上手，并避免使用一些官方不推荐的操作和工具库。此外，本文也会涉及
+<code>OpenCV</code>、<code>dlib</code> 的编译，以及
+<code>Electron</code>
+在树莓派上的部署等话题。文章内容将会伴随笔者的日常使用而长期进行更新，欢迎各位爱好者朋友持续关注与勘误。</p>
+<span id="more"></span>
+<h2 id="板载资源">板载资源</h2>
+<p>开始树莓派正式的应用之前，您需要拥有一张至少 8GB class 4 或者 class
+10 的 microSD 卡、带有标准 HDMI 的显示器以及 Micro HDMI 接口线缆、标准
+USB
+接口的键盘与鼠标、输出电压至少为<code>5V</code>电流至少为<code>2A</code>的优质电源。</p>
+<p><img src="/Embedded/RaspberryPi/board.png"></p>
+<h2 id="系统安装">系统安装</h2>
+<p>树莓派操作系统可以通过 NOOBS
+工具软件、直接烧录镜像至存储卡两种方式进行安装，初次使用官方建议使用
+NOOBS 方式安装，并采用官方基于<strong>Debian 10 buster</strong>发行版的
+Linux 桌面操作系统<strong>Raspbian buster</strong>。</p>
+<h3 id="noobs">NOOBS</h3>
+<p><strong>NOOBS</strong>（新的开箱即用软件，New Out Of Box
+Software）是树莓派提供的一种简单便捷的操作系统安装管理工具，可以通过<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/">树莓派官方下载网站</a>进行获取，目前最新的版本为
+2019 年 7 月 10 日发布的<code>NOOBS_v3_2_0</code>。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">D:\<span class="title">Embedded</span>\<span class="title">Raspberry</span> <span class="title">Pi</span>\<span class="title">NOOBS_v3_2_0</span></span></span><br><span class="line"><span class="function">λ <span class="title">ls</span></span></span><br><span class="line"><span class="function"><span class="title">bcm2708</span>-<span class="title">rpi</span>-<span class="title">b.dtb</span>       <span class="title">bcm2710</span>-<span class="title">rpi</span>-3-<span class="title">b</span>-<span class="title">plus.dtb</span>  <span class="title">os</span>/               <span class="title">RECOVERY_FILES_DO_NOT_EDIT</span></span></span><br><span class="line"><span class="function"><span class="title">bcm2708</span>-<span class="title">rpi</span>-<span class="title">b</span>-<span class="title">plus.dtb</span>  <span class="title">bcm2710</span>-<span class="title">rpi</span>-<span class="title">cm3.dtb</span>       <span class="title">overlays</span>/         <span class="title">recovery7.img</span></span></span><br><span class="line"><span class="function"><span class="title">bcm2708</span>-<span class="title">rpi</span>-<span class="title">cm.dtb</span>      <span class="title">bcm2711</span>-<span class="title">rpi</span>-4-<span class="title">b.dtb</span>       <span class="title">recover4.elf</span>      <span class="title">recovery7l.img</span></span></span><br><span class="line"><span class="function"><span class="title">bcm2708</span>-<span class="title">rpi</span>-<span class="title">zero.dtb</span>    <span class="title">bootcode.bin</span>              <span class="title">recovery.cmdline</span>  <span class="title">riscos</span>-<span class="title">boot.bin</span></span></span><br><span class="line"><span class="function"><span class="title">bcm2708</span>-<span class="title">rpi</span>-<span class="title">zero</span>-<span class="title">w.dtb</span>  <span class="title">BUILD</span>-<span class="title">DATA</span>                <span class="title">recovery.elf</span></span></span><br><span class="line"><span class="function"><span class="title">bcm2709</span>-<span class="title">rpi</span>-2-<span class="title">b.dtb</span>     <span class="title">defaults</span>/                 <span class="title">recovery.img</span></span></span><br><span class="line"><span class="function"><span class="title">bcm2710</span>-<span class="title">rpi</span>-3-<span class="title">b.dtb</span>     <span class="title">INSTRUCTIONS</span>-<span class="title">README.txt</span>   <span class="title">recovery.rfs</span></span></span><br></pre></td></tr></table></figure>
+<p>首先，使用 SD 协会协会官方提供的<a target="_blank" rel="noopener" href="https://www.sdcard.org/downloads/formatter/">SD Memory Card
+Formatter</a>将 microSD 卡格式化为<strong>FAT</strong>（包括 FAT16 和
+FAT32）文件系统，然后将下载完成的<code>NOOBS_v3_2_0.zip</code>压缩文件进行解压，并将所有内容拷贝至
+microSD 卡的根目录，然后将存储卡插入到树莓派上电启动。首次引导时，FAT
+分区上的<strong>RECOVERY</strong>将自动调整至最小，并显示当前可供安装的操作系统列表。</p>
+<figure>
+<img src="/Embedded/RaspberryPi/install/SD-Card-Formatter.png" alt="SD-Card-Formatter">
+<figcaption aria-hidden="true">SD-Card-Formatter</figcaption>
+</figure>
+<p>如果 microSD 容量为 64G 或者超过 64G 的<strong>SDXC
+类型存储卡</strong>，SD Memory Card Formatter
+工具总是会将其格式化为<strong>exFAT</strong>类型，由于树莓派的
+bootloader 内置于 GPU 当中，只支持从 FAT
+文件系统上读取数据，因此这里需要使用到一款第三方格式化工具<a target="_blank" rel="noopener" href="http://www.ridgecrop.demon.co.uk/index.htm?guiformat.htm">FAT32
+Format</a>将其格式化为<strong>FAT32</strong>类型。</p>
+<figure>
+<img src="/Embedded/RaspberryPi/install/FAT32-Format.png" alt="FAT32-Format">
+<figcaption aria-hidden="true">FAT32-Format</figcaption>
+</figure>
+<blockquote>
+<p>树莓派官网上下载的 <strong>NOOBS</strong> 和 <strong>NOOBS
+Lite</strong> 分别是指离线和在线安装版本，前者包含了完整的 Raspbian
+操作系统，无需网络也可以正常进行安装，而后者则需要联接网络进行下载。</p>
+</blockquote>
+<h3 id="镜像安装">镜像安装</h3>
+<p>首先，通过<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/">树莓派官方下载网站</a>获取最新的<code>2020-02-13-raspbian-buster.img</code>镜像，然后下载镜像烧录工具<a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">balenaEtcher</a>，选择镜像文件和
+microSD 盘符以后点击【Flash!】，microSD
+烧录完成以后重新插入树莓派上电启动。</p>
+<figure>
+<img src="/Embedded/RaspberryPi/install/balenaEtcher.png" alt="balenaEtcher">
+<figcaption aria-hidden="true">balenaEtcher</figcaption>
+</figure>
+<blockquote>
+<p>如果上电后发现树莓派 4 无法启动，那么有可能是 SPI 接口的 EEPROM
+被损坏，此时请尝试拔出 microSD
+卡后断开电源，然后重新插入上电，如果绿色的 LED 依然没有闪烁，那就需要对
+EEPROM
+重新进行刷写。到树莓派官方网站下载<code>rpi-boot-eeprom-recovery-2019-05-10.zip</code>恢复工具，将其解压至
+FAT 格式的 microSD 卡根目录后，然后插入树莓派重新上电等待绿色 LED
+开始闪烁。</p>
+</blockquote>
+<h2 id="更换软件源">更换软件源</h2>
+<p>由于官方软件源的下载速度过慢，这里推荐使用清华大学提供的国内软件源，可以通过输入如下命令进行设置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vi /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib rpi</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib rpi</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong>完成后别忘记执行<code>sudo apt-get update</code>更新软件源设置。</p>
+</blockquote>
+<h2 id="工具安装">工具安装</h2>
+<p>安装生产力工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install cmake nginx autoconf git goldendict terminator guake tree tmux build-essential vim p7zip wireshark filezilla kchmviewer emacs uget audacious alacarte vlc okular putty ddd fcitx-table-wbpy whois calibre vokoscreen chromium-browser inkscape gimp flameshot tilix arduino firefox-esr wiringpi</span><br></pre></td></tr></table></figure>
+<p>安装虚拟键盘：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install matchbox-keyboard florence</span><br></pre></td></tr></table></figure>
+<p>安装文泉译正黑字体：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install ttf-wqy-zenhei</span><br></pre></td></tr></table></figure>
+<h2 id="安装与升级">安装与升级</h2>
+<p>升级 Raspbian 软件源，并且更新应用程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt upgrade</span><br><span class="line">➜ sudo apt update</span><br></pre></td></tr></table></figure>
+<p>卸载 Raspbian 的系统组件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt -y purge <span class="string">&quot;xxxxx*&quot;</span></span><br></pre></td></tr></table></figure>
+<p>更新 Raspbian
+操作系统版本，需要先修改<code>/etc/apt/sources.list</code>和<code>/etc/apt/sources.list.d/raspi.list</code>文件里的版本名称，然后执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt update</span><br><span class="line">➜ sudo apt -y dist-upgrade</span><br></pre></td></tr></table></figure>
+<h2 id="gpio-详解">GPIO 详解</h2>
+<p>树莓派的最大强大的特性在于拥有一个 40 针的原生 GPIO（General-Purpose
+Input/Output）接口，其中 2 个<code>5V</code>和 2
+个<code>3.3V</code>引脚，以及 8 个不可配置的<code>0V</code>接地 GND
+引脚。</p>
+<figure>
+<img src="/Embedded/RaspberryPi/gpio/pin.png" alt="gpio">
+<figcaption aria-hidden="true">gpio</figcaption>
+</figure>
+<p>处于输出模式时，其它引脚可以输出<code>3.3V</code>高电平以及<code>0V</code>低电平。处于输入模式时，通过内置的上下拉电阻，可以读取<code>3.3V</code>或者<code>0V</code>的输入信号；其中
+GPIO2 和 GPIO3 拥有固定的上拉电阻，其它引脚则可以通过软件进行配置。</p>
+<figure>
+<img src="/Embedded/RaspberryPi/gpio/pinout.png" alt="gpio">
+<figcaption aria-hidden="true">gpio</figcaption>
+</figure>
+<p>除了简单的输入输出以外，这些原生的 GPIO
+引脚还可用于如下复用的功能：</p>
+<ul>
+<li><strong>PWM</strong>：所有引脚都可以通过软件配置为 PWM，其中
+<code>GPIO12</code>、<code>GPIO13</code>、<code>GPIO18</code>、<code>GPIO19</code>
+具备硬件 PWM 功能。</li>
+<li><strong>SPI</strong>：可配置为
+SPI0（<code>GPIO10/MOSI、GPIO9/MISO、GPIO11/SCLK、GPIO8/CE0、GPIO7/CE1</code>）和
+SPI1（<code>GPIO20/MOSI、GPIO19/MISO、GPIO21/SCLK、GPIO18/CE0、GPIO17/CE1、GPIO16/CE2</code>）共
+2 路 SPI 总线。</li>
+<li><strong>I2C</strong>：<code>GPIO2</code> 为数据总线
+SDA，<code>GPIO3</code> 为时钟总线 SCL，而 <code>GPIO0</code> 和
+<code>GPIO1</code> 分别为 EEPROM 的数据和时钟总线。</li>
+<li><strong>Serial</strong>：<code>GPIO14</code> 和 <code>GPIO15</code>
+分别为串行发送信号 TX 和串行接收信号 RX。</li>
+</ul>
+<figure>
+<img src="/Embedded/RaspberryPi/gpio/broadcom-pin-number.png" alt="gpio">
+<figcaption aria-hidden="true">gpio</figcaption>
+</figure>
+<p>树莓派官方的 Raspbian
+操作系统提供了<code>pinout</code>命令工具，其底层由 Python 库 <a target="_blank" rel="noopener" href="https://gpiozero.readthedocs.io/en/stable/">gpiozero</a>
+实现，并且已经默认安装至 Raspbian 系统镜像。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">➜ pinout</span><br><span class="line"></span><br><span class="line">,--------------------------------.</span><br><span class="line">| oooooooooooooooooooo J8   +======</span><br><span class="line">| 1ooooooooooooooooooo  PoE |   Net</span><br><span class="line">|  Wi                    oo +======</span><br><span class="line">|  Fi  Pi Model 4B  V1.1 oo      |</span><br><span class="line">|        ,----.               +====</span><br><span class="line">| |D|    |SoC |               |USB3</span><br><span class="line">| |S|    |    |               +====</span><br><span class="line">| |I|    `----<span class="string">&#x27;                  |</span></span><br><span class="line"><span class="string">|                   |C|       +====</span></span><br><span class="line"><span class="string">|                   |S|       |USB2</span></span><br><span class="line"><span class="string">| pwr   |HD|   |HD| |I||A|    +====</span></span><br><span class="line"><span class="string">`-| |---|MI|---|MI|----|V|-------&#x27;</span></span><br><span class="line"></span><br><span class="line">Revision           : b03111</span><br><span class="line">SoC                : BCM2711</span><br><span class="line">RAM                : 2048Mb</span><br><span class="line">Storage            : MicroSD</span><br><span class="line">USB ports          : 4 (excluding power)</span><br><span class="line">Ethernet ports     : 1</span><br><span class="line">Wi-<span class="keyword">fi</span>              : True</span><br><span class="line">Bluetooth          : True</span><br><span class="line">Camera ports (CSI) : 1</span><br><span class="line">Display ports (DSI): 1</span><br><span class="line"></span><br><span class="line">J8:</span><br><span class="line">   3V3  (1) (2)  5V</span><br><span class="line"> GPIO2  (3) (4)  5V</span><br><span class="line"> GPIO3  (5) (6)  GND</span><br><span class="line"> GPIO4  (7) (8)  GPIO14</span><br><span class="line">   GND  (9) (10) GPIO15</span><br><span class="line">GPIO17 (11) (12) GPIO18</span><br><span class="line">GPIO27 (13) (14) GND</span><br><span class="line">GPIO22 (15) (16) GPIO23</span><br><span class="line">   3V3 (17) (18) GPIO24</span><br><span class="line">GPIO10 (19) (20) GND</span><br><span class="line"> GPIO9 (21) (22) GPIO25</span><br><span class="line">GPIO11 (23) (24) GPIO8</span><br><span class="line">   GND (25) (26) GPIO7</span><br><span class="line"> GPIO0 (27) (28) GPIO1</span><br><span class="line"> GPIO5 (29) (30) GND</span><br><span class="line"> GPIO6 (31) (32) GPIO12</span><br><span class="line">GPIO13 (33) (34) GND</span><br><span class="line">GPIO19 (35) (36) GPIO16</span><br><span class="line">GPIO26 (37) (38) GPIO20</span><br><span class="line">   GND (39) (40) GPIO21</span><br><span class="line"></span><br><span class="line">For further information, please refer to https://pinout.xyz/</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：关于树莓派 GPIO
+更为详细的用法可以查阅<strong><a target="_blank" rel="noopener" href="https://pinout.xyz/">交互式
+pinout
+图表</a></strong>，该网站为每个引脚提供了详细的说明以及相应的示例程序。</p>
+</blockquote>
+<h2 id="config.txt-启动配置">config.txt 启动配置</h2>
+<p>Raspberry Pi 使用一个配置文件<code>config.txt</code>代替了传统计算机
+BIOS 的功能，该文件会在启动阶段被树莓派上的引导固件读取（由 GPU 在 CPU
+和 Linux 初始化之前执行），所以它被放置在了存储卡的第 1 个引导分区。</p>
+<p>但是该文件同样可以在登入 Raspbian
+系统之后，通过编辑<code>/boot/config.txt</code>文件执行修改操作，所有设置都会在
+Raspberry Pi
+重新启动以后生效。此外，还可以执行下面命令查询当前系统当中已经生效的选项情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ vcgencmd get_config &lt;config&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="raspi-config-管理">raspi-config 管理</h2>
+<p><code>raspi-config</code>是最初由 Alex Bradbury
+编写的树莓派配置工具，现在也可以选择选择使用图形化界面的【树莓派配置应用程序】。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo raspi-config</span><br><span class="line"></span><br><span class="line">┌───────────────────┤ Raspberry Pi Software Configuration Tool (raspi-config) ├────────────────────┐</span><br><span class="line">│                                                                                                  │</span><br><span class="line">│        1 Change User Password Change password <span class="keyword">for</span> the current user                               │</span><br><span class="line">│        2 Network Options      Configure network settings                                         │</span><br><span class="line">│        3 Boot Options         Configure options <span class="keyword">for</span> start-up                                     │</span><br><span class="line">│        4 Localisation Options Set up language and regional settings to match your location       │</span><br><span class="line">│        5 Interfacing Options  Configure connections to peripherals                               │</span><br><span class="line">│        6 Overclock            Configure overclocking <span class="keyword">for</span> your Pi                                 │</span><br><span class="line">│        7 Advanced Options     Configure advanced settings                                        │</span><br><span class="line">│        8 Update               Update this tool to the latest version                             │</span><br><span class="line">│        9 About raspi-config   Information about this configuration tool                          │</span><br><span class="line">│                                                                                                  │</span><br><span class="line">│                                                                                                  │</span><br><span class="line">│                                                                                                  │</span><br><span class="line">│                           &lt;Select&gt;                           &lt;Finish&gt;                            │</span><br><span class="line">│                                                                                                  │</span><br><span class="line">└──────────────────────────────────────────────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<h2 id="配置触摸屏分辨率">配置触摸屏分辨率</h2>
+<p>使用<a target="_blank" rel="noopener" href="http://www.waveshare.net/wiki/7inch_HDMI_LCD_(C)">微雪</a> 7 寸
+IPS 电容触摸屏时，如果需要将分辨率设置为<strong>1024 ×
+600</strong>，可以打开树莓派 TF
+卡根目录下的<code>config.txt</code>文件，并向最后添加如下配置项目；完成后保存，并将
+TF 卡插回到树莓派，重新上电即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">max_usb_current=1</span><br><span class="line">hdmi_group=2</span><br><span class="line">hdmi_mode=87</span><br><span class="line">hdmi_cvt 1024 600 60 6 0 0 0</span><br><span class="line">hdmi_drive=1</span><br></pre></td></tr></table></figure>
+<h2 id="最佳桌面显示配置">最佳桌面显示配置</h2>
+<p>针对外接的<code>1920×1080</code>分辨率显示屏幕，采用如下一系列的显示设置可以获得良好的用户体验。</p>
+<h3 id="基础颜色">基础颜色</h3>
+<p><strong>Raspbian</strong> 菜单以及字体的配色：</p>
+<ul>
+<li>背景灰 <code>#42413C</code>；</li>
+<li>字体白 <code>#E8E8E8</code>；</li>
+</ul>
+<h3 id="显示设置">显示设置</h3>
+<p><img src="/Embedded/RaspberryPi/display/1.png"></p>
+<p><img src="/Embedded/RaspberryPi/display/2.png"></p>
+<p><img src="/Embedded/RaspberryPi/display/3.png"></p>
+<h3 id="面板首选项">面板首选项</h3>
+<p><img src="/Embedded/RaspberryPi/display/4.png"></p>
+<h2 id="处理显示器黑边">处理显示器黑边</h2>
+<p>执行如下命令编辑<code>/boot</code>目录下的<code>config.txt</code>文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /boot/config.txt</span><br></pre></td></tr></table></figure>
+<p>取消<code>disable_overscan = 1</code>前面的<code>#</code>号注释，然后重新启动系统。</p>
+<blockquote>
+<p><strong>注意</strong>：也可以通过<code>sudo raspi-config</code>进入树莓派软件配置工具，选择【7
+Advanced Options】下面的【A2 Overscan】选项同样可以解决该问题。</p>
+</blockquote>
+<h2 id="禁止屏幕休眠">禁止屏幕休眠</h2>
+<h3 id="禁用图形界面休眠">禁用图形界面休眠</h3>
+<p>在<code>/etc/profile.d</code>路径下新建一个<code>hibernate.sh</code>脚本，然后写入下面的命令并且保存，就可以永久禁止显示屏幕在图形界面下被休眠。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xset s off</span><br><span class="line">xset dpms 0 0 0</span><br></pre></td></tr></table></figure>
+<p>除此之外，更多常用的设置如下面的表格所示：</p>
+<table>
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>指令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>xset s off</code></td>
+<td>禁用屏幕保护</td>
+</tr>
+<tr class="even">
+<td><code>xset s 3600 3600</code></td>
+<td>设置空闲时间为 1 小时</td>
+</tr>
+<tr class="odd">
+<td><code>xset s off -dpms</code></td>
+<td>禁用 DPMS（Energy Star）并阻止屏幕进入空闲</td>
+</tr>
+<tr class="even">
+<td><code>xset -dpms</code></td>
+<td>禁用 DPMS（Energy Star）特性</td>
+</tr>
+<tr class="odd">
+<td><code>xset dpms force off</code></td>
+<td>立即关闭屏幕</td>
+</tr>
+<tr class="even">
+<td><code>xset dpms force standby</code></td>
+<td>强制屏幕进入待命状态</td>
+</tr>
+<tr class="odd">
+<td><code>xset dpms force suspend</code></td>
+<td>强制屏幕进入暂停状态</td>
+</tr>
+</tbody>
+</table>
+<h3 id="禁用命令行休眠">禁用命令行休眠</h3>
+<p>Raspbian 与其它 Linux 发行版一样拥有 7
+个工作组，其中<code>tty1 ~ tty6</code>为命令行模式，而<code>tty7</code>则为图形界面模式。按下键盘的<code>Ctrl + Alt + F1 ~ F7</code>组合键可以轮流进行切换。进入<code>tty</code>命令行模式以后，通过如下命令可以在本次会话范围内禁用休眠。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ setterm --blank 0</span><br></pre></td></tr></table></figure>
+<p>重启 Raspbian
+之后，该命令就会失效，所以通常需要将该命令添加至开机自启动脚本<code>/etc/bash.bashrc</code>里面。除此之外，终端属性设置命令<code>setterm</code>还拥有如下常用参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setterm -blank [0-60|force|poke]</span><br><span class="line">setterm -powerdown [0-60]</span><br><span class="line">setterm -powersave [on|vsync|hsync|powerdown|off]</span><br></pre></td></tr></table></figure>
+<p>当上述命令的参数为<code>0</code>时即表示禁用，例如禁止屏幕进入保护与关闭状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ setterm -blank 0 -powerdown 0</span><br></pre></td></tr></table></figure>
+<h2 id="连接隐藏-ssid-的-wifi">连接隐藏 SSID 的 WiFi</h2>
+<p>编辑 <strong>Raspbian</strong> 的
+<code>wpa-supplicant</code>配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
+<p>连接隐藏 WiFi
+时必须将<code>scan_ssid</code>设置为<code>1</code>；此外
+<code>priority</code>
+表示连接优先级，数值越大优先级越高，但不能设置为负数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">network=&#123;</span><br><span class="line">    scan_ssid=1</span><br><span class="line">    priority=1</span><br><span class="line">    ssid=&quot;SSID 名称&quot;</span><br><span class="line">    psk=&quot;WiFi 密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="安装-vscode-编辑器">安装 VSCode 编辑器</h2>
+<p>下载并安装<a target="_blank" rel="noopener" href="https://code.headmelted.com/">树莓派
+VSCode</a>以后，采用以下命令避免执行<code>sudo apt update</code>时出现公钥缺失提示信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ wget https://packagecloud.io/headmelted/codebuilds/gpgkey -O - | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+<h2 id="qt-安装与编译">Qt 安装与编译</h2>
+<p>可以通过命令方便的下载安装 <strong>Raspbian</strong>
+官方仓库当中的预编译版本，截止至本文撰写的 2020 年 3 月 14
+日，官方仓库默认安装的版本为<code>Qt Creator 4.8.2</code>以及基于<code>GCC 8.3.0 32bit</code>的<code>Qt 5.11.3</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install qt5-default qtcreator</span><br></pre></td></tr></table></figure>
+<p>如果当前运行的是一个基于 Qt5 编写的人脸识别项目，由于需要调用
+Raspberry Pi 的蓝牙与摄像头设备，那么在按照上面步骤安装完 Qt
+之后，还需要额外安装如下蓝、多媒体依赖库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install bluez libbluetooth-dev qtmultimedia5-dev qtconnectivity5-dev</span><br></pre></td></tr></table></figure>
+<p>如果需要安装最新的<code>Qt 5.14.2</code>，则需要前往<a target="_blank" rel="noopener" href="https://download.qt.io/official_releases/">Qt
+源码仓库</a>下载<code>qt-everywhere-src-5.14.2.tar.xz</code>和<code>qt-creator-opensource-src-4.12.1.tar.xz</code>的源码手动进行编译安装：</p>
+<p>扩大 Swap
+交换分区存储空间，将<code>CON_SWAPSIZE=100</code>修改为<code>CON_SWAPSIZE=1024</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /etc/dphys-swapfile</span><br><span class="line"></span><br><span class="line">➜ sudo /etc/init.d/dphys-swapfile stop</span><br><span class="line"></span><br><span class="line">➜ sudo /etc/init.d/dphys-swapfile start</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：编译安装过程参考了<a target="_blank" rel="noopener" href="http://www.waveshare.net/study/article-1001-1.html">《微雪树莓派
+Qt 开发环境搭建》</a>、<a target="_blank" rel="noopener" href="https://www.tal.org/tutorials/building-qt-512-raspberry-pi">《Building
+Qt 5.12 LTS for Raspberry Pi on Raspbian》</a>、<a target="_blank" rel="noopener" href="https://www.tal.org/tutorials/building-qtcreator-raspberry-pi-debian-stretch">《Build
+QtCreator on Raspberry Pi》</a>三篇文章。</p>
+</blockquote>
+<h3 id="qt-5.14.2">Qt 5.14.2</h3>
+<p>安装 Qt 源代码编译相关的第 3 方依赖库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt install build-essential libfontconfig1-dev libdbus-1-dev libfreetype6-dev libicu-dev libinput-dev libxkbcommon-dev libsqlite3-dev libssl-dev libpng-dev libjpeg-dev libglib2.0-dev libraspberrypi-dev</span><br></pre></td></tr></table></figure>
+<p>将 Qt 源代码解压至<code>workspace</code>工作目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace $ tar -xf qt-everywhere-src-5.14.2.tar.xz</span><br></pre></td></tr></table></figure>
+<p>Qt 构建是通过 configure 脚本配置的，但是平台和设备的特定设置是在
+mkspecs 配置文件中设置的。Qt 包括用于 Raspberry Pi 的
+mkspec，但是不幸的是，它们仅用于交叉编译环境，并且未经编辑或需要伪造交叉编译环境就不能用于本机构建，并且存在其自身的问题。</p>
+<p>Qt
+源码的编译是通过安装脚本进行配置的，但是平台和设备相关的设置都放置在<code>mkspecs</code>目录下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace/qt-everywhere-src-5.14.2/qtbase/mkspecs $ <span class="built_in">ls</span></span><br><span class="line">aix-g++        features              integrity-armv8-rcar   linux-g++       linux-lsb-g++       macx-g++            openbsd-g++            solaris-cc-stlport    win32-g++             winrt-arm-msvc2019</span><br><span class="line">aix-g++-64     freebsd-clang         integrity-x86          linux-g++-32    linux-rpi2-g++      macx-icc            qnx-aarch64le-qcc      solaris-g++           win32-icc             winrt-x64-msvc2015</span><br><span class="line">android-clang  freebsd-g++           linux-aarch64-gnu-g++  linux-g++-64    linux-rpi3-g++      macx-ios-clang      qnx-armle-v7-qcc       solaris-g++-64        win32-icc-k1om        winrt-x64-msvc2017</span><br><span class="line">common         haiku-g++             linux-arm-gnueabi-g++  linux-icc       linux-rpi4-v3d-g++  macx-tvos-clang     qnx-x86-64-qcc         unsupported           win32-msvc            winrt-x64-msvc2019</span><br><span class="line">cygwin-g++     hpuxi-g++-64          linux-clang            linux-icc-32    linux-rpi-g++       macx-watchos-clang  qnx-x86-qcc            wasm-emscripten       winrt-arm64-msvc2017  winrt-x86-msvc2015</span><br><span class="line">darwin-g++     hurd-g++              linux-clang-32         linux-icc-64    linux-rpi-vc4-g++   macx-xcode          solaris-cc             win32-arm64-msvc2017  winrt-arm64-msvc2019  winrt-x86-msvc2017</span><br><span class="line">devices        integrity-armv7       linux-clang-libc++     linux-icc-k1om  lynxos-g++          modules             solaris-cc-64          win32-clang-g++       winrt-arm-msvc2015    winrt-x86-msvc2019</span><br><span class="line">dummy          integrity-armv7-imx6  linux-clang-libc++-32  linux-llvm      macx-clang          netbsd-g++          solaris-cc-64-stlport  win32-clang-msvc      winrt-arm-msvc2017</span><br></pre></td></tr></table></figure>
+<p>Qt 虽然包含有用于 <strong>Raspberry Pi</strong>
+编译的<code>mkspec</code>，但是仅用于交叉编译环境。如果需要在<strong>Raspberry
+Pi</strong>上完成编译工作，就需要前往<a href="%60https://github.com/oniongarlic/qt-raspberrypi-configuration.git%60">qt-raspberrypi-configuration</a>下载国外爱好者编写的<code>mkspec</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace $ git <span class="built_in">clone</span> https://github.com/oniongarlic/qt-raspberrypi-configuration.git</span><br></pre></td></tr></table></figure>
+<p>进入到<code>qt-raspberrypi-configuration</code>目录，然后执行<code>make install</code>，参数<code>DESTDIR</code>需要根据
+Qt 源码的位置自行设定：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace $ <span class="built_in">cd</span> qt-raspberrypi-configuration &amp;&amp; make install DESTDIR=../qt-everywhere-src-5.14.2</span><br></pre></td></tr></table></figure>
+<p>Qt5 由许多模块组成，安装额外的开发包能够让 Qt
+支持这些特性，下表提供了可选的特性以及所需的开发包。开发人员可以按需选择安装，然后检查<code>configure</code>命令的输出，确保安装脚本找到并启用了这些可选特性。</p>
+<table>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 77%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>可选特性</th>
+<th>所需安装包</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="http://www.bluez.org/">Bluez 蓝牙</a></td>
+<td><code>sudo apt-get install bluez libbluetooth-dev</code></td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://gstreamer.freedesktop.org/">GStreamer
+多媒体框架支持</a></td>
+<td><code>sudo apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad libgstreamer-plugins-bad1.0-dev gstreamer1.0-pulseaudio gstreamer1.0-tools gstreamer1.0-alsa</code></td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="http://alsa-project.org/main/index.php/Main_Page">ALSA
+音频支持</a></td>
+<td><code>sudo apt-get install libasound2-dev</code></td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://www.freedesktop.org/wiki/Software/PulseAudio/?">PulseAudio
+混音支持</a></td>
+<td><code>sudo apt-get install pulseaudio libpulse-dev</code></td>
+</tr>
+<tr class="odd">
+<td>PostgreSQL、MariaDB、MySQL 数据库支持</td>
+<td><code>sudo apt-get install libpq-dev libmariadbclient-dev</code></td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://www.cups.org/">CUPS 打印支持</a></td>
+<td><code>sudo apt-get install libcups2-dev</code></td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://wayland.freedesktop.org/">Wayland 支持</a></td>
+<td><code>sudo apt-get install libwayland-dev</code></td>
+</tr>
+<tr class="even">
+<td>X11 支持</td>
+<td><code>sudo apt-get install libx11-dev libxcb1-dev libxkbcommon-x11-dev libx11-xcb-dev libxext-dev</code></td>
+</tr>
+<tr class="odd">
+<td>无障碍环境</td>
+<td><code>sudo apt-get install libatspi-dev</code></td>
+</tr>
+</tbody>
+</table>
+<p>如果调用相机时出现<code>Unknown module(s) in QT: multimedia multimediawidgets</code>错误，则还需要手动安装如下模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install qtmultimedia5-dev</span><br></pre></td></tr></table></figure>
+<p>新建影子编译目录<code>build</code>，在源代码树的外部编译 Qt
+可以方便编译不同版本，并且出现问题时也便于重新进行编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace $ <span class="built_in">mkdir</span> qt-build</span><br><span class="line">➜ pi@raspberrypi:/workspace $ <span class="built_in">cd</span> qt-build</span><br></pre></td></tr></table></figure>
+<p>配置 Qt
+的<code>configure</code>命令设置相应的编译参数，例如：所需的库、默认的
+QPA
+插件等等。下面的<code>configure</code>命令只是一个示例，开发人员需要按需对其进行调整，例如：需要
+<strong>wayland</strong>，则需要移除<code>-skip wayland</code>选项。<code>configure</code>命令大约需要运行
+10
+分钟，因为它需要编译<code>qmake</code>然后运行各种测试与特性检查。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">PKG_CONFIG_LIBDIR=/usr/lib/arm-linux-gnueabihf/pkgconfig:/usr/share/pkgconfig \</span><br><span class="line">../qt-everywhere-src-5.14.2/configure -platform linux-rpi-g++ \</span><br><span class="line">-v \</span><br><span class="line">-opengl es2 -eglfs \</span><br><span class="line">-no-gtk \</span><br><span class="line">-opensource -confirm-license -release \</span><br><span class="line">-reduce-exports \</span><br><span class="line">-force-pkg-config \</span><br><span class="line">-nomake examples -no-compile-examples \</span><br><span class="line">-skip qtwayland \</span><br><span class="line">-skip qtwebengine \</span><br><span class="line">-no-feature-geoservices_mapboxgl \</span><br><span class="line">-qt-pcre \</span><br><span class="line">-no-pch \</span><br><span class="line">-ssl \</span><br><span class="line">-evdev \</span><br><span class="line">-system-freetype \</span><br><span class="line">-fontconfig \</span><br><span class="line">-glib \</span><br><span class="line">-prefix /opt/qt-5.14.2 \</span><br><span class="line">-qpa eglfs</span><br></pre></td></tr></table></figure>
+<p>接下来就可以开启 Qt 的正式编译过程了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace/qt-build $ sudo make         <span class="comment"># CPU 单核编译</span></span><br><span class="line"></span><br><span class="line">➜ pi@raspberrypi:/workspace/qt-build $ sudo make -j4     <span class="comment"># CPU 多核编译</span></span><br></pre></td></tr></table></figure>
+<p>注意，完成之后需要对下面 3
+个模块单独进行编译，否则后面<code>make install</code>安装时会报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace/qt-build/qtlocation/src/3rdparty/clip2tri $ sudo make</span><br><span class="line"></span><br><span class="line">➜ pi@raspberrypi:/workspace/qt-build/qtlocation/src/3rdparty/clipper $ sudo make</span><br><span class="line"></span><br><span class="line">➜ pi@raspberrypi:/workspace/qt-build/qtlocation/src/3rdparty/poly2tri $ sudo make</span><br></pre></td></tr></table></figure>
+<p>如果编译出现错误，则需要检查是否正确安装了所有<code>configure</code>的依赖。接下来，将编译好的文件安装至<code>/opt/qt-5.14.2</code>目录下面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace/qt-build $ sudo make install</span><br></pre></td></tr></table></figure>
+<p>安装完成以后，可以从<code>/opt/qt-5.14.2</code>安装目录运行<code>qmake</code>，从而验证
+Qt 是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜ /opt/qt-5.14.2/bin/qmake</span><br><span class="line"></span><br><span class="line">QMake version 3.1</span><br><span class="line">Using Qt version 5.14.2 <span class="keyword">in</span> /opt/qt-5.14.2/lib</span><br></pre></td></tr></table></figure>
+<p>上述构建默认使用 <strong>eglfs</strong>
+平台，运行平台二进制文件时，可以通过<code>-platform</code>参数生成指定运行平台的二进制文件。</p>
+<table>
+<thead>
+<tr class="header">
+<th>运行平台</th>
+<th>platform 参数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>X11</strong></td>
+<td><code>-platform xcb</code></td>
+</tr>
+<tr class="even">
+<td><strong>VNC</strong></td>
+<td><code>-platform vnc</code></td>
+</tr>
+<tr class="odd">
+<td><strong>WebGL</strong></td>
+<td><code>-platform webgl</code></td>
+</tr>
+</tbody>
+</table>
+<p>这里还有一些收尾的工作需要完成，将安装好的 Qt 5.14.2 设置为默认的 Qt
+版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace/qt-build $ sudo vim /usr/share/qtchooser/qt5-arm-linux-gnueabihf.conf</span><br></pre></td></tr></table></figure>
+<p>修改<code>qt5-arm-linux-gnueabihf.conf</code>，将内容替换为如下配置项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/opt/qt-5.14.2/bin</span><br><span class="line">/opt/qt-5.14.2/lib</span><br></pre></td></tr></table></figure>
+<p>接着，修改<code>.bashrc</code>用户环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace/qt-build $ sudo vim ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>然后在<code>.bashrc</code>环境变量最后添加如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export QT_SELECT=qt5-arm-linux-gnueabihf</span><br><span class="line">export QML2_IMPORT_PATH=$QTDIR/qml</span><br></pre></td></tr></table></figure>
+<p>执行<code>source ~/.bashrc</code>命令使环境变量生效，最后直接运行<code>qmake</code>命令检查配置是否生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pi@raspberrypi:~ $ qmake -v</span><br><span class="line"></span><br><span class="line">QMake version 3.1</span><br><span class="line">Using Qt version 5.14.2 in /opt/Qt5.14/lib</span><br></pre></td></tr></table></figure>
+<h3 id="qt-creator-4.12.1">Qt Creator 4.12.1</h3>
+<p>首先，解压下载好的<code>qt-creator-opensource-src-4.12.1.tar.xz</code>源代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace $ tar -xf qt-creator-opensource-src-4.12.1.tar.xz</span><br></pre></td></tr></table></figure>
+<p>然后，在工作区建立影子编译目录<code>qt-creator-build</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace $ <span class="built_in">mkdir</span> qt-creator-build</span><br><span class="line"></span><br><span class="line">➜ pi@raspberrypi:/workspace $ <span class="built_in">cd</span> qt-creator-build</span><br></pre></td></tr></table></figure>
+<p>进行影子编译目录<code>qt-creator-build</code>，运行<code>qmake</code>生成
+Makefile 文件，然后让 CPU 进行多核编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace/qt-creator-5.14.2 $ sudo /opt/qt-5.14.2/bin/qmake -r ../qt-creator-opensource-src-4.12.0</span><br><span class="line"></span><br><span class="line">➜ pi@raspberrypi:/workspace/qt-creator-5.14.2 $ sudo make -j4</span><br></pre></td></tr></table></figure>
+<p>最后，编译完成之后，将 Qt Creator 安装至 Raspbian
+操作系统的<code>/opt/qt-creator-5.14.2</code>目录下面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ pi@raspberrypi:/workspace/qt-creator-5.14.2 $ sudo make install INSTALL_ROOT=/opt/qt-creator-5.14.2</span><br></pre></td></tr></table></figure>
+<p>命令行让 Qt Creator 在 X11 下启动，以验证安装是否成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/qt-creator-5.14.2/bin/qtcreator -platform xcb</span><br></pre></td></tr></table></figure>
+<p>将 Qt Creator 的引用添加至 Raspbian 的启动菜单：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> /opt/qt-creator-4.12.1/share/applications/org.qt-project.qtcreator.desktop /usr/share/applications/</span><br></pre></td></tr></table></figure>
+<h2 id="获取设备-ip">获取设备 IP</h2>
+<p>当计算机采用 <strong>SSH</strong> 或者 <strong>VNC</strong> 连接至
+<strong>Raspberry Pi</strong> 时，需要首先获取树莓派的 IP 地址。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ hostname -I</span><br><span class="line"></span><br><span class="line">192.168.3.80</span><br></pre></td></tr></table></figure>
+<p>采用<code>nmap</code>网络扫描工具可以发现当前局域网上设备的 IP
+地址，首先需要进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt install nmap</span><br></pre></td></tr></table></figure>
+<p>然后在局域网使用<code>nmap</code>命令并携带<code>-sn</code>参数进行
+Ping 扫描，该命令会尝试<code>ping</code>连接所有的 IP
+地址，以查看其是否响应，最后输出所有响应设备的主机名称与 IP 地址：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜ nmap -sn 192.168.3.0/24</span><br><span class="line"></span><br><span class="line">Starting Nmap 7.70 ( https://nmap.org ) at 2020-03-19 01:15 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.3.1</span><br><span class="line">Host is up (0.0075s latency).</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.3.80</span><br><span class="line">Host is up (0.0026s latency).</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.3.87</span><br><span class="line">Host is up (0.059s latency).</span><br><span class="line">Nmap <span class="keyword">done</span>: 256 IP addresses (3 hosts up) scanned <span class="keyword">in</span> 2.96 seconds</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：<code>192.168.1.0/24</code>表示当前扫描的 IP
+地址范围为<code>192.168.1.0 ~ 192.168.1.255</code>。</p>
+</blockquote>
+<h2 id="设置静态-ip">设置静态 IP</h2>
+<p>Raspberry Pi 通过 <strong>dhcpcd</strong> 守护程序配置网络设备的
+TCP/IP，可以自动分配 IP 地址、设置网络掩码以及 DNS
+解析。默认情况下，Raspberry Pi 会尝试通过 <strong>DHCP</strong>
+自动配置所有网络接口，如果失败则回退到<code>169.254.0.0/16</code>范围内的自动专用地址，这与其它
+Linux 发行版和 Microsoft Windows 的行为保持一致。如果不希望使用 DHCP
+的自动配置，而改为手动进行静态配置，则可以修改<code>sudo vi /etc/dhcpcd.conf</code>配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"># Allow users of this group to interact with dhcpcd via the control socket.</span><br><span class="line">#controlgroup wheel</span><br><span class="line"></span><br><span class="line"># Inform the DHCP server of our hostname for DDNS.</span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"># Use the hardware address of the interface for the Client ID.</span><br><span class="line">clientid</span><br><span class="line"># or</span><br><span class="line"># Use the same DUID + IAID as set in DHCPv6 for DHCPv4 ClientID as per RFC4361.</span><br><span class="line"># Some non-RFC compliant DHCP servers do not reply with this set.</span><br><span class="line"># In this case, comment out duid and enable clientid above.</span><br><span class="line">#duid</span><br><span class="line"></span><br><span class="line"># Persist interface configuration when dhcpcd exits.</span><br><span class="line">persistent</span><br><span class="line"></span><br><span class="line"># Rapid commit support.</span><br><span class="line"># Safe to enable by default because it requires the equivalent option set</span><br><span class="line"># on the server to actually work.</span><br><span class="line">option rapid_commit</span><br><span class="line"></span><br><span class="line"># A list of options to request from the DHCP server.</span><br><span class="line">option domain_name_servers, domain_name, domain_search, host_name</span><br><span class="line">option classless_static_routes</span><br><span class="line"># Respect the network MTU. This is applied to DHCP routes.</span><br><span class="line">option interface_mtu</span><br><span class="line"></span><br><span class="line"># Most distributions have NTP support.</span><br><span class="line">#option ntp_servers</span><br><span class="line"></span><br><span class="line"># A ServerID is required by RFC2131.</span><br><span class="line">require dhcp_server_identifier</span><br><span class="line"></span><br><span class="line"># Generate SLAAC address using the Hardware Address of the interface</span><br><span class="line">#slaac hwaddr</span><br><span class="line"># OR generate Stable Private IPv6 Addresses based from the DUID</span><br><span class="line">slaac private</span><br><span class="line"></span><br><span class="line"># Example static IP configuration:</span><br><span class="line">#interface eth0</span><br><span class="line">#static ip_address=192.168.0.10/24</span><br><span class="line">#static ip6_address=fd51:42f8:caae:d92e::ff/64</span><br><span class="line">#static routers=192.168.0.1</span><br><span class="line">#static domain_name_servers=192.168.0.1 8.8.8.8 fd51:42f8:caae:d92e::1</span><br><span class="line"></span><br><span class="line"># It is possible to fall back to a static IP if DHCP fails:</span><br><span class="line"># define static profile</span><br><span class="line">#profile static_eth0</span><br><span class="line">#static ip_address=192.168.1.23/24</span><br><span class="line">#static routers=192.168.1.1</span><br><span class="line">#static domain_name_servers=192.168.1.1</span><br><span class="line"></span><br><span class="line"># fallback to static profile on eth0</span><br><span class="line">#interface eth0</span><br><span class="line">#fallback static_eth0</span><br></pre></td></tr></table></figure>
+<p>向上述配置文件中添加如下内容，即可完成静态 IP 的设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface eth0</span><br><span class="line">static ip_address=192.168.0.4/24</span><br><span class="line">static routers=192.168.0.254</span><br><span class="line">static domain_name_servers=192.168.0.254 8.8.8.8</span><br></pre></td></tr></table></figure>
+<p>执行<code>ip link</code>命令可以查看当前 Raspberry Pi OS
+上存在的网络接口，即上面配置中首行的<code>interface xxxx</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pi@raspberrypi:~ $ ip <span class="built_in">link</span></span><br><span class="line"></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">2: eth0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc mq state DOWN mode DEFAULT group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether dc:a6:32:0a:03:83 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">3: wlan0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP mode DORMANT group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether dc:a6:32:0a:03:84 brd ff:ff:ff:ff:ff:ff</span><br></pre></td></tr></table></figure>
+<p>除此之外，还可以执行<code>ifconfig</code>命令查看 Raspberry Pi OS
+当前的网络配置情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">pi@raspberrypi:~ $ ifconfig</span><br><span class="line"></span><br><span class="line">eth0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether dc:a6:32:0a:03:83  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1000  (Local Loopback)</span><br><span class="line">        RX packets 9  bytes 524 (524.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 9  bytes 524 (524.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">wlan0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.199.199  netmask 255.255.255.0  broadcast 192.168.199.255</span><br><span class="line">        inet6 fe80::8568:c185:6209:561c  prefixlen 64  scopeid 0x20&lt;<span class="built_in">link</span>&gt;</span><br><span class="line">        ether dc:a6:32:0a:03:84  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 6413  bytes 406542 (397.0 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 10292  bytes 1429755 (1.3 MiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：早期版本的 Raspberry Pi OS
+使用<code>/etc/network/interfaces</code>配置文件设置网络接口，如果在该文件当中列出了接口，则其中的设置将会优先于<code>/etc/dhcpcd.conf</code>当中的配置。</p>
+</blockquote>
+<h2 id="vnc-远程桌面">VNC 远程桌面</h2>
+<p>VNC 是虚拟网络控制台(Virtual Network
+Console)的英文缩写，它是一款优秀的免费开源远程控制工具，由 AT&amp;T
+欧洲实验室开发。该工具主要包含<code>vncserver</code>、<code>vncviewer</code>、<code>vncpasswd</code>、<code>vncconnect</code>四个部分，但是通常情况下只需要使用到前面两者（分别为服务端和客户端），Raspberry
+Pi 上可以通过如下命令直接安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt install realvnc-vnc-server realvnc-vnc-viewer</span><br></pre></td></tr></table></figure>
+<p>然后，在 Raspberry Pi
+上启动图形桌面，选择<code>【开始菜单】&gt;【首选项】&gt;【Raspberry Pi 配置】&gt;【接口】</code>；或者使用<code>raspi-config</code>在命令行中进行启用，依次选择<code>【Interfacing Options】&gt;【VNC】&gt;【Yes】</code>。</p>
+<p>最后，在本地计算机安装<code>VNC Viewer</code>客户端，将树莓派在当前局域网中的
+IP 地址填入地址栏，然后输入 <strong>Raspbian</strong>
+的用户名与密码即可登入。</p>
+<p><img src="/Embedded/RaspberryPi/remote/VNC.png"></p>
+<blockquote>
+<p><strong>注意</strong>：虽然 RealVNC
+提供的云服务功能经过简单注册以后即可使用，但是仅限于<strong>教育</strong>或者<strong>非商业目的</strong>。</p>
+</blockquote>
+<h2 id="ssh-连接会话">SSH 连接会话</h2>
+<p><strong>SSH</strong>（Secure
+Shell）可以让同一局域网下的计算机远程访问 Raspberry Pi 命令行，Raspbian
+默认禁用 SSH
+服务器，需要通过图形界面下的<code>【Raspberry Pi Configuration】&gt;【Preferences】&gt;【SSH】&gt;【Enabled】&gt;【OK】</code>或者命令行<code>raspi-config</code>里面的<code>【Interfacing Options】&gt;【SSH】&gt;【Yes】&gt;【Ok】&gt;【Finish】</code>。当然与其它
+Linux
+操作系统一样，也可以直接使用<code>systemctl</code>命令<strong>使能</strong>并<strong>运行</strong>
+SSH 服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo systemctl <span class="built_in">enable</span> ssh</span><br><span class="line"></span><br><span class="line">Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.</span><br><span class="line">Executing: /lib/systemd/systemd-sysv-install <span class="built_in">enable</span> ssh</span><br><span class="line"></span><br><span class="line">➜ sudo systemctl start ssh</span><br></pre></td></tr></table></figure>
+<p>树莓派 SSH 启动完成之后，打开计算机上的<code>Putty</code>或者其它 SSH
+远程连接工具，输入树莓派的 IP 地址以及 SSH
+默认的端口号<code>22</code>即可实现连接：</p>
+<p><img src="/Embedded/RaspberryPi/remote/Putty.png"></p>
+<blockquote>
+<p><strong>注意</strong>：开启 SSH 服务之后，同时也就可以方便的使用
+<strong>SFTP</strong>（安全文件传输协议，SSH File Transfer
+Protocol）服务，当然这需要借助 <strong>WinSCP</strong> 或者
+<strong>MobaXterm</strong> 与 <strong>Filezilla</strong>
+等专用客户端工具。</p>
+</blockquote>
+<h3 id="scp-远程拷贝命令">scp 远程拷贝命令</h3>
+<p>树莓派提供了<code>scp</code>命令用于通过 SSH
+传输文件，当然前提是需要知道树莓派在当前局域网里的 IP
+地址。<code>scp</code>命令后面紧跟当前计算机上需要传输的文件路径，以及树莓派的<code>用户名@IP地址</code>，最后的冒号<code>:</code>后面则是目标文件在树莓派主目录下的放置路径，缺省是放置当前用户目录的根路径下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ scp test.txt pi@192.168.3.80:</span><br></pre></td></tr></table></figure>
+<p>上面的命令会将计算机上的<code>test.txt</code>文件传输至 IP
+地址为<code>192.168.3.80</code>的<code>pi</code>用户根目录下面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ scp test.txt pi@192.168.3.80:Downloads/</span><br></pre></td></tr></table></figure>
+<p>将<code>text.txt</code>传输至<code>pi</code>用户根目录下的<code>Downloads</code>文件夹下面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ scp pi@192.168.3.80:Downloads/hank.txt ./</span><br></pre></td></tr></table></figure>
+<p>将树莓派上<code>pi</code>用户根目录下<code>Downloads</code>文件夹内的<code>hank.txt</code>文件传输到当前计算机的<code>./</code>路径。</p>
+<blockquote>
+<p><strong>注意</strong>：<code>scp</code>命令可以同时上传<strong>多个文件</strong>，文件名称当中也可以使用<strong>通配符</strong>，如果文件名中带有空格，则必须使用引号<code>""</code>将文件名称括起来。</p>
+</blockquote>
+<h3 id="rsync-文件同步命令">rsync 文件同步命令</h3>
+<p><code>rsync</code>命令用于在<strong>树莓派</strong>和<strong>Linux
+计算机</strong>之间通过 SSH
+同步目录以及里面的文件，首先在本地计算机上建立一个用于保存截图的<code>screenshot</code>目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ <span class="built_in">mkdir</span> screenshot</span><br></pre></td></tr></table></figure>
+<p>Raspberry Pi
+捕获的照片将会自动保存在<code>camera</code>目录下面，然后在本地计算机执行下面的命令，将这些截图自动同步到本地计算机上的<code>screenshot</code>目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz -e ssh pi@192.168.3.80:camera/ screenshot/</span><br></pre></td></tr></table></figure>
+<h3 id="sshfs-文件系统">SSHFS 文件系统</h3>
+<p><strong>SSHFS</strong> 是 SSH 文件系统（SSH
+Filesystem）的简称，可在安装 Linux 宿主系统的计算机上，通过 SSH
+会话将树莓派 Raspbian 上的目录挂载至本地计算机。</p>
+<p>首先，执行如下命令在计算机上安装 SSHFS：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt install sshfs</span><br></pre></td></tr></table></figure>
+<p>然后，在本地计算机上建立一个目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ <span class="built_in">mkdir</span> hank</span><br></pre></td></tr></table></figure>
+<p>将 Raspberry Pi 的文件系统挂载至这个目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sshfs pi@192.168.3.80: hank</span><br></pre></td></tr></table></figure>
+<p>最后，进入本地计算机的<code>hank</code>目录，就可以查看到映射过来的树莓派<code>\home</code>主目录下的文件。</p>
+<h2 id="samba-文件共享">Samba 文件共享</h2>
+<p><strong>Samba</strong>
+基于<code>SMB/CIFS</code>网络协议，不同设备之间可以通过该协议共享访问文件、串行端口等，这里通过它将
+Windows 10 系统设备上的共享文件夹挂载至树莓派。</p>
+<p>下面的命令会自动安装 Samba 作为服务器和客户端的全部必需组件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt install samba samba-common-bin smbclient cifs-utils</span><br></pre></td></tr></table></figure>
+<h3 id="windows-raspbian">Windows ➜ Raspbian</h3>
+<p>接下来，设置 Windows 10
+操作系统的文件共享状态，打开控制面板并依次进入<code>网络和共享中心\高级共享设置</code>，然后分别勾选专用以及来宾或公用网络下面的【启用网络发现】和【启用文件和打印机共享】：</p>
+<p><img src="/Embedded/RaspberryPi/remote/Windows-share-1.png"></p>
+<p><img src="/Embedded/RaspberryPi/remote/Windows-share-2.png"></p>
+<p>然后在 Windows 10 操作系统的 <strong>D</strong>
+盘创建一个<code>Share</code>文件夹，并鼠标右键选择属性，进入【共享】选项卡设置如下属性：</p>
+<p><img src="/Embedded/RaspberryPi/remote/Windows-share-3.png"></p>
+<p><img src="/Embedded/RaspberryPi/remote/Windows-share-4.png"></p>
+<p>最后进入【安全】选项卡，更改权限状态为【完全控制】：</p>
+<p><img src="/Embedded/RaspberryPi/remote/Windows-share-5.png"></p>
+<p>接下来的步骤，将在 Raspberry Pi 上进行，在 Raspbian
+上建立一个<code>windows-share</code>目录，然后将 Windows 10
+上建立的<code>Share</code>文件夹通过 Samba 挂载至该目录下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo mount.cifs //192.168.3.81/Share /home/pi/windows-share -o user=hank</span><br><span class="line"></span><br><span class="line">Password for hank@//192.168.3.81/Share:  ******</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：上面命令具体的格式应为<code>sudo mount.cifs Windows共享目录 Raspbian共享目录 -o user=Windows用户名</code>，后续输入的密码也应为
+Windows 的密码。</p>
+</blockquote>
+<p>完成以上操作之后，就可以在 Raspberry Pi 查看到 Windows 10
+的<code>Share</code>文件夹里共享的内容。</p>
+<h3 id="raspbian-windows">Raspbian ➜ Windows</h3>
+<p>首先在 Raspbian
+的<code>/home</code>主目录里面创建一个<code>raspbian-share</code>目录，然后编辑
+Samba 配置文件<code>smb.conf</code>通知 Raspbian 共享该目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+<p>在配置文件的末尾，添加如下内容完成共享，并为远程用户提供读/写权限：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[raspbian-share]</span><br><span class="line">    path = /home/pi/raspbian-share</span><br><span class="line">    read only = no</span><br><span class="line">    writable = yes</span><br><span class="line">    public = yes</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：可以在<code>smb.conf</code>文件当中查询<code>workgroup</code>配置项，如有需要，可以将其更改为本地
+Windows 网络工作组的名称。</p>
+</blockquote>
+<p>重新 Samba 服务以使配置生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo /etc/init.d/smbd restart</span><br></pre></td></tr></table></figure>
+<p>回到 Windows 10 操作系统当中，按下【Win + R】键运行如下命令打开
+Raspbian 共享文件目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ \\192.168.3.80\raspbian-share</span><br></pre></td></tr></table></figure>
+<p><img src="/Embedded/RaspberryPi/remote/Raspbian-share.png"></p>
+<h2 id="nfs-网络文件系统">NFS 网络文件系统</h2>
+<p>NFS 网络文件系统（Network File-System）本质上是一种基于
+RPC（远程过程调用）协议的文件系统，用于通过网络让不同设备与系统实现双向共享，就像访问操作系统的本地磁盘一样。首先，安装
+NFS 服务器端和客户端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install nfs-kernel-server nfs-common</span><br></pre></td></tr></table></figure>
+<p>然后，编辑<code>/etc/exports</code>文件配置 NFS
+所要共享给其它设备和系统的目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /etc/exports</span><br></pre></td></tr></table></figure>
+<p>下面配置将<code>/workspace</code>工作区目录设置为 NFS
+共享目录，其中<code>*</code>表示允许任意 IP
+进行访问，<code>insecure</code>表示允许使用<code>1024</code>以上的端口传输数据，<code>rw</code>表示可以进行读写访问，<code>sync</code>则表示同步，<code>no_root_squas</code>表示<code>root</code>用户具有根目录的完全访问权限。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># /etc/exports: the access control list for filesystems which may be exported</span><br><span class="line">#		to NFS clients.  See exports(5).</span><br><span class="line">#</span><br><span class="line"># Example for NFSv2 and NFSv3:</span><br><span class="line"># /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)</span><br><span class="line">#</span><br><span class="line"># Example for NFSv4:</span><br><span class="line"># /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)</span><br><span class="line"># /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">/workspace *(insecure,rw,sync,no_root_squash)</span><br></pre></td></tr></table></figure>
+<p>修改完成以后保存，同时赋予<code>/workspace</code>目录最为宽松的读写权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo <span class="built_in">chmod</span> -R 777 /workspace</span><br><span class="line">➜ sudo <span class="built_in">chown</span> –R nobody /workspace</span><br></pre></td></tr></table></figure>
+<p>下面两条命令用于启动或者重新启动 NFS 服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo /etc/init.d/nfs-kernel-server start</span><br><span class="line">➜ sudo /etc/init.d/nfs-kernel-server restart</span><br></pre></td></tr></table></figure>
+<p>如果共享 NFS 服务的设备为 Linux，则使用如下命令格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo mount -t nfs 192.168.199.199/workspace /mnt -o nolock</span><br></pre></td></tr></table></figure>
+<p>如果共享 NFS 服务的设备为 Windows，则需要先行打开 Windows
+<code>控制面板\所有控制面板项\程序和功能</code>上的 NFS 服务支持：</p>
+<p><img src="/Embedded/RaspberryPi/remote/NFS.png"></p>
+<p>然后再通过如下命令挂载 Raspberry Pi 4B 提供的 NFS 共享服务至
+<strong>X</strong> 盘：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">λ mount \\<span class="number">192</span>.<span class="number">168</span>.<span class="number">199</span>.<span class="number">199</span>\workspace X:</span><br></pre></td></tr></table></figure>
+<h2 id="搭建-ftp-服务">搭建 FTP 服务</h2>
+<p>FTP 是文件传输协议（File Transfer
+Protocol）的英文缩写，树莓派通常采用 <a target="_blank" rel="noopener" href="https://www.pureftpd.org/project/pure-ftpd/"><strong>Pure-FTPd</strong></a>
+搭建 FTP 服务器，通过下面命令可以直接安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt install pure-ftpd</span><br></pre></td></tr></table></figure>
+<p>首先，创建一个<code>ftpgroup</code>用户组以及一个<code>ftpuser</code>用户，同时确保该用户没有登陆权限以及
+Home 目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo groupadd ftpgroup</span><br><span class="line">➜ sudo useradd ftpuser -g ftpgroup -s /sbin/nologin -d /dev/null</span><br></pre></td></tr></table></figure>
+<p>然后，在用户主目录<code>/home/pi</code>下面新建一个<code>FTP</code>文件夹，并且授予<code>ftpuser</code>该目录的访问权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo <span class="built_in">mkdir</span> /home/pi/FTP</span><br><span class="line">➜ sudo <span class="built_in">chown</span> -R ftpuser:ftpgroup /home/pi/FTP</span><br></pre></td></tr></table></figure>
+<p>接着再建立一个名为<code>upload</code>的虚拟用户，并且将其映射至<code>ftpuser</code>和<code>ftpgroup</code>，同时设置其主目录为<code>/home/pi/FTP</code>，最后设置其密码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo pure-pw useradd upload -u ftpuser -g ftpgroup -d /home/pi/FTP -m</span><br></pre></td></tr></table></figure>
+<p>再通过下面命令建立一个虚拟用户数据库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo pure-pw mkdb</span><br></pre></td></tr></table></figure>
+<p>最后，通过建立<code>/etc/pure-ftpd/conf/PureDB</code>文件的链接来定义一种认证方法，注意下面命令中的<code>60</code>只是一个演示值，实际使用的时候应当尽量缩小这个值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo <span class="built_in">ln</span> -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb</span><br></pre></td></tr></table></figure>
+<p>完成上述步骤以后，重新启动 <strong>Pure-FTPd</strong> 步骤：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo service pure-ftpd restart</span><br></pre></td></tr></table></figure>
+<p>最后打开计算机上的 <a target="_blank" rel="noopener" href="https://filezilla-project.org/">Filezilla</a>
+客户端工具，采用上面建立的虚拟用户<code>upload</code>连接至树莓派上搭建的
+FTP 服务：</p>
+<p><img src="/Embedded/RaspberryPi/remote/FTP.png"></p>
+<h2 id="部署-nginx-web-服务">部署 Nginx Web 服务</h2>
+<p>在 Raspbian 终端里输入以下命令安装 Nginx 软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt install nginx</span><br></pre></td></tr></table></figure>
+<p>然后就可以使用如下命令启动 Web 服务器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo /etc/init.d/nginx start</span><br><span class="line"></span><br><span class="line">[ ok ] Starting nginx (via systemctl): nginx.service.</span><br></pre></td></tr></table></figure>
+<p>使用 Web
+浏览器打开<code>http://localhost/</code>地址，即可以查看到如下 Nginx
+欢迎页面：</p>
+<p><img src="/Embedded/RaspberryPi/remote/Nginx.png"></p>
+<p>默认情况下 Nginx 将主页放置在 Raspbian
+的<code>/var/www/html/index.nginx-debian.html</code>文件内，可以根据需要编辑或者替换这个文件，也可以修改
+Nginx
+的配置文件<code>/etc/nginx/sites-available/default</code>里的<code>root</code>属性设置默认页面的位置。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server <span class="punctuation">&#123;</span></span><br><span class="line">  listen <span class="number">80</span> default_server;</span><br><span class="line">  listen <span class="punctuation">[</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">]</span><span class="punctuation">:</span><span class="number">80</span> default_server;</span><br><span class="line">  root /var/www/html;</span><br><span class="line">  index index.html index.htm index.nginx-debian.html;</span><br><span class="line">  server_name _;</span><br><span class="line">  location / <span class="punctuation">&#123;</span></span><br><span class="line">    try_files $uri $uri/ =<span class="number">404</span>;</span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="crontab-定时任务命令">crontab 定时任务命令</h2>
+<p><code>crontab</code>命令用于配置计划任务，可以让计划命令或者脚本以固定间隔时间运行，包括<code>root</code>在内的每个用户都拥有自己的<code>crontab</code>命令空间。运行<code>crontab -l</code>命令可以在控制台列出当前保存的计划任务，在控制台输入<code>crontab -e</code>命令则可以编辑计划任务列表，下面的脚本用于在每天午夜运行<code>backup.sh</code>脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">   0 0 * * *  /home/pi/backup.sh</span><br><span class="line"><span class="comment">#  * * * * *  command to execute</span></span><br><span class="line"><span class="comment">#  ┬ ┬ ┬ ┬ ┬</span></span><br><span class="line"><span class="comment">#  │ │ │ │ │</span></span><br><span class="line"><span class="comment">#  │ │ │ │ │</span></span><br><span class="line"><span class="comment">#  │ │ │ │ └───── day of week (0 - 7) (0 to 6 are Sunday to Saturday, or use names; 7 is Sunday, the same as 0)</span></span><br><span class="line"><span class="comment">#  │ │ │ └────────── month (1 - 12)</span></span><br><span class="line"><span class="comment">#  │ │ └─────────────── day of month (1 - 31)</span></span><br><span class="line"><span class="comment">#  │ └──────────────────── hour (0 - 23)</span></span><br><span class="line"><span class="comment">#  └───────────────────────── min (0 - 59)</span></span><br></pre></td></tr></table></figure>
+<p>如果需要在 <strong>Raspbian</strong>
+启动时运行某个命令，则计算任务列表中要采用<code>@reboot</code>代替时间和日期，例如下面命令会在
+<strong>Raspbian</strong> 重新启动时，运行指定的 Python 脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 0 * * *  /home/pi/backup.sh</span><br><span class="line">@reboot    python /home/pi/myscript.py</span><br></pre></td></tr></table></figure>
+<p>如果希望 <strong>Raspbian</strong>
+启动以后，在后台运行指定的命令，那么需要在命令最后添加一个空格以及一个<code>&amp;</code>符号，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@reboot python /home/pi/myscript.py &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="rc.local-自启动文件">rc.local 自启动文件</h2>
+<p>除了使用<code>crontab</code>命令启动定时任务以外，还可以将这些任务添加至<code>/etc/rc.local</code>自启动文件当中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
+<p>必须使用<code>root</code>权限进行该文件的编辑，并且必须将自启动命令放置在<code>exit 0</code>语句的上方。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh -e</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># rc.local</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This script is executed at the end of each multiuser runlevel.</span></span><br><span class="line"><span class="comment"># Make sure that the script will &quot;exit 0&quot; on success or any other</span></span><br><span class="line"><span class="comment"># value on error.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In order to enable or disable this script just change the execution</span></span><br><span class="line"><span class="comment"># bits.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># By default this script does nothing.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Print the IP address</span></span><br><span class="line">_IP=$(hostname -I) || <span class="literal">true</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$_IP</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">printf</span> <span class="string">&quot;My IP address is %s\n&quot;</span> <span class="string">&quot;<span class="variable">$_IP</span>&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自启动命令放置在这里</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p>如果自启动命令循环运行不退出，则必须在命令末尾添加<code>＆</code>符号，使其运行在单独的进程，而不至于阻塞
+<strong>Raspbian</strong> 的启动过程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 /home/pi/myscript.py &amp;</span><br></pre></td></tr></table></figure>
+<p>此外，命令尽量采用绝对路径，例如<code>/home/pi/myscript.py</code>而非<code>myscript.py</code>。而且由于所有命令都会以<code>root</code>用户执行，这样可能会导致意外的行为，例如命令中通过<code>mkdir</code>创建的文件夹将会具有<code>root</code>权限，其它用户无法正常访问。</p>
+<h2 id="systemd-系统服务">systemd 系统服务</h2>
+<p><code>systemd</code>是 Linux
+上的系统服务管理器，可以用于启动守护进程，如果需要让
+<strong>Raspbian</strong>
+启动时运行某个命令或者程序，就可以通过该命令将其添加为一项服务。</p>
+<p>首先，为系统服务建立一个<code>.service</code>文件，例如<code>myscript.service</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=My service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/usr/bin/python3 -u main.py</span><br><span class="line">WorkingDirectory=/home/pi/myscript</span><br><span class="line">StandardOutput=inherit</span><br><span class="line">StandardError=inherit</span><br><span class="line">Restart=always</span><br><span class="line">User=pi</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>上面的代码会在<code>/home/pi/myscript</code>工作目录下运行<code>main.py</code>脚本，将上述代码文件复制到<code>/etc/systemd/system</code>目录下面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo <span class="built_in">cp</span> myscript.service /etc/systemd/system/myscript.service</span><br></pre></td></tr></table></figure>
+<p>复制完成以后就可以通过如下命令将其启动为一个系统服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo systemctl start myscript.service  // 将脚本启动为系统服务</span><br><span class="line">➜ sudo systemctl stop myscript.service   // 停止将该脚本作为系统服务</span><br></pre></td></tr></table></figure>
+<p>如果启动和停止工作正常，就可以通过如下命令将该系统服务作为自启动任务之一：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> myscript.service</span><br></pre></td></tr></table></figure>
+<p>上面这个命令还可以用于重新启动服务，甚至是禁用其作为自启动项目。</p>
+<h2 id="基于-python-的-gpiozero">基于 Python 的 gpiozero</h2>
+<p>树莓派基金会提供了开源 Python 库 <a target="_blank" rel="noopener" href="https://gpiozero.readthedocs.io/en/stable/">gpiozero</a>，以便于方便快捷的操作
+GPIO 资源。</p>
+<p>例如，使用 LED
+对象上的<code>on()</code>、<code>off()</code>、<code>toggle()</code>、<code>blink()</code>方法可以方便的控制发光二极管的亮灭，下面代码假设发光二极管连接到了树莓派的
+GPIO17 引脚上。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gpiozero <span class="keyword">import</span> LED</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"></span><br><span class="line">led = LED(<span class="number">17</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    led.on()</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br><span class="line">    led.off()</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>利用 Button
+对象提供的<code>is_pressed</code>、<code>is_held</code>属性，<code>when_released</code>、<code>when_pressed</code>
+回调,
+<code>wait_for_press()</code>、<code>wait_for_release()</code>函数可以方便的使用按键，下面代码假设一个物理按键连接到了<code>GPIO2</code>引脚：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gpiozero <span class="keyword">import</span> Button</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"></span><br><span class="line">button = Button(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">if</span> button.is_pressed:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Pressed&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Released&quot;</span>)</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>下面同时利用发光二极管和按键进行实验，三组代码最终呈现的效果都是等效的：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 采用 is_pressed 属性的方式</span></span><br><span class="line"><span class="keyword">from</span> gpiozero <span class="keyword">import</span> LED, Button</span><br><span class="line"></span><br><span class="line">led = LED(<span class="number">17</span>)</span><br><span class="line">button = Button(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">if</span> button.is_pressed:</span><br><span class="line">        led.on()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        led.off()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 采用 wait_for_press() 和 wait_for_release() 的方式</span></span><br><span class="line"><span class="keyword">from</span> gpiozero <span class="keyword">import</span> LED, Button</span><br><span class="line"></span><br><span class="line">led = LED(<span class="number">17</span>)</span><br><span class="line">button = Button(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    button.wait_for_press()</span><br><span class="line">    led.on()</span><br><span class="line">    button.wait_for_release()</span><br><span class="line">    led.off()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 采用 when_pressed 和 when_released 回调</span></span><br><span class="line"><span class="keyword">from</span> gpiozero <span class="keyword">import</span> LED, Button</span><br><span class="line"></span><br><span class="line">led = LED(<span class="number">17</span>)</span><br><span class="line">button = Button(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">button.when_pressed = led.on</span><br><span class="line">button.when_released = led.off</span><br></pre></td></tr></table></figure>
+<h2 id="基于-c-的-wiringpi">基于 C 的 wiringpi</h2>
+<p><a target="_blank" rel="noopener" href="http://wiringpi.com/">wiringpi</a> 是一款基于 GNU LGPL v3
+许可证的 GPIO 接口库，从<code>v2.52</code>版本以后就已经对 Raspberry Pi
+4B 提供了完善的支持，简单的通过下面命令可以快速的执行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ <span class="built_in">cd</span> /tmp</span><br><span class="line">➜ wget https://project-downloads.drogon.net/wiringpi-latest.deb</span><br><span class="line">➜ sudo dpkg -i wiringpi-latest.deb</span><br></pre></td></tr></table></figure>
+<p>安装完成后，执行如下命令测试安装是否正确：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">➜ gpio -v</span><br><span class="line">gpio version: 2.52</span><br><span class="line">Copyright (c) 2012-2018 Gordon Henderson</span><br><span class="line">This is free software with ABSOLUTELY NO WARRANTY.</span><br><span class="line">For details <span class="built_in">type</span>: gpio -warranty</span><br><span class="line"></span><br><span class="line">Raspberry Pi Details:</span><br><span class="line">  Type: Pi 4B, Revision: 01, Memory: 2048MB, Maker: Sony</span><br><span class="line">  * Device tree is enabled.</span><br><span class="line">  *--&gt; Raspberry Pi 4 Model B Rev 1.1</span><br><span class="line">  * This Raspberry Pi supports user-level GPIO access.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">➜ gpio readall</span><br><span class="line"> +-----+-----+---------+------+---+---Pi 4B--+---+------+---------+-----+-----+</span><br><span class="line"> | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |</span><br><span class="line"> +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+</span><br><span class="line"> |     |     |    3.3v |      |   |  1 || 2  |   |      | 5v      |     |     |</span><br><span class="line"> |   2 |   8 |   SDA.1 |   IN | 1 |  3 || 4  |   |      | 5v      |     |     |</span><br><span class="line"> |   3 |   9 |   SCL.1 |   IN | 1 |  5 || 6  |   |      | 0v      |     |     |</span><br><span class="line"> |   4 |   7 | GPIO. 7 |   IN | 1 |  7 || 8  | 1 | IN   | TxD     | 15  | 14  |</span><br><span class="line"> |     |     |      0v |      |   |  9 || 10 | 1 | IN   | RxD     | 16  | 15  |</span><br><span class="line"> |  17 |   0 | GPIO. 0 |   IN | 0 | 11 || 12 | 0 | IN   | GPIO. 1 | 1   | 18  |</span><br><span class="line"> |  27 |   2 | GPIO. 2 |   IN | 0 | 13 || 14 |   |      | 0v      |     |     |</span><br><span class="line"> |  22 |   3 | GPIO. 3 |   IN | 0 | 15 || 16 | 0 | IN   | GPIO. 4 | 4   | 23  |</span><br><span class="line"> |     |     |    3.3v |      |   | 17 || 18 | 0 | IN   | GPIO. 5 | 5   | 24  |</span><br><span class="line"> |  10 |  12 |    MOSI |   IN | 0 | 19 || 20 |   |      | 0v      |     |     |</span><br><span class="line"> |   9 |  13 |    MISO |   IN | 0 | 21 || 22 | 0 | IN   | GPIO. 6 | 6   | 25  |</span><br><span class="line"> |  11 |  14 |    SCLK |   IN | 0 | 23 || 24 | 1 | IN   | CE0     | 10  | 8   |</span><br><span class="line"> |     |     |      0v |      |   | 25 || 26 | 1 | IN   | CE1     | 11  | 7   |</span><br><span class="line"> |   0 |  30 |   SDA.0 |   IN | 1 | 27 || 28 | 1 | IN   | SCL.0   | 31  | 1   |</span><br><span class="line"> |   5 |  21 | GPIO.21 |   IN | 1 | 29 || 30 |   |      | 0v      |     |     |</span><br><span class="line"> |   6 |  22 | GPIO.22 |   IN | 1 | 31 || 32 | 0 | IN   | GPIO.26 | 26  | 12  |</span><br><span class="line"> |  13 |  23 | GPIO.23 |   IN | 0 | 33 || 34 |   |      | 0v      |     |     |</span><br><span class="line"> |  19 |  24 | GPIO.24 |   IN | 0 | 35 || 36 | 0 | IN   | GPIO.27 | 27  | 16  |</span><br><span class="line"> |  26 |  25 | GPIO.25 |   IN | 0 | 37 || 38 | 0 | IN   | GPIO.28 | 28  | 20  |</span><br><span class="line"> |     |     |      0v |      |   | 39 || 40 | 0 | IN   | GPIO.29 | 29  | 21  |</span><br><span class="line"> +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+</span><br><span class="line"> | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |</span><br><span class="line"> +-----+-----+---------+------+---+---Pi 4B--+---+------+---------+-----+-----+</span><br></pre></td></tr></table></figure>
+<p>接下来采用 C 语言编写一个可以通过控制 GPIO 来实现 LED
+闪烁的程序：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;wiringPi.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  wiringPiSetup () ;</span><br><span class="line">  pinMode (<span class="number">0</span>, OUTPUT) ;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (;;)</span><br><span class="line">  &#123;</span><br><span class="line">    digitalWrite (<span class="number">0</span>, HIGH) ; delay (<span class="number">500</span>) ;</span><br><span class="line">    digitalWrite (<span class="number">0</span>,  LOW) ; delay (<span class="number">500</span>) ;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后采用 Raspbian 上提供的 GCC 进行编译与运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ gcc -Wall -o blink blink.c -lwiringPi</span><br><span class="line">➜ sudo ./blink</span><br></pre></td></tr></table></figure>
+<p>然后将树莓派 GPIO 端口（第 11
+位物理引脚，也即<code>BCM pin 17</code>）通过一枚<code>330Ω</code>电阻与一枚<code>5mm</code>的
+LED 发光二极管连接，就可以看到 LED 每间隔 1 秒进行闪烁。</p>
+<p><img src="/Embedded/RaspberryPi/wiringPi.jpg"></p>
+<h2 id="安装-dlib-face_recognition">安装 dlib &amp;
+face_recognition</h2>
+<p>使用如下命令安装所需的依赖库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install build-essential cmake gfortran git wget curl graphicsmagick libgraphicsmagick1-dev libatlas-dev libavcodec-dev libavformat-dev  libgtk2.0-dev libjpeg-dev liblapack-dev libswscale-dev pkg-config python3-dev python3-numpy python3-pip zip</span><br><span class="line"></span><br><span class="line">➜ sudo apt-get install libboost-all-dev   <span class="comment"># 必须单独安装</span></span><br><span class="line"></span><br><span class="line">➜ sudo apt-get clean</span><br></pre></td></tr></table></figure>
+<p>如果你正在使用相机，还需要安装 Python
+库<code>picamera</code>以及数组支持。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install python3-picamera</span><br><span class="line">➜ sudo pip3 install --upgrade picamera[array]</span><br></pre></td></tr></table></figure>
+<p>临时设置更大的<code>swap</code>文件尺寸，防止编译<code>dlib</code>编译时由于存储空间有限而导致失败。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /etc/dphys-swapfile</span><br><span class="line"></span><br><span class="line">&lt; change CONF_SWAPSIZE=100 to CONF_SWAPSIZE=1024 &gt;</span><br><span class="line"></span><br><span class="line">➜ sudo /etc/init.d/dphys-swapfile restart</span><br></pre></td></tr></table></figure>
+<p>下载和安装<code>dlib19.6</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜ <span class="built_in">mkdir</span> -p dlib</span><br><span class="line">➜ git <span class="built_in">clone</span> -b <span class="string">&#x27;v19.6&#x27;</span> --single-branch https://github.com/davisking/dlib.git dlib/</span><br><span class="line">➜ <span class="built_in">cd</span> ./dlib</span><br><span class="line">➜ sudo python3 setup.py install --compiler-flags <span class="string">&quot;-mfpu=neon&quot;</span></span><br></pre></td></tr></table></figure>
+<p>安装<code>face_recognition</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo pip3 install face_recognition</span><br></pre></td></tr></table></figure>
+<p>完成<code>dlib</code>的安装以后，恢复<code>swap</code>文件尺寸为默认值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /etc/dphys-swapfile</span><br><span class="line"></span><br><span class="line">&lt; change CONF_SWAPSIZE=1024 to CONF_SWAPSIZE=100 &gt;</span><br><span class="line"></span><br><span class="line">➜ sudo /etc/init.d/dphys-swapfile restart</span><br></pre></td></tr></table></figure>
+<p>下载<code>face_recognition</code>示例代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ git <span class="built_in">clone</span> --single-branch https://github.com/ageitgey/face_recognition.git</span><br><span class="line">➜ <span class="built_in">cd</span> ./face_recognition/examples</span><br><span class="line">➜ python3 facerec_on_raspberry_pi.py</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：执行<code>example</code>下的示例代码之前，如果使用的是板载
+<strong>CSI</strong>
+接口摄像头，则必须执行<code>sudo raspi-config</code>打开树莓派软件配置工具，依次选择【Interfacing
+Options -&gt; P1 Camera】使能该摄像头。</p>
+</blockquote>
+<p>如果需要使用桌面 GUI，则还需要再安装 <strong>PIXEL</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install --no-install-recommends xserver-xorg xinit raspberrypi-ui-mods</span><br></pre></td></tr></table></figure>
+<h2 id="安装-opencv-3.4.9">安装 OpenCV 3.4.9</h2>
+<p>本小节详细记录了在 <strong>树莓派 4B</strong>
+上源码编译安装<code>opencv 3.4.9</code>和<code>opencv_contrib-3.4.9</code>的完整步骤。</p>
+<h3 id="安装科学计算库-numpy">安装科学计算库 numpy</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo pip3 install numpy</span><br></pre></td></tr></table></figure>
+<h3 id="将根目录扩大至整个-sd-卡">将根目录扩大至整个 SD 卡</h3>
+<p>本步骤会将系统根目录扩展至整个存储卡，充分利用其存储空间，否则可能会导致后续命令执行出现卡死。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo raspi-config</span><br></pre></td></tr></table></figure>
+<p><img src="/Embedded/RaspberryPi/opencv/raspi-config-1.png"></p>
+<p>选择【7 Advanced Options】以后，再选择【A1 Expand
+Filesystem...】确认将 <strong>Raspbian</strong>
+文件系统扩展至全部的存储卡空间。</p>
+<p><img src="/Embedded/RaspberryPi/opencv/raspi-config-2.png"></p>
+<p>完成设置以后，重启 RaspberryPi 4B；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo reboot</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：采用 <strong>NOOBS</strong> 方式安装的
+<strong>Raspbian</strong>
+已经默认将文件系统扩展至全部空间，因此可以跳过本步骤。</p>
+</blockquote>
+<h3 id="安装-opencv-第三方依赖">安装 OpenCV 第三方依赖</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install build-essential git cmake pkg-config -y</span><br><span class="line">➜ sudo apt-get install libjpeg8-dev -y</span><br><span class="line">➜ sudo apt-get install libtiff5-dev -y</span><br><span class="line">➜ sudo apt-get install libjasper-dev -y</span><br><span class="line">➜ sudo apt-get install libpng12-dev -y</span><br><span class="line"></span><br><span class="line">➜ sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y</span><br><span class="line"></span><br><span class="line">➜ sudo apt-get install libgtk2.0-dev -y</span><br><span class="line">➜ sudo apt-get install libatlas-base-dev gfortran -y</span><br></pre></td></tr></table></figure>
+<h3 id="下载-opencv">下载 OpenCV</h3>
+<p>从官方 Github 仓库下载 OpenCV 以及额外的 OpenCV Contrib
+源码包至<code>/home/pi/Downloads</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜ <span class="built_in">cd</span> /home/pi/Downloads</span><br><span class="line"></span><br><span class="line">wget https://github.com/opencv/opencv/archive/3.4.9.zip</span><br><span class="line">wget https://github.com/opencv/opencv_contrib/archive/3.4.9.zip</span><br></pre></td></tr></table></figure>
+<h3 id="配置-cmake">配置 CMake</h3>
+<p>建立 <code>build</code> 目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜ <span class="built_in">cd</span> /home/pi/Downloads/opencv-3.4.9</span><br><span class="line">➜ <span class="built_in">mkdir</span> build</span><br><span class="line">➜ <span class="built_in">cd</span> build</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D OPENCV_EXTRA_MODULES_PATH=/home/pi/Downloads/opencv_contrib-3.4.9/modules -D BUILD_EXAMPLES=ON -D WITH_LIBV4L=ON PYTHON3_EXECUTABLE=/usr/bin/python3.5 PYTHON_INCLUDE_DIR=/usr/include/python3.5 PYTHON_LIBRARY=/usr/lib/arm-linux-gnueabihf/libpython3.5m.so PYTHON3_NUMPY_INCLUDE_DIRS=/home/pi/.local/lib/python3.5/site-packages/numpy/core/include ..</span><br></pre></td></tr></table></figure>
+<h3 id="开始编译">开始编译</h3>
+<p>执行 <code>make</code> 命令对源码包进行编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ <span class="built_in">cd</span> /home/pi/Downloads/opencv-3.4.9/build</span><br><span class="line">➜ sudo make</span><br></pre></td></tr></table></figure>
+<p>执行 <code>make install</code> 安装编译程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo make install</span><br></pre></td></tr></table></figure>
+<h3 id="解决-.i-文件依赖">解决 .i 文件依赖</h3>
+<p>由于 Raspberry Pi 4B
+上编译<code>opencv 3.4.9</code>以及<code>opencv_contrib-3.4.9</code>的依赖过程当中，由于国内网络屏蔽造成的部分<code>.i</code>文件无法正常下载，而在执行<code>sudo make install</code>命令时出现<code>~/opencv_contrib/modules/xfeatures2d/src/boostdesc.cpp:673:20: fatal error: boostdesc_bgm.i: No such file or directory</code>等一系列错误信息。</p>
+<p>通过打开<code>/home/pi/Downloads/opencv/build</code>目录（即源码编译后的二进制文件所在目录）下的<code>CMakeDownloadLog.txt</code>日志文件，搜索如下缺失的<code>.i</code>文件名称：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">boostdesc_bgm.i</span><br><span class="line">boostdesc_lbgm.i</span><br><span class="line">boostdesc_bgm_bi.i</span><br><span class="line">boostdesc_bgm_hd.i</span><br><span class="line"></span><br><span class="line">boostdesc_binboost_064.i</span><br><span class="line">boostdesc_binboost_128.i</span><br><span class="line">boostdesc_binboost_256.i</span><br><span class="line"></span><br><span class="line">vgg_generated_48.i</span><br><span class="line">vgg_generated_64.i</span><br><span class="line">vgg_generated_80.i</span><br><span class="line">vgg_generated_120.i</span><br></pre></td></tr></table></figure>
+<p>解决办法是找到对应的下载地址，完成下载后将其拷贝至<code>/home/pi/Downloads/opencv_contrib-3.4.9/modules/xfeatures2d/src</code>目录下面，重新执行<code>sudo make install</code>即可解决报错问题。</p>
+<blockquote>
+<p><strong>注意</strong>：上述<code>.i</code>依赖文件已经全部放入笔者 <a target="_blank" rel="noopener" href="https://github.com/uinika">Github</a> 里面的 <a target="_blank" rel="noopener" href="https://github.com/uinika/raspberry-pi-opencv-patch">raspberry-pi-opencv-patch</a>
+项目下面，可以直接下载使用，适用于<code>opencv 3.4.9</code>和<code>opencv_contrib-3.4.9</code>版本的编译。</p>
+</blockquote>
+<h3 id="解决-.hpp-头文件路径错误">解决 .hpp 头文件路径错误</h3>
+<p>对于在执行<code>sudo make install</code>命令过程当中，出现的无法找到<code>cuda.hpp</code>、<code>xfeatures2d.hpp</code>、<code>nonfree.hpp</code>头文件的情况，只需要用文件查找命令，在<code>opencv_contrib-3.4.9</code>目录下查找这些文件所在的路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ find -name &quot;xxx.hpp&quot;</span><br></pre></td></tr></table></figure>
+<p>然后将上述头文件所在的<code>/home/...</code>路径名，添加至报错的<code>.cpp</code>源代码文件的<code>#include</code>预包含指令里面，即可以解决问题。</p>
+<h3 id="验证安装结果">验证安装结果</h3>
+<p>进入<code>python3</code>命令行模式，并进行如下操作验证安装是否成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">➜ python3</span><br><span class="line">Python 3.7.3 (default, Dec 20 2019, 18:57:59)</span><br><span class="line">[GCC 8.3.0] on linux</span><br><span class="line">Type <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> or <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; import cv2</span><br><span class="line">&gt;&gt;&gt; cv2.__version__</span><br><span class="line"><span class="string">&#x27;3.4.9&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="pybluez-蓝牙操作">pybluez 蓝牙操作</h2>
+<p>安装<a target="_blank" rel="noopener" href="https://pybluez.readthedocs.io/en/latest/api/index.html">pybluez</a>以及其所依赖的蓝牙协议栈<code>bluez</code>和库文件<code>libbluetooth-dev</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install bluez libbluetooth-dev</span><br><span class="line">➜ sudo pip3 install pybluez</span><br></pre></td></tr></table></figure>
+<p>修改<code>bluetooth.service</code>配置文件为如下内容:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo vim /lib/systemd/system/bluetooth.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">Unit</span>]</span><br><span class="line"><span class="string">Description=Bluetooth</span> <span class="string">service</span></span><br><span class="line"><span class="string">Documentation=man:bluetoothd(8)</span></span><br><span class="line"><span class="string">ConditionPathIsDirectory=/sys/class/bluetooth</span></span><br><span class="line"></span><br><span class="line">[<span class="string">Service</span>]</span><br><span class="line"><span class="string">Type=dbus</span></span><br><span class="line"><span class="string">BusName=org.bluez</span></span><br><span class="line"><span class="comment"># 修改如下 2 行</span></span><br><span class="line"><span class="string">ExecStart=/usr/lib/bluetooth/bluetoothd</span> <span class="string">-C</span> <span class="string">-E</span></span><br><span class="line"><span class="string">ExecStartPost=/usr/bin/sdptool</span> <span class="string">add</span> <span class="string">SP</span></span><br><span class="line"><span class="string">NotifyAccess=main</span></span><br><span class="line"><span class="comment">#WatchdogSec=10</span></span><br><span class="line"><span class="comment">#Restart=on-failure</span></span><br><span class="line"><span class="string">CapabilityBoundingSet=CAP_NET_ADMIN</span> <span class="string">CAP_NET_BIND_SERVICE</span></span><br><span class="line"><span class="string">LimitNPROC=1</span></span><br><span class="line"><span class="string">ProtectHome=true</span></span><br><span class="line"><span class="string">ProtectSystem=full</span></span><br><span class="line"></span><br><span class="line">[<span class="string">Install</span>]</span><br><span class="line"><span class="string">WantedBy=bluetooth.target</span></span><br><span class="line"><span class="string">Alias=dbus-org.bluez.service</span></span><br></pre></td></tr></table></figure>
+<p>重新启动 Raspberry Pi 使设置生效，然后选择 Raspbian
+系统右下方蓝牙菜单上的【Make
+Discoverable】让设备蓝牙处于可查找状态，然后采用<code>sudo</code>权限运行如下的示例程序<code>sudo python3 rfcomm-server.py</code>。注意这里必须以<code>sudo</code>权限运行程序，否则会报出下面错误信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/home/pi/.local/lib/python3.7/site-packages/bluetooth/bluez.py&quot;</span>, line 273, <span class="keyword">in</span> advertise_service</span><br><span class="line">    protocols)</span><br><span class="line">_bluetooth.error: (13, <span class="string">&#x27;Permission denied&#x27;</span>)</span><br><span class="line"></span><br><span class="line">During handling of the above exception, another exception occurred:</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;rfcomm-server.py&quot;</span>, line 22, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    profiles=[bluetooth.SERIAL_PORT_PROFILE],</span><br><span class="line">  File <span class="string">&quot;/home/pi/.local/lib/python3.7/site-packages/bluetooth/bluez.py&quot;</span>, line 275, <span class="keyword">in</span> advertise_service</span><br><span class="line">    raise BluetoothError (*e.args)</span><br><span class="line">bluetooth.btcommon.BluetoothError: [Errno 13] Permission denied</span><br></pre></td></tr></table></figure>
+<p>如果树莓派无法与手机建立蓝牙音频连接，则需要执行如下操作解决：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ sudo apt-get install pulseaudio-module-bluetooth</span><br><span class="line">➜ pactl load-module module-bluetooth-discover</span><br></pre></td></tr></table></figure>
+<p>如果工作依然不正常，则再执行如下命令重新启动<code>pulseaudio</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜ pulseaudio -k</span><br><span class="line">➜ pulseaudio -D</span><br></pre></td></tr></table></figure>
+<h3 id="rfcomm-server.py">rfcomm-server.py</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bluetooth</span><br><span class="line"></span><br><span class="line">server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)</span><br><span class="line">server_sock.bind((<span class="string">&quot;&quot;</span>, bluetooth.PORT_ANY))</span><br><span class="line">server_sock.listen(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">port = server_sock.getsockname()[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">uuid = <span class="string">&quot;94f39d29-7d6d-437d-973b-fba39e49d4ee&quot;</span></span><br><span class="line"></span><br><span class="line">bluetooth.advertise_service(server_sock, <span class="string">&quot;SampleServer&quot;</span>, service_id=uuid,</span><br><span class="line">                            service_classes=[uuid, bluetooth.SERIAL_PORT_CLASS],</span><br><span class="line">                            profiles=[bluetooth.SERIAL_PORT_PROFILE],</span><br><span class="line">                            <span class="comment"># protocols=[bluetooth.OBEX_UUID]</span></span><br><span class="line">                            )</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Waiting for connection on RFCOMM channel&quot;</span>, port)</span><br><span class="line"></span><br><span class="line">client_sock, client_info = server_sock.accept()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Accepted connection from&quot;</span>, client_info)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        data = client_sock.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Received&quot;</span>, data)</span><br><span class="line">        client_sock.send(data);</span><br><span class="line"><span class="keyword">except</span> OSError:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Disconnected.&quot;</span>)</span><br><span class="line"></span><br><span class="line">client_sock.close()</span><br><span class="line">server_sock.close()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;All done.&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="rfcomm-client.py">rfcomm-client.py</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> bluetooth</span><br><span class="line"></span><br><span class="line">addr = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No device specified. Searching all nearby bluetooth devices for &quot;</span></span><br><span class="line">          <span class="string">&quot;the SampleServer service...&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    addr = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Searching for SampleServer on &#123;&#125;...&quot;</span>.<span class="built_in">format</span>(addr))</span><br><span class="line"></span><br><span class="line"><span class="comment"># search for the SampleServer service</span></span><br><span class="line">uuid = <span class="string">&quot;94f39d29-7d6d-437d-973b-fba39e49d4ee&quot;</span></span><br><span class="line">service_matches = bluetooth.find_service(uuid=uuid, address=addr)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(service_matches) == <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Couldn&#x27;t find the SampleServer service.&quot;</span>)</span><br><span class="line">    sys.exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">first_match = service_matches[<span class="number">0</span>]</span><br><span class="line">port = first_match[<span class="string">&quot;port&quot;</span>]</span><br><span class="line">name = first_match[<span class="string">&quot;name&quot;</span>]</span><br><span class="line">host = first_match[<span class="string">&quot;host&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Connecting to \&quot;&#123;&#125;\&quot; on &#123;&#125;&quot;</span>.<span class="built_in">format</span>(name, host))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the client socket</span></span><br><span class="line">sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)</span><br><span class="line">sock.connect((host, port))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Connected. Type something...&quot;</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    data = <span class="built_in">input</span>()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    sock.send(data)</span><br><span class="line"></span><br><span class="line">sock.close()</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>玩转 Raspberry Pi 4B 开源硬件</p><p><a href="http://www.uinio.com/Embedded/RaspberryPi/">http://www.uinio.com/Embedded/RaspberryPi/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-05-18</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-11-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/C&amp;C++/Qt-Quick/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Qt 5 桌面应用程序开发指南 - QtQuick 篇</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/KiCad_Tutorial/"><span class="level-item">开源 EDA 工具 KiCad 6.0 电路设计小书</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#板载资源"><span class="level-left"><span class="level-item">1</span><span class="level-item">板载资源</span></span></a></li><li><a class="level is-mobile" href="#系统安装"><span class="level-left"><span class="level-item">2</span><span class="level-item">系统安装</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#noobs"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">NOOBS</span></span></a></li><li><a class="level is-mobile" href="#镜像安装"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">镜像安装</span></span></a></li></ul></li><li><a class="level is-mobile" href="#更换软件源"><span class="level-left"><span class="level-item">3</span><span class="level-item">更换软件源</span></span></a></li><li><a class="level is-mobile" href="#工具安装"><span class="level-left"><span class="level-item">4</span><span class="level-item">工具安装</span></span></a></li><li><a class="level is-mobile" href="#安装与升级"><span class="level-left"><span class="level-item">5</span><span class="level-item">安装与升级</span></span></a></li><li><a class="level is-mobile" href="#gpio-详解"><span class="level-left"><span class="level-item">6</span><span class="level-item">GPIO 详解</span></span></a></li><li><a class="level is-mobile" href="#config.txt-启动配置"><span class="level-left"><span class="level-item">7</span><span class="level-item">config.txt 启动配置</span></span></a></li><li><a class="level is-mobile" href="#raspi-config-管理"><span class="level-left"><span class="level-item">8</span><span class="level-item">raspi-config 管理</span></span></a></li><li><a class="level is-mobile" href="#配置触摸屏分辨率"><span class="level-left"><span class="level-item">9</span><span class="level-item">配置触摸屏分辨率</span></span></a></li><li><a class="level is-mobile" href="#最佳桌面显示配置"><span class="level-left"><span class="level-item">10</span><span class="level-item">最佳桌面显示配置</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基础颜色"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">基础颜色</span></span></a></li><li><a class="level is-mobile" href="#显示设置"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">显示设置</span></span></a></li><li><a class="level is-mobile" href="#面板首选项"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">面板首选项</span></span></a></li></ul></li><li><a class="level is-mobile" href="#处理显示器黑边"><span class="level-left"><span class="level-item">11</span><span class="level-item">处理显示器黑边</span></span></a></li><li><a class="level is-mobile" href="#禁止屏幕休眠"><span class="level-left"><span class="level-item">12</span><span class="level-item">禁止屏幕休眠</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#禁用图形界面休眠"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">禁用图形界面休眠</span></span></a></li><li><a class="level is-mobile" href="#禁用命令行休眠"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">禁用命令行休眠</span></span></a></li></ul></li><li><a class="level is-mobile" href="#连接隐藏-ssid-的-wifi"><span class="level-left"><span class="level-item">13</span><span class="level-item">连接隐藏 SSID 的 WiFi</span></span></a></li><li><a class="level is-mobile" href="#安装-vscode-编辑器"><span class="level-left"><span class="level-item">14</span><span class="level-item">安装 VSCode 编辑器</span></span></a></li><li><a class="level is-mobile" href="#qt-安装与编译"><span class="level-left"><span class="level-item">15</span><span class="level-item">Qt 安装与编译</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#qt-5.14.2"><span class="level-left"><span class="level-item">15.1</span><span class="level-item">Qt 5.14.2</span></span></a></li><li><a class="level is-mobile" href="#qt-creator-4.12.1"><span class="level-left"><span class="level-item">15.2</span><span class="level-item">Qt Creator 4.12.1</span></span></a></li></ul></li><li><a class="level is-mobile" href="#获取设备-ip"><span class="level-left"><span class="level-item">16</span><span class="level-item">获取设备 IP</span></span></a></li><li><a class="level is-mobile" href="#设置静态-ip"><span class="level-left"><span class="level-item">17</span><span class="level-item">设置静态 IP</span></span></a></li><li><a class="level is-mobile" href="#vnc-远程桌面"><span class="level-left"><span class="level-item">18</span><span class="level-item">VNC 远程桌面</span></span></a></li><li><a class="level is-mobile" href="#ssh-连接会话"><span class="level-left"><span class="level-item">19</span><span class="level-item">SSH 连接会话</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#scp-远程拷贝命令"><span class="level-left"><span class="level-item">19.1</span><span class="level-item">scp 远程拷贝命令</span></span></a></li><li><a class="level is-mobile" href="#rsync-文件同步命令"><span class="level-left"><span class="level-item">19.2</span><span class="level-item">rsync 文件同步命令</span></span></a></li><li><a class="level is-mobile" href="#sshfs-文件系统"><span class="level-left"><span class="level-item">19.3</span><span class="level-item">SSHFS 文件系统</span></span></a></li></ul></li><li><a class="level is-mobile" href="#samba-文件共享"><span class="level-left"><span class="level-item">20</span><span class="level-item">Samba 文件共享</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#windows-raspbian"><span class="level-left"><span class="level-item">20.1</span><span class="level-item">Windows ➜ Raspbian</span></span></a></li><li><a class="level is-mobile" href="#raspbian-windows"><span class="level-left"><span class="level-item">20.2</span><span class="level-item">Raspbian ➜ Windows</span></span></a></li></ul></li><li><a class="level is-mobile" href="#nfs-网络文件系统"><span class="level-left"><span class="level-item">21</span><span class="level-item">NFS 网络文件系统</span></span></a></li><li><a class="level is-mobile" href="#搭建-ftp-服务"><span class="level-left"><span class="level-item">22</span><span class="level-item">搭建 FTP 服务</span></span></a></li><li><a class="level is-mobile" href="#部署-nginx-web-服务"><span class="level-left"><span class="level-item">23</span><span class="level-item">部署 Nginx Web 服务</span></span></a></li><li><a class="level is-mobile" href="#crontab-定时任务命令"><span class="level-left"><span class="level-item">24</span><span class="level-item">crontab 定时任务命令</span></span></a></li><li><a class="level is-mobile" href="#rc.local-自启动文件"><span class="level-left"><span class="level-item">25</span><span class="level-item">rc.local 自启动文件</span></span></a></li><li><a class="level is-mobile" href="#systemd-系统服务"><span class="level-left"><span class="level-item">26</span><span class="level-item">systemd 系统服务</span></span></a></li><li><a class="level is-mobile" href="#基于-python-的-gpiozero"><span class="level-left"><span class="level-item">27</span><span class="level-item">基于 Python 的 gpiozero</span></span></a></li><li><a class="level is-mobile" href="#基于-c-的-wiringpi"><span class="level-left"><span class="level-item">28</span><span class="level-item">基于 C 的 wiringpi</span></span></a></li><li><a class="level is-mobile" href="#安装-dlib-face_recognition"><span class="level-left"><span class="level-item">29</span><span class="level-item">安装 dlib &amp;
+face_recognition</span></span></a></li><li><a class="level is-mobile" href="#安装-opencv-3.4.9"><span class="level-left"><span class="level-item">30</span><span class="level-item">安装 OpenCV 3.4.9</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装科学计算库-numpy"><span class="level-left"><span class="level-item">30.1</span><span class="level-item">安装科学计算库 numpy</span></span></a></li><li><a class="level is-mobile" href="#将根目录扩大至整个-sd-卡"><span class="level-left"><span class="level-item">30.2</span><span class="level-item">将根目录扩大至整个 SD 卡</span></span></a></li><li><a class="level is-mobile" href="#安装-opencv-第三方依赖"><span class="level-left"><span class="level-item">30.3</span><span class="level-item">安装 OpenCV 第三方依赖</span></span></a></li><li><a class="level is-mobile" href="#下载-opencv"><span class="level-left"><span class="level-item">30.4</span><span class="level-item">下载 OpenCV</span></span></a></li><li><a class="level is-mobile" href="#配置-cmake"><span class="level-left"><span class="level-item">30.5</span><span class="level-item">配置 CMake</span></span></a></li><li><a class="level is-mobile" href="#开始编译"><span class="level-left"><span class="level-item">30.6</span><span class="level-item">开始编译</span></span></a></li><li><a class="level is-mobile" href="#解决-.i-文件依赖"><span class="level-left"><span class="level-item">30.7</span><span class="level-item">解决 .i 文件依赖</span></span></a></li><li><a class="level is-mobile" href="#解决-.hpp-头文件路径错误"><span class="level-left"><span class="level-item">30.8</span><span class="level-item">解决 .hpp 头文件路径错误</span></span></a></li><li><a class="level is-mobile" href="#验证安装结果"><span class="level-left"><span class="level-item">30.9</span><span class="level-item">验证安装结果</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pybluez-蓝牙操作"><span class="level-left"><span class="level-item">31</span><span class="level-item">pybluez 蓝牙操作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#rfcomm-server.py"><span class="level-left"><span class="level-item">31.1</span><span class="level-item">rfcomm-server.py</span></span></a></li><li><a class="level is-mobile" href="#rfcomm-client.py"><span class="level-left"><span class="level-item">31.2</span><span class="level-item">rfcomm-client.py</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>FreeCAD 参数化 3D 建模上手实例 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="FreeCAD 是一款面向计算机辅助设计（CAD，Computer Aided Design）的 3D 参数化建模工具软件，该工具基于 LGPL 开源协议，同时提供有适配 Linux、Mac OS、Windows 操作系统的跨平台版本，其底层采用了 OpenCascade 来提供二维与三维几何体的生成显示与分析。这里所谓的参数化建模就是指通过一系列的参数来控制 3D 模型的形状，例如"><meta property="og:type" content="blog"><meta property="og:title" content="FreeCAD 参数化 3D 建模上手实例"><meta property="og:url" content="http://www.uinio.com/Design/FreeCAD/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="FreeCAD 是一款面向计算机辅助设计（CAD，Computer Aided Design）的 3D 参数化建模工具软件，该工具基于 LGPL 开源协议，同时提供有适配 Linux、Mac OS、Windows 操作系统的跨平台版本，其底层采用了 OpenCascade 来提供二维与三维几何体的生成显示与分析。这里所谓的参数化建模就是指通过一系列的参数来控制 3D 模型的形状，例如"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2022-08-31T16:00:00.000Z"><meta property="article:modified_time" content="2022-09-09T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="CAD"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Design/FreeCAD/"},"headline":"FreeCAD 参数化 3D 建模上手实例","image":["http://www.uinio.com/Design/FreeCAD/logo.png"],"datePublished":"2022-08-31T16:00:00.000Z","dateModified":"2022-09-09T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"FreeCAD\r 是一款面向计算机辅助设计（CAD，Computer\r Aided Design）的 3D 参数化建模工具软件，该工具基于\r LGPL 开源协议，同时提供有适配 Linux、Mac OS、Windows\r 操作系统的跨平台版本，其底层采用了 OpenCascade\r 来提供二维与三维几何体的生成显示与分析。这里所谓的参数化建模就是指通过一系列的参数来控制\r 3D\r 模型的形状，例如"}</script><link rel="canonical" href="http://www.uinio.com/Design/FreeCAD/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-08-31T16:00:00.000Z" title="2022/9/1 00:00:00">2022-09-01</time>发表</span><span class="level-item"><time dateTime="2022-09-09T16:00:00.000Z" title="2022/9/10 00:00:00">2022-09-10</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Design/">Design</a></span><span class="level-item">30 分钟读完 (大约4430个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">FreeCAD 参数化 3D 建模上手实例</h1><div class="content"><p><a target="_blank" rel="noopener" href="https://www.freecadweb.org/"><strong>FreeCAD</strong></a>
+是一款面向<strong>计算机辅助设计</strong>（<strong>CAD</strong>，Computer
+Aided Design）的 <strong>3D</strong> 参数化建模工具软件，该工具基于
+<strong>LGPL</strong> 开源协议，同时提供有适配 Linux、Mac OS、Windows
+操作系统的跨平台版本，其底层采用了 <strong>OpenCascade</strong>
+来提供二维与三维几何体的生成显示与分析。这里所谓的<strong>参数化建模</strong>就是指通过一系列的参数来控制
+3D
+模型的形状，例如一个立方体可以由<code>长度</code>、<code>宽度</code>、<code>高度</code>三个参数共同决定，这些参数可以随时进行修改。除此之外，<strong>FreeCAD</strong>
+还可以使用其它模型作为参数；例如将一个立方体作为输入参数，<strong>FreeCAD</strong>
+就能够基于它创建出一个柱状的 3D 模型。</p>
+<p><img src="/Design/FreeCAD/logo.png"></p>
+<p><strong>FreeCAD</strong>
+并非只是为了完成某一项特定的工作，或者仅用于生成某一类特定的模型。使用者可以利用它创作小到电子元件与
+<strong>3D</strong>
+打印部件，大到建筑物的不同尺寸模型。由于每一种任务的工作流程并不完全相同，所以
+<strong>FreeCAD</strong> 分别提供了相应的工作台。目前网络上关于
+<strong>FreeCAD</strong>
+的应用资料较少，所以尝试利用本文记录一些日常使用的技巧，全文基于 2022 年
+9 月份发布的 <strong>FreeCAD 0.20.1</strong>
+版本撰写，文中所涉及的实例已经共享至我的 <a target="_blank" rel="noopener" href="https://github.com/uinika/FreeCAD-Tutorial-Example"><strong>FreeCAD-Tutorial-Example</strong></a>。</p>
+<span id="more"></span>
+<h2 id="基本设置">基本设置</h2>
+<p>依次选择 FreeCAD 顶部菜单栏上面的【<strong>Edit -&gt;
+Preference...</strong>】，打开<strong>首选项窗口</strong>：</p>
+<p><img src="/Design/FreeCAD/Section-1/1.png"></p>
+<p>首先，依次在【<strong>General</strong>】界面进行
+<code>语言</code>、<code>界面风格</code>、<code>默认工作台</code>
+的设置：</p>
+<p><img src="/Design/FreeCAD/Section-1/2.png"></p>
+<p>然后，再切换至的【<strong>Display</strong>】界面，在【<strong>Navigation</strong>】选项卡下面将
+3D 导航模式设置为 <code>Blender</code>：</p>
+<p><img src="/Design/FreeCAD/Section-1/3.png"></p>
+<p>最后，继续切换到【<strong>Display</strong>】界面内的【<strong>Colors</strong>】选项卡，选择背景色为<code>简单颜色</code>，并在弹出的<strong>颜色选择对话框</strong>中将其设置为
+<code>#3C3C3C</code>：</p>
+<p><img src="/Design/FreeCAD/Section-1/4.png"></p>
+<p>保存上述设置之后，FreeCAD
+界面的语言格式会自动切换为中文，并且界面颜色调整为暗黑风格，此时将工作台切换至
+【<strong>Part Design</strong>】：</p>
+<p><img src="/Design/FreeCAD/Section-1/5.png"></p>
+<p>鼠标再次选中顶部菜单栏上面的【<strong>编辑 -&gt;
+首选项...</strong>】，选择弹出窗口中的【<strong>草绘</strong>】界面，勾选显示
+<code>1mm</code> 的网格：</p>
+<p><img src="/Design/FreeCAD/Section-1/6.png"></p>
+<p>接下来，再打开弹出窗口上的【<strong>Part / Part
+Design</strong>】界面，点选下图当中的所有 3 个选项：</p>
+<p><img src="/Design/FreeCAD/Section-1/7.png"></p>
+<h2 id="快速入门">快速入门</h2>
+<p>FreeCAD
+的<strong>工作台</strong>提供了一系列针对不同模型用途的工具集，通过选择不同的工具集，可以制作不同种类的模型：</p>
+<ul>
+<li><strong>Part</strong>
+工作台：用于处理实体零件的基础几何体，例如<code>立方体</code>和<code>球体</code>等；</li>
+<li><strong>Draft</strong> 工作台：用于 2D
+绘图的基本工具，例如<code>直线</code>、<code>圆</code>、<code>弧</code>；</li>
+<li><strong>Sketcher</strong> 工作台：包含用于构建和编辑复杂 2D
+图形的工具，这些图形可以通过<strong>约束</strong>来进行精确的定位；</li>
+<li><strong>Part Design</strong>
+工作台：包含构建实体零件的高级工具集，其中包含了
+<strong>Sketcher</strong> 工作台当中的所有工具；</li>
+<li><strong>Arch</strong> 工作台：用于处理土木工程与建筑模型，其中包含有
+<strong>Draft</strong> 工作台当中的所有工具；</li>
+<li><strong>Drawing</strong> 工作台：创建与操作 2D 工程图纸，可以在 2D
+平面上面展示 3D 的模型；</li>
+</ul>
+<p>FreeCAD 的 3D 空间拥有 <code>X</code>、<code>Y</code>、<code>Z</code>
+三个轴以及一个<strong>原点</strong>，其中 <code>X</code>
+轴指向右侧，<code>Y</code> 轴指向后面，<code>Z</code>
+轴指向上方，这三条轴线相交的位置就是<strong>原点</strong>，也就是
+<code>X</code>、<code>Y</code>、<code>Z</code> 坐标值均为零的点。</p>
+<p><img src="/Design/FreeCAD/Section-2/1.png"></p>
+<p>首先，依次点击工具栏上的【<strong>新建 -&gt; 创建实体 -&gt;
+创建草图</strong>】，鼠标选择 <code>XY_Plane (基准平面)</code>：</p>
+<p><img src="/Design/FreeCAD/Section-2/2.png"></p>
+<p>然后，FreeCAD 就会自动进入到 <strong>Sketcher</strong>
+工作台，此时就可以开始着手在屏幕中间的区域进行<strong>草图</strong>的绘制工作：</p>
+<p><img src="/Design/FreeCAD/Section-2/3.png"></p>
+<p>接下来，使用右侧工具栏上的【<strong>创建圆</strong>】工具绘制出一个圆形，并且使用约束工具，将其直径约束为
+<code>50mm</code>，同时将其<strong>圆心</strong>与坐标<strong>原点</strong>进行【<strong>重合约束</strong>】对齐：</p>
+<p><img src="/Design/FreeCAD/Section-2/4.png"></p>
+<p>最后，点击左侧的【<strong>Close</strong>】退出
+<strong>Sketcher</strong> 工作台，重新返回到【<strong>Part
+Design</strong>】工作台的【<strong>模型</strong>】视图，并且鼠标点击右侧工具栏上的【<strong>凸台</strong>】工具：</p>
+<p><img src="/Design/FreeCAD/Section-2/5.png"></p>
+<p>此时，FreeCAD 自动切换至【<strong>Part
+Design</strong>】工作台的【<strong>任务</strong>】视图，在这里同样将<strong>凸台</strong>的高度设置为
+<code>50mm</code>，然后点击左侧的【<strong>OK</strong>】按钮：</p>
+<p><img src="/Design/FreeCAD/Section-2/6.png"></p>
+<p>此时，FreeCAD 再次切换回【<strong>Part
+Design</strong>】工作台的【<strong>模型</strong>】视图：</p>
+<p><img src="/Design/FreeCAD/Section-2/7.png"></p>
+<p>在【<strong>Part
+Design</strong>】工作台的【<strong>模型</strong>】视图当中，根据当前采用的鼠标
+3D 导航设置（前面已经设置为 <code>Blender</code> 模式），就可以对 3D
+模型进行全方位的观察：</p>
+<p><img src="/Design/FreeCAD/Section-2/8.png"></p>
+<p>完成上述操作之后，将文件保存到 <a target="_blank" rel="noopener" href="https://github.com/uinika/FreeCAD-Tutorial-Example"><strong>FreeCAD-Tutorial-Example</strong></a>
+的 <code>Example-1-Cylinder</code> 目录下名为 <code>Cylinder</code>
+的文档。除此之外，还可以通过如下的键盘快捷键组合，更加便捷的对 3D
+模型进行查看：</p>
+<ul>
+<li>【<strong>SHIFT + 方向左/右键</strong>】可以让模型翻转 90 度；</li>
+<li>按住【<strong>CTRL</strong>】键之后，就可以通过鼠标选择多个目标；</li>
+<li>【<strong>V + O</strong>】进入正交投影模式、【<strong>V +
+P</strong>】进入透视模式；</li>
+<li>【<strong>CTRL + 减号</strong>】缩小模型，【<strong>CTRL + SHIFT +
+加号</strong>】放大模型；</li>
+<li>按下数字键【<strong>1</strong>】查看前面、【<strong>2</strong>】查看顶部、【<strong>3</strong>】查看右侧、【<strong>4</strong>】查看背部、【<strong>5</strong>】查看底部、【<strong>6</strong>】查看左侧；</li>
+</ul>
+<h2 id="实例一桌子">实例一：桌子</h2>
+<p>首先，在 <a target="_blank" rel="noopener" href="https://github.com/uinika/FreeCAD-Tutorial-Example"><strong>FreeCAD-Tutorial-Example</strong></a>
+的 <code>Example-2-Table</code> 目录下新建一个 <code>Table</code>
+空白文档。根据前面介绍的方法，使用 <strong>FreeCAD</strong>
+右侧工具栏上的【<strong>创建矩形</strong>】，绘制出一个长度约束为
+<code>100mm</code> 宽度约束为 <code>50mm</code> 的矩形：</p>
+<p><img src="/Design/FreeCAD/Section-3/1.png"></p>
+<blockquote>
+<p>➤ <strong>FreeCAD</strong>
+当中设置宽度的快捷键为【<strong>L</strong>】，设置高度的快捷键为【<strong>I</strong>】。</p>
+</blockquote>
+<h3 id="矩形的居中对齐">矩形的居中对齐</h3>
+<p>然后，分别选中下图【<strong>1</strong>】、【<strong>2</strong>】、【<strong>3</strong>】位置的点（选中后呈现绿色），并且点击右侧工具栏上的【<strong>对称约束</strong>】工具。最后，就可以得到一个与原点居中对齐的矩形，此时由于整个矩形处于<strong>完全约束</strong>状态，所以线条呈现出绿色。</p>
+<p><img src="/Design/FreeCAD/Section-3/2.png"></p>
+<blockquote>
+<p>➤ <strong>Sketcher</strong>
+工作台当中绘制的任何图形，都必须使其处于完全约束的状态。</p>
+</blockquote>
+<h3 id="选择一个面作为草图">选择一个面作为草图</h3>
+<p>接下来，使用 FreeCAD
+右侧工具栏上的【<strong>凸台</strong>】工具，将桌面拉伸成为一个厚度为
+<code>3mm</code> 的立方体，选中底部（此时导航立方体上面显示为
+<code>BUTTON</code>），点击左侧工具栏上的【<strong>创建草图</strong>】按钮：</p>
+<p><img src="/Design/FreeCAD/Section-3/3.png"></p>
+<h3 id="建立外部参考线">建立外部参考线</h3>
+<p>首先，绘制出 <code>5mm * 5mm</code>
+的矩形作为桌脚的基础轮廓，然后再点击 FreeCAD
+右侧工具栏上的【<strong>外部参考几何体</strong>】，并且选择矩形的<strong>右侧边框</strong>作为<strong>外部参考线</strong>，最后分别选中
+<code>5mm * 5mm</code> 矩形与 <code>100mm * 50mm</code>
+矩形的右上角顶点，同时分别点击右侧工具栏上的<strong>水平</strong>与<strong>垂直</strong>距离约束，将约束距离设置为
+<code>3mm</code>。</p>
+<p><img src="/Design/FreeCAD/Section-3/4.png"></p>
+<p>最后，再借助【<strong>凸台</strong>】工具，将这个
+<code>5mm * 5mm</code> 的矩形拉伸成为高度为 <code>50mm</code>
+的桌腿。</p>
+<h3 id="创建镜像">创建镜像</h3>
+<p>在 <strong>FreeCAD</strong> 右侧工具栏上，选择刚才创建的桌腿凸台
+<code>Pad001</code>，然后点击右侧工具栏上的【<strong>镜像</strong>】按钮。</p>
+<p><img src="/Design/FreeCAD/Section-3/5.png"></p>
+<p>在镜像参数当中选择【<strong>垂直草绘轴</strong>】，就可以垂直于草绘时所选择的<strong>轴</strong>，自动生成出一条桌腿。</p>
+<p><img src="/Design/FreeCAD/Section-3/6.png"></p>
+<p>重复刚才的步骤，不过这次选择【<strong>水平草绘轴</strong>】，从而就可以自动生成出另外一条桌腿。</p>
+<p><img src="/Design/FreeCAD/Section-3/7.png"></p>
+<h3 id="使用环形特征">使用环形特征</h3>
+<p>仍然选中之前创建的桌腿凸台
+<code>Pad001</code>，这次点击右侧工具栏上的【<strong>环形阵列</strong>】按钮。</p>
+<p><img src="/Design/FreeCAD/Section-3/8.png"></p>
+<p>这样就可以创建出最后一条桌腿，到这里一张完整的桌子就绘制完成了。</p>
+<p><img src="/Design/FreeCAD/Section-3/9.png"></p>
+<blockquote>
+<p>➤ 使用<strong>环形阵列</strong>功能时，需要注意左侧 <code>角度</code>
+和 <code>出现次数</code> 两个参数的设置。</p>
+</blockquote>
+<h2 id="实例二iso-prac2-零件">实例二：ISO-PRAC2 零件</h2>
+<h3 id="选择-xz_plane-基准平面">选择 XZ_Plane 基准平面</h3>
+<p>首先，在 <a target="_blank" rel="noopener" href="https://github.com/uinika/FreeCAD-Tutorial-Example"><strong>FreeCAD-Tutorial-Example</strong></a>
+的 <code>Example-3-ISO-PRAC2</code> 目录下新建一个
+<code>ISO-PRAC2</code>
+空白文档。然后，再分别创建一个<strong>实体</strong>和<strong>草图</strong>，选择右侧工具栏上的【<strong>前视图</strong>】按钮，切换至
+<code>XZ_Plane</code>
+平面。最后，鼠标点击【<strong>OK</strong>】按钮进入
+<strong>Sketcher</strong> 工作台。</p>
+<p><img src="/Design/FreeCAD/Section-4/1.png"></p>
+<h3 id="创建折线">创建折线</h3>
+<p>点击 FreeCAD
+右侧工具栏上的【<strong>创建折线</strong>】工具，绘制出如下的草图，绘制过程当中可以通过按下【<strong>M</strong>】键循环切换工具的行为，从而得到下图当中的圆弧效果。</p>
+<p><img src="/Design/FreeCAD/Section-4/2.png"></p>
+<p>绘制完上图的圆弧效果之后，需要选中并且删除位于圆弧左侧的【<strong>相切约束</strong>】：</p>
+<p><img src="/Design/FreeCAD/Section-4/3.png"></p>
+<h3 id="使用重合约束闭合两点">使用重合约束闭合两点</h3>
+<p>使用右侧工具栏上的【<strong>重合约束</strong>】，让下图当中选中的两个点（绿色）自动进行闭合。</p>
+<p><img src="/Design/FreeCAD/Section-4/4.png"></p>
+<p>使用鼠标进行拖动调整，然后删除弧形右下角的<strong>垂直约束</strong>，最终就可以得到下面的图形。</p>
+<p><img src="/Design/FreeCAD/Section-4/5.png"></p>
+<h3 id="添加更多约束">添加更多约束</h3>
+<p>接下来，再分别为上述图形当中的线条添加<strong>水平约束</strong>、<strong>垂直约束</strong>、<strong>宽度约束</strong>、<strong>长度约束</strong>、<strong>相等约束</strong>、<strong>半径约束</strong>。</p>
+<p><img src="/Design/FreeCAD/Section-4/6.png"></p>
+<p>完成全部约束之后，分别选中弧形的<strong>圆心</strong>和草图的<strong>原点</strong>，然后点击右侧工具栏当中的【<strong>重合约束</strong>】按钮，使得草图与原点完成对齐。</p>
+<p><img src="/Design/FreeCAD/Section-4/7.png"></p>
+<p>实现<strong>完全约束</strong>之后的草图如下面所示，可以看到，所有的线条都呈现出了绿色的效果：</p>
+<p><img src="/Design/FreeCAD/Section-4/8.png"></p>
+<h3 id="使用凸台拉伸">使用凸台拉伸</h3>
+<p>在 <strong>Sketcher</strong>
+工作台完成草图的绘制工作之后，就可以切换至 <strong>Part Design</strong>
+工作台，利用工具栏上的【<strong>凸台</strong>】功能将前面绘制的图形拉伸为
+<code>40mm</code> 高度的三维形状，从而就完成了 ISO-PRAC2
+零件的全部绘制工作。</p>
+<p><img src="/Design/FreeCAD/Section-4/9.png"></p>
+<h2 id="实例三三脚椅">实例三：三脚椅</h2>
+<h3 id="选择-xy_plane-基准平面">选择 XY_Plane 基准平面</h3>
+<p>在 <a target="_blank" rel="noopener" href="https://github.com/uinika/FreeCAD-Tutorial-Example"><strong>FreeCAD-Tutorial-Example</strong></a>
+的 <code>Example-4-ISO-Chair</code> 目录下新建一个 <code>Chair</code>
+空白文档，选择
+<code>XY_Plane (基准平面)</code>，使用【<strong>创建圆</strong>】工具，
+并将其半径约束为 <code>100mm</code>。</p>
+<p><img src="/Design/FreeCAD/Section-5/1.png"></p>
+<h3 id="让圆心与原点居中对齐">让圆心与原点居中对齐</h3>
+<p>按照上面的操作步骤，分别用鼠标选中<strong>圆心</strong>和<strong>原点</strong>，再点击右侧工具栏上的【<strong>重合约束</strong>】，就可以完成圆心与原点的居中对齐。</p>
+<p><img src="/Design/FreeCAD/Section-5/2.png"></p>
+<h3 id="添加圆形参考线">添加圆形参考线</h3>
+<p>接下来，鼠标选中上面绘制好的圆形，然后点击工具栏右侧的【<strong>切换辅助线</strong>】按钮，就可以将其切换为<strong>辅助线</strong>。</p>
+<p><img src="/Design/FreeCAD/Section-5/3.png"></p>
+<p><strong>参考线</strong>用于在 <strong>Sketcher</strong>
+工作台里辅助绘制工作，通常呈现为<strong>蓝色</strong>，而在 <strong>Part
+Design</strong> 工作台当中并不会被显示。</p>
+<p><img src="/Design/FreeCAD/Section-5/4.png"></p>
+<h3 id="绘制三角形">绘制三角形</h3>
+<p>选择右侧工具栏的【<strong>三角形</strong>】绘制工具，画出一个三角形，然后分别添加【<strong>水平约束</strong>】和【<strong>重合约束</strong>】，最终得到如下的图形。</p>
+<p><img src="/Design/FreeCAD/Section-5/5.png"></p>
+<h3 id="清除三角形顶点连接关系">清除三角形顶点连接关系</h3>
+<p>首先，清除最外侧<strong>较大</strong>的那个蓝色圆形。然后，鼠标选择三角形任意两条边的连接点，按下键盘上面的【<strong>Delete</strong>】键，此时
+FreeCAD 会自动断开两条边之间的连接关系。</p>
+<p><img src="/Design/FreeCAD/Section-5/6.png"></p>
+<h3 id="新增两条参考线">新增两条参考线</h3>
+<p>首先，使用 <strong>FreeCAD</strong>
+右侧的【<strong>创建线</strong>】工具绘制出两条线段。然后，使用【<strong>重合约束</strong>】将它们连接到草图原点，再使用【<strong>夹角约束</strong>】将两条线段与垂直坐标轴的夹角设置为
+<code>60°</code>
+度，同时将两条线段设置为【<strong>相等约束</strong>】。</p>
+<p><img src="/Design/FreeCAD/Section-5/7.png"></p>
+<h3 id="设置斜线长度">设置斜线长度</h3>
+<p>首先，选中一条之前绘制好的线段。然后，鼠标点击工具栏右侧的【<strong>距离约束</strong>】按钮。最后，将其长度设置为
+<code>250mm</code>。</p>
+<p><img src="/Design/FreeCAD/Section-5/8.png"></p>
+<h3 id="绘制圆弧">绘制圆弧</h3>
+<p>利用右侧工具栏上的【<strong>圆弧</strong>】创建工具，分别绘制出 3
+个圆弧。然后分别添加【<strong>相等约束</strong>】，并且使用【<strong>半径约束</strong>】将其半径设置为
+<code>120mm</code>。</p>
+<p><img src="/Design/FreeCAD/Section-5/9.png"></p>
+<blockquote>
+<p>➤ 为了更加方便的进行展示，在接下来的示例当中，将 FreeCAD
+的网格尺寸调整为 <code>10mm</code>。</p>
+</blockquote>
+<h3 id="把圆心约束至对象">把圆心约束至对象</h3>
+<p>首先，分别选中蓝色的圆形参考线，以及每一个弧形的圆心。然后，点击【<strong>将点约束至对象</strong>】按钮，从而将圆心约束到圆形的参考线上面。</p>
+<p><img src="/Design/FreeCAD/Section-5/10.png"></p>
+<p>接下来，选择已经被固定至蓝色圆形参考线上面的弧形圆心，以及蓝色参考线段与
+Y
+轴，继续使用【<strong>将点约束至对象</strong>】功能，最后就可以得到如下的图形：</p>
+<p><img src="/Design/FreeCAD/Section-5/11.png"></p>
+<h3 id="使用切线约束进行连接">使用切线约束进行连接</h3>
+<p>使用工具栏右侧的【<strong>相切约束</strong>】，闭合草图最外侧的零散线段。</p>
+<p><img src="/Design/FreeCAD/Section-5/12.png"></p>
+<p>如下就是草图最外侧零散线段实现<strong>完全约束</strong>之后的效果。</p>
+<p><img src="/Design/FreeCAD/Section-5/13.png"></p>
+<blockquote>
+<p>➤ 注意不要忘记将之前绘制的两条线段切换为参考线模式。</p>
+</blockquote>
+<h3 id="尝试使用快捷键">尝试使用快捷键</h3>
+<ol type="1">
+<li>将前面的图形，通过【<strong>凸台</strong>】工具拉伸为一个厚度为
+<code>3mm</code> 的三维形状；</li>
+<li>选择其中的一个面绘制如下形状，并且利用【<strong>重合约束
+C</strong>】、【<strong>半径约束 SHIFT +
+R</strong>】、【<strong>水平约束 SHIFT +
+H</strong>】、【<strong>垂直约束 SHIFT +
+V</strong>】对其进行完全约束；</li>
+</ol>
+<p><img src="/Design/FreeCAD/Section-5/14.png"></p>
+<h3 id="绘制-1-个凹坑">绘制 1 个凹坑</h3>
+<ol type="1">
+<li>首先，绘制 4
+条圆弧，并且使用【<strong>相切约束</strong>】将它们连接，然后将它们的圆心固定在参考线上面；</li>
+<li>然后，利用【<strong>相等约束</strong>】、【<strong>半径约束</strong>】、【<strong>固定点至对象约束</strong>】将其完全约束，从而完成草图绘制；</li>
+</ol>
+<p><img src="/Design/FreeCAD/Section-5/15.png"></p>
+<h3 id="生成另外-2-个凹坑">生成另外 2 个凹坑</h3>
+<ol type="1">
+<li>通过 <strong>FreeCAD</strong>
+提供的【<strong>凹坑</strong>】功能，并且将凹坑类型设置为<code>通过所有</code>；</li>
+<li>首先在左侧模型当中，选中刚才的凹坑
+<code>Pocket</code>，然后在右侧工具栏，选中【<strong>环形阵列</strong>】，把
+<code>产生次数</code> 参数设置为 <strong>3</strong>
+次，从而自动产生出另外 2 个凹坑；</li>
+</ol>
+<p><img src="/Design/FreeCAD/Section-5/16.png"></p>
+<h3 id="倒斜角与圆角">倒斜角与圆角</h3>
+<p>首先，按住【<strong>CTRL</strong>】键多选相应的边。然后，分别将内侧的弧形设置为
+<code>10mm</code> 的<strong>斜角</strong>，外侧的弧形设置为
+<code>10mm</code> 的<strong>圆角</strong>，最终得到的效果如下所示。</p>
+<p><img src="/Design/FreeCAD/Section-5/17.png"></p>
+<h3 id="绘制椅脚草图">绘制椅脚草图</h3>
+<ol type="1">
+<li>选择模型的底部 <code>Bottom</code> 新建草图；</li>
+<li>绘制一个半径为 <code>30mm</code>
+的<strong>圆形</strong>，并使用【<strong>固定点至对象约束</strong>】将其圆心与
+Y 轴重合；</li>
+<li>通过【<strong>垂直距离约束</strong>】将<strong>圆心</strong>到<strong>原点</strong>的距离设置为
+<code>160mm</code>，从而完成草图绘制；</li>
+</ol>
+<p><img src="/Design/FreeCAD/Section-5/18.png"></p>
+<h3 id="生成椅脚">生成椅脚</h3>
+<ol type="1">
+<li>首先，使用 FreeCAD 的【<strong>凸台</strong>】功能，自动生成长度为
+<code>180mm</code> 的椅脚；</li>
+<li>然后，在左侧的<strong>组合浏览器</strong>当中，选中上一步产生的椅脚，通过左侧工具栏上的【<strong>环形阵列</strong>】，将<code>出现次数</code>参数设置为
+<code>3</code>，从而自动创建出另外的 2 条椅脚；</li>
+</ol>
+<p><img src="/Design/FreeCAD/Section-5/19.png"></p>
+<h3 id="操作步骤的显示与隐藏">操作步骤的显示与隐藏</h3>
+<p>使用【<strong>空格键</strong>】，可以切换 FreeCAD
+组合浏览器当中的每一个操作步骤的显示与隐藏。</p>
+<p><img src="/Design/FreeCAD/Section-5/20.gif"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>FreeCAD 参数化 3D 建模上手实例</p><p><a href="http://www.uinio.com/Design/FreeCAD/">http://www.uinio.com/Design/FreeCAD/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-09-01</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-09-10</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/CAD/">CAD</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/NFC_Antenna/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">如何设计一枚 NFC 动态标签的天线</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Thinking/2022-Downsizing/"><span class="level-item">2022 互联网裁员潮之后，国内 IT 行业何去何从？</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#基本设置"><span class="level-left"><span class="level-item">1</span><span class="level-item">基本设置</span></span></a></li><li><a class="level is-mobile" href="#快速入门"><span class="level-left"><span class="level-item">2</span><span class="level-item">快速入门</span></span></a></li><li><a class="level is-mobile" href="#实例一桌子"><span class="level-left"><span class="level-item">3</span><span class="level-item">实例一：桌子</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#矩形的居中对齐"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">矩形的居中对齐</span></span></a></li><li><a class="level is-mobile" href="#选择一个面作为草图"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">选择一个面作为草图</span></span></a></li><li><a class="level is-mobile" href="#建立外部参考线"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">建立外部参考线</span></span></a></li><li><a class="level is-mobile" href="#创建镜像"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">创建镜像</span></span></a></li><li><a class="level is-mobile" href="#使用环形特征"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">使用环形特征</span></span></a></li></ul></li><li><a class="level is-mobile" href="#实例二iso-prac2-零件"><span class="level-left"><span class="level-item">4</span><span class="level-item">实例二：ISO-PRAC2 零件</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#选择-xz_plane-基准平面"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">选择 XZ_Plane 基准平面</span></span></a></li><li><a class="level is-mobile" href="#创建折线"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">创建折线</span></span></a></li><li><a class="level is-mobile" href="#使用重合约束闭合两点"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">使用重合约束闭合两点</span></span></a></li><li><a class="level is-mobile" href="#添加更多约束"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">添加更多约束</span></span></a></li><li><a class="level is-mobile" href="#使用凸台拉伸"><span class="level-left"><span class="level-item">4.5</span><span class="level-item">使用凸台拉伸</span></span></a></li></ul></li><li><a class="level is-mobile" href="#实例三三脚椅"><span class="level-left"><span class="level-item">5</span><span class="level-item">实例三：三脚椅</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#选择-xy_plane-基准平面"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">选择 XY_Plane 基准平面</span></span></a></li><li><a class="level is-mobile" href="#让圆心与原点居中对齐"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">让圆心与原点居中对齐</span></span></a></li><li><a class="level is-mobile" href="#添加圆形参考线"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">添加圆形参考线</span></span></a></li><li><a class="level is-mobile" href="#绘制三角形"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">绘制三角形</span></span></a></li><li><a class="level is-mobile" href="#清除三角形顶点连接关系"><span class="level-left"><span class="level-item">5.5</span><span class="level-item">清除三角形顶点连接关系</span></span></a></li><li><a class="level is-mobile" href="#新增两条参考线"><span class="level-left"><span class="level-item">5.6</span><span class="level-item">新增两条参考线</span></span></a></li><li><a class="level is-mobile" href="#设置斜线长度"><span class="level-left"><span class="level-item">5.7</span><span class="level-item">设置斜线长度</span></span></a></li><li><a class="level is-mobile" href="#绘制圆弧"><span class="level-left"><span class="level-item">5.8</span><span class="level-item">绘制圆弧</span></span></a></li><li><a class="level is-mobile" href="#把圆心约束至对象"><span class="level-left"><span class="level-item">5.9</span><span class="level-item">把圆心约束至对象</span></span></a></li><li><a class="level is-mobile" href="#使用切线约束进行连接"><span class="level-left"><span class="level-item">5.10</span><span class="level-item">使用切线约束进行连接</span></span></a></li><li><a class="level is-mobile" href="#尝试使用快捷键"><span class="level-left"><span class="level-item">5.11</span><span class="level-item">尝试使用快捷键</span></span></a></li><li><a class="level is-mobile" href="#绘制-1-个凹坑"><span class="level-left"><span class="level-item">5.12</span><span class="level-item">绘制 1 个凹坑</span></span></a></li><li><a class="level is-mobile" href="#生成另外-2-个凹坑"><span class="level-left"><span class="level-item">5.13</span><span class="level-item">生成另外 2 个凹坑</span></span></a></li><li><a class="level is-mobile" href="#倒斜角与圆角"><span class="level-left"><span class="level-item">5.14</span><span class="level-item">倒斜角与圆角</span></span></a></li><li><a class="level is-mobile" href="#绘制椅脚草图"><span class="level-left"><span class="level-item">5.15</span><span class="level-item">绘制椅脚草图</span></span></a></li><li><a class="level is-mobile" href="#生成椅脚"><span class="level-left"><span class="level-item">5.16</span><span class="level-item">生成椅脚</span></span></a></li><li><a class="level is-mobile" href="#操作步骤的显示与隐藏"><span class="level-left"><span class="level-item">5.17</span><span class="level-item">操作步骤的显示与隐藏</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

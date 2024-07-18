@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>智能 IC 卡技术杂谈 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="集成电路卡又称为 IC 卡（Integrated Circuit Card），是一种内嵌有集成电路的塑料标签或卡片，其集成电路当中包含有 8 位或者 32 位的微控制单元 MCU、只读存储器 ROM、电可擦只读存储器 EEPROM（按字节操作）或者闪速存储器 Flash（按扇区操作）、随机访问存储器 RAM，以及固化在只读存储器 ROM 当中的片内操作系统（COS，Chip Ope"><meta property="og:type" content="blog"><meta property="og:title" content="智能 IC 卡技术杂谈"><meta property="og:url" content="http://www.uinio.com/Embedded/Mifare/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="集成电路卡又称为 IC 卡（Integrated Circuit Card），是一种内嵌有集成电路的塑料标签或卡片，其集成电路当中包含有 8 位或者 32 位的微控制单元 MCU、只读存储器 ROM、电可擦只读存储器 EEPROM（按字节操作）或者闪速存储器 Flash（按扇区操作）、随机访问存储器 RAM，以及固化在只读存储器 ROM 当中的片内操作系统（COS，Chip Ope"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2021-09-09T16:00:00.000Z"><meta property="article:modified_time" content="2021-09-11T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Embedded/Mifare/"},"headline":"智能 IC 卡技术杂谈","image":["http://www.uinio.com/Embedded/Mifare/logo.png"],"datePublished":"2021-09-09T16:00:00.000Z","dateModified":"2021-09-11T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"集成电路卡又称为 IC 卡（Integrated\r Circuit\r Card），是一种内嵌有集成电路的塑料标签或卡片，其集成电路当中包含有\r 8 位或者 32 位的微控制单元\r MCU、只读存储器 ROM、电可擦只读存储器\r EEPROM（按字节操作）或者闪速存储器\r Flash（按扇区操作）、随机访问存储器\r RAM，以及固化在只读存储器 ROM\r 当中的片内操作系统（COS，Chip Ope"}</script><link rel="canonical" href="http://www.uinio.com/Embedded/Mifare/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-09-09T16:00:00.000Z" title="2021/9/10 00:00:00">2021-09-10</time>发表</span><span class="level-item"><time dateTime="2021-09-11T16:00:00.000Z" title="2021/9/12 00:00:00">2021-09-12</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Embedded/">Embedded</a></span><span class="level-item">1 小时读完 (大约6692个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">智能 IC 卡技术杂谈</h1><div class="content"><p><strong>集成电路卡</strong>又称为 <strong>IC 卡</strong>（Integrated
+Circuit
+Card），是一种内嵌有集成电路的塑料<code>标签</code>或<code>卡片</code>，其集成电路当中包含有
+<code>8</code> 位或者 <code>32</code> 位的<strong>微控制单元</strong>
+MCU、<strong>只读存储器</strong> ROM、<strong>电可擦只读存储器</strong>
+EEPROM（按字节操作）或者<strong>闪速存储器</strong>
+Flash（按扇区操作）、<strong>随机访问存储器</strong>
+RAM，以及固化在只读存储器 ROM
+当中的<strong>片内操作系统</strong>（COS，Chip Operating
+System），并且通常内置有
+<code>DES</code>、<code>RSA</code>、<code>国密 SMx</code>、<code>SSF</code>
+等加解密算法。</p>
+<p><img src="/Embedded/Mifare/logo.png"></p>
+<p>目前市场上主流的 IC 卡芯片有<a target="_blank" rel="noopener" href="https://www.mifare.net/en/"><strong>恩智浦 NXP</strong></a> 的
+<strong>Mifare</strong> 系列、<a target="_blank" rel="noopener" href="https://www.infineon.com/cms/cn/product/security-smart-card-solutions/"><strong>英飞凌
+Infineon</strong></a> 的 <strong>SL</strong> 系列、、<a target="_blank" rel="noopener" href="http://www.fmsh.com/7e67a741-a1ed-718d-15e3-83bdb6ecf4fa/"><strong>复旦微电子</strong></a>
+的 <strong>FM</strong> 系列，<a target="_blank" rel="noopener" href="http://www.hed.com.cn/CN/WebPage_51_77.aspx"><strong>华大半导体</strong></a>的
+<strong>SHC</strong> 和 <strong>CIU</strong> 系列除此之外，还有 <a target="_blank" rel="noopener" href="http://www.shhic.com/products.aspx"><strong>华虹集成电路</strong></a>
+的 <strong>SHC</strong> 系列，以及<a target="_blank" rel="noopener" href="https://www.datang.com/productservice/ps1/list1.html"><strong>大唐微电子</strong></a>
+的 <strong>DMT</strong> 系列，<a target="_blank" rel="noopener" href="https://www.gosinoic.com/index.php?f=lists&amp;catid=10"><strong>紫光国微</strong></a>的
+<strong>THD</strong> 系列。这些芯片主要遵循 <strong>《ISO/IEC
+7816》</strong> 和<strong>《ISO/IEC 14443
+TypeA》</strong>两部协议规范，本文主要介绍了笔者在日常工作当中，经常接触到的各类智能卡相关的技术与规范。</p>
+<span id="more"></span>
+<h2 id="接触-非接触-双界面卡">接触 &amp; 非接触 &amp; 双界面卡</h2>
+<p>接照用途和构成，可以将 IC 卡划分为<strong>存储卡</strong>（Memory
+Card）和带有 CPU 的<strong>智能卡</strong>（Smart Card）。</p>
+<ul>
+<li><strong>接触式卡</strong>：IC 芯片封装在 PVC
+塑料里面，但是触点外露，需要与卡槽产生物理接触才能读写数据；</li>
+<li><strong>非接触式卡</strong>：IC 芯片依然被封装在 PVC
+塑料当中，但是通过内置的线圈感应读写卡设备上的电磁波，从而实现非接触式的读写数据；</li>
+<li><strong>双界面卡</strong>：集<code>接触式</code>与<code>非接触式</code>接口为一体的单芯片智能卡，两种接口共享着相同的微控制器、操作系统、EEPROM；</li>
+</ul>
+<p><img src="/Embedded/Mifare/IC-Card.gif"></p>
+<blockquote>
+<p><strong>注意</strong>：许多 IC
+卡芯片的数据手册当中，<code>读写卡设备</code>通常被称为<strong>邻近耦合装置</strong>（<strong>PCD</strong>，Proximity
+Coupling
+Device），而<code>IC 卡片</code>本身则通常被称为<strong>感应卡</strong>（<strong>PICC</strong>，Proximity
+Card）。</p>
+</blockquote>
+<h2 id="isoiec-7816">ISO/IEC 7816</h2>
+<p><strong>ISO/IEC 7816</strong>
+是一种标准化的接触式智能卡通信协议，主要用于读写<strong>接触式</strong>的集成电路卡，该协议由如下
+14 个部分组成：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/14732.html"><strong>ISO7816-1</strong></a>：物理特性；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/14733.html"><strong>ISO7816-2</strong></a>：触点的尺寸与位置；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/38770.html"><strong>ISO7816-3</strong></a>：电子接口与传输协议；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/77180.html"><strong>ISO7816-4</strong></a>：用于交换的组织、安全、命令，即定义了如何使用<strong>应用程序标识符</strong>检索卡片中的应用程序，并且执行相关的检索操作；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/34259.html"><strong>ISO7816-5</strong></a>：应用提供商注册，即通过对<strong>应用程序标识符</strong>进行国际注册，从而授予其唯一性；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/64598.html"><strong>ISO7816-6</strong></a>：交换用行业间数据元素；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/28869.html"><strong>ISO7816-7</strong></a>：用于结构化卡片查询语言（SCQL，Structured
+Card Query Language）的行业间指令 ；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/66092.html"><strong>ISO7816-8</strong></a>：安全操作的命令与机制；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/67802.html"><strong>ISO7816-9</strong></a>：卡片管理相关的指令；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/30558.html"><strong>ISO7816-10</strong></a>：电子信号与同步卡的应答复位；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/67799.html"><strong>ISO7816-11</strong></a>：采用生物特征识别的方法，来进行个人身份验证；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/40604.html"><strong>ISO7816-12</strong></a>：USB
+电气接口及操作过程；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/40605.html"><strong>ISO7816-13</strong></a>：多应用环境下的应用管理命令；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/65250.html"><strong>ISO7816-15</strong></a>：密码信息应用，即加密信息的通用语法和格式，以及在适当时共享此信息的机制</li>
+</ul>
+<p>其中，<strong>ISO/IEC 7816-4</strong>
+里面定义了<strong>应用协议数据单元</strong>（APDU，Application Protocol
+Data Unit）相关的内容，包括接口上交换的 <code>命令-响应</code>
+对的内容、检索 IC
+卡里数据元素和数据对象的方法、通过历史字节的结构与内容来描述 IC
+卡的工作特性、IC 卡当中程序和数据的结构、访问 IC
+卡里文件和数据的方法、定义 IC
+卡内文件与数据访问权限的安全体系结构、用于识别与定位 IC
+卡当中应用的方法与机制、安全消息传递的方式、访问 IC
+卡内置的处理算法；</p>
+<blockquote>
+<p><strong>注意</strong>：国际标准化组织并未提供标号为《ISO
+7816-14》的技术规范；</p>
+</blockquote>
+<h2 id="isoiec-14443">ISO/IEC 14443</h2>
+<p><strong>ISO/IEC 14443</strong> 定义了 <strong>Type A</strong> 和
+<strong>Type B</strong> 两种 IC 卡类型，它们均工作在
+<code>13.56MHz</code>
+无线频率，两者的主要区别在于调制方式、编码方案（协议第 2
+部分）、协议初始化过程（协议第 3 部分）三个方面，但是都共同采用了协议第
+4 部分定义的传输协议，该协议主要由如下 4 个部分组成：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/73596.html"><strong>ISO/IEC
+14443-1</strong></a>：物理特性；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/82757.html"><strong>ISO/IEC
+14443-2</strong></a>：射频电源以及信号接口；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/76566.html"><strong>ISO/IEC
+14443-3</strong></a>：初始化和防撞；</li>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/76562.html"><strong>ISO/IEC
+14443-4</strong></a>：传输协议；</li>
+</ul>
+<p><code>读写卡装置</code>与 IC 卡之间的无线通信频率为
+<code>13.56MHz</code>，当<code>读写卡装置</code>对 IC
+卡进行读写操作时，所发出的信号主要由 2 部分叠加组成：</p>
+<ol type="1">
+<li><strong>电源信号</strong>：是一组由<code>读写卡装置</code>向 IC
+卡发送的固定频率电磁波，卡片内置 <strong>LC 串联谐振电路</strong>
+的频率与<code>读写卡装置</code>发射的频率相同，在电磁波的激励下这个 LC
+电路产生共振，让卡片内置的电容充满电荷，同时另一端连接的单向导通<strong>电子泵</strong>会将这些电荷传送至另一个电容进行存储，当累积电荷达到
+<code>2V</code> 时，该电容就可以作为电源为卡片进行供电；</li>
+<li><strong>指令与数据信号</strong>：用于<code>读写卡装置</code>指挥 IC
+芯片完成数据的读取、修改、储存等操作，并且返回响应信号给<code>读写卡装置</code>，从而完成一次读写操作过程；</li>
+</ol>
+<p>ISO/IEC 14443 可以具体划分为由恩智浦（NXP）等公司提出的 <strong>Type
+A</strong>，以及由意法半导体（ST）等公司提出的 <strong>Type B</strong>
+两种标准，两者的区别主要体现在 <strong>IC
+卡</strong>与<code>读写卡装置</code>之间的通讯调制方式：</p>
+<ol type="1">
+<li><strong>Type A 标准</strong>：表示数据 <code>1</code> 时，信号会出现
+<code>0.2 ~ 0.3</code> 微秒的间隔；而当表示数据 <code>0</code>
+时，信号可能有间隙也可能没有，这与前后的信息相关；这种方式优点在于信息区别明显，受干扰的机会少，反应速度快，不容易误操作；缺点在于当需要为
+IC 卡提供更高的工作电压时，传输的电量有可能会出现波动；</li>
+<li><strong>Type B 标准</strong>：表达数据 <code>1</code>
+的信号幅度更大，而数据 <code>0</code>
+的信号幅度更小，该方式的优点在于可以持续不断的传递信号，不会出现能量波动的情况；缺点在于数据区别不够明显，相对更容易受到外界干扰；</li>
+</ol>
+<h2 id="mifare-1-卡">Mifare 1 卡</h2>
+<p>恩智浦半导体于 1994 年 推出的 <a target="_blank" rel="noopener" href="https://www.nxp.com/products/rfid-nfc/mifare-hf/mifare-classic:MC_41863">Mifare
+Classic 系列</a> 也被称为 <strong>Mifare 1</strong>，即俗称的 <strong>M1
+卡</strong>。其工作频率为 <code>13.56MHZ</code>，符合 <strong>ISO 14443
+Type A</strong> 非接触式射频卡规范，虽然其采用的私有算法
+<strong>CRYPTO1</strong>
+已经遭到破解，但是由于目前国内市场上存在着大量与其相兼容的国产芯片（例如复旦微电子的
+<a target="_blank" rel="noopener" href="http://www.fmsh.com/7e67a741-a1ed-718d-15e3-83bdb6ecf4fa/"><strong>FM11RF08</strong></a>
+芯片），所以并不妨碍其被广泛使用在安全等级要求较低的场合。</p>
+<p><img src="/Embedded/Mifare/Mifare-0.png"></p>
+<ul>
+<li><strong>标准 M1 卡</strong>：第 <code>0</code>
+扇区不可以进行修改，其它扇区则可以反复进行擦写；</li>
+<li><strong>UID 卡</strong>：所有区块都可以被重复擦写，可以重复修改卡片
+ID ，并且响应后门指令（克隆卡会被使用后门指令检测到）；</li>
+<li><strong>CUID
+卡</strong>：所有区块都可以被重复擦写，同样可以重复修改卡片 ID
+，但是不会响应后门指令（避免克隆卡被后门指令检测）；</li>
+<li><strong>FUID 卡</strong>：<code>0</code>
+区块只能够被写入一次，然后变为 M1 卡，在 CUID
+复无效的情况下，或许可以绕开反克隆设备；</li>
+</ul>
+<p>标准 Mifare 1 卡的 EEPROM 被划分为 <strong>16</strong>
+个<strong>扇区</strong>（Sectors），其中每个扇区由 <strong>4</strong>
+个<strong>数据块</strong>（Blocks）组成，每个数据块拥有
+<strong>16</strong> 个<strong>字节</strong>（Bytes）：</p>
+<p><img src="/Embedded/Mifare/Mifare-1.png"></p>
+<ol type="1">
+<li><strong>厂商信息</strong>（Manufacturer Block）：第
+<strong>0</strong> 扇区的<strong>块 0</strong>，用于存放厂商的 32
+位序列号，已经固化，只可读不可修改；</li>
+<li><strong>数据块</strong>（Data
+Blocks）：用于保存数据，可以直接读写，以特殊数据格式表示时，可以进行初始化赋值、加减值、读取值；</li>
+<li><strong>扇区模块</strong>（Value Blocks）：每个扇区的<strong>块
+3</strong>，存放的是该扇区的密码 <strong>A</strong>（6
+bytes）、存取控制（4 bytes）、密码 <strong>B</strong>（6 bytes）；</li>
+</ol>
+<p><img src="/Embedded/Mifare/Mifare-2.png"></p>
+<ol type="1">
+<li><strong>复位应答</strong>（Request Standard/All）：上电复位之后，IC
+卡使用<strong>应答请求码</strong>（<strong>ATQA</strong>，Answer To
+Qequest）响应<code>请求 REQA</code>或<code>唤醒 WUPA</code>的指令；</li>
+<li><strong>防碰撞循环</strong>（Anticollision Loop）：当存在多张 IC
+卡在读写卡装置的周围时，为了防止发生冲突与碰撞，需要从多张 IC
+卡当中选择一张作为处理对象，而未选中的 IC
+卡则会处于空闲模式，以等待下一步被选择，这个过程当中会返回一个被选中的
+IC 卡序列号；</li>
+<li><strong>选择 IC 卡</strong>（Select Card）： 选择当前被选中的 IC
+卡序列号，此时 IC
+卡会返回一个<strong>选择确认码</strong>（<strong>SAK</strong>，Select
+AcKnowledge）；</li>
+<li><strong>三次互相确认</strong>（Three Pass
+Authentication）：选定待处理的 IC
+卡之后，读写卡装置开始确定当前所要访问的扇区号，并且对该扇区的密码进行校验，在经过三次互相确认之后，就可以通过加密的信号进行通信；而当选择另一个扇区时，则必须重新进行扇区的密码校验；</li>
+</ol>
+<p>当
+<code>IC 卡</code>与<code>读写卡装置</code>完成上述认证过程之后，就可以执行如下操作步骤：</p>
+<ul>
+<li><strong>读写块</strong>（Read/Write
+Block）：读写一个块当中的数据；</li>
+<li><strong>加减法</strong>（Decrement/Increment）：对块当中的内容执行加减法，并将结果保存在<strong>内部传输缓冲区</strong>；</li>
+<li><strong>恢复</strong>（Restore）：将一个块的内容移动至<code>内部传输缓冲区</code>；</li>
+<li><strong>传输</strong>（Transfer）：将<code>内部传输缓冲区</code>的内容写入到一个<strong>数据块</strong>；</li>
+<li><strong>停止</strong>（Halt）：将卡片置于暂停工作状态；</li>
+</ul>
+<h2 id="应用协议数据单元-apdu">应用协议数据单元 APDU</h2>
+<p>应用协议数据单元（<strong>APDU</strong>，Application Protocol Data
+Unit）是卡片和外部应用之间的通信报文协议，其格式标准被定义在
+<strong>ISO7816-4</strong>
+当中，具体可以被划分为<strong>命令</strong>和<strong>响应</strong>两种类型：</p>
+<ul>
+<li><strong>命令 APDU</strong>
+由<code>读写卡装置</code>发送到<code>智能卡</code>，其中包含一个必选的 4
+字节头部 <code>CLA + INS + P1 + P2</code> 以及 <code>0 ~ 255</code>
+字节的数据；</li>
+<li><strong>响应 APDU</strong>
+由<code>智能卡</code>返回给<code>读写卡装置</code>，其中包含有必选的 2
+字节状态字和 <code>0 ~ 255</code> 字节的数据；</li>
+</ul>
+<p>下面表格展示了一个 APDU
+<strong>命令-响应对</strong>（Command-Response Pair），即<strong>命令
+APDU</strong> 和<strong>响应 APDU</strong>：</p>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 65%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">命令 APDU 字段</th>
+<th style="text-align: left;">功能描述</th>
+<th style="text-align: center;">字节数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">命令头</td>
+<td style="text-align: left;">表示 CLA 的类字节</td>
+<td style="text-align: center;"><code>1</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">表示 INS 的指令字节</td>
+<td style="text-align: center;"><code>1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">表示 <code>P1 - P2</code> 的参数字节</td>
+<td style="text-align: center;"><code>2</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(L_c\)</span>
+字段</td>
+<td style="text-align: left;">编码 <span class="math inline">\(N_c =
+0\)</span> 时缺省，而 <span class="math inline">\(N_c &gt; 0\)</span>
+时出现；</td>
+<td style="text-align: center;"><code>0</code>、<code>1</code> 或者
+<code>3</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">命令数据字段</td>
+<td style="text-align: left;">编码 <span class="math inline">\(N_c =
+0\)</span> 时缺省，而 <span class="math inline">\(N_c &gt; 0\)</span>
+时体现为一个 <span class="math inline">\(N_c\)</span>
+字节的字符串；</td>
+<td style="text-align: center;"><span class="math inline">\(N_c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(L_e\)</span>
+字段</td>
+<td style="text-align: left;">编码 <span class="math inline">\(N_e =
+0\)</span> 时缺省，而 <span class="math inline">\(N_e &gt; 0\)</span>
+时出现；</td>
+<td style="text-align: center;"><code>0</code>、<code>1</code>、<code>2</code>
+或者 <code>3</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 67%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">响应 APDU 字段</th>
+<th style="text-align: left;">功能描述</th>
+<th style="text-align: center;">字节数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">响应数据字段</td>
+<td style="text-align: left;">编码 <span class="math inline">\(N_r =
+0\)</span> 时缺省，而 <span class="math inline">\(N_r &gt; 0\)</span>
+时体现为一个 <span class="math inline">\(N_r\)</span>
+字节的字符串；</td>
+<td style="text-align: center;"><span class="math inline">\(N_r\)</span>（最多 <span class="math inline">\(N_e\)</span>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">响应尾</td>
+<td style="text-align: left;">状态字节为 <code>SW1-SW2</code></td>
+<td style="text-align: center;"><code>2</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="emv-与-pboc-银行卡标准">EMV 与 PBOC 银行卡标准</h2>
+<p><strong>EMV</strong>（Europay MasterCard
+Visa）标准是由全球三大银行卡组织<strong>欧陆卡</strong>（Europay）、<strong>万事达卡</strong>（MasterCard）和<strong>维萨卡</strong>（Visa）共同发起制定的银行卡技术标准，是基于
+IC 卡的金融支付标准，目前已经成为全球公认的统一标准。其中，接触式卡片以
+<strong>ISO/IEC 7816</strong>
+作为标准，而<strong>非接触式卡片</strong>则主要以 <strong>ISO/IEC
+14443</strong> 作为标准。</p>
+<p><strong>中国人民银行</strong>（PBOC，People's Bank of China）于 2013
+年正式颁布《中国金融集成电路 IC 卡规范》<code>V3.0</code>
+版本，类似上面的介绍的
+EMV，也属于一种<strong>金融集成电路智能卡</strong>感应端与接收端的规范标准。并且接触式卡片同样以
+<strong>ISO/IEC 7816</strong>
+作为标准，而<strong>非接触式卡片</strong>则主要以 <strong>ISO/IEC
+14443</strong> 作为标准。</p>
+<ul>
+<li>第 <strong>1</strong> 部分：《总则》；</li>
+<li>第 <strong>3</strong> 部分：《与应用无关的 IC
+卡与终端接口规范》；</li>
+<li>第 <strong>4</strong> 部分：《借记贷记应用规范》；</li>
+<li>第 <strong>5</strong> 部分：《借记贷记应用卡片规范》；</li>
+<li>第 <strong>6</strong> 部分：《借记贷记应用终端规范》；</li>
+<li>第 <strong>7</strong> 部分：《借记贷记应用安全规范》；</li>
+<li>第 <strong>8</strong> 部分：《与应用无关的非接触式规范》；</li>
+<li>第 <strong>10</strong> 部分：《借记贷记应用个人化指南》；</li>
+<li>第 <strong>12</strong> 部分：《非接触式 IC 卡支付规范》；</li>
+<li>第 <strong>13</strong>
+部分：《基于借记贷记应用的小额支付规范》；</li>
+<li>第 <strong>14</strong> 部分：《非接触式 IC
+卡小额支付扩展应用规范》；</li>
+<li>第 <strong>15</strong> 部分：《电子现金双币支付应用规范》；</li>
+<li>第 <strong>16</strong> 部分：《IC 卡互联网终端规范》；</li>
+<li>第 <strong>18</strong>
+部分：《基于安全芯片的线上支付技术规范》；</li>
+</ul>
+<h2 id="智能卡操作系统-cos">智能卡操作系统 COS</h2>
+<p><strong>卡片操作系统</strong>（<strong>COS</strong>，Card Operating
+System）紧密围绕着其所服务的智能卡特点而研发，设计时会紧密结合智能卡内置存储器的分区情况，并且遵循
+ISO/IEC 7816 或者 ISO/IEC 14443
+等国际标准，主要用于控制智能卡与外界的信息交换，管理智能卡当中的存储器，并且在智能卡内部完成各种命令的处理。由于目前主要解决的是如何处理与响应外部命令的问题，并不会涉及到共享和并发的管理，所以其本质上更加接近于监控程序，而非一个完整的操作系统。</p>
+<blockquote>
+<p><strong>注意</strong>：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/java-card.html"><strong>Java
+Card™</strong></a> 目前已经成为 COS 事实上的工业标准，其以 Java
+虚拟机作为基础，通过更为安全的方式来执行 Java
+Applet，并且支持多应用动态下载，具有平台无关、高安全性、高可靠性、一卡多用等特点。</p>
+</blockquote>
+<h2 id="安全单元-se">安全单元 SE</h2>
+<p><strong>安全元件</strong>（<strong>SE</strong>，Secure
+Element）也称安全芯片，主要由安全硬件和软件两部分组成，硬件部分包括安全的运行环境、存储、算法、接口等；软件部分则提供安全的交互机制，确保
+SE 与上位机之间命令与数据的交互安全。基于 SE
+对数据进行安全处理，可以实现设备的身份认证、数据传输加密、敏感信息保护等功能。</p>
+<p>伴随近年 5G
+逐步组网商用，物联网在迎来较快发展的同时，安全问题日益突出，物联网的安全需求主要存在于如下四个方面：</p>
+<ol type="1">
+<li>硬件设备的唯一标识符；</li>
+<li>硬件设备端与云服务端的双向身份认证；</li>
+<li>数据的加密传输；</li>
+<li>远程 OTA 的安全升级；</li>
+</ol>
+<p>基于嵌入式安全元件 SE
+提供的安全存储与运算环境，就可以为物联网设备运营者提供一个安全可信任的<strong>根</strong>，然后再由运营者发行
+SE 当中的设备 ID
+以及证书密钥等，结合云端的安全服务，从而形成一套完整的物联网安全方案。</p>
+<h2 id="arm-securcore">ARM SecurCore</h2>
+<p><a target="_blank" rel="noopener" href="https://developer.arm.com/ip-products/processors/securcore"><strong>ARM
+SecurCore</strong></a>
+是一系列专门为高性能、大容量<strong>智能卡</strong>与嵌入式安全产品而设计的芯片内核架构，目前主要有如下两款：</p>
+<ul>
+<li><strong>ARM SecurCore
+SC000</strong>：针对<strong>超大容量</strong>的智能卡和嵌入式安全应用，内置了
+<strong>ARM Cortex-M0</strong> 微控制器内核，功率较小，封装面积较小。
+<img src="/Embedded/Mifare/SecurCore-SC000.png"></li>
+<li><strong>ARM SecurCore
+SC300</strong>：针对<strong>高性能</strong>的智能卡和嵌入式安全应，内置了
+<strong>ARM Cortex-M3</strong> 微控制器内核，功率较大，封装面积较大。
+<img src="/Embedded/Mifare/SecurCore-SC300.png"></li>
+</ul>
+<h2 id="arm-trustzone">ARM TrustZone</h2>
+<p><a target="_blank" rel="noopener" href="https://developer.arm.com/ip-products/security-ip/trustzone"><strong>ARM
+TrustZone</strong></a> 在芯片内部提供了一种安全高效的的方法，TrustZone
+技术已经分别被集成到采用 <strong>Armv8-A</strong> 架构的 <a target="_blank" rel="noopener" href="https://developer.arm.com/ip-products/security-ip/trustzone/trustzone-for-cortex-a">Cortex-A</a>
+系列以及采用 <strong>Armv8-M</strong> 架构的 <a target="_blank" rel="noopener" href="https://developer.arm.com/ip-products/security-ip/trustzone/trustzone-for-cortex-m">Cortex-M</a>
+系列芯片当中，通过在微控制器系统当中创建独立的可信与非可信区域，确保数据、固件、片上外设的安全性。</p>
+<p><img src="/Embedded/Mifare/TrustZone.png"></p>
+<p>ARM TrustZone 技术通常需要结合如下的软件和规范进行使用：</p>
+<ul>
+<li><strong>Mbed OS</strong>：基于 C/C++ 的开源安全实时操作系统；</li>
+<li><strong>CMSIS-Pack</strong>：通用微控制器软件接口标准，提供了 Cortex
+系列微控制器与外设的一致接口标准；</li>
+<li><strong>Trusted
+Firmware-M</strong>：可信固件，运行在硬件隔离的安全环境当中，用于提供安全服务；</li>
+</ul>
+<p>下面的表格展示了采用 ARM TrustZone
+技术的相关厂商以及对应的典型产品型号：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">芯片厂商</th>
+<th style="text-align: center;">型号</th>
+<th style="text-align: center;">内核架构</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Microchip</td>
+<td style="text-align: center;">SAM L11</td>
+<td style="text-align: center;">Cortex-M23</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Nordic</td>
+<td style="text-align: center;">nRF9160 与 nRF5340</td>
+<td style="text-align: center;">Cortex-M33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Nuvoton</td>
+<td style="text-align: center;">M2351</td>
+<td style="text-align: center;">Cortex-M23</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">NXP</td>
+<td style="text-align: center;">LPC5500 和 i.MX RT600 系列</td>
+<td style="text-align: center;">Cortex-M33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Silicon Labs</td>
+<td style="text-align: center;">Gecko Series 2</td>
+<td style="text-align: center;">Cortex-M33</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">STMicroelectronics</td>
+<td style="text-align: center;">STM32L5</td>
+<td style="text-align: center;">Cortex-M33</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mbed OS</strong> 是一款基于 Cortex-M
+微控制器的嵌入式实时操作系统，其提供了一个包含有存储、连接、设备管理、传感器驱动、输入输出设备的抽象层。</p>
+<p><img src="/Embedded/Mifare/Mbed.png"></p>
+<h2 id="stmicroelectronics-安全解决方案">STMicroelectronics
+安全解决方案</h2>
+<p><img src="/Embedded/Mifare/STMicroelectronics.png"></p>
+<p>针对银行、身份认证、支付解决方案，均支持
+<strong>ISO7816</strong>、<strong>ISO14443 A/B</strong> 智能卡协议：</p>
+<ul>
+<li><strong>ST31 系列</strong>：基于 ARM SecurCore SC000
+核心架构，常用于智能卡应用程序；</li>
+<li><strong>STPay 系列</strong>：基于 ST31
+的硬件架构，主要用于安全支付的场景；</li>
+</ul>
+<p>针对 NFC、eSE、eSIM 产品的移动安全交易解决方案：</p>
+<ul>
+<li><strong>ST33 系列</strong>：基于 ARM SecurCore SC300
+核心架构，应用于 SIM、eSIM、eSE 场景；</li>
+<li><strong>ST21NFC 系列</strong>：用于 NFC 的微控制器；</li>
+<li><strong>ST54 系列</strong>：基于 ST33 的硬件架构，同时整合了
+eSIM、eSE、NFC 主控；</li>
+</ul>
+<p>同样基于 <strong>ST33</strong> 硬件架构，所提供的车规级 eSIMs
+解决方案，致力于汽车生态系统的安全连接：</p>
+<ul>
+<li><strong>ST33G1M2A 系列</strong>：依然基于 ARM SecurCore SC300
+核心架构；</li>
+<li><strong>ST33GTPMA 系列</strong>：eSE 片上系统；</li>
+<li><strong>ST4SIM-A 系列</strong>：eSIM 片上系统；</li>
+</ul>
+<p>针对物联网生态系统当中的嵌入式平台到网关和服务器：</p>
+<ul>
+<li><strong>STSAFE-A 系列</strong>：用于嵌入式系统和商标保护；</li>
+<li><strong>STSAFE-J 系列</strong>：用于网关和物联网设备；</li>
+<li><strong>STSAFE-TPM 系列</strong>：针对标准化和可验证的 TPM
+服务；</li>
+</ul>
+<p>主要基于 ARM SecurCore SC300
+核心架构，针对工业控制与物联网的组网与通迅用途：</p>
+<ul>
+<li><strong>ST4SIM-S</strong>：用于物联网；</li>
+<li><strong>ST4SIM-M</strong>：用于工业控制；</li>
+<li><strong>ST4SIM-A</strong>：用于汽车；</li>
+</ul>
+<h2 id="infineon-安全解决方案">Infineon 安全解决方案</h2>
+<p>英飞凌在通用微控制器方面，提供了基于 32 位 ARM Cortex 架构的
+<strong>PSoC</strong>（基于 Cortex M0 和 M4 架构的系列）、<strong>TRAVEO
+T2G</strong>（基于 Cortex M4 和 M7
+的高性能系列）、<strong>XMC</strong>（基于 Cortex M0 和 M4
+架构的工业控制系列）微控制器。</p>
+<p><img src="/Embedded/Mifare/Infineon-2.png"></p>
+<p>除此之外，英飞凌还拥有自行研发的 <strong>TriCore</strong>
+多核心微控制器架构，并基于此推出了 <a target="_blank" rel="noopener" href="https://www.infineon.com/cms/en/product/microcontroller/32-bit-tricore-microcontroller/aurix-security-solutions/">AURIX</a>
+系列车规级微控制器（常用于装载有发动机控制程序的乘用车 ECU），包括第一代
+<strong>TC2XX</strong> 和第二代 <strong>TC3XX</strong>
+两个产品序列，最大特色在于嵌入了<strong>硬件安全模块</strong>（HSM，Hardware
+Security Module），其中包含了
+<code>32 位安全计算平台</code>、<code>存储密钥和身份 ID 的受保护存储区</code>、<code>AES-128 硬件加速器</code>和<code>随机数生成器</code>。总而言之，HSM
+提供了一个安全的平台，通过防火墙将其与微控制器的其他部分隔开，从而创建了一个可信的执行环境。</p>
+<p><img src="/Embedded/Mifare/Infineon-1.png"></p>
+<blockquote>
+<p><strong>注意</strong>：除此之外，英飞凌还提供有适用于非接触式卡片的
+<strong>CIPURSE</strong> 安全解决方案，以及集成嵌入式安全方案
+<strong>OPTIGA</strong>，和带有操作系统的集成嵌入式安全解决方案
+<strong>SECORA</strong>。</p>
+</blockquote>
+<h2 id="nxp-安全解决方案">NXP 安全解决方案</h2>
+<p><a target="_blank" rel="noopener" href="https://www.nxp.com/products/processors-and-microcontrollers:MICROCONTROLLERS-AND-PROCESSORS#/"><strong>恩智浦
+NXP</strong></a> 即提供了基于 <strong>ARM</strong>
+内核的通用微控制器系列产品：</p>
+<ul>
+<li><strong>i.MX 系列</strong>：基于 Cortex-A7/A8/A9、ARM9、Arm11
+核心架构，用于多媒体显示场景；</li>
+<li><strong>Layerscape 系列</strong>：基于 Cortex-A7/A9/A53/A57/A72
+多核心架构，适用于企业、云计算和工业市场；</li>
+<li><strong>S32 系列</strong>：基于 Cortex-M/R/A
+核心架构，属于车规级芯片；</li>
+<li><strong>S32V 系列</strong>：四核 Cortex-A53
+架构，用于视觉处理、机器学习等应用；</li>
+</ul>
+<p>也提供了基于自家 <strong>Power</strong> 架构的通用微控制器系列：</p>
+<ul>
+<li><strong>8xxx, 7xxx, 7xx, 6xx 系列</strong>：基于 Power 架构
+<strong>e600</strong>
+核心的中央处理器，适用于服务器、瘦客户端、游戏系统；</li>
+<li><strong>S32R 雷达系列</strong>：基于 Power 架构
+<strong>e200z4</strong> 和 <strong>e200z7</strong>
+核心，优化并且加速了雷达信号的处理；</li>
+<li><strong>MPC5xxx 系列</strong>：基于 Power 架构
+<strong>e200z4</strong> 和 <strong>e200z1</strong>
+核心，专注于质量和长期可靠性的车用微控制器；</li>
+<li><strong>QorIQ P 系列</strong>：基于多核心 Power
+架构，适用于跨运营商、企业、军事和工业市场的网络应用；</li>
+<li><strong>QorIQ Qonverge 平台</strong>：在 Power 架构的基础上加入了
+StarCore 核心的 DSP 架构，用于通信基站；</li>
+<li><strong>QorIQ T 系列</strong>：基于高效的 Power
+架构，该系列常用于低功耗节能产品；</li>
+<li><strong>PowerQUICC 系列</strong>：基于 Power
+架构，常用于通信处理；</li>
+</ul>
+<p>除此之外，恩智浦 NXP 还提供了安全与认证相关的解决方案：</p>
+<ul>
+<li><strong>认证和防伪解决方案</strong>：内嵌有支持 AES、DES、RSA 算法的
+<code>EdgeLock SE050/SE051</code> 物联网安全元件；</li>
+<li><strong>电子证照解决方案</strong>：基于 NXP 自身的
+<strong>SmartMX</strong> 安全控制器和嵌入式操作系统的
+<code>SmartMX3 P71D321/P71D320</code>、<code>SmartMX2 P60</code>；</li>
+</ul>
+<p>其中，值得一提的是其于 2018 年推出的 <a target="_blank" rel="noopener" href="https://www.nxp.com.cn/products/security-and-authentication/secure-service-2go-platform:SECURE_SERVICE_2GO"><strong>2GO</strong></a>
+安全服务平台，为物联网设备提供了一系列安全可扩展的服务：</p>
+<p><img src="/Embedded/Mifare/NXP.png"></p>
+<ul>
+<li><strong>MIFARE 2GO</strong>：用于管理物联网设备 Mifare
+芯片中保存的数字化交通凭证，该安全服务已经完全集成至 Google Pay；</li>
+<li><strong>mWallet 2GO</strong>：移动钱包开发解决方案，并且已经集成到
+MasterCard 和 Visa 的生态合作体系；</li>
+<li><strong>mID
+2GO</strong>：移动身份验证解决方案，用于安全的联接、管理、操作数字化身份信息；</li>
+<li><strong>NTAG</strong>：基于 NFC
+标签的安全增值服务，包含<code>芯片自定义服务</code>、<code>标签管理</code>、<code>身份验证</code>等功能；</li>
+<li><strong>EdgeLock
+2GO</strong>：物联网服务平台，用于安全的部署与管理采用
+<code>EdgeLock SE050</code> 安全元件的物联网设备；</li>
+</ul>
+<h2 id="renesas-安全解决方案">Renesas 安全解决方案</h2>
+<p><a target="_blank" rel="noopener" href="https://www2.renesas.cn/cn/zh"><strong>瑞萨
+Renesas</strong></a> 拥有基于 <strong>ARM Cortex-M</strong> 内核的
+<strong>Synergy</strong> 系列微控制器，以及采用自研 <strong>Renesas
+eXtreme</strong> 内核的 <strong>RX</strong>
+系列微控制器。在安全解决方案方面，则推出了基于 Cortex-M23/M33
+架构，并采用了 ARM TrustZone 技术的 <strong>RA</strong> 系列：</p>
+<p><img src="/Embedded/Mifare/Renesas.png"></p>
+<h2 id="国产芯片厂商安全解决方案">国产芯片厂商安全解决方案</h2>
+<p><a target="_blank" rel="noopener" href="https://www2.renesas.cn/cn/zh"><strong>兆易创新
+Gigadevice</strong></a> 推出了基于 <strong>ARM Cortex-M23</strong>
+内核的 <code>GD32E230/231/232</code> 系列，以及 <strong>ARM
+Cortex-M33</strong> 内核的 <code>GD32E5</code> 的高性能系列。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>智能 IC 卡技术杂谈</p><p><a href="http://www.uinio.com/Embedded/Mifare/">http://www.uinio.com/Embedded/Mifare/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-09-10</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-09-12</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/Instrument/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">电子测量仪器通用术语与相关原理</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Zen/Cryptology/"><span class="level-item">编码实践当中涉及的密码学知识</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#接触-非接触-双界面卡"><span class="level-left"><span class="level-item">1</span><span class="level-item">接触 &amp; 非接触 &amp; 双界面卡</span></span></a></li><li><a class="level is-mobile" href="#isoiec-7816"><span class="level-left"><span class="level-item">2</span><span class="level-item">ISO/IEC 7816</span></span></a></li><li><a class="level is-mobile" href="#isoiec-14443"><span class="level-left"><span class="level-item">3</span><span class="level-item">ISO/IEC 14443</span></span></a></li><li><a class="level is-mobile" href="#mifare-1-卡"><span class="level-left"><span class="level-item">4</span><span class="level-item">Mifare 1 卡</span></span></a></li><li><a class="level is-mobile" href="#应用协议数据单元-apdu"><span class="level-left"><span class="level-item">5</span><span class="level-item">应用协议数据单元 APDU</span></span></a></li><li><a class="level is-mobile" href="#emv-与-pboc-银行卡标准"><span class="level-left"><span class="level-item">6</span><span class="level-item">EMV 与 PBOC 银行卡标准</span></span></a></li><li><a class="level is-mobile" href="#智能卡操作系统-cos"><span class="level-left"><span class="level-item">7</span><span class="level-item">智能卡操作系统 COS</span></span></a></li><li><a class="level is-mobile" href="#安全单元-se"><span class="level-left"><span class="level-item">8</span><span class="level-item">安全单元 SE</span></span></a></li><li><a class="level is-mobile" href="#arm-securcore"><span class="level-left"><span class="level-item">9</span><span class="level-item">ARM SecurCore</span></span></a></li><li><a class="level is-mobile" href="#arm-trustzone"><span class="level-left"><span class="level-item">10</span><span class="level-item">ARM TrustZone</span></span></a></li><li><a class="level is-mobile" href="#stmicroelectronics-安全解决方案"><span class="level-left"><span class="level-item">11</span><span class="level-item">STMicroelectronics
+安全解决方案</span></span></a></li><li><a class="level is-mobile" href="#infineon-安全解决方案"><span class="level-left"><span class="level-item">12</span><span class="level-item">Infineon 安全解决方案</span></span></a></li><li><a class="level is-mobile" href="#nxp-安全解决方案"><span class="level-left"><span class="level-item">13</span><span class="level-item">NXP 安全解决方案</span></span></a></li><li><a class="level is-mobile" href="#renesas-安全解决方案"><span class="level-left"><span class="level-item">14</span><span class="level-item">Renesas 安全解决方案</span></span></a></li><li><a class="level is-mobile" href="#国产芯片厂商安全解决方案"><span class="level-left"><span class="level-item">15</span><span class="level-item">国产芯片厂商安全解决方案</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

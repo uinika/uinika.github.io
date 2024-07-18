@@ -1,0 +1,1145 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>PCB 基本布线规范与设计原则 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="优秀的 PCB 设计者同时也是出色的艺术家，但是伴随 5G 的全面商用以及物联网设备的普及，电路板走线越来越精密，信号频率日益提高，电磁干扰问题日趋严重，PCB 设计人员不得不去面对一个现实问题：PCB 电路板已经开始像一个具有电阻、电容、电感的组件，而非像过去 10 年前那样仅仅作为线路连接的平台。电磁兼容性与信号完整性的问题日益突出，对于 PCB 布线与元器件布局的要求越来越高。"><meta property="og:type" content="blog"><meta property="og:title" content="PCB 基本布线规范与设计原则"><meta property="og:url" content="http://www.uinio.com/Electronics/PCB_Principle/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="优秀的 PCB 设计者同时也是出色的艺术家，但是伴随 5G 的全面商用以及物联网设备的普及，电路板走线越来越精密，信号频率日益提高，电磁干扰问题日趋严重，PCB 设计人员不得不去面对一个现实问题：PCB 电路板已经开始像一个具有电阻、电容、电感的组件，而非像过去 10 年前那样仅仅作为线路连接的平台。电磁兼容性与信号完整性的问题日益突出，对于 PCB 布线与元器件布局的要求越来越高。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2011-12-07T16:00:00.000Z"><meta property="article:modified_time" content="2021-03-14T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="PCB"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/PCB_Principle/"},"headline":"PCB 基本布线规范与设计原则","image":["http://www.uinio.com/Electronics/PCB_Principle/logo.png"],"datePublished":"2011-12-07T16:00:00.000Z","dateModified":"2021-03-14T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"优秀的 PCB 设计者同时也是出色的艺术家，但是伴随 5G\r 的全面商用以及物联网设备的普及，电路板走线越来越精密，信号频率日益提高，电磁干扰问题日趋严重，PCB\r 设计人员不得不去面对一个现实问题：PCB\r 电路板已经开始像一个具有电阻、电容、电感的组件，而非像过去\r 10\r 年前那样仅仅作为线路连接的平台。电磁兼容性与信号完整性的问题日益突出，对于\r PCB 布线与元器件布局的要求越来越高。"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/PCB_Principle/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2011-12-07T16:00:00.000Z" title="2011/12/8 00:00:00">2011-12-08</time>发表</span><span class="level-item"><time dateTime="2021-03-14T16:00:00.000Z" title="2021/3/15 00:00:00">2021-03-15</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">1 小时读完 (大约10334个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">PCB 基本布线规范与设计原则</h1><div class="content"><p><strong>优秀的 PCB 设计者同时也是出色的艺术家</strong>，但是伴随 5G
+的全面商用以及物联网设备的普及，电路板<strong>走线</strong>越来越精密，信号<strong>频率</strong>日益提高，电磁干扰问题日趋严重，PCB
+设计人员不得不去面对一个现实问题：PCB
+电路板已经开始像一个具有电阻、电容、电感的<strong>组件</strong>，而非像过去
+10
+年前那样仅仅作为线路连接的平台。<strong>电磁兼容性</strong>与<strong>信号完整性</strong>的问题日益突出，对于
+PCB 布线与元器件布局的要求越来越高。</p>
+<p><img src="/Electronics/PCB_Principle/logo.png"></p>
+<p>本文首先介绍了 PCB
+制造工艺与元器件封装相关的知识，然后重点讨论了笔者工作过程当中总结的一些
+PCB Layout
+方面的基本布线规范与设计原则。当然，信号完整性作为一个比较系统的工程化问题，这些<strong>经验与原则并非绝对适用于任意场合，实际布线时仍然需要具体问题具体分析，结合实际的工况进行设计</strong>。而对于信号完整性方面的各类繁杂问题，将会专门新开一篇文章另行讨论。</p>
+<span id="more"></span>
+<h2 id="基本术语">基本术语</h2>
+<p>目前全球 EDA 产业格局主要由 <strong>Synopsys</strong>
+(新思科技)、<strong>Cadence</strong>
+(铿腾电子)、<strong>Mentor</strong>（明导电子） 三大企业垄断，其中
+Cadence 公司的 <strong>Allegro</strong>(<code>/əˈleɡroʊ/</code>)
+是业内比较推崇的一款高速 PCB 板级布线工具，当然面对价格不菲的商业
+License，也可以选择免费又好用的 <code>KiCad</code>。</p>
+<p>PCB 是<strong>印刷电路板</strong>（Printed Circuit
+Board）的英文缩写，其基材是由<strong>介电层</strong>（绝缘材料）和<strong>高纯度导体</strong>
+(铜箔)构成，常用的 PCB
+的基材主要是<strong>覆铜箔环氧玻纤布层压板</strong>，也称为<strong>FR-4
+全玻纤板</strong>，使用浸润了环氧树脂的<strong>玻璃纤维布</strong>层压而成。</p>
+<ul>
+<li><strong>网络</strong>：电路也称为网络，即<strong>电路网络</strong>；</li>
+<li><strong>板框</strong>：放置 PCB 封装之前，需要先行在相应的图层绘制
+PCB 板的边框；</li>
+<li><strong>飞线</strong>：是基于相同的原理图网络产生的，当两个封装的焊盘网络相同时就会出现飞线，表示这两个焊盘在
+PCB 当中可以通过导线连接；</li>
+<li><strong>焊盘</strong>：用于将电子元件固定并且连接到 PCB
+，每个焊盘都拥有独立编号，以便于和元件引脚对应；</li>
+<li><strong>泪滴</strong>：平滑过渡布线与焊盘之间的连接，提高连接的可靠性，降低信号传输时阻抗的急剧跳变，避免高频信号由于线宽突然减小而造成反射；</li>
+<li><strong>铺铜</strong>：用于保留连接<strong>地</strong>或者<strong>电源</strong>的整块铜箔区域，一块
+PCB 可以分别设置并且绘制多个铺铜区；</li>
+</ul>
+<h3 id="布线">布线</h3>
+<ul>
+<li><strong>差分对布线</strong>：<strong>差分对</strong>是一种有效的高速信号走线方式，可以抑制共模噪声，达到更好的信号完整性；其中，<strong>等长</strong>和<strong>等距</strong>是差分布线的最基本要求；</li>
+<li><strong>蛇形等长布线</strong>：<strong>蛇形走线</strong>用于解决高速信号下，线长不相等导致的并行信号到达时间差异，进而引发信号时序的改变；其没有所谓滤波或者抗干扰的能力，因而只适用于<strong>时序匹配</strong>用途；</li>
+</ul>
+<h3 id="拼板">拼板</h3>
+<ul>
+<li><strong>拼板</strong>：用于充分利用 PCB 板材，将多块相同或者不同的
+PCB 设计放置到一个上面，从而提高生产效率；</li>
+<li><strong>V 割</strong>：也称为
+<code>V-CUT</code>，是指板厂按照客户的拼板要求（便于后期<strong>分板</strong>），在印刷电路板的特定位置预先使用切割机开出
+<strong>V</strong> 形槽，由于 V-CUT
+刀只能走直线，不能走曲线和折线，所以规则的 PCB
+拼板才会采用该方式；此外，PCB 走线距离 V
+割线距离不应小于<code>0.4mm</code> 以避免损坏；</li>
+<li><strong>邮票孔</strong>：一种是为了便于后期分板，在分板位置打上一些小孔，由于容易造成毛边等问题，所以仅用于拼板不规则的场合；</li>
+<li><strong>半孔</strong>：通常用于制作核心板引脚，即被精确切割为一半的<strong>过孔</strong>；</li>
+</ul>
+<h3 id="过孔">过孔</h3>
+<p><strong>过孔</strong>（<code>Via Hole</code>）是镀铜的的金属小孔，用于实现不同铜层之间的电气连接，具体可以划分为如下
+3 种：</p>
+<p><img src="/Electronics/PCB_Principle/via.png"></p>
+<ol type="1">
+<li><strong>通孔</strong>（<code>Through</code>）：连接顶层与底层并贯穿整个
+PCB；</li>
+<li><strong>盲孔</strong>（<code>Blind</code>）：一端位于 PCB
+表面，另一端位于 PCB 中间的工作层；</li>
+<li><strong>埋孔</strong>（<code>Buried</code>）：用于 PCB
+内部中间两个工作层之间的连接；</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：出于信号完整性的考虑，PCB
+设计当中应该尽量减少<strong>过孔</strong>的使用；如果必须使用过孔，则尽量避免采用<strong>盲孔</strong>和<strong>埋孔</strong>，它们不但增加了
+PCB 的加工难度，也带来了大量电气安全性方面的问题。</p>
+</blockquote>
+<h4 id="过孔的寄生电容">过孔的寄生电容</h4>
+<p>过孔本身存在着对地的寄生电容，过孔的寄生电容会<strong>延长传输信号的上升时间</strong>，例如一块厚度为
+<code>50mil</code> 的 PCB 板材，对于直径为 <code>20mil</code> 内径为
+<code>10mil</code> 的过孔，其与接地覆铜区的距离为
+<code>32mil</code>，则该过孔的寄生电容约为 <code>0.5pF</code>。</p>
+<p>虽然单个过孔的寄生电容对于信号上升沿的变缓作用不明显，但是如果在走线过程当中，多次使用过孔进行层间切换，则寄生电容的影响将会直线上升。</p>
+<h4 id="过孔的寄生电感">过孔的寄生电感</h4>
+<p>过孔在存在寄生电容的同时，也存在着寄生电感，在高速数字电路当中，过孔寄生电感所带来的危害往往大于寄生电容，多个过孔产生的串联寄生电感会削弱旁路电容的作用，从而降低整个电源系统的滤波效果。</p>
+<p>特别是对于<strong>旁路电容</strong>，其在连接电源层与地层的时候，往往需要使用到两个过孔，这样带来的寄生电感会成倍增加，使用时需要额外注意。</p>
+<h3 id="阻焊">阻焊</h3>
+<p>阻焊也称为<strong>焊接掩模</strong>（Solder Mask），是指 PCB
+上需要覆盖阻焊油墨的部分，阻焊层通常使用<strong>负片输出</strong>，所以阻焊层形状映射到
+PCB 之后，并不是为了填充阻焊油墨，而是为了暴露出铜箔。</p>
+<h4 id="阻焊桥">阻焊桥</h4>
+<p><strong>阻焊桥</strong>是贴片元件之间的阻焊（两个阻焊开窗之间保留阻焊油的宽度，通常大于
+<code>6mil</code>），主要用于防止焊盘在焊接时连锡短路。</p>
+<p><img src="/Electronics/PCB_Principle/solder-bridge.jpg"></p>
+<h4 id="阻焊开窗">阻焊开窗</h4>
+<p><strong>阻焊开窗</strong>是指覆铜板不盖油墨的部分，即暴露出 PCB
+表面的铜泊部分。</p>
+<p><img src="/Electronics/PCB_Principle/solder-mask-opening.png"></p>
+<h4 id="包地">包地</h4>
+<p><strong>包地</strong>是指使用<strong>接地网络</strong>将信号线包住，从而达到降低<strong>串扰</strong>的目的。</p>
+<p><img src="/Electronics/PCB_Principle/ground.png"></p>
+<h4 id="fanout-扇出">Fanout 扇出</h4>
+<p><strong>扇出</strong>（Fanout [fænaʊt]）设计是在 PCB
+布局完成之后，进行布线之前的一项工作。目的是通过一段<code>走线</code>和<code>过孔</code>把原来只存在于表层的贴片元件焊盘连接至
+PCB
+内层，这样在后期进行内层布线的时候，就可以不用关注表层的贴片元件焊盘，而只需要对
+Fanout 出来的过孔进行连接即可。</p>
+<p><img src="/Electronics/PCB_Principle/fanout.png"></p>
+<h3 id="单位换算">单位换算</h3>
+<p><strong>密耳</strong>是 PCB
+设计当中经常使用到的一个长度的单位，它代表<code>千分之一英寸</code>，通常写做
+<code>mil</code>，其换算方式如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> mm   (毫米)   ➜  <span class="number">39.37</span>  mil (密耳)</span><br><span class="line"><span class="number">1</span> mil  (密耳)   ➜  <span class="number">0.0254</span> mm  (毫米)  ➜  <span class="number">25.4</span> μm (微米)</span><br><span class="line"><span class="number">1</span> inch (英寸)   ➜  <span class="number">1000</span>   mil (密耳)  ➜  <span class="number">25.4</span> mm (毫米)</span><br></pre></td></tr></table></figure>
+<h2 id="元件封装">元件封装</h2>
+<p><strong>封装</strong>（Package）描述了电子元器件的外形与尺寸，具有相同电子参数的元件可能拥有不同的封装，由于封装技术日新月异并且没有统一标准，本文总结了一些常用电子元件的封装类型。</p>
+<h3 id="贴片元件">贴片元件</h3>
+<p><strong>SMT</strong> 是<strong>表面贴装技术</strong>（Surface
+Mounting Technology）的英文缩写，常见的贴片元件有
+<strong>0201</strong>、<strong>0402</strong>、<strong>0805</strong>、<strong>0603</strong>、<strong>1206</strong>、<strong>1210</strong>、<strong>1812</strong>、<strong>2010</strong>、<strong>2512</strong>
+九种类型：</p>
+<table>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 17%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">英制（mil）</th>
+<th style="text-align: center;">长（mm）</th>
+<th style="text-align: center;">宽（mm）</th>
+<th style="text-align: center;">高（mm）</th>
+<th style="text-align: center;">额定功率（电阻）</th>
+<th style="text-align: center;">最大工作电压（电阻）</th>
+<th style="text-align: center;">公制（mm）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0201 封装</strong></td>
+<td style="text-align: center;"><code>0.60 毫米 ± 0.05</code></td>
+<td style="text-align: center;"><code>0.30 毫米 ± 0.05</code></td>
+<td style="text-align: center;"><code>0.23 毫米 ± 0.05</code></td>
+<td style="text-align: center;"><code>1/20 W</code></td>
+<td style="text-align: center;"><code>25V</code></td>
+<td style="text-align: center;">0603</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0402 封装</strong></td>
+<td style="text-align: center;"><code>1.00 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>0.50 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>0.30 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>1/16 W</code></td>
+<td style="text-align: center;"><code>50V</code></td>
+<td style="text-align: center;">1005</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>0603 封装</strong></td>
+<td style="text-align: center;"><code>1.60 毫米 ± 0.15</code></td>
+<td style="text-align: center;"><code>0.80 毫米 ± 0.15</code></td>
+<td style="text-align: center;"><code>0.40 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>1/10 W</code></td>
+<td style="text-align: center;"><code>50V</code></td>
+<td style="text-align: center;">1608</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0805 封装</strong></td>
+<td style="text-align: center;"><code>2.00 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>1.25 毫米 ± 0.15</code></td>
+<td style="text-align: center;"><code>0.50 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>1/8 W</code></td>
+<td style="text-align: center;"><code>150V</code></td>
+<td style="text-align: center;">2012</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>1206 封装</strong></td>
+<td style="text-align: center;"><code>3.20 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>1.60 毫米 ± 0.15</code></td>
+<td style="text-align: center;"><code>0.55 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>1/4 W</code></td>
+<td style="text-align: center;"><code>200V</code></td>
+<td style="text-align: center;">3216</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1210 封装</strong></td>
+<td style="text-align: center;"><code>3.20 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>2.50 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>0.55 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>1/3 W</code></td>
+<td style="text-align: center;"><code>200V</code></td>
+<td style="text-align: center;">3225</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>1812 封装</strong></td>
+<td style="text-align: center;"><code>4.50 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>3.20 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>0.55 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>1/2 W</code></td>
+<td style="text-align: center;"><code>200V</code></td>
+<td style="text-align: center;">4832</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2010 封装</strong></td>
+<td style="text-align: center;"><code>5.00 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>2.50 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>0.55 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>3/4 W</code></td>
+<td style="text-align: center;"><code>200V</code></td>
+<td style="text-align: center;">5025</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2512 封装</strong></td>
+<td style="text-align: center;"><code>6.40 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>3.20 毫米 ± 0.20</code></td>
+<td style="text-align: center;"><code>0.55 毫米 ± 0.10</code></td>
+<td style="text-align: center;"><code>1 W</code></td>
+<td style="text-align: center;"><code>200V</code></td>
+<td style="text-align: center;">6432</td>
+</tr>
+</tbody>
+</table>
+<h3 id="芯片封装">芯片封装</h3>
+<p>半导体芯片的封装材料主要有<code>塑料</code>、<code>陶瓷</code>、<code>玻璃</code>、<code>金属</code>等等，如果没有特殊工艺要求，现在普遍采用的是塑料封装：</p>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 56%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">封装缩写</th>
+<th style="text-align: left;">封装名称</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>MELF</strong></td>
+<td style="text-align: left;">Metal Electrode Face Components</td>
+<td style="text-align: left;"><strong>金属电极无引线端面元器件</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SOT</strong></td>
+<td style="text-align: left;">Small Outline Transistor</td>
+<td style="text-align: left;"><strong>小外形晶体管</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SOD</strong></td>
+<td style="text-align: left;">Small Outline Diode</td>
+<td style="text-align: left;"><strong>小外形二极管</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SOIC</strong></td>
+<td style="text-align: left;">Small Outline Integrated Circuits</td>
+<td style="text-align: left;"><strong>小外形集成电路</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SSOIC</strong></td>
+<td style="text-align: left;">Shrink Small Outline Integrated
+Circuits</td>
+<td style="text-align: left;"><strong>缩小外形集成电路</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SOP</strong></td>
+<td style="text-align: left;">Small Outline Package Integrated
+Circuits</td>
+<td style="text-align: left;"><strong>小外形封装集成电路</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SSOP</strong></td>
+<td style="text-align: left;">Shrink Small Outline Package Integrated
+Circuits</td>
+<td style="text-align: left;"><strong>缩小外形封装集成电路</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TSOP</strong></td>
+<td style="text-align: left;">Thin Small Outline Package</td>
+<td style="text-align: left;"><strong>薄小外形封装</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TSSOP</strong></td>
+<td style="text-align: left;">Thin Shrink Small Outline Package</td>
+<td style="text-align: left;"><strong>薄缩小外形封装</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SOJ</strong></td>
+<td style="text-align: left;">Small Outline Integrated Circuits with J
+Leads</td>
+<td style="text-align: left;"><strong>J
+形引脚小外形集成电路</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>CFP</strong></td>
+<td style="text-align: left;">Ceramic Flat Packs</td>
+<td style="text-align: left;"><strong>陶瓷扁平封装</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>PQFP</strong></td>
+<td style="text-align: left;">Plastic Quad Flat Pack</td>
+<td style="text-align: left;"><strong>塑料方形扁平封装</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SQFP</strong></td>
+<td style="text-align: left;">Shrink Quad Flat Pack</td>
+<td style="text-align: left;"><strong>缩小方形扁平封装</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CQFP</strong></td>
+<td style="text-align: left;">Ceramic Quad Flat Pack</td>
+<td style="text-align: left;"><strong>陶瓷方形扁平封装</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>PLCC</strong></td>
+<td style="text-align: left;">Plastic Leaded Chip Carriers</td>
+<td style="text-align: left;"><strong>塑料封装有引线芯片载体</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>LCC</strong></td>
+<td style="text-align: left;">Leadless Ceramic Chip Carriers</td>
+<td style="text-align: left;"><strong>无引线陶瓷芯片载体</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>QFN</strong></td>
+<td style="text-align: left;">Quad Flat Non-leaded Package</td>
+<td style="text-align: left;"><strong>四侧无引脚扁平封装</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>DIP</strong></td>
+<td style="text-align: left;">Dual-In-Line Components</td>
+<td style="text-align: left;"><strong>双列引脚元器件</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>PBGA</strong></td>
+<td style="text-align: left;">Plastic Ball Grid Array</td>
+<td style="text-align: left;"><strong>塑封球栅阵列器件</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>AX</strong></td>
+<td style="text-align: left;">Non-polarized Axial-Leaded Discretes</td>
+<td style="text-align: left;"><strong>无极性轴向引脚分立元件</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>CPAX</strong></td>
+<td style="text-align: left;">Polarized Capacitor, Axial</td>
+<td style="text-align: left;"><strong>带极性轴向引脚电容</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CPC</strong></td>
+<td style="text-align: left;">Polarized Capacitor, Cylindricals</td>
+<td style="text-align: left;"><strong>带极性圆柱形电容</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>CYL</strong></td>
+<td style="text-align: left;">Non-polarized Cylindricals</td>
+<td style="text-align: left;"><strong>无极性圆柱形元器件</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>DISC</strong></td>
+<td style="text-align: left;">Non-polarized Offset-Leaded Discs</td>
+<td style="text-align: left;"><strong>无极性偏置引脚分立元件</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RAD</strong></td>
+<td style="text-align: left;">Non-polarized Radial-Leaded Discretes</td>
+<td style="text-align: left;"><strong>无极性径向引脚分立元件</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TO</strong></td>
+<td style="text-align: left;">Transistors Outlines</td>
+<td style="text-align: left;"><strong>晶体管外形</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>PGA</strong></td>
+<td style="text-align: left;">Plastic Grid Array</td>
+<td style="text-align: left;"><strong>塑封阵列器件</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SIP</strong></td>
+<td style="text-align: left;">Single-In-Line Components</td>
+<td style="text-align: left;"><strong>单排引脚元器件</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="布线参数">布线参数</h2>
+<p>目前 PCB 板厂默认采用 <code>1.6</code> 毫米厚度的
+<strong>FR-4</strong> 板材：</p>
+<ul>
+<li><strong>外层铜厚</strong>：<code>1oz ~ 2oz</code>，即<code>35um ~ 70um</code>，默认常规电路板外层铜箔厚度为<code>1 oz</code>，最多可以做到<code>2 oz</code>（需备注）；</li>
+<li><strong>内层铜厚</strong>：<code>0.5oz</code>，即
+<code>17um</code>，默认常规电路板内层铜箔线路厚度为
+<code>0.5 oz</code>；</li>
+<li><strong>最小线宽与间隙</strong>：嘉立创<code>3.5mil</code>，捷配<code>4mil</code>，两者约等于
+<code>0.1mm</code>，实际布线时尽量保证大于 <code>4mil</code> 即可；</li>
+<li><strong>最小过孔内外径</strong>：多层板最小内径
+<code>0.2mm</code>，最小外径为<code>0.4mm</code>，双面板最小内径
+<code>0.3mm</code>,最小外径 <code>0.5mm</code>；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：具体参数请参考所打样 PCB 工厂的文档，例如：<a target="_blank" rel="noopener" href="https://www.jlc.com/portal/vtechnology.html"><strong>《嘉立创 PCB
+工艺参数》</strong></a>、<a target="_blank" rel="noopener" href="https://www.jlc.com/portal/1/serviceGuide"><strong>《嘉立创制造工艺要求》</strong></a>、<a target="_blank" rel="noopener" href="https://www.jiepei.com/capabilities.html"><strong>《捷配 PCB
+工艺能力》</strong></a>。</p>
+</blockquote>
+<h3 id="布线宽度">布线宽度</h3>
+<p><strong>IPC</strong> 是美国印刷电路板协会（The Institute of Printed
+Circuit）的英文缩写，该组织制定了多个 PCB
+设计与制造工艺相关的的规范与标准：</p>
+<ul>
+<li>《IPC-7525 钢网设计标准》</li>
+<li><strong>《IPC-2221 PCB 设计通用标准》</strong></li>
+<li>《IPC-SM-782 表面安装设计焊盘图形标准》</li>
+<li>《IPC-SM-770
+印制板组件装配规范(包括<strong>表面安装</strong>和<strong>穿孔安装</strong>的设计要求)》</li>
+</ul>
+<p>下面这个线宽计算公式出自于<strong>《IPC-2221
+印制电路板通用设计标准》</strong>，适用于外层电流<code>35A</code>、内层电流<code>17.5A</code>、温度为<code>100C°</code>、宽度
+<code>400mil</code> 的情况：：</p>
+<p><span class="math display">\[
+最大电流(安) = K \times 相对环境温升(摄氏度)^{0.44} \times (布线宽度
+\times 布线厚度)^{0.725}，其中 K = 内层布线 0.024 或外层布线 0.048
+\]</span></p>
+<p>当前 PCB 板厂可以加工的成品外层铜厚在<code>1oz ~ 2oz</code>（即
+<code>35μm ~ 70μm</code>）之间，默认外层铜箔线路厚度为
+<code>1oz</code>（最多可以做到 <code>2oz</code>），内层铜箔线路厚度为
+<code>0.5oz</code>（即 <code>17μm</code>）。这里以默认的
+<code>35μm</code>
+布线厚度为基准，可以得到如下常用的<code>布线宽度</code>、<code>最大通过电流</code>、<code>阻抗</code>：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">布线宽度</th>
+<th style="text-align: center;">最大通过电流</th>
+<th style="text-align: center;">阻抗</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0.1mm</strong></td>
+<td style="text-align: center;"><code>0.450486 A</code></td>
+<td style="text-align: center;"><code>0.0982857 Ω</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0.2mm</strong></td>
+<td style="text-align: center;"><code>0.744609 A</code></td>
+<td style="text-align: center;"><code>0.0491429 Ω</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>0.3mm</strong></td>
+<td style="text-align: center;"><code>0.999067 A</code></td>
+<td style="text-align: center;"><code>0.0327619 Ω</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0.4mm</strong></td>
+<td style="text-align: center;"><code>1.23077 A</code></td>
+<td style="text-align: center;"><code>0.0245714 Ω</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>0.5mm</strong></td>
+<td style="text-align: center;"><code>1.44689 A</code></td>
+<td style="text-align: center;"><code>0.0196571 Ω</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0.6mm</strong></td>
+<td style="text-align: center;"><code>1.65136 A</code></td>
+<td style="text-align: center;"><code>0.016381 Ω</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>0.7mm</strong></td>
+<td style="text-align: center;"><code>1.84662 A</code></td>
+<td style="text-align: center;"><code>0.0140408 Ω</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0.8mm</strong></td>
+<td style="text-align: center;"><code>2.03433 A</code></td>
+<td style="text-align: center;"><code>0.0122857 Ω</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>0.9mm</strong></td>
+<td style="text-align: center;"><code>2.21568 A</code></td>
+<td style="text-align: center;"><code>0.0109206 Ω</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1.0mm</strong></td>
+<td style="text-align: center;"><code>2.39156 A</code></td>
+<td style="text-align: center;"><code>0.00982857 Ω</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>1.2mm</strong></td>
+<td style="text-align: center;"><code>2.72953 A</code></td>
+<td style="text-align: center;"><code>0.00819048 Ω</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1.5mm</strong></td>
+<td style="text-align: center;"><code>3.20884 A</code></td>
+<td style="text-align: center;"><code>0.00655238 Ω</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2.0mm</strong></td>
+<td style="text-align: center;"><code>3.95301 A</code></td>
+<td style="text-align: center;"><code>0.00491429 Ω</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>5.0mm</strong></td>
+<td style="text-align: center;"><code>7.6813 A</code></td>
+<td style="text-align: center;"><code>0.00196571 Ω</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="布线间距">布线间距</h3>
+<p><strong>安全间距</strong>是指 2
+个导电子元件或者走线之间测得的最短空间距离，即在保证电气性能稳定与安全的前提下，通过空气所能够绝缘的最短距离。下面表格标注的是<strong>安全间距最小值</strong>，该数据来源于《IPC
+2221 印刷电路板通用设计标准》。</p>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">电压</th>
+<th style="text-align: center;">内层导体</th>
+<th style="text-align: center;">外层导体(海拔 &lt; 3050 米)</th>
+<th style="text-align: center;">外层导体(海拔 &gt; 3050 米)</th>
+<th style="text-align: center;">外层导体(永久聚合物涂层)</th>
+<th style="text-align: center;">外层导体(保形涂层)</th>
+<th style="text-align: center;">外部元件引脚/端接</th>
+<th style="text-align: center;">外部元件引脚/端接(保形涂层)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0 ~ 15 V</strong></td>
+<td style="text-align: center;"><code>0.05 mm</code></td>
+<td style="text-align: center;"><code>0.1 mm</code></td>
+<td style="text-align: center;"><code>0.1 mm</code></td>
+<td style="text-align: center;"><code>0.05 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>16 ~ 30 V</strong></td>
+<td style="text-align: center;"><code>0.05 mm</code></td>
+<td style="text-align: center;"><code>0.1 mm</code></td>
+<td style="text-align: center;"><code>0.1 mm</code></td>
+<td style="text-align: center;"><code>0.05 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+<td style="text-align: center;"><code>0.25 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>31 ~ 50V</strong></td>
+<td style="text-align: center;"><code>0.1 mm</code></td>
+<td style="text-align: center;"><code>0.6 mm</code></td>
+<td style="text-align: center;"><code>0.6 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>51 ~ 100</strong></td>
+<td style="text-align: center;"><code>0.1 mm</code></td>
+<td style="text-align: center;"><code>0.6 mm</code></td>
+<td style="text-align: center;"><code>1.5 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+<td style="text-align: center;"><code>0.5 mm</code></td>
+<td style="text-align: center;"><code>0.13 mm</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>101 ~ 150 V</strong></td>
+<td style="text-align: center;"><code>0.2 mm</code></td>
+<td style="text-align: center;"><code>0.6 mm</code></td>
+<td style="text-align: center;"><code>3.2 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.8 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>151 ~ 170 V</strong></td>
+<td style="text-align: center;"><code>0.2 mm</code></td>
+<td style="text-align: center;"><code>1.25 mm</code></td>
+<td style="text-align: center;"><code>3,2 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.8 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>171 ~ 250 V</strong></td>
+<td style="text-align: center;"><code>0.2 mm</code></td>
+<td style="text-align: center;"><code>1.25 mm</code></td>
+<td style="text-align: center;"><code>6.4 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.8 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>251 ~ 300 V</strong></td>
+<td style="text-align: center;"><code>0.2 mm</code></td>
+<td style="text-align: center;"><code>1.25 mm</code></td>
+<td style="text-align: center;"><code>12.5 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.4 mm</code></td>
+<td style="text-align: center;"><code>0.8 mm</code></td>
+<td style="text-align: center;"><code>0.8 mm</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>301 ~ 500 V</strong></td>
+<td style="text-align: center;"><code>0.25 mm</code></td>
+<td style="text-align: center;"><code>2.5 mm</code></td>
+<td style="text-align: center;"><code>12.5 mm</code></td>
+<td style="text-align: center;"><code>0.8 mm</code></td>
+<td style="text-align: center;"><code>0.8 mm</code></td>
+<td style="text-align: center;"><code>1.5 mm</code></td>
+<td style="text-align: center;"><code>0.8 mm</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：目前大部分板厂所提供的布线最小间距为
+<code>4mil</code>，即 <code>0.1mm</code>。</p>
+</blockquote>
+<h3 id="最小过孔">最小过孔</h3>
+<p>当前 PCB 板厂可以提供的多层板最小内径为
+<code>0.2mm</code>，最小外径为 <code>0.4mm</code>，双面板最小内径
+<code>0.3mm</code>，最小外径 <code>0.5mm</code>。</p>
+<h2 id="封装尺寸">封装尺寸</h2>
+<h2 id="pcb-堆叠与分层">PCB 堆叠与分层</h2>
+<p>虽然 PCB
+可以分为多层结构进行设计，但是通常元器件仅能在顶层或者底层，分别通过<strong>波峰焊</strong>（针对贴片元件）或者<strong>回流焊</strong>（针对分立元件）进行焊接：</p>
+<p><img src="/Electronics/PCB_Principle/soldering.png"></p>
+<p>根据覆铜层数的不同，可以将 PCB 具体划分为如下 3 种类型：</p>
+<ul>
+<li><strong>单面 PCB 板</strong>：仅有一面走线或者覆铜；</li>
+<li><strong>双面 PCB 板</strong>：顶层和底层都会进行走线或者覆铜；</li>
+<li><strong>多层 PCB
+板</strong>：除了顶层和底层之外，中间还包含了<code>信号层</code>、<code>中间层</code>、<code>电源层</code>、<code>接地层</code>，每一层之间相互绝缘并采用过孔连接；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：因为双面 PCB
+的电磁兼容性较差，所以通常仅用于低速设计当中。</p>
+</blockquote>
+<p><img src="/Electronics/PCB_Principle/multilayer.png"></p>
+<p>每层 PCB
+之间，分别可以采用<code>通孔</code>、<code>盲孔</code>、<code>埋孔</code>方式进行连接。总体而言，绝大多数板级
+EDA 工具软件都定义有下表当中的 PCB 功能层次：</p>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">名称</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>顶层/底层</strong></td>
+<td style="text-align: left;">PCB
+板顶面、底面的铜箔层，用于信号走线。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>内层</strong></td>
+<td style="text-align: left;">覆盖有铜箔，用于信号走线与铺铜，可以设置为信号层和内电层。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>顶层/底层丝印层</strong></td>
+<td style="text-align: left;">印刷在 PCB
+板上的字符层（通常为白色）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>顶层/底层锡膏层</strong></td>
+<td style="text-align: left;">也称为正片工艺时的<strong>助焊层</strong>，用于为贴片焊盘制造不锈钢网使用的层，从而决定锡膏填充区域大小以辅助焊接，不需要贴片可以忽略该层；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>顶层/底层阻焊层：</strong></td>
+<td style="text-align: left;">PCB
+顶层、底层上的盖油层（通常为绿色阻焊油），其作用是阻止焊锡粘结板材；该层为负片绘制方式，当有导线或区域不需要覆盖阻焊油时进行绘制，生产出的
+PCB 相应区域将不会覆盖阻焊油，该操作通常称为<strong>开窗</strong>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>边框层</strong></td>
+<td style="text-align: left;">该层用于定义板框的形状、尺寸，板厂会基于该层进行
+PCB 生产；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>顶层/底层装配层</strong></td>
+<td style="text-align: left;">元器件的简化轮廓，用于装配与维修，可以导出文档打印，不会对
+PCB 板生产造成影响；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>机械层</strong></td>
+<td style="text-align: left;">用于记录一些 PCB
+板的机械信息，生产时默认不会使用该层定义的形状进行制造，某些板厂使用源文件生产时会采用机械层作为边框，使用
+<code>Gerber</code>
+文件生产时该层仅用于标识<code>工艺参数</code>、<code>V 割路径</code>等文字信息；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>文档层</strong></td>
+<td style="text-align: left;">类似于机械层，但是该层仅在 EDA
+工具当中可见，不会导出至 <code>Gerber</code> 文件当中；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>飞线层</strong></td>
+<td style="text-align: left;">显示 PCB
+网络飞线，不属于物理意义上的层，只是为了方便颜色设置，因此某些 EDA
+工具会将其放置到<code>层管理器</code>当中进行配置；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>孔层</strong></td>
+<td style="text-align: left;">类似于飞线层，不属于物理意义上的层，仅用于<strong>通孔</strong>（非金属化孔）的显示与颜色配置使用；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>多层</strong></td>
+<td style="text-align: left;">类似于飞线层，金属化孔的显示和颜色配置，当焊盘层属性为多层时，该层将用于连接包括内层在内的每个铜箔层；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>错误层</strong></td>
+<td style="text-align: left;">类似于飞线层，用于
+DRC（设计规则检验）的错误标识显示与颜色配置；</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<strong>信号层</strong>主要放置铜膜导线与元件，为电气信号提供传输通道；<strong>内部电源/接地层</strong>
+也称为<strong>内电层</strong>，主要用来铺设电源和接地，由大块的铜膜覆盖而成，可以提升
+PCB 工作的稳定性。</p>
+</blockquote>
+<h3 id="四层-pcb-参考设计">四层 PCB 参考设计</h3>
+<table>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 11%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">板层顺序</th>
+<th style="text-align: center;">第 1 层</th>
+<th style="text-align: center;">第 2 层</th>
+<th style="text-align: center;">第 3 层</th>
+<th style="text-align: center;">第 4 层</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>第 1 种情况</strong></td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">（信号 1 + 电源）</td>
+<td style="text-align: center;">（信号 2 + 电源）</td>
+<td style="text-align: center;">接地</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>第 2 种情况</strong></td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">信号 2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>第 3 种情况</strong></td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">电源层</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>第 1
+种情况</strong>，比较理想的四层板堆叠设计，因为最外层是接地层，对于 EMI
+有屏蔽作用，同时<strong>电源层</strong>与<strong>接地层</strong>可以靠得很近，使得电源内阻较小；但是，当元器件密度比较大时，不能保证接地层的完整性，信号层的信号质量会变得较差，相邻信号层之间的串扰较大；</li>
+<li><strong>第 2
+种情况</strong>，这种方式较为常用，这种结构拥有较好的层电容效应，整个
+PCB
+的层间串扰较小，信号层可以取得较好的信号完整性；但这种结构当中，由于信号层处于表层，空间电磁辐射的强度增大，需要通过外加屏蔽壳才能够降低
+EMI；</li>
+<li><strong>第 3
+种情况</strong>，电源层与接地层都处于表层，信号完整性比较好，其中
+<code>信号 1</code> 层上的信号质量最好，<code>信号 2</code>
+层次之；这种设计对于 EMI
+有一定的屏蔽作用；但是，由于环路较大，器件密度的大小直接决定着信号质量，相邻信号层不能避免层间干扰，整体上不如第
+1 种结构，除非对于电源功率有特殊要求；</li>
+</ul>
+<h3 id="六层-pcb-参考设计">六层 PCB 参考设计</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">板层顺序</th>
+<th style="text-align: center;">第 1 层</th>
+<th style="text-align: center;">第 2 层</th>
+<th style="text-align: center;">第 3 层</th>
+<th style="text-align: center;">第 4 层</th>
+<th style="text-align: center;">第 5 层</th>
+<th style="text-align: center;">第 6 层</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>第 1 种情况</strong></td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">信号 3</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">信号 4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>第 2 种情况</strong></td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">信号 3</td>
+<td style="text-align: center;">信号 4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>第 3 种情况</strong></td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">信号 3</td>
+<td style="text-align: center;">信号 4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>第 4 种情况</strong></td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 1</td>
+<td style="text-align: center;">电源层</td>
+<td style="text-align: center;">接地层</td>
+<td style="text-align: center;">信号 2</td>
+<td style="text-align: center;">接地层</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>第 1 种情况</strong>，是常见的方式之一，<code>信号 1</code>
+层是比较好的布线层，<code>信号 2</code> 层次之；但是要注意
+<code>信号 2</code> 与 <code>信号 3</code>
+之间的层间串扰，<code>信号 4</code>
+如果没有元件，就尽量减少信号线，并且多覆盖一层接地；</li>
+<li><strong>第 2 种情况</strong>，<code>信号 2</code> 与
+<code>信号 3</code>层的信号完整性最好，其中 <code>信号 2</code>
+层为最好的布线层，<code>信号 3</code>
+层次之；电源平面的阻抗较好，层间电容较大，有利于抑制整板的 EMI；但是由于
+<code>信号 1</code> 与 <code>信号 2</code>
+之间存在较大的层间干扰，并且距离电源层和接地层较远，EMI
+空间辐射强度较大，可能需要外加屏蔽壳；</li>
+<li><strong>第 3
+种情况</strong>，这种情况是六层板的最佳布局，<code>信号 1</code>、<code>信号 2</code>、<code>信号 3</code>
+都是比较好的布线层，并且电源平面的阻抗也比较好，美中不足之处在于
+<code>信号 4</code> 距离接地层过远；</li>
+<li><strong>第 4 种情况</strong>，虽然性能优于前面 3
+种，但是可供布线的层数仅有 2 层；</li>
+</ul>
+<h2 id="信号完整性问题">信号完整性问题</h2>
+<p><strong>信号完整性（SI，Signal Integrity）</strong>是指 PCB
+上的信号经由信号线传输以后仍然能保持完整与正确，当电路中的信号能够以正确的时序、符合要求的持续时间与电压幅度进行传送，并完整的到达输出端时，即说明该电路具有良好的信号完整性；而当信号不能正常响应时，就认为出现了信号完整性问题，特别是在高频高速电路当中。因此，信号完整性分析的目的就是为了确保信号的<strong>时序</strong>与<strong>电压</strong>幅度正确传输，电路设计当中常见的信号完整性问题主要集中在如下几个方面：</p>
+<ul>
+<li><strong>传输延迟</strong>（<code>Transmission Delay</code>）：指信号没有在规定的时间内以一定的持续时间和幅度到达接收端，通常是由于驱动过载、布线过长的传输线效应引起。此外，传输线上的电容、电感也会对信号的状态切换产生延时。高速电路设计当中，传输延迟是一个无法回避的问题，因此专门引入了一个<strong>延迟容限</strong>的概念，即确保电路正常工作的前提下，所允许的信号最大时序变化。</li>
+<li><strong>反射</strong>（<code>Reflection</code>）：指传输线上的回波，信号功率的一部分从源端经过传输线传递至负载，另一部分则会向源端反射。高速电路设计当中，可以将导线等效为传输线，而非集总参数电路中的导线。若阻抗匹配(源端阻抗、传输线阻抗、负载阻抗三者相等)则反射不会发生；反之，如果负载阻抗与传输线阻抗不匹配就会导致接收端向源端的信号反射。布线的几何形状、不恰当的端接方式、经过连接器的传输及电源平面不连续等因素均会导致该问题，进而导致传送信号出现严重的<strong>过冲</strong>（Overshoot）或<strong>下冲</strong>（Undershoot）现象，并最终造成信号的波形变形与时序混乱。</li>
+<li><strong>窜扰</strong>（<code>Crosstalk</code>）：指没有电气连接的信号线之间的感应电压与电流所导致的电磁耦合，这种耦合会造成信号线产生类似天线的作用。其中，容性耦合会引发耦合电流，感性耦合则会引发耦合电压，并伴随时钟速率的提升与
+PCB
+尺寸的缩小而加大，一切都是由于信号线上有交变的信号电流通过所产生的磁场，处于该磁场中的其它信号线就会感应到信号电压。PCB
+的工作层的参数、信号线间距、驱动与接收端的电气特性、信号线本身的端接方式等等都会对窜扰造成一定影响。</li>
+<li><strong>接地反弹</strong>（<code>Ground Bounce</code>）：指由于电路中由于较大电流涌动而在电源与接地平面之间产生的大量噪声，例如大量芯片同步进行切换时，就会在与电源平面之间产生较大的瞬时电流，而芯片封装与电源之间的寄生电感、电容、电阻就会随之引发电源噪声，造成电路在零电位上产生较大的电压波动，进而影响其它元器件的正常工作。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：<strong>信号完整性问题</strong>往往与<strong>电磁兼容性问题</strong>相伴而生。</p>
+</blockquote>
+<h2 id="w20h55-原则">3W/20H/55 原则</h2>
+<ul>
+<li><strong>3W 原则</strong>：也称为 3H 原则，保证两条走线的中心间距大于
+<strong>3
+倍的线宽</strong>，从而减小走线之间的串扰；当走线间的中心距离大于 3
+倍线宽时，可以保持 <code>70%</code> 的线间电场不会互相干扰；如要希望达到
+<code>98%</code> 的线间电场不互相干扰，则可以使用 <strong>10W</strong>
+规则；</li>
+<li><strong>20H 原则</strong>：多层 PCB
+的边缘会向外辐射电磁干扰，让<strong>电源平面</strong>尺寸相对<strong>地平面</strong>尺寸内缩相互间距的
+<code>20</code>
+倍尺寸，让电场只在接地层范围内进行传导，从而有效抑制这种边缘辐射效应；内缩
+<code>20H</code> 则可以将 <code>70%</code> 的电场限制在接地层，内缩
+<code>100H</code> 则可以限制 <code>98%</code> 的电场；</li>
+<li><strong>55 原则</strong>：时钟频率达到 <code>5MHz</code>
+或者脉冲信号的上升时间小于 <code>5ns</code>，那么 PCB
+必须采用多层板；有时出于成本因素的考虑采用双层板结构，这种情况下最好将
+PCB 其中一层作为完整的地平面层；</li>
+</ul>
+<h2 id="pcb-布局规范">PCB 布局规范</h2>
+<ol type="1">
+<li><strong>电源</strong>与<strong>信号</strong>要分开；</li>
+<li>信号的<strong>输入</strong>与<strong>输出</strong>要分开；</li>
+<li><strong>数字部分</strong>与<strong>模拟部分</strong>要分开；</li>
+<li><strong>高频部分</strong>与<strong>低频部分</strong>要分开；</li>
+<li><strong>强电部分</strong>与<strong>弱电部分</strong>要分开。</li>
+</ol>
+<h3 id="元件布局基本原则">元件布局基本原则</h3>
+<ul>
+<li>通常条件下，所有元件均应分布在 PCB 的相同面上，只有在 PCB
+顶层元件过密时，才将一些高度有限并且发热量较小的贴片元件放置在底层；</li>
+<li>依据【<strong>先大后小，先难后易</strong>】的布线原则，重要的单元电路、核心元器件需要首先进行布局，并且保持关键信号线最短；</li>
+<li><strong>高电压大电流信号</strong>与<strong>小电流低电压信号</strong>完全分开；<strong>模拟信号</strong>与<strong>数字信号</strong>分开；<strong>高频信号</strong>与<strong>低频信号</strong>分开，并且高频元器件的隔离要充分；</li>
+<li>布局过程当中，充分参考原理框图，根据<strong>主信号流向</strong>摆放主要元器件；</li>
+<li>元件的布局应当便于信号流通，并让信号尽可能保持一致的流动方向；</li>
+<li>保证电气性能的前提下，元件应当放置在相互平行或者垂直排列的栅格上，以求整齐美观；</li>
+<li>如果元件或导线之间存在较高的电位差，应当加大其间隔距离，避免由于放电击穿引起意外短路；</li>
+<li>带有高电压的元件应当尽量布置在调试时，手不容易触及的地方；</li>
+<li>位于 PCB 边缘的元件，距离边缘至少要有 <strong>2</strong>
+个板厚的距离；</li>
+<li>相同类型的<strong>插装元件</strong>应当同方向进行放置，同类型的有极性元件也尽量朝相同方向摆放，便于后期生产检测；</li>
+<li>避免不同金属封装的元件相互接触；</li>
+<li>元件之间的间隔距离需要满足操作空间的要求，例如插拔 TF 卡；</li>
+<li>重量较大的元件，应当安装在靠近 PCB 支承点的位置，减小 PCB
+板材受力的翘曲度；必要时还应当采取固定措施，不能仅依靠引脚焊面固定；</li>
+<li>高压元器件和低压元器件之间保持较宽的<strong>电气隔离带</strong>，即不将电压等级相差较大的元器件摆放在一起，既有利于电气绝缘，也可以隔离信号提升抗干扰能力；</li>
+</ul>
+<h3 id="防止电磁干扰">防止电磁干扰</h3>
+<ul>
+<li>电磁辐射较强的元件，或者对于电磁辐射较为敏感的元件，应<strong>加大相互之间的距离或者添加屏蔽罩</strong>，元件摆放的方向应当<strong>与相邻的铜泊导线交叉</strong>；</li>
+<li>对于变压器、扬声器、电感等会产生磁场的元件，布局时应注意<strong>减少磁力线对于印制导线的切割</strong>，相邻元件磁场方向应相互垂直，减少彼此之间的耦合；</li>
+<li><strong>电感器件</strong>不要近距离并排摆放，避免形成互感；</li>
+<li>对电磁干扰源进行屏蔽，并且保证<strong>屏蔽罩能够良好的接地</strong>；</li>
+<li>对于高频电路，需要<strong>考虑元件之间的分布参数</strong>的影响；</li>
+</ul>
+<h3 id="抑制热干扰">抑制热干扰</h3>
+<ul>
+<li>发热元件优先安排在利于散热的位置，必要时可以单独设置散热片、散热风扇；</li>
+<li>一些功耗大的集成块、大或中功率管、电阻等元件，要布置在容易散热的地方，并与其它元件隔开一定距离。</li>
+<li>PCB 双面都摆放元件时，底层一般不放置发热元件；</li>
+<li>电阻、电容、晶振等热敏元件，应当尽量远离高温区域，以避免受到热干扰；</li>
+<li>热敏器件尽量摆放在上风口，<strong>高元件</strong>放置在<strong>矮元件</strong>后面，并且沿风阻最小的方向放置，避免风道受阻；</li>
+<li>采用大面积的<strong>接地铜箔</strong>，提升 PCB 的散热效率；</li>
+<li><strong>接地安装孔</strong>可以采用较大的焊盘，以充分利用安装螺栓和
+PCB 两侧的铜箔进行散热；</li>
+</ul>
+<h3 id="电源布局">电源布局</h3>
+<ul>
+<li>多采用<strong>星形拓扑结构</strong>，少采用<strong>菊花链布局</strong>，缩短电源的公共回路；</li>
+<li>电源的<strong>输入与输出要分开进行布局</strong>，以避免串扰问题；</li>
+<li>电源管理芯片、背光芯片、升压芯片需要放置在<strong>屏蔽壳</strong>当中；</li>
+<li>电源走线要尽量<strong>避开射频区域</strong>；</li>
+</ul>
+<h3 id="高速元件与天线布局">高速元件与天线布局</h3>
+<ul>
+<li>DDR、SDRAM、NAND Flash 等存储芯片需要靠近 CPU
+进行摆放，并尽量减少线长以及交叉线的数量；</li>
+<li>屏幕插座应当顺着 CPU 出线的方向，中间的 <strong>RC
+滤波器</strong>尽量摆放在 CPU 一侧；</li>
+<li>高速器件 CPU、液晶屏幕插座等应当远离天线模块；</li>
+<li>射频模块和天线周边不要有金属元器件，以避免影响天线的频率点、阻抗等参数；</li>
+</ul>
+<h2 id="pcb-布线原则">PCB 布线原则</h2>
+<ul>
+<li>高速信号的走线要尽可能<strong>短</strong>和<strong>直</strong>，走线间距要足够大，并且尽量靠近
+PCB 边缘或者接插件；</li>
+<li>相同信号传输线的<strong>线宽</strong>需要保持一致，<strong>拐线</strong>时同样需要保持相同的线宽；</li>
+<li>重要的信号线可以<strong>增加线宽</strong>，以降低其特性阻抗；</li>
+<li>关键信号线可以采用<strong>平行地线</strong>的方式进行隔离；</li>
+<li>相邻的两层之间，走线采用 <strong>#</strong> 字型错开布线；</li>
+<li>每条<strong>走线</strong>的宽度与元器件每个引脚的<strong>焊盘</strong>连接保持<strong>对称</strong>，并且从元件<strong>焊盘中心位置出线</strong>；</li>
+<li>当和焊盘连接的走线比焊盘宽时，走线不能覆盖焊盘，应从焊盘末端引线；</li>
+<li>引脚间距较为密集的贴片元件焊盘引脚，需要从<strong>焊盘外部</strong>走线进行连接，不允许直接连接引脚之间的焊盘；</li>
+<li><strong>过孔</strong>可能会引发信号传输线的阻抗突变，因此需要尽量减少过孔使用的数量；</li>
+<li>信号传输线上避免出现<strong>桩线</strong>，如果无法避免，那么桩线的长度应小于信号的上升时间，避免出现反射；</li>
+<li>高速信号走线换层时，附近要有<strong>接地孔</strong>提供回流环路，确保整板回环小阻抗小；</li>
+<li>模拟信号不要使用 EDA 工具的自动布线功能；</li>
+<li>对敏感节点使用屏蔽线，即在受干扰结点的周边添加一组屏蔽线，并且在<strong>屏蔽线上放置多个接地过孔</strong>；</li>
+</ul>
+<h3 id="串扰">串扰</h3>
+<ul>
+<li><strong>反向电流平行走线</strong>带来的串扰较大；</li>
+<li>串扰强度与走线<strong>长度</strong>成正比，与<strong>间距</strong>成反比，与<strong>频率</strong>成正比；</li>
+<li>加大走线的间距，缩小走线的平行长度，必要时可以采用
+<strong>Jog-Out</strong> 凹凸布线；</li>
+<li>加入端接匹配可以降低反射，并且减小串扰；</li>
+<li>将信号层限制在高于接地平面 <code>10mil</code> 范围以内；</li>
+<li>向串扰比较严重的两条线之间插入一条地线进行隔离，从而减小串扰；</li>
+<li><strong>避开噪声源</strong>，例如
+MCU、电感、晶振邻近的表层严禁走线或者打过孔；</li>
+</ul>
+<h3 id="覆铜">覆铜</h3>
+<ul>
+<li>PCB
+设计当中，没有布线的区域最好选择一个较大的<strong>接地平面</strong>来进行覆盖，以提供屏蔽和提高去耦能力；</li>
+<li>发热元件周围或者大电流走线应当尽量避免使用大面积铜箔，长时间受热会导致铜箔膨胀脱落；</li>
+<li>发热元件周围如果必须使用大面积铜箔，那么最好采用<strong>栅格覆铜</strong>，便于释放铜箔的表面张力；</li>
+<li>相同层的走线分布不平衡或者不同层的铜分布不对称时，推荐覆铜设计。</li>
+<li>PCB 最外层如果存在大面积的区域没有走线，建议在该区域内栅格覆铜，使得
+PCB 整体的铜箔分布均匀；</li>
+<li>推荐铺铜网格之间<strong>空白方格</strong>的大小约为
+<code>25mil x 25mil</code>；</li>
+<li>噪声敏感的电路需要考虑接地屏蔽，即在信号层的四周布宽度大于
+<code>50mil</code> 地线或间距小于 <code>300mil</code> 的地孔；</li>
+<li><strong>孤铜</strong>（特别是表层）超过 <code>150mils</code>
+时，不能打接地过孔，需要删除该区域，以免形成悬空的天线；</li>
+</ul>
+<h2 id="pcb-拼板">PCB 拼板</h2>
+<p><strong>拼板</strong>是指由于电子元件自动化贴片，需要将单块 PCB
+电路板进行 <strong>V
+割</strong>或者<strong>邮票孔</strong>处理的加工方式。常见的 PCB
+拼版方式主要有 3
+种：<strong>同方向拼版</strong>、<strong>中心对称拼版</strong>、<strong>镜像对称拼版</strong>。</p>
+<p><strong>同方向拼版</strong>：最简单的拼板方式，将同款的 PCB
+设计平铺复制以后就可以实现。</p>
+<p><img src="/Electronics/PCB_Principle/joint-1.png"></p>
+<p><strong>中心对称拼版</strong>：适用于拼接<strong>两块</strong>形状不规则的
+PCB，中间必须开铣（<code>xǐ</code>）槽才能够进行分离；如果拼版以后产生较大变形，可以考虑在拼版中添加邮票孔连接的<strong>辅助块</strong>。</p>
+<p><img src="/Electronics/PCB_Principle/joint-2.png"></p>
+<p><strong>镜像对称拼版</strong>：通常在 PCB
+正反面的贴片元件都能够满足<strong>回流焊</strong>的焊接要求时采用，但是要注意镜像对称拼版需要满足
+PCB 光绘的<strong>正负片对称分布</strong>，例如四层板第 2
+层为电源/接地的<strong>负片</strong>，则与其对称的第 3
+层也必须是<strong>负片</strong>，否则不能采用镜像对称方式拼版。</p>
+<p><img src="/Electronics/PCB_Principle/joint-3.png"></p>
+<h2 id="工艺边">工艺边</h2>
+<p><strong>工艺边</strong>是为了满足自动化贴片的需要而增加的辅助部分，生产完成之后会被移除，一般设计为
+<code>5mm</code>。</p>
+<ul>
+<li><strong>定位孔</strong>: 用于 PCB 加工和测试时的定位，一般设计为
+<code>2mm</code> 的<strong>过孔</strong>；</li>
+<li><strong>Mark 点</strong>: 用于自动化贴片机进行识别定位，通常设计为
+<code>1mm</code> 的<strong>焊盘</strong>；</li>
+</ul>
+<h2 id="测试点">测试点</h2>
+<p>关键元件需要在 PCB
+设计上添加测试点，以便于后期进行自动化的<strong>飞针测试</strong>。不允许将用于焊接贴片元件的焊盘作为检测点，必须单独设计专用的测试焊盘，以降低对于焊点检测和生产调试的影响。用作测试点的焊盘需要尽可能分布在
+PCB 相同侧，以降低检测时间和成本。</p>
+<p><img src="/Electronics/PCB_Principle/test-point.jpg"></p>
+<ul>
+<li>测试点<strong>距离 PCB 边缘</strong>尽量大于 <code>5mm</code>；</li>
+<li>确保测试点不会被<strong>阻焊</strong>层或者其它<strong>油墨</strong>覆盖；</li>
+<li>测试点最好<strong>镀锡</strong>或者<strong>沉金</strong>处理，以防止氧化；</li>
+<li>测试点尽量放置在<strong>距离元件</strong> <code>1mm</code>
+以外，避免元件遭到探针的错误撞击；</li>
+<li>测试点需要<strong>距离定位孔</strong> <code>3.2mm</code> 以上；</li>
+<li>测试点的<strong>直径</strong>不可小于
+<code>0.4mm</code>，相邻测试点的<strong>间距</strong>最好在
+<code>2.54mm</code> 以上；</li>
+<li>测试面不能放置<strong>高度</strong>超过 <code>6.4mm</code>
+的元器件，以避免探针的测试夹具撞击到这些过高的元件；</li>
+<li>确保每块<strong>芯片</strong>都拥有电源和接地测试点，并且尽可能靠近芯片（最好小于
+<code>2.54mm</code>）；</li>
+<li>在 PCB
+<strong>走线</strong>上设置测试点时，可以将测试焊盘的宽度进行适当放大；</li>
+<li>测试点应当<strong>均匀分布</strong>在 PCB
+上面，以避免探针下压产生的应力过于集中；</li>
+<li><strong>电源</strong>应当分区域设置测试点，以便于去耦以及故障查询；</li>
+</ul>
+<h2 id="pcb-布线五要素">PCB 布线五要素</h2>
+<ol type="1">
+<li><strong>规划电路分区</strong>，核心元件布局在整板的正中心，而其它重要元件也尽量分布在中轴线附近；</li>
+<li><strong>电源优于一切</strong>，<strong>电源</strong>的输入输出走线尽量<strong>加粗</strong>（线宽不能超过元件引脚焊盘，或者选择回路走线），不同铜层之间的电源走线可以通过<strong>多个过孔</strong>（2
+~ 6 个）来提高载流能力；</li>
+<li><strong>模块化设计思路</strong>，理解每一个电路模块，对于重要的<strong>模块</strong>和<strong>信号走线</strong>要进行合理的<strong>包地</strong>处理；</li>
+<li><strong>合理的扇出 Fanout
+贴片元件引脚</strong>，保持走线的美观；</li>
+<li><strong>最优走线层</strong>通常是指最为靠近完整地平面的走线层；</li>
+</ol>
+<h2 id="pcb-布线基本策略">PCB 布线基本策略</h2>
+<ol type="1">
+<li>首先放置<code>安装孔</code>、<code>接插件</code>、<code>开关</code>等结构件相关的封装位置；</li>
+<li>基于封装<strong>原点</strong>的 X/Y 位置，设计封装属性当中的相对 X/Y
+位置，从而实现封装放置的精确定位；</li>
+<li>首先摆放主控 IC 芯片，然后分功能模块摆放其它 IC
+芯片，最后再放置其它的附属元件；</li>
+<li>滤波电容的容值越小，越需要靠近 <strong>IC
+芯片的引脚</strong>进行放置（非常重要）；相反的，如果容值较大，则可以适当的放置得距离引脚更远；</li>
+<li>布线过程当中，如果飞线对于元件的连接关系形成了干扰，则可以隐藏 EDA
+工具封装<code>值</code>与<code>位号</code>的显示；</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>PCB 基本布线规范与设计原则</p><p><a href="http://www.uinio.com/Electronics/PCB_Principle/">http://www.uinio.com/Electronics/PCB_Principle/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2011-12-08</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-03-15</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/PCB/">PCB</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Zen/Design-Pattern/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">面向对象设计模式温故知新</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Linux/Vim/"><span class="level-item">Vim 常用键位生存指南</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#基本术语"><span class="level-left"><span class="level-item">1</span><span class="level-item">基本术语</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#布线"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">布线</span></span></a></li><li><a class="level is-mobile" href="#拼板"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">拼板</span></span></a></li><li><a class="level is-mobile" href="#过孔"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">过孔</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#过孔的寄生电容"><span class="level-left"><span class="level-item">1.3.1</span><span class="level-item">过孔的寄生电容</span></span></a></li><li><a class="level is-mobile" href="#过孔的寄生电感"><span class="level-left"><span class="level-item">1.3.2</span><span class="level-item">过孔的寄生电感</span></span></a></li></ul></li><li><a class="level is-mobile" href="#阻焊"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">阻焊</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#阻焊桥"><span class="level-left"><span class="level-item">1.4.1</span><span class="level-item">阻焊桥</span></span></a></li><li><a class="level is-mobile" href="#阻焊开窗"><span class="level-left"><span class="level-item">1.4.2</span><span class="level-item">阻焊开窗</span></span></a></li><li><a class="level is-mobile" href="#包地"><span class="level-left"><span class="level-item">1.4.3</span><span class="level-item">包地</span></span></a></li><li><a class="level is-mobile" href="#fanout-扇出"><span class="level-left"><span class="level-item">1.4.4</span><span class="level-item">Fanout 扇出</span></span></a></li></ul></li><li><a class="level is-mobile" href="#单位换算"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">单位换算</span></span></a></li></ul></li><li><a class="level is-mobile" href="#元件封装"><span class="level-left"><span class="level-item">2</span><span class="level-item">元件封装</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#贴片元件"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">贴片元件</span></span></a></li><li><a class="level is-mobile" href="#芯片封装"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">芯片封装</span></span></a></li></ul></li><li><a class="level is-mobile" href="#布线参数"><span class="level-left"><span class="level-item">3</span><span class="level-item">布线参数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#布线宽度"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">布线宽度</span></span></a></li><li><a class="level is-mobile" href="#布线间距"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">布线间距</span></span></a></li><li><a class="level is-mobile" href="#最小过孔"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">最小过孔</span></span></a></li></ul></li><li><a class="level is-mobile" href="#封装尺寸"><span class="level-left"><span class="level-item">4</span><span class="level-item">封装尺寸</span></span></a></li><li><a class="level is-mobile" href="#pcb-堆叠与分层"><span class="level-left"><span class="level-item">5</span><span class="level-item">PCB 堆叠与分层</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#四层-pcb-参考设计"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">四层 PCB 参考设计</span></span></a></li><li><a class="level is-mobile" href="#六层-pcb-参考设计"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">六层 PCB 参考设计</span></span></a></li></ul></li><li><a class="level is-mobile" href="#信号完整性问题"><span class="level-left"><span class="level-item">6</span><span class="level-item">信号完整性问题</span></span></a></li><li><a class="level is-mobile" href="#w20h55-原则"><span class="level-left"><span class="level-item">7</span><span class="level-item">3W/20H/55 原则</span></span></a></li><li><a class="level is-mobile" href="#pcb-布局规范"><span class="level-left"><span class="level-item">8</span><span class="level-item">PCB 布局规范</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#元件布局基本原则"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">元件布局基本原则</span></span></a></li><li><a class="level is-mobile" href="#防止电磁干扰"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">防止电磁干扰</span></span></a></li><li><a class="level is-mobile" href="#抑制热干扰"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">抑制热干扰</span></span></a></li><li><a class="level is-mobile" href="#电源布局"><span class="level-left"><span class="level-item">8.4</span><span class="level-item">电源布局</span></span></a></li><li><a class="level is-mobile" href="#高速元件与天线布局"><span class="level-left"><span class="level-item">8.5</span><span class="level-item">高速元件与天线布局</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pcb-布线原则"><span class="level-left"><span class="level-item">9</span><span class="level-item">PCB 布线原则</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#串扰"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">串扰</span></span></a></li><li><a class="level is-mobile" href="#覆铜"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">覆铜</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pcb-拼板"><span class="level-left"><span class="level-item">10</span><span class="level-item">PCB 拼板</span></span></a></li><li><a class="level is-mobile" href="#工艺边"><span class="level-left"><span class="level-item">11</span><span class="level-item">工艺边</span></span></a></li><li><a class="level is-mobile" href="#测试点"><span class="level-left"><span class="level-item">12</span><span class="level-item">测试点</span></span></a></li><li><a class="level is-mobile" href="#pcb-布线五要素"><span class="level-left"><span class="level-item">13</span><span class="level-item">PCB 布线五要素</span></span></a></li><li><a class="level is-mobile" href="#pcb-布线基本策略"><span class="level-left"><span class="level-item">14</span><span class="level-item">PCB 布线基本策略</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

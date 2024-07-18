@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>初等代数常用公式与图像汇总 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="初等数学主要由代数（Algebra）和几何（Geometry）两部分构成，本篇文章基于《Thomas’ Calculus Early Transcendentals》第 14 版所附录的 A Brief Table of Integrals 章节整理而成，主要涉及基本代数运算、集合、区间与邻域、斜率、映射、幂函数、指数函数、对数函数、弧度制、三角函数以及几何学等知识点，较为系统的概括了初等数"><meta property="og:type" content="blog"><meta property="og:title" content="初等代数常用公式与图像汇总"><meta property="og:url" content="http://www.uinio.com/Math/Algebra/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="初等数学主要由代数（Algebra）和几何（Geometry）两部分构成，本篇文章基于《Thomas’ Calculus Early Transcendentals》第 14 版所附录的 A Brief Table of Integrals 章节整理而成，主要涉及基本代数运算、集合、区间与邻域、斜率、映射、幂函数、指数函数、对数函数、弧度制、三角函数以及几何学等知识点，较为系统的概括了初等数"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2011-01-12T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-24T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Elementary"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Math/Algebra/"},"headline":"初等代数常用公式与图像汇总","image":["http://www.uinio.com/Math/Algebra/logo.png"],"datePublished":"2011-01-12T16:00:00.000Z","dateModified":"2020-11-24T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"初等数学主要由代数（Algebra）和几何（Geometry）两部分构成，本篇文章基于《Thomas’\r Calculus Early Transcendentals》第 14 版所附录的 A Brief Table\r of Integrals\r 章节整理而成，主要涉及基本代数运算、集合、区间与邻域、斜率、映射、幂函数、指数函数、对数函数、弧度制、三角函数以及几何学等知识点，较为系统的概括了初等数"}</script><link rel="canonical" href="http://www.uinio.com/Math/Algebra/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2011-01-12T16:00:00.000Z" title="2011/1/13 00:00:00">2011-01-13</time>发表</span><span class="level-item"><time dateTime="2020-11-24T16:00:00.000Z" title="2020/11/25 00:00:00">2020-11-25</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Math/">Math</a></span><span class="level-item">42 分钟读完 (大约6283个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">初等代数常用公式与图像汇总</h1><div class="content"><p><strong>初等数学</strong>主要由<strong>代数</strong>（Algebra）和<strong>几何</strong>（Geometry）两部分构成，本篇文章基于《Thomas’
+Calculus Early Transcendentals》第 14 版所附录的 <strong>A Brief Table
+of Integrals</strong>
+章节整理而成，主要涉及<code>基本代数运算</code>、<code>集合</code>、<code>区间与邻域</code>、<code>斜率</code>、<code>映射</code>、<code>幂函数</code>、<code>指数函数</code>、<code>对数函数</code>、<code>弧度制</code>、<code>三角函数</code>以及<code>几何学</code>等知识点，较为系统的概括了初等数学当中常见的<strong>公式定理</strong>以及相关的<strong>函数图像</strong>，以备日常进行电路与信号分析时，随手查阅公式使用。</p>
+<p><img src="/Math/Algebra/logo.png"></p>
+<p><strong>高等数学</strong>的研究对象是变动的量，而<strong>初等数学</strong>的研究对象则是不变的量，正是由于初等数学只能解释常量的几何与物理问题，例如：<code>规则图形的长度</code>、<code>面积</code>与<code>体积</code>、<code>匀速直线运动</code>等等。虽然并不涉及<strong>电路与信号分析</strong>过程当中，所需要经常涉及的变化量分析与求解，但是却是整个高等数学知识体系当中，不可或缺的基本常识性内容。<strong>毕竟初等数学当中所重点讨论的函数，正好就是微积分的主要研究对象</strong>。</p>
+<span id="more"></span>
+<h2 id="基础运算">基础运算</h2>
+<h3 id="算术运算">算术运算</h3>
+<div class="table-container">
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[a \cdot (b+c) = a \cdot b + a \cdot
+c\]</span>
+</td>
+<td>
+<span class="math display">\[\frac{a}{b} \cdot \frac{c}{d} = \frac{a
+\cdot c}{b \cdot d}\]</span>
+</td>
+</tr>
+<tr class="even">
+<td>
+<span class="math display">\[\frac{a}{b} + \frac{c}{d} = \frac{ad +
+bc}{bd}\]</span>
+</td>
+<td>
+<span class="math display">\[\frac{a/b}{c/d} = \frac{a}{b} \cdot
+\frac{d}{c}\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="符号定律">符号定律</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[-(-a) = a\]</span>
+</td>
+<td>
+<span class="math display">\[\frac{-a}{b} = \frac{a}{-b} =
+-\frac{a}{b}\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="零">零</h3>
+<p>除数不能为<code>0</code>，如果 <span class="math inline">\(a \neq
+0\)</span>，那么：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[\frac{0}{a} = 0\]</span>
+</td>
+<td>
+<span class="math display">\[a^0 = 1\]</span>
+</td>
+<td>
+<span class="math display">\[0^a = 0\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>而对于任意的数字<code>a</code>，都会有 <span class="math inline">\(a
+\cdot 0 = 0 \cdot a = 0\)</span>；</p>
+<h3 id="指数定律">指数定律</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[a^m \cdot a^n = a^{m+n}\]</span>
+</td>
+<td>
+<span class="math display">\[(ab)^m = a^m \cdot b^m\]</span>
+</td>
+</tr>
+<tr class="even">
+<td>
+<span class="math display">\[(a^m)^n = a^{m \cdot n}\]</span>
+</td>
+<td>
+<span class="math display">\[a^{m/n} = \sqrt[n]{a^m} =
+(\sqrt[n]{a})^m\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>如果 <span class="math inline">\(a \neq 0\)</span>，那么：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[\frac{a^m}{a^n} = a^{m-n}\]</span>
+</td>
+<td>
+<span class="math display">\[a^0 = 1\]</span>
+</td>
+<td>
+<span class="math display">\[a^{-m} = \frac{1}{a^m}\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二项式定理">二项式定理</h3>
+<p>对于任意负整数<code>n</code>可以得到如下公式：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[(a + b)^n = a^n + n \cdot a^{n-1} \cdot b +
+\frac{n(n - 1)}{1 \times 2} \cdot a^{n-2} \cdot b^2 + \frac{n(n - 1)(n -
+2)}{1 \times 2 \times 3} \cdot a^{n-3} \cdot b^3 + ... + n \cdot a \cdot
+b^{n-1} + b^n\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[(a + b)^2 = a^2 + 2ab + b^2\]</span>
+</td>
+<td>
+<span class="math display">\[(a + b)^3 = a^3 + 3a^2b + 3ab^2 +
+b^3\]</span>
+</td>
+</tr>
+<tr class="even">
+<td>
+<span class="math display">\[(a - b)^2 = a^2 - 2ab + b^2\]</span>
+</td>
+<td>
+<span class="math display">\[(a - b)^3 = a^3 - 3a^2b + 3ab^2 -
+b^3\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="整数幂的差">整数幂的差</h3>
+<p>类似求整数幂差的因式分解，如果 <span class="math inline">\(n &gt;
+1\)</span>：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[a^n - b^n = (a - b)(a^{n-1} + a^{n-2}b +
+a^{n-3}b^2 + ... + ab^{n-2} + b^{n-1})\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[a^2 - b^2 = (a - b)(a + b),\]</span>
+</td>
+<td>
+<span class="math display">\[a^3 - b^3 = (a - b)(a^2 + ab +
+b^2)\]</span>
+</td>
+<td>
+<span class="math display">\[a^4 - b^4 = (a - b)(a^3 + a^2b + ab^2 +
+b^3)\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="配平方">配平方</h3>
+<p>如果 <span class="math inline">\(n &gt; 1\)</span> 时：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[ax^2 + bx + c = au^2 + C，其中 u = x +
+(\frac{b}{2a})，而 C = c - \frac{b^2}{4 \cdot a}\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二次公式">二次公式</h3>
+<p>如果 <span class="math inline">\(a \neq 0\)</span> 并且 <span class="math inline">\(ax^2 + bx + c = 0\)</span>，那么：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[x = \frac{-b \pm \sqrt{b^2 -
+4ac}}{2a}\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="根式">根式</h3>
+<p>一般的，如果 <span class="math inline">\(x^n = a\)</span>，那么 <span class="math inline">\(x\)</span> 叫做 <span class="math inline">\(a\)</span> 的 <span class="math inline">\(n\)</span> <strong>次方根</strong>，其中 <span class="math inline">\(n&gt;1\)</span>，并且 <span class="math inline">\(n \in N^*\)</span>。</p>
+<ul>
+<li>当 <span class="math inline">\(n\)</span>
+为<strong>奇数</strong>时，正数的 <span class="math inline">\(n\)</span>
+次方根是一个正数，负数的 <span class="math inline">\(n\)</span>
+次方根是一个负数，此时 <span class="math inline">\(a\)</span> 的 <span class="math inline">\(n\)</span> 次方根用符号 <span class="math inline">\(\sqrt[n]{a}\)</span> 表示；例如：<span class="math inline">\(\sqrt[5]{32} = 2\)</span>，<span class="math inline">\(\sqrt[5]{-32} = -2\)</span>，<span class="math inline">\(\sqrt[3]{a^6} = a^2\)</span>；</li>
+<li>当 <span class="math inline">\(n\)</span>
+为<strong>偶数</strong>时，正数的 <span class="math inline">\(n\)</span>
+次方根有两个，一正一负互为<strong>相反数</strong>；对于正数 <span class="math inline">\(a\)</span>，其<strong>正</strong>的 <span class="math inline">\(n\)</span> 次方根用符号 <span class="math inline">\(\sqrt[n]{a}\)</span> 表示，其<strong>负</strong>的
+n 次方根用符号 <span class="math inline">\(-\sqrt[n]{a}\)</span>
+表示；例如： <span class="math inline">\(\sqrt[4]{16} =
+2\)</span>，<span class="math inline">\(-\sqrt[4]{16} =
+-2\)</span>，或者两者合并记为 <span class="math inline">\(\pm
+\sqrt[4]{16} = \pm 2\)</span>；</li>
+<li><strong>负数</strong>没有偶次方根，<code>0</code>
+的<strong>任意次方根</strong>为 <code>0</code>；</li>
+</ul>
+<p><span class="math inline">\(\sqrt[n]{a}\)</span>
+称为<strong>根式</strong>，这里的 <span class="math inline">\(n\)</span>
+称为<strong>根指数</strong>，<span class="math inline">\(a\)</span>
+称为<strong>被开方数</strong>；根据 <span class="math inline">\(n\)</span> 次方根的意义，可以知道 <span class="math inline">\((\sqrt[n]{a})^n = a\)</span>，例如：<span class="math inline">\((\sqrt{5})^2 = 5\)</span>，<span class="math inline">\((\sqrt[5]{-3})^5 = -3\)</span>；</p>
+<ul>
+<li>当 <span class="math inline">\(n\)</span>
+为<strong>奇数</strong>时，<span class="math inline">\(\sqrt[n]{a^n} =
+a\)</span>；</li>
+<li>当 <span class="math inline">\(n\)</span>
+为<strong>偶数</strong>时，<span class="math inline">\(\sqrt[n]{a^n} =
+|a| = \begin{cases} a,\ a \ge 0 \\ -a,\ a &lt; 0
+\end{cases}\)</span></li>
+</ul>
+<h2 id="斜率">斜率</h2>
+<p><strong>斜率</strong>用于表示一条<strong>直线</strong>关于<strong>横坐标轴</strong>的倾斜程度，当平面上一个<strong>点</strong>从一个位置移动到另外一个位置，其坐标变化的<strong>增量</strong>可以通过终点坐标减去起点坐标获得：</p>
+<p><img src="/Math/Algebra/Thomas/Slope.png"></p>
+<p>例如上图当中的一个点从 <span class="math inline">\((x_1,
+y_1)\)</span> 位置移动至 <span class="math inline">\((x_2, y_2)\)</span>
+位置，此时其坐标的增量为：</p>
+<p><span class="math display">\[
+\begin{cases}
+   \Delta x = x_2 - x_1  \\
+   \Delta y = y_2 - y_1
+\end{cases}
+\]</span></p>
+<p>假设点 <span class="math inline">\(P_1(x_1, y_1)\)</span> 和 <span class="math inline">\(P_2(x_2, y_2)\)</span> 是非垂直直线 <span class="math inline">\(L\)</span>
+上的两个点，那么这条直线的<strong>斜率</strong> <span class="math inline">\(m\)</span> 等于：</p>
+<p><span class="math display">\[
+m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}
+\]</span></p>
+<p>当 <span class="math inline">\(x\)</span>
+增加时上升的直线具有<strong>正斜率</strong>，当 <span class="math inline">\(x\)</span>
+增加时下降的直线具有<strong>负斜率</strong>，水平直线的斜率为<strong>零</strong>，而<strong>垂直的直线没有斜率</strong>。</p>
+<h2 id="映射">映射</h2>
+<p>假设 <span class="math inline">\(X\)</span>、<span class="math inline">\(Y\)</span> 是两个非空集合，如果存在一个法则 <span class="math inline">\(f\)</span>，使得对于 <span class="math inline">\(X\)</span> 中每个元素 <span class="math inline">\(x\)</span>，按照法则 <span class="math inline">\(f\)</span>，在 <span class="math inline">\(Y\)</span> 中都有唯一确定的元素 <span class="math inline">\(y\)</span> 与之对应，那么就称 <span class="math inline">\(f\)</span> 为从 <span class="math inline">\(X\)</span> 到 <span class="math inline">\(Y\)</span> 的<strong>映射</strong>，记作：</p>
+<p><span class="math display">\[
+f: X \rightarrow Y
+\]</span></p>
+<p>其中，<span class="math inline">\(y\)</span> 称为元素 <span class="math inline">\(x\)</span> 在映射 <span class="math inline">\(f\)</span> 下面的<strong>像</strong>，并且记作
+<span class="math inline">\(f(x)\)</span>；而元素 <span class="math inline">\(x\)</span> 称为元素 <span class="math inline">\(y\)</span> 在映射 <span class="math inline">\(f\)</span> 下的一个<strong>原像</strong>；</p>
+<p><span class="math display">\[
+y = f(x)
+\]</span></p>
+<p>集合 <span class="math inline">\(X\)</span> 称为映射 <span class="math inline">\(f\)</span> 的<strong>定义域</strong>，记作 <span class="math inline">\(D_f = X\)</span>；而 <span class="math inline">\(X\)</span>
+当中所有元素的<strong>像</strong>所组成的集合称为映射 <span class="math inline">\(f\)</span> 的<strong>值域</strong>，记作 <span class="math inline">\(R_f\)</span> 或 <span class="math inline">\(f(X)\)</span>：</p>
+<p><span class="math display">\[
+R_f = f(X) = \{ f(x) | x \in X \}
+\]</span></p>
+<ul>
+<li>假设 <span class="math inline">\(f\)</span> 是从集合 <span class="math inline">\(X\)</span> 到集合 <span class="math inline">\(Y\)</span> 的映射，如果 <span class="math inline">\(R_f = Y\)</span>，即 <span class="math inline">\(Y\)</span> 中任一元素 <span class="math inline">\(y\)</span> 都是 <span class="math inline">\(X\)</span> 当中某个元素的<strong>像</strong>，则称
+<span class="math inline">\(f\)</span> 为 <span class="math inline">\(X\)</span> 到 <span class="math inline">\(Y\)</span> 的映射或者<strong>满射</strong>；</li>
+<li>如果对于 <span class="math inline">\(X\)</span> 当中任意两个不同元素
+<span class="math inline">\(x_1 \neq
+x_2\)</span>，它们的<strong>像</strong> <span class="math inline">\(f(x_1) \neq f_(x_2)\)</span>，则称 <span class="math inline">\(f\)</span> 为 <span class="math inline">\(X\)</span> 到 <span class="math inline">\(Y\)</span> 的<strong>单射</strong>；</li>
+<li>如果映射 <span class="math inline">\(f\)</span>
+既是<strong>单射</strong>又是<strong>满射</strong>，则称 <span class="math inline">\(f\)</span>
+为<strong>一一映射</strong>或者<strong>双射</strong>；</li>
+</ul>
+<h3 id="逆映射">逆映射</h3>
+<p>假设 <span class="math inline">\(f\)</span> 是 <span class="math inline">\(X\)</span> 到 <span class="math inline">\(Y\)</span>
+的<strong>单射</strong>，则根据定义，对于每个 <span class="math inline">\(y \in R_f\)</span>，都有唯一的 <span class="math inline">\(x \in X\)</span> 适用于 <span class="math inline">\(f(x) = y\)</span>，于是可以定义一个从 <span class="math inline">\(R\)</span> 到 <span class="math inline">\(X\)</span> 的新映射 <span class="math inline">\(g\)</span>：</p>
+<p><span class="math display">\[
+g:R_f \rightarrow X
+\]</span></p>
+<p>对于每个 <span class="math inline">\(y \in R_f\)</span>，规定 <span class="math inline">\(g(y)=x\)</span>，这个 <span class="math inline">\(x\)</span> 满足 <span class="math inline">\(f(x)=y\)</span>，这个映射 <span class="math inline">\(g\)</span> 就称为 <span class="math inline">\(f\)</span> 的<strong>逆映射</strong>，记作 <span class="math inline">\(f^{-1}\)</span>，其定义域 <span class="math inline">\(D_{f^{-1}} = R_f\)</span>，值域 <span class="math inline">\(R_{f^{-1}} = X\)</span>。</p>
+<h3 id="复合映射">复合映射</h3>
+<p>假设存在 <span class="math inline">\(g:X \rightarrow Y_1\)</span> 与
+<span class="math inline">\(f:Y_2 \rightarrow Z\)</span> 两个映射，其中
+<span class="math inline">\(Y_1 \subset Y_2\)</span>，则由映射 <span class="math inline">\(g\)</span> 与 <span class="math inline">\(f\)</span> 可以确定出一个从 <span class="math inline">\(X\)</span> 到 <span class="math inline">\(Z\)</span> 的对应法则，它将每个 <span class="math inline">\(x \in X\)</span> 映成为 <span class="math inline">\(f[g(x)] = Z\)</span>。显然，该对应法则确定了一个从
+<span class="math inline">\(X\)</span> 到 <span class="math inline">\(Z\)</span> 的映射，这个映射称为映射 <span class="math inline">\(g\)</span> 和 <span class="math inline">\(f\)</span> 构成的<strong>复合映射</strong>，记作
+<span class="math inline">\(f \circ g\)</span>：</p>
+<p><span class="math display">\[
+f \circ g: X \rightarrow Z,\ (f \circ g)(x) = f[g(x)],\ x \in X.
+\]</span></p>
+<h2 id="集合">集合</h2>
+<p><strong>集合</strong>是指具有某种特定性质的事物的总体，采用<strong>大写</strong>的拉丁字母
+<code>A</code>、<code>B</code>、<code>C...</code>
+进行表示。<strong>元素</strong>是组成集合的具体事物，采用<strong>小写</strong>的拉丁字母
+<code>a</code>、<code>b</code>、<code>c...</code>
+进行表示，集合的表示方法通常有如下 2 种：</p>
+<ol type="1">
+<li><strong>列举法</strong>：将集合的全部元素逐一列举出来，<span class="math inline">\(A = \{a_1, a_2, ..., a_n \}\)</span>；</li>
+<li><strong>描述法</strong>：使用集合所含元素的共同特征来进行表示，<span class="math inline">\(B = {x | x 具有的性质}\)</span>；</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：如果元素 <span class="math inline">\(a\)</span> 是集合 <span class="math inline">\(A\)</span> 中的元素，就认为 <span class="math inline">\(a\)</span> 属于集合 <span class="math inline">\(A\)</span>，记作 <span class="math inline">\(a \in
+A\)</span>；如果元素 <span class="math inline">\(a\)</span> 不是集合
+<span class="math inline">\(A\)</span> 中的元素，就认为 <span class="math inline">\(a\)</span> 不属于集合 <span class="math inline">\(A\)</span>，记作 <span class="math inline">\(a
+\notin A\)</span>；</p>
+</blockquote>
+<h3 id="集合之间的关系">集合之间的关系</h3>
+<p>假设 <span class="math inline">\(A\)</span>、<span class="math inline">\(B\)</span> 是两个集合，如果集合 <span class="math inline">\(A\)</span> 中的元素都是集合 <span class="math inline">\(B\)</span> 的元素，则称 <span class="math inline">\(A\)</span> 是 <span class="math inline">\(B\)</span> 的<strong>子集</strong>，记作 <span class="math inline">\(A \subset B\)</span>（读作 <span class="math inline">\(A\)</span> 包含于 <span class="math inline">\(B\)</span>）或者 <span class="math inline">\(B
+\supset A\)</span>（读作 <span class="math inline">\(B\)</span> 包含
+<span class="math inline">\(A\)</span>）。若 <span class="math inline">\(A \subset B\)</span> 且 <span class="math inline">\(A \neq B\)</span>，则称 <span class="math inline">\(A\)</span> 是 <span class="math inline">\(B\)</span> 的<strong>真子集</strong>，记作 <span class="math inline">\(A \subsetneqq B\)</span>。</p>
+<p>如果集合 <span class="math inline">\(A\)</span> 与集合 <span class="math inline">\(B\)</span> 互为子集，即 <span class="math inline">\(A \subset B\)</span> 且 <span class="math inline">\(B \subset A\)</span>，则称集合 <span class="math inline">\(A\)</span> 与集合 <span class="math inline">\(B\)</span> <strong>相等</strong>，记作 <span class="math inline">\(A=B\)</span>。不含任何元素的集合称为<strong>空集</strong>，记作
+<span class="math inline">\(\emptyset\)</span>，空集是任何集合的子集。</p>
+<h3 id="集合的基本运算">集合的基本运算</h3>
+<p>假设 <span class="math inline">\(A\)</span>、<span class="math inline">\(B\)</span> 是两个集合，由所有属于 <span class="math inline">\(A\)</span> 或者属于 <span class="math inline">\(B\)</span> 的元素组成的集合，称为 <span class="math inline">\(A\)</span> 与 <span class="math inline">\(B\)</span> 的<strong>并集</strong>，记作 <span class="math inline">\(A \cup B\)</span>。</p>
+<p><span class="math display">\[
+A \cup B = \{ x | x \in A 或 x \in B \}
+\]</span></p>
+<p>由所有既属于 <span class="math inline">\(A\)</span> 又属于 <span class="math inline">\(B\)</span> 的元素组成的集合称为 <span class="math inline">\(A\)</span> 与 <span class="math inline">\(B\)</span> 的<strong>交集</strong>，记作 <span class="math inline">\(A \cap B\)</span>。</p>
+<p><span class="math display">\[
+A \cap B = \{ x | x \in A 且 x \in B \}
+\]</span></p>
+<p>由所有属于 <span class="math inline">\(A\)</span> 而不属于 <span class="math inline">\(B\)</span> 的元素组成的集合称为 <span class="math inline">\(A\)</span> 与 <span class="math inline">\(B\)</span> 的<strong>差集</strong>，记作 <span class="math inline">\(A \setminus B\)</span>。</p>
+<p><span class="math display">\[
+A \setminus B = \{ x | x \in A 且 x \notin B \}
+\]</span></p>
+<p>包含所研究问题全部元素的集合称为<strong>全集</strong>，通常记作 <span class="math inline">\(U\)</span>。由全集 <span class="math inline">\(U\)</span> 中不属于集合 <span class="math inline">\(A\)</span>
+的所有元素组成的集合称为<strong>补集</strong>，记作 <span class="math inline">\(A^c\)</span>。</p>
+<p><span class="math display">\[
+A^c = \{ x | x \in U, 且 x \notin A \}
+\]</span></p>
+<p>设 <span class="math inline">\(A\)</span>、<span class="math inline">\(B\)</span>、<span class="math inline">\(C\)</span>
+为任意三个集合，则下列集合的运算法则成立：</p>
+<ul>
+<li><strong>交换律</strong>：<span class="math inline">\(A \cup B = B
+\cup A\)</span>，<span class="math inline">\(A \cap B = B \cap
+A\)</span>；</li>
+<li><strong>结合律</strong>：<span class="math inline">\((A \cup B) \cup
+C =  A \cup (B \cup C)\)</span>，<span class="math inline">\((A \cap B)
+\cap C =  A \cap (B \cap C)\)</span>；</li>
+<li><strong>分配律</strong>：<span class="math inline">\((A \cup B) \cap
+C = (A \cap C) \cup (B \cap C)\)</span>，<span class="math inline">\((A
+\cap B) \cup C = (A \cup C) \cap (B \cup C)\)</span>；</li>
+<li><strong>对偶律</strong>：<span class="math inline">\((A \cup B)^c =
+A^c \cap B^c\)</span>，<span class="math inline">\((A \cap B)^c = A^c
+\cup B^c\)</span>；</li>
+</ul>
+<p>两个<strong>集合</strong>之间还可以定义<strong>直积</strong>（也称为<strong>笛卡儿积</strong>），假设
+<span class="math inline">\(A\)</span>、<span class="math inline">\(B\)</span> 是任意两个集合，在集合 <span class="math inline">\(A\)</span> 中任意取一个元素<code>x</code>，在集合
+<span class="math inline">\(B\)</span>
+中任意取一个元素<code>y</code>，组成一个有序对 <span class="math inline">\((x,
+y)\)</span>，把这样的有序对作为新的元素，由其全体组成的集合称为集合
+<span class="math inline">\(A\)</span> 与集合 <span class="math inline">\(B\)</span> 的直积，记为 <span class="math inline">\(A×B\)</span>。</p>
+<p><span class="math display">\[
+A \times B = \{ (x, y) | x \in A 且 y \in B \}
+\]</span></p>
+<h3 id="常用数集">常用数集</h3>
+<p>下面的表格整理了常见数值集合的分类以及相关概念：</p>
+<table>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 29%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">字符</th>
+<th style="text-align: center;">名称</th>
+<th>描述</th>
+<th>表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"> <span class="math inline">\(N\)</span> </td>
+<td style="text-align: center;"> <strong>自然数集</strong> </td>
+<td>包括<code>零</code>在内的全体非负整数；</td>
+<td><span class="math inline">\(N=\{ 0, 1, 2, ..., n, ...
+\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"> <span class="math inline">\(N_+\)</span> </td>
+<td style="text-align: center;"> <strong>正整数</strong> </td>
+<td>全体正整数；</td>
+<td><span class="math inline">\(N_+=\{ 1, 2, ..., n, ...
+\}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"> <span class="math inline">\(Z\)</span> </td>
+<td style="text-align: center;"> <strong>整数集</strong> </td>
+<td>由<code>正整数</code>、<code>零</code>、<code>负整数</code>组成；</td>
+<td><span class="math inline">\(Z=\{..., -n, ..., -2, -1, 0, 1, 2, ...,
+n, ...\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"> <span class="math inline">\(Q\)</span> </td>
+<td style="text-align: center;"> <strong>有理数集</strong> </td>
+<td>由<code>整数</code>和<code>分数</code>组成；</td>
+<td><span class="math inline">\(Q=\{ \frac{p}{q} \Big \vert p \in Z, q
+\in N_+ 且 p 与 q 互质 \}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"> <span class="math inline">\(R\)</span> </td>
+<td style="text-align: center;"> <strong>实数集</strong> </td>
+<td>包括<code>有理数</code>和<code>无理数</code>(小数部分无限不循环)；</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：在数集字符的<strong>右上角</strong>标注
+<code>*</code> 表示排除 <code>0</code>，标注 <code>+</code> 表示排除
+<code>0</code> 和 <code>负数</code>。</p>
+</blockquote>
+<h2 id="区间与邻域">区间与邻域</h2>
+<p>区间也是一种常用的数集，假设 <span class="math inline">\(a\)</span>
+与 <span class="math inline">\(b\)</span> 都是实数，并且 <span class="math inline">\(a &lt; b\)</span>，通常使用字母 <span class="math inline">\(I\)</span> 表示。</p>
+<h3 id="开区间">开区间</h3>
+<p>那么数集 <span class="math inline">\(\{ x | a &lt; x &lt; b
+\}\)</span> 称为<strong>开区间</strong>，记作 <span class="math inline">\((a,b)\)</span>，即：</p>
+<p><span class="math display">\[
+(a,b) = \{ x | a &lt; x &lt; b \}
+\]</span></p>
+<p>其中 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span> 称为开区间 <span class="math inline">\((a,b)\)</span> 的<strong>端点</strong>，这里的
+<span class="math inline">\(a \notin (a,b) 并且 b \notin
+(a,b)\)</span>。</p>
+<p><img src="/Math/Algebra/Set/1.png"></p>
+<h3 id="闭区间">闭区间</h3>
+<p>数集 <span class="math inline">\(\{ x | a \le x \le b \}\)</span>
+称为<strong>闭区间</strong>，记作 <span class="math inline">\([a,b]\)</span>，即：</p>
+<p><span class="math display">\[
+[a,b] = \{ x | a \le x \le b \}
+\]</span></p>
+<p>其中 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span> 称为闭区间 <span class="math inline">\((a,b)\)</span> 的<strong>端点</strong>，这里的
+<span class="math inline">\(a \in (a,b) 并且 b \in (a,b)\)</span>。</p>
+<p><img src="/Math/Algebra/Set/2.png"></p>
+<h3 id="半开区间">半开区间</h3>
+<p>类似的，<span class="math inline">\([a,b) = \{ x | a \le x &lt; b
+\}\)</span> 与 <span class="math inline">\((a,b] = \{ x | a &lt; x \le b
+\}\)</span> 就称为<strong>半开区间</strong>。对于 <span class="math inline">\([a, +\infty) = \{x | x \ge a\}\)</span> 和 <span class="math inline">\((-\infty, b) = \{ x | x &lt; b \}\)</span>
+这类<strong>无限区间</strong>，数轴上可以表现为：</p>
+<p><img src="/Math/Algebra/Set/3.png"></p>
+<blockquote>
+<p><strong>注意</strong>：全体实数集 <span class="math inline">\(R\)</span> 也可以记作 <span class="math inline">\((-\infty,
++\infty)\)</span>，同样属于无限区间。</p>
+</blockquote>
+<h3 id="邻域">邻域</h3>
+<p>邻域是一个以点 <span class="math inline">\(a\)</span>
+为中心的任何开区间，记作 <span class="math inline">\(U(a)\)</span>。这里假设 <span class="math inline">\(\delta\)</span> 是任意一个正数，则开区间 <span class="math inline">\((a-\delta, a+\delta)\)</span> 就是围绕点 <span class="math inline">\(a\)</span> 的一个邻域，称为<strong>点 <span class="math inline">\(a\)</span> 的 <span class="math inline">\(\delta\)</span> 邻域</strong>，记作 <span class="math inline">\(U(a, \delta)\)</span>，即：</p>
+<p><span class="math display">\[
+U(a, \delta) = \{ x | a - \delta &lt; x &lt; a + \delta \}
+\]</span></p>
+<p>其中，点 <span class="math inline">\(a\)</span>
+称为该邻域的<strong>中心</strong>，<span class="math inline">\(\delta\)</span>
+称为该邻域的<strong>半径</strong>。方便起见，会将开区间 <span class="math inline">\((a-\delta,a)\)</span> 称为 <span class="math inline">\(a\)</span> 的<strong>左 <span class="math inline">\(\delta\)</span> 邻域</strong>，而开区间 <span class="math inline">\((a,a+\delta)\)</span> 称为 <span class="math inline">\(a\)</span> 的<strong>右 <span class="math inline">\(\delta\)</span> 邻域</strong>。</p>
+<p><img src="/Math/Algebra/Set/4.png"></p>
+<p>由于 <span class="math inline">\(a - \delta &lt; x &lt; a +
+\delta\)</span> 等同于 <span class="math inline">\(|x - a| &lt;
+\delta\)</span>，因此 <span class="math inline">\(U(a, \delta) = \{ x |
+\ |x - a| &lt; \delta \}\)</span>；又由于 <span class="math inline">\(|x
+- a|\)</span> 可以表示点 <span class="math inline">\(x\)</span> 与点
+<span class="math inline">\(a\)</span> 之间的距离，所以 <span class="math inline">\(U(a, \delta)\)</span> 实际上表示的也是与<strong>点
+<span class="math inline">\(a\)</span></strong> 距离小于 <span class="math inline">\(\delta\)</span> 的所有<strong>点 <span class="math inline">\(x\)</span></strong> 的全体。此时，如果将点 <span class="math inline">\(a\)</span> 的 <span class="math inline">\(\delta\)</span> 邻域去掉中心点 <span class="math inline">\(a\)</span> 之后，就称为点 <span class="math inline">\(a\)</span> 的<strong>去心 <span class="math inline">\(\delta\)</span> 邻域</strong>，记作 <span class="math inline">\(\overset{o}U (a, \delta)\)</span>，即：</p>
+<p><span class="math display">\[
+\overset{o}U (a, \delta) = \{ x | 0 &lt; |x - a| &lt; \delta \}
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：上面等式中的 <span class="math inline">\(0
+&lt; |x - a|\)</span> 是用于表达 <span class="math inline">\(x \neq
+a\)</span> 的意思。</p>
+</blockquote>
+<h2 id="函数">函数</h2>
+<p>假设数集 <span class="math inline">\(D \subset R\)</span>，则称映射
+<span class="math inline">\(f:D \rightarrow R\)</span> 为定义在 <span class="math inline">\(D\)</span> 上的函数，通常简记为：</p>
+<p><span class="math display">\[
+y = f(x), x \in D
+\]</span></p>
+<p>其中，<span class="math inline">\(x\)</span>
+称为<strong>自变量</strong>，<span class="math inline">\(y\)</span>
+称为<strong>因变量</strong>，<span class="math inline">\(D\)</span>
+称为<strong>定义域</strong>（<code>Domain</code>，记作 <span class="math inline">\(D_f\)</span>）。对于每个 <span class="math inline">\(x \in D\)</span> 按照对应法则 <span class="math inline">\(f\)</span>，总有唯一确定的值 <span class="math inline">\(y\)</span> 与之对应，这个值称为函数 <span class="math inline">\(f\)</span> 在 <span class="math inline">\(x\)</span> 处的<strong>函数值</strong>（记作 <span class="math inline">\(f(x)\)</span>），由全体函数值构成的集合称为<strong>值域</strong>（<code>Range</code>，记作
+<span class="math inline">\(R_f\)</span> 或者 <span class="math inline">\(f(D)\)</span>）:</p>
+<p><span class="math display">\[
+R_f = f(D) = \{ y | y = f(x), x \in D \}
+\]</span></p>
+<p>函数定义域的确定通常划分为下面 2 种情形：</p>
+<ol type="1">
+<li><strong>存在实际应用背景的函数</strong>：根据变量的实际意义进行确定；</li>
+<li><strong>算术表达式描述的抽象函数</strong>：通常约定其定义域是使得算术表达式有意义的一切实数，这种定义域称为函数的<strong>自然定义域</strong>；</li>
+</ol>
+<h3 id="有界性">有界性</h3>
+<p>假设函数 <span class="math inline">\(f(x)\)</span> 的定义域为 <span class="math inline">\(D\)</span>，数集 <span class="math inline">\(X
+\subset D\)</span>：</p>
+<ul>
+<li>如果存在数值 <span class="math inline">\(K_1\)</span>，使得 <span class="math inline">\(f(x) \le K_1\)</span> 对于任意 <span class="math inline">\(x \in X\)</span> 都成立，那么称函数 <span class="math inline">\(f(x)\)</span> 在 <span class="math inline">\(X\)</span> 里<strong>有上界</strong>，而 <span class="math inline">\(K_1\)</span> 称为函数 <span class="math inline">\(f(x)\)</span> 在 <span class="math inline">\(X\)</span> 的<strong>上界</strong>。</li>
+<li>如果存在数值 <span class="math inline">\(K_2\)</span>，使得 <span class="math inline">\(f(x) \ge K_2\)</span> 对于任意 <span class="math inline">\(x \in X\)</span> 都成立，那么称函数 <span class="math inline">\(f(x)\)</span> 在 <span class="math inline">\(X\)</span> 里<strong>有下界</strong>，而 <span class="math inline">\(K_2\)</span> 称为函数 <span class="math inline">\(f(x)\)</span> 在 <span class="math inline">\(X\)</span> 的<strong>下界</strong>。</li>
+<li>如果存在正数 <span class="math inline">\(M\)</span>，使得 <span class="math inline">\(|f(x)| \le M\)</span> 对于任意 <span class="math inline">\(x \in X\)</span> 都成立，那么称函数 <span class="math inline">\(f(x)\)</span> 在 <span class="math inline">\(X\)</span> 上<strong>有界</strong>。如果这样的 M
+不存在，就称函数 <span class="math inline">\(f(x)\)</span> 在 <span class="math inline">\(X\)</span>
+上<strong>无界</strong>。即如果对于任何正数 <span class="math inline">\(M\)</span>，总存在 <span class="math inline">\(x_1
+\in X\)</span> 使得 <span class="math inline">\(|f(x_1)| &gt;
+M\)</span>，那么函数 <span class="math inline">\(f(x)\)</span> 在 <span class="math inline">\(X\)</span> 上<strong>无界</strong>。</li>
+</ul>
+<h3 id="单调性">单调性</h3>
+<p>假设函数 <span class="math inline">\(f(x)\)</span> 的定义域为 <span class="math inline">\(D\)</span>，区间 <span class="math inline">\(I
+\subset D\)</span>，对于区间上任意两点 <span class="math inline">\(x_1\)</span> 及 <span class="math inline">\(x_2\)</span>：</p>
+<ul>
+<li>如果 <span class="math inline">\(x_1 &lt; x_2\)</span> 时，恒有
+<span class="math inline">\(f(x_1) &lt; f(x_2)\)</span>，那么称函数
+<span class="math inline">\(f(x)\)</span> 在区间 <span class="math inline">\(I\)</span> 上<strong>单调增加</strong>； <img src="/Math/Algebra/Function/3.png"></li>
+<li>如果 <span class="math inline">\(x_1 &lt; x_2\)</span> 时，恒有
+<span class="math inline">\(f(x_1) &gt; f(x_2)\)</span>，那么称函数
+<span class="math inline">\(f(x)\)</span> 在区间 <span class="math inline">\(I\)</span> 上<strong>单调减少</strong>； <img src="/Math/Algebra/Function/4.png"></li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：<strong>单调增加</strong>与<strong>单调减少</strong>的函数统称为<strong>单调函数</strong>。</p>
+</blockquote>
+<h3 id="奇偶性">奇偶性</h3>
+<p>假设函数 <span class="math inline">\(f(x)\)</span> 的定义域 <span class="math inline">\(D\)</span> 关于原点对称：</p>
+<ul>
+<li>如果对于任意 <span class="math inline">\(x \in D\)</span> 都存在
+<span class="math inline">\(f(-x) = f(x)\)</span> 恒成立，那么 <span class="math inline">\(f(x)\)</span>
+称为<strong>偶函数</strong>，其图形关于 <span class="math inline">\(y\)</span> <strong>轴</strong>对称； <img src="/Math/Algebra/Function/5.png"></li>
+<li>如果对于任意 <span class="math inline">\(x \in D\)</span> 都存在
+<span class="math inline">\(f(-x) = -f(x)\)</span> 恒成立，那么 <span class="math inline">\(f(x)\)</span>
+称为<strong>奇函数</strong>，其图形关于<strong>原点</strong>对称； <img src="/Math/Algebra/Function/6.png"></li>
+</ul>
+<h3 id="周期性">周期性</h3>
+<p>假设函数 <span class="math inline">\(f(x)\)</span> 的定义域为 <span class="math inline">\(D\)</span>，如果存在一个正数 <span class="math inline">\(l\)</span>，使得对于任意 <span class="math inline">\(x \in D\)</span> 都有 <span class="math inline">\((x \pm l) \in D\)</span>，并且 <span class="math inline">\(f(x+l) = f(x)\)</span> 恒成立，那么称 <span class="math inline">\(f(x)\)</span> 为<strong>周期函数</strong>，<span class="math inline">\(l\)</span> 称为 <span class="math inline">\(f(x)\)</span>
+的<strong>周期</strong>，通常讨论的<strong>周期函数</strong>的<strong>周期</strong>是指<strong>最小正周期</strong>。</p>
+<p>下图表示的是一个周期为 <span class="math inline">\(l\)</span>
+的周期函数，在每一个长度为 <span class="math inline">\(l\)</span>
+的区间上面，函数图形都具有相同的形状：</p>
+<p><img src="/Math/Algebra/Function/7.png"></p>
+<p>但是<strong>并非每个周期函数都具有最小正周期</strong>，例如下面的<strong>狄利克雷函数</strong>（Dirichlet）就属于这种情况：</p>
+<p><span class="math display">\[
+D(x) =
+\begin{cases}
+  1,\ x \in 有理数 Q \\
+  0,\ x \in 无理数 Q^c
+\end{cases}
+\]</span></p>
+<p>可以看到该函数是一个周期函数，任何正有理数 <span class="math inline">\(r\)</span>
+都是它的周期，由于不存在最小的正有理数，所以它没有最小正周期。</p>
+<h2 id="分段函数">分段函数</h2>
+<p>自变量在不同变化范围当中，对应法则用不同的式子来表达的函数，通常称为<strong>分段函数</strong>。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">
+函数类型
+</th>
+<th style="text-align: center;">
+定义域，值域
+</th>
+<th style="text-align: center;">
+表达式
+</th>
+<th style="text-align: center;">
+图像
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">
+<strong>绝对值函数</strong>
+</td>
+<td style="text-align: center;">
+定义域 <span class="math inline">\(D = (- \infty, +
+\infty)\)</span>，值域 <span class="math inline">\(R_f = [0,
++\infty)\)</span>；
+</td>
+<td>
+<span class="math display">\[
+          y = |x| =
+          \begin{cases}
+            x,  &amp; x \ge 0 \\
+            -x, &amp; x &lt; 0
+          \end{cases}
+          \]</span>
+</td>
+<td>
+<img src="/Math/Algebra/Function/1.png">
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+<strong>符号函数</strong>
+</td>
+<td style="text-align: center;">
+定义域 <span class="math inline">\(D = (- \infty, +
+\infty)\)</span>，值域 <span class="math inline">\(R_f = \{ -1,0,1
+\}\)</span>；
+</td>
+<td>
+<span class="math display">\[
+          y = \operatorname{sgn}x =
+          \begin{cases}
+            -1,  &amp; x &lt; 0 \\
+            0,   &amp; x = 0 \\
+            1,   &amp; x &gt; 0
+          \end{cases}
+          \]</span>
+</td>
+<td>
+<img src="/Math/Algebra/Function/2.png">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="反函数">反函数</h2>
+<p>假设函数 <span class="math inline">\(y=f(x)\)</span> 的定义域为 <span class="math inline">\(D\)</span> 值域为 <span class="math inline">\(f(D)\)</span>，如果对于值域 <span class="math inline">\(f(D)\)</span> 当中的每一个 <span class="math inline">\(y\)</span>，在定义域 <span class="math inline">\(D\)</span> 当中都有且只有一个 <span class="math inline">\(x\)</span> 使得 <span class="math inline">\(g(y)=x\)</span>，则按此对应法则可以得到一个定义在
+<span class="math inline">\(f(D)\)</span> 上的函数，并将该函数称为函数
+<span class="math inline">\(y=f(x)\)</span>
+的<strong>反函数</strong>，记为:</p>
+<p><span class="math display">\[
+x = f^{-1}(y),\ y \in f(D)
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：可以看到，函数 <span class="math inline">\(f\)</span>
+的<strong>定义域与值域</strong>分别就是反函数 <span class="math inline">\(f^{-1}\)</span>
+的<strong>值域与定义域</strong>，即函数 <span class="math inline">\(f\)</span> 与 <span class="math inline">\(f^{-1}\)</span>
+两者互为<strong>反函数</strong>。</p>
+</blockquote>
+<p>由于习惯上使用 <span class="math inline">\(x\)</span>
+表示自变量，使用 <span class="math inline">\(y\)</span>
+表示因变量，因此一般会将 <span class="math inline">\(y=f(x), x \in
+D\)</span> 的反函数记为：</p>
+<p><span class="math display">\[
+y=f^{-1}(x), x \in f(D)
+\]</span></p>
+<p>相对于反函数 <span class="math inline">\(y=f^{-1}(x)\)</span>
+而言，原来的函数 <span class="math inline">\(y=f(x)\)</span>
+称为<strong>直接函数</strong>，直接函数与其反函数的图形关于直线 <span class="math inline">\(y = x\)</span> 对称：</p>
+<p><img src="/Math/Algebra/Function/8.png"></p>
+<h2 id="复合函数">复合函数</h2>
+<p>假设函数 <span class="math inline">\(y=f(u)\)</span> 的定义域为 <span class="math inline">\(D_f\)</span>，函数 <span class="math inline">\(u =
+g(x)\)</span> 的定义域为 <span class="math inline">\(D_g\)</span>，且其值域 <span class="math inline">\(R_g \subset
+D_f\)</span>，则通过下面等式确定的函数：</p>
+<p><span class="math display">\[
+y = f[g(x)],\ x \in D
+\]</span></p>
+<p>称为由函数 <span class="math inline">\(u = g(x)\)</span> 与函数 <span class="math inline">\(y = f(u)\)</span>
+构成的<strong>复合函数</strong>，其定义域为 <span class="math inline">\(D_g\)</span>，变量 <span class="math inline">\(u\)</span>
+称为<strong>中间变量</strong>。对于由函数 <span class="math inline">\(g\)</span> 与函数 <span class="math inline">\(f\)</span> 构成的复合函数，应当按照先 <span class="math inline">\(g\)</span> 后 <span class="math inline">\(f\)</span> 的顺序进行复合，通常记为 <span class="math inline">\(f \circ g\)</span>：</p>
+<p><span class="math display">\[
+f[g(x)] = (f \circ g)(x)
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：<span class="math inline">\(g\)</span> 与
+<span class="math inline">\(f\)</span> 可以构成复合函数 <span class="math inline">\(f \circ g\)</span> 的条件是：函数 <span class="math inline">\(g\)</span> 的值域 <span class="math inline">\(R\)</span> 必须包含于函数 <span class="math inline">\(f\)</span> 的定义域 <span class="math inline">\(D_f\)</span>，即 <span class="math inline">\(R_g
+\subset D_f\)</span>，否则不能构成复合函数。</p>
+</blockquote>
+<h2 id="函数的运算">函数的运算</h2>
+<p>假设函数 <span class="math inline">\(f(x)\)</span>，<span class="math inline">\(g(x)\)</span> 的定义域依次为 <span class="math inline">\(D_f\)</span>，<span class="math inline">\(D_g\)</span>，<span class="math inline">\(D = D_f
+\cap D_g \neq
+\varnothing\)</span>，那么就可以定义出两个函数之间的运算规则：</p>
+<table>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 17%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>和</strong></th>
+<th style="text-align: center;"><span class="math inline">\(f +
+g\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((f + g)(x) =
+f(x) + g(x),\ 其中 x \in D\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>差</strong></td>
+<td style="text-align: center;"><span class="math inline">\(f -
+g\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((f - g)(x) =
+f(x) - g(x),\ 其中 x \in D\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>积</strong></td>
+<td style="text-align: center;"><span class="math inline">\(f \times
+g\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((f \cdot
+g)(x) = f(x) \cdot g(x),\ 其中 x \in D\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>商</strong></td>
+<td style="text-align: center;"><span class="math inline">\(f \div
+g\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((f \div
+g)(x) = f(x) \div g(x),\ 其中 x \in D\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="基本初等函数">基本初等函数</h2>
+<h3 id="幂函数">幂函数</h3>
+<p>一般地，形如 <span class="math inline">\(y = x^{\mu}\)</span>
+称为<strong>幂函数</strong>，其中 <span class="math inline">\(\mu \in
+R\)</span> 是常数：</p>
+<p><img src="/Math/Algebra/Function/9.png"></p>
+<h3 id="指数函数">指数函数</h3>
+<p>一般地，形如 <span class="math inline">\(y = a^{x}\)</span>
+称为<strong>指数函数</strong>，其中 <span class="math inline">\(a &gt;
+0\)</span> 并且 <span class="math inline">\(a \neq 1\)</span>：</p>
+<p><img src="/Math/Algebra/Function/10.png"></p>
+<h3 id="对数函数">对数函数</h3>
+<p>如果 <span class="math inline">\(a^y = x\)</span>，其中 <span class="math inline">\(a &gt; 0\)</span> 并且 <span class="math inline">\(a \neq 1\)</span>，那么数 <span class="math inline">\(y\)</span> 称为以 <span class="math inline">\(a\)</span> 为底 <span class="math inline">\(x\)</span> 的<strong>对数</strong>，记作 <span class="math inline">\(y = log_a x\)</span>。其中，<code>a</code>
+称为对数的<strong>底数</strong>，而 <span class="math inline">\(x\)</span> 称为<strong>真数</strong>。</p>
+<ul>
+<li>负数与 <code>0</code> 没有对数；</li>
+<li><span class="math inline">\(\log_a 1 = 0\)</span> 并且 <span class="math inline">\(\log_a a = 1\)</span>；</li>
+</ul>
+<p>一般地，形如 <span class="math inline">\(y = \log_a x\)</span>
+称为<strong>对数函数</strong>，其中 <span class="math inline">\(a &gt;
+0\)</span> 并且 <span class="math inline">\(a \neq 1\)</span>
+是常数：</p>
+<p><img src="/Math/Algebra/Function/11.png"></p>
+<ul>
+<li><strong>常用对数</strong>：以 <code>10</code>
+作为<strong>底</strong>的对数，记为 <span class="math inline">\(\log_{10} N\)</span> 或者 <span class="math inline">\(\lg N\)</span>；</li>
+<li><strong>自然对数</strong>：以<strong>无理数</strong> <span class="math inline">\(e = 2.71828...\)</span> 作为底的对数，记为 <span class="math inline">\(y = \ln x\)</span>；</li>
+</ul>
+<h2 id="弧度制">弧度制</h2>
+<p><strong>弧度制</strong>是一种使用<strong>弧长</strong> <code>s</code>
+与<strong>半径</strong> <code>r</code> 之比来度量角度的方式，采用符号
+<code>rad</code> 进行表示，读作<strong>弧度</strong>。</p>
+<table>
+<tbody>
+<tr>
+<td>
+<img src="/Math/Algebra/Thomas/Radian-Measure.png">
+</td>
+<td style="text-align: center;">
+<span class="math display">\[
+        弧度 \theta = \frac{弧长 s}{半径 r}
+        \]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>下面的推导过程，展示了<strong>角度</strong>与<strong>弧度</strong>相互之间的换算关系：</p>
+<p><span class="math display">\[
+360° 度 = \frac{圆周长 2 \pi r}{半径 r} = 2 \pi 弧度
+\implies 1 \pi \ 弧度 = 180° 度
+\implies
+\begin{cases}
+1° 度 = \frac{\pi}{180} 弧度 \approx 0.01745 弧度 \\
+1 弧度 = \frac{180}{\pi} 度 \approx 57.30° 度
+\end{cases}
+\]</span></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 2%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">角度制</th>
+<th style="text-align: center;"><span class="math inline">\(-180°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(-135°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(-90°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(-45°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(0°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(30°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(45°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(60°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(90°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(135°\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(180°\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">弧度制</td>
+<td style="text-align: center;"><span class="math inline">\(-\pi\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\frac{3\pi}{4}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\frac{\pi}{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\frac{\pi}{4}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{\pi}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{\pi}{4}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{\pi}{3}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{\pi}{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{3
+\pi}{4}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\pi\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><img src="/Math/Algebra/Function/12.png"></p>
+<p>接下来，分别使用<strong>角度</strong>和<strong>弧度</strong>来表示相同三角形里的内角：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">
+角度
+</th>
+<th style="text-align: center;">
+弧度
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<img src="/Math/Algebra/Thomas/Degrees-1.png">
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Radians-1.png">
+</td>
+</tr>
+<tr class="even">
+<td>
+<img src="/Math/Algebra/Thomas/Degrees-2.png">
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Radians-2.png">
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三角函数">三角函数</h2>
+<table>
+<tbody>
+<tr>
+<td>
+<img src="/Math/Algebra/Thomas/Definitions.png">
+</td>
+<td>
+<span class="math display">\[
+        \begin{aligned}
+          &amp; \sin \theta = \frac{y}{r} = \frac{1}{\csc \theta}
+\implies 正弦(Sine)        \\
+          &amp; \cos \theta = \frac{x}{r} = \frac{1}{\sec \theta}
+\implies 余弦(Cosine)      \\
+          &amp; \tan \theta = \frac{y}{x} = \frac{1}{\cot \theta}
+\implies 正切(Tangent)     \\
+          &amp; \csc \theta = \frac{r}{y} = \frac{1}{\sin \theta}
+\implies 余割(Cosecant)    \\
+          &amp; \sec \theta = \frac{r}{x} = \frac{1}{\cos \theta}
+\implies 正割(Secant)      \\
+          &amp; \cot \theta = \frac{x}{y} = \frac{1}{\tan \theta}
+\implies 余切(Cotangent)   \\
+        \end{aligned}
+        \]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr>
+<td>
+<strong>正弦</strong>（Sine [saɪn]）
+</td>
+<td>
+<strong>余弦</strong>（Cosine [ˈkəʊsaɪn]）
+</td>
+<td>
+<strong>正切</strong>（Tangent [ˈtændʒənt]）
+</td>
+</tr>
+<tr class="even">
+<td>
+<strong>余割</strong>（Cosecant ['ko'sikənt]）
+</td>
+<td>
+<strong>正割</strong>（Secant ['sikænt]）
+</td>
+<td>
+<strong>余切</strong>（Cotangent ['ko'tændʒənt]）
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr>
+<td style="text-align:center;">
+<strong>正弦函数</strong>：<span class="math inline">\(y = \sin
+x\)</span>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/1-sin.png">
+</td>
+<td>
+<strong>定义域</strong>：<span class="math inline">\((-\infty,
+\infty)\)</span>，<strong>值域</strong>：<span class="math inline">\([−1, 1]\)</span>；
+</td>
+</tr>
+<tr class="even">
+<td style="text-align:center;">
+<strong>余弦函数</strong>：<span class="math inline">\(y = \cos
+x\)</span>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/2-cos.png">
+</td>
+<td>
+<strong>定义域</strong>：<span class="math inline">\((-\infty,
+\infty)\)</span>，<strong>值域</strong>：<span class="math inline">\([−1, 1]\)</span>；
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<strong>正切函数</strong>：<span class="math inline">\(y = \tan
+x\)</span>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/3-tan.png">
+</td>
+<td>
+<strong>定义域</strong>：除 <span class="math inline">\(\frac{\pi}{2}\)</span>
+的奇整数倍数之外的全体实数，<strong>值域</strong>：<span class="math inline">\((-\infty, \infty)\)</span>；
+</td>
+</tr>
+<tr class="even">
+<td style="text-align:center;">
+<strong>余割函数</strong>：<span class="math inline">\(y = \sec
+x\)</span>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/4-sec.png">
+</td>
+<td>
+<strong>定义域</strong>：<span class="math inline">\(x \neq
+\pm\frac{\pi}{2}, \pm\frac{3\pi}{2},
+...\)</span>，<strong>值域</strong>：<span class="math inline">\((-\infty, -1] \cap [1, \infty)\)</span>；
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<strong>正割函数</strong>：<span class="math inline">\(y = \csc
+x\)</span>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/5-csc.png">
+</td>
+<td>
+<strong>定义域</strong>：<span class="math inline">\(x \neq 0, \pm\pi,
+\pm2\pi, ...\)</span>，<strong>值域</strong>：<span class="math inline">\((-\infty, -1] \cap [1, \infty)\)</span>；
+</td>
+</tr>
+<tr class="even">
+<td style="text-align:center;">
+<strong>余切函数</strong>：<span class="math inline">\(y = \cot
+x\)</span>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/6-cot.png">
+</td>
+<td>
+<strong>定义域</strong>：<span class="math inline">\(x \neq 0, \pm\pi,
+\pm2\pi, ...\)</span>，<strong>值域</strong>：<span class="math inline">\((-\infty, \infty)\)</span>；
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三角恒等式">三角恒等式</h2>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[\sin(-\theta) = -\sin\theta\]</span>
+</td>
+<td>
+<span class="math display">\[\cos(-\theta) = \cos\theta\]</span>
+</td>
+<td>
+</td>
+</tr>
+<tr class="even">
+<td>
+<span class="math display">\[\sin^2\theta + \cos^2\theta = 1\]</span>
+</td>
+<td>
+<span class="math display">\[\sec^2\theta = 1 + \tan^2\theta\]</span>
+</td>
+<td>
+<span class="math display">\[\csc^2\theta = 1 + \cot^2\theta\]</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="math display">\[\sin 2\theta = 2 \sin\theta
+\cos\theta\]</span>
+</td>
+<td>
+<span class="math display">\[\cos 2\theta = \cos^2\theta -
+\sin^2\theta\]</span>
+</td>
+<td>
+</td>
+</tr>
+<tr class="even">
+<td>
+<span class="math display">\[\cos^2 \theta =
+\frac{1+\cos2\theta}{2}\]</span>
+</td>
+<td>
+<span class="math display">\[\sin^2 \theta =
+\frac{1-\cos2\theta}{2}\]</span>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[\sin (A + B) = \sin A \cos B + \cos A \sin
+B\]</span>
+</td>
+<td>
+<span class="math display">\[\sin (A - B) = \sin A \cos B - \cos A \sin
+B\]</span>
+</td>
+</tr>
+<tr class="even">
+<td>
+<span class="math display">\[\cos(A + B) = \cos A \cos B - \sin A \sin
+B\]</span>
+</td>
+<td>
+<span class="math display">\[\cos(A - B) = \cos A \cos B + \sin A \sin
+B\]</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="math display">\[\tan(A + B) = \frac{\tan A + \tan B}{1 -
+\tan A \tan B}\]</span>
+</td>
+<td>
+<span class="math display">\[\tan(A - B) = \frac{\tan A - \tan B}{1 +
+\tan A \tan B}\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[\sin(A - \frac{\pi}{2}) = -\cos A\]</span>
+</td>
+<td>
+<span class="math display">\[\cos(A - \frac{\pi}{2}) = \sin A\]</span>
+</td>
+<td>
+<span class="math display">\[\sin(A + \frac{\pi}{2}) = \cos A\]</span>
+</td>
+<td>
+<span class="math display">\[\cos(A + \frac{\pi}{2}) = -\sin A\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[\sin A \sin B = \frac{1}{2} \cos(A - B) -
+\frac{1}{2} \cos(A + B)\]</span>
+</td>
+<td>
+<span class="math display">\[\cos A \cos B = \frac{1}{2} \cos(A - B) +
+\frac{1}{2} \cos(A + B)\]</span>
+</td>
+<td>
+<span class="math display">\[\sin A \cos B = \frac{1}{2} \sin(A - B) +
+\frac{1}{2} \sin(A + B)\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr>
+<td>
+<span class="math display">\[\sin A + \sin B = 2 \sin \frac{1}{2} (A +
+B) \cos \frac{1}{2} (A - B)\]</span>
+</td>
+<td>
+<span class="math display">\[\sin A - \sin B = 2 \cos \frac{1}{2} (A +
+B) \sin \frac{1}{2} (A - B)\]</span>
+</td>
+</tr>
+<tr class="even">
+<td>
+<span class="math display">\[\cos A + \cos B = 2 \cos \frac{1}{2} (A +
+B) \cos \frac{1}{2} (A - B)\]</span>
+</td>
+<td>
+<span class="math display">\[\cos A - \cos B =-2 \sin \frac{1}{2} (A +
+B) \sin \frac{1}{2} (A - B)\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="几何学">几何学</h2>
+<p><strong>A</strong> =
+面积（<strong>A</strong>rea）、<strong>B</strong> = 底面积（Area of
+<strong>B</strong>ase）、<strong>C</strong> =
+周长（<strong>C</strong>ircumference）、<strong>S</strong> =
+表面或侧面的面积（<strong>S</strong>urface Area）、<strong>V</strong> =
+体积（<strong>V</strong>olume）。</p>
+<table>
+<tbody>
+<tr>
+<td style="text-align:center;">
+<strong>三角形</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Triangle.png">
+</td>
+<td>
+<span class="math display">\[面积 A = \frac{1}{2} b h\]</span>
+</td>
+</tr>
+<tr class="even">
+<td style="text-align:center;">
+<strong>相似三角形</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Similar-Triangles.png">
+</td>
+<td>
+<span class="math display">\[\frac{a&#39;}{a} = \frac{b&#39;}{b} =
+\frac{c&#39;}{c}\]</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<strong>勾股定理</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Pythagorean-Theorem.png">
+</td>
+<td>
+<span class="math display">\[a^2 + b^2 = c^2\]</span>
+</td>
+</tr>
+<tr class="even">
+<td style="text-align:center;">
+<strong>平行四边形</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Parallelogram.png">
+</td>
+<td>
+<span class="math display">\[面积 A = b \cdot h  \]</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<strong>梯形</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Trapezoid.png">
+</td>
+<td>
+<span class="math display">\[面积A = \frac{1}{2} (a + b) \cdot
+h\]</span>
+</td>
+</tr>
+<tr class="even">
+<td style="text-align:center;">
+<strong>圆</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Circle.png">
+</td>
+<td>
+<span class="math display">\[面积 A = \pi r^2\]</span> <span class="math display">\[周长 C = 2 \pi r\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr>
+<td style="text-align:center;">
+<strong>底部平行的圆/棱柱</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Any-Cylinder-or-Prism-with-Parallel-Bases.png">
+</td>
+<td>
+<span class="math display">\[体积 V = B \cdot h\]</span>
+</td>
+</tr>
+<tr class="even">
+<td style="text-align:center;">
+<strong>直立圆柱</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Right-Circular-Cylinder.png">
+</td>
+<td>
+<span class="math display">\[体积 V = \pi r^2 \cdot h\]</span> <span class="math display">\[侧面面积 S = 2 \pi r \cdot h\]</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<strong>锥 / 棱锥</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Any-Cone-or-Pyramid.png">
+</td>
+<td>
+<span class="math display">\[体积 V = \frac{1}{3}B \cdot h\]</span>
+</td>
+</tr>
+<tr class="even">
+<td style="text-align:center;">
+<strong>直立圆锥</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Right-Circular-Cone.png">
+</td>
+<td>
+<span class="math display">\[体积 V = \frac{1}{3} \pi r^2 \cdot
+h\]</span> <span class="math display">\[侧面面积 S = \pi r \cdot
+s\]</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<strong>球体</strong>
+</td>
+<td>
+<img src="/Math/Algebra/Thomas/Sphere.png">
+</td>
+<td>
+<span class="math display">\[体积 V = \frac{4}{3} \pi r^3\]</span> <span class="math display">\[表面积 S = 4 \pi r^2\]</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div><div class="article-licensing box"><div class="licensing-title"><p>初等代数常用公式与图像汇总</p><p><a href="http://www.uinio.com/Math/Algebra/">http://www.uinio.com/Math/Algebra/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2011-01-13</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-11-25</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Elementary/">Elementary</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/English/Grammar/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">英文语法学以致用</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Embedded/STC90C51/"><span class="level-item">宏晶 STC90C516RD+ 数据手册精读</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#基础运算"><span class="level-left"><span class="level-item">1</span><span class="level-item">基础运算</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#算术运算"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">算术运算</span></span></a></li><li><a class="level is-mobile" href="#符号定律"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">符号定律</span></span></a></li><li><a class="level is-mobile" href="#零"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">零</span></span></a></li><li><a class="level is-mobile" href="#指数定律"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">指数定律</span></span></a></li><li><a class="level is-mobile" href="#二项式定理"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">二项式定理</span></span></a></li><li><a class="level is-mobile" href="#整数幂的差"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">整数幂的差</span></span></a></li><li><a class="level is-mobile" href="#配平方"><span class="level-left"><span class="level-item">1.7</span><span class="level-item">配平方</span></span></a></li><li><a class="level is-mobile" href="#二次公式"><span class="level-left"><span class="level-item">1.8</span><span class="level-item">二次公式</span></span></a></li><li><a class="level is-mobile" href="#根式"><span class="level-left"><span class="level-item">1.9</span><span class="level-item">根式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#斜率"><span class="level-left"><span class="level-item">2</span><span class="level-item">斜率</span></span></a></li><li><a class="level is-mobile" href="#映射"><span class="level-left"><span class="level-item">3</span><span class="level-item">映射</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#逆映射"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">逆映射</span></span></a></li><li><a class="level is-mobile" href="#复合映射"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">复合映射</span></span></a></li></ul></li><li><a class="level is-mobile" href="#集合"><span class="level-left"><span class="level-item">4</span><span class="level-item">集合</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#集合之间的关系"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">集合之间的关系</span></span></a></li><li><a class="level is-mobile" href="#集合的基本运算"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">集合的基本运算</span></span></a></li><li><a class="level is-mobile" href="#常用数集"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">常用数集</span></span></a></li></ul></li><li><a class="level is-mobile" href="#区间与邻域"><span class="level-left"><span class="level-item">5</span><span class="level-item">区间与邻域</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#开区间"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">开区间</span></span></a></li><li><a class="level is-mobile" href="#闭区间"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">闭区间</span></span></a></li><li><a class="level is-mobile" href="#半开区间"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">半开区间</span></span></a></li><li><a class="level is-mobile" href="#邻域"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">邻域</span></span></a></li></ul></li><li><a class="level is-mobile" href="#函数"><span class="level-left"><span class="level-item">6</span><span class="level-item">函数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#有界性"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">有界性</span></span></a></li><li><a class="level is-mobile" href="#单调性"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">单调性</span></span></a></li><li><a class="level is-mobile" href="#奇偶性"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">奇偶性</span></span></a></li><li><a class="level is-mobile" href="#周期性"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">周期性</span></span></a></li></ul></li><li><a class="level is-mobile" href="#分段函数"><span class="level-left"><span class="level-item">7</span><span class="level-item">分段函数</span></span></a></li><li><a class="level is-mobile" href="#反函数"><span class="level-left"><span class="level-item">8</span><span class="level-item">反函数</span></span></a></li><li><a class="level is-mobile" href="#复合函数"><span class="level-left"><span class="level-item">9</span><span class="level-item">复合函数</span></span></a></li><li><a class="level is-mobile" href="#函数的运算"><span class="level-left"><span class="level-item">10</span><span class="level-item">函数的运算</span></span></a></li><li><a class="level is-mobile" href="#基本初等函数"><span class="level-left"><span class="level-item">11</span><span class="level-item">基本初等函数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#幂函数"><span class="level-left"><span class="level-item">11.1</span><span class="level-item">幂函数</span></span></a></li><li><a class="level is-mobile" href="#指数函数"><span class="level-left"><span class="level-item">11.2</span><span class="level-item">指数函数</span></span></a></li><li><a class="level is-mobile" href="#对数函数"><span class="level-left"><span class="level-item">11.3</span><span class="level-item">对数函数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#弧度制"><span class="level-left"><span class="level-item">12</span><span class="level-item">弧度制</span></span></a></li><li><a class="level is-mobile" href="#三角函数"><span class="level-left"><span class="level-item">13</span><span class="level-item">三角函数</span></span></a></li><li><a class="level is-mobile" href="#三角恒等式"><span class="level-left"><span class="level-item">14</span><span class="level-item">三角恒等式</span></span></a></li><li><a class="level is-mobile" href="#几何学"><span class="level-left"><span class="level-item">15</span><span class="level-item">几何学</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

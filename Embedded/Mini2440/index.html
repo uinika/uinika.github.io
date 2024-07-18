@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>基于三星 S3C2440 的嵌入式 Linux 攻略 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="由于 Linux 操作系统内核具备可裁剪定制的特性，因而能够运行于 ARM 架构的嵌入式设备当中。伴随近几年，硬件性能的飞速提升以及价格的快速下降，Raspberry Pi、Nano Pi、Rock Pi、Orange Pi等可运行完整桌面 Linux 操作系统的卡片电脑大量涌现，通用计算机与嵌入式系统之间的界限愈来愈模糊。各个 IC 厂家不断提升 MCU 性能的同时，也推出了相应的公版"><meta property="og:type" content="blog"><meta property="og:title" content="基于三星 S3C2440 的嵌入式 Linux 攻略"><meta property="og:url" content="http://www.uinio.com/Embedded/Mini2440/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="由于 Linux 操作系统内核具备可裁剪定制的特性，因而能够运行于 ARM 架构的嵌入式设备当中。伴随近几年，硬件性能的飞速提升以及价格的快速下降，Raspberry Pi、Nano Pi、Rock Pi、Orange Pi等可运行完整桌面 Linux 操作系统的卡片电脑大量涌现，通用计算机与嵌入式系统之间的界限愈来愈模糊。各个 IC 厂家不断提升 MCU 性能的同时，也推出了相应的公版"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2012-06-25T16:00:00.000Z"><meta property="article:modified_time" content="2015-12-26T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="MCU"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Embedded/Mini2440/"},"headline":"基于三星 S3C2440 的嵌入式 Linux 攻略","image":["http://www.uinio.com/Embedded/Mini2440/logo.png"],"datePublished":"2012-06-25T16:00:00.000Z","dateModified":"2015-12-26T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"由于 Linux 操作系统内核具备可裁剪定制的特性，因而能够运行于 ARM\r 架构的嵌入式设备当中。伴随近几年，硬件性能的飞速提升以及价格的快速下降，Raspberry Pi、Nano Pi、Rock Pi、Orange Pi等可运行完整桌面\r Linux\r 操作系统的卡片电脑大量涌现，通用计算机与嵌入式系统之间的界限愈来愈模糊。各个\r IC 厂家不断提升 MCU\r 性能的同时，也推出了相应的公版"}</script><link rel="canonical" href="http://www.uinio.com/Embedded/Mini2440/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2012-06-25T16:00:00.000Z" title="2012/6/26 00:00:00">2012-06-26</time>发表</span><span class="level-item"><time dateTime="2015-12-26T16:00:00.000Z" title="2015/12/27 00:00:00">2015-12-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Embedded/">Embedded</a></span><span class="level-item">24 分钟读完 (大约3621个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">基于三星 S3C2440 的嵌入式 Linux 攻略</h1><div class="content"><p>由于 Linux 操作系统内核具备可裁剪定制的特性，因而能够运行于 ARM
+架构的嵌入式设备当中。伴随近几年，硬件性能的飞速提升以及价格的快速下降，<code>Raspberry Pi</code>、<code>Nano Pi</code>、<code>Rock Pi</code>、<code>Orange Pi</code>等可运行完整桌面
+Linux
+操作系统的卡片电脑大量涌现，通用计算机与嵌入式系统之间的界限愈来愈模糊。各个
+IC 厂家不断提升 MCU
+性能的同时，也推出了相应的公版外围电路、通用操作系统、驱动程序支持等一揽子完善的嵌入式技术解决方案，与笔者七年以前接触嵌入式技术伊始，早已经不可同日而语。</p>
+<p><img src="/Embedded/Mini2440/logo.png"></p>
+<p>笔者手上这款 Mini2440 开发板于 2013
+年购置，是由广州友善电子科技有限公司于 2010 年推出的 ARM9
+开发板，虽然板载的三星 S3C2440
+嵌入式微处理器已然廉颇老矣，且对应的<code>Linux 2.6.32.2</code>内核版本也早已壮士暮年。但由于最近涉及
+Linux
+嵌入式操作系统相关的工作，因此重新上电使用，同时以怀旧心态执笔撰写本文，用于记录一些心得体会，同时也作为日后备忘。</p>
+<span id="more"></span>
+<h1 id="板载资源">板载资源</h1>
+<h2 id="软件资源">软件资源</h2>
+<ul>
+<li>嵌入式 Linux
+系统内核版本为<code>Linux 2.6.32.2</code>，可提供<code>Yaffs2</code>、<code>Cramfs</code>、<code>EXT2</code>、<code>FAT32</code>、<code>NFS</code>文件系统支持。</li>
+<li>采用支持 MiniTools 与 SD 卡脱机烧写的<strong>Superboot</strong>作为
+bootloader，代替三星原厂开源的<strong>Supervivi</strong>。</li>
+<li>交叉编译工具为遵循<strong>EABI</strong>标准的<code>arm-linux-gcc-4.4.3.tar.gz</code></li>
+<li>提供了<code>Python</code>脚本编程支持，可以直接对硬件进行访问。</li>
+<li>集成<code>Qt/Embedded 4.8.5</code>支持。</li>
+</ul>
+<h2 id="硬件资源">硬件资源</h2>
+<p>核心资源：</p>
+<ul>
+<li>微处理器采用<strong>Samsung
+S3C2440A</strong>，主频<code>400MHz</code>最高可达<code>533Mhz</code>；</li>
+<li>内存采用板载<code>64M</code>容量<code>32bit</code>位宽数据总线的<strong>SDRAM</strong>，时钟频率可达<code>100MHz</code>；</li>
+<li>Flash 存储器分别采用了板载<code>256M</code>的<strong>Nand
+Flash</strong>, 以及用于安装 BIOS 的板载<code>2M</code>容量<strong>Nor
+Flash</strong>；</li>
+<li>外接<code>3.5</code>英寸<code>240x320</code>分辨率的<strong>LCD</strong>电阻触摸显示屏。</li>
+<li>系统时钟源采用<strong>12MHz</strong>无源晶振。</li>
+</ul>
+<p>外围<strong>IO</strong>接口：</p>
+<ul>
+<li>1
+个采用<strong>DM9000</strong>网络芯片的<code>100M</code>以太网<strong>RJ-45</strong>接口。</li>
+<li>3 个<strong>TTL</strong>串行口，1 个<strong>USB Host</strong>和 1
+个<strong>USB Slave B</strong>型接口。</li>
+<li>1 个<strong>SD 卡</strong>存储接口，1
+个<strong>PWM</strong>控制的蜂鸣器。</li>
+<li>1 路立体声音频输出和 1 路麦克风输入接口。</li>
+<li>1 个<code>10pin</code>的<strong>JTAG</strong>接口。</li>
+<li>4 个用户 LED 指示灯，以及 6 个带引出座的用户按键。</li>
+<li>1 个用于 A/D 模数转换测试的可调电阻。</li>
+<li>1 个用于 I²C
+总线读写测试的串行<strong>EEPROM</strong>芯片<strong>AT24C08</strong>。</li>
+<li>1 个<code>20 pin</code>针摄像头接口。</li>
+<li>采用<code>5V</code>供电的电源，并板载实时时钟电池。</li>
+<li>1 个<code>34pin</code>的<strong>GPIO</strong>接口，以及 1
+个<code>40pin</code>系统总线接口。</li>
+<li>采用专业复位芯片<code>MAX811</code>实现微处理器所需的低电平复位。</li>
+</ul>
+<h1 id="串口终端设置">串口终端设置</h1>
+<p>通过串口连接到开发板进行调试，是嵌入式开发中较为基本的一项工作。由于现代计算机基本不再配置物理串口，因此需要通过专业芯片将
+USB 转换为串口，目前市场上较为常见的 USB 转串口芯片有英国<strong>FTDI
+Chip 飞特蒂亚</strong>的<code>FT232</code>、台湾<strong>Prolific
+旺玖科技</strong>的<code>PL2303</code>、江苏<strong>沁恒</strong>的<code>CH34X</code>，这里推荐使用板载<code>FT232</code>芯片的
+USB
+转串口线，从而获得高速稳定的通信质量，以及兼容性更加良好的驱动程序支持。更为重要的是，避免出现最新版本
+Windows 10 操作系统中由于驱动程序签名错误，导致的 USB
+转串口线无法正常工作的问题。</p>
+<p>当 USB 转串口驱动程序安装成功之后，将线缆从电脑 USB
+接口连接至开发板串口，然后首先了解一下串口通信相关的参数配置：</p>
+<ol type="1">
+<li><strong>波特率</strong> Speed(bps) ：115200</li>
+<li><strong>数据位</strong> Data bits ：8</li>
+<li><strong>停止位</strong> Stop bits ：1</li>
+<li><strong>奇偶校验</strong> Parity：<code>None</code></li>
+<li><strong>数据流控制</strong> Flow Control：<code>None</code></li>
+</ol>
+<p>然后在电脑上启动<strong>串口调试工具</strong>，Winodws
+操作系统上可以选择功能强大的<strong>MobaXterm</strong>，Linux
+环境下则可以选择使用小巧的<strong>Minicom</strong>，下面我们分别对两者的安装和使用进行总结：</p>
+<h2 id="mobaxterm">MobaXterm</h2>
+<p>点击主界面的【New
+session】，然后选择【Serial】串口模式，输入上面提到的串口通信配置数据：</p>
+<p><img src="/Embedded/Mini2440/MobaXterm-1.png"></p>
+<p>点击确定保存配置，将<strong>S2 开关</strong>切换至【Nand
+Flash】启动模式，上电运行之后可以看到开发板 Bootloader 以及 Kernel
+以及各种 Driver 加载的日志信息：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Superboot-<span class="number">2440</span> V1.<span class="number">5</span>(<span class="number">20150414</span>) by FriendlyARM</span><br><span class="line"></span><br><span class="line">Booting from NAND</span><br><span class="line">Load Kernel...</span><br><span class="line">Uncompressing Linux...................................................................................................................................................... done, booting the kernel.</span><br><span class="line">Linux version <span class="number">2</span>.<span class="number">6</span>.<span class="number">32</span>.<span class="number">2</span>-FriendlyARM (root@tzs-ThinkPad-X201) (gcc version <span class="number">4</span>.<span class="number">4</span>.<span class="number">3</span> (ctng-<span class="number">1</span>.<span class="number">6</span>.<span class="number">1</span>) ) #<span class="number">16</span> Tue Dec <span class="number">23</span> <span class="number">15</span>:<span class="number">08</span>:<span class="number">43</span> CST <span class="number">2014</span></span><br><span class="line"><span class="function">CPU: <span class="title">ARM920T</span> [41129200] <span class="title">revision</span> 0 (<span class="title">ARMv4T</span>), <span class="title">cr</span>=<span class="title">c0007177</span></span></span><br><span class="line"><span class="function"><span class="title">CPU</span>: <span class="title">VIVT</span> <span class="title">data</span> <span class="title">cache</span>, <span class="title">VIVT</span> <span class="title">instruction</span> <span class="title">cache</span></span></span><br><span class="line"><span class="function"><span class="title">Machine</span>: <span class="title">FriendlyARM</span> <span class="title">Mini2440</span> <span class="title">development</span> <span class="title">board</span></span></span><br><span class="line"><span class="function">... ... ... ... ...</span></span><br></pre></td></tr></table></figure>
+<p>启动完成后便进入开发板的命令行界面，输入 Linux
+命令查看开发板的一些基本信息：</p>
+<p><img src="/Embedded/Mini2440/MobaXterm-2.png"></p>
+<h2 id="minicom">Minicom</h2>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Superboot-<span class="number">2440</span> V1.<span class="number">5</span>(<span class="number">20150414</span>) by FriendlyARM</span><br><span class="line"></span><br><span class="line">Booting from NOR</span><br><span class="line">Try to <span class="built_in">find</span> SD card...... <span class="keyword">not</span> found.</span><br><span class="line">Hello USB Loop</span><br><span class="line">USB <span class="built_in">Mode</span>: Connected</span><br></pre></td></tr></table></figure>
+<h1 id="superboot">Superboot</h1>
+<p>早期 Mini2440 开发板出厂时预置的 Bootloader
+是由友善之臂基于三星原厂<strong>Vivi</strong>改进而来的<strong>Supervivi</strong>，需要结合三星配套的
+DNW 软件才能实现 USB 下载（<strong>官方版本运行在 Win10
+上时驱动已经失效</strong>）。2014 年以后，友善之臂为 Mini2440
+重新开发了一款称为<strong>Superboot</strong>的
+Bootloader，并在同期推出<strong>MiniTools</strong>作为匹配的 USB
+下载工具，该工具无需串口完全通过 USB 下载，并且内置相应的 USB
+下载驱动，除了能够进行
+Bootloader、Kernel、根文件系统的下载以外，还能够下载并安装<strong>裸机程序</strong>。由于<strong>Superboot</strong>必须与<strong>MiniTools</strong>配套使用，而笔者
+Mini2440 开发板购置年限较早，因此需要手动通过 J-Link
+仿真调试器将<strong>Superboot</strong>下载至开发板上的<strong>2M</strong>容量<strong>Nor
+Flash</strong>，下面来介绍 Bootloader 的具体烧写步骤：</p>
+<p>首先在电脑上安装<code>JLink_Windows_V644d.exe</code>工具，然后将
+Mini2440
+开发板断电，并将<code>JLink</code>通过转接板和排线连接至开发板<code>JTAG</code>接口，另一头插入电脑<code>USB</code>接口。</p>
+<p><img src="/Embedded/Mini2440/superboot/jlink-connection.jpg"></p>
+<p>Mini2440 开发板上电之后，在电脑上双击运行<strong>J-Link
+Commander</strong>，<strong>注意弹出的 JLINK 固件更新提示信息，为了防止
+JLINK
+固件失效这里选择【否】</strong>，运行后软件控制台界面输出如下信息表示<strong>J-Link</strong>已经成功连接至电脑：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SEGGER J-Link Commander V6.<span class="number">44</span>d (Compiled Mar <span class="number">27</span> <span class="number">2019</span> <span class="number">17</span>:<span class="number">09</span>:<span class="number">10</span>)</span><br><span class="line">DLL version V6.<span class="number">44</span>d, compiled Mar <span class="number">27</span> <span class="number">2019</span> <span class="number">17</span>:<span class="number">08</span>:<span class="number">23</span></span><br><span class="line"></span><br><span class="line">Connecting to J-Link via USB...O.K.</span><br><span class="line"><span class="function">Firmware: <span class="title">J</span>-<span class="title">Link</span> <span class="title">ARM</span> <span class="title">V8</span> <span class="title">compiled</span> <span class="title">May</span> 27 2009 17:31:22</span></span><br><span class="line"><span class="function"><span class="title">Hardware</span> <span class="title">version</span>: <span class="title">V8</span>.00</span></span><br><span class="line"><span class="function"><span class="title">S</span>/<span class="title">N</span>: -1</span></span><br><span class="line"><span class="function"><span class="title">License</span>(<span class="title">s</span>): <span class="title">RDI</span>,<span class="title">FlashDL</span>,<span class="title">FlashBP</span>,<span class="title">JFlash</span>,<span class="title">GDBFULL</span></span></span><br><span class="line"><span class="function"><span class="title">VTref</span>=0.000<span class="title">V</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Type</span> &quot;<span class="title">connect</span>&quot; <span class="title">to</span> <span class="title">establish</span> <span class="title">a</span> <span class="title">target</span> <span class="title">connection</span>, &#x27;?&#x27; <span class="title">for</span> <span class="title">help</span></span></span><br></pre></td></tr></table></figure>
+<p>开发板将<strong>S2</strong>开关切换至【Nor
+Flash】，并打开电源开关让开发板上电，接下来打开<strong>J-Flash</strong>并加载<code>s3c2440a_embedclub.jflash</code>配置文件，然后点击【Start
+J-Flash】进入软件主界面：</p>
+<p><img src="/Embedded/Mini2440/superboot/jflash-1.png"></p>
+<p>选择主界面菜单上的【Options】里的【Project
+settings...】，进入到项目配置界面后选择【Flash】选项卡。</p>
+<p><img src="/Embedded/Mini2440/superboot/jflash-2.png"></p>
+<p>点击【Select flash device】按钮，然后选中当前 Mini2440
+开发板用于装载<strong>Bootloader</strong>的<strong>Nor
+Flash</strong>芯片型号。笔者当前 Mini2440
+开发板使用的型号是<code>S29AL016J70TFI02</code>，实物照片如下图：</p>
+<p><img src="/Embedded/Mini2440/superboot/S29AL016J70TFI02.png"></p>
+<p>所以这里直接选择<code>S29AL016Jxxxxxxx2</code>并点击【OK】以及【确定】保存。</p>
+<p><img src="/Embedded/Mini2440/superboot/jflash-3.png"></p>
+<p>接下来，选择<strong>J-Link
+Commander</strong>菜单项【Target】下的【connect】命令，使<strong>J-Link</strong>连接至
+Mini2440 开发板。</p>
+<p><img src="/Embedded/Mini2440/superboot/jflash-4.png"></p>
+<p>再选择菜单项【File】下的【Open data
+file...】选中开发板光盘<code>images</code>目录内的<code>Superboot2440.bin</code>映像文件（<em>注意这里仅支持<code>.bin</code>后缀名格式,
+所以如果下载<code>supervivi-64M</code>就需要添加<code>.bin</code>作为后缀名</em>）。此时会弹出下载起始地址对话框，直接输入<code>0</code>以后点击【确定】即可：</p>
+<p><img src="/Embedded/Mini2440/superboot/jflash-5.png"></p>
+<p>进行到这一步时，所有的前期配置工作都已经完成，点击<strong>J-Flash</strong>菜单【Target】里的【Production
+Programming】开始烧写<strong>Bootloader</strong>：</p>
+<p><img src="/Embedded/Mini2440/superboot/jflash-6.png"></p>
+<p>下面界面展示编程过程正在进行当中，万众期待的魔法即将发生：</p>
+<p><img src="/Embedded/Mini2440/superboot/jflash-7.png"></p>
+<p>当<strong>J-Flash</strong>界面弹出下图信息的时候，表示<strong>Bootloader</strong>已经成功的写入到
+Mini2440 开发板的<strong>Nor Flash</strong>当中。</p>
+<p><img src="/Embedded/Mini2440/superboot/jflash-8.png"></p>
+<p>点击【确定】，<strong>J-Link</strong>断电然后关闭<strong>J-Flash</strong>，开发板重新上电后开始正常工作。</p>
+<blockquote>
+<p>完成【Superboot】的烧写之后，就可以通过 Mini2440 开发板上的 SD
+卡插槽来完成操作系统的安装，首先将 SD
+卡格式化为<strong>FAT32</strong>格式，然后将开发盘光盘中的<code>images</code>目录完全拷贝至
+SD
+卡，并修改好里面<code>FriendlyARM.ini</code>配置文件为当前开发板适用的选项，将<strong>S2
+开关</strong>切换至【Nor
+Flash】一侧，重新上电后蜂鸣器发出一声<code>滴</code>即开始安装操作系统，完成安装之后蜂鸣器将会发出<code>滴滴</code>两声，此时将<strong>S2
+开关</strong>切换至【Nand Flash】重新上电即可启动操作系统。</p>
+</blockquote>
+<h1 id="minitools">MiniTools</h1>
+<p>将友善电子提供的<strong>Superboot</strong>下载到开发板 Nor Flash
+中之后，接下来着手 USB
+下载工具<strong>MiniTools</strong>的安装，由于该软件内置的 USB
+驱动程序未获得 Windows 10 操作系统驱动签名，因此直接在 Windows 10
+环境下安装会提示错误信息。此时，需要通过手动临时关闭 Windows 10
+操作系统的<strong>驱动程序强制签名</strong>验证服务。</p>
+<p>点击 Windows 10
+右下角通知图标，选择【所有设置】-【更新和安全】-【恢复】-【立即重新启动】；此时操作系统会讯问重启选项，选择【疑难解答】-【高级选项】-【启动设置】-【重启】；此时重新启动并进入启动设置选项，选择【7)
+禁用驱动程序强制签名】；进行到这里，重新进入 Windows 10
+操作系统后就可以正常安装 MiniTools
+了。另外一种更新简单的方法是以管理员身份运行<strong>CMD
+命令提示符工具</strong>，然后执行<code>bcdedit.exe /set nointegritychecks off</code>命令就可以关闭强制签名验证，如果需要恢复验证执行<code>bcdedit.exe /set nointegritychecks on</code>即可。</p>
+<p>接下来，在个人电脑上打开<strong>MiniTools</strong>软件，然后用数据线连接开发板的
+USB Slave 和个人电脑上的标准 USB ，并将<strong>S2 开关</strong>拨至【Nor
+Flash】一侧，上电启动后就可以看到开发板成功与 MiniTools 建立连接：</p>
+<p><img src="/Embedded/Mini2440/minitools/install.png"></p>
+<blockquote>
+<p>Linux
+版本<strong>MiniTools</strong>采用静态编译，基本能够兼容大部分发行版，解压后以<code>root</code>权限执行<code>./start.sh</code>命令即可正常运行。</p>
+</blockquote>
+<h2 id="通过-usb-下载操作系统">通过 USB 下载操作系统</h2>
+<p>点击<strong>MiniTools</strong>界面上的【Linux】选项，并点击【Location
+images path】按钮，选择 Mini2440
+开发板配套光盘下的<code>images</code>目录，<strong>MiniTools</strong>会自动加载该目录下<code>FriendlyARM.ini</code>文件中的配置信息并自动填写至软件界面，注意配置文件中的<code>Linux-Kernel</code>项目需要设置为包含有对应液晶屏型号驱动的
+Linux
+内核，笔者当前开发板液晶屏型号为<code>X35</code>，因此将配置文件修改为<code>zImage_X35</code>，就像下面这样：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#This line cannot be removed. by FriendlyARM(www.arm9.net)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">USBMode</span> = <span class="literal">No</span></span><br><span class="line"><span class="attr">Action</span> = Install</span><br><span class="line"><span class="attr">OS</span> = Linux</span><br><span class="line"><span class="attr">VerifyNandWrite</span> = <span class="literal">Yes</span></span><br><span class="line"></span><br><span class="line"><span class="attr">LowFormat</span> = <span class="literal">No</span></span><br><span class="line">Status <span class="attr">Type</span> = Beeper| LED</span><br><span class="line"></span><br><span class="line"><span class="comment"># Linux part</span></span><br><span class="line"><span class="attr">Linux-BootLoader</span> = Superboot2440.bin</span><br><span class="line"><span class="attr">Linux-Kernel</span> = Linux/zImage_X35</span><br><span class="line"><span class="attr">Linux-CommandLine</span> = noinitrd root=/dev/mtdblock3 init=/linuxrc console=ttySAC0</span><br><span class="line"><span class="attr">Linux-RootFs-InstallImage</span> = Linux/rootfs_qtopia_qt4.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows CE 6 part</span></span><br><span class="line"><span class="attr">WindowsCE6-Bootloader</span> = wince6/nboot_X35.bin</span><br><span class="line"><span class="attr">WindowsCE6-BootLogo</span> = wince6/bootlogo.bmp</span><br><span class="line"><span class="attr">WindowsCE6-InstallImage</span> = wince6/NK_X35.bin</span><br><span class="line"></span><br><span class="line"><span class="comment">#User Bin part</span></span><br><span class="line"><span class="attr">UserBin-Bootloader</span> = Superboot2440.bin</span><br><span class="line"><span class="attr">UserBin-Image</span> = <span class="number">2440</span>test/<span class="number">2440</span>test_X35.bin</span><br><span class="line"><span class="attr">userBinStartAddress</span>=<span class="number">30000000</span></span><br></pre></td></tr></table></figure>
+<p>点击【Start flashing】按钮即可开始通过 USB 下载相关的镜像文件。</p>
+<p><img src="/Embedded/Mini2440/minitools/images.png"></p>
+<blockquote>
+<p>使用<strong>MiniTools</strong>工具烧写操作系统时，需要确保 SD
+卡里<code>images/FriendlyARM.ini</code>配置文件的<code>USB-Mode = yes</code>，或者使用前就先拨出
+SD 卡。</p>
+</blockquote>
+<h2 id="使用-usb-下载裸机程序">使用 USB 下载裸机程序</h2>
+<p>友善电子提供了一系列无需运行在嵌入式操作系统之上的裸机测试程序，它们都保存在<code>2440test_X35.bin</code>这个文件下，需要通过<strong>MiniTools</strong>通过
+USB 下载并运行在开发板上。</p>
+<p>连接开发板的串口与 USB Salve
+到计算机，并打开<strong>MobaXterm</strong>串口终端工具，将<strong>S2
+开关</strong>切换至【Nor
+Flash】上电启动，打开<strong>MiniTools</strong>选择【User bin(No
+OS)】菜单，点击【Download and Run】按钮：</p>
+<p><img src="/Embedded/Mini2440/minitools/no-os-bin.png"></p>
+<p>下载完成后，<strong>MobaXterm</strong>串口终端将呈现如下提示信息，此时通过键入指定序号即可执行相应的裸机程序，按下键盘【Esc】键即可退出执行：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Superboot-<span class="number">2440</span> V1.<span class="number">5</span>(<span class="number">20150414</span>) by FriendlyARM</span><br><span class="line"></span><br><span class="line">Booting from NOR</span><br><span class="line">Try to <span class="built_in">find</span> SD card...... <span class="keyword">not</span> found.</span><br><span class="line">Hello USB Loop</span><br><span class="line">USB <span class="built_in">Mode</span>: Connected</span><br><span class="line">Downloading User-Bin...</span><br><span class="line">Downloading User-Bin succeed</span><br><span class="line">Run UserBin▒</span><br><span class="line"></span><br><span class="line">Superboot-<span class="number">2440</span> V1.<span class="number">5</span>(<span class="number">20150414</span>) by FriendlyARM</span><br><span class="line"></span><br><span class="line">Booting from NOR</span><br><span class="line"></span><br><span class="line">&lt;***********************************************&gt;</span><br><span class="line">           SBC2440 Test Program VER1.<span class="number">0</span></span><br><span class="line">                www.arm9.<span class="built_in">net</span></span><br><span class="line">      Build <span class="built_in">time</span> is: Jul <span class="number">01</span> <span class="number">2012</span>  <span class="number">13</span>:<span class="number">05</span>:<span class="number">28</span></span><br><span class="line">          Image$$RO$$Base  = <span class="number">0</span>x30000000</span><br><span class="line">          Image$$RO$$Limit = <span class="number">0</span>x30034c4c</span><br><span class="line">          Image$$RW$$Base  = <span class="number">0</span>x30034c4c</span><br><span class="line">          Image$$RW$$Limit = <span class="number">0</span>x300e2a10</span><br><span class="line">          Image$$ZI$$Base  = <span class="number">0</span>x3009623c</span><br><span class="line">          Image$$ZI$$Limit = <span class="number">0</span>x300e2a10</span><br><span class="line">&lt;***********************************************&gt;</span><br><span class="line"></span><br><span class="line">Please select function :</span><br><span class="line"><span class="number">0</span> : Please input <span class="number">1</span>-<span class="number">16</span> to select test</span><br><span class="line"><span class="number">1</span> : Test PWM</span><br><span class="line"><span class="number">2</span> : RTC <span class="built_in">time</span> display</span><br><span class="line"><span class="number">3</span> : Test ADC</span><br><span class="line"><span class="number">4</span> : Test interrupt and key scan</span><br><span class="line"><span class="number">5</span> : Test Touchpanel</span><br><span class="line"><span class="number">6</span> : Test TFT-LCD or VGA1024x768 module</span><br><span class="line"><span class="number">7</span> : Test IIC EEPROM, <span class="keyword">if</span> use QQ2440, please remove the LCD</span><br><span class="line"><span class="number">8</span> : UDA1341 play music</span><br><span class="line"><span class="number">9</span> : Test SD Card</span><br><span class="line"><span class="number">10</span> : Test CMOS Camera</span><br><span class="line"><span class="number">11</span> : Test <span class="number">1</span>-wire LCD backlight control</span><br></pre></td></tr></table></figure>
+<h1 id="交叉编译环境建立">交叉编译环境建立</h1>
+<h1 id="存储地址空间与片选">存储地址空间与片选</h1>
+</div><div class="article-licensing box"><div class="licensing-title"><p>基于三星 S3C2440 的嵌入式 Linux 攻略</p><p><a href="http://www.uinio.com/Embedded/Mini2440/">http://www.uinio.com/Embedded/Mini2440/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2012-06-26</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2015-12-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Embedded/MQTT/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">小议 MQTT 物联网传输协议</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Math/Calculus/"><span class="level-item">高等数学主要概念与公式摘要</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#板载资源"><span class="level-left"><span class="level-item">1</span><span class="level-item">板载资源</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#软件资源"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">软件资源</span></span></a></li><li><a class="level is-mobile" href="#硬件资源"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">硬件资源</span></span></a></li></ul></li><li><a class="level is-mobile" href="#串口终端设置"><span class="level-left"><span class="level-item">2</span><span class="level-item">串口终端设置</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#mobaxterm"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">MobaXterm</span></span></a></li><li><a class="level is-mobile" href="#minicom"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">Minicom</span></span></a></li></ul></li><li><a class="level is-mobile" href="#superboot"><span class="level-left"><span class="level-item">3</span><span class="level-item">Superboot</span></span></a></li><li><a class="level is-mobile" href="#minitools"><span class="level-left"><span class="level-item">4</span><span class="level-item">MiniTools</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#通过-usb-下载操作系统"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">通过 USB 下载操作系统</span></span></a></li><li><a class="level is-mobile" href="#使用-usb-下载裸机程序"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">使用 USB 下载裸机程序</span></span></a></li></ul></li><li><a class="level is-mobile" href="#交叉编译环境建立"><span class="level-left"><span class="level-item">5</span><span class="level-item">交叉编译环境建立</span></span></a></li><li><a class="level is-mobile" href="#存储地址空间与片选"><span class="level-left"><span class="level-item">6</span><span class="level-item">存储地址空间与片选</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

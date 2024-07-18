@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>如何设计一枚 NFC 动态标签的天线 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="近场通信（NFC，Near Field Communication）是一种基于无线射频识别（RFID，Radio Frequency I Dentification）技术发展起来的近距离无线通信技术，它们都是通过无线频率的电磁感应耦合传递数据，但是 RFID 的传输范围可以达到 1m，而 NFC 的传输范围通常在 10cm 以内。NFC 的无线信号频率为 13.56MHz，可以兼容"><meta property="og:type" content="blog"><meta property="og:title" content="如何设计一枚 NFC 动态标签的天线"><meta property="og:url" content="http://www.uinio.com/Electronics/NFC_Antenna/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="近场通信（NFC，Near Field Communication）是一种基于无线射频识别（RFID，Radio Frequency I Dentification）技术发展起来的近距离无线通信技术，它们都是通过无线频率的电磁感应耦合传递数据，但是 RFID 的传输范围可以达到 1m，而 NFC 的传输范围通常在 10cm 以内。NFC 的无线信号频率为 13.56MHz，可以兼容"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2022-10-17T16:00:00.000Z"><meta property="article:modified_time" content="2022-10-17T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="RFID"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/NFC_Antenna/"},"headline":"如何设计一枚 NFC 动态标签的天线","image":["http://www.uinio.com/Electronics/NFC_Antenna/logo.png"],"datePublished":"2022-10-17T16:00:00.000Z","dateModified":"2022-10-17T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"近场通信（NFC，Near Field\r Communication）是一种基于无线射频识别（RFID，Radio\r Frequency I\r Dentification）技术发展起来的近距离无线通信技术，它们都是通过无线频率的电磁感应耦合传递数据，但是\r RFID 的传输范围可以达到 1m，而 NFC 的传输范围通常在\r 10cm 以内。NFC 的无线信号频率为\r 13.56MHz，可以兼容"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/NFC_Antenna/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-10-17T16:00:00.000Z" title="2022/10/18 00:00:00">2022-10-18</time>发表</span><span class="level-item"><time dateTime="2022-10-17T16:00:00.000Z" title="2022/10/18 00:00:00">2022-10-18</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">30 分钟读完 (大约4495个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">如何设计一枚 NFC 动态标签的天线</h1><div class="content"><p><strong>近场通信</strong>（<strong>NFC</strong>，Near Field
+Communication）是一种基于<strong>无线射频识别</strong>（<strong>RFID</strong>，Radio
+Frequency I
+Dentification）技术发展起来的近距离无线通信技术，它们都是通过无线频率的电磁感应耦合传递数据，但是
+RFID 的传输范围可以达到 <code>1m</code>，而 NFC 的传输范围通常在
+<code>10cm</code> 以内。NFC 的无线信号频率为
+<code>13.56MHz</code>，可以兼容
+<strong>ISO14443</strong>、<strong>ISO15693</strong>、<strong>Felica</strong>
+等非接触式智能卡规范，数据传输速率可以达到
+<code>106kbit/s</code>、<code>212 kbit/s</code>、<code>424kbit/s</code>。</p>
+<p><img src="/Electronics/NFC_Antenna/logo.png"></p>
+<p>意法半导体的 NFC 动态标签芯片 <strong>ST25DV-I2C</strong> 和
+<strong>ST25DV-PWM</strong> 可以通过低功率的 <strong>I²C</strong>
+总线以及 <code>13.56MHz</code>
+无线射频访问芯片内置的<strong>EEPROM</strong>（电可擦除只读存储器），同时支持近程的
+<strong>ISO/IEC 14443 Type A</strong> 和远程的 <strong>ISO/IEC
+15693</strong> 标准。本文旨在介绍无源 <strong>RFID</strong>
+的基本原理，以及 <code>13.56MHz</code>
+感应天线设计的基础知识，文中部分内容参考自意法半导体编号为《<strong>AN2972</strong>》的官方应用笔记（<strong>Application
+Note</strong>）。</p>
+<span id="more"></span>
+<h2 id="操作方式">操作方式</h2>
+<p>实际电路当中集成动态 NFC 标签芯片是一项非常简单的工作，只需要将其通过
+<strong>I²C</strong> 总线连接至 MCU 微控制器即可，而动态 NFC 标签芯片在
+<strong>RF</strong>（射频，Radio
+Frequency）一端，则还需要连接外部天线才能够正常工作。</p>
+<p><img src="/Electronics/NFC_Antenna/1.png"></p>
+<p>动态 NFC 标签的天线通常是放置于 PCB
+电路板上的一圈<strong>环形走线</strong>，其阻抗与内部的<strong>调谐电容值</strong>相匹配，进而创建出一个
+<code>13.56MHz</code> 频率的共振电路，这个调谐频率的基本方程为:</p>
+<p><span class="math display">\[
+f_{调谐} = \frac{1}{2 \pi \times \sqrt{L_{天线} \times C_{调谐}}}
+\]</span></p>
+<h2 id="基本原理与方程">基本原理与方程</h2>
+<p>本文接下来的内容当中，<strong>NFC 标签</strong>用于指代安装在 PCB
+上并与其天线相连接的动态 NFC 标签芯片，而 <strong>NFC
+读卡器</strong>则是指能够以射频模式与 NFC 标签进行通信的设备。</p>
+<h3 id="无源-rfid-技术">无源 RFID 技术</h3>
+<h4 id="能量传递">能量传递</h4>
+<p>动态 NFC
+标签芯片通过其<strong>环形天线</strong>，从读卡器产生的磁场中获取运行所需的能量。该过程类似于变压器的<strong>互感</strong>，其中
+NFC 读卡器相当于<strong>初级绕组</strong>，而 NFC
+标签则相当于<strong>次级绕组</strong>。从 NFC 读卡器到 NFC
+标签芯片的能量传输主要取决于如下四个方面：</p>
+<ol type="1">
+<li>NFC 标签天线的<strong>调谐</strong>程度，接近于 NFC 读卡器的载波频率
+<code>13.56 MHz</code>；</li>
+<li>NFC 读卡器和 NFC
+标签天线之间的<strong>距离</strong>与<strong>方向</strong>；</li>
+<li>NFC 读卡器天线与 NFC 标签天线的<strong>尺寸</strong>；</li>
+<li>NFC 读卡器的<strong>功率</strong>；</li>
+</ol>
+<p>下面的示意图展示了在射频模式下，NFC
+读卡器与标签之间的功率传输机制：</p>
+<p><img src="/Electronics/NFC_Antenna/2.png"></p>
+<p>NFC 读卡器通过电磁场向 NFC 标签传递的能量，取决于 NFC
+读卡器产生的<strong>磁感线</strong>如何流经 NFC 标签天线。</p>
+<ul>
+<li>双方的 NFC
+天线保持<strong>平行</strong>时，通信效果<strong>最佳</strong>；</li>
+<li>双方的 NFC
+天线相互<strong>垂直</strong>时，无法进行有效的通信；</li>
+<li>双方的 NFC
+天线处于<strong>其它位置</strong>时，通信效果会到一定程度的影响；</li>
+</ul>
+<p><img src="/Electronics/NFC_Antenna/3.png"></p>
+<h4 id="数据传输">数据传输</h4>
+<p>将 NFC 标签放置于 NFC 读卡器的电磁场当中，NFC
+标签芯片的内置电路就会开始<strong>解调</strong>来自于读卡器的信息：</p>
+<p><img src="/Electronics/NFC_Antenna/4.png"></p>
+<p>通信结束之后，NFC 读卡器会继续为 NFC 标签供电，以使得 NFC
+标签产生一个应答响应，发送回 NFC 读卡器（动态 NFC
+标签芯片会通过调节内部的输入阻抗，将应答信号反向散射到 NFC
+读卡器）。</p>
+<p><img src="/Electronics/NFC_Antenna/5.png"></p>
+<blockquote>
+<p>▶ 整个数据通信过程所涉及的全部标准与协议，都已经嵌入到了 NFC 读卡器与
+NFC 标签芯片的内部电路当中。</p>
+</blockquote>
+<h3 id="简化等效电路">简化等效电路</h3>
+<p>下面的示意图给出了 NFC 动态标签及其天线的等效电路：</p>
+<p><img src="/Electronics/NFC_Antenna/6.png"></p>
+<ul>
+<li><strong>动态 NFC
+标签芯片的模型</strong>由一个代表其所<strong>消耗电流</strong>的电阻
+<span class="math inline">\(R_{chip}\)</span>
+和一个代表内部<strong>调谐电容</strong>与<strong>内部寄生电容</strong>的
+<span class="math inline">\(C_{tun}\)</span> 来进行表示；</li>
+<li><strong>环形天线的模型</strong>是由表示环形天线上全部<strong>杂散电容</strong>的
+<span class="math inline">\(C_{ant}\)</span>
+，以及表示天线<strong>电阻损耗</strong>的 <span class="math inline">\(R_{ant}\)</span>，和表示环形天线<strong>自感</strong>的
+<span class="math inline">\(L_{ant}\)</span> 共同组成；</li>
+</ul>
+<p>其中，虽然 <span class="math inline">\(C_{ant}\)</span>、<span class="math inline">\(R_{ant}\)</span>、<span class="math inline">\(L_{ant}\)</span>
+是一个常量，但是其<strong>总阻抗</strong>具有频率依赖性。即在<strong>自谐振频率</strong>下，天线阻抗的<strong>虚部</strong>
+<span class="math inline">\(Z_{ant}\)</span>
+为零呈现纯<strong>阻性</strong>；而在低于<strong>自谐振频率</strong>时，天线阻抗的虚部为正值呈现<strong>感性</strong>。当频率低于<strong>自谐振频率</strong>（<span class="math inline">\(Z_{ant} = R_A+
+j_{XA}\)</span>）的时候，天线的<strong>等效电感</strong> <span class="math inline">\(L_A\)</span> 被定义为 <span class="math inline">\(L_A = \frac{X_A}{\omega}\)</span>。</p>
+<blockquote>
+<p>▶ 低频情况下，杂散电容的影响可以忽略不计 <span class="math inline">\(L_A = L_{ant}\)</span>(自感)。而达到
+<code>13.56MHz</code> 频率的时候，杂散电容的影响就不能再被忽视 <span class="math inline">\(L_A &gt; L_{ant}\)</span>。</p>
+</blockquote>
+<h3 id="基本方程">基本方程</h3>
+<h4 id="谐振频率">谐振频率</h4>
+<p>下图展示了存在正弦磁场的情况下，安装有<strong>环形天线</strong>的
+<strong>NFC 动态标签芯片</strong>的等效电路。其中的 <span class="math inline">\(V_{OC}\)</span>
+表示天线传递的<strong>开路电压</strong>，该电压值取决于<code>磁场强度</code>以及天线的<code>尺寸</code>和<code>匝数</code>。</p>
+<p><img src="/Electronics/NFC_Antenna/7.png"></p>
+<p>NFC 标签的天线阻抗为 <span class="math inline">\(Z_{ant} = R_A + jL_A
+\omega\)</span>，其中的 <span class="math inline">\(L_A\)</span>
+表示天线的<strong>电感</strong>。而 NFC 标签芯片的阻抗为 <span class="math inline">\(Z_S = R_S + j \times \frac{1}{CS
+\omega}\)</span>，其中的 <span class="math inline">\(R_S\)</span>
+表示的是 NFC 标签芯片的<strong>电流损耗</strong>，而 <span class="math inline">\(C_S\)</span>
+表示的是<strong>串联等效调谐电容</strong>。</p>
+<blockquote>
+<p>▶ 等效 RLC 电路的谐振频率由条件 <span class="math inline">\(L_A C_S
+\omega^2 = 1\)</span> 给出，其中 <span class="math inline">\(\omega = 2
+\pi f\)</span>（此处的 <span class="math inline">\(f\)</span> 表示频率
+<code>Hz</code>）。</p>
+</blockquote>
+<h4 id="最优天线调谐">最优天线调谐</h4>
+<p>RLC 电路的<strong>总阻抗</strong> <span class="math inline">\(Z_{tot}
+= Z_{ant} + Z_S\)</span>，当<strong>谐振频率</strong>为 <span class="math inline">\(L_A C_S \omega^2 = 1\)</span> 时，总阻抗降低至
+<span class="math inline">\(Z_{tot} = R_A +
+R_S\)</span>，此时天线的总阻抗最小，天线内部的<strong>电流</strong>以及传递给
+NFC
+标签芯片的<strong>电压</strong>最大，进而向设备提供的能量也就最大。</p>
+<p><img src="/Electronics/NFC_Antenna/8.png"></p>
+<blockquote>
+<p>▶ 上图展示了三个动态 NFC 标签天线调优的例子，其中的标签
+<code>#2</code> 为最优的天线调谐。</p>
+</blockquote>
+<h2 id="如何设计-pcb-天线">如何设计 PCB 天线</h2>
+<p><code>13.56MHz</code> 频率下的 NFC
+天线可以根据需要，被设计成为不同的形状。如前所述，需要重点关注的参数是天线在
+<code>13.56MHz</code> 频率下的<strong>等效电感</strong> <span class="math inline">\(L_A\)</span>。</p>
+<blockquote>
+<p>▶ 杂散电容非常难进行近似的取值，通常处于以 <code>pF</code>
+作为单位的范围以内。</p>
+</blockquote>
+<p>接下来的内容会给出计算各种形状天线<strong>自感</strong> <span class="math inline">\(L_{ant}\)</span>
+的有效公式（不考虑天线杂散电容），以及如何通过意法半导体官方提供的 <a target="_blank" rel="noopener" href="https://www.st.com/content/st_com/en/support/resources/edesign.html">eDesignsuite</a>
+工具来计算<strong>等效电感</strong> <span class="math inline">\(L_A\)</span>。</p>
+<h3 id="圆形天线的电感">圆形天线的电感</h3>
+<p><span class="math display">\[
+L_{ant} = \mu_0 \times N^{1.9} \times r \times \ln(\frac{r}{r_0})
+\implies
+4 \pi \cdot 10^{-7} \times 天线圈数^{1.9} \times 天线半径 \times
+\ln\bigg(\frac{天线半径}{导线直径}\bigg)
+\]</span></p>
+<ul>
+<li><code>r</code> 是天线半径，单位为毫米；</li>
+<li><code>r_0</code> 是导线直径，单位为毫米；</li>
+<li><code>N</code> 是天线的圈数；</li>
+<li><span class="math inline">\(\mu_0 = 4 \pi \cdot 10^{-7}
+H/m\)</span>；</li>
+<li><span class="math inline">\(L\)</span> 的单位为亨利；</li>
+</ul>
+<h3 id="螺旋形天线的电感">螺旋形天线的电感</h3>
+<p><span class="math display">\[
+L_{ant} = 31.33 \times \mu_0 \times N^2 \times \frac{a^2}{8a + 11c}
+\implies
+31.33 \times 4 \pi \cdot 10^{-7} \times 天线匝数^2 \times
+\frac{平均半径^2}{8\times平均半径 + 11\times绕组厚度}
+\]</span></p>
+<p><img src="/Electronics/NFC_Antenna/9.png"></p>
+<ul>
+<li><span class="math inline">\(a = \frac{(r_{in} +
+r_{out})}{2}\)</span> 为平均半径，单位为米；</li>
+<li><span class="math inline">\(c = r_{out} - r_{in}\)</span>
+是绕组厚度，单位为米；</li>
+<li><span class="math inline">\(\mu_0 = 4 \pi \cdot 10^{-7}
+H/m\)</span>；</li>
+<li><span class="math inline">\(L\)</span> 的单位为亨利；</li>
+<li><span class="math inline">\(N\)</span>
+是天线的<strong>匝数</strong>；</li>
+</ul>
+<h3 id="方形天线的电感">方形天线的电感</h3>
+<p><span class="math display">\[
+L_{ant} = K_1 \times \mu_0 \times N^2 \times \frac{d}{1 + K_2 \times p}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(d = \frac{(d_{out} +
+d_{in})}{2}\)</span>，单位为<strong>毫米</strong>，其中 <span class="math inline">\(d_{out}\)</span> 为<strong>外径</strong>，而 <span class="math inline">\(d_{in}\)</span> 为<strong>内径</strong>；</li>
+<li><span class="math inline">\(p = \frac{(d_{out} - d_{in})}{(d_{out} +
+d_{in})}\)</span>，单位为<strong>毫米</strong>；</li>
+<li><span class="math inline">\(K_1\)</span> 和 <span class="math inline">\(K_2\)</span> 的取值依赖于天线的布局形式：</li>
+</ul>
+<p><img src="/Electronics/NFC_Antenna/10.png"></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">布局</th>
+<th style="text-align: center;"><span class="math inline">\(K_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(K_2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>正方形</strong></td>
+<td style="text-align: center;"><code>2.34</code></td>
+<td style="text-align: center;"><code>2.75</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>六角形</strong></td>
+<td style="text-align: center;"><code>2.33</code></td>
+<td style="text-align: center;"><code>3.82</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>八角形</strong></td>
+<td style="text-align: center;"><code>2.25</code></td>
+<td style="text-align: center;"><code>3.55</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="edesignsuite-天线设计工具">eDesignSuite 天线设计工具</h3>
+<p>意法半导体官方提供的 <a target="_blank" rel="noopener" href="https://www.st.com/content/st_com/en/support/resources/edesign.html">eDesignsuite</a>
+在线工具套件，为 NFC 天线设计提供了 <a target="_blank" rel="noopener" href="https://eds.st.com/antenna/"><strong>NFC 电感</strong> (NFC
+Inductance)</a> 和 <a target="_blank" rel="noopener" href="https://eds.st.com/nfc-tuningcircuit/"><strong>NFC
+调谐电路</strong> (NFC Tuning Circuit)</a> 两款小工具。只需要输入与 PCB
+材料和天线尺寸相关的参数，该工具就可以通过计算<strong>自电感</strong>和<strong>杂散电容</strong>来得到天线的<strong>等效电感</strong>。</p>
+<p><img src="/Electronics/NFC_Antenna/11.png"></p>
+<p>上图给出了一个天线等效电感的计算示例，包括了天线的几何参数、导体参数、PCB
+基板参数。通过计算出的天线等效电感，就可以生成一个天线的原型。接下来，就可以使用网络分析仪测量天线阻抗，或者使用非接触式的方式测量
+NFC 标签的调谐频率来验证天线设计。</p>
+<h2 id="pcb-布局">PCB 布局</h2>
+<h3 id="动态-nfc-标签芯片与天线之间的连接长度">动态 NFC
+标签芯片与天线之间的连接长度</h3>
+<p>动态 NFC
+标签芯片必须尽可能的靠近天线（位于几毫米范围以内），任何额外的布线都会改变天线的特性。</p>
+<h3 id="地平面-电源-信号层">地平面 电源 信号层</h3>
+<p>布局 PCB 上的 NFC
+天线时，需要注意天线的顶层与底层两个面都不能进行铺铜，并且在天线周围也最好不要存在铜平面；下面的示意图展示了
+NFC 天线的最优布局：<strong>NFC
+标签芯片靠近天线，而接地平面远离天线</strong>。</p>
+<p><img src="/Electronics/NFC_Antenna/12.png"></p>
+<p>接下来，展示的是两种错误设计的示例，这两种情况下电磁波不会流经天线，NFC
+读卡器与动态 NFC 标签的天线之间不会进行能量传递。</p>
+<p><img src="/Electronics/NFC_Antenna/13.png"></p>
+<p>下面同样是一种不推荐的布局示例，因为动态 NFC
+标签天线周围的环形铺铜会极大的衰减电磁波信号。</p>
+<p><img src="/Electronics/NFC_Antenna/14.png"></p>
+<p>而下面则是一种可以被接受的布局示例，主要是由于此处的天线并没有与地平面发生重叠。</p>
+<p><img src="/Electronics/NFC_Antenna/15.png"></p>
+<blockquote>
+<p>▶ 建议在进行 PCB 布局时，专门为 NFC
+天线划分出一块周围没有接地层的独立区域。</p>
+</blockquote>
+<h3 id="金属表面">金属表面</h3>
+<p>当 NFC 天线靠近导电层时，其<strong>自感</strong>将会减小，从而造成
+NFC 标签的调谐频率增加。</p>
+<p><img src="/Electronics/NFC_Antenna/16.png"></p>
+<p>如果设计的 NFC
+天线必须靠近金属表面进行工作，那么就必须对频率调谐的漂移进行补偿，以获得
+<code>13.56MHz</code>
+的正确调谐频率。这里可以通过重新设计一个具有更大等效电感的全新 NFC
+天线，或者在现有天线基础之上增加一个外部调谐电容来实现补偿。下面的表格，就展示了一个使用
+<code>74pF</code> 调谐电容进行频率补偿的示例：</p>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 37%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">特性</th>
+<th style="text-align: left;">ANT1-M24LR16E</th>
+<th style="text-align: left;">ANT1-M24LR16E
+加入<code>74pF</code>调谐电容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">天线尺寸</td>
+<td style="text-align: left;"><code>45 mm x 75 mm</code></td>
+<td style="text-align: left;"><code>45 mm x 75 mm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">空气中的频率调谐</td>
+<td style="text-align: left;"><code>13.7 MHz</code></td>
+<td style="text-align: left;"><code>7.5 MHz</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">接近金属表面的频率调谐</td>
+<td style="text-align: left;"><code>25 MHz</code></td>
+<td style="text-align: left;"><code>14 MHz</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">空气中的读取范围</td>
+<td style="text-align: left;"><code>7.5 cm</code></td>
+<td style="text-align: left;"><code>0.5 cm</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">接近金属表面的读取范围</td>
+<td style="text-align: left;">未检测到</td>
+<td style="text-align: left;"><code>2.5 cm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">状态</td>
+<td style="text-align: left;">天线经过调谐可以暴露在空气中工作</td>
+<td style="text-align: left;">天线可以靠近金属表面进行工作</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>▶ 天线的重新设计会导致走线匝数的增加，需要注意 PCB
+上是否预留有足够的空间。如果布局空间无法有效的进行延伸布线，那么就必须采用外部调谐电容作为频率补偿方案。</p>
+</blockquote>
+<h2 id="nfc-天线调谐的检测">NFC 天线调谐的检测</h2>
+<p>如下的这些因素都会影响到 NFC/RFID
+标签的<strong>调谐频率</strong>：</p>
+<ul>
+<li>天线<strong>等效电感</strong>的计算精度；</li>
+<li>设备主体与天线之间的<strong>连接长度</strong>；</li>
+<li>天线所处的<strong>工作环境</strong>（金属表面、磁性材料）；</li>
+</ul>
+<blockquote>
+<p>▶ 在实际的生产环境当中，往往需要通过专门的仪器来测量 NFC/RFID
+标签的谐振频率。</p>
+</blockquote>
+<h3 id="采用网络分析仪测试">采用网络分析仪测试</h3>
+<p>动态 NFC
+标签天线的调谐频率可以使用带有<strong>环形探头</strong>的<strong>网络分析仪</strong>来进行测量。其中的射频电磁场可以由连接环形探头的网络分析仪（设置为<strong>反射模式</strong>，测量
+<strong>S11
+回波损耗</strong>）产生。环形探头可以购买成品，或者使用单匝线圈自行绕制，并且将其连接至同轴连接器。这样构建出的环形探头可以根据标签天线的尺寸相应的调整大小，进而达到更优的耦合效果。</p>
+<p><img src="/Electronics/NFC_Antenna/17.png"></p>
+<blockquote>
+<p>▶
+通过上述的设备配置与连接，可以直接获得当前系统的<strong>谐振频率</strong>。</p>
+</blockquote>
+<p>如下是一个用于实际测量的网络分析仪参数设置列表：</p>
+<ul>
+<li><strong>起始频率</strong>：<code>5 MHz</code>；</li>
+<li><strong>截止频率</strong>：<code>20 MHz</code>；</li>
+<li><strong>输出功率</strong>：<code>- 10 dBm</code>；</li>
+<li><strong>测量</strong>：<code>Reflection 或者 S11</code>；</li>
+<li><strong>格式</strong>：<code>log magnitude</code>；</li>
+</ul>
+<p>将 NFC 天线放置到连接有网络分析仪的环形探头磁场内，由于环形探头与 NFC
+标签天线相互耦合，从而导致环形探头的阻抗发生变化。当 NFC
+标签处于谐振频率的时候，环形探头的阻抗电阻达到<strong>最大值</strong>，而电抗恢复到<strong>自谐振值</strong>。环形探头的阻抗接近于
+<code>50Ω</code>，可以通过 <strong>S11</strong>
+曲线上面的最小值进行证明。下图展示了某一个天线原型的谐振频率响应曲线：</p>
+<p><img src="/Electronics/NFC_Antenna/18.png"></p>
+<h3 id="采用信号源与示波器测试">采用信号源与示波器测试</h3>
+<p>NFC
+天线的谐振频率也可以采用<strong>信号发生器</strong>和<strong>示波器</strong>，以及两个<strong>环形天线</strong>来进行测量。测试步骤是将一个
+<strong>ISO 10373-7</strong>
+标准的环形天线（如下图所示）与信号发生器连接，从而产生出射频电磁场：</p>
+<p><img src="/Electronics/NFC_Antenna/19.png"></p>
+<p>再通过示波器探头（<code>1MΩ</code> 或者 <code>10MΩ</code>
+输入阻抗）或者 <code>50Ω</code> 阻抗的 BNC 电缆（示波器输入阻抗也设置为
+<code>50Ω</code>），将另外一个 <strong>ISO 10373-7</strong>
+标准的环形天线连接到示波器。</p>
+<p>此时，由于 NFC
+标签与<strong>第一个环形天线</strong>连接，通过信号发生器输出变化的信号使得
+NFC
+标签连接的天线产生电磁感应，这些电磁场会被连接在示波器的<strong>第二个环天线</strong>捕获。<strong>如果当前处于
+NFC
+标签的谐振频率时，那么<code>流入 NFC 标签天线的电流</code>、<code>NFC 标签天线产生的电磁波</code>、<code>示波器显示的电压幅值</code>均将会达到最大值</strong>。</p>
+<p><img src="/Electronics/NFC_Antenna/20.png"></p>
+<p>首先，让信号发生器输出峰峰值为 <code>200mV</code>
+的正弦波信号。然后，以 <code>5MHz</code>
+作为起点，逐步提高信号发生器的输出频率，直至达到示波器所测量到信号的最大幅值。最后，信号发生器所输出的频率就是
+NFC 标签的<strong>谐振频率</strong>。下图给了一款 NFC
+天线原型的<strong>频率响应曲线</strong>，也就是在不同的信号发生器频率下，示波器所测量到的信号幅值：</p>
+<p><img src="/Electronics/NFC_Antenna/21.png"></p>
+<h2 id="从设计到产品">从设计到产品</h2>
+<p>开发设计人员必须了解电路板上 NFC
+天线的<strong>理论</strong>与<strong>实际</strong>性能差异，这里列出一些注意事项。对于不同的
+NFC 读卡器，同一个 NFC
+标签天线所获得的通信效果并不相同，正如下面的示意图所展示的那样：</p>
+<p><img src="/Electronics/NFC_Antenna/22.png"></p>
+<p>另外 PCB
+制造的工艺参数（例如铜层或者环氧层的厚度）也会对天线性能产生影响，这在更换板材供应商的时候需要格外注意。除此之外，同时使用多个动态
+NFC
+标签会导致天线相互耦合，从而出现谐振频率不同于单个天线的情况，例如下面的示意图所展示的情况：</p>
+<p><img src="/Electronics/NFC_Antenna/23.png"></p>
+<p>更加值得注意的是，产品的外壳也会影响 NFC
+标签天线的通信效果，例如使用金属外壳所产生的<strong>法拉第笼</strong>效应，就会阻止
+NFC 读卡器的能量与信号传递到 NFC 标签天线。同时外壳也会影响 PCB
+天线的调谐频率，因而总是建议在最终成品上进行 NFC 射频性能的测试。</p>
+<p><img src="/Electronics/NFC_Antenna/24.png"></p>
+<blockquote>
+<p>▶
+总而言之，在实际量产过程当中，需要充分的考量到<strong>设计</strong>、<strong>原型</strong>、<strong>生产制造</strong>三个环节对于
+NFC 标签天线射频性能所带来的一系列影响。</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>如何设计一枚 NFC 动态标签的天线</p><p><a href="http://www.uinio.com/Electronics/NFC_Antenna/">http://www.uinio.com/Electronics/NFC_Antenna/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-10-18</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-10-18</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/RFID/">RFID</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Project/UINIO-DAP-Link/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">ARM 调试工具 UINIO-DAP-Link 应用详解</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Design/FreeCAD/"><span class="level-item">FreeCAD 参数化 3D 建模上手实例</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#操作方式"><span class="level-left"><span class="level-item">1</span><span class="level-item">操作方式</span></span></a></li><li><a class="level is-mobile" href="#基本原理与方程"><span class="level-left"><span class="level-item">2</span><span class="level-item">基本原理与方程</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#无源-rfid-技术"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">无源 RFID 技术</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#能量传递"><span class="level-left"><span class="level-item">2.1.1</span><span class="level-item">能量传递</span></span></a></li><li><a class="level is-mobile" href="#数据传输"><span class="level-left"><span class="level-item">2.1.2</span><span class="level-item">数据传输</span></span></a></li></ul></li><li><a class="level is-mobile" href="#简化等效电路"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">简化等效电路</span></span></a></li><li><a class="level is-mobile" href="#基本方程"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">基本方程</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#谐振频率"><span class="level-left"><span class="level-item">2.3.1</span><span class="level-item">谐振频率</span></span></a></li><li><a class="level is-mobile" href="#最优天线调谐"><span class="level-left"><span class="level-item">2.3.2</span><span class="level-item">最优天线调谐</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#如何设计-pcb-天线"><span class="level-left"><span class="level-item">3</span><span class="level-item">如何设计 PCB 天线</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#圆形天线的电感"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">圆形天线的电感</span></span></a></li><li><a class="level is-mobile" href="#螺旋形天线的电感"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">螺旋形天线的电感</span></span></a></li><li><a class="level is-mobile" href="#方形天线的电感"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">方形天线的电感</span></span></a></li><li><a class="level is-mobile" href="#edesignsuite-天线设计工具"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">eDesignSuite 天线设计工具</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pcb-布局"><span class="level-left"><span class="level-item">4</span><span class="level-item">PCB 布局</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#动态-nfc-标签芯片与天线之间的连接长度"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">动态 NFC
+标签芯片与天线之间的连接长度</span></span></a></li><li><a class="level is-mobile" href="#地平面-电源-信号层"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">地平面 电源 信号层</span></span></a></li><li><a class="level is-mobile" href="#金属表面"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">金属表面</span></span></a></li></ul></li><li><a class="level is-mobile" href="#nfc-天线调谐的检测"><span class="level-left"><span class="level-item">5</span><span class="level-item">NFC 天线调谐的检测</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#采用网络分析仪测试"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">采用网络分析仪测试</span></span></a></li><li><a class="level is-mobile" href="#采用信号源与示波器测试"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">采用信号源与示波器测试</span></span></a></li></ul></li><li><a class="level is-mobile" href="#从设计到产品"><span class="level-left"><span class="level-item">6</span><span class="level-item">从设计到产品</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

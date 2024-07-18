@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Git 版本管理命令备忘录 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Linux Kernel 是一个非常大规模的开源软件项目，在该项目 1991 ~ 2002 年维护的早期，所有对于代码的修改都是以补丁（Patches）和归档文件（Archived File）的形式进行传递。在 2002 年之后，Linux 内核项目开始使用一款称为 BitKeeper 的商业版本管理工具。但是到了 2005 年，Linux 社区与 BitKeeper 商业公司之间的合作"><meta property="og:type" content="blog"><meta property="og:title" content="Git 版本管理命令备忘录"><meta property="og:url" content="http://www.uinio.com/Zen/Git/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="Linux Kernel 是一个非常大规模的开源软件项目，在该项目 1991 ~ 2002 年维护的早期，所有对于代码的修改都是以补丁（Patches）和归档文件（Archived File）的形式进行传递。在 2002 年之后，Linux 内核项目开始使用一款称为 BitKeeper 的商业版本管理工具。但是到了 2005 年，Linux 社区与 BitKeeper 商业公司之间的合作"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2013-10-04T16:00:00.000Z"><meta property="article:modified_time" content="2021-09-05T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Git"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Zen/Git/"},"headline":"Git 版本管理命令备忘录","image":["http://www.uinio.com/Zen/Git/logo.png"],"datePublished":"2013-10-04T16:00:00.000Z","dateModified":"2021-09-05T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"Linux Kernel\r 是一个非常大规模的开源软件项目，在该项目 1991 ~ 2002\r 年维护的早期，所有对于代码的修改都是以补丁（Patches）和归档文件（Archived\r File）的形式进行传递。在 2002 年之后，Linux 内核项目开始使用一款称为\r BitKeeper 的商业版本管理工具。但是到了 2005 年，Linux\r 社区与 BitKeeper 商业公司之间的合作"}</script><link rel="canonical" href="http://www.uinio.com/Zen/Git/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2013-10-04T16:00:00.000Z" title="2013/10/5 00:00:00">2013-10-05</time>发表</span><span class="level-item"><time dateTime="2021-09-05T16:00:00.000Z" title="2021/9/6 00:00:00">2021-09-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Zen/">Zen</a></span><span class="level-item">31 分钟读完 (大约4648个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">Git 版本管理命令备忘录</h1><div class="content"><p><a target="_blank" rel="noopener" href="https://www.kernel.org/"><strong>Linux Kernel</strong></a>
+是一个非常大规模的开源软件项目，在该项目 <code>1991 ~ 2002</code>
+年维护的早期，所有对于代码的修改都是以<strong>补丁</strong>（Patches）和<strong>归档文件</strong>（Archived
+File）的形式进行传递。在 2002 年之后，Linux 内核项目开始使用一款称为
+<code>BitKeeper</code> 的商业版本管理工具。但是到了 2005 年，Linux
+社区与 BitKeeper 商业公司之间的合作关系破裂，促使 Linux 开源社区以及
+<strong>Linus Torvalds</strong>
+本人根据之前的版本管理经验，开发出了全新的分布式版本管理工具 <a target="_blank" rel="noopener" href="https://git-scm.com/"><strong>Git</strong></a>。</p>
+<p><img src="/Zen/Git/logo.png"></p>
+<p>Git
+不会以基于<strong>文件修改列表</strong>的方式来保存数据，而是以及<strong>引用</strong>和<strong>快照</strong>的方式来保存文件的历史信息；即使没有
+Git 版本管理服务器的支持，大部份操作也能够在本地正常进行；Git
+当中的所有数据存储时都会经过 <strong>SHA-1</strong>
+完整性校验，并且使用一个长度为 <code>40</code>
+的散列字符串来存储和引用这些数据；Git
+当中的所有操作都是在添加数据，因而很难执行不可撤消的任务，也很难让出现在删除数据之后无法找回的场景。</p>
+<span id="more"></span>
+<h2 id="文件状态">文件状态</h2>
+<p>Git
+当中的文件会存在<strong>修改</strong>（Modified）、<strong>暂存</strong>（Staged）、<strong>提交</strong>（Committed）三种状态：</p>
+<ul>
+<li><strong>修改</strong>（Modified）：表示已经修改了文件，但是并没有将这些修改提交到数据库；</li>
+<li><strong>暂存</strong>（Staged）：表示已经将修改之后的文件标记为当前版本，以便进入下一个提交快照；</li>
+<li><strong>提交</strong>（Committed）：意味着数据已经被安全地存储在本地数据库中；</li>
+</ul>
+<p>这样就引出了 Git 版本管理项目的<strong>工作树</strong>（Working
+Tree）、<strong>暂存区</strong>（Staging
+Area）、<strong>仓库</strong>（Git Directory）三个主要组成部分：</p>
+<p><img src="/Zen/Git/areas.png"></p>
+<ul>
+<li><strong>工作树</strong>（Working
+Tree）：工作树是项目一个版本的单个签出。这些文件从 Git
+目录中的压缩数据库中取出，并放在磁盘上供您使用或修改。</li>
+<li><strong>暂存区</strong>（Staging
+Area）：暂存区是一个用于存储下一次提交信息的文件，通常包含在 Git
+目录当中，很多时候也被称作<strong>索引</strong>（index）；</li>
+<li><strong>仓库</strong>（Git Directory）：仓库是 Git
+存储项目元数据和对象数据库的地方，通常位于 Git 仓库当中的
+<code>.git</code> 目录；</li>
+</ul>
+<p>接下来，展示一个 Git 项目的基本工作流程：</p>
+<ol type="1">
+<li>在工作树当中修改了一些文件；</li>
+<li>有选择性的将需要的内容进行暂存，此时只会将这些更改添加至<strong>暂存区</strong>；</li>
+<li>执行提交，将<strong>暂存区</strong>的文件快照永久存储至
+<code>.git</code> 目录当中；</li>
+</ol>
+<h2 id="命令概览">命令概览</h2>
+<table>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 39%">
+<col style="width: 13%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Git 主要命令</th>
+<th style="text-align: left;">功能描述</th>
+<th style="text-align: center;">Git 主要命令</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>add</strong></td>
+<td style="text-align: left;">将文件内容添加到索引中；</td>
+<td style="text-align: center;"><strong>maintenance</strong></td>
+<td>运行一些任务来优化 Git 仓库数据；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>am</strong></td>
+<td style="text-align: left;">从邮箱应用一系列的补丁；</td>
+<td style="text-align: center;"><strong>merge</strong></td>
+<td>合并两个或者更多的开发历史；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>archive</strong></td>
+<td style="text-align: left;">从一个被命名树创建文件归档；</td>
+<td style="text-align: center;"><strong>mv</strong></td>
+<td>移动或者重命名一个文件、目录、符号链接；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>bisect</strong></td>
+<td style="text-align: left;">使用二分查找法来查找引入错误的提交；</td>
+<td style="text-align: center;"><strong>notes</strong></td>
+<td>添加或者检查对象笔记；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>branch</strong></td>
+<td style="text-align: left;">列出、创建、删除分支；</td>
+<td style="text-align: center;"><strong>pull</strong></td>
+<td>获取或者集成另一个仓库或者本地分支；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>bundle</strong></td>
+<td style="text-align: left;">通过存档移动对象与引用；</td>
+<td style="text-align: center;"><strong>push</strong></td>
+<td>使用相关的对象更新远程引用；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>checkout</strong></td>
+<td style="text-align: left;">切换分支或者恢复工作树的文件；</td>
+<td style="text-align: center;"><strong>range-diff</strong></td>
+<td>比较两个提交的范围，例如一个分支的两个版本；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>cherry-pick</strong></td>
+<td style="text-align: left;">根据已经存在的提交应用更改；</td>
+<td style="text-align: center;"><strong>rebase</strong></td>
+<td>在另一个分支上的修改合并至当前分支；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>citool</strong></td>
+<td style="text-align: left;"><code>git-commit</code>
+的图形化替代方案；</td>
+<td style="text-align: center;"><strong>reset</strong></td>
+<td>将当前 <code>HEAD</code> 重置为指定的状态；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>clean</strong></td>
+<td style="text-align: left;">从当前工作树当中移除没有被跟踪的文件；</td>
+<td style="text-align: center;"><strong>restore</strong></td>
+<td>恢复工作树文件；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>clone</strong></td>
+<td style="text-align: left;">克隆一个仓库到一个新的目录；</td>
+<td style="text-align: center;"><strong>revert</strong></td>
+<td>还原一些现有的提交；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>commit</strong></td>
+<td style="text-align: left;">记录更改到仓库；</td>
+<td style="text-align: center;"><strong>rm</strong></td>
+<td>从工作树和索引当中移除文件；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>describe</strong></td>
+<td style="text-align: left;">基于当前可用的引用，给予对象一个人类可读的名称；</td>
+<td style="text-align: center;"><strong>shortlog</strong></td>
+<td>简化 <code>git log</code> 的输出；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>diff</strong></td>
+<td style="text-align: left;">显示提交以及提交之间的更改和工作树等；</td>
+<td style="text-align: center;"><strong>show</strong></td>
+<td>显示各种类型的对象；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>fetch</strong></td>
+<td style="text-align: left;">从另一个仓库下载对象与引用；</td>
+<td style="text-align: center;"><strong>sparse-checkout</strong></td>
+<td>初始化和修改 <code>sparse-checkout</code>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>format-patch</strong></td>
+<td style="text-align: left;">为电子邮件提交准备补丁；</td>
+<td style="text-align: center;"><strong>stash</strong></td>
+<td>将更改隐藏在一个脏的工作目录当中；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>gc</strong></td>
+<td style="text-align: left;">清除不必要的文件并且优化本地存储库；</td>
+<td style="text-align: center;"><strong>status</strong></td>
+<td>展示当前的工作树状态；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>gitk</strong></td>
+<td style="text-align: left;">Git 仓库浏览器；</td>
+<td style="text-align: center;"><strong>submodule</strong></td>
+<td>初始化、更新或检查<strong>子模块</strong>；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>grep</strong></td>
+<td style="text-align: left;">打印符合正则表达式的行；</td>
+<td style="text-align: center;"><strong>switch</strong></td>
+<td>切换分支；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>gui</strong></td>
+<td style="text-align: left;">一个可移植的 Git 图形界面</td>
+<td style="text-align: center;"><strong>tag</strong></td>
+<td>创建、列出、删除、验证一个使用 GPG 签名的标记对象；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>init</strong></td>
+<td style="text-align: left;">创建一个空的 Git
+仓库，或者重新初始化一个已经存在的仓库；</td>
+<td style="text-align: center;"><strong>worktree</strong></td>
+<td>管理多个工作树；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>log</strong></td>
+<td style="text-align: left;">显示提交日志；</td>
+<td style="text-align: center;">-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 33%">
+<col style="width: 10%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Git 辅助命令</th>
+<th>功能描述</th>
+<th style="text-align: center;">Git 辅助命令</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>config</strong></td>
+<td>获取和设置当前仓库或者全局的选项；</td>
+<td style="text-align: center;"><strong>prune</strong></td>
+<td>从对象数据库当中删除所有不可访问的对象；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>fast-export</strong></td>
+<td>Git 快速数据导出；</td>
+<td style="text-align: center;"><strong>reflog</strong></td>
+<td>管理引用日志信息；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>fast-import</strong></td>
+<td>Git 快速数据导入；</td>
+<td style="text-align: center;"><strong>remote</strong></td>
+<td>管理当前被追踪的仓库；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>filter-branch</strong></td>
+<td>重新写入分支；</td>
+<td style="text-align: center;"><strong>repack</strong></td>
+<td>将未打包的对象打包至仓库之中；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>mergetool</strong></td>
+<td>支行合并冲突解决工具来解决合合并冲突；</td>
+<td style="text-align: center;"><strong>replace</strong></td>
+<td>通过<code>创建</code>、<code>列出</code>、<code>删除</code><strong>引用</strong>来替换对象；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>pack-refs</strong></td>
+<td>打包<code>头</code>和<code>标记</code>高效的访问仓库；</td>
+<td style="text-align: center;"><strong>annotate</strong></td>
+<td>使用提交信息来注释文件的<strong>行</strong>；</td>
+</tr>
+</tbody>
+</table>
+<h2 id="用户配置">用户配置</h2>
+<p><code>git config</code> 命令用于设置 Git
+外观和行为相关的配置变量，这些配置变量保存在 3
+个不同的位置，其优先级从高到低如下所示：</p>
+<ol type="1">
+<li><code>/etc/gitconfig</code> 文件:
+包含系统上每个用户及其仓库的通用配置，可以通过 <code>--system</code>
+选项强制使用该配置文件；</li>
+<li><code>~/.gitconfig</code> 或 <code>~/.config/git/config</code>
+文件：只针对当前用户，可以使用 <code>--global</code>
+选项强制使用该配置文件，可以对所有仓库都生效；Windows
+系统则会查找用户目录 <code>C:\Users\$USER</code> 下的
+<code>.gitconfig</code> 文件；</li>
+<li>当前仓库 Git 目录中的 <code>.git/config</code>
+文件：默认情况下用的，也可以通过 <code>--local</code>
+选项强制使用该文件；</li>
+</ol>
+<p>通过 <code>git config --list --show-origin</code> 命令可以查看所有的
+Git 配置，以及这些配置所在的文件位置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">λ git config --list --show-origin</span><br><span class="line"></span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig core.symlinks=<span class="literal">false</span></span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig core.autocrlf=<span class="literal">true</span></span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig core.fscache=<span class="literal">true</span></span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig color.diff=auto</span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig color.status=auto</span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig color.branch=auto</span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig color.interactive=<span class="literal">true</span></span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig help.format=html</span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig diff.astextplain.textconv=astextplain</span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig rebase.autosquash=<span class="literal">true</span></span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig filter.lfs.clean=git-lfs clean -- %f</span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig filter.lfs.smudge=git-lfs smudge -- %f</span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig filter.lfs.process=git-lfs filter-process</span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig filter.lfs.required=<span class="literal">true</span></span><br><span class="line">file:D:/Software/Tech/Git/etc/gitconfig credential.helper=</span><br><span class="line">file:C:/Users/hank/.gitconfig   user.name=hank</span><br><span class="line">file:C:/Users/hank/.gitconfig   user.email=uinika@outlook.com</span><br><span class="line">file:C:/Users/hank/.gitconfig   core.editor=vim</span><br></pre></td></tr></table></figure>
+<p>开始使用 Git
+之前，需要配置用户名、邮件地址、编辑器，这些信息会写入到每一个提交当中，并且不可更改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;Hank&quot;</span></span><br><span class="line">git config --global user.email uinika@outlook.com</span><br><span class="line">git config --global core.editor vim</span><br></pre></td></tr></table></figure>
+<p>如果需要检查当前的所有配置项，则可以通过
+<code>git config --list</code> 命令将它们罗列出来：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">λ git config --list</span><br><span class="line"></span><br><span class="line">core.symlinks=<span class="literal">false</span></span><br><span class="line">core.autocrlf=<span class="literal">true</span></span><br><span class="line">core.fscache=<span class="literal">true</span></span><br><span class="line">user.name=Hank</span><br><span class="line">user.email=uinika@outlook.com</span><br><span class="line">core.editor=vim</span><br><span class="line">core.autocrlf=<span class="literal">false</span></span><br><span class="line">core.quotepath=<span class="literal">false</span></span><br><span class="line">core.ignorecase=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>当然也可以通过输入 <code>git config &lt;key&gt;</code>
+来检查某一项具体的配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">λ git config user.name</span><br><span class="line"></span><br><span class="line">Hank</span><br></pre></td></tr></table></figure>
+<h2 id="获取帮助">获取帮助</h2>
+<p>直接执行 <code>git help</code> 命令，可以获得 Git
+的帮助信息概览：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">λ git <span class="built_in">help</span></span><br><span class="line">usage: git [--version] [--<span class="built_in">help</span>] [-C &lt;path&gt;] [-c &lt;name&gt;=&lt;value&gt;]</span><br><span class="line">           [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]</span><br><span class="line">           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]</span><br><span class="line">           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]</span><br><span class="line">           [--super-prefix=&lt;path&gt;] [--config-env=&lt;name&gt;=&lt;envvar&gt;]</span><br><span class="line">           &lt;<span class="built_in">command</span>&gt; [&lt;args&gt;]</span><br><span class="line"></span><br><span class="line">These are common Git commands used <span class="keyword">in</span> various situations:</span><br><span class="line"></span><br><span class="line">start a working area (see also: git <span class="built_in">help</span> tutorial)</span><br><span class="line">   <span class="built_in">clone</span>             Clone a repository into a new directory</span><br><span class="line">   init              Create an empty Git repository or reinitialize an existing one</span><br><span class="line"></span><br><span class="line">work on the current change (see also: git <span class="built_in">help</span> everyday)</span><br><span class="line">   add               Add file contents to the index</span><br><span class="line">   <span class="built_in">mv</span>                Move or rename a file, a directory, or a symlink</span><br><span class="line">   restore           Restore working tree files</span><br><span class="line">   <span class="built_in">rm</span>                Remove files from the working tree and from the index</span><br><span class="line">   sparse-checkout   Initialize and modify the sparse-checkout</span><br><span class="line"></span><br><span class="line">examine the <span class="built_in">history</span> and state (see also: git <span class="built_in">help</span> revisions)</span><br><span class="line">   bisect            Use binary search to find the commit that introduced a bug</span><br><span class="line">   diff              Show changes between commits, commit and working tree, etc</span><br><span class="line">   grep              Print lines matching a pattern</span><br><span class="line">   <span class="built_in">log</span>               Show commit logs</span><br><span class="line">   show              Show various types of objects</span><br><span class="line">   status            Show the working tree status</span><br><span class="line"></span><br><span class="line">grow, mark and tweak your common <span class="built_in">history</span></span><br><span class="line">   branch            List, create, or delete branches</span><br><span class="line">   commit            Record changes to the repository</span><br><span class="line">   merge             Join two or more development histories together</span><br><span class="line">   rebase            Reapply commits on top of another base tip</span><br><span class="line">   reset             Reset current HEAD to the specified state</span><br><span class="line">   switch            Switch branches</span><br><span class="line">   tag               Create, list, delete or verify a tag object signed with GPG</span><br><span class="line"></span><br><span class="line">collaborate (see also: git <span class="built_in">help</span> workflows)</span><br><span class="line">   fetch             Download objects and refs from another repository</span><br><span class="line">   pull              Fetch from and integrate with another repository or a <span class="built_in">local</span> branch</span><br><span class="line">   push              Update remote refs along with associated objects</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;git help -a&#x27;</span> and <span class="string">&#x27;git help -g&#x27;</span> list available subcommands and some</span><br><span class="line">concept guides. See <span class="string">&#x27;git help &lt;command&gt;&#x27;</span> or <span class="string">&#x27;git help &lt;concept&gt;&#x27;</span></span><br><span class="line">to <span class="built_in">read</span> about a specific subcommand or concept.</span><br><span class="line">See <span class="string">&#x27;git help git&#x27;</span> <span class="keyword">for</span> an overview of the system.</span><br></pre></td></tr></table></figure>
+<p>通过
+<code>git help &lt;verb&gt;</code>、<code>git &lt;verb&gt; --help</code>、<code>man git-&lt;verb&gt;</code>
+三种命令格式，可以只查看到指定命令的帮助信息，执行之后会通过默认的 Web
+浏览器打开 Git 安装目录 <code>mingw64/share/doc/git-doc</code> 下的 HTML
+帮助页面。例如，要获得 <code>git config</code>
+命令的帮助信息，只需要执行 <code>git help config</code> 命令即可。</p>
+<p>如果无需阅读详细的 HTML
+帮助手册，而只需在命令行简单的展示使用参考，则可以采用 <code>-h</code>
+选项来获得较为简明的帮助信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">λ git config -h</span><br><span class="line">usage: git config [&lt;options&gt;]</span><br><span class="line"></span><br><span class="line">Config file location</span><br><span class="line">    --global              use global config file</span><br><span class="line">    --system              use system config file</span><br><span class="line">    --<span class="built_in">local</span>               use repository config file</span><br><span class="line">    --worktree            use per-worktree config file</span><br><span class="line">    -f, --file &lt;file&gt;     use given config file</span><br><span class="line">    --blob &lt;blob-id&gt;      <span class="built_in">read</span> config from given blob object</span><br><span class="line"></span><br><span class="line">Action</span><br><span class="line">    --get                 get value: name [value-pattern]</span><br><span class="line">    --get-all             get all values: key [value-pattern]</span><br><span class="line">    --get-regexp          get values <span class="keyword">for</span> regexp: name-regex [value-pattern]</span><br><span class="line">    --get-urlmatch        get value specific <span class="keyword">for</span> the URL: section[.var] URL</span><br><span class="line">    --replace-all         replace all matching variables: name value [value-pattern]</span><br><span class="line">    --add                 add a new variable: name value</span><br><span class="line">    --<span class="built_in">unset</span>               remove a variable: name [value-pattern]</span><br><span class="line">    --unset-all           remove all matches: name [value-pattern]</span><br><span class="line">    --rename-section      rename section: old-name new-name</span><br><span class="line">    --remove-section      remove a section: name</span><br><span class="line">    -l, --list            list all</span><br><span class="line">    --fixed-value         use string equality when comparing values to <span class="string">&#x27;value-pattern&#x27;</span></span><br><span class="line">    -e, --edit            open an editor</span><br><span class="line">    --get-color           find the color configured: slot [default]</span><br><span class="line">    --get-colorbool       find the color setting: slot [stdout-is-tty]</span><br><span class="line"></span><br><span class="line">Type</span><br><span class="line">    -t, --<span class="built_in">type</span> &lt;&gt;         value is given this <span class="built_in">type</span></span><br><span class="line">    --bool                value is <span class="string">&quot;true&quot;</span> or <span class="string">&quot;false&quot;</span></span><br><span class="line">    --int                 value is decimal number</span><br><span class="line">    --bool-or-int         value is --bool or --int</span><br><span class="line">    --bool-or-str         value is --bool or string</span><br><span class="line">    --path                value is a path (file or directory name)</span><br><span class="line">    --expiry-date         value is an expiry <span class="built_in">date</span></span><br><span class="line"></span><br><span class="line">Other</span><br><span class="line">    -z, --null            terminate values with NUL byte</span><br><span class="line">    --name-only           show variable names only</span><br><span class="line">    --includes            respect include directives on lookup</span><br><span class="line">    --show-origin         show origin of config (file, standard input, blob, <span class="built_in">command</span> line)</span><br><span class="line">    --show-scope          show scope of config (worktree, <span class="built_in">local</span>, global, system, <span class="built_in">command</span>)</span><br><span class="line">    --default &lt;value&gt;     with --get, use default value when missing entry</span><br></pre></td></tr></table></figure>
+<h2 id="获取-git-仓库">获取 Git 仓库</h2>
+<h3 id="初始化仓库">初始化仓库</h3>
+<p>对于尚未纳入版本管理的工程目录，通过 <code>git init</code>
+命令可以将其初始化为一个 Git 仓库，即可以进入
+<code>D:/Workspace/test</code> 目录执行该命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">λ git init</span><br><span class="line"></span><br><span class="line">hint: Using <span class="string">&#x27;master&#x27;</span> as the name <span class="keyword">for</span> the initial branch. This default branch name</span><br><span class="line">hint: is subject to change. To configure the initial branch name to use <span class="keyword">in</span> all</span><br><span class="line">hint: of your new repositories, <span class="built_in">which</span> will suppress this warning, call:</span><br><span class="line">hint:</span><br><span class="line">hint:   git config --global init.defaultBranch &lt;name&gt;</span><br><span class="line">hint:</span><br><span class="line">hint: Names commonly chosen instead of <span class="string">&#x27;master&#x27;</span> are <span class="string">&#x27;main&#x27;</span>, <span class="string">&#x27;trunk&#x27;</span> and</span><br><span class="line">hint: <span class="string">&#x27;development&#x27;</span>. The just-created branch can be renamed via this <span class="built_in">command</span>:</span><br><span class="line">hint:</span><br><span class="line">hint:   git branch -m &lt;name&gt;</span><br><span class="line">Initialized empty Git repository <span class="keyword">in</span> D:/Workspace/test/.git/</span><br></pre></td></tr></table></figure>
+<p>也只可以直接采用 <code>git init 工程名称</code>
+格式的命令，初始化一个新的工程目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">λ git init <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">Initialized empty Git repository <span class="keyword">in</span> D:/Workspace/test/.git/</span><br></pre></td></tr></table></figure>
+<p>由于 Git 提示没有设置默认初始化分支的名称，需要通过
+<code>git config --global init.defaultBranch &lt;name&gt;</code>
+进行设置，下面将其设置为 <code>master</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">D:\Workspace\<span class="built_in">test</span></span><br><span class="line">λ git config --global init.defaultBranch master</span><br><span class="line"></span><br><span class="line">D:\Workspace\<span class="built_in">test</span></span><br><span class="line">λ git init</span><br><span class="line"></span><br><span class="line">Initialized empty Git repository <span class="keyword">in</span> D:/Workspace/test/.git/</span><br></pre></td></tr></table></figure>
+<h3 id="克隆仓库">克隆仓库</h3>
+<p>如果需要获得一份已经存在的 Git 仓库拷贝，就需要使用到
+<code>git clone</code> 命令，例如下面克隆笔者 Github 上的
+<code>rhino</code> 工程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">λ git <span class="built_in">clone</span> https://github.com/uinika/rhino.git</span><br><span class="line"></span><br><span class="line">Cloning into <span class="string">&#x27;rhino&#x27;</span>...</span><br><span class="line">remote: Enumerating objects: 758, <span class="keyword">done</span>.</span><br><span class="line">remote: Total 758 (delta 0), reused 0 (delta 0), pack-reused 758</span><br><span class="line">Receiving objects: 100% (758/758), 1.03 MiB | 28.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Resolving deltas: 100% (356/356), <span class="keyword">done</span>.</span><br></pre></td></tr></table></figure>
+<p>如果需要将工程克隆到本地另外一个名称的目录下面，则可以执行
+<code>git clone https://github.com/uinika/rhino.git example</code>
+命令，在这里 <code>clone</code> 命令后面的 <code>example</code>
+就是重命名之后的本地工程名称：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">λ git <span class="built_in">clone</span> https://github.com/uinika/rhino.git example</span><br><span class="line"></span><br><span class="line">Cloning into <span class="string">&#x27;example&#x27;</span>...</span><br><span class="line">remote: Enumerating objects: 758, <span class="keyword">done</span>.</span><br><span class="line">Recremote: Total 758 (delta 0), reused 0 (delta 0), pack-reused 758eiving objects:  91% (690/758), 364.01 KiB | 350.0Receiving objects:  92% (698/758), 364.01 KiB | 350.00 KiB/s</span><br><span class="line">Receiving objects: 100% (758/758), 1.03 MiB | 750.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Resolving deltas: 100% (356/356), <span class="keyword">done</span>.</span><br></pre></td></tr></table></figure>
+<h2 id="记录更新">记录更新</h2>
+<p>已经纳入 Git
+管理的工程目录下，每一个文件都具有<strong>已跟踪</strong>或<strong>未跟踪</strong>两种状态。初次克隆某个仓库时，该目录当中的所有文件都处于<strong>已跟踪</strong>（Tracked）并且<strong>未修改</strong>（Unmodified）状态，当某个文件被编辑之后就会被标记为<strong>已修改</strong>（Modified）状态，此时可以选择将其放置到暂存区，使其处于<strong>暂存状态</strong>（Staged），如果此时再新加入一个文件，则该文件则会处于<strong>未跟踪</strong>（Untracked）状态，具体可以参考下面的示意图：</p>
+<p><img src="/Zen/Git/lifecycle.png"></p>
+<h3 id="检查文件状态">检查文件状态</h3>
+<p>使用 <code>git status</code>
+命令查看哪些文件处于什么状态，克隆一个新仓库之后立即使用该命令，可以查看到类似如下输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">λ git status</span><br><span class="line"></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to <span class="built_in">date</span> with <span class="string">&#x27;origin/master&#x27;</span>.</span><br><span class="line"></span><br><span class="line">nothing to commit, working tree clean</span><br></pre></td></tr></table></figure>
+<p>由于 <code>git status</code> 命令的输出十分详细，可以采用
+<code>-s</code> 或者 <code>--short</code> 选项简化状态信息的输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">λ git status -s</span><br><span class="line"></span><br><span class="line">λ git status --short</span><br></pre></td></tr></table></figure>
+<h3 id="跟踪新文件">跟踪新文件</h3>
+<p>在工程下新建一个 <code>README.md</code> 文件，然后执行
+<code>git status</code> 查看工程状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">λ git status</span><br><span class="line"></span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line">        README.md</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">&quot;git add&quot;</span> to track)</span><br></pre></td></tr></table></figure>
+<p>运行 <code>git add</code> 命令可以将 <code>README.md</code>
+放置到暂存区，然后再运行 <code>git status</code> 命令查看工程状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">λ git add README.md</span><br><span class="line"></span><br><span class="line">λ git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line">        new file:   README.md</span><br></pre></td></tr></table></figure>
+<p>接下来，对 <code>README.md</code> 文件进行修改之后再保存，再一次运行
+<code>git status</code> 查看工程状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">λ git status</span><br><span class="line"></span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line">        new file:   README.md</span><br><span class="line"></span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">&quot;git restore &lt;file&gt;...&quot;</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line">        modified:   README.md</span><br></pre></td></tr></table></figure>
+<p>观察上面的执行结果会发现 <code>README.md</code>
+文件同时出现了在<strong>暂存区</strong>与<strong>非暂存区</strong>，实际上
+Git 仅仅暂存了执行 <code>git add</code> 命令时的版本，修改之后的
+<code>README.md</code> 需要重新通过 <code>git add</code>
+命令将其添加至<strong>暂存区</strong>。</p>
+<h3 id="配置-.gitignore">配置 .gitignore</h3>
+<p><code>.gitignore</code> 文件用于配置无需纳入 Git
+的文件，通常是一些日志文件，或者编译过程中创建的临时文件等，其配置的格式规范如下面列表所示：</p>
+<ol type="1">
+<li>所有空行或者以 <code>#</code> 开头的行都会被 Git 忽略；</li>
+<li>可以使用标准的 Glob 模式匹配，它会递归的应用到整个 Git 工程；</li>
+<li>匹配模式使用 <code>/</code> <strong>开头</strong>可以防止递归，而以
+<code>/</code> <strong>结尾</strong>则表示当前指定的是目录；</li>
+<li>要忽略指定模式以外的文件或目录，可以在模式前加上感叹号
+<code>!</code> 进行取反；</li>
+</ol>
+<p>Glob 模式是一种 Shell 上使用的简化过的正则表达式：</p>
+<ol type="1">
+<li>星号 <code>*</code> 匹配零个或者多个任意字符；</li>
+<li><code>[abc]</code> 匹配任意一个列在方括号中的字符；</li>
+<li>问号 <code>?</code> 只匹配一个任意字符；</li>
+<li>如果在方括号当中使用短划线 <code>-</code>
+分隔两个字符，表示所有在这两个字符范围内的都可以匹配；</li>
+<li>使用两个星号 <code>**</code> 表示匹配任意中间目录；</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 忽略全部 .exe 文件</span></span><br><span class="line">*.exe</span><br><span class="line"><span class="comment"># 跟踪全部 main.exe，即使前面已经忽略了 .exe 文件</span></span><br><span class="line">!main.exe</span><br><span class="line"><span class="comment"># 只忽略当前目录下的 TODO.md 文件，而不忽略子目录下的 TODO.md</span></span><br><span class="line">/TODO.md</span><br><span class="line"><span class="comment"># 忽略所有目录下名为 build 的文件夹</span></span><br><span class="line">build/</span><br><span class="line"><span class="comment"># 忽略 doc/note.txt，但不会忽略 doc/web/note.txt</span></span><br><span class="line">doc/*.txt</span><br><span class="line"><span class="comment"># 忽略 src/ 及其子目录下的所有 .c 文件</span></span><br><span class="line">src/**/*.c</span><br></pre></td></tr></table></figure>
+<h3 id="查看暂存的修改">查看暂存的修改</h3>
+<p>向 <code>README.md</code> 文件添加字符串
+<code>修改内容！</code>，然后执行 <code>git diff</code>
+命令查看尚未暂存的文件被更新了哪些部分，该命令比较的是工程当中目标文件与暂存区域快照之间的差异，也就是修改之后还没有暂存起来的变化内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">λ git diff</span><br><span class="line"></span><br><span class="line">diff --git a/README.md b/README.md</span><br><span class="line">index e69de29.<span class="number">.2432758</span> <span class="number">100644</span></span><br><span class="line">--- a/README.md</span><br><span class="line">+++ b/README.md</span><br><span class="line">@@ <span class="number">-0</span>,<span class="number">0</span> +<span class="number">1</span> @@</span><br><span class="line">+修改内容！</span><br><span class="line">\ No newline at end of file</span><br></pre></td></tr></table></figure>
+<h2 id="查看提交历史">查看提交历史</h2>
+<h2 id="撤消操作">撤消操作</h2>
+<h2 id="远程仓库的使用">远程仓库的使用</h2>
+<h2 id="打标签">打标签</h2>
+<h2 id="git-别名">Git 别名</h2>
+<h2 id="分支管理">分支管理</h2>
+<h3 id="git-分支简介">Git 分支简介</h3>
+<h3 id="分支的新建与合并">分支的新建与合并</h3>
+<h3 id="分支管理-1">分支管理</h3>
+<h3 id="分支开发工作流">分支开发工作流</h3>
+<h3 id="远程分支">远程分支</h3>
+<h3 id="变基">变基</h3>
+<h2 id="选择修订版本">选择修订版本</h2>
+<h2 id="交互式暂存">交互式暂存</h2>
+<h2 id="贮藏与清理">贮藏与清理</h2>
+<h2 id="签署工作">签署工作</h2>
+<h2 id="搜索">搜索</h2>
+<h2 id="重写历史">重写历史</h2>
+<h2 id="重置揭密">重置揭密</h2>
+<h2 id="高级合并">高级合并</h2>
+<h2 id="rerere">Rerere</h2>
+<h2 id="使用-git-调试">使用 Git 调试</h2>
+<h2 id="子模块">子模块</h2>
+<h2 id="打包">打包</h2>
+<h2 id="替换">替换</h2>
+<h2 id="凭证存储">凭证存储</h2>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Git 版本管理命令备忘录</p><p><a href="http://www.uinio.com/Zen/Git/">http://www.uinio.com/Zen/Git/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2013-10-05</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-09-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Git/">Git</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Web/Backbone/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">为什么认为 Backbone 是现代化前端框架的基石</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Web/Angularjs/"><span class="level-item">AngularJS 1.6.x 最佳实践总结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#文件状态"><span class="level-left"><span class="level-item">1</span><span class="level-item">文件状态</span></span></a></li><li><a class="level is-mobile" href="#命令概览"><span class="level-left"><span class="level-item">2</span><span class="level-item">命令概览</span></span></a></li><li><a class="level is-mobile" href="#用户配置"><span class="level-left"><span class="level-item">3</span><span class="level-item">用户配置</span></span></a></li><li><a class="level is-mobile" href="#获取帮助"><span class="level-left"><span class="level-item">4</span><span class="level-item">获取帮助</span></span></a></li><li><a class="level is-mobile" href="#获取-git-仓库"><span class="level-left"><span class="level-item">5</span><span class="level-item">获取 Git 仓库</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#初始化仓库"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">初始化仓库</span></span></a></li><li><a class="level is-mobile" href="#克隆仓库"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">克隆仓库</span></span></a></li></ul></li><li><a class="level is-mobile" href="#记录更新"><span class="level-left"><span class="level-item">6</span><span class="level-item">记录更新</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#检查文件状态"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">检查文件状态</span></span></a></li><li><a class="level is-mobile" href="#跟踪新文件"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">跟踪新文件</span></span></a></li><li><a class="level is-mobile" href="#配置-.gitignore"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">配置 .gitignore</span></span></a></li><li><a class="level is-mobile" href="#查看暂存的修改"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">查看暂存的修改</span></span></a></li></ul></li><li><a class="level is-mobile" href="#查看提交历史"><span class="level-left"><span class="level-item">7</span><span class="level-item">查看提交历史</span></span></a></li><li><a class="level is-mobile" href="#撤消操作"><span class="level-left"><span class="level-item">8</span><span class="level-item">撤消操作</span></span></a></li><li><a class="level is-mobile" href="#远程仓库的使用"><span class="level-left"><span class="level-item">9</span><span class="level-item">远程仓库的使用</span></span></a></li><li><a class="level is-mobile" href="#打标签"><span class="level-left"><span class="level-item">10</span><span class="level-item">打标签</span></span></a></li><li><a class="level is-mobile" href="#git-别名"><span class="level-left"><span class="level-item">11</span><span class="level-item">Git 别名</span></span></a></li><li><a class="level is-mobile" href="#分支管理"><span class="level-left"><span class="level-item">12</span><span class="level-item">分支管理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#git-分支简介"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">Git 分支简介</span></span></a></li><li><a class="level is-mobile" href="#分支的新建与合并"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">分支的新建与合并</span></span></a></li><li><a class="level is-mobile" href="#分支管理-1"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">分支管理</span></span></a></li><li><a class="level is-mobile" href="#分支开发工作流"><span class="level-left"><span class="level-item">12.4</span><span class="level-item">分支开发工作流</span></span></a></li><li><a class="level is-mobile" href="#远程分支"><span class="level-left"><span class="level-item">12.5</span><span class="level-item">远程分支</span></span></a></li><li><a class="level is-mobile" href="#变基"><span class="level-left"><span class="level-item">12.6</span><span class="level-item">变基</span></span></a></li></ul></li><li><a class="level is-mobile" href="#选择修订版本"><span class="level-left"><span class="level-item">13</span><span class="level-item">选择修订版本</span></span></a></li><li><a class="level is-mobile" href="#交互式暂存"><span class="level-left"><span class="level-item">14</span><span class="level-item">交互式暂存</span></span></a></li><li><a class="level is-mobile" href="#贮藏与清理"><span class="level-left"><span class="level-item">15</span><span class="level-item">贮藏与清理</span></span></a></li><li><a class="level is-mobile" href="#签署工作"><span class="level-left"><span class="level-item">16</span><span class="level-item">签署工作</span></span></a></li><li><a class="level is-mobile" href="#搜索"><span class="level-left"><span class="level-item">17</span><span class="level-item">搜索</span></span></a></li><li><a class="level is-mobile" href="#重写历史"><span class="level-left"><span class="level-item">18</span><span class="level-item">重写历史</span></span></a></li><li><a class="level is-mobile" href="#重置揭密"><span class="level-left"><span class="level-item">19</span><span class="level-item">重置揭密</span></span></a></li><li><a class="level is-mobile" href="#高级合并"><span class="level-left"><span class="level-item">20</span><span class="level-item">高级合并</span></span></a></li><li><a class="level is-mobile" href="#rerere"><span class="level-left"><span class="level-item">21</span><span class="level-item">Rerere</span></span></a></li><li><a class="level is-mobile" href="#使用-git-调试"><span class="level-left"><span class="level-item">22</span><span class="level-item">使用 Git 调试</span></span></a></li><li><a class="level is-mobile" href="#子模块"><span class="level-left"><span class="level-item">23</span><span class="level-item">子模块</span></span></a></li><li><a class="level is-mobile" href="#打包"><span class="level-left"><span class="level-item">24</span><span class="level-item">打包</span></span></a></li><li><a class="level is-mobile" href="#替换"><span class="level-left"><span class="level-item">25</span><span class="level-item">替换</span></span></a></li><li><a class="level is-mobile" href="#凭证存储"><span class="level-left"><span class="level-item">26</span><span class="level-item">凭证存储</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

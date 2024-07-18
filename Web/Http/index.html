@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>HTTP 协议深入解析 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="HTTP 是基于 TCP&amp;#x2F;IP 协议而建立 Web 基础协议，从 1989 年早期的简单 HTTP&amp;#x2F;0.9 单行协议开始，至 1996 年逐步扩展了状态码、协议头等特性发展到 HTTP&amp;#x2F;1.0，然后在 1997 年的 HTTP&amp;#x2F;1.1 增加了 TCP 连接复用、流水线支持、响应分块、缓存控制、内容协商等特性。2015 年 HTTP&amp;#x2F;2 协议正式标准化之后，传统 HTTP 的文本协议被"><meta property="og:type" content="blog"><meta property="og:title" content="HTTP 协议深入解析"><meta property="og:url" content="http://www.uinio.com/Web/Http/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="HTTP 是基于 TCP&amp;#x2F;IP 协议而建立 Web 基础协议，从 1989 年早期的简单 HTTP&amp;#x2F;0.9 单行协议开始，至 1996 年逐步扩展了状态码、协议头等特性发展到 HTTP&amp;#x2F;1.0，然后在 1997 年的 HTTP&amp;#x2F;1.1 增加了 TCP 连接复用、流水线支持、响应分块、缓存控制、内容协商等特性。2015 年 HTTP&amp;#x2F;2 协议正式标准化之后，传统 HTTP 的文本协议被"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2015-03-07T16:00:00.000Z"><meta property="article:modified_time" content="2015-11-11T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Convention"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Web/Http/"},"headline":"HTTP 协议深入解析","image":["http://www.uinio.com/Web/Http/logo.png"],"datePublished":"2015-03-07T16:00:00.000Z","dateModified":"2015-11-11T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"HTTP 是基于\r TCP&#x2F;IP 协议而建立 Web 基础协议，从 1989 年早期的简单\r HTTP&#x2F;0.9 单行协议开始，至 1996\r 年逐步扩展了状态码、协议头等特性发展到 HTTP&#x2F;1.0，然后在\r 1997 年的 HTTP&#x2F;1.1 增加了 TCP\r 连接复用、流水线支持、响应分块、缓存控制、内容协商等特性。2015 年\r HTTP&#x2F;2 协议正式标准化之后，传统 HTTP\r 的文本协议被"}</script><link rel="canonical" href="http://www.uinio.com/Web/Http/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2015-03-07T16:00:00.000Z" title="2015/3/8 00:00:00">2015-03-08</time>发表</span><span class="level-item"><time dateTime="2015-11-11T16:00:00.000Z" title="2015/11/12 00:00:00">2015-11-12</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Web/">Web</a></span><span class="level-item">17 分钟读完 (大约2541个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">HTTP 协议深入解析</h1><div class="content"><p><a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/">HTTP</a> 是基于
+<strong>TCP/IP</strong> 协议而建立 Web 基础协议，从 1989 年早期的简单
+<strong>HTTP/0.9</strong> 单行协议开始，至 1996
+年逐步扩展了状态码、协议头等特性发展到 <strong>HTTP/1.0</strong>，然后在
+1997 年的 <strong>HTTP/1.1</strong> 增加了 TCP
+连接复用、流水线支持、响应分块、缓存控制、内容协商等特性。2015 年
+<strong>HTTP/2</strong> 协议正式标准化之后，传统 HTTP
+的文本协议被二进制协议替代，让并行的请求在同 1 个 TCP
+连接中处理，并移除了<code>header</code>中的重复数据，大幅提升通信效率。</p>
+<p><img src="/Web/Http/logo.png"></p>
+<p>在各类现代化 Web 服务器与开发框架群雄并起的年代，无论是 Python 的<a target="_blank" rel="noopener" href="https://www.djangoproject.com/">Django</a>、<a target="_blank" rel="noopener" href="http://www.tornadoweb.org">Tornado</a>，还是 Java 的<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/index-jsp-135475.html">Servlet</a>或者是
+Go 上的<a target="_blank" rel="noopener" href="https://beego.me/">BeeGo</a>，其本质上都是基于<a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/">HTTP 协议</a>的封装。因此了解 HTTP
+相关协议规范能够提升 Web 开发的透明度，能够从协议角度理解 Web
+报文的通信过程，而非仅仅从各类 Web 开发框架及其 API 封装的角度。</p>
+<span id="more"></span>
+<h2 id="概览">概览</h2>
+<p><a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/">HTTP（<em>HyperText Transfer
+Protocol</em>）</a>是一种能够获取各类网络资源（<em>HTML
+文本</em>、<em>CSS 布局描述</em>、<em>JavaScript
+脚本</em>、<em>图片和音视频多媒体</em>）的通讯协议，是 Web
+数据交换的基础。HTTP 设计于 20 世纪 90
+年代初，是一种可扩展的协议，也是应用层的协议，通过 TCP 或者 TLS 加密的
+TCP 连接进行通信。</p>
+<p><img src="Http/http-layers.png"></p>
+<blockquote>
+<p><strong>HTTP</strong>协议属于应用层，<strong>TCP</strong>协议属于传输层；<strong>DNS</strong>也是一种应用层协议，但是同时使用到了
+UDP 和 TCP
+两种传输层协议；<strong>TLS</strong>是一种安全传输层协议（<em>SSL
+标准化后的产物</em>），用于为 HTTPS
+提供保密性和数据完整性。<strong>IP</strong>协议则位于最下面的网络层，是用于计算机网络相互连接通信的协议，规定了数据包的组成以及路由器如何将数据包发送到目的主机等。</p>
+</blockquote>
+<p>HTTP
+是一种<strong>Client-Server</strong>协议，<strong>Client</strong>端的用户代理用于发送<code>request</code>（<em>浏览器或搜索引擎爬虫</em>），<strong>Server</strong>端接收并处理之后会响应<code>response</code>。在<code>request</code>和<code>response</code>之间存在诸多称为<strong>Proxy</strong>的实体。</p>
+<p><img src="/Web/Http/client-server-chain.png"></p>
+<h3 id="client"><code>Client</code></h3>
+<p>HTTP
+中的<strong>Client</strong>也被称为用户代理（<em>user-agent</em>），通常情况下这个用户代理是浏览器，它首先发出一个请求来获取页面的
+HTML 文档，解析完文档中的资源信息后再发送请求获取 JavaScript 脚本、CSS
+样式以及多媒体资源来进行页面和布局的渲染，浏览器将这些资源整合到一起并最终展现出一个完整的网页文档。</p>
+<h3 id="server"><code>Server</code></h3>
+<p><strong>Server</strong>端用来响应 Client 端的 HTTP
+请求，可以是单独一台服务器，也可以是负载均衡的服务器集群。在 HTTP/1.1 的
+Host 头部当中，多台 Server 甚至可以共享同一个 IP 地址。</p>
+<h3 id="proxy"><code>Proxy</code></h3>
+<p>在浏览器和服务器之间，还存在许多出现在 HTTP
+协议栈的传输层、网络层、物理层的<strong>Proxy</strong>代理设备，它们中大多数对于
+HTTP
+应用层而言是透明的，可以提供诸如：缓存（<em>浏览器缓存，缓存代理服务器</em>）、过滤（<em>反病毒扫描，家长控制</em>）、负载均衡（<em>多台服务器响应不同的请求</em>）、认证（<em>对资源进行权限管理</em>）、日志记录（<em>存储历史信息</em>）。</p>
+<h2 id="基本特性">基本特性</h2>
+<p>HTTP 协议简单易读，报文可以轻松读懂，并且可以进行简单测试（<em>下一代
+HTTP/2 协议将 HTTP 消息封装到了帧<code>frames</code></em>）。HTTP
+容易扩展，HTTP/1.0 当中出现的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">header</a>让协议易于扩展，只要服务器端和客户端就新加入的
+header 达成语义一致，新特性就可以轻松的加入进来。</p>
+<p>HTTP 依赖于面向连接的<strong>TCP</strong>进行消息传递，HTTP/1.0
+为每个请求/响应都打开一个 TCP 连接，这样访问效率相对缓慢。而在 HTTP/1.1
+中默认使用<code>Connection: keep-alive</code>进行持久连接，在一次 TCP
+连接中能够完成多个 HTTP 请求，但是每个请求仍然需要单独发送<em>HTTP
+Header</em>（<em><code>keep-alive</code>的保持时间需要在 HTTP
+服务器<em>Apache 或 Nginx</em>中进行设定</em>），当前的 HTTP/2 则可以在
+TCP 连接始终保持的情况下复用多次消息。</p>
+<blockquote>
+<p>HTTP 是<strong>无状态有会话</strong>的，虽然 HTTP
+协议本身<strong>无状态</strong>，各个 HTTP
+请求互相没有联系，但是通过<em>HTTP Header</em>和<em>HTTP
+Cookie</em>能够创建有状态的会话连接。</p>
+</blockquote>
+<h2 id="http-工作流">HTTP 工作流</h2>
+<p>当<strong>Client</strong>端和<strong>Server</strong>端产生交互时需要经历如下过程：</p>
+<ol type="1">
+<li>打开一个 TCP 连接，TCP 连接被用来发送一条或多条 HTTP
+请求并接受响应的消息（<em>Client
+可以新建连接或者重用已经存在的连接，也可以打开多个新的 TCP
+连接</em>）。</li>
+<li>发送一个 Request 报文（<em>HTTP 1.1 的报文是语义可读的，HTTP 2
+将报文被封装在帧当中，不能被直接进行读取，但是原理仍然相同</em>）。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GET /dev/heartbeat HTTP/1.1</span><br><span class="line">Host: localhost:5000</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Accept: application/json, text/plain, */*</span><br><span class="line">Origin: http://localhost:6000</span><br><span class="line">User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36</span><br><span class="line">Referer: http://localhost:6000/</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9,en;q=0.8</span><br><span class="line">Custom-Header: Hank</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>读取服务端 Response 的报文信息。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Server: Apache-Coyote/1.1</span><br><span class="line">Access-Control-Allow-Origin: http://localhost:6000</span><br><span class="line">Vary: Origin</span><br><span class="line">Access-Control-Expose-Headers: Set-Cookie</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Date: Mon, 12 Mar 2018 02:24:33 GMT</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li>关闭 TCP 连接或者为后续 HTTP 请求重用该 TCP 连接。</li>
+</ol>
+<h2 id="http-报文">HTTP 报文</h2>
+<p>HTTP
+报文是<code>Client</code>和<code>Server</code>之间交换状态与数据的载体，分为由客户端发出的请求<code>request</code>，以及服务器收到请求后的响应<code>response</code>，报文的构建由<code>Client</code>端的浏览器和<code>Server</code>端的
+Web 服务器自动完成。</p>
+<p>HTTP 请求和响应报文具有相似的结构，主要由以下 4 部分构成︰</p>
+<ol type="1">
+<li>起始行用于描述要执行的请求以及对应的成功、失败状态。</li>
+<li>可选的 HTTP 头部信息集合描述消息正文。</li>
+<li>空行表示所有头部元数据已经发送完毕。</li>
+<li>负载数据正文的消息体。</li>
+</ol>
+<p>其中，空行上面的内容统称为<strong>HTTP
+报文头部</strong>，下面的则称为<strong>HTTP
+消息正文</strong>，如图下图所展示的那样：</p>
+<p><img src="Http/http-message-structure.png"></p>
+<blockquote>
+<p>HTTP/1.1 及早期版本中，HTTP 报文采用 ASCII
+编码的多行文本进行发送。HTTP/2
+为了改进和优化性能，将可供人工阅读的文本消息转变为多个 HTTP 数据帧。</p>
+</blockquote>
+<h3 id="request-报文">Request 报文</h3>
+<p><strong>起始行</strong>：起始行包含<code>HTTP方法</code>、<code>请求目标URL</code>、<code>HTTP版本信息</code>三个元素。</p>
+<p><strong>Header</strong>：HTTP
+请求头由一系列键值对格式的属性所组成，具体可以再分为<code>General Header</code>（<em>适用于整个报文</em>）、<code>Request Header</code>（<em>对请求进行设置</em>）、<code>Entity Header</code>（<em>描述请求体
+Body</em>）。</p>
+<p><strong>Body</strong>：请求体 Body
+可以分为<code>Single-resource Body</code>（<em>该类型 Body
+只有一个部分，主要由<code>Content-Type</code>和<code>Content-Length</code>两个
+Header 定义；</em>）和<code>Multiple-resource Body</code>（<em>该类型
+Body 由多个部分组成，每一部分都包含不同的信息位，通常由 HTML
+表单所生成。</em>），</p>
+<p><img src="Http/http-request-header.png"></p>
+<blockquote>
+<p>并不是所有 HTTP 请求都需要携带
+Body，例如<code>GET</code>、<code>HEAD</code>、<code>DELETE</code>、<code>OPTIONS</code>之类的请求就可以不需要。</p>
+</blockquote>
+<h3 id="response-报文">Response 报文</h3>
+<p><strong>起始行</strong>：HTTP
+响应的起始行被称作状态行，包含协议版本（<em>通常为
+HTTP/1.1</em>）、状态码（<em>表明请求是成功或失败，比如：200、404、302</em>）、状态文本（<em>状态码的文本描述</em>）。</p>
+<p><strong>Header</strong>：类似于 HTTP
+请求头，同样被分为<code>General Header</code>（<em>适用于整个报文</em>）、<code>Response Header</code>（<em>起始行以外的服务器信息</em>）、<code>Entity Header</code>（<em>描述响应体
+Body</em>）。</p>
+<p><strong>Body</strong>：响应体 Body
+分为<code>已知长度Single-resource Body</code>（<em>由已知长度的单个文件组成，由<code>Content-Type</code>和<code>Content-Length</code>两个
+Header
+进行定义</em>）、<code>未知长度Single-resource Body</code>（<em>由未知长度的单个文件组成，通过将<code>Transfer-Encoding</code>这个
+Header 设置为<code>chunked</code>来使用 Chunks
+编码。</em>）、<code>Multiple-resource Body</code>（<em>由多部分 Body
+组成，每部分包含不同的信息段，这种情况较为少见。</em>）三类。</p>
+<p><img src="Http/http-response-header.png"></p>
+<h3 id="http2-帧">HTTP/2 帧</h3>
+<p>HTTP/1.1 报文存在一些性能上的缺陷：Header 不会像 Body
+那样被压缩；多个报文之间的 Header 可能相似，但仍然需要重复传输；发送多个
+HTTP 请求时，无法有效复用 TCP 连接；目前 HTTP/2 会将 HTTP/1.1
+的消息分为帧并嵌入到流（<em>stream</em>）当中，并分离<strong>报头帧</strong>和<strong>数据帧</strong>，从而允许压缩报头并组合多个流（<em>多路复用
+multiplexing</em>），从而更加有效的利用底层 TCP 连接。</p>
+<p><img src="/Web/Http/binary-frame.png"></p>
+<blockquote>
+<p>HTTP/2 的帧机制是在 HTTP/1.x 报文和底层 TCP
+传输协议之间增加的一个中间层，当浏览器与服务器同时可用时，HTTP/2
+支持将会被自动开启。</p>
+</blockquote>
+<h2 id="http1.x-连接管理">HTTP/1.x 连接管理</h2>
+<p>https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Connection_management_in_HTTP_1.x</p>
+<h2 id="mime">MIME</h2>
+<h2 id="cors">CORS</h2>
+<h2 id="websocket">Websocket</h2>
+</div><div class="article-licensing box"><div class="licensing-title"><p>HTTP 协议深入解析</p><p><a href="http://www.uinio.com/Web/Http/">http://www.uinio.com/Web/Http/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2015-03-08</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2015-11-12</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Convention/">Convention</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Embedded/STM32F103/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">意法半导体 UINIO-MCU-STM32F103 标准库典型实例</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Web/Convention/"><span class="level-item">Web 前端开发遵循的一些规范与约定</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#概览"><span class="level-left"><span class="level-item">1</span><span class="level-item">概览</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#client"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">Client</span></span></a></li><li><a class="level is-mobile" href="#server"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">Server</span></span></a></li><li><a class="level is-mobile" href="#proxy"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">Proxy</span></span></a></li></ul></li><li><a class="level is-mobile" href="#基本特性"><span class="level-left"><span class="level-item">2</span><span class="level-item">基本特性</span></span></a></li><li><a class="level is-mobile" href="#http-工作流"><span class="level-left"><span class="level-item">3</span><span class="level-item">HTTP 工作流</span></span></a></li><li><a class="level is-mobile" href="#http-报文"><span class="level-left"><span class="level-item">4</span><span class="level-item">HTTP 报文</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#request-报文"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">Request 报文</span></span></a></li><li><a class="level is-mobile" href="#response-报文"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">Response 报文</span></span></a></li><li><a class="level is-mobile" href="#http2-帧"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">HTTP/2 帧</span></span></a></li></ul></li><li><a class="level is-mobile" href="#http1.x-连接管理"><span class="level-left"><span class="level-item">5</span><span class="level-item">HTTP/1.x 连接管理</span></span></a></li><li><a class="level is-mobile" href="#mime"><span class="level-left"><span class="level-item">6</span><span class="level-item">MIME</span></span></a></li><li><a class="level is-mobile" href="#cors"><span class="level-left"><span class="level-item">7</span><span class="level-item">CORS</span></span></a></li><li><a class="level is-mobile" href="#websocket"><span class="level-left"><span class="level-item">8</span><span class="level-item">Websocket</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>如何使用新版本的 LTspice 进行模拟电路仿真 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="集成电路仿真程序（SPICE，Simulation Program with Integrated Circuits Emphasis）是一款以文本进行描述，可以通过数学方法来预测电路行为的仿真工具，也是电子自动化设计与现代半导体工业的基石。其被广泛应用于模拟电路（例如运放算放大器、稳压电源，模数与数模转换等），混合信号电路（锁相环、存储器、高速 GPIO），精密数字电路（延时、时序、功耗、"><meta property="og:type" content="blog"><meta property="og:title" content="如何使用新版本的 LTspice 进行模拟电路仿真"><meta property="og:url" content="http://www.uinio.com/Electronics/LTspice/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="集成电路仿真程序（SPICE，Simulation Program with Integrated Circuits Emphasis）是一款以文本进行描述，可以通过数学方法来预测电路行为的仿真工具，也是电子自动化设计与现代半导体工业的基石。其被广泛应用于模拟电路（例如运放算放大器、稳压电源，模数与数模转换等），混合信号电路（锁相环、存储器、高速 GPIO），精密数字电路（延时、时序、功耗、"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-05-21T16:00:00.000Z"><meta property="article:modified_time" content="2024-07-03T18:28:39.262Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Simulation"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/LTspice/"},"headline":"如何使用新版本的 LTspice 进行模拟电路仿真","image":["http://www.uinio.com/Electronics/LTspice/logo.png"],"datePublished":"2024-05-21T16:00:00.000Z","dateModified":"2024-07-03T18:28:39.262Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"集成电路仿真程序（SPICE，Simulation\r Program with Integrated Circuits\r Emphasis）是一款以文本进行描述，可以通过数学方法来预测电路行为的仿真工具，也是电子自动化设计与现代半导体工业的基石。其被广泛应用于模拟电路（例如运放算放大器、稳压电源，模数与数模转换等），混合信号电路（锁相环、存储器、高速\r GPIO），精密数字电路（延时、时序、功耗、"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/LTspice/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-05-21T16:00:00.000Z" title="2024/5/22 00:00:00">2024-05-22</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.262Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">1 小时读完 (大约7957个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">如何使用新版本的 LTspice 进行模拟电路仿真</h1><div class="content"><p><strong>集成电路仿真程序</strong>（<strong>SPICE</strong>，Simulation
+Program with Integrated Circuits
+Emphasis）是一款以<strong>文本</strong>进行描述，可以通过<strong>数学</strong>方法来预测电路行为的仿真工具，也是电子自动化设计与现代半导体工业的基石。其被广泛应用于<strong>模拟电路</strong>（例如运放算放大器、稳压电源，模数与数模转换等），<strong>混合信号电路</strong>（锁相环、存储器、高速
+GPIO），<strong>精密数字电路</strong>（延时、时序、功耗、漏电流等）等场景的模拟与仿真（大型电子元器件生产企业通常都提供了元件配套的
+<a target="_blank" rel="noopener" href="https://www.ni.com/zh-cn/shop/electronic-test-instrumentation/application-software-for-electronic-test-and-instrumentation-category/what-is-multisim/spice-simulation-fundamentals/spice-simulation-models.html">SPICE
+模型</a>）。</p>
+<p><img src="/Electronics/LTspice/logo.png"></p>
+<p><a target="_blank" rel="noopener" href="https://www.analog.com/cn/index.html"><strong>亚德诺半导体公司</strong></a>（Analog
+Devices）推出的 <strong>LTspice</strong>
+是一款界面简洁，但是功能强大的免费 <strong>SPICE</strong>
+电路仿真工具，其可以基于原理图快速准确的生成仿真结果，并且将这些结果通过内置的波形查看器进行展示，除此之外还内置有丰富的
+SPICE 模型（包含有基本的<strong>无源元件</strong>以及 ADI
+公司的<code>电源管理</code>和<code>信号链</code>产品），可以预先为模拟电路的设计以及元器件的选型提供重要的实验数据参考，从而降低电路设计过程当中产生的各种试错成本，有效的提高设计工作效率。</p>
+<span id="more"></span>
+<h2 id="基础操作">基础操作</h2>
+<p><strong>LTspice</strong> 自带有一系列后缀名称为 <code>.asc</code>
+的<strong>仿真原理图示例文件</strong>，它们都位于 Windows 操作系统的
+<code>C:\Users\hank\AppData\Local\LTspice\examples</code>
+目录下面，主要包含有如下两个目录：</p>
+<ul>
+<li><strong>Educational
+目录</strong>：提供有一些基础的参考示例电路。</li>
+<li><strong>Applications
+目录</strong>：亚德诺半导体公司产品相关的仿真原理图。</li>
+</ul>
+<p>在 <strong>LTspice</strong> 的主界面，鼠标依次点击菜单栏上的【File
+-&gt; Open Examples...】，就可以打开 <code>examples</code>
+目录，从而可以查看选中的 <code>.asc</code> 仿真原理图文件：</p>
+<p><img src="/Electronics/LTspice/1-Basic/1.png"></p>
+<p>这里打开 <code>Educational</code> 目录下的 <code>colpits.asc</code>
+振荡电路示例文件，然后按下键盘上的【<strong>空格</strong>】键，就可以将仿真原理图缩放至一个适配当前屏幕的显示尺寸：</p>
+<p><img src="/Electronics/LTspice/1-Basic/2.png"></p>
+<blockquote>
+<p><strong>注意</strong>：鼠标滚轮向前是<strong>缩小</strong>操作，鼠标滚轮向后是<strong>放大</strong>操作。</p>
+</blockquote>
+<p>鼠标点击 <strong>LTspice</strong>
+顶部菜单栏上的【<strong>Run/Pause</strong>】按钮，或者按下快捷键【<strong>Alt
++ R</strong>】，此时就会在 <code>Educational</code> 目录下自动生成一个
+<code>colpits.raw</code>
+<strong>波形数据文件</strong>，同时也会在主界面打开一个可以单独进行
+<code>拖动</code>、<code>关闭</code>、<code>最大化</code>、<code>最小化</code>
+的波形数据预览窗口：</p>
+<p><img src="/Electronics/LTspice/1-Basic/3.png"></p>
+<p>鼠标点击 <strong>LTspice</strong> 顶部菜单栏上的【<strong>Window
+-&gt; Tile
+Horizontally/Vertically</strong>】按钮，可以设置主界面当中窗口的平铺方向（<code>垂直</code>或者<code>水平</code>）：</p>
+<p><img src="/Electronics/LTspice/1-Basic/4.png"></p>
+<p>此时，把鼠标移动到主界面右侧的 <code>colpits.asc</code>
+仿真原理图上面，就可以使用下图所示的<strong>电压探头</strong>或者<strong>电流探头</strong>（会有<strong>箭头</strong>标识出电流的方向），查看该<strong>点</strong>所对应的电压或者电流信号的情况：</p>
+<p><img src="/Electronics/LTspice/1-Basic/5.png"></p>
+<p>电压与电流信号的相关波形，将会自动展示到主界面当中的
+<code>colpits.raw</code> 波形数据文件预览窗口：</p>
+<p><img src="/Electronics/LTspice/1-Basic/6.png"></p>
+<blockquote>
+<p><strong>注意</strong>：除此之外，按下键盘上的【<strong>ALT</strong>】键不放，将鼠标移动到仿真电路当中的元器件上面，此时鼠标会显示为一个<strong>温度计符号</strong>，按下鼠标左键就可以在<strong>波形显示窗口</strong>查看到该元器件所消耗的功率情况。</p>
+</blockquote>
+<p>使用鼠标框选 <code>colpits.raw</code>
+波形数据文件预览窗口当中的波形，就可以放大该区域的波形细节（此时如果按下【<strong>空格键</strong>】或者在波形上展开鼠标右键菜单点击【<strong>Zoom
+to Fit</strong>】可以恢复波形预览到初始状态）：</p>
+<p><img src="/Electronics/LTspice/1-Basic/7.png"></p>
+<p><img src="/Electronics/LTspice/1-Basic/8.png"></p>
+<blockquote>
+<p><strong>注意</strong>：当使用 <strong>LTspice</strong>
+绘制仿真原理图的时候，必须手动为<strong>电源负极</strong>添加一个
+<code>GND</code> 符号。</p>
+</blockquote>
+<h2 id="常用快捷键">常用快捷键</h2>
+<p>在下面的表格里，展示了 <strong>LTspice</strong>
+当中使用频率非常高的一些快捷键（这些快捷键也可以通过展开菜单栏上的【<strong>Edit</strong>】进行查看或者使用）：</p>
+<table>
+<colgroup>
+<col style="width: 42%">
+<col style="width: 33%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">快捷键</th>
+<th style="text-align: left;">英文</th>
+<th style="text-align: left;">中文</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">【<strong>Ctrl + Z</strong>】</td>
+<td style="text-align: left;">Undo</td>
+<td style="text-align: left;">撤消</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>Ctrl + Shift + Z</strong>】</td>
+<td style="text-align: left;">Redo</td>
+<td style="text-align: left;">重做</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>T</strong>】</td>
+<td style="text-align: left;">Text</td>
+<td style="text-align: left;">文本</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【 <strong>.</strong> 】</td>
+<td style="text-align: left;">SPICE Directive</td>
+<td style="text-align: left;">输入 SPICE 点命令</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>A</strong>】</td>
+<td style="text-align: left;">Configure SPICE Analysis</td>
+<td style="text-align: left;">SPICE 分析配置</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>R</strong>】</td>
+<td style="text-align: left;">Resistor</td>
+<td style="text-align: left;">电阻</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>C</strong>】</td>
+<td style="text-align: left;">Capacitor</td>
+<td style="text-align: left;">电容</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>L</strong>】</td>
+<td style="text-align: left;">Inductor</td>
+<td style="text-align: left;">电感</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>D</strong>】</td>
+<td style="text-align: left;">Diode</td>
+<td style="text-align: left;">二极管</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>P</strong>】</td>
+<td style="text-align: left;">Component</td>
+<td style="text-align: left;">放置元件</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>Ctrl + R</strong>】</td>
+<td style="text-align: left;">Rotate</td>
+<td style="text-align: left;">旋转</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>Ctrl + E</strong>】</td>
+<td style="text-align: left;">Mirror</td>
+<td style="text-align: left;">镜像</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>W</strong>】</td>
+<td style="text-align: left;">Draw Wire</td>
+<td style="text-align: left;">绘制连线</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>N</strong>】</td>
+<td style="text-align: left;">Label Net</td>
+<td style="text-align: left;">网络标号</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>G</strong>】</td>
+<td style="text-align: left;">Place GND</td>
+<td style="text-align: left;">放置 GND 标签</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>B</strong>】</td>
+<td style="text-align: left;">Place BUS tap</td>
+<td style="text-align: left;">放置总线抽头</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>M</strong>】</td>
+<td style="text-align: left;">Move</td>
+<td style="text-align: left;">移动</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>S</strong>】</td>
+<td style="text-align: left;">Stretch</td>
+<td style="text-align: left;">伸缩</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>Backspace</strong>】或【<strong>Del</strong>】</td>
+<td style="text-align: left;">Delete</td>
+<td style="text-align: left;">删除</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【<strong>Ctrl + C</strong>】</td>
+<td style="text-align: left;">Duplicate</td>
+<td style="text-align: left;">复制</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【<strong>Ctrl + V</strong>】</td>
+<td style="text-align: left;">Paste</td>
+<td style="text-align: left;">粘贴</td>
+</tr>
+</tbody>
+</table>
+<h2 id="快捷键设置">快捷键设置</h2>
+<p>鼠标依次点击 <strong>LTspice</strong> 菜单栏上的【<strong>Simulate
+-&gt;
+Settings</strong>】打开设置对话框，选中该对话框里的【<strong>Schematic</strong>】选项卡，按下该界面上的【<strong>Keyboard
+Shortcuts[*]</strong>】按钮：</p>
+<p><img src="/Electronics/LTspice/2-Shortkey/1.png"></p>
+<p>这样就可以查看和修改 <strong>LTspice</strong>
+全部的快捷键设置，其最新的 <code>24.0.0</code>
+版本与早期其它版本的默认快捷键设置有所不同，具体请参考如下界面当中的默认设置：</p>
+<p><img src="/Electronics/LTspice/2-Shortkey/2.png"></p>
+<h2 id="常量符号">常量符号</h2>
+<table>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">LTspice 常量符号</th>
+<th>释义</th>
+<th style="text-align: center;">LTspice 常量符号</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>e</code></td>
+<td>欧拉数</td>
+<td style="text-align: center;"><code>true</code></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>pi</code></td>
+<td>圆周率 <span class="math inline">\(\pi\)</span></td>
+<td style="text-align: center;"><code>false</code></td>
+<td><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>k</code></td>
+<td>波尔兹曼常数</td>
+<td style="text-align: center;"><code>mil</code></td>
+<td><span class="math inline">\(25.4 \times 10^{-6} m\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>q</code></td>
+<td>电荷常数</td>
+<td style="text-align: center;">-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="单位符号">单位符号</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">单位名称</th>
+<th style="text-align: center;">LTspice 单位符号</th>
+<th style="text-align: center;">英文释义</th>
+<th style="text-align: center;">数量级</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>太</strong></td>
+<td style="text-align: center;"><code>T</code> 或者 <code>t</code></td>
+<td style="text-align: center;">Tera</td>
+<td style="text-align: center;"><span class="math inline">\(10^{12}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>吉</strong></td>
+<td style="text-align: center;"><code>G</code> 或者 <code>g</code></td>
+<td style="text-align: center;">Giga</td>
+<td style="text-align: center;"><span class="math inline">\(10^{9}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>兆</strong></td>
+<td style="text-align: center;"><code>meg</code></td>
+<td style="text-align: center;">Mega</td>
+<td style="text-align: center;"><span class="math inline">\(10^{6}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>千</strong></td>
+<td style="text-align: center;"><code>K</code> 或者 <code>k</code></td>
+<td style="text-align: center;">Kilo</td>
+<td style="text-align: center;"><span class="math inline">\(10^{3}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>毫</strong></td>
+<td style="text-align: center;"><code>M</code> 或者 <code>m</code></td>
+<td style="text-align: center;">Milli</td>
+<td style="text-align: center;"><span class="math inline">\(10^{-3}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>微</strong></td>
+<td style="text-align: center;"><code>U</code> 或者 <code>u</code></td>
+<td style="text-align: center;">Micro</td>
+<td style="text-align: center;"><span class="math inline">\(10^{-6}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>纳</strong></td>
+<td style="text-align: center;"><code>N</code> 或者 <code>n</code></td>
+<td style="text-align: center;">Nano</td>
+<td style="text-align: center;"><span class="math inline">\(10^{-9}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>皮</strong></td>
+<td style="text-align: center;"><code>P</code> 或者 <code>p</code></td>
+<td style="text-align: center;">Pico</td>
+<td style="text-align: center;"><span class="math inline">\(10^{-12}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>飞</strong></td>
+<td style="text-align: center;"><code>F</code> 或者 <code>f</code></td>
+<td style="text-align: center;">Femto</td>
+<td style="text-align: center;"><span class="math inline">\(10^{-15}\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：表达 <span class="math inline">\(10^6\)</span>
+数量级要使用 <code>MEG</code> 或者 <code>meg</code>，而不是使用
+<code>M</code> 或者 <code>m</code>；电容器的参数设置里输入
+<code>1</code> 表示的是 <code>1</code> 法拉第，而不能使用
+<code>1F</code> 或者 <code>1f</code>。</p>
+</blockquote>
+<h2 id="spice-点命令">SPICE 点命令</h2>
+<p><strong>LTspice</strong> 当中运行的 SPICE 命令总是以一个点
+<code>.</code>
+作为前缀，因而也被称作<strong>点命令</strong>，常用的点命令如下面的表格所示：</p>
+<table>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 60%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>点命令</th>
+<th>英文描述</th>
+<th>中文描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.AC</code></td>
+<td>Perform an Small Signal AC Analysis Linearized About the DC
+Operating Point</td>
+<td>进行关于直流工作点的线性小信号交流分析</td>
+</tr>
+<tr class="even">
+<td><code>.BACKANNO</code></td>
+<td>Annotate the Subcircuit Pin Names on Port Currents</td>
+<td>在端口电流上面标注子电路的引脚名称</td>
+</tr>
+<tr class="odd">
+<td><code>.DC</code></td>
+<td>Perform a DC Source Sweep Analysis</td>
+<td>执行直流源扫描分析</td>
+</tr>
+<tr class="even">
+<td><code>.END</code></td>
+<td>End of Netlist</td>
+<td>标识网表的结束</td>
+</tr>
+<tr class="odd">
+<td><code>.ENDS</code></td>
+<td>End of Subcircuit Definition</td>
+<td>标识子电路定义的结束</td>
+</tr>
+<tr class="even">
+<td><code>.FERRET</code></td>
+<td>Download a File Given the URL</td>
+<td>从指定的 URL 地址下载文件</td>
+</tr>
+<tr class="odd">
+<td><code>.FOUR</code></td>
+<td>Compute a Fourier Component</td>
+<td>计算傅里叶分量</td>
+</tr>
+<tr class="even">
+<td><code>.FRA</code></td>
+<td>Perfom a Time-Domain Frequency Response Analysis</td>
+<td>执行时域频率响应分析</td>
+</tr>
+<tr class="odd">
+<td><code>.FUNC</code></td>
+<td>User Defined Functions</td>
+<td>用户定义的功能</td>
+</tr>
+<tr class="even">
+<td><code>.GLOBAL</code></td>
+<td>Declare Global Nodes</td>
+<td>声明全局节点</td>
+</tr>
+<tr class="odd">
+<td><code>.IC</code></td>
+<td>Set Initial Conditions</td>
+<td>设置初始条件</td>
+</tr>
+<tr class="even">
+<td><code>.INCLUDE</code></td>
+<td>Include Another File</td>
+<td>包含另一个文件</td>
+</tr>
+<tr class="odd">
+<td><code>.LIB</code></td>
+<td>Include a Library</td>
+<td>包含一个库</td>
+</tr>
+<tr class="even">
+<td><code>.LOADBIAS</code></td>
+<td>Load a Previously Solved DC Solution</td>
+<td>加载已经解析过的直流解决方案</td>
+</tr>
+<tr class="odd">
+<td><code>.MACHINE</code></td>
+<td>Arbitrary State Machine</td>
+<td>任意状态机</td>
+</tr>
+<tr class="even">
+<td><code>.MEASURE</code></td>
+<td>Evaluate User-Defined Electrical Quantities</td>
+<td>求解用户自定义的工程量</td>
+</tr>
+<tr class="odd">
+<td><code>.MODEL</code></td>
+<td>Define a SPICE Model</td>
+<td>定义一个 SPICE 模型</td>
+</tr>
+<tr class="even">
+<td><code>.NET</code></td>
+<td>Compute Network Parameters in a .AC Analysis</td>
+<td>在一个交流分析当中，计算电路网络的参数</td>
+</tr>
+<tr class="odd">
+<td><code>.NODESET</code></td>
+<td>Supply Hints for Initial DC Solution</td>
+<td>为初始的直流解决方案提供提示</td>
+</tr>
+<tr class="even">
+<td><code>.NOISE</code></td>
+<td>Perform a Noise Analysis</td>
+<td>进行噪音分析</td>
+</tr>
+<tr class="odd">
+<td><code>.OP</code></td>
+<td>Find the DC Operating Point</td>
+<td>查询直流工作点</td>
+</tr>
+<tr class="even">
+<td><code>.OPTIONS</code></td>
+<td>Set Simulator Options</td>
+<td>设置仿真工具的选项</td>
+</tr>
+<tr class="odd">
+<td><code>.PARAM</code></td>
+<td>User-Defined Parameters</td>
+<td>用户定义的参数</td>
+</tr>
+<tr class="even">
+<td><code>.SAVE</code></td>
+<td>Limit the Quantity of Saved Data</td>
+<td>限制保存数据的数量</td>
+</tr>
+<tr class="odd">
+<td><code>.SAVEBIAS</code></td>
+<td>Save Operating Point to Disk</td>
+<td>保存工作点到磁盘</td>
+</tr>
+<tr class="even">
+<td><code>.STEP</code></td>
+<td>Parameter Sweeps</td>
+<td>参数扫描</td>
+</tr>
+<tr class="odd">
+<td><code>.SUBCKT</code></td>
+<td>Define a Subcircuit</td>
+<td>定义一个子电路</td>
+</tr>
+<tr class="even">
+<td><code>.TEMP</code></td>
+<td>Temperature Sweeps</td>
+<td>温度扫描</td>
+</tr>
+<tr class="odd">
+<td><code>.TEXT</code></td>
+<td>User-Defined Strings</td>
+<td>用户定义的字符串</td>
+</tr>
+<tr class="even">
+<td><code>.TF</code></td>
+<td>Find the DC Small-Signal Transfer Function</td>
+<td>查找直流小信号传递函数</td>
+</tr>
+<tr class="odd">
+<td><code>.TRAN</code></td>
+<td>Do a Nonlinear Transient Analysis</td>
+<td>执行非线性瞬态分析</td>
+</tr>
+<tr class="even">
+<td><code>.WAVE</code></td>
+<td>Write Selected Nodes to a .Wav File</td>
+<td>将选定的节点写入 <code>.wav</code> 文件</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：在 <code>.asc</code>
+源文件当中，<strong>点命令</strong>以 <code>!</code>
+符号作为开始，而<strong>注释</strong>则是以 <code>;</code>
+作为开始。</p>
+</blockquote>
+<h2 id="spice-分析类型">SPICE 分析类型</h2>
+<p>鼠标点击 <strong>LTspice</strong>
+主界面顶部菜单栏上的【<strong>Simulate -&gt; Configure
+Analysis</strong>】
+或者直接按下快捷键【<strong>A</strong>】，就可以进入如下的 SPICE
+仿真命令配置对话框：</p>
+<p><img src="/Electronics/LTspice/3-SPICE/1.png"></p>
+<h3 id="瞬态分析-transient">瞬态分析 Transient</h3>
+<p>瞬态分析指令 <code>.tran</code>
+用于描述电路当中，各个节点的<strong>电压</strong>与通过元件的<strong>电流</strong>跟随时间的变化关系，即仿真电路在<strong>时域</strong>下的行为：</p>
+<p><img src="/Electronics/LTspice/3-SPICE/2.png"></p>
+<p>瞬态分析指令 <code>.tran</code> 主要拥有如下几个参数：</p>
+<ul>
+<li><code>StopTime</code>：停止时间，该参数用于以<strong>秒</strong>为单位设定仿真的持续时间。</li>
+<li><code>Time to Start Saving Data</code>：仿真数据保存至
+<code>.raw</code> 波形文件的开始时间。</li>
+<li><code>Maximum Timestep</code>：最大时间间隔，也就是时间的步进长度（缺省表示无限大）。</li>
+</ul>
+<p>瞬态分析指令 <code>.tran</code> 主要拥有如下几个修饰符：</p>
+<ul>
+<li><code>Start external DC supply voltages at 0V</code>：让直流电源从
+<code>0V</code> 开始上升，并于 <code>20</code>
+微秒之后达到设定的电压值。</li>
+<li><code>Stop simulating if steady state is detected</code>：如果检测到稳定状态就会停止仿真（只会保存最后
+10 组重复数据）。</li>
+<li><code>Don't reset = 0 when steady state is detected</code>：如果检测到稳定状态就会停止仿真（将会保存全部数据）。</li>
+<li><code>Step the load current source</code>：使用电流源作为负载时，可以使得负载的电流值逐步变化（即每达到一个稳定状态之后，就会向下变换为另外一个电流值）。</li>
+<li><code>Skip initial operating point solution</code>：启用元器件的初始状态值。</li>
+</ul>
+<h3 id="交流分析-ac-analysis">交流分析 AC Analysis</h3>
+<p>交流分析指令 <code>.ac</code>
+可以用于分析小信号的交流频率特性，即仿真电路在<strong>频域</strong>下的行为（由于目标分析频率处于
+<code>0.1Hz ~ 100MHz</code>
+之间较为宽广的范围，所以频率轴通常被表达为<strong>对数刻度</strong>，计算基准可以设置为每间隔
+<code>2</code> 倍或者 <code>10</code> 倍）：</p>
+<p><img src="/Electronics/LTspice/3-SPICE/3.png"></p>
+<ul>
+<li><code>Type of sweep</code>：扫描类型，每两倍（<code>Octave</code>）、每十倍（<code>Decade</code>）、线性（<code>Linear</code>）、列表（<code>List</code>）。</li>
+<li><code>Number of points per X</code>：这里的 <code>X</code>
+是上面设置的扫描类型，通常在 <code>Octave</code> 情况下配置为
+<code>20 ~ 40</code> 点，而在 <code>Decade</code> 情况下配置为
+<code>30 ~ 100</code>
+点。虽然点的数量越多就越精确，但是会花费掉额外的计算时间，所以需要具体情况具体分析。</li>
+<li><code>Start fequency</code>：计算开始频率，单位为
+<code>Hz</code>。</li>
+<li><code>Stop fequency</code>：计算截止频率，单位为
+<code>Hz</code>。</li>
+</ul>
+<h3 id="直流扫描分析-dc-sweep">直流扫描分析 DC Sweep</h3>
+<p>直流扫描分析指令 <code>.dc</code>
+可以动态变换直流源的输出值（最大可以设置 3
+组扫描变量），可以用于分析<strong>二极管</strong>的伏安特性，<strong>晶体管</strong>的静态特性（将基极电流作为参数，观察集电极电流的变化情况），以及<strong>放大器</strong>的输入输出关系：</p>
+<p><img src="/Electronics/LTspice/3-SPICE/4.png"></p>
+<ul>
+<li><code>Name of 1st/2nd/3rd Source to Sweep</code>：输入用于扫描的电压源、电流源的元件名名称，例如
+<code>V1</code> 或者 <code>I2</code>。</li>
+<li><code>Type of Sweep</code>：每两倍（<code>Octave</code>）、每十倍（<code>Decade</code>）、线性（<code>Linear</code>）、列表（<code>List</code>）。</li>
+<li><code>Start Value</code>：扫描起始的电压或者电流。</li>
+<li><code>Stop Value</code>：扫描结束的电压或者电流。</li>
+<li><code>Increment</code>：扫描增量，即间隔的幅度值。</li>
+</ul>
+<h3 id="噪声分析-noise">噪声分析 Noise</h3>
+<p>噪声分析指令 <code>.noise</code>
+用于仿真电路当中<strong>输入</strong>与<strong>输出</strong>相关的频率噪声特性，也就是在<strong>频域</strong>下进行噪声分析（<strong>横轴</strong>是<code>频率</code>，<strong>纵轴</strong>是<code>噪声密度</code>）。其中噪声的单位为
+<span class="math inline">\(\frac{nV}{\sqrt{Hz}}\)</span>（如果想分析某个<strong>频带</strong>的噪声，只需要将该频带振幅的<strong>频率</strong>进行平方之后，再乘以噪声的<strong>电压密度</strong>即可推算出来）。</p>
+<p><img src="/Electronics/LTspice/3-SPICE/5.png"></p>
+<ul>
+<li><code>Input</code>：输入噪声的结点网络标签。</li>
+<li><code>Qutput</code>：输出噪声的结点网络标签。</li>
+<li><strong>其它参数</strong>：与交流分析（AC
+Analysis）相关的参数相同。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：在该模式下按住键盘上的【<strong>CTRL</strong>】键，然后鼠标左键点击波形预览窗口上的
+<span class="math inline">\(V(onoise)\)</span>
+标签，就可以查看<strong>总电压噪声</strong>的均方根值（<strong>RMS</strong>，Root
+Mean Square）。</p>
+</blockquote>
+<h3 id="直流传递分析-dc-transfer">直流传递分析 DC Transfer</h3>
+<p>直流传输分析命令 <code>.tf</code>
+通过将偏置点附近的微小变化视为直线，从而计算出小信号的<strong>输入输出的传递函数值</strong>，以及<strong>输入阻抗</strong>和<strong>输出阻抗</strong>。</p>
+<p><img src="/Electronics/LTspice/3-SPICE/6.png"></p>
+<ul>
+<li><code>Source</code>：电压源或者电流源的网络标签名称（不能使用<code>节点电压</code>、<code>元件电流</code>的名称）。</li>
+<li><code>Output</code>：指定结点的电压，或者指定元件上面通过的电流。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：<strong>传递函数</strong>用于描述一个电路网络的<strong>输出</strong>与<strong>输入</strong>的拉普拉斯变换之比。</p>
+</blockquote>
+<h3 id="直流工作点分析-dc-op-pnt">直流工作点分析 DC op pnt</h3>
+<p>直流工作点分析指令 <code>.op</code>
+用于分析晶体管电路当中不含有交流成分的直流偏置信号，该指令通常不会单独使用，而是会与其它分析方式结合起来使用。这条指令没有扩展的修饰词，所以在点击下面界面当中的【<strong>OK</strong>】按钮之后，就可以将该指令放置在仿真原理图上的任意位置进行执行：</p>
+<p><img src="/Electronics/LTspice/3-SPICE/7.png"></p>
+<blockquote>
+<p><strong>注意</strong>：当在仿真原理图上放置好 <code>.op</code>
+命令，并且运行完毕之后，就会自动弹出一个【Operating
+Point】工作点列表窗口界面。</p>
+</blockquote>
+<h3 id="瞬态频率响应分析-transient-frequency-response">瞬态频率响应分析
+Transient Frequency Response</h3>
+<p>瞬态频率响应分析指令 <code>.fra</code>
+用于分析电路反馈回路的频率响应，使用时仿真原理图电路当中必须包含有一个以
+<code>@</code> 作为前缀的<strong>频率响应分析器</strong>（FRA，Frequency
+Response Analyzer），：</p>
+<p><img src="/Electronics/LTspice/3-SPICE/8.png"></p>
+<p>选择 <strong>LTspice</strong> 菜单栏上的【Edit -&gt;
+Component】或者直接按下快捷键【<strong>P</strong>】，然后在元件对话框的
+<strong>Search</strong> 里输入
+<code>fra</code>，就可以完成频率响应分析器的放置：</p>
+<p><img src="/Electronics/LTspice/3-SPICE/9.png"></p>
+<p>运用 <code>.fra</code>
+指令的时候，需要对<strong>频率响应分析器</strong>的相关分析参数进行详细配置，这些配置参数被划分为了<strong>分析类型</strong>、<strong>激励频率</strong>、<strong>激励幅值</strong>、<strong>通用</strong>四个部分：</p>
+<p><img src="/Electronics/LTspice/3-SPICE/10.png"></p>
+<h2 id="独立电压-电流源">独立电压 &amp; 电流源</h2>
+<h3 id="独立电压源">独立电压源</h3>
+<p>在 <strong>LTspice</strong>
+仿真原理图编辑界面，按下快捷键【<strong>P</strong>】，在弹出的元件选择窗口
+<strong>Search</strong> 里输入
+<code>voltage</code>，然后点击【确定】按钮，就可以向当前的仿真原理图上添加一个独立电压源：</p>
+<p><img src="/Electronics/LTspice/4-Source/1.png"></p>
+<p>在仿真原理图的电压源符号上点击【鼠标右键】，就会弹出一个电压源参数设置窗口，可以用于输入<code>电源的直流输出电压值</code>(单位为伏特
+<code>V</code>)，以及<code>电源的内阻</code>(单位为欧姆
+<code>Ω</code>)：</p>
+<p><img src="/Electronics/LTspice/4-Source/2.png"></p>
+<p>此时如果点击电压源参数设置窗口上的【<strong>Advanced</strong>】按钮，就可以设置更多关于独立电压源的参数：</p>
+<p><img src="/Electronics/LTspice/4-Source/3.png"></p>
+<h3 id="独立电流源">独立电流源</h3>
+<p>在 <strong>LTspice</strong>
+仿真原理图编辑界面，按下快捷键【<strong>P</strong>】，在弹出的元件选择窗口
+<strong>Search</strong> 里输入
+<code>current</code>，然后点击【确定】按钮，就可以向当前的仿真原理图上添加一个独立电流源：</p>
+<p><img src="/Electronics/LTspice/4-Source/4.png"></p>
+<p>在仿真原理图的电流源符号上点击【鼠标右键】，就会弹出一个电流源参数设置窗口，该窗口只可以用于输入<code>电源的直流输出电流值</code>(单位为安培
+<code>A</code>)：</p>
+<p><img src="/Electronics/LTspice/4-Source/5.png"></p>
+<p>此时如果点击电流源参数设置窗口上的【<strong>Advanced</strong>】按钮，就可以设置更多关于独立电流源的参数：</p>
+<p><img src="/Electronics/LTspice/4-Source/6.png"></p>
+<h3 id="参考方向">参考方向</h3>
+<p><strong>LTspice</strong>
+仿真原理图同样遵循电路原理当中<strong>关联参考方向</strong>的相关定义，即当<strong>独立电压源</strong>（由正极指向负极）与<strong>独立电流源</strong>的方向<strong>相反</strong>时（即<strong>非关联参考方向</strong>），电路网络当中的电压与电流为<strong>负数</strong>：</p>
+<p><img src="/Electronics/LTspice/4-Source/7.png"></p>
+<p>而当<strong>独立电压源</strong>（由正极指向负极）与<strong>独立电流源</strong>的方向<strong>相同</strong>时（即<strong>关联参考方向</strong>），则电路网络当中的电压与电流的仿真结果为<strong>正数</strong>：</p>
+<p><img src="/Electronics/LTspice/4-Source/8.png"></p>
+<h2 id="波形信号的产生">波形信号的产生</h2>
+<p>打开 <strong>LTspice</strong> 主界面，选择菜单栏上的【<strong>Voltage
+Source</strong>】或者按下快捷键【<strong>V</strong>】放置一个电压源，然后在该电压源上面点击<strong>鼠标右键</strong>，打开电压源参数设置对话框：</p>
+<p><img src="/Electronics/LTspice/5-Waveform/1.png"></p>
+<h3 id="方波">方波</h3>
+<p>鼠标点击上面电压源参数设置对话框当中的【<strong>Advanced</strong>】按钮，在弹出的独立电压源详细参数设置界面选择【<strong>PULSE</strong>】项，就可以配置脉冲波的相关参数：</p>
+<p><img src="/Electronics/LTspice/5-Waveform/2.png"></p>
+<p>这里我们将<strong>脉冲电压</strong>设置为
+<code>3.3V</code>，<strong>脉冲持续时间</strong>设置为 <code>1m</code>
+秒，<strong>周期</strong>设置为 <code>2m</code>
+秒，输出的<strong>周期数量</strong>设置为 <code>200</code>
+个，<strong>上升和下降沿时间</strong>分别设置为 <code>10n</code>
+秒：</p>
+<p><img src="/Electronics/LTspice/5-Waveform/3.png"></p>
+<p>然后按下快捷键【<strong>Alt +
+R</strong>】运行仿真原理图，就可以从下图左侧独立电压源的
+<code>OUT</code> 端口，查看到下图右侧所示的方波脉冲信号：</p>
+<p><img src="/Electronics/LTspice/5-Waveform/4.png"></p>
+<h3 id="正弦波">正弦波</h3>
+<p>在弹出的参数设置对话框当中，选择【<strong>Advance</strong>】按钮，打开如下的独立电压源详细参数设置窗口，选择其中的【<strong>SINE</strong>】正弦信号，就可以进一步配置相关的参数：</p>
+<p><img src="/Electronics/LTspice/5-Waveform/5.png"></p>
+<p>这里我们将<strong>电压幅度</strong>设置为
+<code>220V</code>，<strong>频率</strong>设置为
+<code>50Hz</code>，从而就可以获得一个 <code>200V</code>
+民用交流市电的波形：</p>
+<p><img src="/Electronics/LTspice/5-Waveform/6.png"></p>
+<p>按下快捷键【<strong>Alt +
+R</strong>】运行仿真原理图，就能够从下图左侧独立电压源的
+<code>OUT</code> 端口，查看到下图右侧所示的正弦脉冲信号：</p>
+<p><img src="/Electronics/LTspice/5-Waveform/7.png"></p>
+<h2 id="四种受控源">四种受控源</h2>
+<h3 id="电压控制电压源">电压控制电压源</h3>
+<p><strong>电压控制电压源</strong>以 <code>E</code>
+作为网络标号的前缀，在仿真原理图界面按下元件放置快捷键【<strong>P</strong>】之后，在
+<code>Search</code> 栏输入 <code>e</code> 或者 <code>e2</code>
+就可以查找并且放置：</p>
+<p><img src="/Electronics/LTspice/6-Controlled/1.png"></p>
+<p>上述仿真原理图当中的<strong>电压源</strong> <code>V1</code>，输出一个
+<code>3.3V</code> 的直流电压，以此作为<strong>电压控制电压源</strong>
+<code>E1</code> 的控制电压。将 <code>E1</code>
+的<strong>控制系数</strong>设置为
+<code>3</code>，那么其输出端就会得到一个 <code>9.9V</code>
+的直流电压。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>LTspice</strong> 默认元件库当中的
+<code>e</code> 和 <code>e2</code>
+两种电压控制电压源，主要区别在于输入端正负极的先后顺序，其中
+<code>e</code> 是上正下负，而 <code>e2</code> 则是上负下正。</p>
+</blockquote>
+<h3 id="电压控制电流源">电压控制电流源</h3>
+<p><strong>电压控制电流源</strong>以 <code>G</code>
+作为网络标号的前缀，在仿真原理图界面按下元件放置快捷键【<strong>P</strong>】之后，在
+<code>Search</code> 栏输入 <code>g</code> 或者 <code>g2</code>
+就可以查找并且放置：</p>
+<p><img src="/Electronics/LTspice/6-Controlled/2.png"></p>
+<p>上述仿真原理图当中的<strong>电压源</strong>
+<code>V1</code>，输出一个幅值为 <code>3.3V</code>，频率为
+<code>1KHz</code> 的正弦信号，以此作为<strong>电压控制电流源</strong>
+<code>G1</code> 的控制电压。将 <code>G1</code>
+的<strong>控制系数</strong>设置为 <code>2</code>，那么电阻
+<code>R1</code> 上面就会通过一个变化幅值达到
+<code>6.6A</code>，变化频率同样为 <code>1KHz</code> 的电流信号。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>LTspice</strong> 默认元件库当中的
+<code>g</code> 和 <code>g2</code>
+两种电压控制电流源，主要区别在于输入端正负极的先后顺序，其中
+<code>g</code> 是上正下负，而 <code>g2</code> 则是上负下正。</p>
+</blockquote>
+<h3 id="电流控制电压源">电流控制电压源</h3>
+<p><strong>电流控制电压源</strong>以 <code>H</code>
+作为网络标号的前缀，在仿真原理图界面按下元件放置快捷键【<strong>P</strong>】之后，在
+<code>Search</code> 栏输入 <code>h</code> 就可以查找并且放置：</p>
+<p><img src="/Electronics/LTspice/6-Controlled/3.png"></p>
+<p>上述仿真原理图当中的<strong>电压源</strong>
+<code>V1</code>，输出一个幅值为 <code>5V</code>，频率为
+<code>1KHz</code> 的正弦信号，导致电阻 <code>R2</code>
+上通过的电流也呈正弦规律变化，以此作为<strong>电流控制电压源</strong>
+<code>H1</code> 的控制电流。将 <code>H1</code>
+的<strong>控制系数</strong>设置为 <code>3</code>，那么电阻
+<code>R1</code> 上面就会通过一个变化幅值为
+<code>15V</code>，变化频率同样为 <code>1KHz</code> 的电压信号。</p>
+<blockquote>
+<p><strong>注意</strong>：电流控制电压源的 <code>Value</code>
+参数，需要采用 <code>电源网络标号 + 空格 + 控制系数</code>
+的格式进行定义。</p>
+</blockquote>
+<h3 id="电流控制电流源">电流控制电流源</h3>
+<p><strong>电流控制电流源</strong>以 <code>F</code>
+作为网络标号的前缀，在仿真原理图界面按下元件放置快捷键【<strong>P</strong>】之后，在
+<code>Search</code> 栏输入 <code>f</code> 就可以查找并且放置：</p>
+<p><img src="/Electronics/LTspice/6-Controlled/4.png"></p>
+<p>上述仿真原理图当中的<strong>电压源</strong>
+<code>V1</code>，输出一个幅值为 <code>5V</code>，频率为
+<code>1KHz</code> 的正弦信号，导致电阻 <code>R2</code>
+上通过的电流也呈正弦规律变化，以此作为<strong>电流控制电流源</strong>
+<code>F1</code> 的控制电流。将 <code>F1</code>
+的<strong>控制系数</strong>设置为 <code>6</code>，那么电阻
+<code>R1</code> 上面就会通过一个变化幅值为
+<code>30A</code>，变化频率同样为 <code>1KHz</code> 的电流信号。</p>
+<blockquote>
+<p><strong>注意</strong>：电流控制电流源的 <code>Value</code>
+参数，需要采用 <code>电源网络标号 + 空格 + 控制系数</code>
+的格式进行定义。</p>
+</blockquote>
+<h2 id="无源元件-伏安特性">无源元件-伏安特性</h2>
+<h3 id="电阻的伏安特性">电阻的伏安特性</h3>
+<p><strong>欧姆定律</strong>是指一个电阻器两端的<strong>电压</strong>
+<span class="math inline">\(V_R\)</span>，与通过该电阻器的<strong>电流</strong>
+<span class="math inline">\(I_R\)</span>
+呈正比，而比例常数就是<strong>电阻值</strong> <span class="math inline">\(R\)</span>：</p>
+<p><span class="math display">\[
+电压 V_R = 电流 I_R \times 电阻 R
+\]</span></p>
+<p>仿真电阻的伏安特性需要使用 <strong>LTspice</strong>
+的<strong>直流扫描分析</strong>（DC
+Sweep）功能，将扫描电源指定为仿真原理图里的
+<code>V1</code>，扫描方式采用 <code>Linear</code>
+线性，起始和截止扫描电压分别为
+<code>-10V ~ + 10V</code>，步进增长值则指定为
+<code>0.1V</code>，具体如下图所示：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/1.png"></p>
+<p>将电压源 <code>V1</code> 的输出设置为 <code>5V</code>，而串联电阻
+<code>R1</code> 的阻值设置为
+<code>1Ω</code>。运行仿真任务之后，就可以看到电阻器的伏安特性曲线是一个以<strong>电压</strong>作为
+<code>X</code> 横轴，<strong>电流</strong>作为 <code>Y</code>
+纵轴，斜率为<strong>电阻值</strong> <span class="math inline">\(R\)</span>，并且经过<strong>原点</strong>的一条直线：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/2.png"></p>
+<h3 id="电容的伏安特性">电容的伏安特性</h3>
+<p>电容器两端的<strong>电压</strong> <span class="math inline">\(V_C\)</span>
+与所存储的<strong>电量</strong>（即通过电容器电流的时间<strong>积分</strong>
+<span class="math inline">\(\int I_C
+dt\)</span>）呈正比，与<strong>电容值</strong> <span class="math inline">\(C\)</span> 呈反比：</p>
+<p><span class="math display">\[
+V_C = \frac{1}{C} \int I_C dt
+\]</span></p>
+<p>对上面的公式两侧，按照时间进行进行<strong>微分</strong>，并且再分别乘以<strong>电容</strong>
+<span class="math inline">\(C\)</span>，就可以得到如下通过电容器的<strong>电流</strong>
+<span class="math inline">\(I_C\)</span>
+与电容器两端<strong>电压</strong> <span class="math inline">\(V_C\)</span> 的关系：</p>
+<p><span class="math display">\[
+C \times \frac{dV_C}{dt} = I_C
+\]</span></p>
+<p>仿真电容的伏安特性需要使用 <strong>LTspice</strong>
+的<strong>瞬态分析</strong>（Transient）功能，将停止时间设置为
+<code>2</code>
+秒，并且勾选<code>启用元器件的初始状态值</code>，具体如下图所示：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/3.png"></p>
+<p>仿真原理图当中的<strong>电流源</strong> <code>I1</code>
+输出的是<strong>峰峰值</strong>为 <span class="math inline">\(\pm
+1mA\)</span> 的方波电流信号，相关的详细设置如下图所示：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/4.png"></p>
+<p>仿真原理图上串联电容器 <code>C1</code> 的值设置为
+<code>1F</code>，并联等效电阻设置为
+<code>1TΩ</code>（以便于在电容器完成充电之后进行放电操作）：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/5.png"></p>
+<p>当电容器上通过的<strong>电流</strong> <span class="math inline">\(I\)</span> 增大至 <code>1mA</code> 的时候，电容器
+<code>C1</code> 开始进入充电状态，两端的<strong>电压</strong> <span class="math inline">\(V_C\)</span>
+随之线性增大。而当通过电容器的<strong>电流</strong> <span class="math inline">\(I\)</span> 降低至 <code>0mA</code> 的时候，电容器
+<code>C1</code> 开始通过 <code>1TΩ</code>
+的并联等效电阻进行放电，此时两端的<strong>电压</strong> <span class="math inline">\(V_C\)</span> 也就随之线性下降：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/6.png"></p>
+<h3 id="电感的伏安特性">电感的伏安特性</h3>
+<p>电感器两端的<strong>电压</strong> <span class="math inline">\(V_L\)</span>
+和单位时间内通过电感器的<strong>电流</strong> <span class="math inline">\(I_L\)</span>
+的变化量呈<strong>正比</strong>，而与电感器的<strong>电感值</strong>
+<span class="math inline">\(I\)</span>
+同样也呈<strong>正比</strong>：</p>
+<p><span class="math display">\[
+V_L = L \times \frac{dI_L}{dt} \xrightarrow{逆关系} I_L = \frac{1}{L}
+\times \int V_L dt
+\]</span></p>
+<p>当下面仿真原理图上的<strong>独立电流源</strong> <code>I1</code> 输出
+<code>5A</code> 直流电流的时候，<strong>电感</strong> <code>L1</code>
+可以近似为一条两端电压为 <code>5mV</code>
+的导线（<strong>LTspice</strong> 当中的电感器都会默认带有
+<code>1mΩ</code> 等效串联电阻）：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/7.png"></p>
+<p>当仿真原理图上的<strong>独立电流源</strong> <code>I1</code> 输出的是
+<code>5A</code> 的正弦直流信号的时候，此时<strong>电感器</strong>
+<code>L1</code> 两端电压 <span class="math inline">\(V_L\)</span>
+的相位，要超前于电流 <span class="math inline">\(I_L\)</span> 的相位
+<code>90</code> 度：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/8.png"></p>
+<h2 id="无源元件-交流特性">无源元件-交流特性</h2>
+<h3 id="电容的交流特性">电容的交流特性</h3>
+<p>一个容值为 <span class="math inline">\(C\)</span>
+的电容器，对于<strong>频率</strong>为 <span class="math inline">\(f\)</span> 的信号所产生的<strong>电抗</strong>
+<span class="math inline">\(X_C\)</span>，可以通过如下的公式进行计算得到：</p>
+<p><span class="math display">\[
+X_C = \frac{1}{2 \pi fC}
+\]</span></p>
+<p>利用电容器的这种频率依赖特性，可以和电阻一起构成可以只允许特定频率通过的
+RC
+滤波电路。根据电路的基本理论，可以知道当<strong>电阻器</strong>通过<strong>交流电流信号</strong>
+<span class="math inline">\(I_C\)</span>
+时，其两端的<strong>电压</strong> <span class="math inline">\(V_C = R_C
+\times
+I_C\)</span>。而当<strong>电容器</strong>通过<strong>交流电流信号</strong>
+<span class="math inline">\(I_C\)</span>
+时，其两端的<strong>电压</strong> <span class="math inline">\(V_C = X_C
+\times
+I_C\)</span>。接下来，分别对<strong>电阻器</strong>（<code>10KΩ</code>）和<strong>电容器</strong>（<code>0.001uF</code>、<code>0.01uF</code>、<code>0.1uF</code>）的频率依赖特性进行仿真实验：</p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/9.png"></p>
+<p><img src="/Electronics/LTspice/7-RCL-VI/10.png"></p>
+<p><span class="math display">\[
+N=a^{x}\ (a &gt; 0, a \neq 1)
+\implies
+x = \log_{a} N
+\]</span></p>
+<p><span class="math display">\[
+x = \log_{10} N
+\implies
+x = \lg N
+\]</span></p>
+<p><span class="math display">\[
+N_{dB} = 10 \times \lg \frac{P_{输入功率}}{P_{输出功率}}
+\]</span></p>
+<h3 id="电感的交流特性">电感的交流特性</h3>
+<h2 id="有源元件-伏安特性">有源元件-伏安特性</h2>
+<h3 id="双极型晶体管的伏安特性">双极型晶体管的伏安特性</h3>
+<h3 id="场效应管的伏安特性">场效应管的伏安特性</h3>
+<h2 id="基本放大电路的仿真">基本放大电路的仿真</h2>
+<h2 id="基本数字逻辑电路的仿真">基本数字逻辑电路的仿真</h2>
+<h2 id="导入外部-spice-模型">导入外部 SPICE 模型</h2>
+<h2 id="仿真实例">仿真实例</h2>
+<h3 id="暂态仿真实例">暂态仿真实例</h3>
+<p>模拟电路当中，电阻串联之后具备分压的功能，例如<strong>电压源</strong>
+<span class="math inline">\(V\)</span> 两端的电压为
+<code>6V</code>，三枚阻值分别为
+<code>R1 = 1Ω</code>、<code>R2 = 2Ω</code>、<code>R3 = 3Ω</code>
+的电阻串联之后，每一枚电阻上通过的<strong>电流</strong> <span class="math inline">\(I\)</span> 与所分得的<strong>电压</strong> <span class="math inline">\(V\)</span> 如下面计算所示：</p>
+<p><span class="math display">\[
+\begin{cases}
+I_1 = I_2 = I_3 = \frac{V}{R_1 + R_2 + R_3} = 1A; \\
+V_1 = V = 6V \\
+V_2 = V \times \frac{R_2 + R_3}{R_1 + R_2 + R_3} = 6V \times \frac{2Ω +
+3Ω}{1Ω + 2Ω + 3Ω} = 5V \\
+V_3 = V \times \frac{R_3}{R_1 + R_2 + R_3} = 6V \times \frac{3Ω}{1Ω + 2Ω
++ 3Ω} = 3V \\
+V_{12} = V \times \frac{R_1}{R_1 + R_2 + R_3} = 6V \times \frac{1Ω}{1Ω +
+2Ω + 3Ω} = 1V \\
+V_{23} = V \times \frac{R_2}{R_1 + R_2 + R_3} = 6V \times \frac{2Ω}{1Ω +
+2Ω + 3Ω} = 2V \\
+V_{13} = V \times \frac{R_3}{R_1 + R_2 + R_3} = 6V \times \frac{3Ω}{1Ω +
+2Ω + 3Ω} = 3V \\
+\end{cases}
+\]</span></p>
+<p>接下来绘制出这个电阻串联电路，打开 <strong>LTspice</strong>
+的主界面之后，按下键盘上的快捷键【<strong>Ctrl + N</strong>】，就可以在
+<code>C:\Users\hank\Documents\LTspice</code> 目录下面新建一个默认名称为
+<code>Draft1.asc</code> 的仿真原理图文件：</p>
+<p><img src="/Electronics/LTspice/Example/1-Transient/1.png"></p>
+<p>完成仿真原理图的绘制之后，鼠标点击 <strong>LTspice</strong>
+主界面顶部的【Configure
+Analysis】按钮，或者直接按下快捷键【<strong>A</strong>】，选择暂态分析【<strong>Transient</strong>】选项卡，并将仿真的停止时间设置为
+<code>1</code> 秒：</p>
+<p><img src="/Electronics/LTspice/Example/1-Transient/2.png"></p>
+<p>在 <strong>LTspice</strong>
+的仿真原理图上面移动鼠标，就可以使用<strong>电流探头</strong>或者<strong>电压探头</strong>测量相应位置的参数（仔细观察可以发现，这些参数与上面手动计算的结果一致），并将这些参数显示到波形预览界面（同时会在仿真原理图文件
+<code>Draft1.asc</code> 所在的目录，自动生成出一个
+<code>Draft1.raw</code> 波形文件）：</p>
+<p><img src="/Electronics/LTspice/Example/1-Transient/3.png"></p>
+<blockquote>
+<p><strong>注意</strong>：测量两点之间的相对电压，需要<strong>鼠标左键</strong>选定第
+<strong>1</strong>
+个点的位置之后（此时电压探头为红色），继续按住<strong>鼠标左键</strong>拖动至第
+2 个点的位置（此时电压探头为黑色）。</p>
+</blockquote>
+<h3 id="交流仿真实例">交流仿真实例</h3>
+<p>在模拟电路当中，由一个<strong>电阻</strong> <code>R = 10kΩ</code>
+和一个<strong>电容</strong> <code>C = 0.1uF</code> 组成的 <strong>RC
+低通滤波器</strong>，其<strong>截止频率</strong> <span class="math inline">\(f_{C}\)</span> 的计算公式如下面所示：</p>
+<p><span class="math display">\[
+f_{C} = \frac{1}{2 \pi RC} = \frac{1}{2 \pi \times 10000 \times
+0.0000001} \approx \frac{1}{0.00628} \approx 159.24 Hz
+\]</span></p>
+<p>接下来绘制出这个 RC 低通滤波器电路，打开 <strong>LTspice</strong>
+的主界面之后，按下键盘上的快捷键【<strong>Ctrl + N</strong>】，就可以在
+<code>C:\Users\hank\Documents\LTspice</code> 目录下面新建一个默认名称为
+<code>Draft1.asc</code> 的仿真原理图文件：</p>
+<p><img src="/Electronics/LTspice/Example/2-AC/1.png"></p>
+<p>完成仿真原理图的绘制之后，鼠标点击 <strong>LTspice</strong>
+主界面顶部的【Configure
+Analysis】按钮，或者直接按下快捷键【<strong>A</strong>】，选择【AC
+Analysis】<strong>交流分析</strong>选项卡，配置相关的仿真分析参数：</p>
+<p><img src="/Electronics/LTspice/Example/2-AC/2.png"></p>
+<p>鼠标点击 <strong>LTspice</strong>
+主界面顶部的【Run/Pause】按钮，或者按下快捷键【<strong>Alt +
+R</strong>】开始运行仿真，紧接着将鼠标移动到 <code>OUT</code>
+端口查看<strong>输出电压</strong> <span class="math inline">\(V(out)\)</span> 的波形：</p>
+<p><img src="/Electronics/LTspice/Example/2-AC/3.png"></p>
+<p>RC 低通滤波器的<strong>截止频率</strong> <span class="math inline">\(f_C\)</span> 就是增益降低至 <code>-3dB</code>
+时候的频率，使用<strong>鼠标左键双击</strong>右侧波形预览窗口顶部的
+<span class="math inline">\(V(out)\)</span>，然后移动光标至
+<code>-3dB</code> 位置，就可以查看到该位置对应的频率为
+<code>159.78631Hz</code>，与前面计算的结果相类似：</p>
+<p><img src="/Electronics/LTspice/Example/2-AC/4.png"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>如何使用新版本的 LTspice 进行模拟电路仿真</p><p><a href="http://www.uinio.com/Electronics/LTspice/">http://www.uinio.com/Electronics/LTspice/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-05-22</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Simulation/">Simulation</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/SI9000/"><span class="level-item">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#基础操作"><span class="level-left"><span class="level-item">1</span><span class="level-item">基础操作</span></span></a></li><li><a class="level is-mobile" href="#常用快捷键"><span class="level-left"><span class="level-item">2</span><span class="level-item">常用快捷键</span></span></a></li><li><a class="level is-mobile" href="#快捷键设置"><span class="level-left"><span class="level-item">3</span><span class="level-item">快捷键设置</span></span></a></li><li><a class="level is-mobile" href="#常量符号"><span class="level-left"><span class="level-item">4</span><span class="level-item">常量符号</span></span></a></li><li><a class="level is-mobile" href="#单位符号"><span class="level-left"><span class="level-item">5</span><span class="level-item">单位符号</span></span></a></li><li><a class="level is-mobile" href="#spice-点命令"><span class="level-left"><span class="level-item">6</span><span class="level-item">SPICE 点命令</span></span></a></li><li><a class="level is-mobile" href="#spice-分析类型"><span class="level-left"><span class="level-item">7</span><span class="level-item">SPICE 分析类型</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#瞬态分析-transient"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">瞬态分析 Transient</span></span></a></li><li><a class="level is-mobile" href="#交流分析-ac-analysis"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">交流分析 AC Analysis</span></span></a></li><li><a class="level is-mobile" href="#直流扫描分析-dc-sweep"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">直流扫描分析 DC Sweep</span></span></a></li><li><a class="level is-mobile" href="#噪声分析-noise"><span class="level-left"><span class="level-item">7.4</span><span class="level-item">噪声分析 Noise</span></span></a></li><li><a class="level is-mobile" href="#直流传递分析-dc-transfer"><span class="level-left"><span class="level-item">7.5</span><span class="level-item">直流传递分析 DC Transfer</span></span></a></li><li><a class="level is-mobile" href="#直流工作点分析-dc-op-pnt"><span class="level-left"><span class="level-item">7.6</span><span class="level-item">直流工作点分析 DC op pnt</span></span></a></li><li><a class="level is-mobile" href="#瞬态频率响应分析-transient-frequency-response"><span class="level-left"><span class="level-item">7.7</span><span class="level-item">瞬态频率响应分析
+Transient Frequency Response</span></span></a></li></ul></li><li><a class="level is-mobile" href="#独立电压-电流源"><span class="level-left"><span class="level-item">8</span><span class="level-item">独立电压 &amp; 电流源</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#独立电压源"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">独立电压源</span></span></a></li><li><a class="level is-mobile" href="#独立电流源"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">独立电流源</span></span></a></li><li><a class="level is-mobile" href="#参考方向"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">参考方向</span></span></a></li></ul></li><li><a class="level is-mobile" href="#波形信号的产生"><span class="level-left"><span class="level-item">9</span><span class="level-item">波形信号的产生</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#方波"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">方波</span></span></a></li><li><a class="level is-mobile" href="#正弦波"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">正弦波</span></span></a></li></ul></li><li><a class="level is-mobile" href="#四种受控源"><span class="level-left"><span class="level-item">10</span><span class="level-item">四种受控源</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电压控制电压源"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">电压控制电压源</span></span></a></li><li><a class="level is-mobile" href="#电压控制电流源"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">电压控制电流源</span></span></a></li><li><a class="level is-mobile" href="#电流控制电压源"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">电流控制电压源</span></span></a></li><li><a class="level is-mobile" href="#电流控制电流源"><span class="level-left"><span class="level-item">10.4</span><span class="level-item">电流控制电流源</span></span></a></li></ul></li><li><a class="level is-mobile" href="#无源元件-伏安特性"><span class="level-left"><span class="level-item">11</span><span class="level-item">无源元件-伏安特性</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电阻的伏安特性"><span class="level-left"><span class="level-item">11.1</span><span class="level-item">电阻的伏安特性</span></span></a></li><li><a class="level is-mobile" href="#电容的伏安特性"><span class="level-left"><span class="level-item">11.2</span><span class="level-item">电容的伏安特性</span></span></a></li><li><a class="level is-mobile" href="#电感的伏安特性"><span class="level-left"><span class="level-item">11.3</span><span class="level-item">电感的伏安特性</span></span></a></li></ul></li><li><a class="level is-mobile" href="#无源元件-交流特性"><span class="level-left"><span class="level-item">12</span><span class="level-item">无源元件-交流特性</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电容的交流特性"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">电容的交流特性</span></span></a></li><li><a class="level is-mobile" href="#电感的交流特性"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">电感的交流特性</span></span></a></li></ul></li><li><a class="level is-mobile" href="#有源元件-伏安特性"><span class="level-left"><span class="level-item">13</span><span class="level-item">有源元件-伏安特性</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#双极型晶体管的伏安特性"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">双极型晶体管的伏安特性</span></span></a></li><li><a class="level is-mobile" href="#场效应管的伏安特性"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">场效应管的伏安特性</span></span></a></li></ul></li><li><a class="level is-mobile" href="#基本放大电路的仿真"><span class="level-left"><span class="level-item">14</span><span class="level-item">基本放大电路的仿真</span></span></a></li><li><a class="level is-mobile" href="#基本数字逻辑电路的仿真"><span class="level-left"><span class="level-item">15</span><span class="level-item">基本数字逻辑电路的仿真</span></span></a></li><li><a class="level is-mobile" href="#导入外部-spice-模型"><span class="level-left"><span class="level-item">16</span><span class="level-item">导入外部 SPICE 模型</span></span></a></li><li><a class="level is-mobile" href="#仿真实例"><span class="level-left"><span class="level-item">17</span><span class="level-item">仿真实例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#暂态仿真实例"><span class="level-left"><span class="level-item">17.1</span><span class="level-item">暂态仿真实例</span></span></a></li><li><a class="level is-mobile" href="#交流仿真实例"><span class="level-left"><span class="level-item">17.2</span><span class="level-item">交流仿真实例</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

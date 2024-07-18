@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>小议 MQTT 物联网传输协议 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="物联网（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，以进行信息的传输与控制交互，并实现智能化的信息感知与管理，进而构建出万物相联的智能化环境，将网络连接能力渗透进现实世界的方方面面。而伴随近年 5G 无线网的迅速商用，海量物联网设备的接入给传统 Web 通信协议带来了挑战，必须有针对性的采取一系列全新特性的通信协议，从而解"><meta property="og:type" content="blog"><meta property="og:title" content="小议 MQTT 物联网传输协议"><meta property="og:url" content="http://www.uinio.com/Embedded/MQTT/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="物联网（IoT，Internet of Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，以进行信息的传输与控制交互，并实现智能化的信息感知与管理，进而构建出万物相联的智能化环境，将网络连接能力渗透进现实世界的方方面面。而伴随近年 5G 无线网的迅速商用，海量物联网设备的接入给传统 Web 通信协议带来了挑战，必须有针对性的采取一系列全新特性的通信协议，从而解"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2012-06-25T16:00:00.000Z"><meta property="article:modified_time" content="2021-08-30T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Protocol"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Embedded/MQTT/"},"headline":"小议 MQTT 物联网传输协议","image":["http://www.uinio.com/Embedded/MQTT/logo.png"],"datePublished":"2012-06-25T16:00:00.000Z","dateModified":"2021-08-30T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"物联网（IoT，Internet\r of\r Things）通过各种网络以及传感器技术，按照约定的协议将无处不在设备联结起来，以进行信息的传输与控制交互，并实现智能化的信息感知与管理，进而构建出万物相联的智能化环境，将网络连接能力渗透进现实世界的方方面面。而伴随近年\r 5G 无线网的迅速商用，海量物联网设备的接入给传统 Web\r 通信协议带来了挑战，必须有针对性的采取一系列全新特性的通信协议，从而解"}</script><link rel="canonical" href="http://www.uinio.com/Embedded/MQTT/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2012-06-25T16:00:00.000Z" title="2012/6/26 00:00:00">2012-06-26</time>发表</span><span class="level-item"><time dateTime="2021-08-30T16:00:00.000Z" title="2021/8/31 00:00:00">2021-08-31</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Embedded/">Embedded</a></span><span class="level-item">2 小时读完 (大约13882个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">小议 MQTT 物联网传输协议</h1><div class="content"><p><strong>物联网</strong>（<strong>IoT</strong>，<strong>I</strong>nternet
+<strong>o</strong>f
+<strong>T</strong>hings）通过各种<strong>网络</strong>以及<strong>传感器</strong>技术，按照约定的协议将无处不在设备联结起来，以进行信息的传输与控制交互，并实现智能化的信息感知与管理，进而构建出万物相联的智能化环境，将网络连接能力渗透进现实世界的方方面面。而伴随近年
+<strong>5G</strong> 无线网的迅速商用，海量物联网设备的接入给传统 Web
+通信协议带来了挑战，必须有针对性的采取一系列全新特性的通信协议，从而解决<code>网络环境不可靠</code>、<code>终端设备系统资源有限</code>等关键问题。</p>
+<p><img src="/Embedded/MQTT/logo.png"></p>
+<p><strong>MQTT</strong>（消息队列遥测传输，Message Queuing Telemetry
+Transport）协议最早是由 <strong>Andy Stanford Clark</strong> 和
+<strong>Arlen Nipper</strong> 于 1999
+年创建，起初主要是解决卫星与原油管道监测数据的传输问题，拥有最低的电池损耗与最小的带宽占用。后来在
+<strong>OASIS</strong> 标准化组织的推动下于 2014 年 10 月公布了 <a target="_blank" rel="noopener" href="https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html"><code>V3.1.1</code></a>
+版本规范，并于 2019 年 3 月发布了最新的 <a target="_blank" rel="noopener" href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/cs02/mqtt-v5.0-cs02.html"><code>V5.0</code></a>
+版本规范，目前 MQTT
+已经成为物联网通信系统当中较为常用的一种传输协议。</p>
+<span id="more"></span>
+<h2 id="发布订阅模式">发布/订阅模式</h2>
+<p><strong>发布/订阅模式</strong>（<code>Publish/Subscribe</code>）提供了传统<strong>客户/服务端模式</strong><code>Client/Server</code>的一种替代方案，在<strong>客户/服务端</strong>模型当中，<strong>客户端</strong>直接与<strong>服务端</strong>进行通信；而<strong>发布/订阅</strong>则是将发送消息的<strong>发布者</strong>（Publisher）与接收消息的<strong>订阅者</strong>（Subscribers）分离。两者并不直接进行通信，甚至彼此之前都不知道对方的存在。<strong>发布者</strong>与<strong>订阅者</strong>之间的连接是由<strong>代理者</strong>（Broker）进行处理，<strong>代理者</strong>的工作是过滤所有<strong>发布者</strong>传入的消息，并且将这些消息正确的分发给<strong>订阅者</strong>。</p>
+<p><img src="/Embedded/MQTT/1.png"></p>
+<p><strong>发布/订阅模式</strong>的重要特性就是将消息的<strong>发布者</strong>与<strong>订阅者</strong>解耦，这种解耦主要体现在如下三个方面：</p>
+<ol type="1">
+<li><strong>空间解耦</strong>：<strong>发布者</strong>和<strong>订阅者</strong>不需要相互了解（例如无需交换
+IP 地址与服务端口）；</li>
+<li><strong>时间解耦</strong>：<strong>发布者</strong>与<strong>订阅者</strong>的操作不需要同时运行；</li>
+<li><strong>同步解耦</strong>：在发布或者订阅消息的过程当中，双方的操作都不会被中断；</li>
+</ol>
+<p><strong>发布/订阅模式</strong>优于传统<strong>客户/服务端模式</strong>的另一方面在于，<strong>代理者</strong>上的操作可以在缓存之后，以<strong>事件驱动</strong>的方式<strong>并行处理</strong>。显然<strong>代理者</strong>（Broker）在发布/订阅过程当中起到了举足轻重的作用，通过如下几种消息过滤方式，可以使得每个<strong>订阅者</strong>都只接收自己订阅的消息：</p>
+<ol type="1">
+<li>基于<strong>话题</strong>（Subject）进行过滤：<strong>代理者</strong>基于每条消息的话题或者主题进行过滤；</li>
+<li>基于<strong>内容</strong>（Content）进行过滤：<strong>代理者</strong>根据特定的内容过滤消息；</li>
+<li>基于<strong>类型</strong>（Type）进行过滤：<strong>代理者</strong>通过事件的类型进行过滤；</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：<strong>发布者</strong>与<strong>订阅者</strong>的解耦是<strong>发布/订阅模式</strong>的关键所在。</p>
+</blockquote>
+<p>MQTT
+几乎体现了上面所提到<strong>发布/订阅模式</strong>的所有方面：</p>
+<ul>
+<li>MQTT
+在空间上分离了<strong>发布者</strong>和<strong>订阅者</strong>，两者只需要知道<strong>代理者</strong>的
+IP 地址与端口即可；</li>
+<li>MQTT
+可以在时间上对<strong>发布者</strong>和<strong>订阅者</strong>进行解耦，即<strong>代理者</strong>可以为不在线的<strong>订阅者</strong>缓存<strong>发布者</strong>的消息；</li>
+<li>MQTT
+的<strong>发布者</strong>和<strong>订阅者</strong>可以异步进行工作，在订阅或者发布消息时，任务不会被阻塞；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：除此之外，MQTT
+还采用了基于<strong>主题</strong>（Topic）的消息过滤机制，并且提供有 3
+种<strong>服务质量</strong>（QoS）等级。</p>
+</blockquote>
+<p>MQTT 和传统<strong>消息队列</strong>（Message
+Queues）之间的区别主要体现在如下 3 个方面：</p>
+<ol type="1">
+<li><strong>消息队列会存储消息，直至消息被消费</strong>：消息队列会将接收到的每一条消息都存储在队列当中，直至被<strong>客户端</strong>（消费者）接收；如果没有消费者接收到消息，那么消息将会一直保持在队列当中等待被消费；</li>
+<li><strong>1 条消息只被 1
+个客户端消费</strong>：传统的消息队列当中，一条消息只能被一个消费者处理；而在
+MQTT
+当中，订阅了<strong>主题</strong>的每一位<strong>订阅者</strong>都会接收到消息；</li>
+<li><strong>队列创建时必须显式进行命名</strong>：使用消息队列之前，必须显式创建并且命名队列；而
+MQTT 的<strong>主题</strong>则更加灵活，可以随时创建随时订阅；</li>
+</ol>
+<h2 id="发布者代理者订阅者">发布者/代理者/订阅者</h2>
+<p>MQTT
+采用的<strong>发布/订阅模式</strong>将发送消息的<strong>发布者</strong>（Publisher）与接收消息的<strong>订阅者</strong>（Subscribers）分离，然后<strong>代理者</strong>（Broker）通过消息的<strong>主题</strong>（Topic）来确定消息应当发送给哪个<strong>订阅者</strong>。总体来看，MQTT
+协议当中的角色可以划分为如下 2 种类型：</p>
+<ol type="1">
+<li><strong>MQTT 客户端</strong>：通过 MQTT
+协议连接至<strong>代理者</strong>服务的任意设备；<strong>发布者</strong>与<strong>订阅者</strong>都属于
+MQTT 的<strong>客户端</strong>，MQTT 的<strong>客户端</strong>可以由
+C/C++、Go、Java、JavaScript 等多种编程语言实现，具体请参考<a target="_blank" rel="noopener" href="https://mqtt.org/software/">MQTT 软件推荐</a>；</li>
+<li><strong>MQTT
+代理者</strong>：负责接收<strong>发布者</strong>的消息，并且根据<strong>主题</strong>路由这些消息至相应的<strong>订阅者</strong>，是所有<strong>发布/订阅</strong>模式协议的核心；</li>
+</ol>
+<h2 id="mqtt-连接">MQTT 连接</h2>
+<p>MQTT 协议构建在 TCP/IP
+协议之上，所有<strong>客户端</strong>（包括<code>发布者</code>与<code>订阅者</code>）以及<strong>代理者</strong>都需要基于
+TCP/IP 协议栈进行工作。</p>
+<p><img src="/Embedded/MQTT/2.png"></p>
+<p>MQTT
+连接始终位于<strong>客户端</strong>与<strong>代理者</strong>之间，<strong>客户端</strong>之间不会相互直接进行连接。当<strong>客户端</strong>发起连接时，<strong>客户端</strong>会向<strong>代理者</strong>发送
+<code>CONNECT</code> 消息，而代理者则使用 <code>CONNACK</code>
+消息进行响应。连接建立之后，<strong>代理者</strong>将会保持连接的打开状态，直至<strong>客户端</strong>发送断开连接命令或者是当前连接被中断。</p>
+<p><img src="/Embedded/MQTT/3.png"></p>
+<h3 id="客户端-connect-发起连接">客户端 CONNECT 发起连接</h3>
+<p><strong>客户端</strong>向<strong>代理者</strong>发送
+<code>CONNECT</code> 消息请求连接，其中主要包含有如下内容：</p>
+<p><img src="/Embedded/MQTT/4.png"></p>
+<ul>
+<li><strong>客户端标识符</strong>
+<code>clientId</code>：用于标识连接到<strong>代理者</strong>的每个<strong>客户端</strong>，该标识符的取值对于<strong>代理者</strong>与<strong>客户端</strong>而言必须唯一；</li>
+<li><strong>清理会话</strong>
+<code>cleanSession</code>：用于告知<strong>代理者</strong>，当前<strong>客户端</strong>是否需要建立持久会话；当
+<code>CleanSession = false</code>
+时，<strong>代理者</strong>将存储<strong>客户端</strong>的所有订阅，以及客户端以<strong>服务质量</strong>（QoS）级别
+<code>1</code> 或者 <code>2</code> 所订阅的全部遗漏消息；而当
+<code>CleanSession = true</code>
+时，<strong>代理者</strong>不但不会为<strong>客户端</strong>保存任何消息，还会清除掉来自于之前持久会话的所有消息；</li>
+<li><strong>用户名/密码</strong>
+<code>username</code>/<code>password</code>：用于对<strong>客户端</strong>进行认证与授权，默认为明文传输，实际应用当中应当进行加密处理；</li>
+<li><strong>临终遗嘱</strong> <code>lastWill*</code>：属于 MQTT
+<strong>临终遗嘱</strong>（LWT，Last Will and
+Testament）特性的一部分，当<strong>客户端</strong>非正常断开连接时，用于发送遗嘱消息通知其它的<strong>客户端</strong>；</li>
+<li><strong>保持连接</strong>
+<code>keepAlive</code>：用于指定<strong>客户端</strong>在连接建立时，与<strong>代理者</strong>通信的时间间隔（以<strong>秒</strong>为单位），即<strong>代理者</strong>与<strong>客户端</strong>在不发送消息的情况下，可以保持连接的最长时间；</li>
+</ul>
+<h3 id="代理者-connack-进行响应">代理者 CONNACK 进行响应</h3>
+<p>当<strong>代理者</strong>接收到 <code>CONNECT</code>
+消息之后，就会发送 <code>CONNACK</code>
+消息进行响应，该消息包含有<strong>会话出现标识</strong>
+<code>sessionPresent</code> 和<strong>连接返回码</strong>
+<code>returnCode</code> 两项内容：</p>
+<p><img src="/Embedded/MQTT/5.png"></p>
+<ul>
+<li><strong>会话出现标识</strong>
+<code>sessionPresent</code>：用于告知<strong>客户端</strong>，当前的<strong>代理者</strong>是否已经拥有了一个会话；当<strong>客户端</strong>连接消息的
+<code>cleanSession = true</code>
+时，由于当前没有可用的会话，所以该项总是为
+<code>false</code>；而当<strong>客户端</strong>连接消息的
+<code>cleanSession = false</code>
+时，此时就会存在两种可能性；如果会话消息对于 <code>clientId</code>
+可用，并且<strong>代理者</strong>服务已经缓存了这些会话信息，那么
+<code>sessionPresent</code> 为
+<code>true</code>；反之，如果<strong>代理者</strong>没有任何这个
+<code>clientId</code> 的会话信息，那么该项就为 <code>false</code>；</li>
+<li><strong>连接返回码</strong>
+<code>returnCode</code>：用于通知<strong>客户端</strong>当前连接是否成功，具体取值请参考下面表格：</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">返回代码</th>
+<th>返回码响应</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>0</code></td>
+<td>已接受连接；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>1</code></td>
+<td>连接被拒绝，不可接受的协议版本；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>2</code></td>
+<td>连接被拒绝，标识符被拒绝；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>3</code></td>
+<td>连接被拒绝，服务器不可用；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>4</code></td>
+<td>连接被拒绝，用户名或密码错误；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>5</code></td>
+<td>连接被拒绝，未获得授权；</td>
+</tr>
+</tbody>
+</table>
+<h2 id="发布订阅退订">发布/订阅/退订</h2>
+<h3 id="发布publish">发布（PUBLISH）</h3>
+<p>当<strong>客户端</strong>连接到一个<strong>代理者</strong>之后，就可以立刻发布消息。<strong>代理者</strong>通过<strong>主题</strong>（Topic）对消息进行过滤和路由，所以每条消息都必须包含有一个<strong>主题</strong>。除此之外，每条消息还必须拥有一个<strong>负载</strong>（Payload），里面包含了需要以<strong>字节</strong>格式进行传输的数据，通常由<strong>客户端</strong>当中的<strong>发布者</strong>来决定<strong>负载</strong>的类型（二进制、文本、XML、JSON）。通常情况下，每条
+<code>PUBLISH</code> 消息都会包含有如下属性：</p>
+<p><img src="/Embedded/MQTT/6.png"></p>
+<ul>
+<li><strong>主题名称</strong>
+<code>topicName</code>：是一段以斜杠<code>/</code>作为分隔符，具有层次结构的简单字符串，例如
+<code>home/bedroom/moisture</code>；</li>
+<li><strong>服务质量</strong> <code>qos</code>：服务质量（QoS，Quality
+of Service）等级有 <code>0</code>、<code>1</code>、<code>2</code>
+三个等级，用于确定消息到达接收者（<strong>发布者</strong>、<strong>订阅者</strong>、<strong>代理者</strong>）所需的保障类型；</li>
+<li><strong>保留标记</strong>
+<code>retainFlag</code>：用于定义<strong>代理者</strong>是否缓存指定<strong>主题</strong>的最后一个正确值，当一个新的<strong>客户端</strong>订阅该<strong>主题</strong>时，就会接收到保留在该<strong>主题</strong>上的最后一条消息；</li>
+<li><strong>负载</strong>
+<code>payload</code>：指定消息所要传输的实际内容，可以是<code>图像</code>、<code>文本</code>、<code>二进制</code>等数据类型；</li>
+<li><strong>数据包标识符</strong>
+<code>packetId</code>：在<strong>客户端</strong>与<strong>代理者</strong>进行消息传输时，为每个数据包添加的唯一标识，并且只与大于
+<code>0</code> 的 QoS
+级别有关，通常由<strong>客户端</strong>或者<strong>代理者</strong>自动进行设置；</li>
+<li><strong>DUP 标志</strong>
+<code>dupFlag</code>：用于标识这条消息是重复的，由于预期接收者（<strong>客户端</strong>、<strong>代理者</strong>）没有确认原始消息而被重发，该场景仅与
+QoS 大于 <code>0</code> 场景有关；</li>
+</ul>
+<p><img src="/Embedded/MQTT/7.png"></p>
+<blockquote>
+<p><strong>注意</strong>：当<strong>发布者</strong>向<strong>代理者</strong>发送
+<code>PUBLISH</code> 消息时，<strong>代理者</strong>会根据 QoS
+级别处理消息，并通过<strong>订阅者</strong>订阅的<strong>主题</strong>转发这些消息。<strong>发布者</strong>只关心将
+<code>PUBLISH</code>
+消息发送给<strong>代理者</strong>，而并不会获得其它任何反馈。</p>
+</blockquote>
+<h3 id="订阅subscribe">订阅（SUBSCRIBE）</h3>
+<p>如果<strong>客户端</strong>想要订阅指定的<strong>主题</strong>，那么就需要向<strong>代理者</strong>发送一个
+<code>SUBSCRIBE</code>
+消息，该消息非常简单，只包含一个唯一的<strong>数据包标识符</strong>
+<code>packetId</code>，以及一个<strong>主题/服务质量列表</strong>。</p>
+<p><img src="/Embedded/MQTT/8.png"></p>
+<ul>
+<li><strong>数据包标识符</strong>
+<code>packetId</code>：<strong>订阅者</strong>向<strong>代理者</strong>订阅消息时，会自动为每个数据包添加唯一的标识；</li>
+<li><strong>主题/服务质量列表</strong>：一条 <code>SUBSCRIBE</code>
+消息可以包含多个订阅，每个订阅由一个 <code>Topic</code> 主题和一个
+<code>QoS</code> 级别组成；<code>SUBSCRIBE</code>
+消息中的<strong>主题</strong>可以包含<strong>通配符</strong>，以便订阅指定<strong>主题模式</strong>（而非特定的<strong>主题</strong>）；如果当前客户端具有重复的订阅，那么<strong>代理者</strong>将会响应该主题所具有的最高
+<code>QoS</code> 级别消息；</li>
+</ul>
+<h3 id="订阅确认suback">订阅确认（SUBACK）</h3>
+<p>为了确认每条订阅，<strong>代理者</strong>会向<strong>订阅者</strong>发送一条
+<code>SUBACK</code>
+确认消息，该消息包含有原始订阅消息的<strong>数据包标识符</strong>
+<code>packetId</code>，以及一个<strong>返回码</strong>
+<code>returnCode</code> 列表。</p>
+<p><img src="/Embedded/MQTT/9.png"></p>
+<ul>
+<li><strong>数据包标识符</strong>
+<code>packetId</code>：数据包的唯一标识符，与 <code>SUBSCRIBE</code>
+订阅消息当中的 <code>packetId</code> 保持一致；</li>
+<li><strong>返回码</strong>
+<code>returnCode</code>：<strong>代理者</strong>会为在
+<code>SUBSCRIBE</code> 消息当中接收到的每个 <code>topic/qos</code>
+响应一个返回码，例如<strong>订阅者</strong>发送的 <code>SUBSCRIBE</code>
+消息拥有 <code>5</code> 个订阅，那么<strong>代理者</strong>响应的
+<code>SUBACK</code> 退订消息就会包含 <code>5</code>
+个返回码，这些返回码用于确认每个<strong>主题</strong>是否都已经被正确订阅，并且展示<strong>代理者</strong>所授予的
+QoS
+级别；如果<strong>代理者</strong>由于权限或者主题不正确等原因拒绝了本次订阅，则
+<code>SUBACK</code> 消息将会包含该主题的失败返回码；</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">返回代码</th>
+<th style="text-align: center;">返回码响应</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><strong>成功</strong>，最大 QoS 为
+<code>0</code>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><strong>成功</strong>，最大 QoS 为
+<code>1</code>；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>2</code></td>
+<td style="text-align: center;"><strong>成功</strong>，最大 QoS 为
+<code>2</code>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>128</code></td>
+<td style="text-align: center;"><strong>失败</strong>；</td>
+</tr>
+</tbody>
+</table>
+<p>客户端里的<strong>订阅者</strong>成功发送 <code>SUBSCRIBE</code>
+消息，并且接收到 <code>SUBACK</code> 消息响应之后，就会获得与
+<code>SUBSCRIBE</code>
+消息包含<strong>主题</strong>相匹配的<strong>发布者</strong>已经发布的消息。</p>
+<p><img src="/Embedded/MQTT/10.png"></p>
+<h3 id="退订unsubscribe">退订（UNSUBSCRIBE）</h3>
+<p>同<strong>订阅者</strong>发送的 <code>SUBSCRIBE</code> 消息相对应的是
+<code>UNSUBSCRIBE</code>
+消息，<strong>代理者</strong>接收到该消息之后，就会删除<strong>订阅者</strong>的指定订阅。类似于
+<code>SUBSCRIBE</code> 订阅消息，<code>UNSUBSCRIBE</code>
+退订消息同样包含有一个<strong>数据包标识符</strong>
+<code>packetId</code> 和一个<strong>主题列表</strong>。</p>
+<p><img src="/Embedded/MQTT/11.png"></p>
+<ul>
+<li><strong>数据包标识符</strong>
+<code>packetId</code>：当消息在<strong>订阅者</strong>与<strong>代理者</strong>之间流动时，用于唯一的标识消息，由<strong>订阅者</strong>或者<strong>代理者</strong>自动进行设置；</li>
+<li><strong>主题/服务质量列表</strong>：包含多条<strong>订阅者</strong>想要取消订阅的<strong>主题</strong>，只需要发送<strong>主题</strong>
+<code>Topic</code>，而不需要发送
+<code>QoS</code>；<strong>代理者</strong>接收到之后会取消这些<strong>主题</strong>的订阅，而不关心其最初订阅时的
+QoS 级别；</li>
+</ul>
+<h3 id="退订确认unsuback">退订确认（UNSUBACK）</h3>
+<p>当<strong>代理者</strong>接收到<strong>订阅者</strong>的
+<code>UNSUBSCRIBE</code>
+退订消息，并且<strong>代理者</strong>将指定的<strong>主题</strong>退订操作完成之后，就会向<strong>订阅者</strong>发送一条用于确认<strong>退订消息</strong>的
+<code>UNSUBACK</code> 消息，该消息仅包含有原始 <code>UNSUBSCRIBE</code>
+的数据包标识符。</p>
+<p><img src="/Embedded/MQTT/12.png"></p>
+<ul>
+<li><strong>数据包标识符</strong>
+<code>packetId</code>：消息的唯一标识符，同样与 <code>UNSUBSCRIBE</code>
+消息当中提供的 <code>packetId</code> 相同；</li>
+</ul>
+<p><img src="/Embedded/MQTT/13.png"></p>
+<p>当订阅者从<strong>代理者</strong>接收到 <code>UNSUBACK</code>
+消息之后，客户端就可以认为 <code>UNSUBSCRIBE</code>
+消息当中的订阅主题已经被<strong>代理者</strong>删除。</p>
+<h2 id="主题-topic">主题 Topic</h2>
+<p>MQTT
+协议的<strong>主题</strong>（Topic）是指<strong>代理者</strong>用于为<strong>客户端</strong>过滤与路由消息的
+<strong>UTF-8
+编码字符串</strong>，一个<strong>主题</strong>是由一个或者多个<strong>主题级别</strong>（Topic
+Level）构成，每个主题级别由正斜线 <code>/</code>
+进行分隔。每个<strong>主题</strong>必须至少包含 1 个字符（一个单独的斜杆
+<code>/</code>
+也是一个有效的主题），并且主题字符串允许存在<strong>空格</strong>。除此之外，主题<strong>区分大小写</strong>，<code>home/temperature</code>
+与 <code>Home/Temperature</code> 是 2
+个不同的<strong>主题</strong>。</p>
+<p><img src="/Embedded/MQTT/13.png"></p>
+<p>相比于传统的<strong>消息队列</strong>（Message Queue），MQTT
+的<strong>主题</strong>非常轻量级，<strong>客户端</strong>在<code>发布</code>或者<code>订阅</code><strong>主题</strong>之前，并不一定要提前创建这个<strong>主题</strong>。<strong>代理者</strong>可以在不进行任何初始化的条件下，接受任意有效的主题。</p>
+<h3 id="通配符">通配符</h3>
+<p>当客户端的<strong>订阅者</strong>订阅某个<strong>主题</strong>时，既可以订阅已经发布的确切<strong>主题</strong>，也可以采用<strong>通配符</strong>同时订阅多个相关的<strong>主题模式</strong>。这里的<strong>通配符只能用于订阅主题，而不能用于发布消息</strong>。MQTT
+拥有<strong>单级</strong>和<strong>多级</strong> 2
+种不同类型的通配符。</p>
+<p><strong>单级通配符
+<code>+</code></strong>：只能用于匹配<strong>一个主题级别</strong>：</p>
+<p><img src="/Embedded/MQTT/14.png"></p>
+<p>如果<strong>主题</strong>包含有除通配符之外的任意字符串，那么任意主题都可以与具备<strong>单级通配符</strong>的主题进行匹配，例如订阅
+<code>myhome/groundfloor/+/temperature</code>
+可以匹配如下一系列的主题：</p>
+<p><img src="/Embedded/MQTT/15.png"></p>
+<p><img src="/Embedded/MQTT/16.png"></p>
+<p><strong>多级通配符
+<code>#</code></strong>：可以匹配<strong>多个主题级别</strong>，必须作为<strong>主题</strong>的最后一个字符放置，并且以斜杠
+<code>/</code>
+开头。当<strong>订阅者</strong>订阅了携带有<strong>多级通配符</strong>的<strong>主题</strong>时，无论该主题有多冗长，该订阅者都会接收到<code>/#</code>模式之前主题的全部消息：</p>
+<p><img src="/Embedded/MQTT/17.png"></p>
+<p><img src="/Embedded/MQTT/18.png"></p>
+<p><strong>系统保留主题
+<code>$</code></strong>：以<code>$</code>符号作为前缀的主题由 MQTT
+系统内部保留，通常用于<strong>代理者</strong>内部统计信息，各种<strong>代理者</strong>（Broker）对其的实现与定义都会有所不同，下面是一些系统保留主题的示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$SYS</span>/broker/clients/disconnected</span><br><span class="line"><span class="variable">$SYS</span>/broker/clients/connected</span><br><span class="line"><span class="variable">$SYS</span>/broker/messages/sent</span><br><span class="line"><span class="variable">$SYS</span>/broker/clients/total</span><br><span class="line"><span class="variable">$SYS</span>/broker/uptime</span><br></pre></td></tr></table></figure>
+<h3 id="最佳实践">最佳实践</h3>
+<ul>
+<li>切勿在主题开头使用正斜杠
+<code>/</code>，避免引入一个<strong>零字符</strong>作为不必要的主题级别；</li>
+<li>永远不要在主题中使用空格（包括 UTF-8
+当中不同类型的空白），从而避免为阅读和调试带来不必要的困扰；</li>
+<li>尽量保持主题简短，对于资源有限的物联网设备，每个字节占用的存储空间都非常重要；</li>
+<li>仅使用 ASCII 字符，避免使用一些不可打印的字符；</li>
+<li>将唯一标识符或者<strong>客户端</strong> ID
+嵌入主题，从而方便的识别消息的发送者；</li>
+<li>不要轻易直接订阅
+<code>#</code>，即不要直接使用<strong>多级通配符</strong>订阅<strong>代理者</strong>上发布的全部消息，避免给<strong>订阅者</strong>带来过大的数据吞吐量；</li>
+<li>优化主题层次结构，保持主题命名的长期扩展性；</li>
+</ul>
+<h2 id="服务质量-qos">服务质量 QoS</h2>
+<p><strong>服务质量</strong>（<strong>QoS</strong>, Quality of
+Service）级别是消息发送方与接收方之间的一种约定，主要是通过控制消息的<strong>传输次数</strong>来确保其能够以指定的方式传递交付数据。作为
+MQTT 协议的一个关键特性，<strong>QoS</strong>
+可以使客户端能够选择与其<code>网络可靠性</code>、<code>应用程序逻辑</code>相匹配的服务级别，MQTT
+主要包含如下三个 <code>QoS</code> 级别：</p>
+<ul>
+<li><code>0</code>：<strong>最多传送一次</strong>；</li>
+<li><code>1</code>：<strong>至少传送一次</strong>；</li>
+<li><code>2</code>：<strong>只有一次</strong>；</li>
+</ul>
+<p><strong>发布者</strong>将消息发送到<strong>代理者</strong>时定义消息的
+<code>QoS</code>
+级别，而<strong>代理者</strong>使用每个<strong>订阅者</strong>在订阅过程中定义的
+QoS
+级别，然后将消息传输给<strong>订阅者</strong>。如果<strong>订阅者</strong>定义的
+<code>QoS</code> 级别低于<strong>发布者</strong>定义的 <code>QoS</code>
+级别，则<strong>代理者</strong>将会以相对较低的那个 <code>QoS</code>
+级别传输消息。接下来，讨论一下 MQTT 协议当中的每个 QoS
+级别的工作原理。</p>
+<h3 id="qos-0-最多一次">QoS 0 最多一次</h3>
+<p>最小的 QoS 级别为
+<code>0</code>，这种服务质量可以确保最佳的交付效果。但是并不保证交付结果，即接收方不会确认收到消息，发送方也不会存储和重新传输消息。</p>
+<p><img src="/Embedded/MQTT/19.png"></p>
+<h3 id="qos-1-至少一次">QoS 1 至少一次</h3>
+<p>QoS 级别 <code>1</code>
+可以保证消息至少传递一次给接收者，发送方会存储消息，直至从接收方处获得确认接收到消息的
+<code>PUBACK</code> 数据包为止，在这里消息可以被发送多次。</p>
+<p><img src="/Embedded/MQTT/20.png"></p>
+<p>发送方采用<strong>数据包标识符</strong> <code>packetId</code> 对
+<code>PUBLISH</code> 数据包与相应的<strong>发布确认</strong>
+<code>PUBACK</code> 数据包进行匹配，如果发送方在一定时间之内未收到
+<code>PUBACK</code> 数据包，则发送方将会重新发送 <code>PUBLISH</code>
+数据包；当<strong>接收端</strong>收到该 QoS 级别为 <code>1</code>
+的消息以后，就可以立刻开始进行处理；例如现在接收方是一个<strong>代理者</strong>，则<strong>代理者</strong>会把消息发送给所有<strong>订阅者</strong>，然后回复一个
+<code>PUBACK</code> 数据包：</p>
+<p><img src="/Embedded/MQTT/21.png"></p>
+<p>接下来，如果<strong>发布者</strong>再次发布消息，就会被设置一个<strong>重复标记</strong>（DUP），该标记在
+QoS 级别 <code>1</code>
+里仅用于内部目的，无需<strong>代理者</strong>或者<strong>客户端</strong>来进行处理。</p>
+<h3 id="qos-2-仅有一次">QoS 2 仅有一次</h3>
+<p>QoS 为 <code>2</code> 是 MQTT 最高级别的 QoS
+级别，同时也是最为<strong>安全</strong>与<strong>缓慢</strong>的服务质量级别，该级别能够保证每一条消息只会被<strong>收件人</strong>接收一次，这种保证由<strong>发送方</strong>与<strong>接收方</strong>之间的至少两个<strong>请求/响应流</strong>（包含
+4
+次握手）来提供。<strong>发送方</strong>与<strong>接收方</strong>都会使用原始
+<code>PUBLISH</code>
+消息的<strong>数据包标识符</strong>来协调消息的传递流程。</p>
+<p><img src="/Embedded/MQTT/22.png"></p>
+<p>当<strong>接收方</strong>从<strong>发送方</strong>获得一个 QoS 级别为
+<code>2</code> 的 <code>PUBLISH</code>
+数据包时，<strong>接收方</strong>在处理该消息的同时，会通过一个用于确认
+<code>PUBLISH</code> 的 <code>PUBREC</code>
+数据包回复<strong>发送方</strong>。如果<strong>发送方</strong>未能从<strong>接收方</strong>那里接收到
+<code>PUBREC</code>
+数据包，那么<strong>发送方</strong>就会再次发送带有<strong>重复标志</strong>（DUP，Duplicate）的
+<code>PUBLISH</code> 包，直至接收到确认的 <code>PUBREC</code>
+数据包。</p>
+<p><img src="/Embedded/MQTT/23.png"></p>
+<p>一旦<strong>发送方</strong>从<strong>接收方</strong>那里接收到一个
+<code>PUBREC</code>
+数据包，<strong>发送方</strong>就可以安全的丢弃最初的
+<code>PUBLISH</code> 数据包，并且存储来自于<strong>接收方</strong>的
+<code>PUBREC</code> 数据包，同时使用 <code>PUBREL</code>
+数据包进行响应。</p>
+<p><img src="/Embedded/MQTT/24.png"></p>
+<p>在<strong>接收方</strong>获得 <code>PUBREL</code>
+数据包之后，就可以丢弃之前存储的全部状态，并使用一个
+<code>PUBCOMP</code> 数据包进行响应，而<strong>发送方</strong>接收到
+<code>PUBCOMP</code>
+之后同样会进行类似的处理。在<strong>接收方</strong>完成处理并将
+<code>PUBCOMP</code>
+数据包响应给<strong>发送方</strong>之前，<strong>接收方</strong>将会缓存初始
+<code>PUBLISH</code> 的<strong>数据包标识符</strong>
+<code>packetId</code> 引用，该步骤对于避免第 2
+次处理消息极为重要。<strong>发送方</strong>接收到 <code>PUBCOMP</code>
+数据包之后，已发布消息的<strong>数据包标识符</strong>
+<code>packetId</code> 就可以得到重用。</p>
+<p><img src="/Embedded/MQTT/25.png"></p>
+<p>这样在整个 QoS 级别 <code>2</code>
+的流程全部执行完成之后，收发双方就可以确定消息已经被正确的传递。如果数据包发生了丢失，那么<strong>发送方</strong>将有责任在恰当的时间之内重新传输消息，而<strong>接收方</strong>同样有责任去逐一响应每一条消息。</p>
+<h3 id="qos-的降级">QoS 的降级</h3>
+<p>正如本节内容开始时所提到的，<strong>发送方</strong>与<strong>接收方</strong>
+QoS
+的定义与级别是完全不同的，比如<strong>发布者</strong>向<strong>代理者</strong>发送
+<code>PUBLISH</code> 消息时定义了
+<code>QoS</code>，而当<strong>代理者</strong>将消息传递给<strong>订阅者</strong>时，则<strong>代理者</strong>会使用<strong>订阅者</strong>在订阅时所定义的
+<code>QoS</code> 级别。</p>
+<p>例如客户端 <strong>A</strong>
+是消息的<strong>发送者</strong>，而客户端 <strong>B</strong>
+是消息的<strong>接收者</strong>，如果客户端 <strong>B</strong> 以 QoS
+级别 <code>1</code> 向代理者发送订阅，而客户端 <strong>A</strong>
+则向<strong>代理者</strong>发布 QoS 级别 <code>2</code>
+消息。最后<strong>代理者</strong>会以 QoS 级别 <code>1</code>
+将消息传输给客户端 <strong>B</strong>，这种情况下消息会多次传递给客户端
+<strong>B</strong>，因为 QoS 级别 <code>1</code>
+会确保消息至少传递一次，但是并不会阻止同一条消息被多次传递。</p>
+<h3 id="packetid-的唯一性">packetId 的唯一性</h3>
+<p>MQTT 用于 QoS 级别 <code>1</code> 与 <code>2</code> 的
+<code>packetId</code>
+在数据传输时，其值在<strong>客户端</strong>和<strong>代理者</strong>之间是唯一的（但是在所有<strong>客户端</strong>之间可能并非唯一）。每次交互流程结束之后，数据包标识符
+<code>packetId</code> 就可以获得重用，而这正是 <code>packetId</code>
+长度不需要超过 <code>65535</code>
+的原因所在，因为客户端在没有完成交互的情况下，发送超过这个数量的消息是不现实的。</p>
+<h3 id="qos-12-的消息排队">QoS 1/2 的消息排队</h3>
+<p>当客户端具有<strong>持久会话</strong>能力时，如果客户端意外掉线，则采用
+QoS 级别 <code>1</code> 或者 <code>2</code>
+发送的所有消息会排队等待该离线客户端重新上线。</p>
+<h3 id="最佳实践-1">最佳实践</h3>
+<p>当选择使用 <strong>QoS</strong> 级别 <code>0</code> 的时候：</p>
+<ul>
+<li>确保<strong>发送方</strong>与<strong>接收方</strong>之间拥有一个基本稳定的连接；</li>
+<li>如果数据重要性不高，或者可以在很短时间内重新进行发送，那么就可以容忍<strong>小部分数据</strong>的丢失；</li>
+<li>可以无需使用<strong>消息队列</strong>，因为只有当断开连接的客户端具备
+QoS 级别 <code>1</code> 或者
+<code>2</code>，并且具有<strong>持久会话</strong>能力时，消息才会开始排队；</li>
+</ul>
+<p>当选择使用 <strong>QoS</strong> 级别 <code>1</code> 的时候：</p>
+<ul>
+<li>如果需要获得每条消息，并且能够处理重复的消息，那么可以选择 QoS 级别
+<code>1</code>；因为它可以确保消息<strong>至少被送达一次</strong>，并且被<strong>允许多次传递</strong>，但是前提是程序必须能够妥善的<strong>处理这些重复的消息</strong>；</li>
+<li>如果设备和网络不能承受 QoS 级别 <code>2</code>
+带来的<strong>性能开销</strong>，那么就可以考虑采用 QoS 级别
+<code>1</code>；</li>
+</ul>
+<p>当选择使用 <strong>QoS</strong> 级别 <code>2</code> 的时候：</p>
+<ul>
+<li>如果确实需要<strong>准确的接收每一条消息</strong>，那么就可以选择
+<strong>QoS</strong> 级别
+<code>2</code>，但是需要注意由此带来的额外性能开销；</li>
+</ul>
+<h2 id="清理会话-cleansession">清理会话 cleanSession</h2>
+<p><strong>客户端</strong>要从 MQTT
+<strong>代理者</strong>接收消息，就必须连接到这个<strong>代理者</strong>，并且<code>发布消息</code>或<code>订阅主题</code>。如果<strong>客户端</strong>与<strong>代理者</strong>之间的连接突然中断，这些<code>发布的消息</code>和<code>订阅的主题</code>就将会丢失，<strong>客户端</strong>需要在重新连接之后再次<code>发布消息</code>与<code>订阅主题</code>。每次连接中断之后都要重新发布与订阅，这对于系统资源受限的<strong>客户端</strong>而言是一个不必要的负担。避免这个问题，需要<strong>客户端</strong>在连接到<strong>代理者</strong>服务时发起<strong>持久会话</strong>请求。<strong>持久会话</strong>（Persistent
+Session）会在<strong>客户端</strong>与<strong>代理者</strong>需要建立保持连接时，由客户端提供自身的
+<code>clientId</code>
+给<strong>代理者</strong>，以用于鉴别每次会话请求。</p>
+<h3 id="代理者行为">代理者行为</h3>
+<p>在持久会话当中，为了便于<strong>客户端</strong>在脱机之后进行重新连接，<strong>代理者</strong>通常会持有如下信息：</p>
+<ul>
+<li>该<strong>客户端</strong>会话之前是否存在；</li>
+<li>该<strong>客户端</strong>的所有订阅信息;</li>
+<li>在服务质量 <strong>QoS</strong> 级别 <code>1</code> 或
+<code>2</code> 的工作流程当中，客户端尚未确认的消息；</li>
+<li><strong>客户端</strong>脱机时错过的所有<strong>新</strong>的
+<strong>QoS</strong> 级别 <code>1</code> 与 <code>2</code> 的消息；</li>
+<li>从<strong>客户端</strong>接收到，但是尚未完全确认的
+<strong>QoS</strong> 级别 <code>2</code> 的消息；</li>
+</ul>
+<p>客户端使用一个<strong>清理会话</strong> <code>cleanSession</code>
+标志来通知<strong>代理者</strong>（Broker）是否使用持久会话：</p>
+<ul>
+<li>当 <code>cleanSession</code> 标志设置为 <code>true</code>
+时，表示当前<strong>客户端</strong>不需要持久会话，此时如果<strong>客户端</strong>断开连接，那么其所有信息都会丢失；</li>
+<li>当 <code>cleanSession</code> 标志设置为 <code>false</code>
+时，表示当前<strong>客户端</strong>需要建立一个持久会话，此时即使<strong>客户端</strong>断开连接，其所有信息也依然会被保留；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：MQTT 从 <code>3.1.1</code>
+版本开始，<strong>代理者</strong>发送给<strong>客户端</strong>的
+<code>CONNACK</code> 消息将会包含 <code>cleanSession</code>
+清理会话标识。</p>
+</blockquote>
+<h3 id="客户端行为">客户端行为</h3>
+<p>当<strong>客户端</strong>请求<strong>代理者</strong>保存会话数据的时候，客户端自身也将保存如下信息：</p>
+<ul>
+<li>QoS 级别 <code>1</code> 或 <code>2</code>
+流程当中，尚未由<strong>代理者</strong>确认的消息；</li>
+<li>从<strong>代理者</strong>接收到，但是尚未完全确认的 QoS 级别
+<code>2</code> 消息;</li>
+</ul>
+<h3 id="最佳实践-2">最佳实践</h3>
+<p>下面总结了<strong>持久会话</strong>（<code>cleanSession = true</code>）与<strong>清理会话</strong>（<code>cleanSession = flase</code>）两种场景下的一些最佳实践：</p>
+<h4 id="持久会话">持久会话</h4>
+<ul>
+<li>为了确保<strong>客户端</strong>可以获得来自某个订阅主题的所有消息，需要<strong>代理者</strong>为<strong>客户端</strong>维持一个消息队列，以便<strong>客户端</strong>重新联机之后恢复这些消息；</li>
+<li>由于<strong>客户端</strong>的硬件资源有限，所以需要由<strong>代理者</strong>服务来存储<strong>客户端</strong>的订阅信息，并且恢复中断的通信；</li>
+<li><strong>客户端</strong>需要在重新连接后恢复所有 <strong>QoS</strong>
+级别 <code>1</code> 与 <code>2</code> 的发布消息；</li>
+</ul>
+<h4 id="清理会话">清理会话</h4>
+<ul>
+<li><strong>客户端</strong>不需要获取离线时错过的消息；</li>
+<li><strong>客户端</strong>只需要将消息发布到主题，而无需订阅该主题；</li>
+<li>不希望<strong>代理者</strong>存储会话信息，或者重试
+<strong>QoS</strong> 级别 <code>1</code> 与 <code>2</code>
+消息的传输；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：通常<strong>代理者</strong>服务会存储会话，直至<strong>客户端</strong>重新连接；如果<strong>客户端</strong>长时间没有恢复连接，则消息存储的时间长度要由具体的
+MQTT 实现来决定。</p>
+</blockquote>
+<h2 id="保留消息-retainflag">保留消息 retainFlag</h2>
+<p>MQTT
+当中<strong>发布者</strong>只能确保消息安全的传递给<strong>代理者</strong>，而无法保证消息一定会被<strong>订阅者</strong>接收到。而<strong>订阅者</strong>同样会面临相似的问题，即无法保证<strong>发布者</strong>何时（可能是几秒钟、几分钟甚至几个小时）会在其订阅的主题上发布消息。这种情况，正是
+MQTT <strong>消息保留机制</strong>的用武之地。</p>
+<p><strong>保留消息</strong>是在<strong>发布者</strong>发布<strong>主题</strong>的时候，将
+<code>retainFlag</code> 设置为 <code>true</code> 的普通 MQTT
+消息，<strong>代理者</strong>会存储该<strong>主题</strong>（Topic）下的最后一条保留消息以及相应的
+<strong>QoS</strong>
+级别。当订阅者在订阅具有<strong>保留消息</strong>的<strong>主题</strong>时，会在订阅之后立刻接收到保留消息。换而言之，<strong>保留消息</strong>可以帮助<strong>客户端</strong>在订阅一个主题之后，立刻就可以获得状态更新，消除了等待<strong>发布者</strong>下一次更新的时间空白。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>代理者</strong>只会为每个<strong>主题</strong>保留
+<code>1</code>
+条消息。保留消息不一定就是最后一条消息，但必须是最后一条把
+<code>retainFlag</code> 设置为 <code>true</code> 的消息。</p>
+</blockquote>
+<p>如果需要删除<strong>保留消息</strong>，则可以向其对应的<strong>主题</strong>发送仅有
+<code>0 Byte</code>
+有效载荷的<strong>保留消息</strong>，这样就可以达到让<strong>代理者</strong>删除之前<strong>保留消息</strong>的目的。</p>
+<blockquote>
+<p><strong>注意</strong>：如果 MQTT
+没有<strong>保留消息</strong>机制，那么新的<strong>订阅者</strong>在发布间隔将会一直处于信息空白，使用<strong>保留消息</strong>有助于立刻为新连接的<strong>订阅者</strong>提供最近的有效信息。</p>
+</blockquote>
+<h2 id="临终遗嘱-lastwill">临终遗嘱 lastWill*</h2>
+<p>当某个<strong>客户端</strong>未能正常断开与<strong>代理者</strong>之间的连接，那么就可以采用
+MQTT 的<strong>临终遗嘱</strong>（LWT，Last Will and
+Testament）机制来通知其它客户端，连接至该<strong>代理者</strong>的每个<strong>客户端</strong>都将会接收到一条<strong>临终遗嘱</strong>消息。这条<strong>临终遗嘱</strong>消息依然是带有
+<code>topic</code>、<code>retainFlag</code>、<code>qos</code>、<code>payload</code>
+的普通 MQTT 消息。</p>
+<p><strong>代理者</strong>服务将会存储这些消息，直至检测到<strong>客户端</strong>非正常断开连接，从而将<strong>临终遗嘱</strong>消息广播给所有订阅<strong>客户端</strong>。而如果<strong>客户端</strong>是通过正常的
+<code>DISCONNECT</code>
+消息正确断开连接，那么<strong>代理者</strong>将不会广播终遗嘱消息。</p>
+<p><img src="/Embedded/MQTT/26.png"></p>
+<p>客户端可以在 <code>CONNECT</code>
+消息当中指定好<strong>临终遗嘱</strong>消息，然后再初始化<strong>客户端</strong>和<strong>代理者</strong>之间的连接。</p>
+<p><img src="/Embedded/MQTT/27.png"></p>
+<h3 id="广播时机">广播时机</h3>
+<p>根据 MQTT 的 <code>3.1.1</code>
+版本规范，在如下的场景当中，<strong>代理者</strong>就会广播某个客户端的<strong>临终遗嘱</strong>消息:</p>
+<ul>
+<li><strong>代理者</strong>检测到 I/O 错误或者网络故障；</li>
+<li><strong>客户端</strong>在定义的<strong>保持连接</strong>周期内通信失败；</li>
+<li><strong>客户端</strong>在关闭网络连接之前，没有发送
+<code>DISCONNECT</code> 数据包；</li>
+<li>由于协议发生错误，<strong>代理者</strong>关闭网络连接；</li>
+</ul>
+<h3 id="最佳实践-3">最佳实践</h3>
+<p>生产场景当中，<strong>临终遗嘱</strong>经常与<strong>保留消息</strong>结合起来使用，以保存特定<strong>主题</strong>上的<strong>客户端</strong>状态：</p>
+<ol type="1">
+<li>首先 <strong>client1</strong> 向<strong>代理者</strong>发送一条带有
+<code>lastWillMessage</code> 参数的 <code>CONNECT</code>
+消息，该消息有效负载
+<code>payload = "Offline"</code>，同时设置临终遗嘱属性为
+<code>lastWillRetain = true</code> 和
+<code>lastWillTopic = client1/status</code>；</li>
+<li>接着<strong>客户端</strong>在相同的 <code>client1/status</code>
+主题上发布<strong>有效载荷</strong> <code>payload = "Online"</code>
+以及<strong>保留标志</strong> <code>retainFlag = true</code> 的
+<code>PUBLISH</code> 消息；</li>
+<li>只要 <strong>client1</strong> 保持连接，新订阅到
+<code>client1/status</code> 主题的<strong>客户端</strong>就会接收到
+<code>"Online"</code> 保留消息；</li>
+<li>如果 <strong>client1</strong>
+不幸意外的断开连接，则<strong>代理者</strong>将使用有效负载
+<code>payload = "Offline"</code>
+作为新的保留消息发布<strong>临终遗嘱</strong>；</li>
+<li>当 <strong>client1</strong>
+脱机时，订阅到该主题的<strong>客户端</strong>将会从<strong>代理者</strong>那里，接收到作为<strong>保留消息</strong>的<strong>临终遗嘱</strong>
+<code>"Offline"</code>，从而使得其它<strong>客户端</strong>更新至
+<strong>client1</strong> 在这个主题上的最新状态；</li>
+</ol>
+<h2 id="保持连接-keepalive">保持连接 keepAlive</h2>
+<p>MQTT 构建在<strong>传输控制协议</strong>（TCP，Transmission Control
+Protocol）基础之上，该协议能够确保数据包可靠有序，并经过错误检查之后在网络上传输。但是有时候通信双方之间的传输会不同步（例如其中一方崩溃或发生传输错误），这种不完整的连接状态在
+TCP 当中被称为<strong>半开连接</strong>（Half-open
+Connection），进而造成通信的一方明明已经传输失败，而另一方仍然在尝试发送消息并且等待这些消息被确认。</p>
+<p>MQTT 通过<strong>保持连接</strong>（Keep
+Alive）来解决<strong>半开连接</strong>造成的上述问题，该机制可以确保<strong>代理者</strong>与<strong>客户端</strong>之间的连接仍然是打开的，并且双方知晓已经建立连接，当<strong>客户端</strong>与<strong>代理者</strong>建立连接时，双方通信的间隔时间（以秒为单位）定义了<strong>代理者</strong>与<strong>客户端</strong>不能相互通信的最大时间长度。</p>
+<p>换而言之，<strong>保持连接</strong>（Keep
+Alive）规定了<strong>客户端</strong>，从<strong>完成</strong>一个控制包传输到<strong>开始</strong>下一个控制包发送之间，所允许的最大时间间隔。<strong>客户端</strong>有责任确保<strong>控制报文</strong>的发送间隔不会超过
+Keep Alive
+的设定值，即在没有发送其它任何控制数据包的情况下，<strong>客户端</strong>必须发送一个
+<code>PINGREQ</code> 作为<strong>心跳请求</strong>数据包。</p>
+<p>也就是说只要消息经常交换，并且没有超过 Keep Alive
+的设定值，就无需发送额外的消息来确定当前连接是否仍然打开。如果<strong>客户端</strong>在
+<code>Keep Alive</code>
+期间没有发送消息，那么其必须向<strong>代理者</strong>发送一个
+<code>PINGREQ</code>
+数据包，以确认当前<strong>代理者</strong>仍然可用；而<strong>代理者</strong>必须断开未发送消息或者
+<code>PINGREQ</code> 数据包的客户端连接，断开连接时间是 Keep Alive
+时间间隔的 <strong>1.5</strong>
+倍。同样，如果<strong>客户端</strong>在合理的时间内没有接收到<strong>代理者</strong>的响应，也将会自动关闭连接。</p>
+<p>MQTT 的保持连接机制（Keep
+Alive）主要使用到了<strong>心跳请求</strong> <code>PINGREQ</code>
+和<strong>心跳响应</strong> <code>PINGRESP</code> 两个数据包。</p>
+<h3 id="pingreq">PINGREQ</h3>
+<p><strong>心跳请求</strong> <code>PINGREQ</code>
+由<strong>客户端</strong>向<strong>代理者</strong>发送，报文当中不包含有效负载，用于向<strong>代理者</strong>表明当前<strong>客户端</strong>仍然处于活动状态。如果<strong>客户端</strong>不发送
+<code>PUBLISH</code> 或者 <code>SUBSCRIBE</code>
+等任何其它类型的包，则<strong>客户端</strong>必须向<strong>代理者</strong>发送
+<code>PINGREQ</code> 心跳请求包。</p>
+<p><img src="/Embedded/MQTT/28.png"></p>
+<h3 id="pingresp">PINGRESP</h3>
+<p><strong>心跳响应</strong> <code>PINGRESP</code>
+由<strong>代理者</strong>向<strong>客户端</strong>发送，同样也不包含有效负载，当<strong>代理者</strong>接收到一个
+<code>PINGREQ</code> 心跳请求包时，<strong>代理者</strong>必须使用一个
+<code>PINGRESP</code>
+<strong>心跳响应包</strong>来进行回复，从而向<strong>客户端</strong>表明当前<strong>代理者</strong>仍然处于可用状态。</p>
+<p><img src="/Embedded/MQTT/29.png"></p>
+<h3 id="注意事项">注意事项</h3>
+<ul>
+<li>如果<strong>代理者</strong>没有从<strong>客户端</strong>接收到
+<code>PINGREQ</code>
+或者其它数据包，则<strong>代理者</strong>将会自动关闭连接，并且发送<strong>临终遗嘱</strong>消息；</li>
+<li>在<strong>客户端</strong>发起 <code>CONNECT</code>
+连接时，要设置适当的 <code>keepAlive</code>
+属性，例如<strong>客户端</strong>可以根据<code>信号强度</code>来调整该属性值；</li>
+<li><code>keepAlive</code> 属性可以设置的最大保持时间为
+<code>18 小时 12 分 15 秒</code>；</li>
+<li>如果<strong>保持连接</strong>的时间间隔为
+<code>0</code>，那么保持连接机制就将会失效；</li>
+</ul>
+<h3 id="客户端接管">客户端接管</h3>
+<p>通常情况下，断开连接的<strong>客户端</strong>会尝试重新进行连接。但是有时<strong>代理者</strong>仍然会存在有一个<strong>半开</strong>的客户端连接。在
+MQTT
+当中，如果<strong>代理者</strong>检测到半开连接，就会执行<strong>客户端接管</strong>操作。即<strong>代理者</strong>根据<strong>客户端标识符</strong>
+<code>clientId</code>
+关闭与该<strong>客户端</strong>的前一个连接，然后与该<strong>客户端</strong>建立起一个新的连接，这个行为可以确保发生半开连接问题时，断开的<strong>客户端</strong>能够建立起新的有效连接。</p>
+<h2 id="基于-websocket-的-mqtt">基于 WebSocket 的 MQTT</h2>
+<p><strong>WebSocket</strong> 与 MQTT 一样也是基于 TCP/IP
+的一种通信协议，因而 MQTT 在支持 WebSocket 的 Web
+浏览器当中，其工作方式与原生 MQTT 基本相同，所需要的只是一个类似 <a target="_blank" rel="noopener" href="https://www.eclipse.org/paho/index.php?page=clients/js/index.php">Eclipse
+Paho JavaScript Client</a> 这样的浏览器客户端。</p>
+<p><img src="/Embedded/MQTT/31.png"></p>
+<p><strong>Paho</strong> 一款使用 JavaScript 编写，并基于 Web 浏览器的
+MQTT 客户端库，其底层通过 WebSockets 协议连接至 MQTT
+<strong>代理者</strong>（Broker）。使用如下 <a target="_blank" rel="noopener" href="https://cdnjs.com/">cdnjs</a> 链接，可以方便的将 Paho 引入到 Web
+前端工程当中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>下面的代码是一个基于 Paho 的基本示例，它通过 WebSockets 连接到 MQTT
+代理者服务，并且订阅主题 <code>World</code>。订阅成功之后就会向
+<code>World</code> 主题发布的 <code>Hello</code>
+消息，并将任意订阅该主题的消息打印至 Web 浏览器控制台。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 建立一个客户端实例 */</span></span><br><span class="line">client = <span class="keyword">new</span> <span class="title class_">Paho</span>.<span class="property">MQTT</span>.<span class="title class_">Client</span>(</span><br><span class="line">  location.<span class="property">hostname</span>,</span><br><span class="line">  <span class="title class_">Number</span>(location.<span class="property">port</span>),</span><br><span class="line">  <span class="string">&quot;clientId&quot;</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 设置回调函数 */</span></span><br><span class="line">client.<span class="property">onConnectionLost</span> = onConnectionLost;</span><br><span class="line">client.<span class="property">onMessageArrived</span> = onMessageArrived;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 连接至客户端 */</span></span><br><span class="line">client.<span class="title function_">connect</span>(&#123; <span class="attr">onSuccess</span>: onConnect &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*当客户端连接的时候调用 */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onConnect</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">/* 连接建立之后，进行订阅并且发送消息 */</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onConnect&quot;</span>);</span><br><span class="line">  client.<span class="title function_">subscribe</span>(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">  message = <span class="keyword">new</span> <span class="title class_">Paho</span>.<span class="property">MQTT</span>.<span class="title class_">Message</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">  message.<span class="property">destinationName</span> = <span class="string">&quot;World&quot;</span>;</span><br><span class="line">  client.<span class="title function_">send</span>(message);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 当客户端丢失连接的时候调用 */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onConnectionLost</span>(<span class="params">responseObject</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (responseObject.<span class="property">errorCode</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onConnectionLost:&quot;</span> + responseObject.<span class="property">errorMessage</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 当消息到达的时候调用 */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onMessageArrived</span>(<span class="params">message</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onMessageArrived:&quot;</span> + message.<span class="property">payloadString</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：鉴于 JavaScript 版本的的 <strong>Paho</strong>
+已经年久失修，实际开发当中推荐采用 <a target="_blank" rel="noopener" href="https://github.com/mqttjs/MQTT.js">MQTT.js</a> 来代替使用。</p>
+</blockquote>
+<h2 id="mqtt-5-新特性">MQTT 5 新特性</h2>
+<p>虽然 MQTT 协议发明于 1999
+年，但是其广泛应用则是在数年之后。<strong>MQTT 3.1.1</strong> 作为 OASIS
+与 ISO 标准发布第 5 年之后。2019 年 3 月，<strong>MQTT 5</strong>
+作为新一代的协议标准正式生效。新规范的一个关键目标是增强可扩展性，并且更为适用于大规模系统，MQTT
+的 <code>V3.1.1</code> 版本证明了 MQTT
+是一种可扩展有状态的物联网协议，而 <code>V5</code> 版本的设计旨在使 MQTT
+的<strong>代理者</strong>服务更加容易的支持海量并发。</p>
+<p><img src="/Embedded/MQTT/32.png"></p>
+<p>MQTT 的 <code>V5</code> 基本保持与 <code>V3.1.1</code>
+版本的兼容，只是对<code>临终遗嘱</code>等少部分特性细节进行了调整，并且添加了
+<code>TTL</code> 和 <code>共享订阅</code>
+等流行新特性，此外新版本协议在线路传输上也略有变化，并且增加了新的控制报文
+<code>AUTH</code>。</p>
+<h3 id="自定义-mqtt-协议头">自定义 MQTT 协议头</h3>
+<p>MQTT 5 最令人兴奋的新特性之一，是可以在协议头部当中添加自定义的
+<code>key-value</code> 键值对属性。类似于 HTTP 协议，MQTT
+的<strong>客户端</strong>与<strong>代理者</strong>可以通过添加任意数量的自定义协议头来携带元数据，这些元数据可以应用于特定的业务场景。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>自定义 MQTT
+协议头</strong>被大量运用于实现 MQTT 5 当中的各种新特性。</p>
+</blockquote>
+<h3 id="原因码-reason-codes">原因码 Reason Codes</h3>
+<p><strong>原因码</strong>（Reason
+Codes）用于标识一些预定义的协议错误，通常放置在数据包当中，从而允许<strong>客户端</strong>与<strong>代理者</strong>去解释错误条件。原因码有时也被称为<strong>消极确认</strong>（Negative
+Acknowledgements），诸如
+<code>CONNACK</code>、<code>PUBACK</code>、<code>PUBREC</code>、<code>PUBREL</code>、<code>PUBCOMP</code>、<code>SUBACK</code>、<code>UNSUBACK</code>、<code>AUTH</code>、<code>DISCONNECT</code>
+等 MQTT 包都可以携带原因码。</p>
+<blockquote>
+<p><strong>注意</strong>：原因码的消极确认范围位于
+<code>Quota Exceeded</code> 到 <code>Protocol Error</code>
+之间，由<strong>客户端</strong>和<strong>代理者</strong>负责解释这些新增的原因码。</p>
+</blockquote>
+<h3 id="connack-不支持特性返回码">CONNACK 不支持特性返回码</h3>
+<p>伴随着 MQTT 应用的普及，许多企业与开源组织创建并且提供了诸多的 MQTT
+实现，但是并非所有这些实现都与 MQTT 规范完全兼容。因此新版本的 MQTT 5
+为不完整的 MQTT
+实现提供了一种用于表达<strong>代理者</strong>不支持某个特性的方法，而<strong>客户端</strong>可以基于此来确保不会使用到这些<strong>不受支持</strong>的特性。</p>
+<p><strong>代理者</strong>通过 <code>CONNACK</code>
+数据包（<strong>客户端</strong>发送 <code>CONNECT</code>
+数据包之后由<strong>代理者</strong>发送 <code>CONNACK</code>
+数据包）当中的预定义协议头来标识某个不支持的协议特性，这些协议头同样也可以用来通知<strong>客户端</strong>是否具有使用某个协议特性的权限。MQTT
+5
+规范使用如下的预定义协议头来标识<strong>代理者</strong>未实现的特性，或者客户端不允许使用的协议特性：</p>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 8%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>预定义协议头</th>
+<th style="text-align: center;">数据类型</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Retain Available</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td>标识<strong>保留消息</strong>是否可用；</td>
+</tr>
+<tr class="even">
+<td>Maximum QoS</td>
+<td style="text-align: center;"><code>Number</code></td>
+<td>允许<strong>客户端</strong>用于发布消息、订阅主题的最大
+<strong>QoS</strong> 级别；</td>
+</tr>
+<tr class="odd">
+<td>Wildcard available</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td><strong>通配符</strong>是否可以用于主题订阅；</td>
+</tr>
+<tr class="even">
+<td>Subscription identifiers available</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td><strong>订阅标识符</strong>对于 MQTT 客户端是否可用；</td>
+</tr>
+<tr class="odd">
+<td>Shared Subscriptions available</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td><strong>共享订阅</strong>对于 MQTT 客户端是否可用；</td>
+</tr>
+<tr class="even">
+<td>Maximum Message Size</td>
+<td style="text-align: center;"><code>Number</code></td>
+<td>MQTT
+<strong>客户端</strong>能够使用的最大<strong>消息</strong>尺寸；</td>
+</tr>
+<tr class="odd">
+<td>Server Keep Alive</td>
+<td style="text-align: center;"><code>Number</code></td>
+<td><strong>代理者</strong>为某个<strong>客户端</strong>所能够支持的<strong>保持连接</strong>时间间隔；</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<strong>返回码</strong>功能的缺点在于 MQTT
+客户端需要解释这些状态码，并且确保程序当中不会使用到<strong>代理者</strong>不支持的特性，或者<strong>客户端</strong>没有权限使用的特性。</p>
+</blockquote>
+<h3 id="clean-session-变更为-clean-start">Clean Session 变更为 Clean
+Start</h3>
+<p><strong>MQTT 3.1.1</strong>
+当中一个非常重要的功能是<strong>清理会话</strong>
+<code>cleanSession</code>，如果<strong>客户端</strong>向<strong>代理者</strong>发送携带有
+<code>cleanSession = true</code> 标志的 <code>CONNECT</code>
+数据包，那么一旦底层网络连接中断，<strong>代理者</strong>就会立即丢弃<strong>客户端</strong>的所有信息。</p>
+<p>而在 <strong>MQTT 5</strong>
+当中，<strong>客户端</strong>可以选择使用携带有<strong>清理启动标志</strong>
+<code>cleanStart = true</code> 的 <code>CONNECT</code>
+消息，在这里<strong>代理者</strong>会丢弃之前的所有会话数据，使得<strong>客户端</strong>以新的会话开始连接。当<strong>客户端</strong>和<strong>服务器</strong>之间的
+TCP
+连接关闭之后，会话并不会被自动清除，而是会在<strong>客户端</strong>断开连接之后才会触发删除操作，并且此时必须将
+<code>Session Expiry Interval</code> 协议头设置为 <code>0</code>。</p>
+<blockquote>
+<p><strong>注意</strong>：新的<strong>清理启动标志</strong>
+<code>cleanStart</code> 简化了会话处理过程，相比于
+<code>cleanSession</code> 具有更好的灵活性，并且更加易于实现。</p>
+</blockquote>
+<h3 id="额外的-mqtt-数据包">额外的 MQTT 数据包</h3>
+<p>MQTT 5 引入了一个崭新的 <code>AUTH</code>
+数据包，主要应用于于实现实现一些特定的身份验证机制。该数据包可以在建立连接之后，让<strong>代理者</strong>与<strong>客户端</strong>使用较为复杂的权限验证，甚至还可以在不关闭连接的情况下重新对客户端进行验证。</p>
+<h3 id="utf-8-字符串对">UTF-8 字符串对</h3>
+<p>自定义协议头的出现，还同时引入了新的数据类型 <strong>UTF-8
+编码的字符串对</strong>，该数据类型本质上是一个包含有 <code>key</code>
+与 <code>value</code>
+的<strong>键值对</strong>，该数据类型目前仅限用于<strong>自定义协议头</strong>。算上这个新引入的数据类型，MQTT
+5 协议总共支持 7 种不同的数据类型：</p>
+<ul>
+<li><strong>位</strong>（Bit）</li>
+<li><strong>两字节整型</strong>（Two Byte Integer）</li>
+<li><strong>四字节整型</strong>（Four Byte Integer）</li>
+<li><strong>UTF-8 编码字符串</strong>（UTF-8 Encoded String）</li>
+<li><strong>可变字节整型</strong>（Variable Byte Integer）</li>
+<li><strong>二进制型</strong>（Binary Data）</li>
+<li><strong>UTF-8 字符串对</strong>（UTF-8 String Pair）</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：MQTT
+大部分应用场景使用的都是<strong>二进制型</strong>（Binary
+Data）和<strong>UTF-8 编码字符串</strong>（UTF-8 Encoded
+String），当然也可以使用这里提到的 <strong>UTF-8
+编码字符串</strong>（UTF-8 Encoded
+String），而其它所有数据类型对于用户都会是隐藏的，仅由 MQTT
+<strong>客户端</strong>和<strong>代理者</strong>生成 MQTT
+数据包时使用。</p>
+</blockquote>
+<h3 id="双向断开-disconnect-数据包">双向断开 DISCONNECT 数据包</h3>
+<p><strong>MQTT 3.1.1</strong> 当中，<strong>客户端</strong>会在关闭底层
+TCP 连接之前，发送 <code>DISCONNECT</code>
+数据包来通知<strong>代理者</strong>服务正常断开连接。但是并不能在<strong>代理者</strong>出现问题，需要关闭
+TCP 连接的时候通知<strong>客户端</strong>。</p>
+<p>而在 <strong>MQTT 5</strong>
+当中，可以允许<strong>代理者</strong>在关闭 TCP 连接之前，发送
+<code>DISCONNECT</code>
+数据包，这样<strong>客户端</strong>就可以方便的了解到 TCP
+连接断开的原因，并且采取相应的应对策略。虽然<strong>代理者</strong>无需解释连接断开的确切原因，但是至少可以让<strong>客户端</strong>开发人员，了解到连接断开的大致原因。</p>
+<blockquote>
+<p><strong>注意</strong>：由于 <code>DISCONNECT</code>
+数据包同样可以携带<strong>原因码</strong>（Reason
+Codes），所以可以很容易的标识出连接断开的具体原因（例如没有权限）。</p>
+</blockquote>
+<h3 id="qos-级别-1-与-2-消息不再重试">QoS 级别 1 与 2 消息不再重试</h3>
+<p>MQTT <strong>客户端</strong>使用 TCP
+双向连接作为底层传输协议，确保数据包总是能够正确的进行传输。如果 TCP
+连接发生中断，则 QoS 级别 <code>1</code> 和 <code>2</code> 会发起多次
+TCP 连接保证消息被正确的传递。</p>
+<p><strong>MQTT 3.1.1</strong> 允许在 TCP
+连接正常时重新传递消息，实践证明这是一个糟糕的主意，因为超出负载能力的<strong>客户端</strong>可能会因此变得更加超载。例如<strong>客户端</strong>从<strong>代理者</strong>接收到一条消息，并且需要耗费
+<code>11</code>
+秒来进行处理，并且在处理之后确认数据包。假设此时<strong>代理者</strong>会在超时
+<code>10</code>
+秒之后重新传输消息，这种方法就会浪费宝贵的带宽，并且加重<strong>客户端</strong>的负担。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>MQTT 5</strong>
+规范不允许<strong>代理者</strong>和<strong>客户端</strong>在正常的 TCP
+连接上重新传递消息，如果遇到 TCP
+连接关闭的情况，则<strong>代理者</strong>与<strong>客户端</strong>必须重新发送未经确认的数据包，因此采用
+QoS 级别 <code>1</code> 与 <code>2</code> 就显得非常必要。</p>
+</blockquote>
+<h3 id="无用户名使用密码">无用户名使用密码</h3>
+<p><strong>MQTT 3.1.1</strong> 要求<strong>客户端</strong>使用
+<code>CONNECT</code> 数据包中的 <code>password</code>
+字段时，需要同时使用 <code>username</code>
+字段，这对于某些没有用户名的场景极为不便（例如 <strong>OAuth</strong>
+使用一个 JSON 令牌作为身份验证与鉴权信息）。</p>
+<p><strong>MQTT 5</strong> 虽然提供了更为优雅的方式（通过
+<code>AUTH</code> 数据包）来携带令牌信息，但是仍然可以利用
+<code>CONNECT</code> 数据包里的 <code>password</code>
+字段，并且可以只使用 <code>password</code> 字段，而无需再行填写
+<code>username</code> 字段。</p>
+<h2 id="三端综合运用实例">三端综合运用实例</h2>
+<p>本示例通过 Web 页面来控制 Arduino 开发板上连接的一枚 LED
+发光二极管，需要使用基于 Nodejs 上的 <strong>Aedes</strong>
+来发布同时支持 TCP 和 Websocket
+的<strong>代理者</strong>（Broker）服务，然后通过
+<strong>PubSubClient</strong> 在 Arduino 开发板上发布
+<code>inEsp32Topic</code> 与 <code>outEsp32Topic</code>
+<strong>主题</strong>，最后使用 <strong>MQTT.js</strong> 在 Web
+网页端订阅这些主题，从而实现<code>网页</code>、<code>开发板</code>、<code>服务器</code>三端的
+MQTT 状态联动。</p>
+<p><img src="/Embedded/MQTT/33.gif"></p>
+<h3 id="aedes">Aedes</h3>
+<p>常用的 MQTT <strong>代理者</strong>（Broker）服务有 <a target="_blank" rel="noopener" href="https://www.emqx.io/zh">EMQ X</a>、<a target="_blank" rel="noopener" href="https://www.hivemq.com/mqtt-essentials/">HiveMQ</a>、<a target="_blank" rel="noopener" href="https://github.com/mcollina/mosca">Mosca</a> 等等，其中
+<code>Mosca</code> 基于 NodeJS 实现，不过目前 Github
+上该项目已经停止维护，原作者创建了一款支持数据持久化与集群，并且性能更为优越的
+<a target="_blank" rel="noopener" href="https://github.com/moscajs/aedes">Aedes</a>，其完整的实现了
+<code>MQTT V3.1.1</code> 协议并且支持 Websocket，通过下面的命令可以安装
+Aedes 以及相关依赖到 Web 服务端工程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install aedes aedes-server-factory --save-dev</span><br></pre></td></tr></table></figure>
+<p>下面示例代码通过 <code>aedes</code> 以及
+<code>aedes-server-factory</code> 建立了同时支持 <strong>TCP</strong> 和
+<strong>WebSocket</strong> 协议的 MQTT <strong>代理者</strong>服务：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Aedes</span> = <span class="built_in">require</span>(<span class="string">&quot;aedes&quot;</span>)();</span><br><span class="line"><span class="keyword">const</span> &#123; createServer &#125; = <span class="built_in">require</span>(<span class="string">&quot;aedes-server-factory&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">WebsocketPort</span> = <span class="number">8080</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">TcpPort</span> = <span class="number">1883</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 使用 Websocket 协议传输的 Broker */</span></span><br><span class="line"><span class="title function_">createServer</span>(<span class="title class_">Aedes</span>, &#123; <span class="attr">ws</span>: <span class="literal">true</span> &#125;).<span class="title function_">listen</span>(<span class="title class_">WebsocketPort</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">info</span>(<span class="string">&quot;Aedes MQTT Websocket server listening on port &quot;</span>, <span class="title class_">WebsocketPort</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/* 使用 TCP 协议传输的 Broker */</span></span><br><span class="line"><span class="title function_">createServer</span>(<span class="title class_">Aedes</span>).<span class="title function_">listen</span>(<span class="title class_">TcpPort</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">info</span>(<span class="string">&quot;Aedes MQTT TCP server started and listening on port &quot;</span>, <span class="title class_">TcpPort</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="pubsubclient">PubSubClient</h3>
+<p><a target="_blank" rel="noopener" href="https://pubsubclient.knolleary.net/">PubSubClient</a>
+是一款运行于 <strong>Arduino</strong> 上的 MQTT
+消息订阅与发布客户端，下面的示例代码基于 ESP32
+开发板执行了如下任务：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;WiFi.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;PubSubClient.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 配置网络 SSID 以及 Broker 服务 */</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span>* PASSWORD = <span class="string">&quot;*****&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span>* SSID = <span class="string">&quot;*************&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span>* MQTT_SERVER = <span class="string">&quot;***************&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MQTT_PORT = <span class="number">1883</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> LED = <span class="number">33</span>;</span><br><span class="line"></span><br><span class="line">WiFiClient espClient;</span><br><span class="line"><span class="function">PubSubClient <span class="title">client</span><span class="params">(espClient)</span></span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> lastMsg = <span class="number">0</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MSG_BUFFER_SIZE  (50)</span></span><br><span class="line"><span class="type">char</span> msg[MSG_BUFFER_SIZE];</span><br><span class="line"><span class="type">int</span> value = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Wifi 配置函数 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup_wifi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">10</span>);</span><br><span class="line">  Serial.<span class="built_in">println</span>();</span><br><span class="line">  Serial.<span class="built_in">print</span>(<span class="string">&quot;Connecting to &quot;</span>);</span><br><span class="line">  Serial.<span class="built_in">println</span>(SSID);</span><br><span class="line"></span><br><span class="line">  WiFi.<span class="built_in">mode</span>(WIFI_STA);</span><br><span class="line">  WiFi.<span class="built_in">begin</span>(SSID, PASSWORD);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (WiFi.<span class="built_in">status</span>() != WL_CONNECTED) &#123;</span><br><span class="line">    <span class="built_in">delay</span>(<span class="number">500</span>);</span><br><span class="line">    Serial.<span class="built_in">print</span>(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">randomSeed</span>(<span class="built_in">micros</span>());</span><br><span class="line"></span><br><span class="line">  Serial.<span class="built_in">println</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">  Serial.<span class="built_in">println</span>(<span class="string">&quot;WiFi connected&quot;</span>);</span><br><span class="line">  Serial.<span class="built_in">println</span>(<span class="string">&quot;IP address: &quot;</span>);</span><br><span class="line">  Serial.<span class="built_in">println</span>(WiFi.<span class="built_in">localIP</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 客户端回调函数 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">callback</span><span class="params">(<span class="type">char</span>* topic, byte* payload, <span class="type">unsigned</span> <span class="type">int</span> length)</span> </span>&#123;</span><br><span class="line">  Serial.<span class="built_in">print</span>(<span class="string">&quot;Message arrived [&quot;</span>);</span><br><span class="line">  Serial.<span class="built_in">print</span>(topic);</span><br><span class="line">  Serial.<span class="built_in">print</span>(<span class="string">&quot;] &quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    Serial.<span class="built_in">print</span>((<span class="type">char</span>)payload[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  Serial.<span class="built_in">println</span>();</span><br><span class="line">  <span class="comment">/* 如果接收到的第一个字符是 1，那么就点亮 LED 发光二极管 */</span></span><br><span class="line">  <span class="keyword">if</span> ((<span class="type">char</span>)payload[<span class="number">0</span>] == <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">    <span class="built_in">digitalWrite</span>(LED, HIGH);  <span class="comment">// 输出高电平，打开 LED</span></span><br><span class="line">    Serial.<span class="built_in">println</span>(<span class="string">&quot;LED OPEN&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>((<span class="type">char</span>)payload[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">    <span class="built_in">digitalWrite</span>(LED, LOW);   <span class="comment">// 输出低电平，关闭 LED</span></span><br><span class="line">    Serial.<span class="built_in">println</span>(<span class="string">&quot;LED COLOSE&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 重新连接 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reconnect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* 循环直至重新建立连接 */</span></span><br><span class="line">  <span class="keyword">while</span> (!client.<span class="built_in">connected</span>()) &#123;</span><br><span class="line">    Serial.<span class="built_in">print</span>(<span class="string">&quot;Attempting MQTT connection...&quot;</span>);</span><br><span class="line">    <span class="comment">/* 创建一个随机的客户端 ID */</span></span><br><span class="line">    String clientId = <span class="string">&quot;ESP32Client-&quot;</span>;</span><br><span class="line">    clientId += <span class="built_in">String</span>(<span class="built_in">random</span>(<span class="number">0xffff</span>), HEX);</span><br><span class="line">    <span class="comment">/* 开始尝试连接 */</span></span><br><span class="line">    <span class="keyword">if</span> (client.<span class="built_in">connect</span>(clientId.<span class="built_in">c_str</span>())) &#123;</span><br><span class="line">      Serial.<span class="built_in">println</span>(<span class="string">&quot;connected&quot;</span>);</span><br><span class="line">      client.<span class="built_in">publish</span>(<span class="string">&quot;outEsp32Topic&quot;</span>, <span class="string">&quot;Hello ESP32!&quot;</span>);  <span class="comment">// 连接建立之后发布一个 outEsp32Topic 主题</span></span><br><span class="line">      client.<span class="built_in">subscribe</span>(<span class="string">&quot;inEsp32Topic&quot;</span>);                 <span class="comment">// 然后重新订阅 inEsp32Topic 主题</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      Serial.<span class="built_in">print</span>(<span class="string">&quot;failed, rc=&quot;</span>);</span><br><span class="line">      Serial.<span class="built_in">print</span>(client.<span class="built_in">state</span>());</span><br><span class="line">      Serial.<span class="built_in">println</span>(<span class="string">&quot; try again in 5 seconds&quot;</span>);</span><br><span class="line">      <span class="built_in">delay</span>(<span class="number">5000</span>);                                     <span class="comment">// 等待 5 秒再试</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">pinMode</span>(LED, OUTPUT);          <span class="comment">// 将 LED 引脚初始化为输出模式</span></span><br><span class="line">  Serial.<span class="built_in">begin</span>(<span class="number">115200</span>);          <span class="comment">// 设置串口波特率</span></span><br><span class="line">  <span class="built_in">setup_wifi</span>();                  <span class="comment">// 调用 Wifi 配置函数</span></span><br><span class="line">  client.<span class="built_in">setServer</span>(MQTT_SERVER, MQTT_PORT);</span><br><span class="line">  client.<span class="built_in">setCallback</span>(callback);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!client.<span class="built_in">connected</span>()) &#123;</span><br><span class="line">    <span class="built_in">reconnect</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  client.<span class="built_in">loop</span>();</span><br><span class="line"></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> now = <span class="built_in">millis</span>();</span><br><span class="line">  <span class="keyword">if</span> (now - lastMsg &gt; <span class="number">2000</span>) &#123;</span><br><span class="line">    lastMsg = now;</span><br><span class="line">    ++value;</span><br><span class="line">    <span class="built_in">snprintf</span> (msg, MSG_BUFFER_SIZE, <span class="string">&quot;%ld&quot;</span>, <span class="built_in">digitalRead</span>(LED));</span><br><span class="line">    Serial.<span class="built_in">print</span>(<span class="string">&quot;Publish message: &quot;</span>);</span><br><span class="line">    Serial.<span class="built_in">println</span>(msg);</span><br><span class="line">    client.<span class="built_in">publish</span>(<span class="string">&quot;outEsp32Topic&quot;</span>, msg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="mqtt.js">MQTT.js</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/mqttjs/MQTT.js">MQTT.js</a>
+是一款可以同时运行于 NodeJS 和 Web 浏览器的 MQTT
+协议<strong>客户端</strong>，可以通过下面的命令直接将相关的依赖安装至
+Webpack 前端工程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mqtt --save</span><br></pre></td></tr></table></figure>
+<p>如下示例代码通过一个开关控件，实时切换页面当中一个圆形图案的背景颜色，并且向<strong>主题</strong>
+<code>inEsp32Topic</code> 发布 LED 的亮灭状态，从而控制与 Arduino
+相连接的发光二极管：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">header</span>&gt;</span>MQTT Test<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-bind:style</span>=<span class="string">&quot;styleObject&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span>&gt;</span>&#123;&#123; led &#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-switch</span> <span class="attr">v-model</span>=<span class="string">&quot;led&quot;</span> <span class="attr">active-text</span>=<span class="string">&quot;打开&quot;</span> <span class="attr">active-value</span>=<span class="string">&quot;OPEN&quot;</span> <span class="attr">inactive-text</span>=<span class="string">&quot;关闭&quot;</span> <span class="attr">inactive-value</span>=<span class="string">&quot;CLOSE&quot;</span> <span class="attr">active-color</span>=<span class="string">&quot;#ff4949&quot;</span> @<span class="attr">change</span>=<span class="string">&quot;onChange&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">el-switch</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> <span class="variable constant_">MQTT</span> <span class="keyword">from</span> <span class="string">&quot;mqtt&quot;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">led</span>: <span class="string">&quot;OPEN&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">host</span>: <span class="string">&quot;ws://localhost:8080&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="title class_">MqttClient</span>: &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">styleObject</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">backgroundColor</span>: <span class="string">&quot;#FF4949&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">      &#125;,</span></span><br><span class="line"><span class="language-javascript">    &#125;;</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">methods</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">onChange</span>(<span class="params">status</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> vm = <span class="variable language_">this</span>;</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">/* 打开 LED */</span></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">if</span> (vm.<span class="property">led</span> == <span class="string">&quot;OPEN&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">this</span>.<span class="property">styleObject</span>.<span class="property">backgroundColor</span> = <span class="string">&quot;#FF4949&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">this</span>.<span class="property">styleObject</span>.<span class="property">color</span> = <span class="string">&quot;#FFFFFF&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        vm.<span class="property">MqttClient</span>.<span class="title function_">publish</span>(<span class="string">&quot;inEsp32Topic&quot;</span>, <span class="string">&quot;1&quot;</span>, &#123; <span class="attr">qos</span>: <span class="number">0</span>, <span class="attr">retain</span>: <span class="literal">false</span> &#125;);</span></span><br><span class="line"><span class="language-javascript">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (vm.<span class="property">led</span> == <span class="string">&quot;CLOSE&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">/* 关闭 LED */</span></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">this</span>.<span class="property">styleObject</span>.<span class="property">backgroundColor</span> = <span class="string">&quot;#D3DCE6&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">this</span>.<span class="property">styleObject</span>.<span class="property">color</span> = <span class="string">&quot;#324057&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        vm.<span class="property">MqttClient</span>.<span class="title function_">publish</span>(<span class="string">&quot;inEsp32Topic&quot;</span>, <span class="string">&quot;0&quot;</span>, &#123; <span class="attr">qos</span>: <span class="number">0</span>, <span class="attr">retain</span>: <span class="literal">false</span> &#125;);</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">this</span>.$message(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">message</span>: <span class="string">&quot;LED is &quot;</span> + status,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">type</span>: <span class="string">&quot;warning&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">offset</span>: <span class="number">50</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">duration</span>: <span class="number">500</span>,</span></span><br><span class="line"><span class="language-javascript">      &#125;);</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> vm = <span class="variable language_">this</span>;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> clientId = <span class="string">&quot;mqttjs_&quot;</span> + <span class="title class_">Math</span>.<span class="title function_">random</span>().<span class="title function_">toString</span>(<span class="number">16</span>).<span class="title function_">substr</span>(<span class="number">2</span>, <span class="number">8</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">info</span>(<span class="string">&quot;connecting MQTT client&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    vm.<span class="property">MqttClient</span> = <span class="variable constant_">MQTT</span>.<span class="title function_">connect</span>(vm.<span class="property">host</span>, &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">keepalive</span>: <span class="number">30</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">clientId</span>: clientId,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">protocolId</span>: <span class="string">&quot;MQTT&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">protocolVersion</span>: <span class="number">4</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">clean</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">reconnectPeriod</span>: <span class="number">1000</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">connectTimeout</span>: <span class="number">30</span> * <span class="number">1000</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">will</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">topic</span>: <span class="string">&quot;WillMsg&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">payload</span>: <span class="string">&quot;Connection Closed abnormally..!&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">qos</span>: <span class="number">0</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">retain</span>: <span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">      &#125;,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">rejectUnauthorized</span>: <span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    vm.<span class="property">MqttClient</span>.<span class="title function_">on</span>(<span class="string">&quot;error&quot;</span>, <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">info</span>(err);</span></span><br><span class="line"><span class="language-javascript">      vm.<span class="property">MqttClient</span>.<span class="title function_">end</span>();</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    vm.<span class="property">MqttClient</span>.<span class="title function_">on</span>(<span class="string">&quot;connect&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">info</span>(<span class="string">&quot;client connected:&quot;</span> + clientId);</span></span><br><span class="line"><span class="language-javascript">      vm.<span class="property">MqttClient</span>.<span class="title function_">subscribe</span>(<span class="string">&quot;outEsp32Topic&quot;</span>, &#123; <span class="attr">qos</span>: <span class="number">0</span> &#125;);</span></span><br><span class="line"><span class="language-javascript">      vm.<span class="property">MqttClient</span>.<span class="title function_">publish</span>(<span class="string">&quot;inEsp32Topic&quot;</span>, <span class="string">&quot;1&quot;</span>, &#123; <span class="attr">qos</span>: <span class="number">0</span>, <span class="attr">retain</span>: <span class="literal">false</span> &#125;);</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    vm.<span class="property">MqttClient</span>.<span class="title function_">on</span>(<span class="string">&quot;message&quot;</span>, <span class="keyword">function</span> (<span class="params">topic, message, packet</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">info</span>(</span></span><br><span class="line"><span class="language-javascript">        <span class="string">&quot;Received Message = &quot;</span> + message.<span class="title function_">toString</span>() + <span class="string">&quot;\nOn topic:= &quot;</span> + topic</span></span><br><span class="line"><span class="language-javascript">      );</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">if</span> (message.<span class="title function_">toString</span>() == <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        vm.<span class="property">led</span> = <span class="string">&quot;OPEN&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;LED 已经打开&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (message.<span class="title function_">toString</span>() == <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        vm.<span class="property">led</span> = <span class="string">&quot;CLOSE&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;LED 已经关闭&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    vm.<span class="property">MqttClient</span>.<span class="title function_">on</span>(<span class="string">&quot;close&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">info</span>(clientId + <span class="string">&quot; disconnected&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">&#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>小议 MQTT 物联网传输协议</p><p><a href="http://www.uinio.com/Embedded/MQTT/">http://www.uinio.com/Embedded/MQTT/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2012-06-26</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-08-31</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Protocol/">Protocol</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Linux/Command/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Linux 常用命令行速查手册</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Embedded/Mini2440/"><span class="level-item">基于三星 S3C2440 的嵌入式 Linux 攻略</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#发布订阅模式"><span class="level-left"><span class="level-item">1</span><span class="level-item">发布/订阅模式</span></span></a></li><li><a class="level is-mobile" href="#发布者代理者订阅者"><span class="level-left"><span class="level-item">2</span><span class="level-item">发布者/代理者/订阅者</span></span></a></li><li><a class="level is-mobile" href="#mqtt-连接"><span class="level-left"><span class="level-item">3</span><span class="level-item">MQTT 连接</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#客户端-connect-发起连接"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">客户端 CONNECT 发起连接</span></span></a></li><li><a class="level is-mobile" href="#代理者-connack-进行响应"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">代理者 CONNACK 进行响应</span></span></a></li></ul></li><li><a class="level is-mobile" href="#发布订阅退订"><span class="level-left"><span class="level-item">4</span><span class="level-item">发布/订阅/退订</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#发布publish"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">发布（PUBLISH）</span></span></a></li><li><a class="level is-mobile" href="#订阅subscribe"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">订阅（SUBSCRIBE）</span></span></a></li><li><a class="level is-mobile" href="#订阅确认suback"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">订阅确认（SUBACK）</span></span></a></li><li><a class="level is-mobile" href="#退订unsubscribe"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">退订（UNSUBSCRIBE）</span></span></a></li><li><a class="level is-mobile" href="#退订确认unsuback"><span class="level-left"><span class="level-item">4.5</span><span class="level-item">退订确认（UNSUBACK）</span></span></a></li></ul></li><li><a class="level is-mobile" href="#主题-topic"><span class="level-left"><span class="level-item">5</span><span class="level-item">主题 Topic</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#通配符"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">通配符</span></span></a></li><li><a class="level is-mobile" href="#最佳实践"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">最佳实践</span></span></a></li></ul></li><li><a class="level is-mobile" href="#服务质量-qos"><span class="level-left"><span class="level-item">6</span><span class="level-item">服务质量 QoS</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#qos-0-最多一次"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">QoS 0 最多一次</span></span></a></li><li><a class="level is-mobile" href="#qos-1-至少一次"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">QoS 1 至少一次</span></span></a></li><li><a class="level is-mobile" href="#qos-2-仅有一次"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">QoS 2 仅有一次</span></span></a></li><li><a class="level is-mobile" href="#qos-的降级"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">QoS 的降级</span></span></a></li><li><a class="level is-mobile" href="#packetid-的唯一性"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">packetId 的唯一性</span></span></a></li><li><a class="level is-mobile" href="#qos-12-的消息排队"><span class="level-left"><span class="level-item">6.6</span><span class="level-item">QoS 1/2 的消息排队</span></span></a></li><li><a class="level is-mobile" href="#最佳实践-1"><span class="level-left"><span class="level-item">6.7</span><span class="level-item">最佳实践</span></span></a></li></ul></li><li><a class="level is-mobile" href="#清理会话-cleansession"><span class="level-left"><span class="level-item">7</span><span class="level-item">清理会话 cleanSession</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#代理者行为"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">代理者行为</span></span></a></li><li><a class="level is-mobile" href="#客户端行为"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">客户端行为</span></span></a></li><li><a class="level is-mobile" href="#最佳实践-2"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">最佳实践</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#持久会话"><span class="level-left"><span class="level-item">7.3.1</span><span class="level-item">持久会话</span></span></a></li><li><a class="level is-mobile" href="#清理会话"><span class="level-left"><span class="level-item">7.3.2</span><span class="level-item">清理会话</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#保留消息-retainflag"><span class="level-left"><span class="level-item">8</span><span class="level-item">保留消息 retainFlag</span></span></a></li><li><a class="level is-mobile" href="#临终遗嘱-lastwill"><span class="level-left"><span class="level-item">9</span><span class="level-item">临终遗嘱 lastWill*</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#广播时机"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">广播时机</span></span></a></li><li><a class="level is-mobile" href="#最佳实践-3"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">最佳实践</span></span></a></li></ul></li><li><a class="level is-mobile" href="#保持连接-keepalive"><span class="level-left"><span class="level-item">10</span><span class="level-item">保持连接 keepAlive</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#pingreq"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">PINGREQ</span></span></a></li><li><a class="level is-mobile" href="#pingresp"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">PINGRESP</span></span></a></li><li><a class="level is-mobile" href="#注意事项"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">注意事项</span></span></a></li><li><a class="level is-mobile" href="#客户端接管"><span class="level-left"><span class="level-item">10.4</span><span class="level-item">客户端接管</span></span></a></li></ul></li><li><a class="level is-mobile" href="#基于-websocket-的-mqtt"><span class="level-left"><span class="level-item">11</span><span class="level-item">基于 WebSocket 的 MQTT</span></span></a></li><li><a class="level is-mobile" href="#mqtt-5-新特性"><span class="level-left"><span class="level-item">12</span><span class="level-item">MQTT 5 新特性</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#自定义-mqtt-协议头"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">自定义 MQTT 协议头</span></span></a></li><li><a class="level is-mobile" href="#原因码-reason-codes"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">原因码 Reason Codes</span></span></a></li><li><a class="level is-mobile" href="#connack-不支持特性返回码"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">CONNACK 不支持特性返回码</span></span></a></li><li><a class="level is-mobile" href="#clean-session-变更为-clean-start"><span class="level-left"><span class="level-item">12.4</span><span class="level-item">Clean Session 变更为 Clean
+Start</span></span></a></li><li><a class="level is-mobile" href="#额外的-mqtt-数据包"><span class="level-left"><span class="level-item">12.5</span><span class="level-item">额外的 MQTT 数据包</span></span></a></li><li><a class="level is-mobile" href="#utf-8-字符串对"><span class="level-left"><span class="level-item">12.6</span><span class="level-item">UTF-8 字符串对</span></span></a></li><li><a class="level is-mobile" href="#双向断开-disconnect-数据包"><span class="level-left"><span class="level-item">12.7</span><span class="level-item">双向断开 DISCONNECT 数据包</span></span></a></li><li><a class="level is-mobile" href="#qos-级别-1-与-2-消息不再重试"><span class="level-left"><span class="level-item">12.8</span><span class="level-item">QoS 级别 1 与 2 消息不再重试</span></span></a></li><li><a class="level is-mobile" href="#无用户名使用密码"><span class="level-left"><span class="level-item">12.9</span><span class="level-item">无用户名使用密码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#三端综合运用实例"><span class="level-left"><span class="level-item">13</span><span class="level-item">三端综合运用实例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#aedes"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">Aedes</span></span></a></li><li><a class="level is-mobile" href="#pubsubclient"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">PubSubClient</span></span></a></li><li><a class="level is-mobile" href="#mqtt.js"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">MQTT.js</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

@@ -1,0 +1,1739 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>写给有经验 PCB 工程师的 Cadence Allegro 极速上手指南 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="楷登电子 Cadence 推出的 Allegro&amp;#x2F;OrCAD SPB 是一款专业的板级 EDA 工具，其融合了原理图设计、电路仿真、PCB 绘制编辑、拓扑逻辑自动布线、信号完整性分析、设计输出 等功能，经常被运用于高速 PCB 设计场景。撰写这篇文章的目的，是为已经具备有其它 EDA 使用经验的工程师，快速的上手 Cadence SPB 全家桶设计套件。本文撰写时所采用的是 Caden"><meta property="og:type" content="blog"><meta property="og:title" content="写给有经验 PCB 工程师的 Cadence Allegro 极速上手指南"><meta property="og:url" content="http://www.uinio.com/Electronics/Cadence/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="楷登电子 Cadence 推出的 Allegro&amp;#x2F;OrCAD SPB 是一款专业的板级 EDA 工具，其融合了原理图设计、电路仿真、PCB 绘制编辑、拓扑逻辑自动布线、信号完整性分析、设计输出 等功能，经常被运用于高速 PCB 设计场景。撰写这篇文章的目的，是为已经具备有其它 EDA 使用经验的工程师，快速的上手 Cadence SPB 全家桶设计套件。本文撰写时所采用的是 Caden"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2020-08-05T16:00:00.000Z"><meta property="article:modified_time" content="2024-07-03T18:28:38.971Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="EDA"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/Cadence/"},"headline":"写给有经验 PCB 工程师的 Cadence Allegro 极速上手指南","image":["http://www.uinio.com/Electronics/Cadence/logo.png"],"datePublished":"2020-08-05T16:00:00.000Z","dateModified":"2024-07-03T18:28:38.971Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"楷登电子 Cadence\r 推出的 Allegro&#x2F;OrCAD SPB 是一款专业的板级 EDA\r 工具，其融合了原理图设计、电路仿真、PCB 绘制编辑、拓扑逻辑自动布线、信号完整性分析、设计输出\r 等功能，经常被运用于高速 PCB\r 设计场景。撰写这篇文章的目的，是为已经具备有其它 EDA\r 使用经验的工程师，快速的上手 Cadence SPB\r 全家桶设计套件。本文撰写时所采用的是 Caden"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/Cadence/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-05T16:00:00.000Z" title="2020/8/6 00:00:00">2020-08-06</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:38.971Z" title="2024/7/4 02:28:38">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">2 小时读完 (大约14464个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">写给有经验 PCB 工程师的 Cadence Allegro 极速上手指南</h1><div class="content"><p>楷登电子 <a target="_blank" rel="noopener" href="https://www.cadence.com/zh_CN/home/company.html"><strong>Cadence</strong></a>
+推出的 <strong>Allegro/OrCAD SPB</strong> 是一款专业的板级 EDA
+工具，其融合了<code>原理图设计</code>、<code>电路仿真</code>、<code>PCB 绘制编辑</code>、<code>拓扑逻辑自动布线</code>、<code>信号完整性分析</code>、<code>设计输出</code>
+等功能，经常被运用于高速 PCB
+设计场景。撰写这篇文章的目的，是为已经具备有其它 EDA
+使用经验的工程师，快速的上手 <strong>Cadence SPB</strong>
+全家桶设计套件。本文撰写时所采用的是 <strong>Cadence SPB SPB
+17.4</strong> 版本，并且将补丁更新至
+<code>Hotfix_SPB17.40.037</code>，该版本的基础操作与快捷键，与目前最新的
+<code>23.1</code>
+版本基本相同，且两者的工程文件相互兼容，无需进行任何额外的数据转换。全文提供了清晰的目录结构，便于读者按图索骥与查缺补漏。</p>
+<p><img src="/Electronics/Cadence/logo.png"></p>
+<p><strong>Cadence SPB SPB 17.4</strong> 版本于 2019 年推出，在兼容早期
+<code>17.2</code> 和 <code>16.6</code>
+版本工程文件的基础之上，还进行了一系列全新的功能升级。其在老版本基础上新增了一套<strong>暗黑主题</strong>，并且对工具栏的图标以及主界面的窗口进行了重组。最为重要的更新在于支持从原理图直接创建
+PCB，且可以方便的实现两者的同步操作。除此之外，还提供了 Web
+搜索功能，可以方便的从 <a target="_blank" rel="noopener" href="https://www.samacsys.com/component-search-engine/"><strong>Samacsys</strong></a>
+和 <a target="_blank" rel="noopener" href="https://www.ultralibrarian.com/"><strong>Ultra
+Librarian</strong></a> 下载
+<code>原理图符号</code>、<code>PCB 封装</code>、<code>数据手册</code>
+以及 <code>3D 模型</code>。</p>
+<span id="more"></span>
+<h1 id="cadence-spb-安装与启动">Cadence SPB 安装与启动</h1>
+<p><strong>Allegro/OrCAD SPB 17.4</strong> 套件当中的 <strong>OrCAD
+Capture CIS</strong> 工具主要用于原理图设计，而 <strong>Allegro
+PCB</strong> 工具则主要用于 PCB 绘制。一个完整的 <strong>Cadence
+SPB</strong>
+工程，会同时包含有<code>元件库文件</code>、<code>原理图文件</code>、<code>PCB 库文件</code>、<code>网表文件</code>、<code>PCB 文件</code>、<code>生产文件</code>：</p>
+<p><img src="/Electronics/Cadence/0-Install/1.png"></p>
+<p>安装 <strong>Cadence OrCAD and Allegro 17.4-2019</strong>
+套件的过程当中，需要勾选<strong>安装类型</strong>为【Custom】自定义安装，并且勾选为使用该计算机的所有用户安装（可以根据使用环境酌情选择）：</p>
+<p><img src="/Electronics/Cadence/0-Install/2.png"></p>
+<p>在接下来的<strong>安装特性</strong>选择对话框当中，只需要选择【OrCAD
+Products】下面的 <strong>OrCAD Capture CIS</strong> 和【Allegro
+Products】下面的 <strong>Allegro PCB Editor Router and SI</strong>
+两款工具即可：</p>
+<p><img src="/Electronics/Cadence/0-Install/3.png"></p>
+<p>安装完成之后，分别在开始菜单栏输入 <code>Capture CIS 17.4</code> 和
+<code>PCB Editor 17.4</code> 就可以打开相应的原理图与 PCB
+设计工具。在接下来弹出的<strong>产品选择</strong>对话框当中，通常会分别选择
+<code>OrCAD Capture CIS</code> 作为原理图编辑工具，而
+<code>Allegro Enterprise PCB Designer Suite</code> 作为 PCB
+绘制工具：</p>
+<p><img src="/Electronics/Cadence/0-Install/4.png"></p>
+<p>如果需要重新选择原理图编辑器，则可以在没有打开任何原理图工程的情况下，启动
+<code>Capture CIS 17.4</code> 之后，鼠标依次选择菜单栏上面的【File -&gt;
+Change Product...】项：</p>
+<p><img src="/Electronics/Cadence/0-Install/5.png"></p>
+<p>下面的表格里，罗列出了一个 <strong>Cadence SPB</strong>
+工程当中，一些经常出现的工程文件后缀名称，便于大家在使用的时候加以区分：</p>
+<table>
+<colgroup>
+<col style="width: 40%">
+<col style="width: 13%">
+<col style="width: 33%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">文件类型</th>
+<th style="text-align: center;">文件后缀</th>
+<th style="text-align: center;">文件类型</th>
+<th style="text-align: center;">文件后缀</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Cadence SPB
+工程文件</strong></td>
+<td style="text-align: center;"><code>.opj</code></td>
+<td style="text-align: center;">Flash 焊盘文件</td>
+<td style="text-align: center;"><code>.fsm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>原理图符号库文件</strong></td>
+<td style="text-align: center;"><code>.olb</code></td>
+<td style="text-align: center;">格式化符号</td>
+<td style="text-align: center;"><code>.osm</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>原理图文件</strong></td>
+<td style="text-align: center;"><code>.dsn</code></td>
+<td style="text-align: center;">无电气特性的机械零件</td>
+<td style="text-align: center;"><code>.bsm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>PCB 版图文件</strong></td>
+<td style="text-align: center;"><code>.brd</code></td>
+<td style="text-align: center;">可编辑封装文件</td>
+<td style="text-align: center;"><code>.dra</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Cadence SPB
+网表文件</strong></td>
+<td style="text-align: center;"><code>.dat</code></td>
+<td style="text-align: center;">自定义焊盘图形文件</td>
+<td style="text-align: center;"><code>.ssm</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>第三方网表文件</strong></td>
+<td style="text-align: center;"><code>.net</code></td>
+<td style="text-align: center;">操作记录文件</td>
+<td style="text-align: center;"><code>.jrl</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>PCB 封装文件</strong></td>
+<td style="text-align: center;"><code>.psm</code></td>
+<td style="text-align: center;">处理日志文件</td>
+<td style="text-align: center;"><code>.log</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>焊盘文件</strong></td>
+<td style="text-align: center;"><code>.pad</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="新建一个原理图工程">新建一个原理图工程</h1>
+<p>打开 <strong>Cadence SPB</strong> 套件当中的 <strong>OrCAD Capture
+CIS</strong> 之后，呈现出的主界面如下图所示：</p>
+<p><img src="/Electronics/Cadence/1-Schematic-Project/0.png"></p>
+<p>首先，在操作系统的当前工作目录下，手动新建一个
+<code>UINIO-Cadence-Template</code> 空文件夹，然后打开 <strong>OrCAD
+Capture CIS</strong> 菜单栏的【File -&gt; New -&gt;
+Project...】新建一个<strong>工程</strong>：</p>
+<p><img src="/Electronics/Cadence/1-Schematic-Project/1.png"></p>
+<p>在弹出的对话框当中，分别填写工程的名称，并且指定工程所在的位置，也就是上面新建的
+<code>UINIO-Cadence-Template</code> 目录：</p>
+<p><img src="/Electronics/Cadence/1-Schematic-Project/2.png"></p>
+<p>这个时候，<code>UINIO-Cadence-Template</code>
+目录下的工程文件结构如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">└─UINIO-Cadence-Template</span><br><span class="line">    │  UINIO-CADENCE-TEMPLATE.DSN</span><br><span class="line">    │  UINIO-Cadence-Template.opj</span><br><span class="line">    │</span><br><span class="line">    └─UINIO-Cadence-Template-PSpiceFiles</span><br></pre></td></tr></table></figure>
+<h1 id="一些基本的偏好设置">一些基本的偏好设置</h1>
+<p><strong>Cadence SPB SPB 17.4</strong>
+带来的一大变化就是可以支持暗黑界面的显示，鼠标点击 <strong>OrCAD Capture
+CIS</strong> 菜单栏上的【Options -&gt; Preferences】，在弹出的
+<strong>Preferences</strong> 对话框里，修改【Colors/Print】选项卡下的
+<strong>Application Theme</strong> 项为 <code>Dark</code>：</p>
+<p><img src="/Electronics/Cadence/1-Schematic-Project/3.png"></p>
+<p>然后，切换至【Grid Display】选项卡，修改工作区的网格风格为线条
+<code>Lines</code>：</p>
+<p><img src="/Electronics/Cadence/1-Schematic-Project/4.png"></p>
+<p>最后，再切换至【Miscellaneous】选项卡，勾选 <strong>Auto
+Reference</strong> 选项区的
+<code>Automatically reference placed</code>，使得放置和复制粘贴原理图符号时能够自动填写位号：</p>
+<p><img src="/Electronics/Cadence/1-Schematic-Project/5.png"></p>
+<blockquote>
+<p><strong>注意</strong>：Miscellaneous [ˌmɪsəˈleɪniəs]
+表示的是<strong>其它参数</strong>。</p>
+</blockquote>
+<h1 id="原理图符号的绘制">原理图符号的绘制</h1>
+<h2 id="原理图工程下新建符号库">原理图工程下新建符号库</h2>
+<p>接下来，在上面新建的 <code>UINIO-Cadence-Template</code>
+工程当中，鼠标依次点击 <strong>OrCAD Capture CIS</strong>
+菜单栏上的【File -&gt; New -&gt;
+Library...】，新建一个<strong>原理图符号库</strong>：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/1.png"></p>
+<p>默认情况下，新建的原理图符号库名称叫做
+<code>LIBRARY1.OLB</code>，选中这个符号库单击鼠标右键，在弹出的菜单中选择【Save】或者【Save
+As...】项：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/2.png"></p>
+<p>此时会弹出下面的对话框提示你选择一个保存位置，在这里我们将上面默认的原理符号库名称修改为
+<code>UINIO.OLB</code>，并将其保存到 <code>UINIO-Cadence-Template</code>
+工程的 <code>Libraries</code> 目录下面：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/3.png"></p>
+<h2 id="原理图符号库下新建符号">原理图符号库下新建符号</h2>
+<p>在 <strong>OrCAD Capture CIS</strong>
+左侧的<strong>工程列表</strong>当中，再次选中修改名称之后的
+<code>UINIO.OLB</code>。按下鼠标右键并点击弹出菜单当中的【New
+Part】，新建一个<strong>原理图符号</strong>：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/4.png"></p>
+<p>此时会弹出 <strong>New Part Properties</strong>
+对话框，需要再继续填写<strong>原理图符号</strong>的名称（这里假设为<code>GD32W515PIQ6</code>），然后鼠标点击【OK】按钮：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/5.png"></p>
+<p>在上面对话框当中，<strong>OrCAD Capture CIS</strong>
+会将原理图符号的封装类型 <code>Package Type</code> 划分为
+<code>Homogeneous</code>（默认）和 <code>Heterogeneous</code> 两种：</p>
+<ul>
+<li><strong>Homogeneous</strong> [ˌhɒməˈdʒiːniəs]
+同种类构成元器件：由多个相同的 <strong>Part</strong>
+组成，只需要创建其中一个部分，其它部分就会自动与其保持一致。</li>
+<li><strong>Heterogeneous</strong> [ˌhetərəˈdʒiːniəs]
+多种类构成元器件：由多个不同的 <strong>Part</strong>
+组成，多用于引脚数量较多的 IC
+元器件，可以对引脚进行分组分块设计，以便于后期的原理图设计。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：这些 <strong>Part</strong>
+的具体数量，都是由上面对话框当中的【Parts
+per】项控制。如果当前符号具有多个
+<strong>Part</strong>，那么就可以通过菜单栏上的 【View -&gt; Next
+Part】或者快捷键 【Ctrl + N】，以及【View -&gt; Previous
+Part】或者快捷键 【Ctrl + P】，在这个原理图符号的不同
+<strong>Part</strong> 之间来回进行切换。</p>
+</blockquote>
+<h2 id="开始绘制原理图符号">开始绘制原理图符号</h2>
+<p>完成前面的操作步骤之后，就可以通过调节 <strong>OrCAD Capture
+CIS</strong>
+主界面<strong>工作区</strong>当中的元器件<strong>虚线框</strong>，去控制原理图符号的大小尺寸。当鼠标点选该<strong>虚线框</strong>的时候，其四个边角上面就会分别出现紫色圆点，鼠标按住拖动就可以进行调节（下图右侧属性区的
+<code>PCB Footprint</code> 字段，用于关联该原理图符号所对应的 PCB
+封装）：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/6.png"></p>
+<blockquote>
+<p><strong>注意</strong>：在 <strong>OrCAD Capture CIS</strong>
+工作区按下字母【I】可以进行<strong>放大</strong>（Zoom
+In），也可以按下字母【O】进行<strong>缩小</strong>（Zoom Out）操作。</p>
+</blockquote>
+<p>接下来，展开<strong>菜单栏</strong>上的【Place】选项（如下图所示），或者点击
+<strong>OrCAD Capture CIS</strong>
+右侧<strong>绘制工具栏</strong>上的对应图标，就可以在<strong>虚线框</strong>里面绘制原理图符号的形状并且放置引脚：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/7.png"></p>
+<p>借助上述工具绘制完原理图符号的<strong>形状</strong>之后，就要开始放置原理图符号的<strong>引脚</strong>，这里鼠标选择菜单栏上的【Place
+-&gt; Pin】，或者按下快捷键【Shift +
+G】，再或者点击最右侧<strong>绘制工具栏</strong>上的【Place
+pin】按钮，此时会弹出 <strong>Place Pin</strong> 对话框：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/8.png"></p>
+<p><strong>Place Pin</strong>
+对话框当中，各个属性的功能说明如下面列表所示：</p>
+<ul>
+<li><code>Name</code>：引脚名称。</li>
+<li><code>Number</code>：引脚编号。</li>
+<li><code>Shape</code>：引脚的形状类型。</li>
+<li><code>Type</code>：引脚信号输入/输出属性。</li>
+<li><code>Width</code>：引脚的显示宽度。</li>
+</ul>
+<p>如果需要批量放置多个引脚，则可以鼠标点击菜单栏上的【Place -&gt; Pin
+Array】或者按下【Shift + J】快捷键，在弹出的 <strong>Place Pin
+Array</strong> 对话框进行如下设置：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/9.png"></p>
+<p><strong>Place Pin Array</strong>
+对话框当中，各个属性的功能说明如下面列表所示：</p>
+<ul>
+<li><code>Starting Name</code>：第一个引脚的名称。</li>
+<li><code>Starting Number</code>：第一个引脚的编号。</li>
+<li><code>Number of Pins</code>：需要放置的引脚总数。</li>
+<li><code>Pin Spacing</code>：引脚之间的间隔距离。</li>
+<li><code>Pin# Increment for Next Pin</code>：引脚 Name 和 Number
+的递增量。</li>
+</ul>
+<p>除此之外，在选中原理图工作区当中的一个或者多个引脚之后，点击鼠标右键菜单中的【Edit
+Pins】，或者直接按下快捷键【Shift +
+H】，就可以批量修改该原理图符号的各个引脚属性：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/10.png"></p>
+<p>这个时候在 <code>UINIO-Cadence-Template</code>
+目录下，呈现出的工程文件结构如下面所示，可以发现上面新建的
+<code>Libraries</code> 目录，以及该目录下新增的 <code>UINIO.OLB</code>
+符号库文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">└─UINIO-Cadence-Template</span><br><span class="line">    │  UINIO-CADENCE-TEMPLATE.DSN</span><br><span class="line">    │  UINIO-Cadence-Template.opj</span><br><span class="line">    │</span><br><span class="line">    ├─Libraries</span><br><span class="line">    │      UINIO.OLB</span><br><span class="line">    │      UINIO.OLBlck</span><br><span class="line">    │      UINIO_0.OBK</span><br><span class="line">    │</span><br><span class="line">    └─UINIO-Cadence-Template-PSpiceFiles</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：完成原理图符号的外形绘制以及引脚放置之后，可以按下快捷键【Ctrl
++
+S】执行保存操作，或者在工作区的<strong>窗口标签</strong>上展开鼠标右键菜单，选择【Save】项执行保存操作。</p>
+</blockquote>
+<p>在紫色的虚线图框当中，绘制完原理图符号（下图左），并且完成引脚的放置（下图右）之后，所得到的效果如下面所示：</p>
+<p><img src="/Electronics/Cadence/2-Schematic-Symbol/11.png"></p>
+<blockquote>
+<p><strong>注意</strong>：原理图符号相关的图形，必须放置在紫色的虚线框当中。</p>
+</blockquote>
+<h2 id="常用快捷键汇总">常用快捷键汇总</h2>
+<table>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 37%">
+<col style="width: 12%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">快捷键</th>
+<th style="text-align: left;">功能说明</th>
+<th style="text-align: left;">快捷键</th>
+<th style="text-align: left;">功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">【I】</td>
+<td style="text-align: left;">缩小工作区内容。</td>
+<td style="text-align: left;">【Shift + G】</td>
+<td style="text-align: left;">放置一个原理图符号引脚。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【O】</td>
+<td style="text-align: left;">放大工作区内容。</td>
+<td style="text-align: left;">【Shift + J】</td>
+<td style="text-align: left;">批量放置多个原理图符号引脚。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">【Ctrl + S】</td>
+<td style="text-align: left;">保存操作。</td>
+<td style="text-align: left;">【Shift + H】</td>
+<td style="text-align: left;">修改原理图符号引脚属性。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">【Ctrl + N】</td>
+<td style="text-align: left;">切换至<strong>下一个</strong>原理图符号的
+<strong>Part</strong>。</td>
+<td style="text-align: left;">【Ctrl + P】</td>
+<td style="text-align: left;">切换至<strong>上一个</strong>原理图符号的
+<strong>Part</strong>。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="开始原理图的绘制">开始原理图的绘制</h1>
+<h2 id="自动备份设置">自动备份设置</h2>
+<p>选择 <strong>OrCAD Capture CIS</strong> 主界面菜单栏上的【Options
+-&gt; Autobackup】，此时会弹出下面的 <strong>Multi-level Backup
+settings</strong> 对话框：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/2.png"></p>
+<p>在弹出的 <strong>Multi-level Backup settings</strong>
+对话框里，可以进行如下选项的设置：</p>
+<ul>
+<li><strong>Backup time</strong>：自动备份时间，默认为 10 分钟。</li>
+<li><strong>No of backups to</strong>：自动备份保存个数，默认为 3
+个。</li>
+<li><strong>Directory
+for</strong>：自动备份保存路径（建议指定一个目录，避免找不到备份文件）。</li>
+</ul>
+<h2 id="原理图图框全局设置">原理图图框全局设置</h2>
+<p>选择 <strong>OrCAD Capture CIS</strong> 主界面菜单栏上的【Options
+-&gt; Design Template】，此时会弹出下面的 <strong>Design
+Template</strong> 对话框：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/1.png"></p>
+<p>在上面弹出的 <strong>Design Template</strong>
+对话框当中，可以选择如下的几个选项卡进行设置：</p>
+<ul>
+<li><strong>Fonts</strong>：模板默认的字体。</li>
+<li><strong>Title Block</strong>：设置原理图右下角边框区域的模板。</li>
+<li><strong>Page
+Size</strong>：页面大小设置（只对新建的原理图页面有效）。</li>
+<li><strong>Grid
+Reference</strong>：配置工作区顶部和左侧显示的<strong>网格参考符</strong>。</li>
+<li><strong>Hierarchy</strong>：层级设置（保持默认即可）。</li>
+<li><strong>SDT Compatibility</strong>：SDT
+文件兼容性（保持默认即可）。</li>
+</ul>
+<h2 id="修改指定原理图页面的属性">修改指定原理图页面的属性</h2>
+<p>首先，鼠标选中需要修改的那一页原理图，单击鼠标右键并且选择
+<strong>Schematic Page Properties</strong> 项：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/3.png"></p>
+<p>然后，在弹出的 <strong>Schematic Page Properties</strong>
+窗口当中，就可以设置该原理图的各种属性：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/4.png"></p>
+<h2 id="添加原理图符号库-符号">添加原理图符号库 &amp; 符号</h2>
+<p>第一次打开刚才新建的原理图的时候，选择 <strong>OrCAD Capture
+CIS</strong> 主界面菜单栏上的 【Place -&gt; Part】，或者直接按下快捷键
+<strong>P</strong>，此时就会在主界面右侧弹出<strong>原理图符号列表</strong>：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/5.png"></p>
+<p>首先，鼠标点击上图 <strong>(1)</strong>
+的按钮添加原理图符号库，<strong>OrCAD Capture CIS</strong> 自带有 46 个
+<code>.olb</code> 原理图库文件，都保存在 <strong>Cadence SPB</strong>
+安装目录下的
+<code>D:\Software\Tech\Cadence\SPB_17.4\tools\capture\library</code>
+文件夹当中。其中
+<code>CAPSYM.olb</code>、<code>CONNECTOR.olb</code>、<code>DISCRETE.olb</code>、<code>TRANSISTOR.olb</code>
+这几个库最为常用：</p>
+<ul>
+<li><code>CAPSYM.olb</code>：存放<strong>电源</strong>、<strong>地</strong>、<strong>输入输出端口</strong>、<strong>标题栏</strong>等。</li>
+<li><code>CONNECTOR.olb</code>：存放有各种各样的<strong>连接器</strong>。</li>
+<li><code>DISCRETE.olb</code>：存放<strong>电阻</strong>、<strong>电容</strong>、<strong>电感</strong>、<strong>开关</strong>、<strong>变压器</strong>等常用分立（Discrete
+[dɪˈskriːt]）元件。</li>
+<li><code>TRANSISTOR.olb</code>：存放
+<strong>FET</strong>、<strong>UJT</strong>、<strong>PUT</strong>
+等晶体管元件。</li>
+</ul>
+<p>然后，就可以在上图 <strong>(2)</strong>
+的输入框里搜索指定元件，比如这里就放置了一个 <code>DISCRETE.olb</code>
+原理图符号库当中的<strong>电阻</strong>
+<code>R</code>。在选择好原理图符号之后，在工作区<strong>双击鼠标</strong>进行摆放，然后按下快捷键【ESC】或者选中鼠标右键菜单的【End
+Mode】结束摆放）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/6.png"></p>
+<p>原理图符号的相关操作，主要集中在 <strong>OrCAD Capture CIS</strong>
+菜单栏的【<strong>Edit</strong>】项下面。而连接原理图符号、绘制辅助线、添加文字图片的各种操作，则主要集中在菜单栏的【<strong>Place</strong>】项下面：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/7.png"></p>
+<h2 id="原理图符号的各种操作">原理图符号的各种操作</h2>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 87%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">原理图符号操作</th>
+<th style="text-align: left;">具体操作方式说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>选择</strong></td>
+<td style="text-align: left;">被鼠标选中之后，原理图符号周围会出现<strong>紫色虚线框</strong>。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>移动</strong></td>
+<td style="text-align: left;">首先选中原理图符号，然后鼠标左键按下拖动即可。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>对齐</strong></td>
+<td style="text-align: left;">执行菜单栏上的【Edit -&gt; Align -&gt;
+Align Left/Center/Right/Top/Middle/Bottom】项。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>镜像</strong></td>
+<td style="text-align: left;">执行菜单栏上的【Edit -&gt; Mirror -&gt;
+Horizontally/Vertically/Both】项，或者按下快捷键【H】或者【V】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>旋转</strong></td>
+<td style="text-align: left;">执行菜单栏上的【Edit -&gt;
+Rotate】命令，或者直接按下快捷键【R】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>拖动复制</strong></td>
+<td style="text-align: left;">选中符号，按下按键【Ctrl】直接拖动，松开鼠标即可快速完成复制粘贴操作。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>删除</strong></td>
+<td style="text-align: left;">首先选中符号，然后按下快捷键【Delete】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>复制</strong></td>
+<td style="text-align: left;">选中符号，鼠标右键选择【Copy】，或者直接按下快捷键【Ctrl
++ C】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>剪切</strong></td>
+<td style="text-align: left;">选中符号，鼠标右键选择【Cut】，或者直接按下快捷键【Ctrl
++ X】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>粘贴</strong></td>
+<td style="text-align: left;">选中符号，鼠标右键选择【Paste】，或者直接按下快捷键【Ctrl
++ V】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>撤销操作</strong></td>
+<td style="text-align: left;">直接按下快捷键【Ctrl + Z】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>重做操作</strong></td>
+<td style="text-align: left;">直接按下快捷键【Ctrl + Y】。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="电气连接相关的操作">电气连接相关的操作</h2>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">原理图电气连接操作</th>
+<th style="text-align: left;">具体操作方式说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>绘制导线</strong></td>
+<td style="text-align: left;">点击菜单栏命令【Place -&gt;
+Wire】，或者按下快捷键【W】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>结束导线绘制</strong></td>
+<td style="text-align: left;">按下快捷键【Esc】，或者鼠标右键菜单选择【End
+Wire】项。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>添加连接结点</strong></td>
+<td style="text-align: left;">在两条交叉未连接的导线之间添加连接节点，可以执行菜单栏命令【Place
+-&gt; Junction】，或者按下快捷键【J】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>放置网络标号</strong></td>
+<td style="text-align: left;">点击菜单栏上的【Place -&gt; Net
+Alias】，或者直接按下快捷键【N】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>忽略 ERC 检查点</strong></td>
+<td style="text-align: left;">点击菜单栏上的【Place -&gt; No
+Connect】，或者直接按下快捷键【X】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>总线</strong></td>
+<td style="text-align: left;">点击菜单栏【Place -&gt;
+Bus】或快捷键【B】（总线名称格式为 <code>名称 + []</code>，例如
+<code>BUS[0:5]</code>、<code>BUS[0-5]</code>、<code>BUS[0...5]</code>）。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>总线分支</strong></td>
+<td style="text-align: left;">点击菜单栏上的【Place -&gt; Bus
+Entry】，或者按下快捷键【E】（总线分支名称格式为
+<code>总线名称 + 序数</code>，例如
+<code>BUS0</code>、<code>BUS1</code>）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">放置<strong>电源</strong></td>
+<td style="text-align: left;">点击菜单栏上的【Place -&gt;
+Power】，或者按下快捷键【F】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">放置<strong>地</strong></td>
+<td style="text-align: left;">点击菜单栏上的【Place -&gt;
+Ground】，或者按下快捷键【G】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>跨页连接符</strong></td>
+<td style="text-align: left;">点击菜单栏上的【Place -&gt; Off-Page
+Connector】，或者按下快捷键【G】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>差分标识</strong></td>
+<td style="text-align: left;">鼠标选中需要添加差分标识的原理图页，再点击菜单栏上的【Tools
+-&gt; Create Differential Pair】。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="放置非电气对象">放置非电气对象</h2>
+<p><strong>OrCAD Capture CIS</strong>
+原理图当中的辅助线，可以用于标识信号和原理图功能模块。</p>
+<table>
+<colgroup>
+<col style="width: 29%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">非电气对象放置操作</th>
+<th style="text-align: left;">具体操作方式说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">修改<strong>辅助线属性</strong></td>
+<td style="text-align: left;">通过鼠标双击辅助线，可以修改辅助线的属性。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">放置<strong>辅助线</strong>（直线）</td>
+<td style="text-align: left;">点击菜单栏【Place -&gt;
+Line】，或按下快捷键【Shift + L】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">放置<strong>辅助线</strong>（矩形）</td>
+<td style="text-align: left;">点击菜单栏【Place -&gt;
+Rectangle】，或按下快捷键【Shift + R】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">放置<strong>辅助线</strong>（椭圆线）</td>
+<td style="text-align: left;">点击菜单栏【Place -&gt;
+Ellipse】，或按下快捷键【Shift + F】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">放置<strong>辅助线</strong>（椭圆弧线）</td>
+<td style="text-align: left;">点击菜单栏【Place -&gt; Elliptical
+Arc】，或按下快捷键【Shift + T】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">放置<strong>辅助线</strong>（贝塞尔曲线）</td>
+<td style="text-align: left;">点击菜单栏【Place -&gt; Bezier
+Curve】，或按下快捷键【Shift + Q】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">放置<strong>辅助线</strong>（折线 ）</td>
+<td style="text-align: left;">点击菜单栏【Place -&gt;
+Polyline】，或按下快捷键【Y】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">放置<strong>辅助线</strong>（弧线）</td>
+<td style="text-align: left;">选择菜单栏上的【Place -&gt; Arc】项。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">放置<strong>图片</strong></td>
+<td style="text-align: left;">选择菜单栏上的【Place -&gt;
+Picture...】项。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">放置<strong>字符标注</strong></td>
+<td style="text-align: left;">选择菜单栏【Place -&gt;
+Text...】，或按下快捷键【Shift + T】。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="重新生成原理图符号的位号">重新生成原理图符号的位号</h2>
+<p>首先，需要清除原理图上原有的位号，鼠标选择 <strong>OrCAD Capture
+CIS</strong> 菜单栏上的【Tools -&gt; Annotate】，勾选弹出对话框当中的
+<code>Reset part references to "?"</code>
+选项，然后按下【确定】按钮，就可以复位当前原理图上的所有位号：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/8.png"></p>
+<p>然后，就可以重新生成原理图上所有符号的位号，这里依然点击菜单栏上的【Tools
+-&gt; Annotate】项，勾选弹出对话框当中的
+<code>Incremental reference update</code>
+选项，然后按下【确定】按钮，就可以为当前原理图上的所有符号重新生成位号：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/9.png"></p>
+<h2 id="调整原理图符号属性表格显示方式">调整原理图符号属性表格显示方式</h2>
+<p>在 <strong>OrCAD Capture CIS</strong>
+的工作区，鼠标双击原理图符号，就会进入到<strong>属性编辑器</strong>【Property
+Editor】界面，该界面当中的属性表格默认是<strong>横向</strong>显示，查阅起来十分不便。因此可以鼠标右键单击下图当中标识的位置，选择弹出菜单中的【Pivot】选项：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/10.png"></p>
+<p>此时，就可以将属性表格的显示方向更换为<strong>纵向</strong>，这样阅读起来会更加的直观与方便（按照上述的步骤重新操作一次，就可以重新切换回横向显示模式）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/11.png"></p>
+<blockquote>
+<p><strong>注意</strong>：英文 Pivot [ˈpɪvət]
+指的是<strong>数据透视表</strong>。</p>
+</blockquote>
+<h2 id="搜索原理图或者工程">搜索原理图或者工程</h2>
+<p>鼠标点击 <strong>OrCAD Capture CIS</strong> 菜单栏上的【Edit -&gt;
+Find】项，或者直接按下快捷键【Ctrl + F】，就可以在主界面工作区右侧展开
+<strong>Find</strong>
+工作面板，在这里可以查询到<strong>原理图范围</strong>或者<strong>工程范围</strong>的<code>位号</code>、<code>字符</code>、<code>网络标号</code>、<code>引脚编号</code>等内容。</p>
+<p><img src="/Electronics/Cadence/3-Schematic/12.png"></p>
+<p>搜索结果会展示在 <strong>OrCAD Capture CIS</strong>
+底部的<strong>状态信息显示区域</strong>，此时使用鼠标双击该区域的某一条查询结果，就会自动高亮原理图当中与查询结果匹配的符号，具体操作步骤可以参考上面的示意图。</p>
+<h1 id="层次原理图的设计">层次原理图的设计</h1>
+<p>复杂的电路设计只绘制一张原理图，可读性会非常差，这种情况下可以采用层次化的原理图结构来提升可读性，即将复杂电路按照<strong>功能</strong>划分为若干的<strong>子模块</strong>。使得设计人员前期可以按照模块进行设计，最后通过在这些子模块原理图之间建立连接关系来完成整个电路的设计。层次原理图的设计方法，主要划分为<strong>自上而下</strong>和<strong>自下而上</strong>两种：</p>
+<ol type="1">
+<li><strong>自上而下</strong>的方式：先绘制<strong>顶层模块</strong>的原理图，再绘制<strong>子层模块</strong>的原理图。</li>
+<li><strong>自下而上</strong>的方式：先绘制<strong>子层模块</strong>的原理图，再绘制<strong>顶层模块</strong>的原理图。</li>
+</ol>
+<h2 id="新建一个原理图模块">新建一个原理图模块</h2>
+<p>在 <strong>OrCAD Capture CIS</strong> 左侧工程列表当中的
+<code>.\uinio-cadence-template.dsn</code>
+原理图上面点击鼠标右键，选择展开菜单中的【New
+Schematic...】新建一个名称为 <code>UINIO-Main</code>
+的<strong>原理图模块</strong>（默认名称为
+<code>SCHEMATIC1</code>，可以自定义名称）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/13.png"></p>
+<h2 id="指定根原理图模块">指定根原理图模块</h2>
+<p><strong>OrCAD Capture CIS</strong> 当中的每一份原理图，都需要指定一个
+<code>root</code> 根模块。选中左侧工程列表当中的 <code>UINIO-Main</code>
+模块，然后点击鼠标右键执行【Make Root】，把上面新建的
+<code>UINIO-Main</code> 指定为<strong>根模块</strong>：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/14.png"></p>
+<h2 id="新建一个原理图页">新建一个原理图页</h2>
+<p>在 <strong>OrCAD Capture CIS</strong> 左侧工程列表当中的
+<code>UINIO-Main</code> 上面点击鼠标右键，选择展开菜单中的【New
+Page】新建一张<strong>原理图页</strong>（默认名称为
+<code>PAGE1</code>，可以自定义名称）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/15.png"></p>
+<h2 id="自上而下的层次原理图设计">自上而下的层次原理图设计</h2>
+<p>首先，在 <strong>OrCAD Capture CIS</strong> 左侧建立并且打开
+<code>UINIO-Main/PAGE1</code> 原理图页，执行菜单栏上的【Place -&gt;
+Hierarchical
+Block...】命令，在弹出的对话框中输入<strong>分层模块</strong>的名称
+<code>UINIO-Block</code>，并且选择合适的参数：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/16.png"></p>
+<p>然后，在该原理图工作区放置<strong>分层模块框</strong>，并且将其拖动至合适的大小，以便于后续放置<strong>分层端口</strong>：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/17.png"></p>
+<p>接着，鼠标双击上面的<strong>分层模块框</strong>，或者选择鼠标右键菜单中的【Descend
+Hierarchy】项，设置好<strong>子层模块</strong>原理图的名称，这里使用默认的
+<code>PAGE1</code>：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/18.png"></p>
+<p>接下来，就可以在新生成的 <code>UINIO-Block/PAGE1</code>
+原理图当中展开绘制工作，此时可以选择菜单栏上的【Place -&gt; Hierarchical
+Port...】项，在打开的对话框中选择对应的<strong>分层端口</strong>符号与名称（<code>UINIO-Port-Left/Right</code>）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/19.png"></p>
+<p>这里的<strong>分层端口</strong>主要用于与上一层模块建立关联，经过上述步骤放置到工作区原理图上的分层端口如下面所示：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/20.png"></p>
+<p>返回之前放置<strong>分层模块</strong> <code>UINIO-Block</code>
+的原理图工作区，选中模块之后展开鼠标右键菜单，点击【Synchronize
+Up】选项，同步<strong>子层模块</strong>当中定义的<strong>分层端口</strong>至<strong>顶层模块</strong>当中：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/21.png"></p>
+<p>最后，<strong>OrCAD Capture CIS</strong>
+左侧工程列表，所呈现出的自上而下层次原理图结构，如下面的截图所示：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/22.png"></p>
+<h2 id="自下而上的层次原理图设计">自下而上的层次原理图设计</h2>
+<p>首先，在 <strong>OrCAD Capture CIS</strong> 左侧工程列表当中的
+<code>.\uinio-cadence-template.dsn</code>
+里面，新建两个原理图<strong>分层模块</strong>
+<code>UINIO-Schematic-1</code> 和
+<code>UINIO-Schematic-2</code>，同时仍然将 <code>UINIO-Main</code>
+指定为<strong>根模块</strong>：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/23.png"></p>
+<p>然后，在 <code>UINIO-Schematic-1</code> 和
+<code>UINIO-Schematic-2</code> 两个原理图模块下的 <code>PAGE1</code>
+页分别放置一个 <strong>AD9630</strong> 放大器元件：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/24.png"></p>
+<p>接着选择菜单栏上的【Place -&gt; Hierarchical Port...】项，分别为
+<code>UINIO-Schematic-1/PAGE1</code> 和
+<code>UINIO-Schematic-2/PAGE1</code> 当中的 <strong>AD9630</strong>
+添加输入输出相关的<strong>分层端口</strong> <code>INPUT</code> 和
+<code>OUTPUT</code>：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/25.png"></p>
+<p>最终，原理图页 <code>UINIO-Schematic-1/PAGE1</code> 和
+<code>UINIO-Schematic-2/PAGE1</code> 当中的 <strong>AD9630</strong>
+放大器元件符号如下图所示：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/26.png"></p>
+<p>接下来，返回到<strong>根模块</strong> <code>UINIO-Main</code> 的
+<code>PAGE1</code> 原理图页，点击菜单栏上的【Place -&gt; Hierarchical
+Block...】，放置上面定义的 <code>UINIO-Schematic-1</code> 和
+<code>UINIO-Schematic-2</code> 分层模块，注意在弹出的对话框当中选择
+<code>Schematic View</code>，并且分别指定关联的原理图：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/27.png"></p>
+<p>可以看到，此时放置的 <code>UINIO-Schematic-1</code> 和
+<code>UINIO-Schematic-2</code>
+分层模块，已经自带有<strong>分层端口</strong>（不需要再手动
+<strong>Synchronize Up</strong>）。绘制导线连接两个分层模块的
+<code>INPUT</code> 和 <code>OUTPUT</code>
+端口，这样就完成了自下而上层次原理图的创建：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/28.png"></p>
+<h1 id="drc-设计规则检查">DRC 设计规则检查</h1>
+<p>生产环境当中，完成原理图的设计工作之后，在开始正式的 PCB
+绘制之前，通常需要利用 <strong>OrCAD Capture CIS</strong>
+提供的<strong>设计规则检查</strong>（DRC，Design Rules
+Check）功能进行查漏补缺。鼠标点击菜单上的【PCB -&gt; Design Rules
+Check...】，就可以打开 DRC 检查对话框：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/29.png"></p>
+<p>按下对话框当中的【Run】按钮，就可以开始运行 DRC
+设计规则检查。检查当中发现的错误，都会展示在 <strong>OrCAD Capture
+CIS</strong> 底部的<strong>状态信息显示区域</strong>：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/30.png"></p>
+<p>如果需要调整当前所要检查的设计规则，则只需要鼠标点击对话框左侧的【Rules
+Setup】标签，进行相应的勾选即可：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/31.png"></p>
+<h1 id="导出网表bompdf">导出网表、BOM、PDF</h1>
+<h2 id="导出原理图对应的网表">导出原理图对应的网表</h2>
+<p><strong>网表</strong>（Netlist）用于保存原理图当中的<code>电路网络连接关系</code>，以及<code>元件封装信息</code>、<code>位号映射关系</code>等数据信息，并将这些信息同步到
+PCB 版图。而 <strong>Cadence SPB SPB 17.4</strong> 已经支持原理图与 PCB
+的同步更新，可以省略掉繁复的网表导出操作。</p>
+<h3 id="导出-cadence-spb-网表">导出 Cadence SPB 网表</h3>
+<p>鼠标选择左侧<strong>工程列表</strong>当中需要生成网表的原理图文件（这里是
+<code>.\uinio-cadence-template.dsn</code>），然后执行菜单栏命令【Tools
+-&gt; Create Netlist...】（也可以点击工具栏上的相应图标）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/32.png"></p>
+<p>在弹出的【Create Netlist】对话框当中，勾选 PCB 选项卡下面的
+<code>Create PCB Editor Netlist</code>，并且在【Netlist
+Files】里输入网表文件的保存路径（默认为 <code>allegro</code>
+文件夹）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/33.png"></p>
+<p>此时，如果单击该界面右侧的【Setup】按钮，在弹出的界面中勾选
+<code>Ignore Electrical Constraints</code>
+项，就会在导出过程当中忽略电气规则的检查（不建议这么做）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/34.png"></p>
+<h3 id="导出第三方网表">导出第三方网表</h3>
+<p>这里依然选择当前需要生成网表的原理图文件，然后同样鼠标点击菜单栏上的【Tools
+-&gt; Create Netlist...】命令，在弹出的 <strong>Create Netlist</strong>
+对话框当中，切换至【Other】选项卡：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/35.png"></p>
+<p>此时需要在 <strong>Create Netlist</strong>
+对话框当中，进行如下三个设置，才能够正确的导出第三方网表文件：</p>
+<ol type="1">
+<li>在 <strong>Formatters</strong> 栏中选择
+<strong>orTelesis64.dll</strong> 选项。</li>
+<li>在 <strong>Part Value</strong> 栏中填写
+<code>&#123;PCB Footprint&#125;</code>（避免报错）。</li>
+<li>在 <strong>Netlist File</strong> 栏填写第三方网表的导出路径。</li>
+</ol>
+<h2 id="导出-bom-清单">导出 BOM 清单</h2>
+<p>鼠标选择 <strong>OrCAD Capture CIS</strong>
+左侧<strong>工程列表</strong>当中，当前需要生成网表的原理图文件（这里是
+<code>.\uinio-cadence-template.dsn</code>），然后点击菜单栏【Tools -&gt;
+Bill of Materials...】导出该原理图的 BOM 清单：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/36.png"></p>
+<p>注意该对话框当中 <strong>Line Item Definition</strong> 栏里的
+<strong>Header</strong> 和 <strong>Combined property string</strong>
+输入框，默认情况下分别填写的内容为
+<code>Item\tQuantity\tReference\tPart</code> 和
+<code>&#123;Item&#125;\t&#123;Quantity&#125;\t&#123;Reference&#125;\t&#123;Value&#125;</code>，依次是<strong>元件数量</strong>、<strong>位号</strong>、<strong>属性值</strong>。但是缺省了<strong>元件封装</strong>相关的信息，因而需要在原来输入框内容的尾部分别再添加
+<code>\tPCB Footprint</code> 和
+<code>\t&#123;PCB Footprint&#125;</code>，填写完成之后的界面如下图所示：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/37.png"></p>
+<h2 id="导出-pdf-格式的原理图">导出 PDF 格式的原理图</h2>
+<p>在 <strong>OrCAD Capture CIS</strong>
+左侧的<strong>工程列表</strong>当中，选中当前需要生成网表的原理图文件（这里是
+<code>.\uinio-cadence-template.dsn</code>）。打开菜单栏上的【Options
+-&gt; Preferences】项，在弹出对话框的【Colors/Print】选项卡下，选择打印
+PDF
+时需要输出的<strong>属性</strong>以及对应的<strong>颜色</strong>（通常情况下保持默认设置即可）：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/38.png"></p>
+<p>首先鼠标依次点击菜单栏上面的【File -&gt;
+Print...】，或者直接按下快捷键【Ctrl +
+P】，然后在弹出的界面上点击【OK】，并在随后的操作系统对话框中选择 PDF
+导出的位置以及 PDF 名称，从而完成原理图 PDF 的导出操作：</p>
+<p><img src="/Electronics/Cadence/3-Schematic/39.png"></p>
+<h1 id="使用-padstack-创建-.pad-焊盘">使用 Padstack 创建 .pad 焊盘</h1>
+<p><strong>Cadence SPB</strong> 与其它板级 EDA
+工具的一个最大区别就在于，使用 <strong>PCB Editor 17.4</strong> 创建 PCB
+封装之前，需要先使用 <strong>Padstack Editor 17.4</strong> 工具制作好
+<code>.pad</code> 焊盘文件，然后 <strong>PCB Editor</strong>
+再导入这些焊盘，并且创建一个 <code>.dra</code>
+可编辑封装工程，最后才能导出绘制 PCB 所使用的 <code>.psm</code>
+封装文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">焊盘文件(.pad) -&gt; 可编辑封装文件(.dra) -&gt; PCB 封装文件(.psm)</span><br></pre></td></tr></table></figure>
+<h2 id="start选项卡">【Start】选项卡</h2>
+<p>选项卡【Start】是打开 <strong>Padstack Editor</strong>
+工具之后的默认界面，在这里可以选择焊盘的用途与几何形状（根据当前选择的<strong>用途</strong>，只有支持该用途的
+<strong>Padstack Editor</strong> 选项卡才可以被打开）：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/1.png"></p>
+<h2 id="drill选项卡">【Drill】选项卡</h2>
+<p>选项卡【Drill】里可以定义钻孔的<code>类型</code>、<code>直径</code>、<code>公差</code>，并且还支持一次性定义多个钻孔（需要在底部
+<strong>Drill rows and columns</strong>
+当中指定其<strong>行</strong>与<strong>列</strong>的信息）：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/2.png"></p>
+<h2 id="secondary-drill选项卡">【Secondary Drill】选项卡</h2>
+<p>选项卡【Secondary
+Drill】用于选择二次钻孔时所使用的是<strong>平头孔</strong>还是<strong>沉头孔</strong>，并且指定其
+<code>头部直径</code>、<code>公差</code>、<code>深度</code> 参数：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/3.png"></p>
+<h2 id="drill-symbol选项卡">【Drill Symbol】选项卡</h2>
+<p>选项卡【Drill
+Symbol】可以设置用来标识钻孔的几何图形符号，即<strong>钻孔符号</strong>：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/4.png"></p>
+<h2 id="drill-offset选项卡">【Drill Offset】选项卡</h2>
+<p>选项卡【Drill
+Offset】下面的功能比较单一，仅用于定义钻孔相对于原点的位置偏移量：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/5.png"></p>
+<h2 id="design-layers选项卡">【Design Layers】选项卡</h2>
+<p>选项卡【Design
+Layers】用来设置焊盘在每一个叠层里的参数（通过<strong>鼠标右键菜单</strong>可以添加与删除叠层）：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/6.png"></p>
+<h2 id="mask-layers选项卡">【Mask Layers】选项卡</h2>
+<p>选项卡【Mask
+Layers】用于设置焊盘在掩膜层相关的参数，可以通过右侧的【Add
+Layer】按钮添加更多的掩膜层（最多可以添加 16 次，一共 32 层）：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/7.png"></p>
+<h2 id="options选项卡">【Options】选项卡</h2>
+<p>选项卡【Options】里面只有如下两个选项，按需进行勾选即可：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/8.png"></p>
+<h2 id="制作-via-过孔焊盘">制作 Via 过孔焊盘</h2>
+<p>接下来，我们使用 <strong>Padstack Editor</strong> 分别制作直径为
+<code>1.1mm</code>、<code>1.2mm</code>、<code>1.3mm</code>
+的三个过孔焊盘。首先在【Start】标签下，将 <strong>Padstack
+Editor</strong> 的单位切换为
+<code>Millimeter</code>，然后选择焊盘的用途为
+<code>Via</code>，几何形状为 <code>Circle</code>：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/9.png"></p>
+<p>在【Drill】标签下，设置孔的类型为 <code>Circle</code>，钻孔直径为
+<code>1.1mm</code>，属于<strong>金属化孔</strong>
+<code>Plated</code>：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/10.png"></p>
+<p>在【Drill Symbol】标签下，钻孔符号名称设置为
+<code>Via</code>，钻孔图形为 <code>Circle</code>，钻孔图形的直径为
+<code>1.5mm</code>：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/11.png"></p>
+<p>在【Design
+Layers】标签下，可以对焊盘所涉及到的各个<strong>层</strong>进行设置（这里我们设置
+<code>BEGIN LAYER</code>、<code>DEFAULT INTERNAL</code>、<code>END LAYER</code>
+三个层）：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/12.png"></p>
+<h2 id="导出为-.pad-焊盘文件">导出为 .pad 焊盘文件</h2>
+<p>选择好焊盘的用途以及形状，并且配置好相关参数之后，就可以点击
+<strong>Padstack Editor</strong> 菜单栏上的【File -&gt; Save/Save
+As...】项，导出以 <code>.pad</code>
+作为后缀的焊盘设计文件（将这些焊盘文件保存至
+<code>UINIO-Cadence-Template</code> 工程下的 <code>\Libraries\Pad</code>
+目录）：</p>
+<p><img src="/Electronics/Cadence/4-Padstack/13.png"></p>
+<p>经过上述步骤制作完成直径分别为
+<code>1.1mm</code>、<code>1.2mm</code>、<code>1.3mm</code> 的
+<code>UINIO-Pad-1.pad</code>、<code>UINIO-Pad-2.pad</code>、<code>UINIO-Pad-3.pad</code>
+三个焊盘文件以后，此时 <strong>UINIO-Cadence-Template</strong>
+目录下所呈现的工程文件结构如下面所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">└─UINIO-Cadence-Template</span><br><span class="line">    │  UINIO-CADENCE-TEMPLATE.DSN</span><br><span class="line">    │  UINIO-Cadence-Template.opj</span><br><span class="line">    │</span><br><span class="line">    │─UINIO-Cadence-Template-PSpiceFiles</span><br><span class="line">    │</span><br><span class="line">    ├─Footprint</span><br><span class="line">    │</span><br><span class="line">    └─Pad</span><br><span class="line">        └─UINIO-Pad-1.pad</span><br><span class="line">        └─UINIO-Pad-2.pad</span><br><span class="line">        └─UINIO-Pad-3.pad</span><br></pre></td></tr></table></figure>
+<h1 id="创建-.dra-工程制作-.pcm-封装">创建 .dra 工程制作 .pcm 封装</h1>
+<p>鼠标点击 <strong>Allegro PCB Editor</strong> 菜单栏上的【File -&gt;
+New...】，此时可以选择如下两种 PCB 封装的创建方式：</p>
+<ol type="1">
+<li><strong>Package Symbol</strong>：基于 <strong>Padstack
+Editor</strong> 工具制作的焊盘来创建元件的 PCB 封装。</li>
+<li><strong>Package Symbol
+(Wizard)</strong>：基于<strong>向导</strong>的方式创建元件的 PCB
+封装。</li>
+</ol>
+<p><img src="/Electronics/Cadence/5-Footprint/1.png"></p>
+<blockquote>
+<p><strong>注意</strong>：该步骤创建的 <code>.dra</code>
+可编辑封装文件，可以保存到 <code>/Libraries/Footprint</code>
+目录下面。</p>
+</blockquote>
+<h2 id="基于焊盘创建-pcb-封装">基于焊盘创建 PCB 封装</h2>
+<p>执行 <strong>Allegro PCB Editor</strong> 菜单栏上的【Set Up -&gt;
+User Preferences】命令，在弹出的 <strong>User Preferences
+Editor</strong> 对话框依次点击【Path -&gt; Library】：</p>
+<p><img src="/Electronics/Cadence/5-Footprint/2.png"></p>
+<p>分别将<strong>焊盘文件路径</strong> <code>padpath</code>
+和<strong>封装文件路径</strong> <code>psmpath</code> 指向
+<strong>UINIO-Cadence-Template</strong> 工程下面预先建立好的
+<code>/Libraries/Pad</code>（已经保存有之前 <strong>Padstack
+Editor</strong> 导出的 <code>.pad</code> 焊盘文件）和
+<code>/Libraries/Footprint</code> 目录，便于后期设计封装和 PCB
+的时候，使用这些目录里保存的资源：</p>
+<p><img src="/Electronics/Cadence/5-Footprint/3.png"></p>
+<p>点击 <strong>Allegro PCB Editor</strong> 菜单栏上的【Layout -&gt;
+Pins】项，按下主界面右侧面板 <strong>Padstack</strong>
+旁边的按钮，然后选择当前需要放置的 <code>.pad</code> 焊盘：</p>
+<p><img src="/Electronics/Cadence/5-Footprint/4.png"></p>
+<p>放置好焊盘之后，就可以选择工具栏上的【Shape
+Add】按钮，在右侧面板指定的<strong>层</strong>上面，放置各种封装相关的<strong>外形</strong>和<strong>文本</strong>信息：</p>
+<p><img src="/Electronics/Cadence/5-Footprint/5.png"></p>
+<h2 id="基于向导创建-pcb-封装">基于向导创建 PCB 封装</h2>
+<p>基于向导的方式创建元件的 PCB 封装，顾名思义就是基于如下
+<strong>Package Symbol Wizard</strong>
+对话框里面的向导步骤，逐步的去创建相应的 PCB 封装：</p>
+<p><img src="/Electronics/Cadence/5-Footprint/6.png"></p>
+<p>基于向导的方式去创建封装，可供选择的基本封装类型主要有如下八种：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">序号</th>
+<th style="text-align: left;">封装名称</th>
+<th style="text-align: left;">封装中文</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><strong>DIP</strong></td>
+<td style="text-align: left;">双列直插式封装。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><strong>SOIC</strong></td>
+<td style="text-align: left;">小外型集成电路封装。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><strong>PLCC</strong></td>
+<td style="text-align: left;">塑料芯片载体封装。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><strong>QFP</strong></td>
+<td style="text-align: left;">方形扁平封装。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><strong>TH DISCRETE</strong></td>
+<td style="text-align: left;">通孔分立元件封装。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;"><strong>SMD DISCRETE</strong></td>
+<td style="text-align: left;">贴片分立元件封装。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><strong>SIP</strong></td>
+<td style="text-align: left;">单列直插式封装。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;"><strong>ZIP</strong></td>
+<td style="text-align: left;">锯齿形直插式封装。</td>
+</tr>
+</tbody>
+</table>
+<p>当鼠标点击 <strong>Package Symbol Wizard</strong>
+对话框的【Next】按钮进行到下一个步骤的时候，需要首先点击该界面当中的【Load
+Template】按钮，然后再勾选
+<code>Default Cadence supplied template</code>
+选项，接下来就可以继续点击【Next】进行进一步的配置：</p>
+<p><img src="/Electronics/Cadence/5-Footprint/7.png"></p>
+<h2 id="导出为-.psm-封装文件">导出为 .psm 封装文件</h2>
+<p>接下来，鼠标点击【File -&gt; Create Symbol...】项，将
+<code>.dra</code> 可编辑封装文件导出为 <code>.psm</code> 格式的 PCB
+封装文件（即 <strong>Allegro PCB Editor</strong> 绘制 PCB
+时候所使用的封装文件）：</p>
+<p><img src="/Electronics/Cadence/5-Footprint/8.png"></p>
+<blockquote>
+<p><strong>注意</strong>：推荐将 <code>.psm</code> 封装文件也保存至
+<strong>UINIO-Cadence-Template</strong> 工程的
+<code>\Libraries\Footprint</code> 目录下面。</p>
+</blockquote>
+<p>当进行到这个阶段的时候，<strong>UINIO-Cadence-Template</strong>
+目录下的工程文件结构就如下面所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">└─UINIO-Cadence-Template</span><br><span class="line">    │  UINIO-CADENCE-TEMPLATE.DSN</span><br><span class="line">    │  UINIO-Cadence-Template.opj</span><br><span class="line">    │</span><br><span class="line">    │─UINIO-Cadence-Template-PSpiceFiles</span><br><span class="line">    │</span><br><span class="line">    ├─Footprint</span><br><span class="line">    ├   └─UINIO.dra</span><br><span class="line">    │   └─UINIO.psm</span><br><span class="line">    │</span><br><span class="line">    └─Pad</span><br><span class="line">        └─UINIO-Pad-1.pad</span><br><span class="line">        └─UINIO-Pad-2.pad</span><br><span class="line">        └─UINIO-Pad-3.pad</span><br></pre></td></tr></table></figure>
+<h1 id="基于-pcb-editor-绘制版图">基于 PCB Editor 绘制版图</h1>
+<p>接下来的内容里，就可以开始使用 <strong>Allegro PCB Editor</strong>
+进行版图布线了，其主界面视图主要包含有如下几个区域：</p>
+<p><img src="/Electronics/Cadence/6-PCB/0.png"></p>
+<h2 id="class-与-sub-class">Class 与 Sub Class</h2>
+<p><strong>Allegro PCB Editor</strong> 会将 PCB
+划分为<strong>不同功能层次</strong>的组合，我们可以通过右侧控制面板上的【Options】进行切换：</p>
+<p><img src="/Electronics/Cadence/6-PCB/1.png"></p>
+<p>这些功能层次按照 <code>Class</code>（<strong>类</strong>）和
+<code>Sub Class</code>（<strong>子类</strong>）进行组织，例如比较常用的有
+<code>Board Geometry</code>、<code>Etch</code>、<code>Package</code>
+类及其子类：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board Geometry 类</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Design outline</strong> 子类</td>
+<td style="text-align: left;">PCB 板框</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Dimension</strong> 子类</td>
+<td style="text-align: left;">尺寸标注</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Silkscreen_top</strong> 子类</td>
+<td style="text-align: left;">顶层丝印</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Silkscreen_bottom</strong>
+子类</td>
+<td style="text-align: left;">底层丝印</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Etch 类</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>top</strong> 子类</td>
+<td style="text-align: left;">蚀刻顶层（走线与覆铜）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>bottom</strong> 子类</td>
+<td style="text-align: left;">蚀刻底层（走线与覆铜）</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 79%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Package 类</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Assembly_Top</strong>
+子类、<strong>Assembly_Bottom</strong> 子类</td>
+<td style="text-align: left;">装配层</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Pastemask_Top</strong>
+子类、<strong>Pastemask_Bottom</strong> 子类</td>
+<td style="text-align: left;">助焊层/钢网层</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Place_Bound_Top</strong>
+子类、<strong>Place_Bound_Bottom</strong> 子类</td>
+<td style="text-align: left;">元件封装的边界</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Silkscreen_Top</strong>
+子类、<strong>Silkscreen_Bottom</strong> 子类</td>
+<td style="text-align: left;">丝印层</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pin_Number</strong> 子类</td>
+<td style="text-align: left;">引脚编号</td>
+</tr>
+</tbody>
+</table>
+<p>下面表格整理了 <strong>Allegro PCB Editor</strong> 当中
+<code>Class</code>（类）和
+<code>Sub Class</code>（子类）所涉及的英文术语：</p>
+<table>
+<colgroup>
+<col style="width: 19%">
+<col style="width: 49%">
+<col style="width: 16%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">英文术语</th>
+<th style="text-align: left;">中文释义</th>
+<th style="text-align: left;">英文术语</th>
+<th style="text-align: left;">中文释义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Active</strong></td>
+<td style="text-align: left;">激活</td>
+<td style="text-align: left;"><strong>Class</strong></td>
+<td style="text-align: left;">类</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SubClass</strong></td>
+<td style="text-align: left;">子类</td>
+<td style="text-align: left;"><strong>Board</strong></td>
+<td style="text-align: left;">板</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Geometry</strong></td>
+<td style="text-align: left;">几何</td>
+<td style="text-align: left;"><strong>Assembly</strong></td>
+<td style="text-align: left;">装配</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Cutout</strong></td>
+<td style="text-align: left;">剪切</td>
+<td style="text-align: left;"><strong>Design</strong></td>
+<td style="text-align: left;">设计</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Outline</strong></td>
+<td style="text-align: left;">外框</td>
+<td style="text-align: left;"><strong>Dimension</strong></td>
+<td style="text-align: left;">尺寸</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Silkscreen</strong></td>
+<td style="text-align: left;">丝印</td>
+<td style="text-align: left;"><strong>Top</strong></td>
+<td style="text-align: left;">顶层</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Bottom</strong></td>
+<td style="text-align: left;">底层</td>
+<td style="text-align: left;"><strong>Etch</strong> [etʃ]</td>
+<td style="text-align: left;">刻蚀/线路层</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Manufacturing</strong></td>
+<td style="text-align: left;">制造</td>
+<td style="text-align: left;"><strong>Nc Drill</strong></td>
+<td style="text-align: left;">无连接的钻孔</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Package</strong></td>
+<td style="text-align: left;">封装</td>
+<td style="text-align: left;"><strong>Pastemask</strong></td>
+<td style="text-align: left;">助焊层/钢网层</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Bound</strong></td>
+<td style="text-align: left;">边界</td>
+<td style="text-align: left;"><strong>Soldermask</strong></td>
+<td style="text-align: left;">阻焊层</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pin</strong></td>
+<td style="text-align: left;">引脚</td>
+<td style="text-align: left;"><strong>Via</strong></td>
+<td style="text-align: left;">过孔</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Keepin</strong></td>
+<td style="text-align: left;">保持在...里面</td>
+<td style="text-align: left;"><strong>Keepout</strong></td>
+<td style="text-align: left;">保持在...外面</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ref Des</strong></td>
+<td style="text-align: left;">位号，Reference Designator
+[ˈdezɪɡneɪtə(r)]</td>
+<td style="text-align: left;"><strong>Route</strong></td>
+<td style="text-align: left;">布线</td>
+</tr>
+</tbody>
+</table>
+<h2 id="调整快捷键设置">调整快捷键设置</h2>
+<p>按照 <code>alias 按键 命令</code> 或者 <code>funckey 按键 命令</code>
+的格式，修改 <strong>Cadence SPB 17.4</strong> 安装目录
+<code>D:\Software\Tech\Cadence\SPB_17.4\share\pcb\text</code> 下的
+<code>env</code> 配置文件，就可以调整 <strong>Allegro PCB
+Editor</strong> 的快捷键设置，而 <code>env</code>
+文件默认的快捷键配置如下面的表格所示：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">快捷键</th>
+<th style="text-align: left;">功能描述</th>
+<th style="text-align: center;">快捷键</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>F2</strong></td>
+<td style="text-align: left;">Zoom Fit</td>
+<td style="text-align: center;"><strong>Shift + F2</strong></td>
+<td>Property Edit</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>F3</strong></td>
+<td style="text-align: left;">Add Connect</td>
+<td style="text-align: center;"><strong>Shift + F3</strong></td>
+<td>Slide</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>F4</strong></td>
+<td style="text-align: left;">Show Element</td>
+<td style="text-align: center;"><strong>Shift + F4</strong></td>
+<td>Show Measure</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>F5</strong></td>
+<td style="text-align: left;">Redraw</td>
+<td style="text-align: center;"><strong>Shift + F5</strong></td>
+<td>Copy</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>F6</strong></td>
+<td style="text-align: left;">Done</td>
+<td style="text-align: center;"><strong>Shift + F6</strong></td>
+<td>Move</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>F7</strong></td>
+<td style="text-align: left;">Next</td>
+<td style="text-align: center;"><strong>Shift + F7</strong></td>
+<td>Dehilight</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>F8</strong></td>
+<td style="text-align: left;">Oops</td>
+<td style="text-align: center;"><strong>Shift + F8</strong></td>
+<td>Hilight Pick</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>F9</strong></td>
+<td style="text-align: left;">Cancel</td>
+<td style="text-align: center;"><strong>Shift + F9</strong></td>
+<td>Vertex</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>F10</strong></td>
+<td style="text-align: left;">Grid Toggle</td>
+<td style="text-align: center;"><strong>Shift + F10</strong></td>
+<td>Save_as Temp</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>F11</strong></td>
+<td style="text-align: left;">Zoom In</td>
+<td style="text-align: center;"><strong>Shift + F11</strong></td>
+<td>Zoom Previous</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>F12</strong></td>
+<td style="text-align: left;">Zoom Out</td>
+<td style="text-align: center;"><strong>Shift + F12</strong></td>
+<td>Zoom World</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>~N</strong></td>
+<td style="text-align: left;">New</td>
+<td style="text-align: center;"><strong>Ctrl + F2</strong></td>
+<td>Next</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>~O</strong></td>
+<td style="text-align: left;">Open</td>
+<td style="text-align: center;"><strong>Ctrl + F5</strong></td>
+<td>Color192</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>~S</strong></td>
+<td style="text-align: left;">Save</td>
+<td style="text-align: center;"><strong>Ctrl + F6</strong></td>
+<td>Layer Priority</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>~D</strong></td>
+<td style="text-align: left;">Delete</td>
+<td style="text-align: center;"><strong>Ctrl + Shift + F5</strong></td>
+<td>Status</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>~Z</strong></td>
+<td style="text-align: left;">Undo</td>
+<td style="text-align: center;"><strong>+</strong></td>
+<td>subclass -+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>~Y</strong></td>
+<td style="text-align: left;">Redo</td>
+<td style="text-align: center;"><strong>-</strong></td>
+<td>subclass --</td>
+</tr>
+</tbody>
+</table>
+<h2 id="新建-.brd-版图工程">新建 .brd 版图工程</h2>
+<p>鼠标点击菜单栏上的【File -&gt; New...】，选择弹出对话框中的
+<strong>Drawing Type</strong> 类型为 <code>Board</code>，并且将
+<strong>Drawing Name</strong> 名称设置为
+<code>UINIO-CADENCE-TEMPLATE.brd</code>：</p>
+<p><img src="/Electronics/Cadence/6-PCB/2.png"></p>
+<p>这样就完成了 <code>UINIO-CADENCE-TEMPLATE.brd</code>
+版图文件的创建，此时的工程文件目录结构如下面所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">└─UINIO-Cadence-Template</span><br><span class="line">    │  UINIO-CADENCE-TEMPLATE.dsn</span><br><span class="line">    │  UINIO-Cadence-Template.opj</span><br><span class="line">    │  UINIO-CADENCE-TEMPLATE.brd</span><br><span class="line">    │</span><br><span class="line">    │─UINIO-Cadence-Template-PSpiceFiles</span><br><span class="line">    │</span><br><span class="line">    ├─Footprint</span><br><span class="line">    ├   └─UINIO.dra</span><br><span class="line">    │   └─UINIO.psm</span><br><span class="line">    │</span><br><span class="line">    └─Pad</span><br><span class="line">        └─UINIO-Pad-1.pad</span><br><span class="line">        └─UINIO-Pad-2.pad</span><br><span class="line">        └─UINIO-Pad-3.pad</span><br></pre></td></tr></table></figure>
+<h2 id="导入设计资源">导入设计资源</h2>
+<p>如前所述，焊盘文件以及 PCB
+封装，都会被保存在当前工程的相应目录下面，使用之前需要在 <strong>Allegro
+PCB Editor</strong> 当中指定这些目录：</p>
+<ul>
+<li><code>devpath</code>：存放第 3 方网表相关的 Device
+文件，这些文件中记录有 PCB
+封装的引脚信息，导入第三方网表时会与这些引脚信息进行比对。</li>
+<li><code>padpath</code>：存放 PCB 封装相关的焊盘文件。</li>
+<li><code>psmpath</code>：存放版图上的 PCB 封装文件。</li>
+<li><code>steppath</code>：存放 PCB 封装所对应的 3D 模型。</li>
+</ul>
+<p>鼠标点击 <strong>Allegro PCB Editor</strong> 菜单栏上的【Setup -&gt;
+User Preferences】，在弹出的对话框中选择【Path -&gt; Library】项，主要对
+<code>devpath</code>、<code>padpath</code>、<code>psmpath</code>、<code>steppath</code>
+这四项进行设置：</p>
+<p><img src="/Electronics/Cadence/6-PCB/3.png"></p>
+<h2 id="导入网表">导入网表</h2>
+<p>当在 <strong>Allegro PCB Editor</strong> 新建了一个 <code>.brd</code>
+后缀的 PCB 文件以后，就可以鼠标点击菜单栏上的【File -&gt; Import -&gt;
+Logic/Netlis】进行网表的导入操作：</p>
+<p><img src="/Electronics/Cadence/6-PCB/4.png"></p>
+<p>如果是 <strong>OrCAD Capture CIS</strong>
+导出的网表，就在弹出对话框中，选择默认打开的【Cadence】选项卡，勾选如下设置的同时，指定网表文件的存放路径：</p>
+<p><img src="/Electronics/Cadence/6-PCB/5.png"></p>
+<p>如果是第三方 EDA
+工具导出的网表文件，则需要切换至【Other】选项卡，勾选如下的选项，并且指定第三方网表的保存路径：</p>
+<p><img src="/Electronics/Cadence/6-PCB/6.png"></p>
+<h2 id="导入-pcb-板框">导入 PCB 板框</h2>
+<p><code>DWG</code> 或者 <code>DXF</code>
+格式的板框文件，由结构工程师借助专业的 CAD 工具绘制而成，鼠标依次点击
+<strong>Allegro PCB Editor</strong> 菜单栏上的【File -&gt; Import -&gt;
+DXF】，在弹出的对话话中进行如下设置：</p>
+<p><img src="/Electronics/Cadence/6-PCB/7.png"></p>
+<p>选择 DXF 文件所要导入的图层（通常选择
+<code>BOARD GEOMETRY</code>），其它设置项可以参考下图进行修改，最后按下【Map】按钮将这里设置的
+<code>Class</code> 和 <code>Subclass</code> 映射到 DXF 图层：</p>
+<p><img src="/Electronics/Cadence/6-PCB/8.png"></p>
+<p>除此之外，<strong>Allegro PCB Editor</strong> 还支持自定义简单形状的
+PCB 板框，鼠标点击菜单栏上的【Add -&gt; Line】命令，就可以在
+<strong>Board Geomertry</strong> 层（在右侧控制面板指定）绘制自定义的
+PCB 板框：</p>
+<p><img src="/Electronics/Cadence/6-PCB/9.png"></p>
+<h2 id="层叠设置">层叠设置</h2>
+<p>执行 <strong>Allegro PCB Editor</strong> 菜单栏上面的【Setup -&gt;
+Cross Section】命令，就可以打开 PCB 叠层管理器：</p>
+<p><img src="/Electronics/Cadence/6-PCB/10.png"></p>
+<p>在叠层名称上展开鼠标右键菜单，单击上面的【Add
+Layer】项，就可以添加新的 PCB
+叠层（需要指定叠层的<code>类型</code>、<code>功能</code>、<code>材料</code>）：</p>
+<p><img src="/Electronics/Cadence/6-PCB/11.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>Allegro PCB Editor</strong>
+的叠层管理器当中，使用鼠标双击自定义叠层的名称，就可以对其执行修改操作。</p>
+</blockquote>
+<h2 id="原理图-pcb-交互模式">原理图 &amp; PCB 交互模式</h2>
+<p>启用原理图与 PCB 的交互选择模式，需要鼠标点击 <strong>OrCAD Capture
+CIS</strong> 菜单栏上的【Options -&gt;
+Preference】项，然后选择【Miscellaneous】选项卡，勾选
+<code>Enable Intertool Communication</code> 启用交互模式：</p>
+<p><img src="/Electronics/Cadence/6-PCB/12.png"></p>
+<p>在导入 <strong>Cadence SPB</strong> 网表之后，首先需要在
+<strong>Allegro PCB Editor</strong> 中执行【Move】命令，选中 PCB
+版图上的元件（下图左）。然后选择菜单栏上的【Display -&gt; Assign
+Color】，高亮 PCB
+版图上被选中的元件，此时原理图当中对应的元件就会自动被选中：</p>
+<p><img src="/Electronics/Cadence/6-PCB/13.png"></p>
+<h1 id="常用-pcb-版图布局操作">常用 PCB 版图布局操作</h1>
+<p><strong>Allegro PCB Editor</strong>
+当中进行元素布局的时候，<strong>需要先执行菜单栏上的命令，再框选需要执行操作的元素</strong>，这是与其它
+EDA 工具使用习惯上的一个重大区别：</p>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 78%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">PCB 版图布局操作</th>
+<th style="text-align: left;">操作方式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">移动元素</td>
+<td style="text-align: left;">点击菜单栏【Edit -&gt; Move】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">旋转元素</td>
+<td style="text-align: left;">点击菜单栏【Edit -&gt; Spin】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">镜像元素</td>
+<td style="text-align: left;">点击菜单栏【Edit -&gt; Mirror】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">复制元素</td>
+<td style="text-align: left;">点击菜单栏【Edit -&gt; Copy】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">测量距离</td>
+<td style="text-align: left;">点击菜单栏【Display -&gt; Measure】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">高亮网络</td>
+<td style="text-align: left;">点击菜单栏【Display -&gt;
+Highlight】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">取消高亮网络</td>
+<td style="text-align: left;">点击菜单栏【Display -&gt;
+Dehighlight】。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">分配网络颜色</td>
+<td style="text-align: left;">点击菜单栏【Display -&gt; Assign
+Color】。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">显示元素信息</td>
+<td style="text-align: left;">点击菜单栏【Display -&gt;
+Element】，然后选中要查看信息的元素。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">互换元素位置</td>
+<td style="text-align: left;">点击菜单栏【Place -&gt; Swap -&gt;
+Components】。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">PCB 版图布局组合操作</th>
+<th style="text-align: left;">操作方式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">对齐元素</td>
+<td style="text-align: left;">首先点击菜单栏【Setup -&gt; Application
+Mode -&gt; Placement
+Edit】，然后框选分组元素，点击鼠标右键菜单上的【Align
+components】项。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">分组元素</td>
+<td style="text-align: left;">首先点击菜单栏【Setup -&gt; Application
+Mode -&gt; Placement
+Edit】，然后框选分组元素，点击鼠标右键菜单上的【Place replicate
+create】项。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">临时分组元素</td>
+<td style="text-align: left;">首先点击菜单栏【Edit -&gt;
+Move】，然后框选需要临时分组的元素，点击鼠标右键菜单上的【Temp
+Group】项。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="元素的锁定与解锁">元素的锁定与解锁</h2>
+<p>使用 <strong>Allegro PCB Editor</strong>
+进行元件布局操作的时候，由于一些结构件和定位孔的位置固定，为了防止后期误操作，通常会使用锁定命令将其锁定。使用时需要鼠标先点击工具栏上的【Fix】和【Unfix】图标，然后再选择需要锁定或者解锁的元素：</p>
+<p><img src="/Electronics/Cadence/6-PCB/14.png"></p>
+<h1 id="善用约束管理器">善用约束管理器</h1>
+<p><strong>网络类</strong>（Net
+Class）用于将具备同一属性的电路网络放置在一起，分类的目的在于可以使用统一的规则对布线进行约束和管理。例如
+<code>GND</code> 和 <code>Power</code>
+网络放置在一起构成<strong>电源网络类</strong>，或者将 <code>90Ω</code>
+的 USB 差分信号放置在一起构成 <code>90Ω</code>
+<strong>差分类</strong>。鼠标选择 <strong>Allegro PCB Editor</strong>
+菜单栏上面的【Setup -&gt; Constraints -&gt; Constraint Manager...】项
+：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/1.png"></p>
+<p>就可以打开 <strong>Allegro PCB Editor</strong>
+提供的<strong>约束管理器窗口</strong>：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/2.png"></p>
+<h2 id="创建-class-网络类">创建 Class 网络类</h2>
+<p>网络类 <strong>Class</strong>
+通常用于依照<strong>功能模块</strong>对电路网络进行分类，鼠标依次选择
+<strong>约束管理器窗口</strong> 左侧的【Physical -&gt;
+Net】菜单项，然后使用【Ctrl/Shift +
+鼠标左键】选中多个网络，再点击鼠标右键菜单中的【Create -&gt;
+Class...】创建 Class 网络类：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/3.png"></p>
+<p>在随后弹出的网络类窗口当中，对创建的 Class
+网络类进行命名，然后鼠标点击【确定】按钮即可：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/4.png"></p>
+<h2 id="创建-net-group-网络分组">创建 Net Group 网络分组</h2>
+<p>网络分组 <strong>Net Group</strong>
+用于对某一类型的信号进行分组，例如 DDR 颗粒的同一组 <code>D0～D7</code>
+数据线就可以创建为一组 Net Group。其创建步骤与网络类 Class
+相似，不同之处在于点击的是鼠标右键菜单上的【Create -&gt; Net
+Group...】项：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/5.png"></p>
+<p>在随后弹出的网络类窗口当中，对要创建的网络分组 Net Group
+进行命名，然后鼠标点击【确定】按钮即可：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/6.png"></p>
+<h2 id="创建-pin-pair-引脚配对">创建 Pin Pair 引脚配对</h2>
+<p>引脚配对 <strong>Pin Pair</strong> 通常用于等长布线操作，选择
+<strong>约束管理器窗口</strong> 左侧的【Electrical -&gt; Net -&gt;
+Routing -&gt; Relative Propagation
+Delay】菜单项，然后选中<strong>一条</strong>需要实现等长的信号线，再点击鼠标右键菜单上的【Create
+-&gt; Pin Pair...】创建引脚配对：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/7.png"></p>
+<p>执行上述操作之后，弹出的对话框中会显示该信号线所连接的<strong>全部引脚</strong>，如果是<strong>点对点</strong>可以直接按下【OK】按钮，如果该信号线上存在着<strong>多个连接点</strong>，则选择需要进行等长操作的两个连接点即可：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/8.png"></p>
+<h2 id="添加过孔约束">添加过孔约束</h2>
+<p>选择 <strong>约束管理器窗口</strong> 左侧的【Physical -&gt; Physical
+Constraint Set -&gt; All Layers】菜单项，鼠标双击右侧表格当中
+<code>Vias</code> 栏下面的空白项目：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/9.png"></p>
+<p>在弹出的 <strong>Edit Via List</strong>
+对话框当中，使用鼠标双击<strong>左侧</strong>待选的过孔，就可以将其添加至<strong>右侧</strong>的
+PCB 过孔列表当中，操作完成之后点击【OK】按钮。接下来就可以在 PCB
+布线过程当中，<strong>双击鼠标左键</strong>实现打孔换层的操作：</p>
+<p><img src="/Electronics/Cadence/7-Constraint/10.png"></p>
+<h1 id="开始执行铺铜操作">开始执行铺铜操作</h1>
+<h2 id="选择铺铜区域">选择铺铜区域</h2>
+<p>鼠标点击 <strong>Allegro PCB Editor</strong> 菜单栏上的 【Shape -&gt;
+Select Shape or Void/Cavity】，就可以选中 PCB
+版图上已经铺铜的区域，该操作是其它一切铺铜相关操作的基础，因而务必熟练掌握：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/0.png"></p>
+<h2 id="修改铺铜区域属性">修改铺铜区域属性</h2>
+<p>首先点击 <strong>Allegro PCB Editor</strong> 菜单栏上的 【Shape -&gt;
+Select Shape or Void/Cavity】选中 PCB
+上已经铺铜的区域，然后选中鼠标右键菜单上的【Parameters】选项，在打开的对话框里就可以调整该铺铜区域的各项属性：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/1.png"></p>
+<h2 id="手动铺铜">手动铺铜</h2>
+<p>执行 <strong>Allegro PCB Editor</strong> 菜单栏上的【Shape -&gt;
+Polygon/Rectangular/Circular】项，就可以手动绘制出<code>多边形</code>、<code>矩形</code>、<code>圆形</code>的铺铜区域：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/2.png"></p>
+<h2 id="手动挖铜">手动挖铜</h2>
+<p><strong>挖铜</strong>就是移除多余的铺铜区域，执行 <strong>Allegro PCB
+Editor</strong> 菜单栏上的【Shape -&gt; Manual
+Void/Cavity】项，就可以展开下图中的一系列挖铜命令：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/3.png"></p>
+<h2 id="自动移除孤铜">自动移除孤铜</h2>
+<p><strong>孤铜</strong>是指在 PCB
+中孤立无连接的覆铜区域，通常需要对其进行删除处理。首先执行
+<strong>Allegro PCB Editor</strong> 菜单栏上的【Display -&gt;
+Status】命令，查看当前 PCB 版图当中是否存在有孤铜区域：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/4.png"></p>
+<p>如果存在有孤铜区域（上图黄色框选部分），那么首先需要执行菜单栏上的【Shape
+-&gt; Delete Island】命令，然后在 <strong>Allegro PCB Editor</strong>
+右侧控制面板上的【Options】选项卡下面，点击【Delete all on
+layer】按钮删除这些孤铜区域：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/5.png"></p>
+<h2 id="调整铺铜网络">调整铺铜网络</h2>
+<p>调整铺铜的电路网络，首先需要执行菜单栏上的【Shape -&gt; Select Shape
+or
+Void/Cavity】命令，选择需要分配或调整网络的铺铜区域，然后点击鼠标右键菜单上的【Assign
+Net】菜单项：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/6.png"></p>
+<p>最后，就可以在 <strong>Allegro PCB Editor</strong>
+右侧控制面板上的【Options】选项卡里，点击【...】按钮进行电路网络的分配：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/7.png"></p>
+<h2 id="静动态铺铜转换">静/动态铺铜转换</h2>
+<p><strong>动态铺铜</strong>（Dynamic
+Shape）可以自动避让元件和过孔，而<strong>静态铺铜</strong>（Static
+Shape）则需要手动进行避让，PCB 版图设计的时候两者可以相互进行转换。</p>
+<p>首先，依然需要执行菜单栏上的【Shape -&gt; Select Shape or
+Void/Cavity】命令，选中需要进行转换的铺铜区域，然后点击鼠标右键菜单上的【Change
+Shape Type】选项，就转换铺铜区域的静态与动态属性：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/8.png"></p>
+<h2 id="合并铺铜区域">合并铺铜区域</h2>
+<p><strong>Allegro PCB Editor</strong>
+支持将两个处于<strong>相同网络</strong>的铺铜区域进行合并，或者将一个没有指定网络的铺铜区域，与一个指定了网络的铺铜区域进行合并。首先选中需要进行合并操作的覆铜区域，然后执行菜单栏上的【Shape
+-&gt; Merge Shapes】命令即可：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/9.png"></p>
+<h2 id="铺铜优级级">铺铜优级级</h2>
+<p>如果铺铜区域出现重叠的情况，则可以让其中一个铺铜区域的优先级，高于另外一个铺铜区域，此时后者将会自动避让重叠的部分。</p>
+<p>这里同样通过菜单栏上的【Shape -&gt; Select Shape or
+Void/Cavity】命令，选中需要<strong>提高</strong>或者<strong>降低</strong>优先级的铺铜区域，然后点击鼠标右键菜单上的【Raise
+Priority】或者【Lower
+Priority】选项，就可以提高或者降低该铺铜区域的优先级。</p>
+<p><img src="/Electronics/Cadence/8-Coppering/10.png"></p>
+<h2 id="分隔平面铺铜">分隔平面铺铜</h2>
+<p>首先，执行 <strong>Allegro PCB Editor</strong> 菜单栏上的【Edit -&gt;
+Split Plane -&gt;
+Parameters】，设置<strong>分隔平面</strong>（即需要自动铺铜的层）的参数（通常选择
+<code>Solid</code> 实心铺铜）：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/11.png"></p>
+<p>然后，再执行菜单栏上的【Edit -&gt; Split Plane -&gt;
+Create】建立<strong>分隔平面</strong>命令，选择需要进行自动铺铜操作的<strong>层</strong>：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/12.png"></p>
+<p>最后，在弹出的窗口里，选择当前需要自动铺铜的电路网络，完成之后鼠标点击【OK】按钮，<strong>Allegro
+PCB Editor</strong> 就会自动对该层电路网络进行铺铜：</p>
+<p><img src="/Electronics/Cadence/8-Coppering/13.png"></p>
+<h2 id="铺铜操作总结">铺铜操作总结</h2>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">铺铜选择操作</th>
+<th style="text-align: left;">操作说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>选择铺铜区域</strong></td>
+<td style="text-align: left;">点击菜单栏上的【Shape -&gt; Select Shape
+or Void/Cavity】选项，然后再在 PCB 版图上执行选择操作。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 89%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">其它铺铜操作</th>
+<th style="text-align: left;">操作说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>手动铺铜</strong></td>
+<td style="text-align: left;">直接点击菜单栏上的【Shape -&gt;
+Polygon/Rectangular/Circular】选项。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>手动挖铜</strong></td>
+<td style="text-align: left;">直接点击菜单栏上的【Shape -&gt; Manual
+Void/Cavity】选项。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>自动移除孤铜</strong></td>
+<td style="text-align: left;">直接点击菜单栏上的【Shape -&gt; Delete
+Island】选项。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>合并铺铜区域</strong></td>
+<td style="text-align: left;">选中铺铜区域之后，执行菜单栏上的【Shape
+-&gt; Merge Shapes】选项。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>修改铺铜区属性</strong></td>
+<td style="text-align: left;">选中铺铜区域之后，点击鼠标右键菜单上的【Parameters】选项。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>调整铺铜网络</strong></td>
+<td style="text-align: left;">选中铺铜区域之后，点击鼠标右键菜单上的【Assign
+Net】选项。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>动静态铺铜转换</strong></td>
+<td style="text-align: left;">选中铺铜区域之后，点击鼠标右键菜单上的【Change
+Shape Type】选项。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>铺铜优级级</strong></td>
+<td style="text-align: left;">选中铺铜区域之后，点击鼠标右键菜单上的【Raise
+Priority】或者【Lower Priority】选项。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>自动对层铺铜</strong></td>
+<td style="text-align: left;">首先点击菜单栏【Edit -&gt; Split Plane
+-&gt; Parameters】设置铺铜方式，然后点击【Edit -&gt; Split Plane -&gt;
+Create】选择铺铜的层，最后指定当前自动铺铜的网络。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="常用的布线操作">常用的布线操作</h1>
+<h2 id="显示飞线">显示飞线</h2>
+<p>执行 <strong>Allegro PCB Editor</strong> 菜单栏上的【Display -&gt;
+Show Rats/Blank Rats】可以显示或者隐藏 PCB
+版图上各个元件的原理图飞线连接关系，在弹出的下拉菜单里存在有
+<code>All</code>（显示/隐藏所有的飞线）、<code>Net</code>（显示/隐藏指定网络的飞线）、<code>Components</code>（显示/隐藏所选择的元器件的飞线）三个选项：</p>
+<p><img src="/Electronics/Cadence/9-Wiring/1.png"></p>
+<h2 id="调整布线形态">调整布线形态</h2>
+<p>在布线过程当中，经常需要调整走线的形状以及弯折的角度，此时可以执行
+<strong>Allegro PCB Editor</strong> 菜单栏上的【Route -&gt;
+Connect】命令，将【Options】面板中的 <strong>Line Lock</strong> 修改为
+<code>Line/Arc</code>（走线形状）以及
+<code>Off/45/90</code>（走线弯折角度）：</p>
+<p><img src="/Electronics/Cadence/9-Wiring/2.png"></p>
+<h2 id="蛇形走线">蛇形走线</h2>
+<p>PCB
+进行等长设计时，经常会使用到<strong>蛇形走线</strong>。首先执行菜单栏上的【Route
+-&gt; Delay
+Tune】命令，然后就可以通过右侧的【Options】面板，配置蛇形布线的相关参数：</p>
+<p><img src="/Electronics/Cadence/9-Wiring/3.png"></p>
+<blockquote>
+<p><strong>注意</strong>：【Options】面板中的 <code>Style</code>
+参数用于设置蛇形走线的样式，而【Gap】通常被设置为 3
+倍线宽，<code>Corners</code> 通常设置为 <code>45°</code>，最小拐角长度
+<code>Miter Size</code> 通常设置为 1 倍线宽。</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>写给有经验 PCB 工程师的 Cadence Allegro 极速上手指南</p><p><a href="http://www.uinio.com/Electronics/Cadence/">http://www.uinio.com/Electronics/Cadence/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-08-06</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/EDA/">EDA</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/C&amp;C++/Qt-Widgets/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Qt 5 桌面应用程序开发指南 - QtWidgets 篇</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/Analog_Mooc/"><span class="level-item">模拟电子技术原理与综合运用</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#cadence-spb-安装与启动"><span class="level-left"><span class="level-item">1</span><span class="level-item">Cadence SPB 安装与启动</span></span></a></li><li><a class="level is-mobile" href="#新建一个原理图工程"><span class="level-left"><span class="level-item">2</span><span class="level-item">新建一个原理图工程</span></span></a></li><li><a class="level is-mobile" href="#一些基本的偏好设置"><span class="level-left"><span class="level-item">3</span><span class="level-item">一些基本的偏好设置</span></span></a></li><li><a class="level is-mobile" href="#原理图符号的绘制"><span class="level-left"><span class="level-item">4</span><span class="level-item">原理图符号的绘制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#原理图工程下新建符号库"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">原理图工程下新建符号库</span></span></a></li><li><a class="level is-mobile" href="#原理图符号库下新建符号"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">原理图符号库下新建符号</span></span></a></li><li><a class="level is-mobile" href="#开始绘制原理图符号"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">开始绘制原理图符号</span></span></a></li><li><a class="level is-mobile" href="#常用快捷键汇总"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">常用快捷键汇总</span></span></a></li></ul></li><li><a class="level is-mobile" href="#开始原理图的绘制"><span class="level-left"><span class="level-item">5</span><span class="level-item">开始原理图的绘制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#自动备份设置"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">自动备份设置</span></span></a></li><li><a class="level is-mobile" href="#原理图图框全局设置"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">原理图图框全局设置</span></span></a></li><li><a class="level is-mobile" href="#修改指定原理图页面的属性"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">修改指定原理图页面的属性</span></span></a></li><li><a class="level is-mobile" href="#添加原理图符号库-符号"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">添加原理图符号库 &amp; 符号</span></span></a></li><li><a class="level is-mobile" href="#原理图符号的各种操作"><span class="level-left"><span class="level-item">5.5</span><span class="level-item">原理图符号的各种操作</span></span></a></li><li><a class="level is-mobile" href="#电气连接相关的操作"><span class="level-left"><span class="level-item">5.6</span><span class="level-item">电气连接相关的操作</span></span></a></li><li><a class="level is-mobile" href="#放置非电气对象"><span class="level-left"><span class="level-item">5.7</span><span class="level-item">放置非电气对象</span></span></a></li><li><a class="level is-mobile" href="#重新生成原理图符号的位号"><span class="level-left"><span class="level-item">5.8</span><span class="level-item">重新生成原理图符号的位号</span></span></a></li><li><a class="level is-mobile" href="#调整原理图符号属性表格显示方式"><span class="level-left"><span class="level-item">5.9</span><span class="level-item">调整原理图符号属性表格显示方式</span></span></a></li><li><a class="level is-mobile" href="#搜索原理图或者工程"><span class="level-left"><span class="level-item">5.10</span><span class="level-item">搜索原理图或者工程</span></span></a></li></ul></li><li><a class="level is-mobile" href="#层次原理图的设计"><span class="level-left"><span class="level-item">6</span><span class="level-item">层次原理图的设计</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建一个原理图模块"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">新建一个原理图模块</span></span></a></li><li><a class="level is-mobile" href="#指定根原理图模块"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">指定根原理图模块</span></span></a></li><li><a class="level is-mobile" href="#新建一个原理图页"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">新建一个原理图页</span></span></a></li><li><a class="level is-mobile" href="#自上而下的层次原理图设计"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">自上而下的层次原理图设计</span></span></a></li><li><a class="level is-mobile" href="#自下而上的层次原理图设计"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">自下而上的层次原理图设计</span></span></a></li></ul></li><li><a class="level is-mobile" href="#drc-设计规则检查"><span class="level-left"><span class="level-item">7</span><span class="level-item">DRC 设计规则检查</span></span></a></li><li><a class="level is-mobile" href="#导出网表bompdf"><span class="level-left"><span class="level-item">8</span><span class="level-item">导出网表、BOM、PDF</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#导出原理图对应的网表"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">导出原理图对应的网表</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#导出-cadence-spb-网表"><span class="level-left"><span class="level-item">8.1.1</span><span class="level-item">导出 Cadence SPB 网表</span></span></a></li><li><a class="level is-mobile" href="#导出第三方网表"><span class="level-left"><span class="level-item">8.1.2</span><span class="level-item">导出第三方网表</span></span></a></li></ul></li><li><a class="level is-mobile" href="#导出-bom-清单"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">导出 BOM 清单</span></span></a></li><li><a class="level is-mobile" href="#导出-pdf-格式的原理图"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">导出 PDF 格式的原理图</span></span></a></li></ul></li><li><a class="level is-mobile" href="#使用-padstack-创建-.pad-焊盘"><span class="level-left"><span class="level-item">9</span><span class="level-item">使用 Padstack 创建 .pad 焊盘</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#start选项卡"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">【Start】选项卡</span></span></a></li><li><a class="level is-mobile" href="#drill选项卡"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">【Drill】选项卡</span></span></a></li><li><a class="level is-mobile" href="#secondary-drill选项卡"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">【Secondary Drill】选项卡</span></span></a></li><li><a class="level is-mobile" href="#drill-symbol选项卡"><span class="level-left"><span class="level-item">9.4</span><span class="level-item">【Drill Symbol】选项卡</span></span></a></li><li><a class="level is-mobile" href="#drill-offset选项卡"><span class="level-left"><span class="level-item">9.5</span><span class="level-item">【Drill Offset】选项卡</span></span></a></li><li><a class="level is-mobile" href="#design-layers选项卡"><span class="level-left"><span class="level-item">9.6</span><span class="level-item">【Design Layers】选项卡</span></span></a></li><li><a class="level is-mobile" href="#mask-layers选项卡"><span class="level-left"><span class="level-item">9.7</span><span class="level-item">【Mask Layers】选项卡</span></span></a></li><li><a class="level is-mobile" href="#options选项卡"><span class="level-left"><span class="level-item">9.8</span><span class="level-item">【Options】选项卡</span></span></a></li><li><a class="level is-mobile" href="#制作-via-过孔焊盘"><span class="level-left"><span class="level-item">9.9</span><span class="level-item">制作 Via 过孔焊盘</span></span></a></li><li><a class="level is-mobile" href="#导出为-.pad-焊盘文件"><span class="level-left"><span class="level-item">9.10</span><span class="level-item">导出为 .pad 焊盘文件</span></span></a></li></ul></li><li><a class="level is-mobile" href="#创建-.dra-工程制作-.pcm-封装"><span class="level-left"><span class="level-item">10</span><span class="level-item">创建 .dra 工程制作 .pcm 封装</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基于焊盘创建-pcb-封装"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">基于焊盘创建 PCB 封装</span></span></a></li><li><a class="level is-mobile" href="#基于向导创建-pcb-封装"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">基于向导创建 PCB 封装</span></span></a></li><li><a class="level is-mobile" href="#导出为-.psm-封装文件"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">导出为 .psm 封装文件</span></span></a></li></ul></li><li><a class="level is-mobile" href="#基于-pcb-editor-绘制版图"><span class="level-left"><span class="level-item">11</span><span class="level-item">基于 PCB Editor 绘制版图</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#class-与-sub-class"><span class="level-left"><span class="level-item">11.1</span><span class="level-item">Class 与 Sub Class</span></span></a></li><li><a class="level is-mobile" href="#调整快捷键设置"><span class="level-left"><span class="level-item">11.2</span><span class="level-item">调整快捷键设置</span></span></a></li><li><a class="level is-mobile" href="#新建-.brd-版图工程"><span class="level-left"><span class="level-item">11.3</span><span class="level-item">新建 .brd 版图工程</span></span></a></li><li><a class="level is-mobile" href="#导入设计资源"><span class="level-left"><span class="level-item">11.4</span><span class="level-item">导入设计资源</span></span></a></li><li><a class="level is-mobile" href="#导入网表"><span class="level-left"><span class="level-item">11.5</span><span class="level-item">导入网表</span></span></a></li><li><a class="level is-mobile" href="#导入-pcb-板框"><span class="level-left"><span class="level-item">11.6</span><span class="level-item">导入 PCB 板框</span></span></a></li><li><a class="level is-mobile" href="#层叠设置"><span class="level-left"><span class="level-item">11.7</span><span class="level-item">层叠设置</span></span></a></li><li><a class="level is-mobile" href="#原理图-pcb-交互模式"><span class="level-left"><span class="level-item">11.8</span><span class="level-item">原理图 &amp; PCB 交互模式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#常用-pcb-版图布局操作"><span class="level-left"><span class="level-item">12</span><span class="level-item">常用 PCB 版图布局操作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#元素的锁定与解锁"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">元素的锁定与解锁</span></span></a></li></ul></li><li><a class="level is-mobile" href="#善用约束管理器"><span class="level-left"><span class="level-item">13</span><span class="level-item">善用约束管理器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#创建-class-网络类"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">创建 Class 网络类</span></span></a></li><li><a class="level is-mobile" href="#创建-net-group-网络分组"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">创建 Net Group 网络分组</span></span></a></li><li><a class="level is-mobile" href="#创建-pin-pair-引脚配对"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">创建 Pin Pair 引脚配对</span></span></a></li><li><a class="level is-mobile" href="#添加过孔约束"><span class="level-left"><span class="level-item">13.4</span><span class="level-item">添加过孔约束</span></span></a></li></ul></li><li><a class="level is-mobile" href="#开始执行铺铜操作"><span class="level-left"><span class="level-item">14</span><span class="level-item">开始执行铺铜操作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#选择铺铜区域"><span class="level-left"><span class="level-item">14.1</span><span class="level-item">选择铺铜区域</span></span></a></li><li><a class="level is-mobile" href="#修改铺铜区域属性"><span class="level-left"><span class="level-item">14.2</span><span class="level-item">修改铺铜区域属性</span></span></a></li><li><a class="level is-mobile" href="#手动铺铜"><span class="level-left"><span class="level-item">14.3</span><span class="level-item">手动铺铜</span></span></a></li><li><a class="level is-mobile" href="#手动挖铜"><span class="level-left"><span class="level-item">14.4</span><span class="level-item">手动挖铜</span></span></a></li><li><a class="level is-mobile" href="#自动移除孤铜"><span class="level-left"><span class="level-item">14.5</span><span class="level-item">自动移除孤铜</span></span></a></li><li><a class="level is-mobile" href="#调整铺铜网络"><span class="level-left"><span class="level-item">14.6</span><span class="level-item">调整铺铜网络</span></span></a></li><li><a class="level is-mobile" href="#静动态铺铜转换"><span class="level-left"><span class="level-item">14.7</span><span class="level-item">静/动态铺铜转换</span></span></a></li><li><a class="level is-mobile" href="#合并铺铜区域"><span class="level-left"><span class="level-item">14.8</span><span class="level-item">合并铺铜区域</span></span></a></li><li><a class="level is-mobile" href="#铺铜优级级"><span class="level-left"><span class="level-item">14.9</span><span class="level-item">铺铜优级级</span></span></a></li><li><a class="level is-mobile" href="#分隔平面铺铜"><span class="level-left"><span class="level-item">14.10</span><span class="level-item">分隔平面铺铜</span></span></a></li><li><a class="level is-mobile" href="#铺铜操作总结"><span class="level-left"><span class="level-item">14.11</span><span class="level-item">铺铜操作总结</span></span></a></li></ul></li><li><a class="level is-mobile" href="#常用的布线操作"><span class="level-left"><span class="level-item">15</span><span class="level-item">常用的布线操作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#显示飞线"><span class="level-left"><span class="level-item">15.1</span><span class="level-item">显示飞线</span></span></a></li><li><a class="level is-mobile" href="#调整布线形态"><span class="level-left"><span class="level-item">15.2</span><span class="level-item">调整布线形态</span></span></a></li><li><a class="level is-mobile" href="#蛇形走线"><span class="level-left"><span class="level-item">15.3</span><span class="level-item">蛇形走线</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

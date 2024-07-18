@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>常见 LDO 线性稳压芯片的对比选型 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="稳压器（Voltage Regulator）是一种在电源电压或者负载电流发生变化的时候，依然能够提供稳定输出电压的元件。常见的稳压器主要分为线性稳压器和开关稳压器两种。其中，开关稳压器是通过重复切换输出级的开关状态，并配合其它储能元件来产生指定的输出电压。而线性稳压器则是通过获取输出电压反馈，然后经由误差放大器组成的控制电路，动态的调节输入与输出之间的电压差，进而实现动态稳压的目的，其主要特点是"><meta property="og:type" content="blog"><meta property="og:title" content="常见 LDO 线性稳压芯片的对比选型"><meta property="og:url" content="http://www.uinio.com/Electronics/LDO/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="稳压器（Voltage Regulator）是一种在电源电压或者负载电流发生变化的时候，依然能够提供稳定输出电压的元件。常见的稳压器主要分为线性稳压器和开关稳压器两种。其中，开关稳压器是通过重复切换输出级的开关状态，并配合其它储能元件来产生指定的输出电压。而线性稳压器则是通过获取输出电压反馈，然后经由误差放大器组成的控制电路，动态的调节输入与输出之间的电压差，进而实现动态稳压的目的，其主要特点是"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2023-04-09T16:00:00.000Z"><meta property="article:modified_time" content="2024-07-03T18:28:39.237Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="电源"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/LDO/"},"headline":"常见 LDO 线性稳压芯片的对比选型","image":["http://www.uinio.com/Electronics/LDO/thumbnail.png"],"datePublished":"2023-04-09T16:00:00.000Z","dateModified":"2024-07-03T18:28:39.237Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"稳压器（Voltage\r Regulator）是一种在电源电压或者负载电流发生变化的时候，依然能够提供稳定输出电压的元件。常见的稳压器主要分为线性稳压器和开关稳压器两种。其中，开关稳压器是通过重复切换输出级的开关状态，并配合其它储能元件来产生指定的输出电压。而线性稳压器则是通过获取输出电压反馈，然后经由误差放大器组成的控制电路，动态的调节输入与输出之间的电压差，进而实现动态稳压的目的，其主要特点是"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/LDO/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-04-09T16:00:00.000Z" title="2023/4/10 00:00:00">2023-04-10</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.237Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">19 分钟读完 (大约2821个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">常见 LDO 线性稳压芯片的对比选型</h1><div class="content"><p><strong>稳压器</strong>（Voltage
+Regulator）是一种在电源电压或者负载电流发生变化的时候，依然能够提供稳定输出电压的元件。常见的稳压器主要分为<strong>线性稳压器</strong>和<strong>开关稳压器</strong>两种。其中，<strong>开关稳压器</strong>是通过重复切换输出级的开关状态，并配合其它储能元件来产生指定的输出电压。而<strong>线性稳压器</strong>则是通过获取输出电压反馈，然后经由<strong>误差放大器</strong>组成的控制电路，动态的调节输入与输出之间的电压差，进而实现动态稳压的目的，其主要特点是输入电压
+<span class="math inline">\(V_{IN}\)</span> 大于输出电压 <span class="math inline">\(V_{OUT}\)</span>。</p>
+<p><img src="/Electronics/LDO/logo.png"></p>
+<p>近几年<strong>低压差稳压器</strong>（<strong>LDO</strong>，Low
+Dropout
+Regulator）被广泛应用在微控制器电路当中，其主要特点在于输入电压与输出电压之间的压差
+<span class="math inline">\(V_{DROPOUT}\)</span>
+非常小（通常在几十毫伏到几百毫伏范围）。在上述的 <strong>LDO</strong>
+原理示意图当中，绿色的<strong>误差放大器</strong>通过改变内部的<strong>可变电阻</strong>，就能够达到了稳定<strong>输出电压</strong>
+<span class="math inline">\(V_{OUT}\)</span> 的目的（其中 <span class="math inline">\(RDS_{ON}\)</span> 包含了 <strong>LDO</strong>
+内部的
+<code>调整元件电阻</code>、<code>片内互连电阻</code>、<code>引脚电阻</code>、<code>线焊电阻</code>）。</p>
+<span id="more"></span>
+<h2 id="经典线性稳压器-1117-系列">经典线性稳压器 1117 系列</h2>
+<p><strong>AMS</strong> 公司（Advanced Monolithic Systems）的 <a target="_blank" rel="noopener" href="http://www.advanced-monolithic.com/pdf/ds1117.pdf"><strong>AMS1117</strong></a>
+是一款比较经典的线性稳压器。除此之外，<a target="_blank" rel="noopener" href="https://www.ti.com.cn/product/cn/TLV1117"><strong>德州仪器
+TLV1117</strong></a>、<a target="_blank" rel="noopener" href="https://www.onsemi.cn/products/power-management/linear-regulators-ldo/ncp1117"><strong>安森美
+NCP1117</strong></a>、<a target="_blank" rel="noopener" href="http://www.microne.com.cn/ProductDetail.aspx?id=87"><strong>微盟电子
+ME1117</strong></a>、<a target="_blank" rel="noopener" href="https://www.jscj-elec.com/uploads/pdf/20221010/SCJT1117B-A%20Series%20Rev-1.4.pdf"><strong>长晶科技
+CJT1117</strong></a> 也推出了类似命名的 Pin-to-Pin
+产品。<strong>SOT-223</strong> 是 <strong>1117</strong>
+系列芯片的典型封装形式，下面的示意图对其引脚的功能进行了说明：</p>
+<p><img src="/Electronics/LDO/0.png"></p>
+<p>而下面的原理图是<strong>固定电压输出</strong>版本
+<strong>1117</strong> 的典型应用电路，这里推荐使用 <code>10uF</code>
+的<strong>钽电容</strong>作为<strong>旁路电容</strong> <span class="math inline">\(C_1\)</span>，以及 <code>10uF</code>
+的<strong>钽电容</strong>作为<strong>输出电容</strong> <span class="math inline">\(C_2\)</span>：</p>
+<p><img src="/Electronics/LDO/1.png"></p>
+<p>而下面的原理图则是<strong>可调电压输出</strong>版本
+<strong>1117</strong> 的典型应用电路，其输出电压公式为 <span class="math inline">\(V_{OUT} = V_{REF} \times (1 + \frac{R_2}{R_1}) +
+I_{ADJ} \times R_2\)</span>。公式当中的 <span class="math inline">\(I_{ADJ}\)</span>（约
+<code>50uA</code>）通常可以被忽略，因为其值远远小于 <span class="math inline">\(R_1\)</span> 上面的电流（约
+<code>2mA ~ 10mA</code>）。</p>
+<p><img src="/Electronics/LDO/2.png"></p>
+<h3 id="输出电压精度">输出电压精度</h3>
+<p><strong>1117</strong>
+系列线性稳压器的输出电压精度，通常为标称电压值的 <span class="math inline">\(\pm 1.5 \%\)</span> 左右，即如果标称输出电压为
+<code>3.3V</code>，那么实际的输出电压应当介于 <code>3.25V ~ 3.35V</code>
+之间：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">元件型号</th>
+<th style="text-align: center;">空载输出电压</th>
+<th style="text-align: center;">满载输出电压</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>AMS1117</strong></td>
+<td style="text-align: center;"><code>3.33V</code></td>
+<td style="text-align: center;"><code>3.3V</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>TLV1117</strong></td>
+<td style="text-align: center;"><code>3.27V</code></td>
+<td style="text-align: center;"><code>3.26V</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>NCP1117</strong></td>
+<td style="text-align: center;"><code>3.31V</code></td>
+<td style="text-align: center;"><code>3.3V</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>ME1117</strong></td>
+<td style="text-align: center;"><code>3.28V</code></td>
+<td style="text-align: center;"><code>3.26V</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>CJT1117</strong></td>
+<td style="text-align: center;"><code>3.32V</code></td>
+<td style="text-align: center;"><code>3.32V</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<strong>空载输出</strong>是指稳压器在输出电流为
+<code>0mA</code> 时的输出电压值，而<strong>满载输出</strong>则是指 1117
+芯片在输出电流为 <code>800mA</code> 时的输出电压值。</p>
+</blockquote>
+<h3 id="输出纹波控制">输出纹波控制</h3>
+<p><strong>输出纹波</strong>用于衡量线性稳压器输出电压的平稳程度，是一个叠加在直流稳定值之上的交流分量。通常只需要把这种纹波控制在
+<code>20mV</code> 以内，就能够满足正常的使用。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">元件型号</th>
+<th style="text-align: center;">空载输出电压纹波</th>
+<th style="text-align: center;">满载输出电压纹波</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>AMS1117</strong></td>
+<td style="text-align: center;"><code>17.6mV</code></td>
+<td style="text-align: center;"><code>19.2mV</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>TLV1117</strong></td>
+<td style="text-align: center;"><code>16.2mV</code></td>
+<td style="text-align: center;"><code>18.4mV</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>NCP1117</strong></td>
+<td style="text-align: center;"><code>15.8mV</code></td>
+<td style="text-align: center;"><code>16.8mV</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>ME1117</strong></td>
+<td style="text-align: center;"><code>16.7mV</code></td>
+<td style="text-align: center;"><code>17.6mV</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>CJT1117</strong></td>
+<td style="text-align: center;"><code>16.2mV</code></td>
+<td style="text-align: center;"><code>16.8mV</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="动态电压波动">动态电压波动</h3>
+<p>因为线性稳压器的后级负载通常是动态变化的，所以就会导致其输出电压发生波动，这种波动是衡量线性稳压器性能一个非常重要的参数。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">元件型号</th>
+<th style="text-align: center;">波动电压大小</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>AMS1117</strong></td>
+<td style="text-align: center;"><code>344mV</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>TLV1117</strong></td>
+<td style="text-align: center;"><code>94mV</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>NCP1117</strong></td>
+<td style="text-align: center;"><code>134mV</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>ME1117</strong></td>
+<td style="text-align: center;"><code>216mV</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>CJT1117</strong></td>
+<td style="text-align: center;"><code>172mV</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：通常 <strong>1117</strong>
+系列的<strong>输出电容</strong>都会要求使用<strong>钽电容</strong>，而非相同容值的<strong>陶瓷电容</strong>，这是因为钽电容的<strong>寄生电阻</strong>较大，而陶瓷电容的寄生电阻较小。换而言之
+<strong>1117</strong>
+系列的电源环路稳定性，非常依赖于拥有更大寄生电阻的钽电容，从而提升其动态响应性能。</p>
+</blockquote>
+<h3 id="选型总结">选型总结</h3>
+<ul>
+<li>通常情况下 <strong>1117</strong> 系列的最大输出电流为
+<code>1A</code>，但是当在 <code>5V</code> 转 <code>3.3V</code>
+且输出电流为 <code>800mA</code> 的时候，芯片的发热温度将会达到
+<code>130°C</code> 左右，所以尽量不要让 <strong>1117</strong> 去负载高于
+<code>1W</code> 的功率；</li>
+<li>由于 <strong>1117</strong> 系列的 <strong>SOT-223</strong>
+封装体积较大，比较浪费 PCB
+布线空间，并且不能使用陶瓷电容作为滤波电容，同时静态电流也比较大（毫安级别），因而不适用于低功耗场景，加之假货与翻新件泛滥成灾，所以工程实践当中已经较少被使用到；</li>
+</ul>
+<h2 id="低压差线性稳压器-ldo">低压差线性稳压器 LDO</h2>
+<p><strong>低压差稳压器</strong>（<strong>LDO</strong>，Low Dropout
+Regulator）相对于传统的<strong>线性稳压器</strong>而言，输入与输出之间的电压差更小。传统的
+<strong>78xx</strong> 系列线性稳压器，其输入电压至少要比输出电压高出
+<code>2V ~ 3V</code>。即便是要求更低一些的 <strong>1117</strong>
+系列，其压差也至少应在 <code>1V</code> 以上。这种情况对于
+<code>5V</code> 转 <code>3.3V</code> 的场景，其输入与输出之间的压差仅有
+<code>1.7V</code>，显然无法满足正常工作的要求，因此 LDO
+低压差稳压器应运而生，下面表格展示市场上常见的三款 LDO
+芯片的性能参数：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">LDO 型号</th>
+<th style="text-align: center;">封装形式</th>
+<th style="text-align: center;">静态电流</th>
+<th style="text-align: center;">输出纹波</th>
+<th style="text-align: center;">动态响应</th>
+<th style="text-align: center;">输出精度</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>XC6206</strong></td>
+<td style="text-align: center;">SOT-23-3</td>
+<td style="text-align: center;"><code>1.4uA</code></td>
+<td style="text-align: center;"><code>&lt; 5mV</code></td>
+<td style="text-align: center;"><code>680mV</code></td>
+<td style="text-align: center;"><code>0.6%</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>ME6206</strong></td>
+<td style="text-align: center;">SOT-23-3</td>
+<td style="text-align: center;"><code>8.3uA</code></td>
+<td style="text-align: center;"><code>&lt; 5mV</code></td>
+<td style="text-align: center;"><code>11.6mV</code></td>
+<td style="text-align: center;"><code>0.9%</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>ME6211</strong></td>
+<td style="text-align: center;">SOT-23-5</td>
+<td style="text-align: center;"><code>36.9mA</code></td>
+<td style="text-align: center;"><code>&lt; 5mV</code></td>
+<td style="text-align: center;"><code>18.2mV</code></td>
+<td style="text-align: center;"><code>0.6%</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：当上述芯片的输出电流为 <code>100mA</code>
+的时候，发热温度约等于 <code>55°C</code>，而当输出电流达到
+<code>200mA</code> 的时候，则发热温度也将会达到
+<code>76°C</code>，高于这个温度就需要考虑加装散热装置，并且选用更加有利于散热的
+PCB 布局。</p>
+</blockquote>
+<ul>
+<li>对于 <strong>SOT-23</strong> 封装的 LDO 线性稳压芯片，在
+<code>5V</code> 转 <code>3.3V</code> 的情况下，最大输入电流应当控制在
+<code>200mA</code> 以内。如果需要使用更大的输出电流，则可以考虑使用
+<strong>1117</strong> 系列；</li>
+<li><strong>特瑞仕</strong>的 <strong>XC6206</strong>
+静态电流较小，适合低功耗场景，但是需要注意它的动态响应和纹波都比较大；</li>
+<li><strong>微盟电子</strong>的 <strong>ME6211</strong> 和
+<strong>ME6206</strong>
+系列性价比较高，小批量采购不容易购买到假货；</li>
+<li><strong>SOT-23-5</strong> 封装的 LDO 元件相比于
+<strong>SOT-23-3</strong> 多出一个 <code>ENABLE</code>
+控制引脚（关断之后电流较小），如果需要控制输出就选择
+<strong>SOT-23-5</strong> 封装，如果希望更小的封装，则可以选择
+<strong>SOT-23-3</strong> 封装；</li>
+</ul>
+<h2 id="特瑞仕-xc6206-系列">特瑞仕 XC6206 系列</h2>
+<p><a target="_blank" rel="noopener" href="https://product.torex.com.cn/cn/series/xc6206"><strong>特瑞仕
+XC6206</strong></a> 系列是一款高精度低功耗的 LDO
+线性稳压芯片，即使在输出电流较大的情况下，其输入与输出之间的<strong>压差</strong>依然较小。其常见的
+<strong>SOT-23-3</strong> 封装通常拥有
+<code>输入</code>、<code>输出</code>、<code>接地</code>
+三个引脚，内部包含有<strong>限流电路</strong>、<strong>驱动三极管</strong>、<strong>高精度参考电压源</strong>、<strong>误差校正电路</strong>等单元电路：</p>
+<p><img src="/Electronics/LDO/3.png"></p>
+<p><strong>XC6206</strong>
+系列稳压芯片的主要性能参数如下面的表格所示：</p>
+<table>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">参数名称</th>
+<th style="text-align: center;">参数值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>最大输出电流</strong></td>
+<td style="text-align: center;"><code>200mA (3.0V type)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>输入输出压差</strong></td>
+<td style="text-align: center;"><code>250mV @ 100mA (3.0V type)</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>最大工作电压</strong></td>
+<td style="text-align: center;"><code>6.0V</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>输出电压范围</strong></td>
+<td style="text-align: center;"><code>1.2V ~ 5.0V</code>
+（<code>0.1V</code> 递进）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>输出精度</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\pm2\%
+@V_{OUT}\ge1.5V\)</span>、<span class="math inline">\(\pm30mV@V_{OUT}&lt;1.5V\)</span>、<span class="math inline">\(\pm1\% @V_{OUT}\ge2.0V\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>低功耗</strong></td>
+<td style="text-align: center;">典型值为 <code>1.0 μA</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>输出电容类型</strong></td>
+<td style="text-align: center;">可以兼容低 ESR 的陶瓷电容</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>保护措施</strong></td>
+<td style="text-align: center;">内置限流电路</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>工作环境温度</strong></td>
+<td style="text-align: center;">-40℃ ~ 85℃</td>
+</tr>
+</tbody>
+</table>
+<p><strong>XC6206</strong>
+系列可以选用较低<strong>等效串联电阻</strong>（ESR，Equivalent Series
+Resistance）的陶瓷电容，并且可以通过内部的限流电路提供输出引脚的短路保护，其典型应用电路如下面的原理图所示：</p>
+<p><img src="/Electronics/LDO/4.png"></p>
+<h2 id="微盟电子-me6206-系列">微盟电子 ME6206 系列</h2>
+<p><a target="_blank" rel="noopener" href="http://www.microne.com.cn/"><strong>微盟电子</strong></a>推出的
+<strong>ME6206</strong>
+系列是一款低功耗低压差、高纹波抑制率，并且具有过流与短路保护的 CMOS
+降压型稳压芯片，该系列元件具有较低的<strong>静态偏置电流</strong>（典型值为
+<code>8.0μA</code>），可以在输入输出电压差极小情况下，提供约
+<code>300mA</code> 的输出电流，并且仍然能够保持良好的调整率。</p>
+<table>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 77%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">参数名称</th>
+<th style="text-align: center;">参数值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>高精度输出电压</strong></td>
+<td style="text-align: center;"><code>±2%</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>输出电压</strong></td>
+<td style="text-align: center;"><code>1.5V ~ 5.0V</code>，步长为
+<code>0.1V</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>最大工作电压</strong></td>
+<td style="text-align: center;"><code>6V</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>静态偏置电流典型值</strong></td>
+<td style="text-align: center;"><code>8.0μA</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>带载能力</strong></td>
+<td style="text-align: center;">当 <span class="math inline">\(V_{in}=4.3V\)</span> 且 <span class="math inline">\(V_{out}=3.3V\)</span> 的时候，输出电流 <span class="math inline">\(I_{out}=300mA\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>输入输出电压差</strong></td>
+<td style="text-align: center;">输出电流为 <code>90mA</code> 时的压差为
+<code>0.2V</code>，而输出电流为 <code>200mA</code> 时的压差为
+<code>0.4V</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ME6206</strong> 系列稳压芯片的常用封装形式为
+<strong>SOT-23-3</strong>，其典型应用电路如下图所示：</p>
+<p><img src="/Electronics/LDO/5.png"></p>
+<blockquote>
+<p><strong>注意</strong>：上述原理图当中的 <strong>VIN</strong>
+表示电压输入引脚，<strong>VOUT</strong> 表示电压输出引脚，而
+<strong>VSS</strong> 则表示的是接地引脚。</p>
+</blockquote>
+<h2 id="微盟电子-me6211-系列">微盟电子 ME6211 系列</h2>
+<p><a target="_blank" rel="noopener" href="http://www.microne.com.cn/"><strong>微盟电子</strong></a>推出的
+<strong>ME6211</strong>
+系列，同样是一款高精度、高纹波抑制比、低噪声，快速响应的 CMOS
+低压差线性稳压器，该芯片内置有<code>参考电压源</code>、<code>误差修正电路</code>、<code>限流电路</code>、<code>相位补偿电路</code>、<code>低内阻 MOSFET</code>，可以达到高纹波抑制、低输出噪声、超快速响应的性能指标：</p>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 78%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">参数名称</th>
+<th style="text-align: center;">参数值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>最大输出电流</strong></td>
+<td style="text-align: center;">当 <span class="math inline">\(V_{in}=5V\)</span> 且 <span class="math inline">\(V_{out}=3.3V\)</span> 的时候，输出电流 <span class="math inline">\(I_{out}=500mA\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>输入输出电压差</strong></td>
+<td style="text-align: center;">输出电流为 <code>100mA</code> 时压差为
+<code>100mV</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>工作电压范围</strong></td>
+<td style="text-align: center;"><code>2V ～ 6.0V</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>输出电压范围</strong></td>
+<td style="text-align: center;"><code>1.2V ～ 5.0V</code>，步长为
+<code>0.1V</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>输出精度</strong></td>
+<td style="text-align: center;"><code>±2％</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>静态电流</strong></td>
+<td style="text-align: center;">典型值为 <code>50uA</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>关断电流</strong></td>
+<td style="text-align: center;">典型值为 <code>0.1uA</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>纹波抑制比</strong></td>
+<td style="text-align: center;">例如 ME6211C33 为
+<code>70dB@1KHz</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>输出噪声</strong></td>
+<td style="text-align: center;"><code>50uVrms</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>输入稳定性</strong></td>
+<td style="text-align: center;">典型值为 <code>0.05％</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ME6211</strong>
+系列兼容体积相对于<strong>钽电容</strong>更加小巧的<strong>陶瓷电容</strong>，并且无需再额外使用
+<code>0.1μF</code>
+的旁路电容，可以进一步节省物料成本。除此之外，<strong>ME6211</strong>
+系列常用的封装形式为
+<strong>SOT-23-5</strong>，其典型应用电路如下图所示：</p>
+<p><img src="/Electronics/LDO/6.png"></p>
+<blockquote>
+<p><strong>注意</strong>：上图当中的 <strong>VIN</strong>
+是电压输入引脚，<strong>VOUT</strong> 是电压输出引脚，
+<strong>VSS</strong> 属于接地引脚，<strong>CE</strong>
+则是使能引脚（高电平），而 <strong>NC</strong> 引脚无需进行连接。</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>常见 LDO 线性稳压芯片的对比选型</p><p><a href="http://www.uinio.com/Electronics/LDO/">http://www.uinio.com/Electronics/LDO/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-04-10</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%94%B5%E6%BA%90/">电源</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Project/Arduino-ESP32/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">基于 UINIO-MCU-ESP32 的 Arduino 进阶教程</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Project/UINIO-MCU-ESP32/"><span class="level-item">UINIO-MCU-ESP32 系列核心板电路设计</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#经典线性稳压器-1117-系列"><span class="level-left"><span class="level-item">1</span><span class="level-item">经典线性稳压器 1117 系列</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#输出电压精度"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">输出电压精度</span></span></a></li><li><a class="level is-mobile" href="#输出纹波控制"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">输出纹波控制</span></span></a></li><li><a class="level is-mobile" href="#动态电压波动"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">动态电压波动</span></span></a></li><li><a class="level is-mobile" href="#选型总结"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">选型总结</span></span></a></li></ul></li><li><a class="level is-mobile" href="#低压差线性稳压器-ldo"><span class="level-left"><span class="level-item">2</span><span class="level-item">低压差线性稳压器 LDO</span></span></a></li><li><a class="level is-mobile" href="#特瑞仕-xc6206-系列"><span class="level-left"><span class="level-item">3</span><span class="level-item">特瑞仕 XC6206 系列</span></span></a></li><li><a class="level is-mobile" href="#微盟电子-me6206-系列"><span class="level-left"><span class="level-item">4</span><span class="level-item">微盟电子 ME6206 系列</span></span></a></li><li><a class="level is-mobile" href="#微盟电子-me6211-系列"><span class="level-left"><span class="level-item">5</span><span class="level-item">微盟电子 ME6211 系列</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

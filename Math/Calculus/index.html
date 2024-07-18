@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>高等数学主要概念与公式摘要 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="高等数学是由微积分学，较为深入的代数学、几何学以及它们之间的交叉内容所形成的一门基础学科。由于电路分析、运算放大器、信号完整性、高频电路和信号学当中，都涉及有大量的积分和导数运算，也需要经常使用到拉普拉斯和傅立叶变换等高等数学内容，因此着手撰写本文用于复习大学本科学习阶段涉及的微积分知识，主要包含一元函数微分学、一元函数积分学、矢量代数与空间解析几何、多元函数微分学、多元函数积分学、无穷级数、常微"><meta property="og:type" content="blog"><meta property="og:title" content="高等数学主要概念与公式摘要"><meta property="og:url" content="http://www.uinio.com/Math/Calculus/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="高等数学是由微积分学，较为深入的代数学、几何学以及它们之间的交叉内容所形成的一门基础学科。由于电路分析、运算放大器、信号完整性、高频电路和信号学当中，都涉及有大量的积分和导数运算，也需要经常使用到拉普拉斯和傅立叶变换等高等数学内容，因此着手撰写本文用于复习大学本科学习阶段涉及的微积分知识，主要包含一元函数微分学、一元函数积分学、矢量代数与空间解析几何、多元函数微分学、多元函数积分学、无穷级数、常微"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2012-02-18T16:00:00.000Z"><meta property="article:modified_time" content="2022-04-25T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Calculus"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Math/Calculus/"},"headline":"高等数学主要概念与公式摘要","image":["http://www.uinio.com/Math/Calculus/logo.png"],"datePublished":"2012-02-18T16:00:00.000Z","dateModified":"2022-04-25T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"高等数学是由微积分学，较为深入的代数学、几何学以及它们之间的交叉内容所形成的一门基础学科。由于电路分析、运算放大器、信号完整性、高频电路和信号学当中，都涉及有大量的积分和导数运算，也需要经常使用到拉普拉斯和傅立叶变换等高等数学内容，因此着手撰写本文用于复习大学本科学习阶段涉及的微积分知识，主要包含一元函数微分学、一元函数积分学、矢量代数与空间解析几何、多元函数微分学、多元函数积分学、无穷级数、常微"}</script><link rel="canonical" href="http://www.uinio.com/Math/Calculus/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2012-02-18T16:00:00.000Z" title="2012/2/19 00:00:00">2012-02-19</time>发表</span><span class="level-item"><time dateTime="2022-04-25T16:00:00.000Z" title="2022/4/26 00:00:00">2022-04-26</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Math/">Math</a></span><span class="level-item">25 分钟读完 (大约3735个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">高等数学主要概念与公式摘要</h1><div class="content"><p>高等数学是由微积分学，较为深入的代数学、几何学以及它们之间的交叉内容所形成的一门基础学科。由于<strong>电路分析</strong>、<strong>运算放大器</strong>、<strong>信号完整性</strong>、<strong>高频电路</strong>和<strong>信号学</strong>当中，都涉及有大量的积分和导数运算，也需要经常使用到拉普拉斯和傅立叶变换等高等数学内容，因此着手撰写本文用于复习大学本科学习阶段涉及的微积分知识，主要包含<code>一元函数微分学</code>、<code>一元函数积分学</code>、<code>矢量代数与空间解析几何</code>、<code>多元函数微分学</code>、<code>多元函数积分学</code>、<code>无穷级数</code>、<code>常微分方程</code>等部分的内容。</p>
+<p><img src="/Math/Calculus/logo.png"></p>
+<p>由于微积分涉及的概念相对较为抽象，因此在文章写作过程中，阅读并且参考了<strong>《Thomas’
+Calculus》</strong>一书当中的有关内容。该书从 1951 年第 1
+版发行至今，当前的最新版本为第 14
+版，已经足足经历了七十个年头，是一本经历过时间检验的优秀参考资料。对于本文当中所涉及到的代数学知识，可以参见博主撰写的另外一篇数学类文章<a href="/Math/Algebra/"><strong>《初等代数常用公式与图像汇总》</strong></a>。</p>
+<span id="more"></span>
+<h2 id="函数与极限">函数与极限</h2>
+<h3 id="数列的极限">数列的极限</h3>
+<h4 id="数列极限的定义">数列极限的定义</h4>
+<p>➤ 如果按照某一个法则，对于每一个 <span class="math inline">\(n \in
+N\)</span>，都对应着一个确定的<strong>实数</strong> <span class="math inline">\(x_n\)</span>，这些<strong>实数</strong> <span class="math inline">\(x_n\)</span> 按照<strong>下标</strong> <span class="math inline">\(n\)</span>
+从小到大排列得到的一个<strong>序列</strong> <span class="math inline">\(x_1, x_2, x_3, ... , x_n, ...\)</span>
+就叫做<strong>数列</strong>，简记为 <span class="math inline">\(\{ x_n
+\}\)</span>。数列当中的每一个数叫做数列的<strong>项</strong>，其中的第
+<span class="math inline">\(n\)</span>
+项叫做数列的<strong>一般项</strong>或者<strong>通项</strong>。</p>
+<p>几何上，可以将<strong>数列</strong> <span class="math inline">\(\{
+x_n \}\)</span>
+视为数轴上的一个动点，它依次取数轴上的<strong>点</strong> <span class="math inline">\(x_1,x_2,x_3,...,x_n,...\)</span>：</p>
+<p><img src="/Math/Calculus/Chapter-1/1.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>数列</strong> <span class="math inline">\(\{ x_n \}\)</span>
+可以视为自变量为<strong>正整数</strong> <span class="math inline">\(n\)</span> 的<strong>函数</strong> <span class="math inline">\(x_n = f(n),\ n \in
+N_+\)</span>，当<strong>自变量</strong> <span class="math inline">\(n\)</span> 依次取 <code>1,2,3...</code>
+等一切正整数时，对应的函数值就组成了一个<strong>数列</strong> <span class="math inline">\(\{ x_n \}\)</span>。</p>
+</blockquote>
+<hr>
+<p>➤ 假设 <span class="math inline">\(\{x_n\}\)</span>
+为一个数列，如果存在<strong>常数</strong> <span class="math inline">\(a\)</span>，对于任意给定的<strong>正数</strong>
+<span class="math inline">\(\varepsilon\)</span>
+(无论它多么小)，总存在<strong>正整数</strong> <span class="math inline">\(N\)</span>，使得当 <span class="math inline">\(n&gt;N\)</span> 时，不等式 <span class="math inline">\(\vert x_n - a \vert &lt; \varepsilon\)</span>
+都成立，那么就称<strong>常数</strong> <span class="math inline">\(a\)</span> 是<strong>数列</strong> <span class="math inline">\(\{ x_n \}\)</span>
+的<strong>极限</strong>，或者称数列 <span class="math inline">\(\{x_n\}\)</span> <strong>收敛</strong>于 <span class="math inline">\(a\)</span>，记为：</p>
+<p><span class="math display">\[
+\lim\limits_{n \to \infty} x_n = a \ 或者 \ x_n \to a (n \to \infty)
+\]</span></p>
+<p>如果不存在这样的<strong>常数</strong> <span class="math inline">\(a\)</span>，就说明<strong>数列</strong> <span class="math inline">\(\{x_n\}\)</span>
+没有极限，或者说<strong>数列</strong> <span class="math inline">\(\{x_n\}\)</span>
+是<strong>发散</strong>的，习惯上也就是说 <span class="math inline">\(\lim\limits_{n \to \infty} x_n\)</span>
+不存在。</p>
+<blockquote>
+<p><strong>注意</strong>：上面定义当中的<strong>正数 <span class="math inline">\(\varepsilon\)</span>
+可以任意给定</strong>非常重要，因为只有满足了这个前提条件，不等式 <span class="math inline">\(|x_n - a|&lt;\varepsilon\)</span> 才能够表达出
+<span class="math inline">\(x_n\)</span> 与 <span class="math inline">\(a\)</span>
+<strong>无限接近</strong>的意思，除此之外，还需要注意定义当中的<strong>正整数</strong>
+<span class="math inline">\(N\)</span>
+是与任意给定的<strong>正数</strong> <span class="math inline">\(\varepsilon\)</span> 相关的，它会随着 <span class="math inline">\(\varepsilon\)</span> 的给定而选定。</p>
+</blockquote>
+<p>几何上，<strong>数列</strong> <span class="math inline">\(\{ x_n
+\}\)</span> 的<strong>极限</strong>为 <span class="math inline">\(a\)</span> 是将<strong>常数</strong> <span class="math inline">\(a\)</span> 以及<strong>数列</strong> <span class="math inline">\(x_1,x_2,x_3,...,x_n,...\)</span>，在数轴上用其对应的点表示出来，再在数轴上作<strong>点</strong>
+<span class="math inline">\(a\)</span> 的<strong>邻域</strong>，即开区间
+<span class="math inline">\((a - \varepsilon, a +
+\varepsilon)\)</span>：</p>
+<p><img src="/Math/Calculus/Chapter-1/2.png"></p>
+<blockquote>
+<p><strong>注意</strong>：由于<strong>不等式</strong> <span class="math inline">\(|x_n - a| &lt; \varepsilon\)</span>
+与<strong>不等式</strong> <span class="math inline">\(a - \varepsilon
+&lt; x_n &lt; a + \varepsilon\)</span> 等价，所以当 <span class="math inline">\(n &gt; N\)</span> 时，所有的<strong>点</strong>
+<span class="math inline">\(x_n\)</span> 都位于<strong>开区间</strong>
+<span class="math inline">\((a - \varepsilon, a + \varepsilon)\)</span>
+之内，而只存在有限个（最多只有 <span class="math inline">\(N\)</span>
+个）处于区间之外。</p>
+</blockquote>
+<hr>
+<p>➤ 用<strong>符号</strong> <span class="math inline">\(\forall\)</span>
+表示<strong>对于每一个</strong>，<strong>符号</strong> <span class="math inline">\(\exists\)</span>
+表示<strong>存在</strong>，那么<strong>数列极限</strong> <span class="math inline">\(\lim\limits_{n \to \infty} x_n\)</span>
+的定义可以表达为：</p>
+<p><span class="math display">\[
+\lim\limits_{n \to \infty} x_n \iff \forall \varepsilon &gt; 0，\exists
+正整数 N，当 n &gt; N 时，有 \vert x_n - a \vert &lt; \varepsilon
+\]</span></p>
+<h4 id="收敛数列的性质">收敛数列的性质</h4>
+<p>➤ 下面的四个定理，都是有关于收敛数列的性质：</p>
+<ul>
+<li><strong>定理 1</strong>：极限的唯一性，如果<strong>数列</strong>
+<span class="math inline">\(\{ x_n \}\)</span>
+<strong>收敛</strong>，那么它的极限<strong>唯一</strong>；</li>
+<li><strong>定理 2</strong>：收敛数列的有界性，如果<strong>数列</strong>
+<span class="math inline">\(\{ x_n \}\)</span>
+<strong>收敛</strong>，那么数列 <span class="math inline">\(\{ x_n
+\}\)</span> 一定<strong>有界</strong>；</li>
+<li><strong>定理
+3</strong>：收敛数列与其子数列间的关系，如果<strong>数列</strong> <span class="math inline">\(\{ x_n \}\)</span> 收敛于 <span class="math inline">\(a\)</span>，那么它的任意一个<strong>子数列</strong>也收敛，并且<strong>极限</strong>也是
+<span class="math inline">\(a\)</span>；</li>
+<li><strong>定理 4</strong>：收敛数列的保号性，如果 <span class="math inline">\(\lim\limits_{n \to \infty} x_n = a\)</span>，且
+<span class="math inline">\(a &gt; 0\)</span> (或者 <span class="math inline">\(a &lt;
+0\)</span>)，那么存在<strong>正整数</strong> <span class="math inline">\(N\)</span>，当 <span class="math inline">\(n &gt;
+N\)</span> 时，都有 <span class="math inline">\(x_n &gt; 0\)</span>
+(或者 <span class="math inline">\(x_n &lt; 0\)</span>)；</li>
+</ul>
+<blockquote>
+<p><strong>推论</strong>：如果<strong>数列</strong> <span class="math inline">\(\{ x_n \}\)</span> 从某项起有 <span class="math inline">\(x \ge 0\)</span> (或者 <span class="math inline">\(x \le 0\)</span>)，并且 <span class="math inline">\(\lim\limits_{n \to \infty} x_n = a\)</span>，那么
+<span class="math inline">\(a \ge 0\)</span> (或者 <span class="math inline">\(a \le 0\)</span>)；</p>
+</blockquote>
+<h4 id="子数列">子数列</h4>
+<p>➤ 任意抽取<strong>数列</strong> <span class="math inline">\(\{ x_n
+\}\)</span>
+里的无限多项，并且保持这些<strong>项</strong>在原数列当中的先后次序，这样得到的数列就称为<strong>原数列</strong>的<strong>子数列</strong>或<strong>子列</strong>。</p>
+<p>假设在<strong>数列</strong> <span class="math inline">\(\{ x_n
+\}\)</span> 当中，第一次抽取 <span class="math inline">\(\{ x_{n_1}
+\}\)</span>，第二次抽取 <span class="math inline">\(\{ x_{n_1}
+\}\)</span> 后面的 <span class="math inline">\(\{ x_{n_2}
+\}\)</span>，第三次抽取 <span class="math inline">\(\{ x_{n_2}
+\}\)</span> 后面的 <span class="math inline">\(\{ x_{n_3}
+\}\)</span>，如此循环往复，就可以得到如下的数列：</p>
+<p><span class="math display">\[
+\{ x_{n_1}, x_{n_2}, x_{n_3} ..., x_{n_k}, ... \}
+\]</span></p>
+<p>这里的<strong>数列</strong> <span class="math inline">\(\{ x_{n_k}
+\}\)</span> 就是<strong>数列</strong> <span class="math inline">\(\{ x_n
+\}\)</span> 的<strong>子数列</strong>。其中的<strong>一般项</strong>
+<span class="math inline">\(x_{n_k}\)</span>
+是指<strong>子数列</strong>的第 <code>k</code>
+项，<strong>原数列</strong>的第 <code>n</code> 项。</p>
+<h3 id="函数的极限">函数的极限</h3>
+<h4 id="函数极限的一般概念">函数极限的一般概念</h4>
+<p>➤
+<strong>函数极限的一般概念</strong>：如果在<strong>自变量</strong>的某个变化过程当中，对应的<strong>函数值</strong>无限接近于某个确定的数，那么这个确定的数就称为该变化过程当中的<strong>函数极限</strong>。这个极限与自变量的变化过程密切相关，自变量的变化过程不同，函数极限的表现形式就会不同：</p>
+<ol type="1">
+<li><strong>自变量</strong> <span class="math inline">\(x\)</span>
+任意的趋近于<strong>有限值</strong> <span class="math inline">\(x_0\)</span> 时（记作 <span class="math inline">\(x \to
+x_0\)</span>），对应的<strong>函数值</strong> <span class="math inline">\(f(x)\)</span> 的变化情况；</li>
+<li><strong>自变量</strong> <span class="math inline">\(x\)</span>
+的<strong>绝对值</strong> <span class="math inline">\(|x|\)</span>
+趋近于<strong>无穷大</strong> <span class="math inline">\(\infty\)</span> 时（记作 <span class="math inline">\(x \to
+\infty\)</span>），对应的<strong>函数值</strong> <span class="math inline">\(f(x)\)</span> 的变化情况；</li>
+</ol>
+<hr>
+<h4 id="自变量趋于有限值">自变量趋于有限值</h4>
+<p>➤
+<strong>自变量趋于有限值时函数的极限</strong>：假设<strong>函数</strong>
+<span class="math inline">\(f(x)\)</span> 在<strong>点</strong> <span class="math inline">\(x_0\)</span>
+的某一个<strong>去心邻域</strong>内有定义，如果存在<strong>常数</strong>
+<code>A</code>，对于任意给定的<strong>正数</strong> <span class="math inline">\(\varepsilon\)</span>
+(不论多么小)，总存在着<strong>正数</strong> <span class="math inline">\(\delta\)</span>，使得当 <span class="math inline">\(x\)</span> 满足<strong>不等式</strong> <span class="math inline">\(0 &lt; |x - x_0| &lt; \delta\)</span>
+时，对应的<strong>函数值</strong> <span class="math inline">\(f(x)\)</span> 都满足<strong>不等式</strong> <span class="math inline">\(|f(x) - A| &lt;
+\varepsilon\)</span>，那么<strong>常数</strong> <code>A</code>
+就称为<strong>函数</strong> <span class="math inline">\(f(x)\)</span> 当
+<span class="math inline">\(x \to x_0\)</span>
+时候的<strong>极限</strong>，记作：</p>
+<p><span class="math display">\[
+\lim\limits_{x \to x_0} f(x) = A\ 或者\ f(x) \to A\ (当 x \to x_0)
+\]</span></p>
+<p>这个定义可以简单的表述为如下形式：</p>
+<p><span class="math display">\[
+\lim\limits_{x \to x_0} f(x) = A \iff \forall \varepsilon &gt; 0,\
+\exists\ \delta &gt; 0,\ 当 0&lt;|x - x_0|&lt; \delta 时,\ 有 |f(x) - A|
+&lt; \varepsilon
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：上述定义里的 <span class="math inline">\(0
+&lt; |x - x_0|\)</span> 表示的是 <span class="math inline">\(x \neq
+x_0\)</span>，所以 <span class="math inline">\(x \to x_0\)</span> 时函数
+<span class="math inline">\(f(x)\)</span> 有无极限，与函数 <span class="math inline">\(f(x)\)</span> 在<strong>点</strong> <span class="math inline">\(x_0\)</span> 是否有定义并无关联。</p>
+</blockquote>
+<hr>
+<p>➤ <strong>函数 <span class="math inline">\(f(x)\)</span> 当 <span class="math inline">\(x \to x_0\)</span> 时的极限为 <code>A</code>
+的几何解释</strong>：对于任意给定的一个<strong>正数</strong> <span class="math inline">\(\varepsilon\)</span> 作平行于 <span class="math inline">\(x\)</span> 轴的两条<strong>直线</strong> <span class="math inline">\(y = A + \varepsilon\)</span> 以及 <span class="math inline">\(y = A -
+\varepsilon\)</span>，介于两条直线之间的是一个<strong>横条区域</strong>。根据定义，对于给定的
+<span class="math inline">\(\varepsilon\)</span>，存在着<strong>点</strong>
+<span class="math inline">\(x_0\)</span> 的一个 <span class="math inline">\(\delta\)</span> <strong>邻域</strong> <span class="math inline">\((x_0 - \delta, x_0 + \delta)\)</span>，当 <span class="math inline">\(y = f(x)\)</span>
+图形上的<strong>点</strong>的<strong>横坐标</strong> <span class="math inline">\(x\)</span> 在<strong>邻域</strong> <span class="math inline">\((x_0 - \delta, x_0 + \delta)\)</span> 内，但是
+<span class="math inline">\(x \neq x_0\)</span>
+时，这些<strong>点</strong>的<strong>纵坐标</strong> <span class="math inline">\(f(x)\)</span> 满足<strong>不等式</strong> <span class="math inline">\(|f(x) - A| &lt; \varepsilon\)</span> 或者 <span class="math inline">\(A - \varepsilon &lt; f(x) &lt; A +
+\varepsilon\)</span>，即这些<strong>点</strong>都位于下图当中的<strong>横条区域</strong>：</p>
+<p><img src="/Math/Calculus/Chapter-1/3.png"></p>
+<hr>
+<p>➤ 在 <span class="math inline">\(\lim\limits_{x \to x_0} f(x) =
+A\)</span> 的定义当中，将 <span class="math inline">\(0 &lt; |x - x_0|
+&lt; \delta\)</span> 更改为 <span class="math inline">\(x_0 - \delta
+&lt; x &lt; x_0\)</span>，那么 <code>A</code>
+就称为<strong>函数</strong> <span class="math inline">\(f(x)\)</span> 当
+<span class="math inline">\(x \to x_0\)</span>
+时的<strong>左极限</strong>，记作：</p>
+<p><span class="math display">\[
+\lim\limits_{x \to x_{0}^{-}} f(x) = A 或者 f(x_{0}^{-}) = A
+\]</span></p>
+<p>➤ 类似的，在 <span class="math inline">\(\lim\limits_{x \to x_0} f(x)
+= A\)</span> 的定义当中，将 <span class="math inline">\(0 &lt; |x - x_0|
+&lt; \delta\)</span> 更改为 <span class="math inline">\(x_0 &lt; x &lt;
+x_0 + \delta\)</span>，那么 <code>A</code> 就称为<strong>函数</strong>
+<span class="math inline">\(f(x)\)</span> 当 <span class="math inline">\(x \to x_0\)</span>
+时的<strong>右极限</strong>，记作：</p>
+<p><span class="math display">\[
+\lim\limits_{x \to x_{0}^{+}} f(x) = A 或者 f(x_{0}^{+}) = A
+\]</span></p>
+<p>➤
+<strong>左极限</strong>与<strong>右极限</strong>统称为<strong>单侧极限</strong>，根据
+<span class="math inline">\(x \to x_0\)</span> 时函数 <span class="math inline">\(f(x)\)</span>
+极限的定义，以及<strong>左极限</strong>与<strong>右极限</strong>的定义，可以容易的证明：函数
+<span class="math inline">\(f(x)\)</span> 当 <span class="math inline">\(x \to x_0\)</span>
+时极限存在的<strong>充分必要条件</strong>是左极限、右极限各自存在并且相等，即</p>
+<p><span class="math display">\[
+f(x_0^{-}) = f(x_0^{+})
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：即使 <span class="math inline">\(f(x_0^{-})\)</span> 和 <span class="math inline">\(f(x_0^{+})\)</span>
+都存在，但是两者如果<strong>不相等</strong>，则 <span class="math inline">\(\lim\limits_{x \to x_0} f(x)\)</span>
+也不会存在。</p>
+</blockquote>
+<hr>
+<h4 id="自变量趋于无穷大">自变量趋于无穷大</h4>
+<p>➤
+<strong>自变量趋于无穷大时函数的极限</strong>：假设<strong>函数</strong>
+<span class="math inline">\(f(x)\)</span> 当 <span class="math inline">\(|x|\)</span>
+大于某一个正数时有定义，如果存在<strong>常数</strong>
+<code>A</code>，对于任意给定的正数 <span class="math inline">\(\varepsilon\)</span>
+(无论多么小)，总存在着<strong>正数</strong> <code>X</code>，使得当 <span class="math inline">\(x\)</span> 满足<strong>不等式</strong> <span class="math inline">\(|x| &gt; X\)</span>
+时，对应的函数值都满足<strong>不等式</strong> <span class="math inline">\(|f(x) - A| &lt;
+\varepsilon\)</span>，那么<strong>常数</strong> <code>A</code>
+就称为<strong>函数</strong> <span class="math inline">\(f(x)\)</span> 当
+<span class="math inline">\(x \to \infty\)</span>
+时候的<strong>极限</strong>，记作：</p>
+<p><span class="math display">\[
+\lim\limits_{x \to \infty} f(x) = A\ 或者\ f(x) \to A\ (当 x \to \infty)
+\]</span></p>
+<p>这个定义同样可以简单的表述为如下形式：</p>
+<p><span class="math display">\[
+\lim\limits_{x \to \infty} f(x) = A \iff \forall \varepsilon &gt; 0,\
+\exists\ X &gt; 0,\ 当 |x| &gt; X 时,\ 有 |f(x) - A| &lt; \varepsilon
+\]</span></p>
+<ul>
+<li>如果 <span class="math inline">\(x &gt; 0\)</span> 并且无限增大
+(记作 <span class="math inline">\(x \to
++\infty\)</span>)，那么只要将上述定义中的 <span class="math inline">\(|x| &gt; X\)</span> 更改为 <span class="math inline">\(x &gt; X\)</span>，就可以得到 <span class="math inline">\(\lim\limits_{x \to +\infty} f(x) = A\)</span>
+的定义。</li>
+<li>如果 <span class="math inline">\(x &lt; 0\)</span> 并且 <span class="math inline">\(|x|\)</span> 无限增大 (记作 <span class="math inline">\(x \to -\infty\)</span>)，那么只要将上述定义中的
+<span class="math inline">\(|x| &gt; X\)</span> 更改为 <span class="math inline">\(x &lt; -X\)</span>，就可以得到 <span class="math inline">\(\lim\limits_{x \to -\infty} f(x) = A\)</span>
+的定义。</li>
+</ul>
+<hr>
+<p>➤ <strong><span class="math inline">\(\lim\limits_{x \to \infty} f(x)
+= A\)</span> 的几何意义</strong>：作<strong>直线</strong> <span class="math inline">\(y = A - \varepsilon\)</span> 和 <span class="math inline">\(y = A +
+\varepsilon\)</span>，则总有一个<strong>正数</strong> <code>X</code>
+存在，使得当 <span class="math inline">\(x &gt; X\)</span> 或者 <span class="math inline">\(x &lt; -X\)</span> 时，<strong>函数</strong> <span class="math inline">\(y = f(x)\)</span>
+的图形位于这两条直线之间，此时<strong>直线</strong> <span class="math inline">\(y = A\)</span> 就是<strong>函数</strong> <span class="math inline">\(y = f(x)\)</span>
+的图形的<strong>水平渐近线</strong>。</p>
+<p><img src="/Math/Calculus/Chapter-1/4.png"></p>
+<h4 id="函数极限的性质">函数极限的性质</h4>
+<p>➤ 这里以 <span class="math inline">\(\lim\limits_{x \to x_0}
+f(x)\)</span> 形式为代表，给出关于函数极限性质的一些定理：</p>
+<ul>
+<li><strong>定理 1</strong>：函数极限的唯一性，如果 <span class="math inline">\(\lim\limits_{x \to x_0} f(x)\)</span>
+存在，那么该极限唯一；</li>
+<li><strong>定理 2</strong>：函数极限的局部有界性，如果 <span class="math inline">\(\lim\limits_{x \to x_0} f(x) =
+A\)</span>，那么存在<strong>常数</strong> <span class="math inline">\(M
+&gt; 0\)</span> 和 <span class="math inline">\(\delta &gt;
+0\)</span>，使得当 <span class="math inline">\(0 &lt; |x - x_0| &lt;
+\delta\)</span> 时，有 <span class="math inline">\(|f(x)| \leq
+M\)</span>；</li>
+<li><strong>定理 3</strong>：函数极限的局部保号性，如果 <span class="math inline">\(\lim\limits_{x \to x_0} f(x) = A\)</span>，并且
+<span class="math inline">\(A &gt; 0\)</span> (或者 <span class="math inline">\(A &lt; 0\)</span>)，那么存在<strong>常数</strong>
+<span class="math inline">\(\delta &gt; 0\)</span>，使得当 <span class="math inline">\(0 &lt; |x - x_0| &lt; \delta\)</span> 时，有 <span class="math inline">\(f(x) &gt; 0\)</span> (或者 <span class="math inline">\(f(x) &lt; 0\)</span>)；</li>
+<li><strong>定理 3'</strong>：基于<strong>定理 3</strong>
+可以进一步得出结论，如果 <span class="math inline">\(\lim\limits_{x \to
+x_0} f(x) = A\ (A \neq
+0)\)</span>，那么就存在着的某一个<strong>去心邻域</strong> <span class="math inline">\(\overset{o}{U}(x_0)\)</span>，当 <span class="math inline">\(x \in \overset{o}{U}(x_0)\)</span> 时，就有 <span class="math inline">\(|f(x)| &gt; \frac{|A|}{2}\)</span>；</li>
+</ul>
+<blockquote>
+<p><strong>推论</strong>：如果在 <span class="math inline">\(x_0\)</span> 的某一个<strong>去心邻域</strong>内
+<span class="math inline">\(f(x) \ge 0\)</span> (或者 <span class="math inline">\(f(x) \le 0\)</span>)，并且 <span class="math inline">\(\lim\limits_{x \to x_0} f(x) = A\)</span>，那么
+<span class="math inline">\(A \ge 0\)</span> (或者 <span class="math inline">\(A \le 0\)</span>)。</p>
+</blockquote>
+<ul>
+<li><strong>定理
+4</strong>：函数极限与数列极限的关系，如果<strong>极限</strong> <span class="math inline">\(\lim\limits_{x \to x_0} f(x)\)</span> 存在，<span class="math inline">\(\{x_n \}\)</span> 为<strong>函数</strong> <span class="math inline">\(f(x)\)</span> 的定义域内任一收敛于 <span class="math inline">\(x_0\)</span> 的数列，并且满足 <span class="math inline">\(x_n \neq x_0\ (n \in
+N_+)\)</span>，那么相应的函数值<strong>数列</strong> <span class="math inline">\(\{ f(x_n) \}\)</span> 必然收敛，并且 <span class="math inline">\(\lim\limits_{n \to \infty} f(x_n) = \lim\limits_{x
+\to x_0} f(x)\)</span>；</li>
+</ul>
+<h3 id="无穷大-无穷小">无穷大 &amp; 无穷小</h3>
+<p>➤ <strong>无穷小的定义</strong>：如果<strong>函数</strong> <span class="math inline">\(f(x)\)</span> 当 <span class="math inline">\(x \to
+x_0\)</span> (或者 <span class="math inline">\(x \to
+\infty\)</span>)时的极限为<strong>零</strong>，那么就称<strong>函数</strong>
+<span class="math inline">\(f(x)\)</span> 为当 <span class="math inline">\(x \to x_0\)</span> (或者 <span class="math inline">\(x \to
+\infty\)</span>)时的<strong>无穷小</strong>。</p>
+<p>➤ <strong>无穷小与函数极限的关系</strong>：在自变量的同一个变化过程
+<span class="math inline">\(x \to x_0\)</span> (或者 <span class="math inline">\(x \to \infty\)</span>)当中，<strong>函数</strong>
+<span class="math inline">\(f(x)\)</span> 具有<strong>极限</strong>
+<span class="math inline">\(A\)</span> 的充分必要条件是 <span class="math inline">\(f(x) = A + \alpha\)</span>，其中 <span class="math inline">\(\alpha\)</span> 是无穷小。</p>
+<hr>
+<p>➤ <strong>无穷大的定义</strong>：假设<strong>函数</strong> <span class="math inline">\(f(x)\)</span> 在 <span class="math inline">\(x_0\)</span>
+的某一个<strong>去心邻域</strong>内有定义 (或者 <span class="math inline">\(|x|\)</span>
+大于某一个<strong>正数</strong>时有定义)，如果对于任意给定的<strong>正数</strong>
+<span class="math inline">\(M\)</span>
+(无论它多么大)，总存在着<strong>正数</strong> <span class="math inline">\(\delta\)</span> (或者<strong>正数</strong> <span class="math inline">\(X\)</span>)，只要 <span class="math inline">\(x\)</span> 适合<strong>不等式</strong> <span class="math inline">\(0 &lt; |x - x_0| &lt; \delta\)</span> (或者 <span class="math inline">\(|x| &gt;
+X\)</span>)，对应的<strong>函数值</strong> <span class="math inline">\(f(X)\)</span> 总是满足<strong>不等式</strong>
+<span class="math inline">\(|f(x)| &gt;
+M\)</span>，那么就称<strong>函数</strong> <span class="math inline">\(f(x)\)</span> 是当 <span class="math inline">\(x
+\to x_0\)</span> (或者 <span class="math inline">\(x \to
+\infty\)</span>) 时的<strong>无穷大</strong>。</p>
+<p>➤ <strong>函数的极限为无穷大</strong>：根据函数极限的定义，当 <span class="math inline">\(x \to x_0\)</span> (<strong>或者</strong> <span class="math inline">\(x \to \infty\)</span>)
+时，<strong>无穷大</strong>的<strong>函数</strong> <span class="math inline">\(f(x)\)</span>
+极限不存在，但是为了便于叙述函数的这一状态，也可以表述成<strong>函数的极限为无穷大</strong>，并且记为：</p>
+<p><span class="math display">\[
+\lim\limits_{x \to x_0} f(x) = \infty\ (或者 \lim\limits_{x \to \infty}
+= \infty)
+\]</span></p>
+<p>如果将无穷大定义当中的 <span class="math inline">\(|f(x)| &gt;
+M\)</span> 更换为 <span class="math inline">\(f(x) &gt; M\)</span>
+(<strong>或者</strong> <span class="math inline">\(f(x) &lt;
+-M\)</span>)，那么就可以记作：</p>
+<p><span class="math display">\[
+\lim\limits_{\begin{aligned} &amp;x \to x_0 \\ (&amp;x \to \infty)
+\end{aligned}} f(x) = + \infty
+\ (或者 \lim\limits_{\begin{aligned} &amp;x \to x_0 \\ (&amp;x \to
+\infty) \end{aligned}} f(x) = - \infty)
+\]</span></p>
+<p>一般而言，如果 <span class="math inline">\(\lim\limits_{x \to x_0}
+f(x)= \infty\)</span>，那么<strong>直线</strong> <span class="math inline">\(x = x_0\)</span> 就是<strong>函数</strong> <span class="math inline">\(y = f(x)\)</span>
+的图形的<strong>铅直渐近线</strong>。例如对于 <span class="math inline">\(\lim\limits_{x \to 1} \frac{1}{x - 1} =
+\infty\)</span> 而言，<strong>直线</strong> <span class="math inline">\(x = 1\)</span> 就是<strong>函数</strong> <span class="math inline">\(y = \frac{1}{x - 1}\)</span>
+图形上面的一条铅直渐近线：</p>
+<p><img src="/Math/Calculus/Chapter-1/5.png"></p>
+<p>➤
+<strong>无穷大与无穷小之间的关系</strong>：在自变量的同一个变化过程当中，如果
+<span class="math inline">\(f(x)\)</span>
+为<strong>无穷大</strong>，那么 <span class="math inline">\(\frac{1}{f(x)}\)</span>
+为<strong>无穷小</strong>；反之，如果 <span class="math inline">\(f(x)\)</span> 为<strong>无穷小</strong>，并且
+<span class="math inline">\(f(x) \neq 0\)</span>，那么 <span class="math inline">\(\frac{1}{f(x)}\)</span>
+为<strong>无穷大</strong>。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>高等数学主要概念与公式摘要</p><p><a href="http://www.uinio.com/Math/Calculus/">http://www.uinio.com/Math/Calculus/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2012-02-19</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-04-26</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Calculus/">Calculus</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Embedded/Mini2440/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">基于三星 S3C2440 的嵌入式 Linux 攻略</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Zen/Design-Pattern/"><span class="level-item">面向对象设计模式温故知新</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#函数与极限"><span class="level-left"><span class="level-item">1</span><span class="level-item">函数与极限</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数列的极限"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">数列的极限</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数列极限的定义"><span class="level-left"><span class="level-item">1.1.1</span><span class="level-item">数列极限的定义</span></span></a></li><li><a class="level is-mobile" href="#收敛数列的性质"><span class="level-left"><span class="level-item">1.1.2</span><span class="level-item">收敛数列的性质</span></span></a></li><li><a class="level is-mobile" href="#子数列"><span class="level-left"><span class="level-item">1.1.3</span><span class="level-item">子数列</span></span></a></li></ul></li><li><a class="level is-mobile" href="#函数的极限"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">函数的极限</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#函数极限的一般概念"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">函数极限的一般概念</span></span></a></li><li><a class="level is-mobile" href="#自变量趋于有限值"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">自变量趋于有限值</span></span></a></li><li><a class="level is-mobile" href="#自变量趋于无穷大"><span class="level-left"><span class="level-item">1.2.3</span><span class="level-item">自变量趋于无穷大</span></span></a></li><li><a class="level is-mobile" href="#函数极限的性质"><span class="level-left"><span class="level-item">1.2.4</span><span class="level-item">函数极限的性质</span></span></a></li></ul></li><li><a class="level is-mobile" href="#无穷大-无穷小"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">无穷大 &amp; 无穷小</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

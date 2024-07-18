@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>现代数字逻辑电子技术概论 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="二十一世纪，数字化浪潮席卷了电子工业领域，与传统的模拟电子系统相比，数字系统具备更加优异的精确与可靠性，逐步取代了许多模拟电路的应用场景。数字逻辑电路是对数字信号进行算术与逻辑运算的电路，以逻辑门作为基本电路单元（最早采用 TTL 工艺，伴随半导体工艺技术的不断进步，目前已经逐步被 CMOS 工艺取代），数字电路可以分为组合逻辑电路（基本逻辑门）和时序逻辑电路（逻辑门 + 反馈逻辑回路）两"><meta property="og:type" content="blog"><meta property="og:title" content="现代数字逻辑电子技术概论"><meta property="og:url" content="http://www.uinio.com/Electronics/Digital/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="二十一世纪，数字化浪潮席卷了电子工业领域，与传统的模拟电子系统相比，数字系统具备更加优异的精确与可靠性，逐步取代了许多模拟电路的应用场景。数字逻辑电路是对数字信号进行算术与逻辑运算的电路，以逻辑门作为基本电路单元（最早采用 TTL 工艺，伴随半导体工艺技术的不断进步，目前已经逐步被 CMOS 工艺取代），数字电路可以分为组合逻辑电路（基本逻辑门）和时序逻辑电路（逻辑门 + 反馈逻辑回路）两"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2021-01-30T16:00:00.000Z"><meta property="article:modified_time" content="2021-02-07T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Digital Circuit"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/Digital/"},"headline":"现代数字逻辑电子技术概论","image":["http://www.uinio.com/Electronics/Digital/logo.png"],"datePublished":"2021-01-30T16:00:00.000Z","dateModified":"2021-02-07T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"二十一世纪，数字化浪潮席卷了电子工业领域，与传统的模拟电子系统相比，数字系统具备更加优异的精确与可靠性，逐步取代了许多模拟电路的应用场景。数字逻辑电路是对数字信号进行算术与逻辑运算的电路，以逻辑门作为基本电路单元（最早采用\r TTL 工艺，伴随半导体工艺技术的不断进步，目前已经逐步被\r CMOS\r 工艺取代），数字电路可以分为组合逻辑电路（基本逻辑门）和时序逻辑电路（逻辑门\r + 反馈逻辑回路）两"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/Digital/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-01-30T16:00:00.000Z" title="2021/1/31 00:00:00">2021-01-31</time>发表</span><span class="level-item"><time dateTime="2021-02-07T16:00:00.000Z" title="2021/2/8 00:00:00">2021-02-08</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">29 分钟读完 (大约4377个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">现代数字逻辑电子技术概论</h1><div class="content"><p>二十一世纪，数字化浪潮席卷了电子工业领域，与传统的模拟电子系统相比，数字系统具备更加优异的精确与可靠性，逐步取代了许多模拟电路的应用场景。数字逻辑电路是对数字信号进行算术与逻辑运算的电路，以<strong>逻辑门</strong>作为基本电路单元（最早采用
+<strong>TTL</strong> 工艺，伴随半导体工艺技术的不断进步，目前已经逐步被
+<strong>CMOS</strong>
+工艺取代），数字电路可以分为<strong>组合逻辑电路</strong>（基本逻辑门）和<strong>时序逻辑电路</strong>（逻辑门
++ 反馈逻辑回路）两大类。</p>
+<p><img src="/Electronics/Digital/logo.png"></p>
+<p>本篇文章讲解了数字逻辑电路的分析与设计所涉及到的基础理论，首先讲解了<code>数制</code>、<code>码制</code>和<code>逻辑代数</code>等基础知识，接着重点描述<code>组合逻辑电路</code>和<code>时序逻辑电路</code>的分析与设计方法，然后讨论了各种<code>数字集成电路</code>（
+含门电路、可编程逻辑元件、半导体存储器）的原理以及使用方法，并且介绍了<code>硬件描述语言</code>与<code>可编程逻辑器件</code>的相关知识，最后一部分讲解<code>AD/DA</code>转换以及<code>脉冲波形</code>的产生和转换电路。</p>
+<span id="more"></span>
+<h2 id="数字逻辑概论">数字逻辑概论</h2>
+<h3 id="数字信号">数字信号</h3>
+<p><strong>模拟信号</strong>的电压或者电流在幅值和时间上都是离散的：</p>
+<p><img src="/Electronics/Digital/Section-1/1.png"></p>
+<p><strong>数字信号</strong>的电压或者电流的幅值随着时间连续变化：</p>
+<p><img src="/Electronics/Digital/Section-1/2.png"></p>
+<p>数字信号可以采用<strong>高</strong>、<strong>低</strong>电平来表示，它们统称为<strong>逻辑电平</strong>：</p>
+<ol type="1">
+<li><strong>低电平</strong>：电压值位于 <span class="math inline">\(0
+\sim V_{L(max)}\)</span> 范围内，通常表示逻辑 <code>0</code>；</li>
+<li><strong>高电平</strong>：电压值位于 <span class="math inline">\(V_{H(min)} \sim +V_{DD}\)</span>
+范围内，通常表示逻辑 <code>1</code>；</li>
+<li>电压值位于 <span class="math inline">\(V_{L(max)} \sim
+V_{H(min)}\)</span> 范围内没有定义，不能使用；</li>
+</ol>
+<p><img src="/Electronics/Digital/Section-1/3.png"></p>
+<p><strong>CMOS
+元器件电压值范围</strong>与<strong>数字逻辑电平</strong>之间的对应关系：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">电压范围</th>
+<th style="text-align: center;">逻辑值</th>
+<th style="text-align: center;">逻辑电平</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(3.5V \sim
+5V\)</span></td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;">高电平 <strong>H</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(0V \sim
+1.5V\)</span></td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;">低电平 <strong>L</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1.5V \sim
+3.5V\)</span></td>
+<td style="text-align: center;">无定义</td>
+<td style="text-align: center;">无定义</td>
+</tr>
+</tbody>
+</table>
+<p>数字波形是信号的<strong>逻辑电平</strong>相对于<strong>时间</strong>的图形化表达方式：</p>
+<p><img src="/Electronics/Digital/Section-1/4.png"></p>
+<p>实际脉冲波形在高、低电平跳变时，边沿不是陡直的，都需要经历一个过渡过程：</p>
+<p><img src="/Electronics/Digital/Section-1/5.png"></p>
+<ul>
+<li><strong>脉冲幅值 <span class="math inline">\(V_m\)</span></strong>：脉冲电压的最大变化幅度，即图中高电平的电压值，单位为伏特
+<code>V</code>；</li>
+<li><strong>上升时间 <span class="math inline">\(t_r\)</span></strong>：指矩形脉冲上升沿从 <span class="math inline">\(10\% V_m\)</span> 上升到 <span class="math inline">\(90\% V_m\)</span> 时所经历的时间，单位为纳秒
+<code>ns</code>；</li>
+<li><strong>下降时间 <span class="math inline">\(t_f\)</span></strong>：指矩形脉冲下降沿从 <span class="math inline">\(90\% V_m\)</span> 下降到 <span class="math inline">\(10\% V_m\)</span> 时所经历的时间，单位为纳秒
+<code>ns</code>；</li>
+<li><strong>周期 <span class="math inline">\(T\)</span></strong>：周期性重复的矩形脉冲中，两个相邻脉冲之间的时间间隔。有时也用频率来表示，即
+<span class="math inline">\(f = \frac{1}{T}\)</span>；</li>
+<li><strong>脉冲宽度 <span class="math inline">\(t_w\)</span></strong>：从矩形脉冲上升沿的中间点
+<span class="math inline">\(50\% V_m\)</span> 开始，到脉冲下降沿的中间点
+<span class="math inline">\(50\% V_m\)</span> 为止的一段时间；</li>
+<li><strong>占空比 <span class="math inline">\(q\)</span></strong>：表示矩形脉冲宽度（高电平）占据整个周期的百分比；</li>
+</ul>
+<p>▶【例题】假设周期性矩形脉冲波形的高电平持续时间为
+<code>6ms</code>，低电平的持续时间为 <code>10ms</code>，求解占空比
+<code>q</code> 和频率 <code>f</code> ？</p>
+<p>▶【解答】根据条件可以得到脉动宽度 <span class="math inline">\(t_w =
+6ms\)</span> 和周期 <span class="math inline">\(T = 6ms + 10ms =
+16ms\)</span>，从而可以计算出：</p>
+<p><span class="math display">\[
+\begin{aligned}
+   占空比 &amp;\implies q = \frac{6 ms}{10 ms} \times 100\% = 37.5\% \\
+   频率  &amp;\implies f = \frac{1}{T} = \frac{1}{16 \times 10^{-3}s} =
+62.5 Hz
+\end{aligned}
+\]</span></p>
+<h3 id="数制">数制</h3>
+<p><strong>数制</strong>是一种计数规则，主要是指每一位的构成，以及从<strong>低位</strong>向<strong>高位</strong>的进位。例如：<strong>十进制</strong>是以
+<code>10</code> 为基数的计数体制，采用
+<code>0</code>、<code>1</code>、<code>2</code>、<code>3</code>、<code>4</code>、<code>5</code>、<code>6</code>、<code>7</code>、<code>8</code>、<code>9</code>
+十个数值，其进位的规则是<strong>逢十进一</strong>。</p>
+<p><img src="/Electronics/Digital/Section-1/6.png"></p>
+<p><strong>二进制</strong>则是以 <code>2</code> 为基数,采用
+<code>0</code> 和 <code>1</code>
+两个数值，其进位规则是<strong>逢二进一</strong>，其中左侧是<strong>最高有效位</strong>（MSB），右侧为<strong>最低有效位</strong>(LSB)。</p>
+<p><img src="/Electronics/Digital/Section-1/7.png"></p>
+<blockquote>
+<p><strong>注意</strong>：二进制数中的每 1 个二进制数称为
+<code>1 bit</code> 位，而 8 位二进制数被称为 <code>1 Byte</code>
+字节。</p>
+</blockquote>
+<p>下面的表格对照了
+<strong>十</strong>（Decimal）、<strong>二</strong>（Binary）、<strong>八</strong>（Octonary）、<strong>十六</strong>（Hexadecimal）进制的特点：</p>
+<p><img src="/Electronics/Digital/Section-1/8.png"></p>
+<p>下面的表格展示了常用进制数值的换算关系：</p>
+<p><img src="/Electronics/Digital/Section-1/9.png"></p>
+<h4 id="二进制-十进制">二进制 ➔ 十进制</h4>
+<p>二进制数转换为十进制的方法，按照<strong>按权展开</strong>公式进行计算。即将每个位上的数值与相应位置的权相乘，最后再求和。</p>
+<p>▶【例题】将二进制整数 <span class="math inline">\((1001
+1101)_2\)</span> 转换为十进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/10.png"></p>
+<p>▶【例题】将二进制小数 <span class="math inline">\((0.1011)_2\)</span>
+转换为十进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/11.png"></p>
+<h4 id="十进制整数-二进制">十进制整数 ➔ 二进制</h4>
+<p>十进制<strong>整数</strong>转换为二进制数主要有<strong>加权求和法</strong>、<strong>除二取余法</strong>两种方式。</p>
+<h5 id="加权求和法">加权求和法</h5>
+<p><strong>加权求和法</strong>是通过确定一组二进制权，让它们的<strong>和</strong>等于已知十进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/12.png"></p>
+<p>▶【例题】将十进制整数 <span class="math inline">\((9)_{10}\)</span>
+转换为二进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/13.png"></p>
+<p>▶【例题】将十进制整数 <span class="math inline">\((82)_{10}\)</span>
+转换为二进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/14.png"></p>
+<p>▶【例题】将十进制整数 <span class="math inline">\((125)_{10}\)</span>
+转换为二进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/15.png"></p>
+<h5 id="除二取余法">除二取余法</h5>
+<p><strong>除二取余法</strong>是将十进制整数除以 <code>2</code>
+取其余数，所得之商再除以 <code>2</code>，再取其余数，如此重复直到商为
+<code>0</code>，每次得到的余数就构成了二进制数的对应位。其中，第一个余数为二进制数的最低位，最后一个余数为二进制数的最高位。</p>
+<p>▶【例题】将十进制数 <span class="math inline">\((45)_{10}\)</span>
+转换为二进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/16.png"></p>
+<h4 id="十进制小数-二进制">十进制小数 ➔ 二进制</h4>
+<p>十进制<strong>小数</strong>转换为二进制数同样可以选择<strong>加权求和法</strong>、<strong>除二取余法</strong>两种方式。</p>
+<h5 id="加权求和法-1">加权求和法</h5>
+<p><strong>加权求和法</strong>是通过确定一组二进制权，让它们的<strong>和</strong>等于已知十进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/17.png"></p>
+<p>▶【例题】将十进制小数 <span class="math inline">\((0.625)_{10}\)</span> 转换为二进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/18.png"></p>
+<h5 id="除二取余法-1">除二取余法</h5>
+<p><strong>除二取余法</strong>是将十进制整数除以 <code>2</code>
+取其余数，所得之商再除以
+<code>2</code>，再取其余数，如此重复直至小数部分为 <code>0</code>
+或者小数部分的位数满足误差要求，然后<strong>四舍五入</strong>为止，每次得到的整数就构成了二进制数的对应位。</p>
+<p>▶【例题】将十进制小数 <span class="math inline">\((0.3125)_{10}\)</span> 转换为二进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/19.png"></p>
+<p>▶【例题】将十进制小数 <span class="math inline">\((0.562)_{10}\)</span>
+转换为二进制数，要求转换误差小于 <span class="math inline">\(1\%\)</span>。</p>
+<p>如果误差要求小于 <span class="math inline">\(1\%\)</span>，那么 <span class="math inline">\(2^{-m} \le 1\% \implies m \ge \frac{2}{\lg 2} =
+6.64 \implies m = 7\)</span>，即保留 7 位二进制结果即可：</p>
+<p><img src="/Electronics/Digital/Section-1/20.png"></p>
+<p>接下来校对上面得到二进制结果 <span class="math inline">\((0.1000111)_{2}\)</span> 的转换误差，</p>
+<p><img src="/Electronics/Digital/Section-1/21.png"></p>
+<p>由于 <span class="math inline">\((0.562)_{10} - (0.555)_{10} \approx
+0.7\%\)</span> 误差小于 <span class="math inline">\(1\%\)</span>，所以最后得到的二进制结果满足转换误差的要求。</p>
+<h4 id="二进制-十六进制">二进制 ➔ 十六进制</h4>
+<p>由于 4 位二进制数恰好拥有 16 个状态，如果将这 4
+位二进制数看作整体，其进位输出正好是逢十六进一，所以可以采用<strong>分组转换法</strong>，即以二进制数的小数点为基准，整数部分从右至左每
+4 位分成一组，而小数部分从左至右每 4 位也分成一组，不足 4 位的以
+<code>0</code> 进行补足，然后将每一组数以一个十六进制数代替。</p>
+<p>▶【例题】将二进制小数 <span class="math inline">\((1101\ 1001\ 1011\
+0011 . 01)_{2}\)</span> 转换为十六进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/22.png"></p>
+<p>所以，最终的转换结果为 <span class="math inline">\((1101\ 1001\ 1011\
+0011.01)_2 = (D9B3.4)_{16}\)</span>。</p>
+<h4 id="十六进制-二进制">十六进制 ➔ 二进制</h4>
+<p>将每个十六进制数改写为等值的 4
+位二进制数即可，并且保持高低位的次序不变。</p>
+<p>▶【例题】将十六进制小数 <span class="math inline">\((4E6.97C)_{16}\)</span> 转换为二进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/23.png"></p>
+<p>所以，最终的转换结果为 <span class="math inline">\((4E6.97C)_{16} =
+(0100\ 1110\ 0110. 1001\ 0111\ 1100)_2\)</span>。</p>
+<h4 id="十六进制-十进制">十六进制 ➔ 十进制</h4>
+<p>可以根据<strong>按权展开</strong>公式进行计算，即将每个数与相应位置上的权相乘，然后再进行求和运算。</p>
+<p>▶【例题】将十六进制小数 <span class="math inline">\((3A.C)_{16}\)</span> 转换为十进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/24.png"></p>
+<p>所以，最终的转换结果为 <span class="math inline">\((3A.C)_{16} =
+(58.75)_{10}\)</span>。</p>
+<h4 id="十进制-十六进制">十进制 ➔ 十六进制</h4>
+<p>将十进制转换为十六进制，可以先转换为二进制数，然后再将得到的二进制数转换为等值的十六进制数。</p>
+<p>当然，也可以采用<strong>除以十六取余法</strong>直接从十进制<strong>整数</strong>转换为十六进制。</p>
+<p>▶【例题】将十进制整数 <span class="math inline">\((650)_{10}\)</span>
+转换为十六进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/25.png"></p>
+<p>对于十进制<strong>小数</strong>转换为十六进制，则需要使用<strong>乘以十二取整法</strong>。</p>
+<p>▶【例题】将十进制小数 <span class="math inline">\((0.75)_{10}\)</span> 转换为十六进制数。</p>
+<p><img src="/Electronics/Digital/Section-1/26.png"></p>
+<h3 id="二进制算术运算">二进制算术运算</h3>
+<p>当两个二进制数表示两个数量大小时，它们之间可以进行数值运算，这种运算称为算术运算。</p>
+<h4 id="加法">加法</h4>
+<p>二进制数加法的运算规则与十进制数加法类似，只是其进位规则为<strong>逢二进一</strong>。</p>
+<p>对于<strong>一位二进制数</strong>的相加运算，会向左侧相邻的高位产生进位：</p>
+<p><img src="/Electronics/Digital/Section-1/27.png"></p>
+<p>对于多位二进制数的加法从最低位（最右侧）开始，每次取被加数和加数的一位相加，然后逐一向左侧相邻的高位进位。</p>
+<p><img src="/Electronics/Digital/Section-1/28.png"></p>
+<h4 id="减法">减法</h4>
+<p>二进制减法运算当中，当 <code>0</code> 减去 <code>1</code>
+不够减时，需要向左边高位进行借位，借的这一位作为 <code>10</code>
+处理（即十进制数 <code>2</code>），也称为<strong>借一为二</strong>。</p>
+<!-- ![](Digital/Section-1/29.png) -->
+<p><span class="math display">\[
+\begin{aligned}
+   0 - 0 &amp;= \color{Red}0    &amp;\implies 借位为\ \color{Green}0 \\
+   1 - 0 &amp;= \color{Red}1    &amp;\implies 借位为\ \color{Green}0 \\
+   1 - 1 &amp;= \color{Red}0    &amp;\implies 借位为\ \color{Green}0 \\
+   0 - 1 &amp;= \color{Red}-11  &amp;\implies 借位为\ \color{Green}1 \\
+\end{aligned}
+\]</span></p>
+<p>当两个<strong>一位二进制数</strong>相减时，如果低位向本位的借位一直为
+<code>1</code>，那么计算的四种情况为：</p>
+<p><img src="/Electronics/Digital/Section-1/30.png"></p>
+<p>当两个<strong>多位二进制数</strong>相减时，从最低位（最右边）开始，每次取被减数与减数的
+1
+位相减；同时还要考虑低位向本位的借位，如果被减数小于减数，就要将减数与被减数交换位置，用减数减去被减数，然后在差值的前面添加负号<code>-</code>。</p>
+<p><img src="/Electronics/Digital/Section-1/31.png"></p>
+<h4 id="乘法">乘法</h4>
+<p>被乘数与乘数中某一位相乘的结果，称为<strong>部分积</strong>。</p>
+<!-- ![](Digital/Section-1/32.png) -->
+<p><span class="math display">\[
+\begin{aligned}
+   0 \times 0 &amp;= \color{Red}0 \\
+   0 \times 1 &amp;= \color{Red}0 \\
+   1 \times 0 &amp;= \color{Red}0 \\
+   1 \times 1 &amp;= \color{Red}1 \\
+\end{aligned}
+\]</span></p>
+<p>▶【例题】计算两个四位二进制数 <span class="math inline">\(1011\)</span> 和 <span class="math inline">\(1001\)</span> 的积？</p>
+<p><img src="/Electronics/Digital/Section-1/33.png"></p>
+<p>所以，多位二进制数 <span class="math inline">\(1011\)</span> 乘以
+<span class="math inline">\(1001\)</span> 的积为 <span class="math inline">\(1100011\)</span>。</p>
+<blockquote>
+<p><strong>注意</strong>：计算机当中，乘法运算是通过<strong>左移被乘数</strong>、<strong>加法</strong>两种运算共同完成的。</p>
+</blockquote>
+<h4 id="除法">除法</h4>
+<p>从被除数的最高位开始，逐位向低位不断减去除数，够减时商为
+<code>1</code>，不够减时商为
+<code>0</code>，这样不断减下去就可以求得商。在二进制除法当中，每一位商的值为
+<code>0</code> 或者 <code>1</code>。</p>
+<!-- ![](Digital/Section-1/34.png) -->
+<p><span class="math display">\[
+\begin{aligned}
+   0 \div 1 &amp;= \color{Red}0 \\
+   1 \div 1 &amp;= \color{Red}1 \\
+\end{aligned}
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：类似于十进制的除法，二进制的除数不能为
+<code>0</code>，否则没有意义。</p>
+</blockquote>
+<p>▶【例题】计算两个四位二进制数 <span class="math inline">\(1010\)</span> 和 <span class="math inline">\(111\)</span> 的商？</p>
+<p><img src="/Electronics/Digital/Section-1/35.png"></p>
+<blockquote>
+<p><strong>注意</strong>：计算机当中，除法运算是通过<strong>右移被除数</strong>、<strong>减法</strong>两种运算共同完成的。</p>
+</blockquote>
+<h4 id="有符号数">有符号数</h4>
+<p>日常生活当中，通常在一个数的前面采用 <code>+</code> 号表示正数，减号
+<code>-</code> 表示负数。由于数字系统只能识别和处理 <code>0</code> 和
+<code>1</code> 表示的二进制数据，因此通常将<strong>正号 <code>+</code>
+用 <code>0</code>表示负号用 <code>1</code>
+表示</strong>。将数的符号和值分别用 <code>0</code> 和 <code>1</code>
+进行编码，所表示出来的二进制数称为<strong>机器数</strong>，机器数真正的值（即用正负符号表示的十进制或二进制数值）称为<strong>真值</strong>。机器数可以分为<strong>有符号</strong>和<strong>无符号</strong>两种类型：</p>
+<ol type="1">
+<li><strong>无符号数</strong>：所有二进制位全部用来表示数值，例如 8
+位无符号整数的 8 位全部都是用来表示数值的<strong>数值位</strong>： <img src="/Electronics/Digital/Section-1/36.png"></li>
+<li><strong>有符号数</strong>：符号和数值分别采用二进制数进行表示，例如
+8
+位无符号整数左边的最高位作为<strong>符号位</strong>，其余位为<strong>数值位</strong>：
+<img src="/Electronics/Digital/Section-1/37.png"></li>
+</ol>
+<p>有符号数可以进一步分为<strong>原码</strong>、<strong>反码</strong>、<strong>补码</strong>形式：</p>
+<h5 id="原码">原码</h5>
+<p><strong>原码</strong>就是将正数的符号位用 <code>0</code>
+表示，负数的符号位用 <code>1</code>
+表示，数值用绝对值的二进制数形式表示。</p>
+<p><img src="/Electronics/Digital/Section-1/38.png"></p>
+<p>因此，真值 <code>0</code> 也会拥有 <code>+0</code> 和 <code>-0</code>
+两种不同的表示形式：</p>
+<p><img src="/Electronics/Digital/Section-1/39.png"></p>
+<blockquote>
+<p><strong>注意</strong>：计算机当中，位 <code>bit</code>
+是二进制数据的最小单位，一位二进制数就是 <code>1</code>
+比特（<code>bit</code>），通常将 <code>8</code> 位二进制数称为
+<code>1</code> 字节（<code>Byte</code>），而 <code>4</code>
+位二进制数称为半字节（<code>Nibble</code> /ˈnɪbl/）。</p>
+</blockquote>
+<h5 id="反码">反码</h5>
+<p>原码简单易懂且便于转换为真值，但是实现加、减运算较为麻烦。为了简化计算机的处理过程，通常会将<strong>减法</strong>运算转换为<strong>加法</strong>运算，于是引进了<strong>补码</strong>的概念。由于<strong>补码</strong>与<strong>反码</strong>之间存在一定的换算关系，所以这里首先对<strong>反码</strong>进行介绍。</p>
+<ul>
+<li><strong>正数</strong>的反码与原码相同；</li>
+<li><strong>负数</strong>的反码是其正数的反码，但是符号位保持为<code>1</code>，数值部分则按位取反；</li>
+</ul>
+<p><img src="/Electronics/Digital/Section-1/40.png"></p>
+<p>反码当中 <code>0</code> 同样拥有 <code>+0</code> 和 <code>-0</code>
+两种不同的表示形式：</p>
+<p><img src="/Electronics/Digital/Section-1/41.png"></p>
+<h5 id="补码">补码</h5>
+<p>减法运算 <code>10 – 5</code> 可以用 <code>10 + 7</code>
+的加法运算来代替，而 <code>5</code> 和 <code>7</code>
+相加正好是进位的模数 <code>12</code>，所以称 <code>7</code> 为
+<code>-5</code> 对模 <code>12</code> 的补数，
+也称为<strong>补码</strong>。</p>
+<p><img src="/Electronics/Digital/Section-1/42.png"></p>
+<p><strong>模</strong>是指一个计量系统的量程，例如时钟能够表示 <span class="math inline">\(1 \sim 12\)</span>，那么以 <span class="math inline">\(12\)</span>
+作为一个计数循环就被称为<strong>模</strong>。而四位二进制数能够表示
+<span class="math inline">\(0000 \sim 1111\)</span> 其模为
+<code>16</code>，同理八位二进制数的模为 <span class="math inline">\(2^8
+= 256\)</span>。</p>
+<p><img src="/Electronics/Digital/Section-1/43.png"></p>
+<p>所以，在舍弃进位的条件下，减去某数的计算可以采用加上这个数补码的计算来代替，该结论同样适用于二进制数的减法运算。</p>
+<p><img src="/Electronics/Digital/Section-1/44.png"></p>
+<p>例如减法 <span class="math inline">\(1011 - 0111 = 0100\)</span>
+对应的十进制形式为 <span class="math inline">\(11 - 7 =
+4\)</span>，在<strong>舍弃进位</strong>的条件下，可以采用 <span class="math inline">\(1011 + 1001 = 0100\)</span>
+形式代替，对应的十进制等式是 <span class="math inline">\(11 + 9 =
+4\)</span>。这是因为四位二进制数的模数为 <code>16</code>，而
+<code>9</code> 恰好就是 <code>-7</code> 对模 <code>16</code>
+的补码。</p>
+<ul>
+<li><strong>正数</strong>的补码与原码相同；</li>
+<li><strong>负数</strong>的补码是符号位为 <code>1</code>
+的负数，数值部分为其绝对值按位取反，并在最低位加
+<code>1</code>，即<strong>负数的补码等于其反码加上一</strong>；</li>
+</ul>
+<p><img src="/Electronics/Digital/Section-1/45.png"></p>
+<p>注意，补码当中，真值 <code>0</code> 的表示是唯一的，即：</p>
+<p><img src="/Electronics/Digital/Section-1/46.png"></p>
+<p>负数补数的简便求解方法：从<strong>右侧最低位</strong>向<strong>左侧最高位</strong>扫描，保留出现第一个
+<code>1</code> 的位，后续的其它位全部按位取反，符号位保持不变。</p>
+<p>▶【例题】使用八位二进制数，将 <code>-90</code> 用补码表示出来：</p>
+<p><img src="/Electronics/Digital/Section-1/47.png"></p>
+<p>▶【例题】使用八位二进制数，将 <code>-1</code> 用补码表示出来：</p>
+<p><img src="/Electronics/Digital/Section-1/48.png"></p>
+<p>求解一个<strong>补码</strong>的<strong>补码</strong>，就可以将<strong>补码</strong>转换成<strong>原码</strong>，即
+<span class="math inline">\([[x]_补]_补 = [x]_原\)</span>。</p>
+<p>▶【例题】求解 <span class="math inline">\([1010 1010]_补\)</span>
+的原码和真值？</p>
+<p><img src="/Electronics/Digital/Section-1/49.png"></p>
+<p>将<strong>补码</strong>当中所有等于 <code>1</code>
+的<strong>位的权值</strong>相加（包括符号位，负数的符号位的权值被赋予负值），就可以得到其十进制数。</p>
+<p>▶【例题】确定补数 <span class="math inline">\([0101\
+0110]_补\)</span> 和 <span class="math inline">\([1010\
+1010]_补\)</span> 的十进制值？</p>
+<p><img src="/Electronics/Digital/Section-1/50.png"></p>
+<p><span class="math display">\[
+[0101\ 0110]_补 = 1 \times 2^6 + 1  \times 2^4 + 1  \times 2^2 + 1
+\times 2^1 = 64 + 16 + 4 + 2 = +86
+\]</span></p>
+<p><img src="/Electronics/Digital/Section-1/51.png"></p>
+<p><span class="math display">\[
+[1010\ 1010]_补 = 1 \times (-2)^7 + 1 \times 2^5 + 1  \times 2^3 + 1
+\times 2^1 = -128 + 32 + 8 + 2
+= -86
+\]</span></p>
+<h3 id="二进制代码">二进制代码</h3>
+<h2 id="逻辑代数">逻辑代数</h2>
+<h2 id="组合逻辑电路">组合逻辑电路</h2>
+<h2 id="硬件描述语言-verilog-hdl">硬件描述语言 Verilog HDL</h2>
+<h2 id="锁存器和触发器">锁存器和触发器</h2>
+<h2 id="时序逻辑电路">时序逻辑电路</h2>
+<h2 id="逻辑门电路">逻辑门电路</h2>
+<h2 id="半导体存储器">半导体存储器</h2>
+<h2 id="可编程逻辑器件">可编程逻辑器件</h2>
+<h2 id="脉冲波形的产生与变换">脉冲波形的产生与变换</h2>
+<h2 id="数模与模数转换器">数模与模数转换器</h2>
+</div><div class="article-licensing box"><div class="licensing-title"><p>现代数字逻辑电子技术概论</p><p><a href="http://www.uinio.com/Electronics/Digital/">http://www.uinio.com/Electronics/Digital/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-01-31</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-02-08</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Digital-Circuit/">Digital Circuit</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Zen/Cryptology/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">编码实践当中涉及的密码学知识</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/HEP_Analog/"><span class="level-item">高等教育出版社《模拟电子技术》温习札记</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#数字逻辑概论"><span class="level-left"><span class="level-item">1</span><span class="level-item">数字逻辑概论</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数字信号"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">数字信号</span></span></a></li><li><a class="level is-mobile" href="#数制"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">数制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#二进制-十进制"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">二进制 ➔ 十进制</span></span></a></li><li><a class="level is-mobile" href="#十进制整数-二进制"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">十进制整数 ➔ 二进制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#加权求和法"><span class="level-left"><span class="level-item">1.2.2.1</span><span class="level-item">加权求和法</span></span></a></li><li><a class="level is-mobile" href="#除二取余法"><span class="level-left"><span class="level-item">1.2.2.2</span><span class="level-item">除二取余法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#十进制小数-二进制"><span class="level-left"><span class="level-item">1.2.3</span><span class="level-item">十进制小数 ➔ 二进制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#加权求和法-1"><span class="level-left"><span class="level-item">1.2.3.1</span><span class="level-item">加权求和法</span></span></a></li><li><a class="level is-mobile" href="#除二取余法-1"><span class="level-left"><span class="level-item">1.2.3.2</span><span class="level-item">除二取余法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#二进制-十六进制"><span class="level-left"><span class="level-item">1.2.4</span><span class="level-item">二进制 ➔ 十六进制</span></span></a></li><li><a class="level is-mobile" href="#十六进制-二进制"><span class="level-left"><span class="level-item">1.2.5</span><span class="level-item">十六进制 ➔ 二进制</span></span></a></li><li><a class="level is-mobile" href="#十六进制-十进制"><span class="level-left"><span class="level-item">1.2.6</span><span class="level-item">十六进制 ➔ 十进制</span></span></a></li><li><a class="level is-mobile" href="#十进制-十六进制"><span class="level-left"><span class="level-item">1.2.7</span><span class="level-item">十进制 ➔ 十六进制</span></span></a></li></ul></li><li><a class="level is-mobile" href="#二进制算术运算"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">二进制算术运算</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#加法"><span class="level-left"><span class="level-item">1.3.1</span><span class="level-item">加法</span></span></a></li><li><a class="level is-mobile" href="#减法"><span class="level-left"><span class="level-item">1.3.2</span><span class="level-item">减法</span></span></a></li><li><a class="level is-mobile" href="#乘法"><span class="level-left"><span class="level-item">1.3.3</span><span class="level-item">乘法</span></span></a></li><li><a class="level is-mobile" href="#除法"><span class="level-left"><span class="level-item">1.3.4</span><span class="level-item">除法</span></span></a></li><li><a class="level is-mobile" href="#有符号数"><span class="level-left"><span class="level-item">1.3.5</span><span class="level-item">有符号数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#原码"><span class="level-left"><span class="level-item">1.3.5.1</span><span class="level-item">原码</span></span></a></li><li><a class="level is-mobile" href="#反码"><span class="level-left"><span class="level-item">1.3.5.2</span><span class="level-item">反码</span></span></a></li><li><a class="level is-mobile" href="#补码"><span class="level-left"><span class="level-item">1.3.5.3</span><span class="level-item">补码</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#二进制代码"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">二进制代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#逻辑代数"><span class="level-left"><span class="level-item">2</span><span class="level-item">逻辑代数</span></span></a></li><li><a class="level is-mobile" href="#组合逻辑电路"><span class="level-left"><span class="level-item">3</span><span class="level-item">组合逻辑电路</span></span></a></li><li><a class="level is-mobile" href="#硬件描述语言-verilog-hdl"><span class="level-left"><span class="level-item">4</span><span class="level-item">硬件描述语言 Verilog HDL</span></span></a></li><li><a class="level is-mobile" href="#锁存器和触发器"><span class="level-left"><span class="level-item">5</span><span class="level-item">锁存器和触发器</span></span></a></li><li><a class="level is-mobile" href="#时序逻辑电路"><span class="level-left"><span class="level-item">6</span><span class="level-item">时序逻辑电路</span></span></a></li><li><a class="level is-mobile" href="#逻辑门电路"><span class="level-left"><span class="level-item">7</span><span class="level-item">逻辑门电路</span></span></a></li><li><a class="level is-mobile" href="#半导体存储器"><span class="level-left"><span class="level-item">8</span><span class="level-item">半导体存储器</span></span></a></li><li><a class="level is-mobile" href="#可编程逻辑器件"><span class="level-left"><span class="level-item">9</span><span class="level-item">可编程逻辑器件</span></span></a></li><li><a class="level is-mobile" href="#脉冲波形的产生与变换"><span class="level-left"><span class="level-item">10</span><span class="level-item">脉冲波形的产生与变换</span></span></a></li><li><a class="level is-mobile" href="#数模与模数转换器"><span class="level-left"><span class="level-item">11</span><span class="level-item">数模与模数转换器</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

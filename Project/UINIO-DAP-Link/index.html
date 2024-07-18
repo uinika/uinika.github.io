@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>ARM 调试工具 UINIO-DAP-Link 应用详解 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="ARM Mbed OS 是一款开源免费的物联网操作系统，包含有基于 ARM Cortex-M 系列微控制器开发智能连接产品所需的全部基础架构。其社区推出的 DAP-Link 同样是一个开源项目，它支持编程和调试运行在 ARM Cortex 微控制器上面的代码，主要运行于拥有 SWD 或者 JTAG 接口的微控制器当中，并且通过 USB 接口在计算机与 ARM Cortex 微控制器之"><meta property="og:type" content="blog"><meta property="og:title" content="ARM 调试工具 UINIO-DAP-Link 应用详解"><meta property="og:url" content="http://www.uinio.com/Project/UINIO-DAP-Link/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="ARM Mbed OS 是一款开源免费的物联网操作系统，包含有基于 ARM Cortex-M 系列微控制器开发智能连接产品所需的全部基础架构。其社区推出的 DAP-Link 同样是一个开源项目，它支持编程和调试运行在 ARM Cortex 微控制器上面的代码，主要运行于拥有 SWD 或者 JTAG 接口的微控制器当中，并且通过 USB 接口在计算机与 ARM Cortex 微控制器之"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2023-01-21T16:00:00.000Z"><meta property="article:modified_time" content="2024-07-03T18:28:39.662Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Tools"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Project/UINIO-DAP-Link/"},"headline":"ARM 调试工具 UINIO-DAP-Link 应用详解","image":["http://www.uinio.com/Project/UINIO-DAP-Link/logo.png"],"datePublished":"2023-01-21T16:00:00.000Z","dateModified":"2024-07-03T18:28:39.662Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"ARM Mbed OS\r 是一款开源免费的物联网操作系统，包含有基于 ARM Cortex-M\r 系列微控制器开发智能连接产品所需的全部基础架构。其社区推出的 DAP-Link\r 同样是一个开源项目，它支持编程和调试运行在 ARM Cortex\r 微控制器上面的代码，主要运行于拥有 SWD 或者\r JTAG 接口的微控制器当中，并且通过 USB 接口在计算机与\r ARM Cortex\r 微控制器之"}</script><link rel="canonical" href="http://www.uinio.com/Project/UINIO-DAP-Link/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-01-21T16:00:00.000Z" title="2023/1/22 00:00:00">2023-01-22</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.662Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">1 小时读完 (大约7046个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">ARM 调试工具 UINIO-DAP-Link 应用详解</h1><div class="content"><p><strong>ARM Mbed OS</strong>
+是一款开源免费的物联网操作系统，包含有基于 <strong>ARM Cortex-M</strong>
+系列微控制器开发智能连接产品所需的全部基础架构。其社区推出的 <a target="_blank" rel="noopener" href="https://daplink.io/"><strong>DAP-Link</strong></a>
+同样是一个开源项目，它支持编程和调试运行在 ARM Cortex
+微控制器上面的代码，主要运行于拥有 <strong>SWD</strong> 或者
+<strong>JTAG</strong> 接口的微控制器当中，并且通过 USB 接口在计算机与
+ARM Cortex
+微控制器之间创建一个用于调试仿真的通道与桥梁，为开发人员提供了<strong>下载调试</strong>、<strong>串口通信</strong>、<strong>拖拽烧录</strong>等一系列实用功能。</p>
+<p><img src="/Project/UINIO-DAP-Link/logo.png"></p>
+<p><strong>DAPLink</strong> 主要由 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/mbed-HDK-Eagle-Projects"><strong>Mbed
+硬件开发工具包</strong></a> 以及 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/DAPLink"><strong>DAPLink
+固件</strong></a> 两个开源项目构成，而 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link"><strong>UINIO-DAP-Link</strong></a>
+则是由我自己设计的一款完全开源的 DAPLink
+实现，相比于官方原版的硬件电路设计，在引出有 <strong>SWD</strong>
+调试接口（由 ARM 公司制订）的同时，还引出了 <strong>JTAG</strong>
+接口（属于 IEEE1149 国际标准）以及<code>5V</code> 和 <code>3.3V</code>
+电源，并且附带有 <strong>SWD</strong> 至 <strong>JTAG</strong> 转接板的
+PCB 设计，而固件部分则是基于 ARM
+官方的最新的原版固件移植而来，全部的原理图与固件程序都已经开源在 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link"><strong>GitHub</strong></a>。</p>
+<span id="more"></span>
+<h2 id="dap-link-简介">DAP Link 简介</h2>
+<p><strong>DAPLink</strong>
+调试器可以为开发人员提供如下一系列方便实用的功能：</p>
+<ul>
+<li><strong>CMSIS-DAPv1 HID</strong> - 兼容 CMSIS 的调试通道；</li>
+<li><strong>CMSIS-DAPv2 WinUSB</strong> - 兼容 CMSIS 的调试通道；</li>
+<li><strong>WebUSB CMSIS-DAP HID</strong> - 兼容 CMSIS 的调试通道；</li>
+<li><strong>CDC</strong> - 用于日志、跟踪和终端仿真的虚拟通信端口；</li>
+<li><strong>MSC</strong> - 通过拖拽编程 Flash
+存储器（根据固件不同，仅⽀持烧录特定型号芯片）；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：目前 DAPLink 已经取代了过去 <strong>ARM
+Mbed</strong> 推出的 <strong>CMSIS-DAP</strong> 开源调试器项目。</p>
+</blockquote>
+<p>如下品牌的 ARM 硬件接口电路（<strong>HIC</strong>，Hardware Interface
+Circuits，即调试器硬件）与 DAPLink 的固件完全兼容：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nxp.com/design/microcontrollers-developer-resources/mcu-link-debug-probe:MCU-LINK">恩智浦
+MCU-LINK</a>，基于 LPC55xx 主控；</li>
+<li><a target="_blank" rel="noopener" href="https://www.nuvoton.com/tool-and-software/debugger-and-programmer/1-to-1-debugger-and-programmer/nu-link2-me/">新唐
+Nu-Link2-Me</a>，基于 M48SSIDAE 主控；</li>
+<li><a target="_blank" rel="noopener" href="https://www.maximintegrated.com/en/products/microcontrollers/MAX32625PICO.html">美信
+MAX32625PICO</a>，基于 MAX32625 主控；</li>
+<li><a target="_blank" rel="noopener" href="https://www.segger.com/products/debug-probes/j-link/models/j-link-ob/">Segger
+J-Link OB</a>，基于 Atmel SAM3U 主控芯片；</li>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/en/evaluation-tools/stm32-nucleo-boards.html">意法半导体
+ST-LINK/V2</a>，基于 STM32F103CB 主控；</li>
+<li><a target="_blank" rel="noopener" href="http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA">恩智浦
+OpenSDA</a>，基于 K20, K22, KL26Z 和 KL27Z 主控；</li>
+<li><a target="_blank" rel="noopener" href="https://www.nxp.com/support/developer-resources/hardware-development-tools/lpcxpresso-boards:LPCXPRESSO-BOARDS">恩智浦
+LPC-Link2 based</a>，基于 LPC11U35 或者 LPC4322 主控；</li>
+</ul>
+<p><strong>DAPLink</strong>
+主要提供了<strong>拖放编程</strong>、<strong>串口通信</strong>、<strong>调试</strong>三种主要功能：</p>
+<ul>
+<li><strong>拖拽烧录</strong>：通过将 <code>.bin</code> 或者
+<code>.hex</code> 格式的文件复制或者保存到 DAPLink
+驱动器，从而实现对目标微控制器的编程。完成以后，驱动器将会重新进行挂载。如果下载出现问题，则驱动器上将会自动生成一个包含有故障信息的
+<code>FAIL.TXT</code> 文件；</li>
+<li><strong>串口通信</strong>：可以直接与目标 MCU
+微控制器进行双向串行通信，支持
+<code>9600</code>、<code>14400</code>、<code>19200</code>、<code>28800</code>、<code>38400</code>、<code>56000</code>、<code>57600</code>、<code>115200</code>
+等常用波特率；</li>
+<li><strong>下载调试</strong>：可以使用任意支持 CMSIS-DAP 协议的 IDE
+集成开发环境进行调试，例如 <a target="_blank" rel="noopener" href="https://github.com/mbedmicro/pyOCD">pyOCD</a>、<a target="_blank" rel="noopener" href="http://www.keil.com/">uVision</a>、<a target="_blank" rel="noopener" href="https://www.iar.com/">IAR</a>；</li>
+</ul>
+<p>更新设备固件时，只需要连接上 USB 并且按住重置键，让设备进入
+Bootloader
+引导模式，从而开始下载固件。如果下载成功，那么设备将会离开引导模式，并且开始运行新的固件。如果下载失败，则设备将会自动生成显示有错误信息的
+<code>FAIL.TXT</code> 文件。</p>
+<h2 id="编译-daplink-工程">编译 DAPLink 工程</h2>
+<p><strong>DAPLink</strong> 的固件源代码，使用开源项目构建工具 <a target="_blank" rel="noopener" href="https://github.com/project-generator/project_generator">project-generator</a>
+提供的 <code>progen</code>
+命令进行构建。除此之外，在编译过程当中还需要使用到如下一系列工具软件：</p>
+<ol type="1">
+<li>安装 <a target="_blank" rel="noopener" href="https://git-scm.com/downloads">Git</a>
+并将其加入环境变量；</li>
+<li>安装 <a target="_blank" rel="noopener" href="https://www.python.org/downloads/">Python 3</a>
+并将其加入环境变量；</li>
+<li>安装相关的编译器，可以选择标识为 <code>gcc_arm</code> 的 <a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads">GNU
+ARM Embedded Toolchain</a> 、标识为 <code>armclang</code> 的 <a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/embedded/arm-compiler">ARM
+Compiler 6</a>，以及标识为 <code>armcc</code> 的 <a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/embedded/keil-mdk">Keil
+MDK</a> 或者 <a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/embedded/arm-compiler/downloads/legacy-compilers#arm-compiler-5">ARM
+Compiler 5</a> 编译器，它们当中的大部分都只支持 Linux 和 Windows
+操作系统环境；</li>
+<li>安装 <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make">GNU Make</a>
+构建工具，可以组合使用 <a target="_blank" rel="noopener" href="https://cmake.org">CMake</a> 以及 <a target="_blank" rel="noopener" href="https://ninja-build.org">ninja</a>；</li>
+<li>通过 <code>pip Install virtualenv</code> 命令全局安装 Python
+虚拟环境 <code>virtualenv</code>；</li>
+</ol>
+<h3 id="准备虚拟环境">准备虚拟环境</h3>
+<p>首先，需要去克隆 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/DAPLink"><strong>DAPLink</strong></a>
+托管在 Github 上面的开源工程，并且创建出一个 Python 虚拟环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/mbedmicro/DAPLink</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cd</span> DAPLink</span><br><span class="line"></span><br><span class="line">$ pip install virtualenv</span><br><span class="line"></span><br><span class="line">$ virtualenv venv</span><br></pre></td></tr></table></figure>
+<p>如果当前使用的是 <strong>DAPLink</strong> 的指定 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/DAPLink/releases">Release
+版本</a>，当把这些版本下载至本地以后，为了避免后续编译过程当中报错，需要将其初始化为一个
+Git 工程项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br><span class="line">$ git add .</span><br><span class="line">$ git config --global user.name <span class="string">&quot;Hank&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;uinika@outlook.com&quot;</span></span><br><span class="line">$ git commit -m <span class="string">&quot;update&quot;</span></span><br></pre></td></tr></table></figure>
+<p>接下来，就可以激活 Python 虚拟环境，并且更新 <strong>DAPLink</strong>
+开源工程相关的第三方依赖库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ venv/Scripts/activate       (For Linux)</span><br><span class="line"></span><br><span class="line">$ venv\Scripts\activate.bat   (For Windows)</span><br><span class="line"></span><br><span class="line">(venv) $ pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>除此之外，还需要再额外全局安装 <code>intelhex</code> 和
+<code>pyelftools</code> 两个 Python 第三方库，避免后续使用 <strong>Keil
+µVision</strong> 进行编译的时候出现依赖缺失的错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install intelhex pyelftools</span><br></pre></td></tr></table></figure>
+<h3 id="构建-keil-µvision-工程">构建 Keil µVision 工程</h3>
+<p>接下来开始构建 <strong>DAPLink</strong> 的项目工程结构，可以使用 <a target="_blank" rel="noopener" href="https://github.com/project-generator/project_generator">project-generator</a>
+提供的 <code>progen</code> 命令或者直接执行
+<code>tools/progen_compile.py</code> 脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python tools/progen_compile.py [-t &lt;tool&gt;] [--clean] [-v] [--parallel] [&lt;project&gt; [&lt;project&gt; ...]]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-t &lt;tool&gt;</code>：选择当前构建所使用的工具链，默认为
+<code>make_gcc_arm</code>，其它的可选项分别为
+<code>make_gcc_arm</code>、<code>make_armclang</code>、<code>make_armcc</code>、<code>cmake_gcc_arm</code>、<code>cmake_armclang</code>、<code>cmake_armcc</code>；</li>
+<li><code>--clean</code>:
+清除现有的编译结果，并且强制重新编译所有文件；</li>
+<li><code>-v</code>: 列出详细信息，该选项会延长编译运行时间；</li>
+<li><code>--parallel</code>: 启用并行编译，加快编译速度；</li>
+<li><code>&lt;project&gt;</code>:
+等待编译的目标工程，如果缺省将会编译全部工程；</li>
+</ul>
+<p>通过执行下面的命令，可以在 <code>projectfiles/uvision</code>
+目录下面生成一系列的 <strong>Keil µVision</strong> 工程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ progen generate -t uvision</span><br></pre></td></tr></table></figure>
+<p>当然也可以使用下面这条命令，只生成 <code>stm32f103xb_bl</code> 和
+<code>stm32f103xb_stm32f103rb_if</code> 两个指定的 <strong>Keil
+µVision</strong> 工程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ progen generate -f projects.yaml -p stm32f103xb_bl stm32f103xb_stm32f103rb_if -t uvision</span><br></pre></td></tr></table></figure>
+<p>上述命令当中的参数 <code>-f</code> 用于指定工程配置文件，而参数
+<code>-p</code> 则用于指定工程的名称，最后的 <code>-t</code>
+则用于指定工程所属的开发环境。</p>
+<h2 id="添加-arm-compiler-version-5">添加 ARM Compiler version 5</h2>
+<p>编译 <strong>DAPLink</strong> 工程所需要使用到的 ARM 编译器版本为
+<strong>5</strong>，而当前最新版本的 <a target="_blank" rel="noopener" href="https://armkeil.blob.core.windows.net/eval/MDK539.EXE">Keil
+µVision 5.39</a> 包含的编译器版本为 <strong>6</strong>，此时需要下载 <a target="_blank" rel="noopener" href="https://armkeil.blob.core.windows.net/eval/MDK536.EXE">Keil
+µVision 5.36</a>，同时提取其 <code>ARM</code> 目录下的
+<code>ARMCC</code> 编译器，并将其解压至当前 <strong>Keil
+µVision</strong> 程序安装目录下的 <code>ARM</code> 文件夹下面：</p>
+<p><img src="/Project/UINIO-DAP-Link/ARMCC/1.png"></p>
+<p>启动 <strong>Keil µVision</strong> 开发环境，依次点击菜单栏上面的
+<code>【Project】-&gt;【Mange】-&gt;【Project Items】</code> 选项：</p>
+<p><img src="/Project/UINIO-DAP-Link/ARMCC/2.png"></p>
+<p>选中弹出对话框当中的 <code>【Folders/Extensions】</code> 选项卡，点击
+<code>Use ARM Compiler</code> 最右侧的按钮（即下图橙色圈出部分）：</p>
+<p><img src="/Project/UINIO-DAP-Link/ARMCC/3.png"></p>
+<p>鼠标再点击新弹出界面上的
+<code>【Add another ARM Compiler Version to List】</code>
+按钮，将路径定位至刚才放置到 <strong>Keil µVision</strong> 安装目录下的
+<code>ARMCC</code> 文件夹：</p>
+<p><img src="/Project/UINIO-DAP-Link/ARMCC/4.png"></p>
+<p>关闭上述对话框，再使用鼠标点击一次界面上的
+<code>【Setup Default ARM Compiler Version】</code> 按钮：</p>
+<p><img src="/Project/UINIO-DAP-Link/ARMCC/5.png"></p>
+<p>选中 <code>【Use default Compiler Version 5】</code>，将上面的
+<code>ARMCC</code> 目录设置为当前 <strong>Keil µVision</strong>
+的默认编译器：</p>
+<p><img src="/Project/UINIO-DAP-Link/ARMCC/6.png"></p>
+<p>完成上述操作之后，就可以打开当前 <strong>Keil µVision</strong> 工程的
+<code>【Target】</code> 选项卡，打开 <code>ARM Compiler</code>
+下拉菜单，就可以看到相关的编译器选项：</p>
+<p><img src="/Project/UINIO-DAP-Link/ARMCC/7.png"></p>
+<h2 id="导入-daplink-工程到-keil-µvision-5">导入 DAPLink 工程到 Keil
+µVision 5</h2>
+<p>由于当前 <strong>DAPLink</strong> 采用了 <strong>Keil µVision
+4</strong> 进行构建，所以打开工程的时候会弹出如下的
+<code>【Using an MDK Version 4 Project】</code> 对话框：</p>
+<p><img src="/Project/UINIO-DAP-Link/DAPLink/1.png"></p>
+<p>依次点击弹出界面上的
+<code>【Migrate to Device Pack】</code>、<code>【Stop Waiting】</code>
+按钮，最后点击 <code>【是(Y)】</code>：</p>
+<p><img src="/Project/UINIO-DAP-Link/DAPLink/2.png"></p>
+<p>选择当前 <strong>UINIO-DAP-Link</strong> 所使用的意法半导体
+<code>STM32F103C8T6</code> 作为目标编译芯片：</p>
+<p><img src="/Project/UINIO-DAP-Link/DAPLink/3.png"></p>
+<p>确认把当前以 <code>.uvproj</code> 作为后缀名的 <strong>Keil µVision
+4</strong> 工程，转换为以 <code>.uvprojx</code> 作为后缀名的
+<strong>Keil µVision 5</strong> 工程：</p>
+<p><img src="/Project/UINIO-DAP-Link/DAPLink/4.png"></p>
+<h2 id="开始下载-daplink-固件">开始下载 DAPLink 固件</h2>
+<p>当使用 <code>progen</code> 执行完成项目构建之后，就会自动在
+<strong>DAPLink</strong> 工程的 <code>projectfiles\uvision</code>
+目录下面生成如下两个 <strong>Keil µVision</strong> 工程：</p>
+<ol type="1">
+<li><code>stm32f103xb_bl</code> 目录：<strong>DAPLink</strong> 的
+Bootloader 工程，编译后得到 <code>stm32f103xb_bl.hex</code>。</li>
+<li><code>stm32f103xb_stm32f103rb_if</code>
+目录：<strong>DAPLink</strong> 的 Interface 工程，编译后得到
+<code>stm32f103xb_stm32f103rb_if.hex</code>。</li>
+</ol>
+<p>首先，计算机需要连接上一台已经下载好固件的 <strong>CMSIS-DAP
+Debugger</strong> 调试器，并且在 <strong>Keil µVision</strong>
+当中进行如下一系列设置：</p>
+<p><img src="/Project/UINIO-DAP-Link/Firmware/1.png"></p>
+<p><img src="/Project/UINIO-DAP-Link/Firmware/2.png"></p>
+<p><img src="/Project/UINIO-DAP-Link/Firmware/3.png"></p>
+<p>然后，就可以编译 <strong>DAPLink</strong> 的 Bootloader 工程
+<code>stm32f103xb_bl</code>，并且将其直接烧录至
+<strong>UINIO-DAP-Link</strong> 当中：</p>
+<p><img src="/Project/UINIO-DAP-Link/Firmware/4.png"></p>
+<p>完成 Bootloader 的烧录之后，将 <strong>UINIO-DAP-Link</strong>
+连接至计算机的 USB
+端口，就会自动在操作系统的<strong>资源管理器</strong>当中挂载出一个
+<code>MAINTENANCE</code> 盘符：</p>
+<p><img src="/Project/UINIO-DAP-Link/Firmware/5.png"></p>
+<p>接下来，开始编译 <strong>DAPLink</strong> 的 Interface 工程
+<code>stm32f103xb_stm32f103rb_if</code>，完成之后将编译得到的
+<code>stm32f103xb_stm32f103rb_if.hex</code> 文件拖入
+<code>MAINTENANCE</code> 盘符。如果此时<strong>资源管理器</strong>当中的
+<code>MAINTENANCE</code> 盘符自动被更名为
+<code>DAPLINK</code>，就表示已经成功完成了
+<strong>UINIO-DAP-Link</strong> 的全部固件下载工作：</p>
+<p><img src="/Project/UINIO-DAP-Link/Firmware/6.png"></p>
+<blockquote>
+<p><strong>注意</strong>：下载 <strong>DAPLink</strong> 固件所需的
+<code>stm32f103xb_bl.hex</code>
+<code>stm32f103xb_stm32f103rb_if.hex</code> 固件，已经被放置到 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link">UINIO-DAP-Link</a>
+开源项目的 <code>Firmware</code> 目录下面，故而大家可以省略前述的
+<strong>Keil µVision</strong>
+编译步骤，直接按照上述流程下载固件即可。</p>
+</blockquote>
+<h2 id="配置-daplink-源文件">配置 DAPLink 源文件</h2>
+<p>首先，打开 <code>DAPLink\source\daplink\cmsis-dap</code> 目录下的
+<code>dap_strings.h</code> 源文件，将其中的
+<code>#define CMSIS_DAP_PRODUCT_NAME "DAPLink CMSIS-DAP"</code>
+语句修改为自定义的
+<code>#define CMSIS_DAP_PRODUCT_NAME "UINIO-CMSIS-DAP"</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> !defined(CMSIS_DAP_PRODUCT_NAME)</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> CMSIS_DAP_PRODUCT_NAME <span class="string">&quot;UINIO-CMSIS-DAP&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>然后，再打开 <code>DAPLink\source\hic_hal\stm32\stm32f103xb</code>
+目录下的 <code>IO_Config.h</code> 头文件，根据当前
+<strong>UINIO-DAP-Link</strong> 的引脚连接关系进行如下一系列配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __IO_CONFIG_H__</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __IO_CONFIG_H__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f1xx.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;compiler.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;daplink.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">COMPILER_ASSERT(DAPLINK_HIC_ID == DAPLINK_HIC_ID_STM32F103XB);</span><br><span class="line"></span><br><span class="line"><span class="comment">// USB control pin</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USB_CONNECT_PORT_ENABLE()    __HAL_RCC_GPIOA_CLK_ENABLE()</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USB_CONNECT_PORT_DISABLE()   __HAL_RCC_GPIOA_CLK_DISABLE()</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USB_CONNECT_PORT             GPIOA</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USB_CONNECT_PIN              GPIO_PIN_15</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USB_CONNECT_ON()             (USB_CONNECT_PORT-&gt;BSRR = USB_CONNECT_PIN)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> USB_CONNECT_OFF()            (USB_CONNECT_PORT-&gt;BRR  = USB_CONNECT_PIN)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Connected LED</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CONNECTED_LED_PORT           GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CONNECTED_LED_PIN            GPIO_PIN_6</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CONNECTED_LED_PIN_Bit        6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// When bootloader, disable the target port(not used)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> POWER_EN_PIN_PORT            GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> POWER_EN_PIN                 GPIO_PIN_15</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> POWER_EN_Bit                 15</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// nRESET OUT Pin</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> nRESET_PIN_PORT              GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> nRESET_PIN                   GPIO_PIN_0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> nRESET_PIN_Bit               0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// SWD</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWCLK_TCK_PIN_PORT           GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWCLK_TCK_PIN                GPIO_PIN_13</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWCLK_TCK_PIN_Bit            13</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWDIO_OUT_PIN_PORT           GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWDIO_OUT_PIN                GPIO_PIN_14</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWDIO_OUT_PIN_Bit            14</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWDIO_IN_PIN_PORT            GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWDIO_IN_PIN                 GPIO_PIN_12</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SWDIO_IN_PIN_Bit             12</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// USB status LED</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RUNNING_LED_PORT             GPIOA</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RUNNING_LED_PIN              GPIO_PIN_9</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RUNNING_LED_Bit              9</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_HID_LED_PORT             GPIOA</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_HID_LED                  GPIO_PIN_9</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_HID_LED_Bit              9</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_CDC_LED_PORT             GPIOA</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_CDC_LED                  GPIO_PIN_9</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_CDC_LED_Bit              9</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_MSC_LED_PORT             GPIOA</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_MSC_LED                  GPIO_PIN_9</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PIN_MSC_LED_Bit              9</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="拖拽方式升级-daplink-固件">拖拽方式升级 DAPLink 固件</h2>
+<p><strong>UINIO-DAP-Link</strong> 调试器采用意法半导体
+<code>STM32F103C8T6</code> 作为主控芯片，片上 <strong>Flash</strong>
+的容量为 <code>64KB</code>。在之前所述的步骤当中，已经为其烧录了
+<code>stm32f103xb_bl.hex</code> 作为
+<strong>Bootloader</strong>，因而支持通过拖拽方式升级快速升级
+<strong>Interface</strong> 固件
+<code>stm32f103xb_stm32f103rb_if.hex</code>，具体操作步骤如下所示：</p>
+<ol type="1">
+<li>使用杜邦线将 <strong>UINIO-DAP-Link</strong> 调试器的
+<code>nRST</code> 和 <code>GND</code> 针脚进行短接。</li>
+<li>将 <strong>UINIO-DAP-Link</strong> 连接到电脑，资源管理器出现
+<code>MAINTENANCE</code> 盘符。</li>
+<li>此时可以把 <code>nRST</code> 和 <code>GND</code>
+引脚的杜邦线连接断开。</li>
+<li>将新版本固件拖动至 <code>MAINTENANCE</code> 盘符，等待
+<strong>UINIO-DAP-Link</strong> 自动更新固件。</li>
+<li>如果 Windows 操作系统的<strong>资源管理器</strong>出现
+<code>DAPLINK</code> 盘符，就表示已经升级成功。</li>
+</ol>
+<h2 id="在-stm32cubeide-使用-daplink">在 STM32CubeIDE 使用 DAPLink</h2>
+<p>在接下来的内容里，将会基于我所制作的 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-STM32L051K8"><strong>UINIO-MCU-STM32L051K8</strong></a>
+核心板，在意法半导体提供的最新版本 <a target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stm32cubeide.html"><strong>STM32CubeIDE</strong></a>
+当中，实现固件的烧录与调试。</p>
+<h3 id="安装-arm-eabi-工具链">安装 arm-eabi 工具链</h3>
+<p>在 <strong>STM32CubeIDE</strong> 当中运用 DAPLink
+调试与下载程序，需要使用到 <strong>ARM
+嵌入式应用程序二进制接口</strong>，也就是 <strong>ARM
+EABI</strong>。包括了 <a target="_blank" rel="noopener" href="https://gnutoolchains.com/arm-eabi/"><strong>Windows Toolchain for
+ARM</strong></a> 和 <a target="_blank" rel="noopener" href="https://gnutoolchains.com/arm-eabi/openocd/"><strong>OpenOCD</strong></a>
+两个工具库：</p>
+<ol type="1">
+<li>首先，需要调用 <code>openocd.exe</code> 开启一个连接到 DAP-Link
+与目标微控制器的 GDB 调试服务；</li>
+<li>然后，<strong>STM32CubeIDE</strong> 就可以通过
+<code>arm-none-eabi-gdb.exe</code> 访问这个 GDB 服务；</li>
+</ol>
+<p>下载并且解压上述两个工具库之后，分别将它们的 <code>bin</code>
+目录添加到操作系统的<strong>环境变量</strong>，再分别执行如下两个命令，测试其是否已经正确的被安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">λ openocd</span><br><span class="line"></span><br><span class="line">Open On-Chip Debugger 0.11.0 (2021-11-18) [https://github.com/sysprogs/openocd]</span><br><span class="line">Licensed under GNU GPL v2</span><br><span class="line">libusb1 09e75e98b4d9ea7909e8837b7a3f00dda4589dc3</span><br><span class="line">For bug reports, <span class="built_in">read</span></span><br><span class="line">        http://openocd.org/doc/doxygen/bugs.html</span><br><span class="line">embedded:startup.tcl:26: Error: Can<span class="string">&#x27;t find openocd.cfg</span></span><br><span class="line"><span class="string">in procedure &#x27;</span>script<span class="string">&#x27;</span></span><br><span class="line"><span class="string">at file &quot;embedded:startup.tcl&quot;, line 26</span></span><br><span class="line"><span class="string">Info : Listening on port 6666 for tcl connections</span></span><br><span class="line"><span class="string">Info : Listening on port 4444 for telnet connections</span></span><br><span class="line"><span class="string">Error: Debug Adapter has to be specified, see &quot;adapter driver&quot; command</span></span><br><span class="line"><span class="string">embedded:startup.tcl:26: Error:</span></span><br><span class="line"><span class="string">in procedure &#x27;</span>script<span class="string">&#x27;</span></span><br><span class="line"><span class="string">at file &quot;embedded:startup.tcl&quot;, line 26</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">λ arm-none-eabi-gdb</span><br><span class="line"></span><br><span class="line">GNU gdb (GDB) 10.2.90.20210621-git</span><br><span class="line">Copyright (C) 2021 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.</span><br><span class="line">Type <span class="string">&quot;show copying&quot;</span> and <span class="string">&quot;show warranty&quot;</span> <span class="keyword">for</span> details.</span><br><span class="line">This GDB was configured as <span class="string">&quot;--host=i686-w64-mingw32 --target=arm-none-eabi&quot;</span>.</span><br><span class="line">Type <span class="string">&quot;show configuration&quot;</span> <span class="keyword">for</span> configuration details.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;https://www.gnu.org/software/gdb/bugs/&gt;.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line"></span><br><span class="line">For <span class="built_in">help</span>, <span class="built_in">type</span> <span class="string">&quot;help&quot;</span>.</span><br><span class="line">Type <span class="string">&quot;apropos word&quot;</span> to search <span class="keyword">for</span> commands related to <span class="string">&quot;word&quot;</span>.</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+<h3 id="以命令行方式进行调用">以命令行方式进行调用</h3>
+<h4 id="配置-openocd">配置 OpenOCD</h4>
+<p>OpenOCD 命令的调用格式如下面的代码所示，其中的 <code>-f</code>
+参数表示当前使用的是配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openocd.exe -f interface\调试器接口配置文件 -f target\目标微控制器配置文件</span><br></pre></td></tr></table></figure>
+<p>下面列出了 <code>OpenOCD\share\openocd\scripts\interface</code>
+目录下的所有配置文件，由于这里使用的是 <strong>DAP-Link</strong>
+作为调试器，所以通常都是以 <code>cmsis-dap.cfg</code> 作为参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">λ <span class="built_in">ls</span> OpenOCD\share\openocd\scripts\interface</span><br><span class="line"></span><br><span class="line">altera-usb-blaster.cfg   dummy.cfg          jtag_vpi.cfg      raspberrypi2-native.cfg    ti-icdi.cfg</span><br><span class="line">altera-usb-blaster2.cfg  estick.cfg         kitprog.cfg       raspberrypi-native.cfg     ti-icdi-auto.cfg</span><br><span class="line">arm-jtag-ew.cfg          flashlink.cfg      nds32-aice.cfg    rlink.cfg                  ulink.cfg</span><br><span class="line">at91rm9200.cfg           ft232r/            nulink.cfg        rshim.cfg                  usb-jtag.cfg</span><br><span class="line">buspirate.cfg            ft232r.cfg         opendous.cfg      stlink.cfg                 usbprog.cfg</span><br><span class="line">calao-usb-a9260.cfg      ftdi/              openjtag.cfg      stlink-dap.cfg             vsllink.cfg</span><br><span class="line">cc3200lp.cfg             imx-native.cfg     osbdm.cfg         stlink-v1.cfg              xds110.cfg</span><br><span class="line">chameleon.cfg            jlink.cfg          parport.cfg       stlink-v2.cfg</span><br><span class="line">cmsis-dap.cfg            jtag_dpi.cfg       parport_dlc5.cfg  stlink-v2-1.cfg</span><br><span class="line">dln-2-gpiod.cfg          jtag_hat_rpi2.cfg  picoprobe.cfg     sysfsgpio-raspberrypi.cfg</span><br></pre></td></tr></table></figure>
+<p>接下来例出的是 <code>OpenOCD\share\openocd\scripts\target</code>
+目录下的全部配置文件，这里需要根据目标 MCU
+微控制器的型号，酌情选择相应的配置文件作为参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">λ <span class="built_in">ls</span> OpenOCD\share\openocd\scripts\target</span><br><span class="line"></span><br><span class="line">adsp-sc58x.cfg                     bluenrg-x.cfg         lpc13xx.cfg                    samsung_s3c2440.cfg</span><br><span class="line">aduc702x.cfg                       c100.cfg              lpc1549.cfg                    samsung_s3c2450.cfg</span><br><span class="line">aducm3027.cfg                      c100config.tcl        lpc15xx.cfg                    samsung_s3c4510.cfg</span><br><span class="line">aducm3029.cfg                      c100helper.tcl        lpc17xx.cfg                    samsung_s3c6410.cfg</span><br><span class="line">aducm302x.tcl                      c100regs.tcl          lpc1850.cfg                    sharp_lh79532.cfg</span><br><span class="line">aducm360.cfg                       cc2538.cfg            lpc1xxx.cfg                    sim3x.cfg</span><br><span class="line">aducm4050.cfg                      cs351x.cfg            lpc2103.cfg                    smp8634.cfg</span><br><span class="line">aducm4x50.tcl                      davinci.cfg           lpc2124.cfg                    snps_em_sk_fpga.cfg</span><br><span class="line">allwinner_v3s.cfg                  dragonite.cfg         lpc2129.cfg                    snps_hsdk.cfg</span><br><span class="line">alphascale_asm9260t.cfg            dsp56321.cfg          lpc2148.cfg                    spear3xx.cfg</span><br><span class="line">altera_fpgasoc.cfg                 dsp568013.cfg         lpc2294.cfg                    stellaris.cfg</span><br><span class="line">altera_fpgasoc_arria10.cfg         dsp568037.cfg         lpc2378.cfg                    stm32f0x.cfg</span><br><span class="line">am335x.cfg                         efm32.cfg             lpc2460.cfg                    stm32f1x.cfg</span><br><span class="line">am437x.cfg                         em357.cfg             lpc2478.cfg                    stm32f2x.cfg</span><br><span class="line">amdm37x.cfg                        em358.cfg             lpc2900.cfg                    stm32f3x.cfg</span><br><span class="line">ampere_emag.cfg                    eos_s3.cfg            lpc2xxx.cfg                    stm32f4x.cfg</span><br><span class="line">ar71xx.cfg                         epc9301.cfg           lpc3131.cfg                    stm32f7x.cfg</span><br><span class="line">arm_corelink_sse200.cfg            esi32xx.cfg           lpc3250.cfg                    stm32g0x.cfg</span><br><span class="line">armada370.cfg                      exynos5250.cfg        lpc40xx.cfg                    stm32g0x_alt.cfg</span><br><span class="line">at32ap7000.cfg                     faux.cfg              lpc4350.cfg                    stm32g4x.cfg</span><br><span class="line">at91r40008.cfg                     feroceon.cfg          lpc4357.cfg                    stm32g4x_alt.cfg</span><br><span class="line">at91rm9200.cfg                     fm3.cfg               lpc4370.cfg                    stm32h7x.cfg</span><br><span class="line">at91sam3ax_4x.cfg                  fm4.cfg               lpc546xx.cfg                   stm32h7x_dual_bank.cfg</span><br><span class="line">at91sam3ax_8x.cfg                  fm4_mb9bf.cfg         lpc55sxx.cfg                   stm32h7x_dual_core.cfg</span><br><span class="line">at91sam3ax_xx.cfg                  fm4_s6e2cc.cfg        lpc84x.cfg                     stm32l0.cfg</span><br><span class="line">at91sam3nXX.cfg                    gd32e23x.cfg          lpc8nxx.cfg                    stm32l0_dual_bank.cfg</span><br><span class="line">at91sam3sXX.cfg                    gd32vf103.cfg         lpc8xx.cfg                     stm32l1.cfg</span><br><span class="line">at91sam3u1c.cfg                    gp326xxxa.cfg         ls1012a.cfg                    stm32l1x_dual_bank.cfg</span><br><span class="line">at91sam3u1e.cfg                    hi3798.cfg            marvell/                       stm32l4x.cfg</span><br><span class="line">at91sam3u2c.cfg                    hi6220.cfg            max32620.cfg                   stm32l5x.cfg</span><br><span class="line">at91sam3u2e.cfg                    hilscher_netx10.cfg   max32625.cfg                   stm32mp15x.cfg</span><br><span class="line">at91sam3u4c.cfg                    hilscher_netx50.cfg   max3263x.cfg                   stm32u5x.cfg</span><br><span class="line">at91sam3u4e.cfg                    hilscher_netx500.cfg  mc13224v.cfg                   stm32w108xx.cfg</span><br><span class="line">at91sam3uxx.cfg                    icepick.cfg           mdr32f9q2i.cfg                 stm32wbx.cfg</span><br><span class="line">at91sam3XXX.cfg                    imx.cfg               nds32v2.cfg                    stm32wlx.cfg</span><br><span class="line">at91sam4c32x.cfg                   imx21.cfg             nds32v3.cfg                    stm32xl.cfg</span><br><span class="line">at91sam4cXXX.cfg                   imx25.cfg             nds32v3m.cfg                   stm8l.cfg</span><br><span class="line">at91sam4lXX.cfg                    imx27.cfg             nds32v5.cfg                    stm8l152.cfg</span><br><span class="line">at91sam4sd32x.cfg                  imx28.cfg             nhs31xx.cfg                    stm8s.cfg</span><br><span class="line">at91sam4sXX.cfg                    imx31.cfg             npcx.cfg                       stm8s003.cfg</span><br><span class="line">at91sam4XXX.cfg                    imx35.cfg             nrf51.cfg                      stm8s103.cfg</span><br><span class="line">at91sam7a2.cfg                     imx51.cfg             nrf52.cfg                      stm8s105.cfg</span><br><span class="line">at91sam7se512.cfg                  imx53.cfg             nuc910.cfg                     str710.cfg</span><br><span class="line">at91sam7sx.cfg                     imx6.cfg              numicro.cfg                    str730.cfg</span><br><span class="line">at91sam7x256.cfg                   imx6_dual.cfg         omap2420.cfg                   str750.cfg</span><br><span class="line">at91sam7x512.cfg                   imx6_quad.cfg         omap3530.cfg                   str912.cfg</span><br><span class="line">at91sam9.cfg                       imx6sx.cfg            omap4430.cfg                   swj-dp.tcl</span><br><span class="line">at91sam9260.cfg                    imx6ul.cfg            omap4460.cfg                   swj-dp-legacy.tcl</span><br><span class="line">at91sam9260_ext_RAM_ext_flash.cfg  imx7.cfg              omap5912.cfg                   swm050.cfg</span><br><span class="line">at91sam9261.cfg                    imx7ulp.cfg           omapl138.cfg                   test_reset_syntax_error.cfg</span><br><span class="line">at91sam9263.cfg                    imx8m.cfg             or1k.cfg                       test_syntax_error.cfg</span><br><span class="line">at91sam9g10.cfg                    imx8qm.cfg            pic32mm.cfg                    ti_calypso.cfg</span><br><span class="line">at91sam9g20.cfg                    imxrt.cfg             pic32mx.cfg                    ti_cc13x0.cfg</span><br><span class="line">at91sam9g45.cfg                    infineon/             psoc4.cfg                      ti_cc13x2.cfg</span><br><span class="line">at91sam9rl.cfg                     is5114.cfg            psoc5lp.cfg                    ti_cc26x0.cfg</span><br><span class="line">at91sama5d2.cfg                    ixp42x.cfg            psoc6.cfg                      ti_cc26x2.cfg</span><br><span class="line">at91samdXX.cfg                     k1921vk01t.cfg        pxa255.cfg                     ti_cc3220sf.cfg</span><br><span class="line">at91samg5x.cfg                     k40.cfg               pxa270.cfg                     ti_cc32xx.cfg</span><br><span class="line">atheros_ar2313.cfg                 k60.cfg               pxa3xx.cfg                     ti_dm355.cfg</span><br><span class="line">atheros_ar2315.cfg                 ke02.cfg              qualcomm_qca4531.cfg           ti_dm365.cfg</span><br><span class="line">atheros_ar9331.cfg                 ke04.cfg              quark_d20xx.cfg                ti_dm6446.cfg</span><br><span class="line">atheros_ar9344.cfg                 ke06.cfg              quark_x10xx.cfg                ti_k3.cfg</span><br><span class="line">atmega128.cfg                      ke0x.cfg              raspberry.cfg                  ti_msp432.cfg</span><br><span class="line">atmega128rfa1.cfg                  ke1xf.cfg             raspberrypi2.cfg               ti_rm4x.cfg</span><br><span class="line">atsame5x.cfg                       ke1xz.cfg             raspberrypi3.cfg               ti_tms570.cfg</span><br><span class="line">atsaml1x.cfg                       kex.cfg               raspberrypi3_single.cfg        ti_tms570ls1224.cfg</span><br><span class="line">atsamv.cfg                         kinetis_128k.cfg      readme.txt                     ti_tms570ls20xxx.cfg</span><br><span class="line">avr32.cfg                          kinetis_1m.cfg        renesas_r7s72100.cfg           ti_tms570ls3137.cfg</span><br><span class="line">bcm2711.cfg                        kinetis_256k.cfg      renesas_rcar_gen2.cfg          ti-ar7.cfg</span><br><span class="line">bcm281xx.cfg                       kinetis_32k.cfg       renesas_rcar_gen3.cfg          ti-cjtag.cfg</span><br><span class="line">bcm2835.cfg                        kinetis_512k.cfg      renesas_rcar_reset_common.cfg  tmpa900.cfg</span><br><span class="line">bcm2836.cfg                        kinetis_64k.cfg       renesas_rz_g2.cfg              tmpa910.cfg</span><br><span class="line">bcm2837.cfg                        kinetis_generic.cfg   renesas_s7g2.cfg               tnetc4401.cfg</span><br><span class="line">bcm4706.cfg                        kl25.cfg              rk3308.cfg                     u8500.cfg</span><br><span class="line">bcm4718.cfg                        kl46.cfg              rk3399.cfg                     vybrid_vf6xx.cfg</span><br><span class="line">bcm47xx.cfg                        klx.cfg               rm57x.cfg                      xilinx_zynqmp.cfg</span><br><span class="line">bcm5352e.cfg                       ks869x.cfg            rp2040.cfg                     xmc1xxx.cfg</span><br><span class="line">bcm6348.cfg                        kx.cfg                rp2040-core0.cfg               xmc4xxx.cfg</span><br><span class="line">bluefield.cfg                      lpc11xx.cfg           rs14100.cfg                    xmos_xs1-xau8a-10_arm.cfg</span><br><span class="line">bluenrg-lp.cfg                     lpc12xx.cfg           samsung_s3c2410.cfg            zynq_7000.cfg</span><br></pre></td></tr></table></figure>
+<p>这里以
+<code>STM32L0</code>、<code>STM32F1</code>、<code>STM32F4</code>
+系列微控制器为例，需要分别使用到如下几条 OpenOCD 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openocd.exe -f interface\cmsis-dap.cfg -f target\stm32l0.cfg</span><br><span class="line">openocd.exe -f interface\cmsis-dap.cfg -f target\stm32f1x.cfg</span><br><span class="line">openocd.exe -f interface\cmsis-dap.cfg -f target\stm32f4x.cfg</span><br></pre></td></tr></table></figure>
+<p>接下来以 <code>STM32L051K8U6</code> 微控制器为例，正确执行 OpenOCD
+命令之后的效果如下所示，命令行会提示当前提供的 GDB 服务端口为
+<code>3333</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">λ openocd.exe -f interface\cmsis-dap.cfg -f target\stm32l0.cfg</span><br><span class="line"></span><br><span class="line">Open On-Chip Debugger 0.11.0 (2021-11-18) [https://github.com/sysprogs/openocd]</span><br><span class="line">Licensed under GNU GPL v2</span><br><span class="line">libusb1 09e75e98b4d9ea7909e8837b7a3f00dda4589dc3</span><br><span class="line">For bug reports, <span class="built_in">read</span></span><br><span class="line">        http://openocd.org/doc/doxygen/bugs.html</span><br><span class="line">Info : auto-selecting first available session transport <span class="string">&quot;swd&quot;</span>. To override use <span class="string">&#x27;transport select &lt;transport&gt;&#x27;</span>.</span><br><span class="line">Info : Listening on port 6666 <span class="keyword">for</span> tcl connections</span><br><span class="line">Info : Listening on port 4444 <span class="keyword">for</span> telnet connections</span><br><span class="line">Warn : could not <span class="built_in">read</span> product string <span class="keyword">for</span> device 0x058f:0x9540: Entity not found</span><br><span class="line">Info : CMSIS-DAP: SWD  supported</span><br><span class="line">Info : CMSIS-DAP: JTAG supported</span><br><span class="line">Info : CMSIS-DAP: FW Version = 1.0</span><br><span class="line">Info : CMSIS-DAP: Interface Initialised (SWD)</span><br><span class="line">Info : SWCLK/TCK = 1 SWDIO/TMS = 1 TDI = 1 TDO = 1 nTRST = 0 nRESET = 0</span><br><span class="line">Info : CMSIS-DAP: Interface ready</span><br><span class="line">Info : clock speed 300 kHz</span><br><span class="line">Info : SWD DPIDR 0x0bc11477</span><br><span class="line">Info : stm32l0.cpu: Cortex-M0+ r0p1 processor detected</span><br><span class="line">Info : stm32l0.cpu: target has 4 breakpoints, 2 watchpoints</span><br><span class="line">Info : starting gdb server <span class="keyword">for</span> stm32l0.cpu on 3333</span><br><span class="line">Info : Listening on port 3333 <span class="keyword">for</span> gdb connections</span><br></pre></td></tr></table></figure>
+<p>简便起见，也可以将上述命令保存为 Windows 系统下面一个名为
+<code>OpenOCD stm32l0.bat</code>
+的批处理文件，方便调试的时候快速进行调用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> Openocd Runing ... ... ...</span><br><span class="line">openocd.exe -f interface\cmsis-dap.cfg -f target\stm32l0.cfg</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<h4 id="配置-stm32cubeide">配置 STM32CubeIDE</h4>
+<p>启动 <strong>OpenOCD</strong> 服务之后，接着在
+<strong>STM32CubeIDE</strong> 当中新建一个名称叫做
+<code>Test-STM32L051K8U6</code> 的工程：</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/1.png"></p>
+<p>首先，选中 <strong>STM32CubeIDE</strong>
+左侧的工程名称，点击鼠标右键菜单上的 【<strong>Build
+Project</strong>】， 编译生成出一个 <code>Test-STM32L051K8U6.elf</code>
+二进制文件。点击工具栏上【<strong>Debug</strong>】图标右侧的箭头，点击弹出菜单上的
+<code>Debug Configrations...</code> 打开调试配置窗口，鼠标双击窗口上的
+<code>GDB Hardware Debugging</code> 新建一条名为
+<code>Test-STM32L051K8U6 Debug</code> 的 GDB
+硬件调试配置，并在自动打开的【Main】选项卡界面进行如下一系列配置：</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/2.png"></p>
+<p>切换至【<strong>Debugger</strong>】选项卡，将 GDB 命令修改为
+<code>D:\Software\Tech\ARMEabi\bin\arm-none-eabi-gdb.exe</code>，并且将连接地址设置为
+<code>localhost:3333</code>：</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/3.png"></p>
+<p>经过上述步骤的配置，鼠标点击【<strong>Debug</strong>】按钮，就已经可以让
+<strong>STM32CubeIDE</strong> 通过 <strong>UINIO-DAP-Link</strong>
+实现固件的烧录下载，如果需要进入单步调试模式，则可以在【<strong>Startup</strong>】选项卡当中，手动在
+<code>main</code> 函数位置设置一个断点：</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/4.png"></p>
+<h3 id="以-external-tools-方式使用">以 External Tools 方式使用</h3>
+<p>首先，需要在 <strong>STM32CubeIDE</strong> 的 <strong>External
+Tool</strong> 当中添加 OpenOCD，依次点击顶部菜单栏当中的 【<strong>RUN
+-&gt; External Tools -&gt; External Tools
+Configrations...</strong>】，新建一个名称为
+<code>Test-STM32L051K8U6 Run</code> 的配置，并且将 OpenOCD
+命令所在的位置指定为
+<code>D:\Software\Tech\ARMEabi\OpenOCD\bin\openocd.exe</code>，相应的参数设置为
+<code>-f interface\cmsis-dap.cfg -f target\stm32l0.cfg</code>：</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/5.png"></p>
+<p>打开 <strong>STM32CubeIDE</strong> 的 <strong>Debugger
+Configration</strong> 窗口，鼠标双击左侧的【<strong>Launch
+Group</strong>】新建一个名为 <code>UINIO-DAP-Link</code>
+的<strong>运行组</strong>，然后点击右侧的【<strong>Add...</strong>】按钮：</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/6.png"></p>
+<p>此时添加的执行配置策略为：首先执行 <code>OpenOCD</code> 命令开启 GDB
+服务，然后再通过 <code>arm-none-eabi-gdb</code> 执行调试任务。</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/7.png"></p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/8.png"></p>
+<p>最后，配置完成之后的 <strong>Launch Group</strong>
+顺序如下图所示：</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/9.png"></p>
+<p>接下来，就可以在 <strong>STM32CubeIDE</strong>
+顶部工具栏上【Run】和【Debug】按钮的下面，发现上面的配置的
+<code>UINIO-DAP-Link</code>
+<strong>运行组</strong>，点击之后就可以愉快的使用
+<strong>UINIO-DAP-Link</strong> 执行 STM32
+微控制器的程序调试工作了。</p>
+<p><img src="/Project/UINIO-DAP-Link/STM32CubeIDE/10.png"></p>
+<h2 id="在-keil-µvision-使用-daplink">在 Keil µVision 使用 DAPLink</h2>
+<p>本节内容将会基于 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-MCU-GD32F350RBT6"><strong>UINIO-MCU-GD32F350RBT6</strong></a>
+核心板，新建一个名称为 <code>test</code> 的 <strong>Keil
+µVision</strong> 工程，并且点击菜单栏上的
+<code>【Options for target】-&gt;【Device】</code>，选择当前编译的目标设备为
+<code>GD32F350RB</code>：</p>
+<p><img src="/Project/UINIO-DAP-Link/Keil/1.png"></p>
+<p>接下来，再点击弹出的 <code>【Manage Run-Time Environment】</code>
+界面上的 <strong>OK</strong> 按钮，完成测试工程的建立：</p>
+<p><img src="/Project/UINIO-DAP-Link/Keil/2.png"></p>
+<p>再次打开 <code>【Options for target】</code>，鼠标选择
+<code>【Output】</code> 选项卡，勾选 <code>Create HEX File</code>
+选项之后，在 <code>Name of Executable</code>
+当中把待下载的二进制文件添加上 <code>.hex</code> 后缀名称（否则
+<strong>Keil µVision</strong> 会默认下载 <code>.axf</code>
+后缀的二进制文件）：</p>
+<p><img src="/Project/UINIO-DAP-Link/Keil/3.png"></p>
+<p>紧接着打开 <code>【Debug】</code> 选项卡，选择
+<code>CMSIS-DAP Debugger</code>，并且点击 <code>【Settings】</code>
+按钮：</p>
+<p><img src="/Project/UINIO-DAP-Link/Keil/4.png"></p>
+<p>在弹出的对话框中，选择 <strong>UINIO-CMSIS-DAP</strong>（需要提前将
+<strong>UINIO-DAP-Link</strong> 连接到电脑的 USB 端口）：</p>
+<p><img src="/Project/UINIO-DAP-Link/Keil/5.png"></p>
+<p>再打开对话框上的 <code>【Flash Download】</code> 选项卡，勾选
+<code>Reset and Run</code> 之后，点击 <code>【Add】</code>
+按钮添加片上的 <strong>Flash 编程算法</strong>：</p>
+<p><img src="/Project/UINIO-DAP-Link/Keil/6.png"></p>
+<p>至此就完成了 <strong>UINIO-DAP-Link</strong> 在 <strong>Keil
+µVision</strong> 当中的全部配置，接下来就可以添加官方的 ARM
+标准库，愉快的编写并且下载工程代码了。</p>
+<h2 id="通过-keil-µvision-直接下载-hex">通过 Keil µVision 直接下载
+HEX</h2>
+<p>如果需要直接烧录已经编译过的 <code>.hex</code> 固件（例如下载 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link">UINIO-DAP-Link</a> 当中
+<code>Firmware</code> 目录下的
+<code>stm32f103xb_bl.hex</code>），可以按照前一小节内容所述的步骤，建立一个名为
+<code>test</code> 的 <strong>Keil µVision</strong> 工程，并将需要下载的
+<code>.hex</code> 文件拷贝至其 <code>Objects</code> 目录当中，接着在
+<code>【Options for target】-&gt;【Output】</code> 选项卡下面的
+<code>Name of Executable</code> 输入框当中，填入当前需要下载的
+<code>.hex</code> 文件完整名称（下图以 <code>stm32f103xb_bl.hex</code>
+为例）：</p>
+<p><img src="/Project/UINIO-DAP-Link/Keil/7.png"></p>
+<blockquote>
+<p><strong>注意</strong>：通过上述界面当中的
+<code>【Select Folder Objects...】</code> 按钮，还可以指定除了
+<code>Objects</code> 之外其它包含有 <code>.hex</code> 固件的目录。</p>
+</blockquote>
+<p>然后，就可以点击 <strong>Keil µVision</strong> 顶部工具栏上的
+<code>【Download】</code> 按钮，或者直接按下快捷键
+<code>【F8】</code>，就可以将上面指定的 <code>.hex</code> 文件下载至目标
+ARM 芯片当中：</p>
+<p><img src="/Project/UINIO-DAP-Link/Keil/8.png"></p>
+<blockquote>
+<p><strong>注意</strong>：新建的 <strong>Keil µVision</strong>
+工程必须参考前面的步骤，配置好目标芯片的型号以及片上 Flash
+的编程算法。</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>ARM 调试工具 UINIO-DAP-Link 应用详解</p><p><a href="http://www.uinio.com/Project/UINIO-DAP-Link/">http://www.uinio.com/Project/UINIO-DAP-Link/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-01-22</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Tools/">Tools</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Project/UINIO-Logic-24MHz/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">快速上手 UINIO-Logic-24MHz 逻辑分析仪</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/NFC_Antenna/"><span class="level-item">如何设计一枚 NFC 动态标签的天线</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#dap-link-简介"><span class="level-left"><span class="level-item">1</span><span class="level-item">DAP Link 简介</span></span></a></li><li><a class="level is-mobile" href="#编译-daplink-工程"><span class="level-left"><span class="level-item">2</span><span class="level-item">编译 DAPLink 工程</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#准备虚拟环境"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">准备虚拟环境</span></span></a></li><li><a class="level is-mobile" href="#构建-keil-µvision-工程"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">构建 Keil µVision 工程</span></span></a></li></ul></li><li><a class="level is-mobile" href="#添加-arm-compiler-version-5"><span class="level-left"><span class="level-item">3</span><span class="level-item">添加 ARM Compiler version 5</span></span></a></li><li><a class="level is-mobile" href="#导入-daplink-工程到-keil-µvision-5"><span class="level-left"><span class="level-item">4</span><span class="level-item">导入 DAPLink 工程到 Keil
+µVision 5</span></span></a></li><li><a class="level is-mobile" href="#开始下载-daplink-固件"><span class="level-left"><span class="level-item">5</span><span class="level-item">开始下载 DAPLink 固件</span></span></a></li><li><a class="level is-mobile" href="#配置-daplink-源文件"><span class="level-left"><span class="level-item">6</span><span class="level-item">配置 DAPLink 源文件</span></span></a></li><li><a class="level is-mobile" href="#拖拽方式升级-daplink-固件"><span class="level-left"><span class="level-item">7</span><span class="level-item">拖拽方式升级 DAPLink 固件</span></span></a></li><li><a class="level is-mobile" href="#在-stm32cubeide-使用-daplink"><span class="level-left"><span class="level-item">8</span><span class="level-item">在 STM32CubeIDE 使用 DAPLink</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装-arm-eabi-工具链"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">安装 arm-eabi 工具链</span></span></a></li><li><a class="level is-mobile" href="#以命令行方式进行调用"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">以命令行方式进行调用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#配置-openocd"><span class="level-left"><span class="level-item">8.2.1</span><span class="level-item">配置 OpenOCD</span></span></a></li><li><a class="level is-mobile" href="#配置-stm32cubeide"><span class="level-left"><span class="level-item">8.2.2</span><span class="level-item">配置 STM32CubeIDE</span></span></a></li></ul></li><li><a class="level is-mobile" href="#以-external-tools-方式使用"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">以 External Tools 方式使用</span></span></a></li></ul></li><li><a class="level is-mobile" href="#在-keil-µvision-使用-daplink"><span class="level-left"><span class="level-item">9</span><span class="level-item">在 Keil µVision 使用 DAPLink</span></span></a></li><li><a class="level is-mobile" href="#通过-keil-µvision-直接下载-hex"><span class="level-left"><span class="level-item">10</span><span class="level-item">通过 Keil µVision 直接下载
+HEX</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

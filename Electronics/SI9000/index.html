@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>基于 Polar Si9000e 计算传输线特征阻抗的全攻略 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="伴随近几年集成电路制程工艺的进步，PCB 传输线上信号的频率逐年提高，非常容易导致信号在传输过程当中，由于受到传输线的阻力而出现插损（插入损耗，单位为分贝），这种信号在传输过程中受到的阻力被称为特性阻抗或者特征阻抗。换而言之，如果信号在传输过程当中，传输路径上的特征阻抗发生了变化，信号就会在阻抗不连续的结点发生反射。因而 PCB 上的传输线仅仅只解决通和断的问题还远远不够，还需要进一步确保其"><meta property="og:type" content="blog"><meta property="og:title" content="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"><meta property="og:url" content="http://www.uinio.com/Electronics/SI9000/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="伴随近几年集成电路制程工艺的进步，PCB 传输线上信号的频率逐年提高，非常容易导致信号在传输过程当中，由于受到传输线的阻力而出现插损（插入损耗，单位为分贝），这种信号在传输过程中受到的阻力被称为特性阻抗或者特征阻抗。换而言之，如果信号在传输过程当中，传输路径上的特征阻抗发生了变化，信号就会在阻抗不连续的结点发生反射。因而 PCB 上的传输线仅仅只解决通和断的问题还远远不够，还需要进一步确保其"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-04-04T16:00:00.000Z"><meta property="article:modified_time" content="2024-07-03T18:28:39.378Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="EDA"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/SI9000/"},"headline":"基于 Polar Si9000e 计算传输线特征阻抗的全攻略","image":["http://www.uinio.com/Electronics/SI9000/logo.png"],"datePublished":"2024-04-04T16:00:00.000Z","dateModified":"2024-07-03T18:28:39.378Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"伴随近几年集成电路制程工艺的进步，PCB\r 传输线上信号的频率逐年提高，非常容易导致信号在传输过程当中，由于受到传输线的阻力而出现插损（插入损耗，单位为分贝），这种信号在传输过程中受到的阻力被称为特性阻抗或者特征阻抗。换而言之，如果信号在传输过程当中，传输路径上的特征阻抗发生了变化，信号就会在阻抗不连续的结点发生反射。因而\r PCB\r 上的传输线仅仅只解决通和断的问题还远远不够，还需要进一步确保其"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/SI9000/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://unpkg.com/highlight.js@9.12.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/projects.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-04-04T16:00:00.000Z" title="2024/4/5 00:00:00">2024-04-05</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.378Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Electronics/">Electronics</a></span><span class="level-item">28 分钟读完 (大约4248个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</h1><div class="content"><p>伴随近几年集成电路制程工艺的进步，PCB
+传输线上信号的频率逐年提高，非常容易导致信号在传输过程当中，由于受到传输线的阻力而出现<strong>插损</strong>（插入损耗，单位为<strong>分贝</strong>），这种信号在传输过程中受到的阻力被称为<strong>特性阻抗</strong>或者<strong>特征阻抗</strong>。换而言之，如果信号在传输过程当中，传输路径上的<strong>特征阻抗</strong>发生了变化，信号就会在<code>阻抗不连续</code>的结点发生<strong>反射</strong>。因而
+PCB
+上的传输线仅仅只解决<strong>通</strong>和<strong>断</strong>的问题还远远不够，还需要进一步确保其传输链路上特性阻抗的匹配和连续。</p>
+<p><img src="/Electronics/SI9000/logo.png"></p>
+<p><strong>英国宝拉</strong> <a target="_blank" rel="noopener" href="https://www.polarinstruments.com/index.html"><strong>POLAR</strong></a>
+公司推出的 <a target="_blank" rel="noopener" href="https://www.polarinstruments.com/products/si/Si9000.html"><strong>Si9000e</strong></a>，正是一款这样可以预测
+PCB
+走线阻抗的计算工具，该工具已经成为高速电路设计当中，必不可少的辅助工具。该工具提取了
+100 余种 PCB
+传输线的典型结构，并且基于这些结构对指定频率下的传输线阻抗进行建模计算。<strong>Si9000e</strong>
+将影响 PCB
+传输线阻抗的主要因素：<code>板材厚度</code>、<code>顶层走线宽度</code>、<code>铜泊厚度</code>、<code>走线周围的包地间距</code>、<code>表面绿油的厚度</code>
+作为输入参数，就可以计算出<strong>表面单端/差分</strong>和<strong>共面单端/差分</strong>类型走线的阻抗。</p>
+<span id="more"></span>
+<h1 id="英文词汇准备">英文词汇准备</h1>
+<p>由于 <strong>Si9000e 传输线场求解器</strong>（Si9000e Transmission
+Line Field
+Solver）采用的是全英文界面，因而在开始正式的内容之前，需要将软件界面高频出现的专业英文词汇，整理在下面的表格当中：</p>
+<table>
+<colgroup>
+<col style="width: 53%">
+<col style="width: 46%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Si9000e 界面英文词汇</th>
+<th style="text-align: left;">Si9000e 界面英文词汇</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Stripline</strong> [ˈstrɪplaɪn]
+n.带状线，电介质条状线</td>
+<td style="text-align: left;"><strong>Coplanar</strong> [kəʊˈpleɪnə(r)]
+adj.共面的</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Microstrip</strong>
+[ˈmaɪkrəʊstrɪp] n.微带线，微波传输带</td>
+<td style="text-align: left;"><strong>Coated</strong> [ˈkəʊtɪd] adj.
+覆盖有阻焊油墨的</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Waveguide</strong> [ˈweɪvˌɡaɪd]
+n.波导</td>
+<td style="text-align: left;"><strong>Coarse</strong> [kɔːs] adj.
+粗略的</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Substrate</strong> [ˈsʌbstreɪt]
+n.基层</td>
+<td style="text-align: left;"><strong>Single-End</strong> [ˈsɪŋɡl end]
+adj.单端的</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Dielectric</strong>
+[ˌdaɪɪˈlektrɪk] n.电介质</td>
+<td style="text-align: left;"><strong>Differential</strong>
+[ˌdɪfəˈrenʃ(ə)l] adj.差分的</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Thickness</strong> [ˈθɪknəs]
+n.厚度</td>
+<td style="text-align: left;"><strong>Separation</strong> [ˌsepəˈreɪʃn]
+n.隔离</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Cutout</strong> [ˈkʌtaʊt]
+n.分割</td>
+<td style="text-align: left;"><strong>Lossless</strong> [ˈlɒsləs]
+adj.无损的</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tolerance</strong> [ˈtɒlərəns]
+n.公差</td>
+<td style="text-align: left;"><strong>Trace</strong> [treɪs] n. PCB
+上的铜质走线</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：本文后续内容会将 <strong>Si9000e</strong>
+直接简写为 <strong>Si9000</strong>。</p>
+</blockquote>
+<h1 id="微带线-带状线">微带线 &amp; 带状线</h1>
+<p>PCB 电路网络当中的信号走线，可以划分为
+<strong>微带线</strong>（Microstrip）和
+<strong>带状线</strong>（Stripline）两种主要类型：</p>
+<p><img src="/Electronics/SI9000/Stripline-Microstrip.png"></p>
+<ul>
+<li><strong>微带线</strong>（Microstrip）：即 PCB
+表面的带状走线，由于一面裸露在空气中，可以向周围形成辐射或受到周围的辐射干扰，而另一面附着在
+PCB 绝缘电介质上，所以其形成的电场一部分分布在空气中，另一部分分布在 PCB
+的绝缘介质里，其信号传输速率高于<strong>带状线</strong>。</li>
+<li><strong>带状线</strong>（Stripline）：即 PCB
+内层的带状走线，由于嵌在两层导体之间，所以其电场分布在两层导体所形成的平面之间，能量不会被辐射出去，也不会受到外部辐射的干扰。由于其周围分布的是介电常数大于
+<code>1</code>
+的电介质，所以信号传输速率要慢于<strong>微带线</strong>。</li>
+</ul>
+<p>无论是微带线还是带状线，在 PCB
+当中这些走线的单位通常会采用<strong>密尔</strong>
+<code>mil</code>，其与公制<strong>毫米</strong> <code>mm</code>
+的换算关系如下面等式所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 密耳(mil) = <span class="number">0.0254</span> 毫米(mm)</span><br></pre></td></tr></table></figure>
+<h1 id="共面单端-共面波导">共面单端 &amp; 共面波导</h1>
+<p>传输线理论当中的<strong>共面波导</strong>（下图左）与<strong>共面单端</strong>（下图右）两种走线模型，是非常容易混淆的两个概念：</p>
+<p><img src="/Electronics/SI9000/Waveguide-Single-Ended.png"></p>
+<ul>
+<li><strong>共面波导</strong>（CPW，Coplanar
+Waveguide）是指在介质平面上制作出中心导体带，并在紧邻中心导体带的两侧制作出<strong>导体平面</strong>，这样就构成了共面波导，其本质上属于一种<strong>共面微带传输线</strong>（上图左）。</li>
+<li><strong>共面单端</strong>（Coplanar
+Single-Ended）走线的概念类似于共面波导，不同之处在于其中心导体带两侧是<strong>指定宽度的接地走线</strong>，而非一个完整的地平面（上图右）。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：当采用 <strong>Si9000</strong>
+计算阻抗的时候，由于<strong>共面单端</strong>需要输入的计算参数更多。因此，在没有特别严格要求的情况下，可以直接使用<strong>共面波导</strong>作为阻抗计算的模型，同样参数情况下两者的计算结果差异非常细微。</p>
+</blockquote>
+<h1 id="常用-pcb-叠层结构">常用 PCB 叠层结构</h1>
+<p>实际的 PCB 设计工作当中，在完成元件的布局摆放之后，会首先对 PCB
+布线的瓶颈位置进行分析，根据敏感信号线的种类和数量来确定<strong>信号层</strong>的层数。然后再根据电源的性能参数要求，来确定<strong>内电层</strong>的层数。从而最终确定整个
+PCB 的<strong>叠层设计方案</strong>。下面的表格对比了 3 种常见
+<strong>四层 PCB 叠层方案</strong> 的优缺点（通常会优先选择第
+<code>2</code> 和第 <code>3</code> 号叠层方案）：</p>
+<p><img src="/Electronics/SI9000/Level-4.png"></p>
+<p>而在接下来的表格里，则是对比了 4 种常见 <strong>六层 PCB
+叠层方案</strong> 的优缺点（通常会优先选择第 <code>3</code> 和第
+<code>4</code> 号叠层方案）：</p>
+<p><img src="/Electronics/SI9000/Level-6.png"></p>
+<h1 id="si9000-主界面介绍">Si9000 主界面介绍</h1>
+<p><strong>Si9000</strong>
+软件的主界面可以被划分为【功能选择标签】、【模型选择区域】、【参数输入与计算区域】、【单位切换区域】四个区域：</p>
+<p><img src="/Electronics/SI9000/UI.png"></p>
+<ol type="1">
+<li>【功能选择标签】：在计算 PCB
+特征阻抗的时候，需要将切换至<strong>无损计算</strong>（Lossless
+Calculation）标签。</li>
+<li>【模型选择区域】主要用于选择 PCB
+典型层叠结构与走线方式的<strong>特征阻抗模型</strong>。</li>
+<li>【单位切换区域】用于在
+<strong>米尔</strong>（<code>Mils</code>）、<strong>英寸</strong>（<code>Inches</code>）、<strong>微米</strong>（<code>Microns</code>）、<strong>毫米</strong>（<code>Millimetres</code>）计算单位之间进行切换。</li>
+<li>【参数输入与计算区域】用于输入 PCB
+各种基材、铜层、阻焊油墨、走线的参数信息，并且利用这些信息计算出相应的特征阻抗。</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：勾选软件底部的【Auto
+Calc】可以开启自动计算功能，即当参数输入区域发生变化的时候，<strong>Si9000</strong>
+就会自动计算出对应的特征阻抗结果。</p>
+</blockquote>
+<h1 id="常见的阻抗模型">常见的阻抗模型</h1>
+<p>现代传输线理论认为，信号在传输过程当中，特征阻抗的不连续会造成反射现象。而在信号完整性领域，<code>反射</code>、<code>串扰</code>、<code>参考平面分割</code>
+都会导致阻抗的不连续问题，因而传输线特征阻抗的匹配显得尤为重要。在下面的列表里，对高速电路设计当中存在的一些概念进行了解释：</p>
+<ul>
+<li><strong>时延</strong>：高速信号从电路网络的一端传送至另一端所需的时间。</li>
+<li><strong>串扰</strong>：信号线之间的<strong>互感</strong>与<strong>互容</strong>所引发的噪声。</li>
+<li><strong>反射</strong>：在传输线上阻抗不连续的位置，一部分信号会继续向前传输，另外一部分则会被反射形成回波。</li>
+<li><strong>振铃</strong>：由于传输线的阻抗不匹配，导致信号被多次反射叠加之后，所出现的振荡波形。</li>
+</ul>
+<p>常见的阻抗计算模型可以划分为<strong>内层</strong>或者<strong>外层</strong>的
+<code>单端</code>、<code>差分</code>、<code>共面单端</code>、<code>共面波导</code>、<code>差分共面地</code>、<code>差分共面波导</code>
+一共 12 种模型：</p>
+<table>
+<colgroup>
+<col style="width: 49%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>外层单端</strong></th>
+<th style="text-align: center;"><strong>内层单端</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-1.png"></td>
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-7.png"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>外层差分</strong></td>
+<td style="text-align: center;"><strong>内层差分</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-2.png"></td>
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-8.png"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>外层共面单端</strong></td>
+<td style="text-align: center;"><strong>内层共面单端</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-3.png"></td>
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-9.png"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>外层共面波导</strong></td>
+<td style="text-align: center;"><strong>内层共面波导</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-4.png"></td>
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-10.png"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>外层差分共面地</strong></td>
+<td style="text-align: center;"><strong>内层差分共面地</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-5.png"></td>
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-11.png"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>外层差分共面波导</strong></td>
+<td style="text-align: center;"><strong>内层差分共面波导</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-6.png"></td>
+<td style="text-align: center;"><img src="/Electronics/SI9000/Impedance-Model-12.png"></td>
+</tr>
+</tbody>
+</table>
+<p>影响上述模型当中<strong>特征阻抗</strong>的因素有<code>基材厚度</code>、<code>介电常数</code>、<code>铜层厚度</code>、<code>线宽</code>、<code>线距</code>、<code>阻焊油墨厚度</code>等，具体请参考下面的表格：</p>
+<table>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 30%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">缩写</th>
+<th style="text-align: left;">英文名称</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>H1</strong></td>
+<td style="text-align: left;"><code>Substrate 1 Height</code></td>
+<td style="text-align: left;">第 1
+层基材的<strong>厚度</strong>（不包含铜厚）；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>H2</strong></td>
+<td style="text-align: left;"><code>Substrate 2 Height</code></td>
+<td style="text-align: left;">第 2
+层基材的<strong>厚度</strong>（不包含铜厚）；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Er1</strong></td>
+<td style="text-align: left;"><code>Substrate 1 Dielectric</code></td>
+<td style="text-align: left;">第 1
+层基材的<strong>介电常数</strong>（多种基材压合时取平均值）；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Er2</strong></td>
+<td style="text-align: left;"><code>Substrate 2 Dielectric</code></td>
+<td style="text-align: left;">第 2
+层基材的<strong>介电常数</strong>（多种基材压合时取平均值）；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>W1</strong></td>
+<td style="text-align: left;"><code>Lower Trace Width</code></td>
+<td style="text-align: left;">阻抗走线的<strong>下线宽</strong>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>W2</strong></td>
+<td style="text-align: left;"><code>Upper Trace Width</code></td>
+<td style="text-align: left;">阻抗走线的<strong>上线宽</strong>；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>G1</strong></td>
+<td style="text-align: left;"><code>Lower Ground Strip Width</code></td>
+<td style="text-align: left;">接地走线的<strong>上线宽</strong>。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>G2</strong></td>
+<td style="text-align: left;"><code>Upper Ground Strip Width</code></td>
+<td style="text-align: left;">接地走线的<strong>下线宽</strong>。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>D1</strong></td>
+<td style="text-align: left;"><code>Ground Strip Separation</code></td>
+<td style="text-align: left;">接地走线的<strong>间隔距离</strong>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>T1</strong></td>
+<td style="text-align: left;"><code>Trace Thickness</code></td>
+<td style="text-align: left;">走线的<strong>铜层厚度</strong>；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>C1</strong></td>
+<td style="text-align: left;"><code>Coating Above Substrate</code></td>
+<td style="text-align: left;">基材的<strong>阻焊油墨厚度</strong>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>C2</strong></td>
+<td style="text-align: left;"><code>Coating Above Trace</code></td>
+<td style="text-align: left;">铜皮或者走线的<strong>阻焊油墨厚度</strong>；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>C3</strong></td>
+<td style="text-align: left;"><code>Coating Between Traces</code></td>
+<td style="text-align: left;">铜层走线间隙的<strong>阻焊油墨厚度</strong>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>CEr</strong></td>
+<td style="text-align: left;"><code>Coating Dielectric</code></td>
+<td style="text-align: left;">阻焊油墨的<strong>介电常数</strong>；</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<strong>残铜率</strong>是指板 PCB
+上面<code>覆铜面积</code>与<code>整板面积</code>之比，例如未经加工的覆铜芯板的残铜率为
+<code>100%</code>，而将表面铜层全部被蚀刻掉之后残铜率就变为
+<code>0%</code>。</p>
+</blockquote>
+<h1 id="导线的上下线宽换算关系">导线的上/下线宽换算关系</h1>
+<p>目前的 PCB
+蚀刻制造工艺，会导致铜层走线出现<strong>上窄下宽</strong>的情况，形成类似下图这样的梯形截面走线：</p>
+<p><img src="/Electronics/SI9000/Trapezoid.png"></p>
+<p>接下来的表格展现了不同基础铜厚情况下，铜层走线的 <span class="math inline">\(W_{上/下线宽}\)</span> 以及 <span class="math inline">\(D_{线距}\)</span>，与 <span class="math inline">\(W_{设计线宽}\)</span> 和 <span class="math inline">\(D_{设计线距}\)</span>
+之间的换算关系（如果不需要精确的计算，那么可以默认 <span class="math inline">\(W_{上线宽}\)</span> 比 <span class="math inline">\(W_{下线宽}\)</span> 要窄约
+<code>1mil</code>，具体参数建议咨询 PCB 生产厂家）：</p>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">基础铜厚</th>
+<th style="text-align: center;">上线宽 <span class="math inline">\(W_{上线宽}\)</span></th>
+<th style="text-align: center;">下线宽 <span class="math inline">\(W_{下线宽}\)</span></th>
+<th style="text-align: center;">线距 <span class="math inline">\(D_{线距}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>18μm</strong>（内层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 0.1 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>35μm</strong>（内层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 0.4 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>70μm</strong>（内层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 1.2 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>42μm</strong>（负片层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 0.4 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
++ 0.4 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}
+- 0.4 mil\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>48μm</strong>（负片层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 0.5 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
++ 0.5 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}
+- 0.5 mil\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>65μm</strong>（负片层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 0.8 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
++ 0.8 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}
+- 0.8 mil\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>12μm</strong>（外层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 0.6 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
++ 0.6 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}
+- 0.6 mil\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>18μm</strong>（外层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 0.6 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
++ 0.7 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}
+- 0.7 mil\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>35μm</strong>（外层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 0.9 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
++ 0.9 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}
+- 0.9 mil\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>12μm</strong>（镀金工艺外层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 1.2 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>18μm</strong>（镀金工艺外层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 1.2 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>35μm</strong>（镀金工艺外层）</td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}
+- 2.0 mil\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_{设计线宽}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(D_{设计线距}\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<strong>信号层</strong>主要用于走线，通常采用<strong>正片</strong>方式处理；而<strong>电源层</strong>和<strong>接地层</strong>通常采用<strong>负片</strong>方式处理，这样只需指定无需铺铜的位置即可，可以较大程度降低
+EDA 工具的数据处理量。</p>
+</blockquote>
+<h1 id="芯板与半固化片">芯板与半固化片</h1>
+<p>多层 PCB 都是由 <code>FR-4</code> 材料的
+<strong>覆铜芯板</strong>（Core）与具有粘结功能的
+<strong>半固化片</strong>（PP，Prepreg [priːpreɡ]）热压合而成，当使用
+<strong>Si9000</strong> 计算带有叠层结构的 PCB
+特性阻抗时，纳入计算的板材厚度应当由两者共同叠加而成，下图清晰的展示了覆铜芯板与半固化片之间的这种叠加关系：</p>
+<p><img src="/Electronics/SI9000/PCB-Structure.png"></p>
+<h2 id="芯板的介电常数">芯板的介电常数</h2>
+<p>普通 FR-4 材料的
+<strong>覆铜芯板</strong>（Core），主要有南亚、建滔、生益、宏瑞等板材生产厂家，下面两个表格展示了<strong>Tg
+≤ 170</strong> 型与 <strong>IT180A S1000-2</strong> 型的 <strong>生益
+FR-4 芯板</strong>，在各种厚度下所对应的<strong>介电常数</strong>：</p>
+<table>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">生益 FR-4 芯板厚度</th>
+<th style="text-align: center;">0.051mm/2mil</th>
+<th style="text-align: center;">0.075mm/3.0mil</th>
+<th style="text-align: center;">0.102mm/4mil</th>
+<th style="text-align: center;">0.11mm/4.33mil</th>
+<th style="text-align: center;">0.13mm/5.1mil</th>
+<th style="text-align: center;">0.15mm/5.9mil</th>
+<th style="text-align: center;">0.18mm/7.0mil</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Tg ≤ 170</strong> 型</td>
+<td style="text-align: center;">3.6</td>
+<td style="text-align: center;">3.65</td>
+<td style="text-align: center;">3.95</td>
+<td style="text-align: center;">无此规格</td>
+<td style="text-align: center;">3.95</td>
+<td style="text-align: center;">3.65</td>
+<td style="text-align: center;">4.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>IT180A S1000-2</strong> 型</td>
+<td style="text-align: center;">3.9</td>
+<td style="text-align: center;">3.95</td>
+<td style="text-align: center;">4.25</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4.25</td>
+<td style="text-align: center;">4.25</td>
+<td style="text-align: center;">4.5</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">生益 FR-4 芯板厚度</th>
+<th style="text-align: center;">0.21mm/8.27mil</th>
+<th style="text-align: center;">0.25mm/10mil</th>
+<th style="text-align: center;">0.36mm/14.5mil</th>
+<th style="text-align: center;">0.51mm/20mil</th>
+<th style="text-align: center;">0.71mm/28mil</th>
+<th style="text-align: center;">≥0.8mm/≥31.5mil</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Tg ≤ 170</strong> 型</td>
+<td style="text-align: center;">3.95</td>
+<td style="text-align: center;">3.95</td>
+<td style="text-align: center;">4.2</td>
+<td style="text-align: center;">4.1</td>
+<td style="text-align: center;">4.2</td>
+<td style="text-align: center;">4.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>IT180A S1000-2</strong> 型</td>
+<td style="text-align: center;">4.25</td>
+<td style="text-align: center;">4.25</td>
+<td style="text-align: center;">4.5</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;">4.5</td>
+<td style="text-align: center;">4.5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="半固化片的介电常数">半固化片的介电常数</h2>
+<p><strong>半固化片</strong>（PP）比较有名的厂家是罗杰斯（Rogers），主要有
+<code>106</code>、<code>1080</code>、<code>3313</code>、<code>2116</code>、<code>7628</code>
+等规格，下面的这个表格展示了 <strong>Tg ≤ 170</strong> 型与
+<strong>IT180A S1000-2</strong>
+型半固化片，在各种规格下所对应的介电常数：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 9%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tg≤170 半固化片规格</th>
+<th style="text-align: center;">106</th>
+<th style="text-align: center;">1080</th>
+<th style="text-align: center;">3313</th>
+<th style="text-align: center;">2116</th>
+<th style="text-align: center;">7628</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">理论厚度 (mm)</td>
+<td style="text-align: center;">0.0513</td>
+<td style="text-align: center;">0.0773</td>
+<td style="text-align: center;">0.1034</td>
+<td style="text-align: center;">0.1185</td>
+<td style="text-align: center;">0.1951</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">介电常数</td>
+<td style="text-align: center;">3.6</td>
+<td style="text-align: center;">3.65</td>
+<td style="text-align: center;">3.85</td>
+<td style="text-align: center;">3.95</td>
+<td style="text-align: center;">4.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>IT180A S1000-2B
+半固化片规格</strong></td>
+<td style="text-align: center;"><strong>106</strong></td>
+<td style="text-align: center;"><strong>1080</strong></td>
+<td style="text-align: center;"><strong>3313</strong></td>
+<td style="text-align: center;"><strong>2116</strong></td>
+<td style="text-align: center;"><strong>7628</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">理论厚度 (mm)</td>
+<td style="text-align: center;">0.0511</td>
+<td style="text-align: center;">0.07727</td>
+<td style="text-align: center;">0.0987</td>
+<td style="text-align: center;">0.1174</td>
+<td style="text-align: center;">0.1933</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">介电常数</td>
+<td style="text-align: center;">3.9</td>
+<td style="text-align: center;">3.95</td>
+<td style="text-align: center;">4.15</td>
+<td style="text-align: center;">4.25</td>
+<td style="text-align: center;">4.5</td>
+</tr>
+</tbody>
+</table>
+<h1 id="si9000-阻抗计算实例">Si9000 阻抗计算实例</h1>
+<p>在高速电路设计过程当中，通常情况下
+<strong>DDR</strong>、<strong>eMMC</strong>、<strong>SDIO</strong>
+等单端信号会要求 <code>50Ω</code> 阻抗（可以将其设置为 EDA
+工具走线的默认线宽）。而 <strong>HDMI</strong>、<strong>DDR</strong>
+时钟 等差分信号则会要求 <code>100Ω</code> 阻抗，除此之外
+<strong>USB</strong> 差分线则会要求 <code>90Ω</code> 阻抗。</p>
+<p>为了匹配这些各不相同的特征阻抗需求，需要基于 <strong>Si9000</strong>
+对走线的各种参数进行计算，从而获得合理的走线<strong>宽度</strong>与<strong>距离</strong>。由于使用
+<strong>Si9000</strong>
+进行<strong>无损计算</strong>的时候，所采用的参数与 PCB
+生产厂家所使用的材料以及工艺密切相关，因而必须遵循厂家提供的相关参数，确保阻抗计算结果的准确性。这里的表格，展示的是某工厂最新使用的<strong>半固化片</strong>规格与其介电常数：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">半固化片规格</th>
+<th style="text-align: center;">7628</th>
+<th style="text-align: center;">2216</th>
+<th style="text-align: center;">3313</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>介电常数</strong></td>
+<td style="text-align: center;"><code>4.4</code></td>
+<td style="text-align: center;"><code>4.16</code></td>
+<td style="text-align: center;"><code>4.1</code></td>
+</tr>
+</tbody>
+</table>
+<p>而接下来的表格，则展示了该工厂所使用<strong>阻焊油墨</strong>的厚度以及介电常数：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">基材上的油墨厚度</th>
+<th style="text-align: center;">导线上的油墨厚度</th>
+<th style="text-align: center;">阻焊油墨介电常数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>0.8mil</code></td>
+<td style="text-align: center;"><code>0.5mil</code></td>
+<td style="text-align: center;"><code>3.8</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：<strong>盎司</strong> <code>oz</code>
+原本是一个用于表示重量的单位 <code>1oz = 28.350g</code>，在 PCB
+设计当中通常将其用于描述铜层的厚度，<code>1OZ</code> 铜层对应的厚度约为
+<code>0.035mm</code>。</p>
+</blockquote>
+<h2 id="四层层叠方案-jlc04161h-7628">四层层叠方案 JLC04161H-7628</h2>
+<p>以某 PCB 生产厂家所提供的 <code>JLC04161H-7628</code> 型四层 PCB
+叠层方案为例（PCB 成品厚度 <code>1.59mm</code>，内层铜厚
+<code>0.5oz</code>，外层铜厚 <code>1oz</code>）：</p>
+<p><img src="/Electronics/SI9000/JLC04161H-7628.png"></p>
+<p>下图是使用 <strong>Si9000</strong> 计算 <code>50Ω</code>
+欧姆<strong>外层单端</strong>阻抗走线的结果（即上下线宽度分别为
+<code>14.1614/13.1614mil</code> 或者
+<code>0.35970/0.33430mm</code>）：</p>
+<p><img src="/Electronics/SI9000/JLC04161H-7628-1.png"></p>
+<h2 id="四层层叠方案-jlc04161h-3313">四层层叠方案 JLC04161H-3313</h2>
+<p>以某 PCB 生产厂家所提供的 <code>JLC04161H-3313</code> 型四层 PCB
+叠层方案为例（PCB 成品厚度 <code>1.56mm</code>，内层铜厚
+<code>0.5oz</code>，外层铜厚 <code>1oz</code>）：</p>
+<p><img src="/Electronics/SI9000/JLC04161H-3313.png"></p>
+<p>下图是使用 <strong>Si9000</strong> 计算 <code>100Ω</code>
+欧姆<strong>外层差分共面</strong>阻抗走线的结果（即上下线宽度分别为
+<code>5.1623/4.1623mil</code> 或者
+<code>0.13112/0.10572mm</code>）：</p>
+<p><img src="/Electronics/SI9000/JLC04161H-3313-1.png"></p>
+<h2 id="六层层叠方案-jlc06161h-3313">六层层叠方案 JLC06161H-3313</h2>
+<p>以某 PCB 生产厂家所提供的 <code>JLC06161H-3313</code> 型六层 PCB
+叠层方案为例（上下线宽度分别为 <code>1.6mm</code>，内层铜厚
+<code>0.5oz</code>，外层铜厚 <code>1oz</code>）：</p>
+<p><img src="/Electronics/SI9000/JLC06161H-3313.png"></p>
+<p>下图是使用 <strong>Si9000</strong> 计算 <code>90Ω</code>
+欧姆<strong>内层差分共面</strong>阻抗走线的结果（即上下线宽度分别为
+<code>4.9260/3.9260mil</code> 或者
+<code>0.12512/0.09972mm</code>）：</p>
+<p><img src="/Electronics/SI9000/JLC06161H-3313-1.png"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>基于 Polar Si9000e 计算传输线特征阻抗的全攻略</p><p><a href="http://www.uinio.com/Electronics/SI9000/">http://www.uinio.com/Electronics/SI9000/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-04-05</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-07-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/EDA/">EDA</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/LTspice/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">如何使用新版本的 LTspice 进行模拟电路仿真</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/Component/"><span class="level-item">硬件电路设计当中 の 常用分立元器件选型</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#英文词汇准备"><span class="level-left"><span class="level-item">1</span><span class="level-item">英文词汇准备</span></span></a></li><li><a class="level is-mobile" href="#微带线-带状线"><span class="level-left"><span class="level-item">2</span><span class="level-item">微带线 &amp; 带状线</span></span></a></li><li><a class="level is-mobile" href="#共面单端-共面波导"><span class="level-left"><span class="level-item">3</span><span class="level-item">共面单端 &amp; 共面波导</span></span></a></li><li><a class="level is-mobile" href="#常用-pcb-叠层结构"><span class="level-left"><span class="level-item">4</span><span class="level-item">常用 PCB 叠层结构</span></span></a></li><li><a class="level is-mobile" href="#si9000-主界面介绍"><span class="level-left"><span class="level-item">5</span><span class="level-item">Si9000 主界面介绍</span></span></a></li><li><a class="level is-mobile" href="#常见的阻抗模型"><span class="level-left"><span class="level-item">6</span><span class="level-item">常见的阻抗模型</span></span></a></li><li><a class="level is-mobile" href="#导线的上下线宽换算关系"><span class="level-left"><span class="level-item">7</span><span class="level-item">导线的上/下线宽换算关系</span></span></a></li><li><a class="level is-mobile" href="#芯板与半固化片"><span class="level-left"><span class="level-item">8</span><span class="level-item">芯板与半固化片</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#芯板的介电常数"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">芯板的介电常数</span></span></a></li><li><a class="level is-mobile" href="#半固化片的介电常数"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">半固化片的介电常数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#si9000-阻抗计算实例"><span class="level-left"><span class="level-item">9</span><span class="level-item">Si9000 阻抗计算实例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#四层层叠方案-jlc04161h-7628"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">四层层叠方案 JLC04161H-7628</span></span></a></li><li><a class="level is-mobile" href="#四层层叠方案-jlc04161h-3313"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">四层层叠方案 JLC04161H-3313</span></span></a></li><li><a class="level is-mobile" href="#六层层叠方案-jlc06161h-3313"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">六层层叠方案 JLC06161H-3313</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Zen/Markdown/"><img src="/Zen/Markdown/logo.png" alt="一篇简明扼要的 Markdown 魔法速成教程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-12T16:00:00.000Z">2024-03-13</time></p><p class="title"><a href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><p class="categories"><a href="/categories/Zen/">Zen</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2023 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/math.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
