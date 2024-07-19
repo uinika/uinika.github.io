@@ -3425,7 +3425,7 @@ FIFO/缓冲区发生溢出之后，读写函数将会阻塞程序的执行。用
 <td>
 调用 <code>Serial.begin()</code> 时内置 WiFi
 库的<strong>调试输出</strong>默认禁用，如果需要启用<strong>调试输出</strong>，就需要手动调用该函数，例如：
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Serial.<span class="built_in">setDebugOutput</span>(<span class="literal">true</span>)；  <span class="comment">// 开启 Serial 的调试输出</span></span><br><span class="line">Serial1.<span class="built_in">setdebugoutput</span>(<span class="literal">true</span>)； <span class="comment">// 将调试输出重定向至 Serial1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Serial.<span class="built_in">setDebugOutput</span>(<span class="literal">true</span>)；  <span class="comment">// 开启 Serial 的调试输出</span></span><br><span class="line">Serial<span class="number">1.</span><span class="built_in">setdebugoutput</span>(<span class="literal">true</span>)； <span class="comment">// 将调试输出重定向至 Serial1</span></span><br></pre></td></tr></table></figure>
 </td>
 </tr>
 <tr>
@@ -3437,7 +3437,7 @@ FIFO/缓冲区发生溢出之后，读写函数将会阻塞程序的执行。用
 对象上调用该方法可以配置串行通信相关属性，例如<strong>数据位</strong>（<code>5</code>、<code>6</code>、<code>7</code>、<code>8</code>）、<strong>奇偶校验</strong>方式（奇校验
 <code>O</code>、偶校验 <code>E</code>、无校验
 <code>N</code>）、<strong>停止位</strong>（<code>1</code>、<code>2</code>），例如：
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Serial.<span class="built_in">begin</span>(baudrate, SERIAL_8N1);</span><br><span class="line">Serial.<span class="built_in">begin</span>(baudrate, SERIAL_6E2);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Serial.<span class="built_in">begin</span>(baudrate, SERIAL_8N1);</span><br><span class="line">Serial.<span class="built_in">begin</span>(baudrate, SERIAL_<span class="number">6E2</span>);</span><br></pre></td></tr></table></figure>
 </td>
 </tr>
 <tr>
