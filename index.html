@@ -127,7 +127,7 @@ Cortex-M0+</strong> 双核心的微控制器，运行频率高达
 <p><img src="/Electronics/Component/logo.png"></p>
 <p>电子元器件如同电子设备的细胞，承载着实现各种复杂功能的基础任务，它们是电路设计和调试中不可或缺的元素。实际的电路设计过程当中，各类电子元器件的选择、连接、调试都至关重要，正确的选型能够确保设备的性能和稳定性，而合理的连接方式更是能够降低信号的损失与干扰。本文旨在以简单明了的方式介绍
 <code>电阻器</code>、<code>电容器</code>、<code>电感器</code>、<code>变压器</code>、<code>二极管</code>、<code>三极管</code>、<code>晶闸管</code>、<code>场效应管</code>、<code>IGBT</code>
-等常用分立式电子元器件的参数与选型注意事项。</p></div><a class="article-more button is-small is-size-7" href="/Electronics/Component/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-01-21T16:00:00.000Z" title="2023/1/22 00:00:00">2023-01-22</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.662Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">1 小时读完 (大约7046个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Project/UINIO-DAP-Link/">ARM 调试工具 UINIO-DAP-Link 应用详解</a></p><div class="content"><p><strong>ARM Mbed OS</strong>
+等常用分立式电子元器件的参数与选型注意事项。</p></div><a class="article-more button is-small is-size-7" href="/Electronics/Component/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-01-21T16:00:00.000Z" title="2023/1/22 00:00:00">2023-01-22</time>发表</span><span class="level-item"><time dateTime="2024-09-03T17:51:04.520Z" title="2024/9/4 01:51:04">2024-09-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Project/">Project</a></span><span class="level-item">1 小时读完 (大约6988个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Project/UINIO-DAPLink/">ARM 调试工具 UINIO-DAPLink 应用详解</a></p><div class="content"><p><strong>ARM Mbed OS</strong>
 是一款开源免费的物联网操作系统，包含有基于 <strong>ARM Cortex-M</strong>
 系列微控制器开发智能连接产品所需的全部基础架构。其社区推出的 <a target="_blank" rel="noopener" href="https://daplink.io/"><strong>DAP-Link</strong></a>
 同样是一个开源项目，它支持编程和调试运行在 ARM Cortex
@@ -135,17 +135,17 @@ Cortex-M0+</strong> 双核心的微控制器，运行频率高达
 <strong>JTAG</strong> 接口的微控制器当中，并且通过 USB 接口在计算机与
 ARM Cortex
 微控制器之间创建一个用于调试仿真的通道与桥梁，为开发人员提供了<strong>下载调试</strong>、<strong>串口通信</strong>、<strong>拖拽烧录</strong>等一系列实用功能。</p>
-<p><img src="/Project/UINIO-DAP-Link/logo.png"></p>
+<p><img src="/Project/UINIO-DAPLink/logo.png"></p>
 <p><strong>DAPLink</strong> 主要由 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/mbed-HDK-Eagle-Projects"><strong>Mbed
 硬件开发工具包</strong></a> 以及 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/DAPLink"><strong>DAPLink
-固件</strong></a> 两个开源项目构成，而 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link"><strong>UINIO-DAP-Link</strong></a>
+固件</strong></a> 两个开源项目构成，而 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAPLink"><strong>UINIO-DAPLink</strong></a>
 则是由我自己设计的一款完全开源的 DAPLink
 实现，相比于官方原版的硬件电路设计，在引出有 <strong>SWD</strong>
 调试接口（由 ARM 公司制订）的同时，还引出了 <strong>JTAG</strong>
 接口（属于 IEEE1149 国际标准）以及<code>5V</code> 和 <code>3.3V</code>
 电源，并且附带有 <strong>SWD</strong> 至 <strong>JTAG</strong> 转接板的
 PCB 设计，而固件部分则是基于 ARM
-官方的最新的原版固件移植而来，全部的原理图与固件程序都已经开源在 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAP-Link"><strong>GitHub</strong></a>。</p></div><a class="article-more button is-small is-size-7" href="/Project/UINIO-DAP-Link/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-12T16:00:00.000Z" title="2024/3/13 00:00:00">2024-03-13</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.892Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Zen/">Zen</a></span><span class="level-item">28 分钟读完 (大约4127个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><div class="content"><p><a target="_blank" rel="noopener" href="https://www.markdownguide.org/"><strong>Markdown</strong></a>
+官方的最新的原版固件移植而来，全部的原理图与固件程序都已经开源在 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-DAPLink"><strong>GitHub</strong></a>。</p></div><a class="article-more button is-small is-size-7" href="/Project/UINIO-DAPLink/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-12T16:00:00.000Z" title="2024/3/13 00:00:00">2024-03-13</time>发表</span><span class="level-item"><time dateTime="2024-07-03T18:28:39.892Z" title="2024/7/4 02:28:39">2024-07-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Zen/">Zen</a></span><span class="level-item">28 分钟读完 (大约4127个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Zen/Markdown/">一篇简明扼要的 Markdown 魔法速成教程</a></p><div class="content"><p><a target="_blank" rel="noopener" href="https://www.markdownguide.org/"><strong>Markdown</strong></a>
 是一款轻量级的文本标记语言，由<strong>约翰·格鲁伯</strong>（John
 Gruber）于 <strong>2004</strong>
 年开发，主要用于在<strong>纯文本文档</strong>当中添加格式化元素。具有语法简单，易于读写的特点，同时也可以方便的纳入
