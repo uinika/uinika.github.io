@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>关于锂离子电池选型里的一些重要细节 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="锂离子电池是一种采用锂金属化合物作为正负极材料，中间再填充电解质溶液的化学电池，属于一种可反复充放电的二次电池。内部主要依靠锂离子在正极与负极之间的移动来进行充放电。在充放电过程中，锂离子在两个电极之间不断的往返，嵌入正负极材料或者从正负极材料当中脱嵌。例如在充电时，锂离子就会从正极材料脱嵌，穿过电解质溶液之后再嵌入负极材料，使得负极逐渐呈现出富锂状态，而在放电的时候这个化学过程正好相反。"><meta property="og:type" content="blog"><meta property="og:title" content="关于锂离子电池选型里的一些重要细节"><meta property="og:url" content="http://www.uinio.com/Electronics/Battery/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="锂离子电池是一种采用锂金属化合物作为正负极材料，中间再填充电解质溶液的化学电池，属于一种可反复充放电的二次电池。内部主要依靠锂离子在正极与负极之间的移动来进行充放电。在充放电过程中，锂离子在两个电极之间不断的往返，嵌入正负极材料或者从正负极材料当中脱嵌。例如在充电时，锂离子就会从正极材料脱嵌，穿过电解质溶液之后再嵌入负极材料，使得负极逐渐呈现出富锂状态，而在放电的时候这个化学过程正好相反。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-08-28T16:00:00.000Z"><meta property="article:modified_time" content="2024-09-03T17:22:59.309Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="电池"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/Battery/"},"headline":"关于锂离子电池选型里的一些重要细节","image":["http://www.uinio.com/Electronics/Battery/logo.png"],"datePublished":"2024-08-28T16:00:00.000Z","dateModified":"2024-09-03T17:22:59.309Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"锂离子电池是一种采用锂金属化合物作为正负极材料，中间再填充电解质溶液的化学电池，属于一种可反复充放电的二次电池。内部主要依靠锂离子在正极与负极之间的移动来进行充放电。在充放电过程中，锂离子在两个电极之间不断的往返，嵌入正负极材料或者从正负极材料当中脱嵌。例如在充电时，锂离子就会从正极材料脱嵌，穿过电解质溶液之后再嵌入负极材料，使得负极逐渐呈现出富锂状态，而在放电的时候这个化学过程正好相反。"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/Battery/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/projects/index.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-28T16:00:00.000Z" title="2024/8/29 00:00:00">2024-08-29</time>发表</span><span class="level-item"><time dateTime="2024-09-03T17:22:59.309Z" title="2024/9/4 01:22:59">2024-09-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%94%B5%E5%AD%90%E7%A1%AC%E4%BB%B6/">电子硬件</a></span><span class="level-item">24 分钟读完 (大约3616个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">关于锂离子电池选型里的一些重要细节</h1><div class="content"><p><strong>锂离子电池</strong>是一种采用锂金属化合物作为正负极材料，中间再填充电解质溶液的化学电池，属于一种可反复充放电的<strong>二次电池</strong>。内部主要依靠<strong>锂离子</strong>在正极与负极之间的移动来进行充放电。在充放电过程中，锂离子在两个电极之间不断的往返，嵌入正负极材料或者从正负极材料当中脱嵌。例如在充电时，锂离子就会从正极材料脱嵌，穿过电解质溶液之后再嵌入负极材料，使得负极逐渐呈现出富锂状态，而在放电的时候这个化学过程正好相反。</p>
+<p><img src="/Electronics/Battery/logo.png"></p>
+<p>长期以来，围绕锂离子电池安全性的话题层出不穷，大量的行业规范与政策法规，伴随着锂离子电池的大规模市场化应用而被不断推出。自从
+2024 年 8 月 1 日起，我国已经对锂离子电池实施 <strong>3C</strong>
+强制认证管理，未获得 <strong>3C</strong> 认证并且标注
+<strong>3C</strong>
+认证标识的锂电池产品，将不得出厂进行销售和进行其它经营活动。本文总结了各类锂离子电池材料的特性，以及选型过程当中的一些重要事项，希冀能够对于广大电子工程师的物料选型工作有所裨益。</p>
+<span id="more"></span>
+<p>锂离子电池主要是由<strong>正极</strong>（锂化合物）和<strong>负极</strong>（石墨）材料，以及两极之间填充的<strong>电解液</strong>和<strong>隔膜</strong>构成。下面的示意图展示了在充放电的时刻，电池内部锂离子的运动方向，以及外电路当中电流的运动方向：</p>
+<p><img src="/Electronics/Battery/Basic-Theory.png"></p>
+<p>锂离子电池（后续直接简称为<strong>锂电池</strong>）通常会使用循环次数和日历寿命两指标来表示电池的寿命：</p>
+<ul>
+<li><strong>循环次数</strong>：将电池从 <code>0％</code> 充电至
+<code>100％</code>，再从 <code>100％</code> 放电到 <code>0％</code>
+作为一个循环，能够反复进行充放电的次数。</li>
+<li><strong>日历寿命</strong>：表示电池在规定的充电状态下即使静置也能够使用的时间，即从生产之日起至电池寿命结束的时间长度。</li>
+</ul>
+<p>在接下来的表格里，展示了三种常用电池（铅蓄电池、镍氢电池、锂离子电池）的循环次数和日历寿命：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">电池类型</th>
+<th style="text-align: left;">循环次数</th>
+<th style="text-align: left;">日历寿命</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>铅蓄电池</strong></td>
+<td style="text-align: left;"><code>3150 次</code></td>
+<td style="text-align: left;"><code>17 年</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>镍氢电池</strong></td>
+<td style="text-align: left;"><code>2000 次</code></td>
+<td style="text-align: left;"><code>5~7 年</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>锂离子电池</strong></td>
+<td style="text-align: left;"><code>3500 次</code></td>
+<td style="text-align: left;"><code>6~10 年</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：虽然铅蓄电池的寿命长于锂离子电池，但是其能量密度相较于锂离子电池要差上许多。综合循环次数与日历寿命两个指标，</p>
+</blockquote>
+<h2 id="材料分类">材料分类</h2>
+<p>根据<strong>正极</strong>材料所采用锂化合物的不同，可以将锂离子电池划分为如下几个种类：</p>
+<ol type="1">
+<li><strong>钴酸锂</strong>电池：钴酸锂比较容易合成，但是钴是稀有金属，价格比较昂贵，并且化学性质非常活泼，需要限制充放电电流，避免出现热失控。</li>
+<li><strong>锰酸锂</strong>电池：放电电压与钴酸锂电池相类似，但是制造成本更加低廉，但是充放电过程当中，锰可能会溶入电解质，缩短电池寿命。</li>
+<li><strong>三元锂</strong>电池：即<strong>镍钴锰酸锂</strong>，优点在于安全性相对高，而且以铁作为原材料，生成成本相比锰酸锂更低，缺点在于放电电压非常低。</li>
+<li><strong>磷酸铁锂</strong>电池：为了减少钴的用量，同时使用了钴、镍、锰三种材料，其中镍的比例较高，虽然放电电压相比钴酸锂、锰酸锂略低，但是能够降低生产成本，并且容量较高。但是缺点在于材料化学属性较为活泼，高温性能不稳定。</li>
+<li><strong>钛酸锂</strong>电池：负极材料采用钛酸锂，正极材料采用上述其它几种锂离子材料，稳定性和安全性更好，循环寿命更长。但是价格昂贵，且能量密度过低，不太适合作为动力电池。</li>
+</ol>
+<p><img src="/Electronics/Battery/Li.png"></p>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 8%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">锂离子电池类型</th>
+<th style="text-align: left;">标称电压</th>
+<th style="text-align: left;">典型工作电压范围</th>
+<th style="text-align: left;">充电截止电压</th>
+<th style="text-align: left;">放电截止电压</th>
+<th style="text-align: left;">循环寿命</th>
+<th style="text-align: left;">热失控温度</th>
+<th style="text-align: left;">容量（能量密度法，Wh/Kg）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>钴酸锂</strong>电池</td>
+<td style="text-align: left;"><code>3.6V</code></td>
+<td style="text-align: left;"><code>3.0V ~ 4.2V</code></td>
+<td style="text-align: left;"><code>4.2V</code></td>
+<td style="text-align: left;"><code>2.5V</code></td>
+<td style="text-align: left;"><code>500 ～ 1000</code> 次</td>
+<td style="text-align: left;"><code>150°C</code></td>
+<td style="text-align: left;"><code>150 ~ 200 Wh/Kg</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>锰酸锂</strong>电池</td>
+<td style="text-align: left;"><code>3.7/3.8V</code></td>
+<td style="text-align: left;"><code>3.0V ~ 4.2V</code></td>
+<td style="text-align: left;"><code>4.2V</code></td>
+<td style="text-align: left;"><code>2.5V</code></td>
+<td style="text-align: left;"><code>300 ～ 700</code> 次</td>
+<td style="text-align: left;"><code>250°C</code></td>
+<td style="text-align: left;"><code>100 ~ 150 Wh/Kg</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>三元锂</strong>电池</td>
+<td style="text-align: left;"><code>3.6/3.7V</code></td>
+<td style="text-align: left;"><code>3.0V ~ 4.2V</code></td>
+<td style="text-align: left;"><code>4.2V</code></td>
+<td style="text-align: left;"><code>2.5V</code></td>
+<td style="text-align: left;"><code>1000 ～ 2000</code> 次</td>
+<td style="text-align: left;"><code>210°C</code></td>
+<td style="text-align: left;"><code>150 ~ 220 Wh/Kg</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>磷酸铁锂</strong>电池</td>
+<td style="text-align: left;"><code>3.2/3.3V</code></td>
+<td style="text-align: left;"><code>2.5V ~ 3.65V</code></td>
+<td style="text-align: left;"><code>3.65V</code></td>
+<td style="text-align: left;"><code>2.5V</code></td>
+<td style="text-align: left;"><code>1000 ～ 2000</code> 次</td>
+<td style="text-align: left;"><code>270°C</code></td>
+<td style="text-align: left;"><code>90 ~ 120 Wh/Kg</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>钛酸锂</strong>电池</td>
+<td style="text-align: left;"><code>2.4V</code></td>
+<td style="text-align: left;"><code>1.8V ~ 2.85V</code></td>
+<td style="text-align: left;"><code>2.85V</code></td>
+<td style="text-align: left;"><code>1.8V</code></td>
+<td style="text-align: left;"><code>3000 ～ 7000</code> 次</td>
+<td style="text-align: left;"><code>500°C</code></td>
+<td style="text-align: left;"><code>50 ~ 80 Wh/Kg</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="封装规格">封装规格</h2>
+<p>根据封装形式的不同，大体上可以将锂离子电池划分为<strong>软包</strong>（下图左，尺寸形状可定制）和<strong>金属壳</strong>（下图右，尺寸形状固定）两种类型，</p>
+<p><img src="/Electronics/Battery/18650.png"></p>
+<p>其中在 <a target="_blank" rel="noopener" href="https://webstore.iec.ch/en/publication/27451"><strong>国际电工技术委员会
+IEC61960 规范</strong></a>
+当中，对于<strong>圆柱形金属壳</strong>锂离子电池的命名形式进行了定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">正极材料代码 + 负极材料代码 + 直径 + 高度</span><br></pre></td></tr></table></figure>
+<p>其中，<strong>正极</strong>材料包括有
+<code>C/U</code>（钴酸锂）、<code>M</code>（锰酸锂）、<code>NB</code>（氧化铌）、<code>V</code>（氧化钒）、<code>T</code>（钛酸锂），而<strong>负极</strong>材料包括有
+<code>C</code>（碳）、<code>L</code>（铝酸锂）、<code>S</code>（硅酸锂）、<code>T/TL</code>（钛酸锂）。除此之外，直径和高度的单位均为
+<code>mm</code>
+<strong>毫米</strong>。为了书写方便，通常会省去前面的正负极材料代码，而直接使用外形尺寸来描述不同的电池规格。例如在下面的表格里，就展示了常用<strong>圆柱形金属壳</strong>锂离子电池的型号与规格：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">型号</th>
+<th style="text-align: left;">直径（mm）</th>
+<th style="text-align: left;">高度（mm）</th>
+<th style="text-align: left;">容量（时间乘积法，mAh）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>14500</strong> 型</td>
+<td style="text-align: left;"><code>14 毫米</code></td>
+<td style="text-align: left;"><code>50 毫米</code></td>
+<td style="text-align: left;"><code>800  ~ 1000 毫安时</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>18650</strong> 型</td>
+<td style="text-align: left;"><code>18 毫米</code></td>
+<td style="text-align: left;"><code>65 毫米</code></td>
+<td style="text-align: left;"><code>2000 ~ 3500 毫安时</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>18500</strong> 型</td>
+<td style="text-align: left;"><code>18 毫米</code></td>
+<td style="text-align: left;"><code>50 毫米</code></td>
+<td style="text-align: left;"><code>1000 ~ 2000 毫安时</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>26650</strong> 型</td>
+<td style="text-align: left;"><code>26 毫米</code></td>
+<td style="text-align: left;"><code>65 毫米</code></td>
+<td style="text-align: left;"><code>3200 ~ 3500 毫安时</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>21700</strong> 型</td>
+<td style="text-align: left;"><code>21 毫米</code></td>
+<td style="text-align: left;"><code>70 毫米</code></td>
+<td style="text-align: left;"><code>3000 ~ 4800 毫安时</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>32650</strong> 型</td>
+<td style="text-align: left;"><code>32 毫米</code></td>
+<td style="text-align: left;"><code>65 毫米</code></td>
+<td style="text-align: left;"><code>4500 ~ 6500 毫安时</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>32700</strong> 型</td>
+<td style="text-align: left;"><code>32 毫米</code></td>
+<td style="text-align: left;"><code>70 毫米</code></td>
+<td style="text-align: left;"><code>4500 ~ 6500 毫安时</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：上述表格当中，电池型号末尾的 <code>0</code>
+代表其为<strong>圆柱形</strong>锂电池。</p>
+</blockquote>
+<h2 id="串并联关系">串并联关系</h2>
+<p>概而言之，电阻器是<strong>串联分压，并联分流</strong>，而锂电池则是<strong>串联增压，并联增流增容</strong>，它们各自的连接方式分别如下图所示：</p>
+<p><img src="/Electronics/Battery/Series-Parallel.png"></p>
+<ul>
+<li><strong>串联</strong>（上图左）：将锂电池单体首尾相连，此时负载
+<code>Load</code> 两端的输出电压，等于各个单体的端电压之和
+<code>36V</code>。</li>
+<li><strong>并联</strong>（上图右）：将锂电池单体的正极分别相互连接到一起，此时负载
+<code>Load</code> 两端的输出电压不变，输出电流等于各个单体的输出电流之和
+<code>3A</code>，并且最终构成的电池包总容量也会相应的提升至三个单体容量之和。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：由单体<strong>锂电芯</strong>组成的<strong>锂电池包</strong>，其串并联关系的选型，要依据电源电路所需要的<strong>工作电压范围</strong>、后级负载的<strong>持续运行时间</strong>以及其所<strong>消耗的电流</strong>来综合进行判断。特别需要注意满足在后级负载<strong>上电启动</strong>的一瞬间，所产生的<strong>瞬时峰值电流</strong>需求。最好先将后级负载连接至<strong>可编程电源</strong>，观察一下该峰值电流的大小，并以该电流值作为锂电池包输出电流的<strong>上限值</strong>来进行选型，并且尽量保留一定的性能冗余。</p>
+</blockquote>
+<h2 id="电池容量">电池容量</h2>
+<p>锂电池容量的计算方法，根据表达意义所侧重的不同，可以进一步划分为<strong>能量密度法</strong>和<strong>时间乘积法</strong>两种方式：</p>
+<ul>
+<li><strong>能量密度法</strong>：即电池容量与电池质量的比值，通常以<strong>瓦时/千克</strong>（<code>Wh/kg</code>）作为单位进行表示。</li>
+<li><strong>时间乘积法</strong>：通常以<strong>安时</strong>（<code>Ah</code>，Ampere-hour）作为单位，表示在一定放电条件下（环境温度
+<code>25°C</code>
+左右），其所能够提供的电流和持续时间的乘积。例如，如果一节锂电池能够以 1
+安培的电流持续放电 1 小时，那么其容量就等于 <code>1Ah</code> 安时。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：这两种表达方式都已经体现到了前述内容的表格当中。</p>
+</blockquote>
+<h2 id="充放电倍率">充放电倍率</h2>
+<p><strong>充放电倍率</strong> <code>C</code>
+用于表示锂电池在单位时间内，完全放电所输出的电流大小。例如一节标称为
+<code>3300mAh</code> 容量的 18650 型三元锂电池，其放电倍率为
+<code>3C</code>，则其以 1 小时单位时间内进行放电，输出的电流应当为
+<code>9.9A</code> 安培，具体计算公式如下所示：</p>
+<p><span class="math display">\[
+I_{输出电流} = C_{充放电倍率} \times P_{锂电池额定容量}
+\]</span></p>
+<p>根据放电倍率的不同，还可以将锂电池划分为<strong>功率/动力型</strong>（放电倍率大于
+<code>10C</code>）和<strong>容量型</strong>（放电倍率
+<code>1C ~ 3C</code>）两种类型。下图是某国产 18650
+型锂电池的规格书，注意其中关于锂电池充放电倍率的描述：</p>
+<p><img src="/Electronics/Battery/Datasheet.png"></p>
+<h2 id="锂电池内阻">锂电池内阻</h2>
+<p>锂电池的内阻是指电池在工作时，电流经过电池内部所受到的阻力（不是常量，会随时间和温度变化）。主要由<strong>欧姆内阻</strong>（电解液、电极材料、隔膜的体电阻或者接触电阻）和<strong>极化内阻</strong>（正负极发生电化学反应时极化所产生的阻抗）两个部分组成。</p>
+<p>较低的锂电池内阻可以减少充放电过程当中的能量损失，也有助于降低锂电池在大电流充放电时候所产生的热量，从而降低热失控的风险。除此之外，锂电池内阻的增高通常与锂电池内部材料的老化过程相关，因而监测内阻的变化对于预测电池的健康状态也具有重要意义。锂电阻的内阻测量方法主要包括直流和交流两种：</p>
+<ul>
+<li><strong>直流测量法</strong>：通过在锂电池两端施加恒定电压并测量通过锂电池的电流来计算内阻。</li>
+<li><strong>交流测量法</strong>：通过在锂电池两端施加小幅的交流电压，并测量其电流响应来计算内阻。</li>
+</ul>
+<h2 id="充电过程">充电过程</h2>
+<p>为了确保锂电池充电过程的安全，需要采用特定的电流与电压（即<strong>限压恒流</strong>）进行充电，整个充电过程主要划分为<strong>涓流充电</strong>、<strong>恒流充电</strong>、<strong>恒压充电</strong>
+三个阶段，下面以三元锂电池的充电过程为例进行说明：</p>
+<p><img src="/Electronics/Battery/Charge.png"></p>
+<ul>
+<li><strong>涓流充电</strong>：当电池电压低于 <code>3V</code>
+时进行低压预充，充电电流为恒流充电倍率的 <code>0.1C</code>。</li>
+<li><strong>恒流充电</strong>：当电池电压上升至涓流充电电压的阈值之上时，就可以提高充电电流至
+<code>0.2C ~ 1C</code> 进行恒流充电，当电池电压上升至 <code>4.2V</code>
+时，恒流充电结束。</li>
+<li><strong>恒压充电</strong>：保持充电电压为
+<code>4.2V</code>，伴随着电池电量的逐渐饱和，当充电电流逐渐减小至
+<code>0.01C</code> 的时候，就可以终止充电。</li>
+</ul>
+<h2 id="bms-充放电参数">BMS 充放电参数</h2>
+<p>接下来的内容，展示了锂离子<strong>电池管理系统</strong>（BMS，Battery
+Management System）固件开发过程当中，一些常用的头文件配置参数：</p>
+<ol type="1">
+<li><strong>单体过压保护电压</strong>：单节锂电池的过压保护值，充电时不得超过该上限电压（厂家数据手册）。</li>
+<li><strong>单体过压恢复电压</strong>：低于该参数的时候，就可以认为单节锂电池已经处于不饱和状态（可自定义）。</li>
+<li><strong>单体欠压保护电压</strong>：单节锂电池低于该电压的时候，就会停止继续放电，避免损坏电池（厂家数据手册）。</li>
+<li><strong>单体欠压恢复电压</strong>：单节锂电池高于该电压的时候，可以认为其已经退出欠压保护状态（可自定义）。</li>
+<li><strong>自动关机电压</strong>：低于该电压，就会关闭硬件系统（可自定义）。</li>
+<li><strong>均衡起始电压</strong>：高于该参数时，就会启动电池均衡过程（可自定义）。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 三元锂（Trihydride Lithium）电池 BMS 参数 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Over_Voltage_Protect   4.20 <span class="comment">// 单体过压保护电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Over_Voltage_Rcovery   4.18 <span class="comment">// 单体过压恢复电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Under_Voltage_Protect  2.65 <span class="comment">// 单体欠压保护电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Under_Voltage_Rcovery  2.70 <span class="comment">// 单体欠压恢复电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Shutdown_Voltage       3.00 <span class="comment">// 自动关机电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Balance_Voltage        3.30 <span class="comment">// 均衡起始电压</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 磷酸铁锂（Lithium Iron Phosphate）电池 BMS 参数 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Over_Voltage_Protect   3.60 <span class="comment">// 单体过压保护电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Over_Voltage_Rcovery   3.55 <span class="comment">// 单体过压恢复电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Under_Voltage_Protect  2.60 <span class="comment">// 单体欠压保护电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Under_Voltage_Rcovery  2.65 <span class="comment">// 单体欠压恢复电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Shutdown_Voltage       2.50 <span class="comment">// 自动关机电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TL_Balance_Voltage        3.00 <span class="comment">// 均衡起始电压</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 钛酸锂（Lithium Titanate）电池 BMS 参数 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LT_Over_Voltage_Protect   2.70 <span class="comment">// 单体过压保护电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LT_Over_Voltage_Rcovery   2.65 <span class="comment">// 单体过压恢复电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LT_Under_Voltage_Protect  1.80 <span class="comment">// 单体欠压保护电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LT_Under_Voltage_Rcovery  1.85 <span class="comment">// 单体欠压恢复电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LT_Shutdown_Voltage       1.70 <span class="comment">// 自动关机电压</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LT_Balance_Voltage        2.30 <span class="comment">// 均衡起始电压</span></span></span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>关于锂离子电池选型里的一些重要细节</p><p><a href="http://www.uinio.com/Electronics/Battery/">http://www.uinio.com/Electronics/Battery/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-08-29</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-09-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%94%B5%E6%B1%A0/">电池</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/LTspice/"><span class="level-item">如何使用新版本的 LTspice 进行模拟电路仿真</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#材料分类"><span class="level-left"><span class="level-item">1</span><span class="level-item">材料分类</span></span></a></li><li><a class="level is-mobile" href="#封装规格"><span class="level-left"><span class="level-item">2</span><span class="level-item">封装规格</span></span></a></li><li><a class="level is-mobile" href="#串并联关系"><span class="level-left"><span class="level-item">3</span><span class="level-item">串并联关系</span></span></a></li><li><a class="level is-mobile" href="#电池容量"><span class="level-left"><span class="level-item">4</span><span class="level-item">电池容量</span></span></a></li><li><a class="level is-mobile" href="#充放电倍率"><span class="level-left"><span class="level-item">5</span><span class="level-item">充放电倍率</span></span></a></li><li><a class="level is-mobile" href="#锂电池内阻"><span class="level-left"><span class="level-item">6</span><span class="level-item">锂电池内阻</span></span></a></li><li><a class="level is-mobile" href="#充电过程"><span class="level-left"><span class="level-item">7</span><span class="level-item">充电过程</span></span></a></li><li><a class="level is-mobile" href="#bms-充放电参数"><span class="level-left"><span class="level-item">8</span><span class="level-item">BMS 充放电参数</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%B5%E5%AD%90%E7%A1%AC%E4%BB%B6/"><span class="level-start"><span class="level-item">电子硬件</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="关于锂离子电池选型里的一些重要细节"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">关于锂离子电池选型里的一些重要细节</a></p><p class="categories"><a href="/categories/%E7%94%B5%E5%AD%90%E7%A1%AC%E4%BB%B6/">电子硬件</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%B1%A0/"><span class="tag">电池</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2024 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

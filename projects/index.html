@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>UINIO 系列开源硬件概览 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO.com 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO.com 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="UINIO-MCU-RP2040 核心板 UINIO-MCU-RP2040 是一款基于树莓派 RP2040 微控制器的核心板，该主控芯片采用 ARM Cortex-M0+ 双核心，运行频率高达 133MHz，片上内置有 264KB 容量的 SRAM 内存，并且能够外接高达 16MB 容量的片外 Flash 闪存（通过专用的 QSPI 总线进行连接），并且还集成有 DMA 控制器，以及"><meta property="og:type" content="blog"><meta property="og:title" content="UINIO 系列开源硬件概览"><meta property="og:url" content="http://www.uinio.com/projects/index.html"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="UINIO-MCU-RP2040 核心板 UINIO-MCU-RP2040 是一款基于树莓派 RP2040 微控制器的核心板，该主控芯片采用 ARM Cortex-M0+ 双核心，运行频率高达 133MHz，片上内置有 264KB 容量的 SRAM 内存，并且能够外接高达 16MB 容量的片外 Flash 闪存（通过专用的 QSPI 总线进行连接），并且还集成有 DMA 控制器，以及"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-09-03T17:15:28.815Z"><meta property="article:modified_time" content="2024-09-03T17:15:28.815Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="Electronics, Embedded, Web."><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/projects/index.html"},"headline":"UINIO 系列开源硬件概览","image":["http://www.uinio.com/projects/UINIO-MCU-RP2040/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-RP2040/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-MCU-HC32F460KETA/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-HC32F460KETA/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-MCU-HC32F460PETB/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-HC32F460PETB/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-MCU-STM32L051K8U6/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-STM32L051K8U6/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-MCU-STM32F103C8T6/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-STM32F103C8T6/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-MCU-STM32F401CCU6/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-STM32F401CCU6/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-MCU-GD32F350RBT6/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-GD32F350RBT6/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-MCU-ESP32S3/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-ESP32S3/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-MCU-ESP32C3/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-MCU-ESP32C3/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-USB-Serial/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-USB-Serial/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-USB-UART/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-USB-UART/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-Power-LDO/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-Power-LDO/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-Storage/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-Storage/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-Signal-Translator/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-Signal-Translator/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-Monitor/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-Monitor/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-Logic-24MHz/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-Logic-24MHz/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-Keyboard/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-Keyboard/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-DAP-Link/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-DAP-Link/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-Cubic-Prism/PCB-3D-1.png","http://www.uinio.com/projects/UINIO-Cubic-Prism/PCB-3D-2.png","http://www.uinio.com/projects/UINIO-Cubic-Prism/Sheel-1.png","http://www.uinio.com/projects/UINIO-Cubic-Prism/Sheel-2.png","http://www.uinio.com/projects/UINIO-Cubic-Prism/Sheel-3.png","http://www.uinio.com/projects/UINIO-Peg-Board/PCB-3D-1.png"],"datePublished":"2024-09-03T17:15:28.815Z","dateModified":"2024-09-03T17:15:28.815Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO.com"}}},"description":"UINIO-MCU-RP2040 核心板\r UINIO-MCU-RP2040\r 是一款基于树莓派 RP2040 微控制器的核心板，该主控芯片采用 ARM\r Cortex-M0+ 双核心，运行频率高达 133MHz，片上内置有\r 264KB 容量的 SRAM 内存，并且能够外接高达\r 16MB 容量的片外 Flash 闪存（通过专用的\r QSPI 总线进行连接），并且还集成有 DMA 控制器，以及"}</script><link rel="canonical" href="http://www.uinio.com/projects/index.html"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO.com</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item is-active" href="/projects/index.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><h1 class="title is-3 is-size-4-mobile">UINIO 系列开源硬件概览</h1><div class="content"><h1 id="uinio-mcu-rp2040-核心板">UINIO-MCU-RP2040 核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-RP2040"><strong>UINIO-MCU-RP2040</strong></a>
+是一款基于树莓派 RP2040 微控制器的核心板，该主控芯片采用 <strong>ARM
+Cortex-M0+</strong> 双核心，运行频率高达 <code>133MHz</code>，片上内置有
+<code>264KB</code> 容量的 <strong>SRAM</strong> 内存，并且能够外接高达
+<code>16MB</code> 容量的片外 <strong>Flash</strong> 闪存（通过专用的
+QSPI 总线进行连接），并且还集成有 DMA 控制器，以及 30 个
+<strong>GPIO</strong> 引脚（其中 4
+个可用作模拟输入）。除此之外，片上还拥有 2 个 <strong>UART</strong>
+控制器、2 个 <strong>SPI</strong> 控制器、2 个 <strong>I²C</strong>
+控制器，以及 16 个 <strong>PWM</strong> 通道。同时还支持 <strong>USB
+1.1</strong> 设备和主机模式，以及 USB
+大容量存储启动模式和拖放式编程。</p>
+<p><img src="/projects/UINIO-MCU-RP2040/PCB-3D-1.png" width="500"></p>
+<p><img src="/projects/UINIO-MCU-RP2040/PCB-3D-2.png" width="500"></p>
+<h2 id="设计概要">设计概要</h2>
+<ol type="1">
+<li>Flash 存储芯片采用了更加小巧的 <code>WSON8</code> 封装；</li>
+<li>添加 <code>SOD123</code>
+封装的<strong>肖特基势垒二极管</strong>，用于防止正负级错误的反接；</li>
+<li>预留有 <code>2mm</code> 的固定螺丝孔，便于安装至 3D
+打印外壳，或者搭建成套的产品原型；</li>
+<li>添加了用于全局异步复位的 <strong>RESET</strong>
+按钮（低电平有效），便于在上电状态进行复位操作以及更新固件；</li>
+<li>引出了官方 Pico 开发板没有的 <code>GPIO23</code> 和
+<code>GPIO24</code> 两个引脚资源，并且在 <code>GPIO25</code>
+引脚采用了与 Pico 相同的测试用 LED 发光二极管；</li>
+<li>由于 ADC 引脚内部集成有连接至
+<code>IOVDD</code>（<code>3.3V</code>）的反向二极管，所以采用了 FET
+场效应管 <strong>DMG1012T</strong> 防止在 RP2040
+没有上电的时候，这些引脚上施加的电压通过 <code>ADC3</code> 引脚泄露到
+<code>3.3V</code> 电源网络；</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>： 核心板引脚顺序并不完全兼容官方的
+<strong>Raspberry Pi Pico</strong> 开发板。</p>
+</blockquote>
+<h2 id="固件更新">固件更新</h2>
+<p><strong>UINIO-MCU-RP2040</strong>
+的固件更新操作流程如下面步骤所示：</p>
+<ol type="1">
+<li>按住 <strong>BOOT</strong> 按键不放，将核心板的 Type-C
+接口连接到电脑的；</li>
+<li>等待 1 秒钟之后，松开 <strong>BOOT</strong> 按键，此时计算机会自动将
+<strong>UINIO-MCU-RP2040</strong> 识别为可移动磁盘；</li>
+<li>将等待下载的固件拖动或者复制到该可移动磁盘当中，此时
+<strong>RP2040</strong> 主控会自动重启并且加载固件；</li>
+</ol>
+<h2 id="参考技术文档">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-MCU-RP2040 开源项目提供了如下一系列技术参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-MCU-RP2040.html">《交互式 BOM
+物料清单与 PCB 版图在线预览》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-MCU-RP2040/">《基于树莓派
+UINIO-MCU-RP2040 核心板制作逻辑分析仪》</a></li>
+</ul>
+<h1 id="uinio-mcu-hc32f460keta-核心板">UINIO-MCU-HC32F460KETA
+核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-HC32F460KETA"><strong>UINIO-MCU-HC32F460KETA</strong></a>
+是一款基于小华半导体 <strong>HC32F460KETA-LQFP64</strong>
+型微控制器的核心板，该款微控制器的最大特点是支持
+<code>1.8V ~ 3.6V</code> 的<strong>宽电压范围</strong>，和
+<code>-40℃ ~ 105℃</code> 的<strong>宽温度范围</strong>。基于 <strong>ARM
+Cortex-M4</strong> 内核架构，最高工作频率可以达到
+<code>200MHz</code>，内置有 <strong>DSP</strong> 数字信号处理器和
+<strong>FPU</strong> 浮点运算单元。除此之外，还集成有 <code>512KB</code>
+的 Flash 存储器，以及 <code>192KB</code> 的 SRAM 存储器。</p>
+<p><img src="/projects/UINIO-MCU-HC32F460KETA/PCB-3D-1.png" width="450"></p>
+<p><img src="/projects/UINIO-MCU-HC32F460KETA/PCB-3D-2.png" width="450"></p>
+<h2 id="设计概要-1">设计概要</h2>
+<ul>
+<li>外部晶振电路，全部使用了打孔包地处理；</li>
+<li>扩展了两路串联有自恢复保险丝的 <code>5V</code>
+电源接口，整体采用覆铜处理，以提升接口的载流能力；</li>
+<li>模拟电源引脚 <code>AVSS</code> 和 <code>AVCC</code> 都串联有对
+<code>100Mhz</code> 高频杂散信号存在 <code>1KΩ</code> 阻抗的磁珠；</li>
+<li>对调试下载接口 SWD
+进行了前置处理，并且匹配了通信线序，可以方便快速的与 <a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-DAPLink"><strong>UINIO-DAPLink</strong></a>
+进行杜邦线连接；</li>
+<li>引出了全部的 <strong>52</strong> 个 GPIO 端口，可以自由的使用
+<strong>8</strong> 种常见的外设通信接口：</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 5%">
+<col style="width: 79%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">接口名称</th>
+<th style="text-align: left;">数量</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>GPIO</strong></td>
+<td style="text-align: left;">52 个</td>
+<td style="text-align: left;"><code>PAx</code>、<code>PBx</code>、<code>PCx</code>、<code>PDx</code>、<code>PHx</code>
+一共五组。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>I2C</strong></td>
+<td style="text-align: left;">3 组</td>
+<td style="text-align: left;">支持 SMBus 协议。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>USART</strong></td>
+<td style="text-align: left;">4 组</td>
+<td style="text-align: left;">支持 ISO7816-3 协议。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SPI</strong></td>
+<td style="text-align: left;">4 组</td>
+<td style="text-align: left;">支持 4 线式 SPI 模式和 3
+线式时钟同步模式，支持全双工和只传送两种通信方式。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>QSPI</strong></td>
+<td style="text-align: left;">1 组</td>
+<td style="text-align: left;">支持 <code>200Mbps</code>
+高速访问的存储器控制模块。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>I2S</strong></td>
+<td style="text-align: left;">4 组</td>
+<td style="text-align: left;">内置音频 PLL 支持音频级采样精度。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SDIO</strong></td>
+<td style="text-align: left;">2 组</td>
+<td style="text-align: left;">支持 SD/MMC/eMMC 格式。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CAN</strong></td>
+<td style="text-align: left;">1 组</td>
+<td style="text-align: left;">支持 ISO11898-1 标准协议。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>USB 2.0 FS</strong></td>
+<td style="text-align: left;">1 组</td>
+<td style="text-align: left;">内置 PHY，支持 Device/Host 模式。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考技术文档-1">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+<strong>UINIO-MCU-HC32F460KETA</strong>
+开源项目提供了如下一系列参考技术资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/UINIO-MCU-HC32F460KETA/UINIO-MCU-HC32F460KETA-Schematic.pdf">《UINIO-MCU-HC32F460KETA
+核心板原理图》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/UINIO-MCU-HC32F460KETA/UINIO-MCU-HC32F460KETA-BOM.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ul>
+<h1 id="uinio-mcu-hc32f460petb-核心板">UINIO-MCU-HC32F460PETB
+核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-HC32F460PETB"><strong>UINIO-MCU-HC32F460PETB</strong></a>
+是一款基于小华半导体 <strong>HC32F460PETB-LQFP64</strong>
+型微控制器的核心板，该款微控制器的最大特点是支持
+<code>1.8V ~ 3.6V</code> 的<strong>宽电压范围</strong>，和
+<code>-40℃ ~ 105℃</code> 的<strong>宽温度范围</strong>。基于 <strong>ARM
+Cortex-M4</strong> 内核架构，最高工作频率可以达到
+<code>200MHz</code>，内置有 <strong>DSP</strong> 数字信号处理器和
+<strong>FPU</strong> 浮点运算单元。除此之外，还集成有 <code>512KB</code>
+的 Flash 存储器，以及 <code>192KB</code> 的 SRAM 存储器。</p>
+<p><img src="/projects/UINIO-MCU-HC32F460PETB/PCB-3D-1.png" width="550"></p>
+<p><img src="/projects/UINIO-MCU-HC32F460PETB/PCB-3D-2.png" width="550"></p>
+<h2 id="设计概要-2">设计概要</h2>
+<ul>
+<li>外部晶振电路，全部使用了打孔包地处理；</li>
+<li>扩展了两路串联有自恢复保险丝的 <code>5V</code>
+电源接口，整体采用覆铜处理，以提升接口的载流能力；</li>
+<li>模拟电源引脚 <code>AVSS</code> 和 <code>AVCC</code> 都串联有对
+<code>100Mhz</code> 高频杂散信号存在 <code>1KΩ</code> 阻抗的磁珠；</li>
+<li>对调试下载接口 SWD
+进行了前置处理，并且匹配了通信线序，可以方便快速的与 <a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-DAPLink"><strong>UINIO-DAPLink</strong></a>
+进行杜邦线连接；</li>
+<li>引出了全部的 <strong>83</strong> 个 GPIO 端口，可以自由的使用
+<strong>8</strong> 种常见的外设通信接口：</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 5%">
+<col style="width: 79%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">接口名称</th>
+<th style="text-align: left;">数量</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>GPIO</strong></td>
+<td style="text-align: left;">83 个</td>
+<td style="text-align: left;"><code>PAx</code>、<code>PBx</code>、<code>PCx</code>、<code>PDx</code>、<code>PEx</code>、<code>PHx</code>
+一共六组。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>I2C</strong></td>
+<td style="text-align: left;">3 组</td>
+<td style="text-align: left;">支持 SMBus 协议。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>USART</strong></td>
+<td style="text-align: left;">4 组</td>
+<td style="text-align: left;">支持 ISO7816-3 协议。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SPI</strong></td>
+<td style="text-align: left;">4 组</td>
+<td style="text-align: left;">支持 4 线式 SPI 模式和 3
+线式时钟同步模式，支持全双工和只传送两种通信方式。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>QSPI</strong></td>
+<td style="text-align: left;">1 组</td>
+<td style="text-align: left;">支持 <code>200Mbps</code>
+高速访问的存储器控制模块。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>I2S</strong></td>
+<td style="text-align: left;">4 组</td>
+<td style="text-align: left;">内置音频 PLL 支持音频级采样精度。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SDIO</strong></td>
+<td style="text-align: left;">2 组</td>
+<td style="text-align: left;">支持 SD/MMC/eMMC 格式。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CAN</strong></td>
+<td style="text-align: left;">1 组</td>
+<td style="text-align: left;">支持 ISO11898-1 标准协议。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>USB 2.0 FS</strong></td>
+<td style="text-align: left;">1 组</td>
+<td style="text-align: left;">内置 PHY，支持 Device/Host 模式。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考技术文档-2">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+<strong>UINIO-MCU-HC32F460PETB</strong>
+开源项目提供了如下一系列参考技术资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/UINIO-MCU-HC32F460PETB/UINIO-MCU-HC32F460PETB-Schematic.pdf">《UINIO-MCU-HC32F460PETB
+核心板原理图》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/UINIO-MCU-HC32F460PETB/UINIO-MCU-HC32F460PETB-BOM.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ul>
+<h1 id="uinio-mcu-stm32l051k8u6-核心板">UINIO-MCU-STM32L051K8U6
+核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-STM32L051K8U6"><strong>UINIO-MCU-STM32L051K8U6</strong></a>
+是一款基于<strong>意法半导体</strong> <a target="_blank" rel="noopener" href="https://www.st.com/en/microcontrollers-microprocessors/stm32l051k8.html">STM32L051K8</a>
+系列低功耗微控制器的核心板电路设计，该款主控芯片采用
+<strong>LQFP32</strong> 封装，基于 <strong>ARM Cortex-M0+</strong>
+架构，片上内置有 <code>64 Kbytes</code> 的 <strong>Flash</strong>
+存储器，以及 <code>8 Kbytes</code> 的 <strong>RAM</strong> 存储器。</p>
+<p><img src="/projects/UINIO-MCU-STM32L051K8U6/PCB-3D-1.png" width="500"></p>
+<p><img src="/projects/UINIO-MCU-STM32L051K8U6/PCB-3D-2.png" width="500"></p>
+<h2 id="设计概要-3">设计概要</h2>
+<ol type="1">
+<li>采用 <code>16 Pin</code> 规格的 <strong>USB Type-C</strong>
+接口；</li>
+<li>已经将 <strong>STM32L051K8</strong> 微控制器的 <strong>28</strong>
+个 <strong>GPIO</strong> 引脚资源悉数引出；</li>
+<li>预留有 <strong>SOIC</strong> 封装的 <strong>W25Q</strong> 型 Flash
+存储器焊接位置（可选）；</li>
+<li>预留有 <strong>3215</strong> 封装 <code>32.768KHz</code>
+频率贴片晶振的焊接位置（可选）；</li>
+<li>单独提供有 4 线制 <strong>SWD</strong> 下载接口，便于快速与
+<strong>DAP-Link</strong> 连接调试；</li>
+<li>添加了 <code>Imax</code> 为 <code>750mA</code>
+的自恢复保险丝，防止后级操作短路损毁芯片；</li>
+</ol>
+<h2 id="参考技术文档-3">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-MCU-STM32L051K8U6 开源项目提供了如下一系列技术参考资料：</p>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Embedded/STM32F103/">《意法半导体
+STM32F103 标准库典型实例》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Embedded/STM32F401/">《基于 HAL 与 LL 的
+STM32F401 开发实践》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/">《ARM 调试工具
+UINIO-DAP-Link 应用详解》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-MCU-STM32L051K8U6.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<h1 id="uinio-mcu-stm32f103c8t6-核心板">UINIO-MCU-STM32F103C8T6
+核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-STM32F103C8T6"><strong>UINIO-MCU-STM32F103C8T6</strong></a>
+是一款基于 <a target="_blank" rel="noopener" href="https://www.st.com/zh/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html"><strong>意法半导体</strong></a>
+<strong>LQFP48</strong> 封装的 <strong>STM3232F103C8T6</strong>
+微控制器的核心板电路设计，该微控制器基于 <strong>ARM Cortex-M3</strong>
+内核架构，主频可以达到 <code>72MHz</code>，片上载有 <code>64KB</code>
+容量的 Flash 存储器和 <code>20Kbytes</code> 的 SRAM 存储器，并且拥有 3
+组 <code>USART</code>，以及 CAN 接口、<code>USB2.0</code> 全速接口、12
+位分辨率
+<code>ADC/DAC</code>，整体上属于外设资源比较完善的高性价比主控芯片产品。</p>
+<p><img src="/projects/UINIO-MCU-STM32F103C8T6/PCB-3D-1.png" width="600"></p>
+<p><img src="/projects/UINIO-MCU-STM32F103C8T6/PCB-3D-2.png" width="600"></p>
+<h2 id="设计概要-4">设计概要</h2>
+<ol type="1">
+<li>引出了意法半导体 <strong>STM32F103C8T6</strong> 型微控制器上面的全部
+GPIO 引脚资源；</li>
+<li>单独提供有四线制的 <strong>SWD</strong> 下载接口，便于快速与 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link">UINIO-DAP-Link</a>
+建立连接；</li>
+<li>分别使用了 <code>8MHz</code> 与 <code>32.768KHz</code>
+两枚贴片晶振作为系统外部时钟与实时时钟；</li>
+<li>板载 <strong>BOOT0</strong> 和 <strong>BOOT1</strong>
+两枚启动配置按钮，以及一枚 <strong>NRST</strong> 复位按钮；</li>
+<li>模拟电源引脚 <code>VDDA</code> 使用了对 <code>100Mhz</code>
+高频杂散信号存在 <code>1KΩ</code>
+阻抗的<strong>磁珠</strong>进行单点接地；</li>
+</ol>
+<h2 id="启动配置">启动配置</h2>
+<p><strong>UINIO-MCU-STM32F103C8T6</strong> 通过板载的
+<code>BOOT0</code> 和 <code>BOOT1</code>
+两枚按钮来配置启动方式，默认情况下是从片上的 Flash
+闪存进行启动，具体的配置信息可以参见下表：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">BOOT0</th>
+<th style="text-align: center;">BOOT1</th>
+<th style="text-align: left;">启动方式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><code>X</code></td>
+<td style="text-align: left;">片上 Flash 闪存</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: left;">系统存储器/ISP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: left;">片上 SRAM 静态随机存储器</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考技术文档-4">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-MCU-STM32F103C8T6 开源项目提供了如下一系列技术参考资料：</p>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Embedded/STM32F103/">《意法半导体
+STM32F103C8T6 标准库典型实例》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/">《ARM 调试工具
+UINIO-DAP-Link 应用详解》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-MCU-STM32F103C8T6.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<h1 id="uinio-mcu-stm32f401ccu6-核心板">UINIO-MCU-STM32F401CCU6
+核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-STM32F401CCU6"><strong>UINIO-MCU-STM32F401CCU6</strong></a>
+是一款基于 <a target="_blank" rel="noopener" href="https://www.st.com/zh/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html"><strong>意法半导体</strong></a>
+<strong>UFQFPN48</strong> 封装的 <strong>STM32F401CCU6</strong>
+微控制器的核心板电路设计，该微控制器基于 <strong>ARM Cortex-M4</strong>
+内核架构，主频可以达到 <code>72MHz</code>，片上载有 <code>256KB</code>
+容量的 Flash 存储器和 <code>64Kbytes</code> 的 SRAM 存储器，并且拥有 3
+组 <strong>USART</strong> 和 3 组 <strong>I²C</strong> 接口，以及 4 组
+<strong>SPI</strong> 接口与 <code>USB2.0</code> 全速控制器、12
+位分辨率的 <code>ADC/DAC</code>
+转换器，整体上属于高性价比、高性能的主控芯片产品。</p>
+<p><img src="/projects/UINIO-MCU-STM32F401CCU6/PCB-3D-1.png" width="600"></p>
+<p><img src="/projects/UINIO-MCU-STM32F401CCU6/PCB-3D-2.png" width="600"></p>
+<blockquote>
+<p><strong>注意</strong>：相比较于采用 <strong>ARM Cortex-M3</strong>
+内核架构的 <strong>STM32F103C8T6</strong> 等产品，使用 <strong>ARM
+Cortex-M4</strong> 内核的 <strong>STM32F401CCU6</strong>
+携带有浮点计算单元（<strong>FPU</strong>，Float Point
+Unit），在处理数学计算时能够大幅度提升运算性能。</p>
+</blockquote>
+<h2 id="设计概要-5">设计概要</h2>
+<ol type="1">
+<li>引出了意法半导体 <strong>STM32F401CCU6</strong> 型微控制器上面的全部
+GPIO 引脚资源；</li>
+<li>单独提供有四线制的 <strong>SWD</strong> 下载接口，便于快速与 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link">UINIO-DAP-Link</a>
+建立连接；</li>
+<li>分别使用了 <code>8MHz</code> 与 <code>32.768KHz</code>
+两枚贴片晶振作为系统外部时钟与实时时钟；</li>
+<li>板载 <strong>BOOT0</strong> 和 <strong>BOOT1</strong>
+两枚启动配置按钮，以及一枚 <strong>NRST</strong> 复位按钮；</li>
+<li>模拟电源引脚 <code>VDDA</code> 使用了对 <code>100Mhz</code>
+高频杂散信号存在 <code>1KΩ</code>
+阻抗的<strong>磁珠</strong>进行单点接地；</li>
+</ol>
+<h2 id="启动配置-1">启动配置</h2>
+<p><strong>UINIO-MCU-STM32F401CCU6</strong> 通过板载的
+<code>BOOT0</code> 和 <code>BOOT1</code>
+两枚按钮来配置启动方式，默认情况下是从片上的 Flash
+闪存进行启动，具体的配置信息可以参见下表：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">BOOT0</th>
+<th style="text-align: center;">BOOT1</th>
+<th style="text-align: left;">启动方式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><code>X</code></td>
+<td style="text-align: left;">片上 Flash 闪存</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: left;">系统存储器/ISP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: left;">片上 SRAM 静态随机存储器</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考技术文档-5">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-MCU-STM32F401CCU6 开源项目提供了如下一系列技术参考资料：</p>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Embedded/STM32F401/">《基于 HAL 与 LL 的
+UINIO-MCU-STM32F401 开发实践》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/">《ARM 调试工具
+UINIO-DAP-Link 应用详解》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-MCU-STM32F401CCU6.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<h1 id="uinio-mcu-gd32f350rbt6-核心板">UINIO-MCU-GD32F350RBT6
+核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-GD32F350RBT6"><strong>UINIO-MCU-GD32F350RBT6</strong></a>
+是一款基于 <a target="_blank" rel="noopener" href="https://www.gigadevice.com.cn/"><strong>兆易创新</strong></a> 国产
+<strong>LQFP64</strong> 封装的 <strong>GD32F350RBT6</strong>
+微控制器的核心板电路设计，该微控制器基于 <strong>ARM Cortex-M4</strong>
+内核架构，主频高达 <code>108MHz</code>，片上载有 <code>128K</code>
+容量的 Flash 存储器，以及 <code>16K</code> 的 SRAM 存储器，并且各拥有 2
+组 <code>USART</code>、<code>I2C</code>、<code>SPI</code>，以及 1 组
+<code>I2S</code>、<code>12 位 ADC</code>、<code>12 位 DAC</code>，同时支持
+<strong>USB 2.0 FS OTG</strong> 协议，总体上属于 GPIO
+引脚数量较多，但是外设资源有所取舍的主控芯片产品。</p>
+<p><img src="/projects/UINIO-MCU-GD32F350RBT6/PCB-3D-1.png" width="650"></p>
+<p><img src="/projects/UINIO-MCU-GD32F350RBT6/PCB-3D-2.png" width="650"></p>
+<blockquote>
+<p><strong>注意</strong>：相比较于采用 <strong>ARM Cortex-M3</strong>
+内核架构的 <strong>GD32F103C8T6</strong> 等产品，使用 <strong>ARM
+Cortex-M4</strong> 内核的 <strong>GD32F350RBT6</strong>
+携带有浮点计算单元（<strong>FPU</strong>，Float Point
+Unit），在处理数学计算时能够大幅度提升运算性能。</p>
+</blockquote>
+<h2 id="启动配置-2">启动配置</h2>
+<p><strong>UINIO-MCU-STM32F401CCU6</strong> 通过板载 <code>BOOT0</code>
+按钮和<strong>用户选项字节</strong> <code>BOOT1_n</code>
+位来配置启动方式，默认情况下是从片上的 Flash
+闪存进行启动，具体的配置信息可以参见下表：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">BOOT0</th>
+<th style="text-align: center;">BOOT1_n</th>
+<th style="text-align: left;">启动方式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: center;"><code>X</code></td>
+<td style="text-align: left;">片上 Flash 闪存</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: left;">系统存储器/ISP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: left;">片上 SRAM 静态随机存储器</td>
+</tr>
+</tbody>
+</table>
+<h2 id="设计概要-6">设计概要</h2>
+<ol type="1">
+<li>引出了兆易创新 <strong>GD32F350RBT6</strong> 型微控制器上面的全部
+GPIO 引脚资源；</li>
+<li>单独提供有四线制的 <strong>SWD</strong> 下载接口，便于快速与 <a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link">UINIO-DAP-Link</a>
+建立连接；</li>
+<li>分别使用了 <code>8MHz</code> 与 <code>32.768KHz</code>
+两枚贴片晶振作为系统外部时钟与实时时钟；</li>
+<li>板载一枚 <strong>BOOT0</strong> 启动配置按钮，以及一枚
+<strong>NRST</strong> 复位按钮；</li>
+<li>模拟电源引脚 <code>VDDA</code> 使用了对 <code>100Mhz</code>
+高频杂散信号存在 <code>1KΩ</code>
+阻抗的<strong>磁珠</strong>进行单点接地；</li>
+</ol>
+<h2 id="参考技术文档-6">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-MCU-GD32F350RBT6 开源项目提供了如下一系列技术参考资料：</p>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-MCU-GD32/">《兆易创新
+UINIO-MCU-GD32 标准库开发指南》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/">《ARM 调试工具
+UINIO-DAP-Link 应用详解》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-MCU-GD32F350RBT6.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<h1 id="uinio-mcu-esp32s3-核心板">UINIO-MCU-ESP32S3 核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-ESP32S3"><strong>UINIO-MCU-ESP32S3</strong></a>
+是一款采用 <a target="_blank" rel="noopener" href="https://www.espressif.com.cn">上海乐鑫科技</a>
+<strong>ESP32-S3</strong> 微控制器的核心板电路设计，该微控制器基于
+<strong>Xtensa® dual-core 32-bit LX7</strong> 架构，拥有 45 个 GPIO
+接口，主频高达 <code>240MHz</code>，同时具备 <strong>2.4GHz
+Wi-Fi</strong> 与 <strong>Bluetooth5</strong>
+两种物联网接入能力。片上载有 <code>384KB</code> 容量的
+<strong>ROM</strong>，以及 <code>512KB</code> 容量的
+<strong>SRAM</strong> 和 <code>16KB</code> 容量的
+<strong>RTCSRAM</strong>。</p>
+<p><img src="/projects/UINIO-MCU-ESP32S3/PCB-3D-1.png" width="700"></p>
+<p><img src="/projects/UINIO-MCU-ESP32S3/PCB-3D-2.png" width="700"></p>
+<h2 id="设计概要-7">设计概要</h2>
+<ul>
+<li>完整兼容官方的 <a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/">Arduino-ESP32</a>
+板级支持包；</li>
+<li>采用 LDO 低压差线性稳压芯片 <code>ME6211C33M5G</code> 提供
+<code>3.3V</code> 电源；</li>
+<li>预留 <strong>TQFN</strong> 封装的 USB 转 UART 串口芯片
+<strong>CH343P</strong> 位置，可以按需进行贴装，不贴装时可以采用右上角的
+4 线杜邦针外接串口下载模块；</li>
+<li>预留有 2.4G 微带天线 <strong>π
+型阻抗匹配电路</strong>位置，如果对于信号的收发功率没有严格要求，则可以将位号为
+<code>L1</code> 的串联电感替换为 <code>0R</code> 电阻；</li>
+<li>预留有 5 个 <code>1mm</code>
+沉头螺丝开孔，可以用于固定主板和外壳；</li>
+</ul>
+<h2 id="注意事项">注意事项</h2>
+<ol type="1">
+<li>上电之前不能下拉 <code>IO9/BOOT</code> 的电平状态，否则
+<strong>ESP32-S3</strong> 将会进入<strong>下载模式</strong>；</li>
+<li><code>IO8</code>
+引脚默认进行了上拉，因为如果其为低电平状态，则不能使用串口进行固件下载；</li>
+<li><code>GPIO11</code> 默认为 SPI 接口 Flash 存储器的 <code>VDD</code>
+引脚，需要配置之后才能作为 GPIO 使用；</li>
+<li>外置的 <code>W25Q128JVSSIQ</code> 型 Flash 存储器，其
+<code>VDD</code> 已经连接至 <code>3.3V</code>
+电源，使用时无需再行配置，Flash 采用普通的两线制 SPI 总线进行通信；</li>
+<li><code>IO12</code>、<code>IO13</code> 在 <strong>QIO</strong>
+模式下被复用为 SPI 信号线 <code>SPIHD</code> 和
+<code>SPIWP</code>，本开发板采用两线制 SPI 的 <strong>DIO</strong>
+模式，使用时需要注意将 Flash 配置为 <strong>DIO</strong> 模式；</li>
+</ol>
+<h2 id="参考技术文档-7">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-MCU-ESP32S3 开源项目提供有如下一系列技术参考资料：</p>
+<ol type="1">
+<li><a href="http://www.uinio.com/Project/UINIO-MCU-ESP32/">《UINIO-MCU-ESP32
+核心板电路设计》</a></li>
+<li><a href="http://www.uinio.com/Project/Arduino-ESP32/">《基于
+UINIO-MCU-ESP32 的 Arduino 进阶教程》</a></li>
+<li><a href="http://www.uinio.com/Project/UINIO-Monitor/">《运用 U8G2 与
+TFT_eSPI 玩转 UINIO-Monitor 显示屏》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-MCU-ESP32S3.html">《交互式 BOM
+物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<h1 id="uinio-mcu-esp32c3-核心板">UINIO-MCU-ESP32C3 核心板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-MCU-ESP32C3"><strong>UINIO-MCU-ESP32C3</strong></a>
+是一款采用 <a target="_blank" rel="noopener" href="https://www.espressif.com.cn">上海乐鑫科技</a>
+<strong>ESP32-C3</strong> 微控制器的核心板电路设计，该微控制器基于开源的
+<strong>RISC-V</strong> 指令集，主频高达
+<code>160MHz</code>，并且同时具备有 <strong>2.4GHz Wi-Fi</strong> 与
+<strong>Bluetooth5</strong> 两种无线接入能力。片上载有
+<code>384KB</code> 容量的 <strong>ROM</strong>，以及 <code>400KB</code>
+容量的 <strong>SRAM</strong> 和 <code>8KB</code> 容量的
+<strong>RTCSRAM</strong>。</p>
+<p><img src="/projects/UINIO-MCU-ESP32C3/PCB-3D-1.png" width="500"></p>
+<p><img src="/projects/UINIO-MCU-ESP32C3/PCB-3D-2.png" width="500"></p>
+<h2 id="设计概要-8">设计概要</h2>
+<ul>
+<li>完整兼容官方的 <a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/">Arduino-ESP32</a>
+板级支持包；</li>
+<li>采用 LDO 低压差线性稳压芯片 <code>ME6211C33M5G</code> 提供
+<code>3.3V</code> 电源；</li>
+<li>预留 <strong>TQFN</strong> 封装的 USB 转 UART 串口芯片
+<strong>CH343P</strong> 位置，可以按需进行贴装，不贴装时可以采用右上角的
+4 线杜邦针外接串口下载模块；</li>
+<li>预留有 2.4G 微带天线 <strong>π
+型阻抗匹配电路</strong>位置，如果对于信号的收发功率没有严格要求，则可以将位号为
+<code>L1</code> 的串联电感替换为 <code>0R</code> 电阻；</li>
+<li>预留有 4 个 <code>1mm</code> 沉头螺丝开孔，可以用于固定核心板；</li>
+</ul>
+<h2 id="注意事项-1">注意事项</h2>
+<ol type="1">
+<li>上电之前不能下拉 <code>IO9/BOOT</code> 的电平状态，否则
+<strong>ESP32-C3</strong> 将会进入<strong>下载模式</strong>；</li>
+<li><code>IO8</code>
+引脚默认进行了上拉，因为如果其为低电平状态，则不能使用串口进行固件下载；</li>
+<li><code>GPIO11</code> 默认为 SPI 接口 Flash 存储器的 <code>VDD</code>
+引脚，需要配置之后才能作为 GPIO 使用；</li>
+<li>外置的 <code>W25Q128JVSSIQ</code> 型 Flash 存储器，其
+<code>VDD</code> 已经连接至 <code>3.3V</code>
+电源，使用时无需再行配置，Flash 采用普通的两线制 SPI 总线进行通信；</li>
+<li><code>IO12</code>、<code>IO13</code> 在 <strong>QIO</strong>
+模式下被复用为 SPI 信号线 <code>SPIHD</code> 和
+<code>SPIWP</code>，本开发板采用两线制 SPI 的 <strong>DIO</strong>
+模式，使用时需要注意将 Flash 配置为 <strong>DIO</strong> 模式；</li>
+</ol>
+<h2 id="参考技术文档-8">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-MCU-ESP32C3 开源项目提供有如下一系列技术参考资料：</p>
+<ol type="1">
+<li><a href="http://www.uinio.com/Project/UINIO-MCU-ESP32/">《UINIO-MCU-ESP32
+核心板电路设计》</a></li>
+<li><a href="http://www.uinio.com/Project/Arduino-ESP32/">《基于
+UINIO-MCU-ESP32 的 Arduino 进阶教程》</a></li>
+<li><a href="http://www.uinio.com/Project/UINIO-Monitor/">《运用 U8G2 与
+TFT_eSPI 玩转 UINIO-Monitor 显示屏》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-MCU-ESP32C3.html">《交互式 BOM
+物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<h1 id="uinio-usb-serial-串行协议转换器">UINIO-USB-Serial
+串行协议转换器</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-USB-Serial"><strong>UINIO-USB-Serial</strong></a>
+是一款基于<strong>沁恒</strong>高速 USB 2.0 转接芯片 <a target="_blank" rel="noopener" href="https://www.wch.cn/products/CH347.html"><strong>CH347T</strong></a>
+的 USB 串行协议转换工具，支持 USB 接口转
+<code>GPIO</code>、<code>UART</code>、<code>I²C</code>、<code>SPI</code>、<code>JTAG</code>,
+可以用于调试 3.3V 电平的微控制器与外设的通信，也可以配合使用 <a target="_blank" rel="noopener" href="https://github.com/uinika/UINIO-Signal-Translator">UINIO-Signal-Translator</a>
+完成 <code>3.3V</code> 到 <code>1.8V</code> 的高速信号转换，从而实现对
+FPGA 芯片的调试与下载。</p>
+<p><img src="/projects/UINIO-USB-Serial/PCB-3D-1.png" width="400"></p>
+<p><img src="/projects/UINIO-USB-Serial/PCB-3D-2.png" width="390"></p>
+<h2 id="设计概要-9">设计概要</h2>
+<ol type="1">
+<li>主控芯片 <strong>CH347T</strong> 采用了易于购买的
+<code>TSSOP20</code> 封装；</li>
+<li>工作模式采用 <code>P1</code> 与 <code>P2</code>
+排针的<strong>跳线帽</strong>进行配置；</li>
+<li>添加有 5 个 <code>1mm</code>
+直径固定螺丝孔，方便与外壳进行固定组装；</li>
+<li>分类引出了 UART1 和 UART2、SPI、I²C、JTAG
+五条通信总线的排针，配置好工作模式之后就可以快速接线使用；</li>
+<li>配合 <a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Signal-Translator">UINIO-Signal-Translator</a>
+可以将电平信号转换为 FPGA 芯片常用的 <code>1.8V</code>；</li>
+</ol>
+<h2 id="工作模式简介">工作模式简介</h2>
+<p><strong>UINIO-USB-Serial</strong> 可以支持下面的四种工作模式：</p>
+<ol type="1">
+<li><strong>USB ➞ UART</strong>：支持两路 UART
+串行接口，每一路的波特率最高可以达到 <code>9Mbps</code>。</li>
+<li><strong>USB ➞ I²C</strong>：处于 I²C 主设备模式，支持 4
+种传输速度。</li>
+<li><strong>USB ➞ SPI</strong>：处于 SPI 主设备模式，最高频率可以达到
+<code>36MHz</code>，并且支持 2 路片选信号线，可以分时操作两个 SPI
+从设备。</li>
+<li><strong>USB ➞ JTAG</strong>：支持标准四线 JTAG
+协议，最高频率可以达到 <code>18Mbit/s</code>。</li>
+</ol>
+<h2 id="工作模式配置">工作模式配置</h2>
+<p>这些模式分别由 <strong>CH347T</strong> 的 <code>DTR1</code> 和
+<code>RTS1</code> 引脚的电平状态进行控制：</p>
+<table>
+<thead>
+<tr class="header">
+<th>排针 P1</th>
+<th>排针 P2</th>
+<th>工作模式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>低电平</code></td>
+<td><code>低电平</code></td>
+<td>UART1 + JTAG</td>
+</tr>
+<tr class="even">
+<td><code>高电平</code></td>
+<td><code>高电平</code></td>
+<td>UART1 + UART0</td>
+</tr>
+<tr class="odd">
+<td><code>高电平</code></td>
+<td><code>低电平</code></td>
+<td>UART1 + SPI + I2C (HID)</td>
+</tr>
+<tr class="even">
+<td><code>低电平</code></td>
+<td><code>高电平</code></td>
+<td>UART1 + SPI + I2C (VCP)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考技术文档-9">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-USB-Serial 开源项目提供了如下一系列技术参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-USB-Serial.html">《交互式 BOM
+物料清单与 PCB 版图在线预览》</a></li>
+</ul>
+<h1 id="uinio-usb-uart-串口调试器">UINIO-USB-UART 串口调试器</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-USB-UART"><strong>UINIO-USB-UART</strong></a>
+是一款分别基于<a target="_blank" rel="noopener" href="https://www.wch.cn/products/CH343.html"><strong>苏州沁恒
+CH343P</strong></a> 和<a target="_blank" rel="noopener" href="https://www.silabs.com/interface/usb-bridges/classic/device.cp2102"><strong>美国芯科
+CP2102</strong></a> 芯片的 <strong>USB</strong> 转 <strong>UART</strong>
+的开源串口调试器电路设计，两款芯片都可以稳定的支持 <code>921600</code>
+波特率通信。</p>
+<p><img src="/projects/UINIO-USB-UART/PCB-3D-1.png" width="350"></p>
+<p><img src="/projects/UINIO-USB-UART/PCB-3D-2.png" width="350"></p>
+<h2 id="设计概要-10">设计概要</h2>
+<ol type="1">
+<li>板载 <code>RXD</code> 和 <code>TXD</code> 的信号读写指示灯；</li>
+<li>引出了包括<strong>串口硬件流控信号线</strong>在内的全部片上资源；</li>
+<li>增加 <strong>1206</strong>
+封装的<strong>自恢复保险丝</strong>，为后级电路提供短接保护；</li>
+<li>使用 <strong>16 Pin</strong> 的 <strong>USB Type-C</strong>
+接口，并且采用了 PCB 拼板设计；</li>
+<li>预留有 <code>1mm</code> 的固定螺丝孔，便于安装至 3D
+打印外壳，或者搭建成套的产品原型；</li>
+<li>通过为 <strong>UINIO-USB-UART-CH343P</strong> 的 <code>VIN</code>
+引脚提供参考电压，可以调整 UART 收发的电平信号幅值。</li>
+</ol>
+<h2 id="参考技术文档-10">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-USB-UART 开源项目提供了如下一系列技术参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-USB-UART.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ul>
+<h1 id="uinio-power-ldo-线性稳压器模组">UINIO-Power-LDO
+线性稳压器模组</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Power-LDO"><strong>UINIO-Power-LDO</strong></a>
+是一款同时支持
+<strong>XC6206</strong>、<strong>ME6211</strong>、<strong>SGM2019</strong>、<strong>AMS1117</strong>
+四种常用线性稳压芯片的测试模组，采用四合一拼板设计，可以拆分单独使用。</p>
+<p><img src="/projects/UINIO-Power-LDO/PCB-3D-1.png" width="600"></p>
+<p><img src="/projects/UINIO-Power-LDO/PCB-3D-2.png" width="600"></p>
+<h2 id="应用介绍">应用介绍</h2>
+<ol type="1">
+<li><strong>XC6206</strong> 模组：选用 <strong>SOT-23-3</strong>
+封装，兼容<strong>特瑞仕</strong> <code>XC6206</code>
+系列低压差线性稳压器。</li>
+<li><strong>ME6211</strong> 模组：选用 <strong>SOT-23-5</strong>
+封装，兼容<strong>微盟</strong> <code>ME6211</code>
+系列低压差线性稳压器。</li>
+<li><strong>SGM2019</strong> 模组：选用 <strong>SOT-23-5</strong>
+封装，兼容<strong>圣邦微</strong> <code>SGM2019</code>
+系列低压差线性稳压器。</li>
+<li><strong>AMS1117</strong> 模组：选用 <strong>SOT-223-3</strong>
+封装，可以兼容<strong>固定电压</strong>版本的<strong>艾迈斯</strong>
+<code>AMS1117</code>、<strong>德州仪器</strong> <code>REG1117</code>
+线性稳压器。</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：每一片模组都单独添加了 <code>2mm</code>
+直径的非金属化固定螺丝孔。</p>
+</blockquote>
+<h2 id="设计概要-11">设计概要</h2>
+<ol type="1">
+<li>采用了 6 Pin 的 <strong>USB Type-C</strong>，并且 <code>CC1</code>
+和 <code>CC2</code> 分别添加了 <code>5.1kΩ</code>
+下拉电阻，可以更好的兼容具备<strong>功率传输协议 USB-PD</strong>（USB
+Power Delivery）的电源；</li>
+<li>使用 <code>0.7mm</code> 线宽 <code>0.3mm</code>
+线距、<code>0.8mm</code> 过孔 <code>0.3mm</code> 孔径进行 PCB
+布线，在温升 10℃ 的情况下，最大负载电流为 <code>1.6A</code>
+左右，如果需要换用其它型号的线性稳压芯片，需要注意其最大输出电流不能超过该值。</li>
+<li>支持使用 <code>2Pin</code> 的杜邦针作为电源输入端口，而
+<code>4Pin</code> 的杜邦针作为两路的电源输出端口。</li>
+<li>添加有一枚用于防止<strong>输入端</strong>反接的
+<strong>1N5819</strong> 肖特基二极管（最大整流电流
+<code>1A</code>，最大反向工作电压 <code>40V</code>），采用大尺寸的
+<strong>SOD-123</strong> 封装，或者也可以选择载流能力达到
+<code>3A</code> 的 <strong>1N5822</strong>。</li>
+<li>肖特基二极管和 <code>4Pin</code>
+杜邦针两端，分别添加有两组测试点，便于测量输入输出的电源纹波。</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>： <strong>AMS1117</strong>
+模组的输出电容，必须采用<strong>等效串联电阻 ESR</strong>（Equivalent
+Series Resistance）更大的 <code>22uF</code>
+<strong>钽电容</strong>，从而确保输出的稳定性。</p>
+</blockquote>
+<h2 id="参考技术文档-11">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+<strong>UINIO-Power-LDO</strong>
+开源项目提供了如下一系列技术参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Electronics/LDO/">《常见 LDO
+线性稳压芯片的对比选型》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Power-LDO.html">《交互式 BOM
+物料清单与 PCB 版图在线预览》</a></li>
+</ul>
+<h1 id="uinio-storage-低速存储器模组">UINIO-Storage 低速存储器模组</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Storage"><strong>UINIO-Storage</strong></a>
+是一款同时支持
+<strong>EEPROM</strong>、<strong>Flash</strong>、<strong>MicroSD</strong>
+三种类型存储器的多功能模组，采用了拼板设计，每一片模组都添加有独立的
+<code>1mm</code> 直径固定螺丝孔，可以单独拆分进行使用。</p>
+<p><img src="/projects/UINIO-Storage/PCB-3D-1.png" width="500"></p>
+<p><img src="/projects/UINIO-Storage/PCB-3D-2.png" width="500"></p>
+<h2 id="应用介绍-1">应用介绍</h2>
+<ol type="1">
+<li><strong>EEPROM 存储器</strong> <code>AT24Cxxx</code>：支持 SOIC 和
+TSSOP 两种封装形式，使用 I²C 总线通信。</li>
+<li><strong>Flash 存储器</strong> <code>W25Qxxx</code>：支持 SOIC 和
+WSON 两种封装形式，使用 SPI 总线通信。</li>
+<li><strong>MicroSD 读卡器</strong>：同时支持 <code>SPI</code> 和
+<code>SDIO</code> 两种通信方式，独立 <code>5V</code>
+线性稳压芯片供电，支持读写大容量 TF 卡。</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>： 针对每个模组都进行了单独的分区覆铜，其中两片
+AT24Cxxx EEPROM 模组分别被配置为不同的 I²C 地址。</p>
+</blockquote>
+<h2 id="设计概要-12">设计概要</h2>
+<ol type="1">
+<li>每一片模组都单独添加有 <code>1mm</code> 直径的固定螺丝孔；</li>
+<li>每一片模组的 <code>3.3V</code> 外部供电端都添加了 <code>0.1uF</code>
+滤波电容；</li>
+<li>已经为 <strong>EEPROM</strong> 存储器的 I²C 总线添加了
+<code>10KΩ</code> 的上拉电阻；</li>
+<li>为了提升 <strong>MicroSD 读卡器</strong>
+在读取大容量存储卡时的电流驱动能力，单独添加了一枚 <code>3.3V</code>
+线性稳压芯片进行供电；</li>
+<li>配合<strong>串行协议转换器</strong> <a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-USB-Serial">UINIO-USB-Serial</a>
+以及相应的上位机程序，可以方便的对模组上的存储器进行读写操作；</li>
+</ol>
+<h2 id="参考技术文档-12">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-Storage 开源项目提供了如下一系列技术参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Storage.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ul>
+<h1 id="uinio-signal-translator-电平转换器">UINIO-Signal-Translator
+电平转换器</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Signal-Translator"><strong>UINIO-Signal-Translator</strong></a>
+是一款基于德州仪器 TSSOP 封装的 <a target="_blank" rel="noopener" href="https://www.ti.com.cn/product/cn/TXS0108E"><strong>TXS0108</strong></a>
+以及 <a target="_blank" rel="noopener" href="https://www.ti.com.cn/product/cn/TXB0108"><strong>TXB0108</strong></a>
+的双向电平信号转换器模组，适用于漏极开路或者推挽输出的应用，支持
+<code>1.8V</code>、<code>2.5V</code>、<code>3.3V</code>、<code>5V</code>
+等常见信号电平之间的相互转换。</p>
+<p><img src="/projects/UINIO-Signal-Translator/PCB-3D-1.png" width="420"></p>
+<p><img src="/projects/UINIO-Signal-Translator/PCB-3D-2.png" width="420"></p>
+<h2 id="设计概要-13">设计概要</h2>
+<ol type="1">
+<li>输出使能端 <strong>OE</strong>
+需要通过<strong>跳线帽</strong>进行配置；</li>
+<li>分别为参考电压 A 与参考电压 B 添加了 LED 指示灯；</li>
+<li>增加了 4 个 <code>1mm</code>
+直径固定螺丝孔，方便与外壳进行固定组装；</li>
+<li>转换芯片均采用易于购买的 <code>TSSOP20</code> 封装，可以按需使用
+<strong>TXS0108</strong> 或者 <strong>TXB0108</strong>；</li>
+<li>可以配合串行协议转换器 <a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-USB-Serial">UINIO-USB-Serial</a>
+使用，用于调试 <code>1.8V</code> 电平信号的 FPGA 芯片外设；</li>
+</ol>
+<h2 id="输入输出参数">输入输出参数</h2>
+<ul>
+<li><strong>TXB0108</strong>：<code>VCCA</code> 端电压
+<code>1.2V ~ 3.6V</code>，<code>VCCB</code> 端电压
+<code>1.65V ~ 5.5V</code>，使能端 <code>OE</code> 高电平有效。不能用于
+I²C 的开漏输出，只适用于 <strong>UART</strong> 与 <strong>SPI</strong>
+总线通信场景。</li>
+<li><strong>TXS0108</strong>：<code>VCCA</code> 端电压
+<code>1.4V ~ 3.6V</code>，<code>VCCB</code> 端电压
+<code>1.65V ~ 5.5V</code>，使能端 <code>OE</code>
+高电平有效，同时支持开漏与推挽输出（推挽模式下最大数据速率可以达到
+<code>110Mbps</code>，开漏模式下则只能达到
+<code>1.2Mbps</code>），可以同时适用于
+<strong>UART</strong>、<strong>I²C</strong>、<strong>SPI</strong>
+等总线通信场景。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>： <strong>TXS0108</strong> 和
+<strong>TXB0108</strong>
+两款芯片只能完成逻辑电平信号的转换，其驱动能力较小，并不具备带负载能力。</p>
+</blockquote>
+<h2 id="参考技术文档-13">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-Signal-Translator 开源项目提供了如下一系列技术参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Signal-Translator.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ul>
+<h1 id="uinio-monitor-显示屏幕模组">UINIO-Monitor 显示屏幕模组</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Monitor"><strong>UINIO-Monitor</strong></a>
+是一款同时拼接了 <strong>0.96 英寸 LCD
+显示屏</strong>（<code>ST7735</code>，<code>160×80</code>）、<strong>0.96
+英寸 OLED
+显示屏</strong>（<code>SSD1315</code>，<code>128×64</code>）、<strong>1.3
+英寸 LCD
+显示屏</strong>（<code>ST7789</code>，<code>240×240</code>）、<strong>2.4
+英寸 LCD
+显示屏</strong>（<code>ST7789</code>，<code>240×320</code>）、<strong>1.69
+英寸 LCD 显示屏</strong>（<code>ST7789</code>，<code>240×280</code>）
+的五合一屏幕驱动电路设计。</p>
+<p><img src="/projects/UINIO-Monitor/PCB-3D-1.png" width="550"></p>
+<p><img src="/projects/UINIO-Monitor/PCB-3D-2.png" width="550"></p>
+<h2 id="设计概要-14">设计概要</h2>
+<ol type="1">
+<li>采用 <strong>FreeCAD</strong>
+绘制了合理并且美观的板框（长度与宽度均小于或等于
+<code>10cmm</code>）；</li>
+<li>分别提供有 4 个 <code>1mm</code>
+直径螺丝孔，便于安装至其它结构件，快速搭建出产品原型；</li>
+<li><strong>LCD</strong>
+屏幕的外接引脚<strong>线序</strong>全部保持统一，并且重要的<strong>丝印</strong>信息会同时标注在
+PCB 的<strong>顶层</strong>与<strong>底层</strong>；</li>
+<li>PCB 板载 <code>0.5mm</code> 间距的 <strong>FPC</strong>
+柔性排线连接器，同时还引出了 <code>2.54mm</code>
+间距的直插排针，便于通过杜邦线快速搭建实验电路；</li>
+<li>由于 <strong>OLED</strong> 屏幕的功耗相对较小，因而采用了
+<code>300mA</code> 输出的线性稳压芯片
+<code>XC6206P332MR</code>；而功耗相对较大的 <strong>LCD</strong>
+屏幕，则统一采用 <code>ME6211C33M5G-N</code> 线性稳压芯片；</li>
+</ol>
+<h2 id="注意事项-2">注意事项</h2>
+<ol type="1">
+<li>工程的 <code>CAD</code> 目录下，保存的是 <strong>FreeCAD</strong>
+绘制的 PCB 板框草图文件；</li>
+<li>工程的 <code>3D Models</code> 文件夹，保存的是 LCD 和 OLED 裸屏的
+<strong>3D</strong> 模型 <strong>FreeCAD</strong> 源文件；</li>
+<li>工程的 <code>Reference</code>
+目录下提供了裸屏相关的数据手册以及参考原理图；</li>
+<li><strong>0.96 英寸 OLED 显示屏</strong> 同时兼容采用
+<code>SSD1306</code> 和 <code>SSD1315</code> 两款驱动芯片的屏幕；</li>
+<li>由于 <code>XC6206P332MR</code>
+电源正负极反接时，极易导致线性稳压芯片烧毁，所以串联
+<strong>SOD-323</strong> 封装的肖特基二极管防止反接；</li>
+<li>当使用 <strong>Arduino</strong> 的 <strong>U8g2</strong> 库驱动
+<strong>0.96 英寸 OLED 显示屏</strong> 的时候，必须焊接上
+<code>R20</code> 电阻，而 <code>R19</code> 电阻位置可以留空；</li>
+</ol>
+<h2 id="参考技术文档-14">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-Monitor 开源项目提供有如下一系列技术参考资料：</p>
+<ol type="1">
+<li><a href="http://www.uinio.com/Project/Arduino-ESP32/">《基于
+UINIO-MCU-ESP32 的 Arduino 进阶教程》</a></li>
+<li><a href="http://www.uinio.com/Project/UINIO-Monitor/">《运用 U8G2 与
+TFT_eSPI 玩转 UINIO-Monitor 显示屏》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Monitor.html">《交互式
+BOM 物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<h1 id="uinio-logic-24mhz-逻辑分析仪">UINIO-Logic-24MHz 逻辑分析仪</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Logic-24MHz"><strong>UINIO-Logic-24MHz</strong></a>
+是一款基于<strong>英飞凌</strong>（已收购<strong>赛普拉斯
+Cypress</strong>）的 <a target="_blank" rel="noopener" href="https://www.infineon.com/cms/en/product/universal-serial-bus-usb-power-delivery-controller/peripheral-controllers/ez-usb-fx2lp/cy7c68013a-56ltxit/"><strong>CY7C68013A</strong></a>
+型 <code>USB2.0</code> 控制器，以及 <a target="_blank" rel="noopener" href="https://sigrok.org/"><strong>Sigork</strong></a>
+开源固件方案的逻辑分析仪电路设计。拥有 <code>24MHz</code> 采样频率，以及
+<strong>8</strong> 个采样通道。</p>
+<p><img src="/projects/UINIO-Logic-24MHz/PCB-3D-1.png" width="450"></p>
+<p><img src="/projects/UINIO-Logic-24MHz/PCB-3D-2.png" width="450"></p>
+<h2 id="设计概要-15">设计概要</h2>
+<ol type="1">
+<li>采用 <strong>USB Type-C</strong> 接口，以及 <code>10 Pin</code>
+的牛角插座；</li>
+<li><strong>CY7C68013A</strong> 型 USB 控制器芯片采用了体积较小的
+<code>QFN56</code> 封装；</li>
+<li><strong>AT24C64</strong> 微芯 EEPROM 存储器芯片同样采用体积小巧的
+<code>TSSOP8</code> 封装；</li>
+<li>板载 <code>24MHz</code> 无源贴片晶振，阻容贴片元件全部采用
+<code>0402</code> 的小规格封装；</li>
+<li>增加具有<strong>三态输出</strong>功能的 <strong>74HC245</strong>
+八路信号收发器，提升信号采集的稳定性；</li>
+<li>低压差线性稳压器可以灵活选用 <code>ME6211C33M5G</code> 或者
+<code>A6303AE5R-33A</code> 等 <code>SOT23-5</code> 封装的
+<strong>LDO</strong> 芯片；</li>
+</ol>
+<h2 id="注意事项-3">注意事项</h2>
+<ul>
+<li>LED 指示灯 <code>D2</code> 连接至 <strong>CY7C68013A</strong> 的
+<code>PA0</code> 引脚，而 <code>D3</code> 则被连接至 <code>PA1</code>
+引脚；</li>
+<li>需要结合 <strong>Sigork</strong> 的开源固件 <a target="_blank" rel="noopener" href="https://github.com/wuxx/sigrok-firmware-fx2lafw">sigrok-firmware-fx2lafw</a>，并且搭配
+<a target="_blank" rel="noopener" href="https://sigrok.org/wiki/Downloads">PulseView</a>
+上位机协同使用；</li>
+</ul>
+<h2 id="参考技术文档-15">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-Logic-24MHz 开源项目提供了如下一系列技术参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-Logic-24MHz/">《快速上手
+UINIO-Logic-24MHz 逻辑分析仪》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Logic-24MHz.html">《交互式 BOM
+物料清单与 PCB 版图在线预览》</a></li>
+</ul>
+<h1 id="uinio-keyboard-多功能输入模组">UINIO-Keyboard
+多功能输入模组</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Keyboard"><strong>UINIO-Keyboard</strong></a>
+是一款基于<a target="_blank" rel="noopener" href="https://www.wch.cn/product/CH452.html"><strong>江苏恒沁
+CH452</strong></a> 的 64 位键盘输入装置，采用两线制的
+<strong>I²C</strong> 总线通信接口，并且外扩有<a target="_blank" rel="noopener" href="https://www.alpsalpine.com/"><strong>日本阿尔卑斯阿尔派（ALPSALPINE）</strong></a>
+的 3 枚 <strong>EC11</strong> 旋转编码器、以及 1 枚
+<strong>RKJXV</strong>
+模拟量碳膜摇杆，基本覆盖了嵌入式开发当中主流的实体输入方案。</p>
+<p><img src="/projects/UINIO-Keyboard/PCB-3D-1.png" width="500"></p>
+<p><img src="/projects/UINIO-Keyboard/PCB-3D-2.png" width="500"></p>
+<h2 id="设计概要-16">设计概要</h2>
+<ol type="1">
+<li>添加了六个 <code>3mm</code>
+直径开孔，便于安装<strong>铜柱</strong>；</li>
+<li>键盘统一采用 <code>3 × 4 × 2.5</code> 规格的四脚贴片按键；</li>
+<li>碳膜摇杆可以替换为国产的 <a target="_blank" rel="noopener" href="http://www.k-silver.com/c_html_products/jp13heisedaikaiguan-825.html"><strong>广东控银
+JP13</strong></a> 型摇杆；</li>
+<li><strong>键盘</strong>、<strong>旋转编码器</strong>、<strong>模拟量摇杆</strong>分别拥有各自独立的
+LED 电源指示灯；</li>
+<li>关于 64 位键盘的具体键位编码，可以参考官方的<a target="_blank" rel="noopener" href="https://www.wch.cn/downloads/CH452DS1_PDF.html"><strong>《数码管驱动及键盘控制芯片
+CH452》</strong></a> 数据手册；</li>
+</ol>
+<h2 id="参考技术文档-16">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-Keyboard 开源项目提供了如下参考技术资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Keyboard.html"><strong>《交互式
+BOM 物料清单与 PCB 版图在线预览》</strong></a></li>
+</ul>
+<h1 id="uinio-dap-link-下载调试器">UINIO-DAP-Link 下载调试器</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-DAP-Link"><strong>UINIO-DAP-Link</strong></a>
+是一款基于 <a target="_blank" rel="noopener" href="https://daplink.io/"><strong>ARM DAP
+Link</strong></a> 开源固件的硬件下载调试电路设计，采用了
+<code>LQFP48</code> 封装的 <strong>STM32F103CBT6</strong> 或者
+<strong>STM32F103C8T6</strong> 微控制器作为主控芯片，同时也兼容其它
+<code>Pin to Pin</code> 的 <strong>Cortex-M3</strong>
+微控制器（需要自行调整固件）。</p>
+<p><img src="/projects/UINIO-DAP-Link/PCB-3D-1.png" width="700"></p>
+<p><img src="/projects/UINIO-DAP-Link/PCB-3D-2.png" width="700"></p>
+<h2 id="设计概要-17">设计概要</h2>
+<ol type="1">
+<li>采用 <strong>USB Type-C</strong> 接口以及 <strong>3225</strong>
+封装的贴片晶振；</li>
+<li>提供 <strong>SWD/JTAG</strong> 转换板，以及清晰合理的符号标识；</li>
+<li>低压差线性稳压器 <strong>LDO</strong> 调整为
+<code>ME6211C33M5G</code> 方案；</li>
+<li>兼容 <a target="_blank" rel="noopener" href="https://github.com/ARMmbed/DAPLink/releases/tag/v0257">ARMmbed
+DAPLink</a> 提供的 <code>REL v0257</code> 最新版本固件；</li>
+<li>预留 <code>1mm</code> 和 <code>2mm</code>
+直径固定螺丝孔，方便与外壳进行固定；</li>
+<li>工程中的 <code>Firmware</code> 目录提供有已编译的最新
+<strong>DAPLink 0258</strong> 版本固件的 <code>Bootloader</code> 以及
+<code>Interface</code>；</li>
+</ol>
+<h2 id="参考技术文档-17">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-DAP-Link 开源项目提供了如下一系列技术参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Project/UINIO-DAP-Link/"><strong>《ARM
+调试工具 UINIO-DAP-Link 应用指南》</strong></a>：介绍 UINIO-DAP-Link 在
+<strong>STM32CubeIDE</strong> 以及 <strong>Keil µVision</strong>
+开发环境当中的使用，以及 DAPLink 固件的下载更新方法。</li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-DAP-Link.html"><strong>《交互式
+BOM 物料清单与 PCB 版图在线预览》</strong></a>：介绍了 UINIO-DAP-Link
+硬件 PCB 所涉及的物料清单，并且还提供了布线的预览。</li>
+</ul>
+<h1 id="uinio-cubic-prism-分光棱镜显示器">UINIO-Cubic-Prism
+分光棱镜显示器</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Cubic-Prism"><strong>UINIO-Cubic-Prism</strong></a>
+是一款基于 <strong>上海乐鑫科技</strong> <a target="_blank" rel="noopener" href="https://products.espressif.com/">ESP32-PICO-D4</a>
+主控芯片，以及<strong>日本 TDK 株式会社</strong> 的 <a target="_blank" rel="noopener" href="https://invensense.tdk.com/products/motion-tracking/6-axis/mpu-6050/">MPU6050</a>
+加速度传感器的分光棱镜显示设备。</p>
+<h2 id="工程目录说明">工程目录说明</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">├─Documents               电路原理图以及动态 BOM 文件</span><br><span class="line">├─CAD                     3D 打印模型文件</span><br><span class="line">│  ├─GCode                Cura 切片文件，仅适用于型号为 Vyper 的 3D 打印机</span><br><span class="line">│  └─STL                  模型 STL 文件</span><br><span class="line">├─Firmware                开源固件</span><br><span class="line">├─Gerbers                 用于加工 PCB 电路板的光绘文件</span><br><span class="line">├─Images                  README 图片素材</span><br><span class="line">├─Libraries               KiCAD 原理图库、封装库、3D 模型库</span><br><span class="line">│  ├─Uinika.3D</span><br><span class="line">│  └─Uinio.Footprint</span><br><span class="line">└─Tools                   固件烧写工具、屏幕共享工具、图片格式转换工具</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：该工程分别在 <strong>USB Type-C</strong> 的
+<code>CC1</code> 和 <code>CC2</code> 引脚，添加了 <code>R13</code> 和
+<code>R14</code> 两枚下拉电阻（原始开源项目缺失），从而能够支持 USBPD
+快充协议。</p>
+</blockquote>
+<h2 id="设计概要-18">设计概要</h2>
+<p><img src="/projects/UINIO-Cubic-Prism/PCB-3D-1.png" width="650"></p>
+<p><img src="/projects/UINIO-Cubic-Prism/PCB-3D-2.png" width="650"></p>
+<ul>
+<li>天线屏蔽使用 2 排接地过孔（省略了阻抗匹配电路）；</li>
+<li>完全兼容 <strong>Github</strong> 上的 <a target="_blank" rel="noopener" href="https://github.com/ClimbSnail/HoloCubic_AIO">HoloCubic_AIO</a>
+固件及其相关工具；</li>
+<li>电路原理图进行了重绘，同时 PCB
+也重新进行了手工布线，尽可能多的采用大面积铺铜；</li>
+<li>更换了 TF 卡插座为更加便宜并且比较容易购买的封装形式；</li>
+<li>同时提供有 <code>AMS1117-3.3</code> 和 <code>ME6211C33M5G</code>
+两款线性稳压器芯片的屏幕显示模组，便于拼板打样；</li>
+<li>屏幕<strong>扩展板</strong>与<strong>主板</strong>所使用线性稳压芯片的
+<code>3.3V</code>
+完全隔离（多个稳压器不能像原始开源项目当中那样，被简单的并联起来使用）；</li>
+<li>屏幕<strong>扩展板</strong>与<strong>主板</strong>采用
+<code>10cm</code> 长度的 <code>8Pin</code> <strong>同向 FPC
+软排线</strong>进行连接；</li>
+</ul>
+<h2 id="参考技术文档-18">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 提供有
+UINIO-Cubic-Prism 开源项目的 <a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Cubic-Prism.html"><strong>《交互式
+BOM 物料清单与 PCB
+版图在线预览》</strong></a>，以及如下一系列相关技术的参考资料：</p>
+<ol type="1">
+<li><a href="http://www.uinio.com/Project/UINIO-MCU-ESP32/">《UINIO-MCU-ESP32
+核心板电路设计》</a></li>
+<li><a href="http://www.uinio.com/Project/Arduino-ESP32/">《基于
+UINIO-MCU-ESP32 的 Arduino 进阶教程》</a></li>
+<li><a href="http://www.uinio.com/Project/UINIO-Monitor/">《运用 U8G2 与
+TFT_eSPI 玩转 UINIO-Monitor 显示屏》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Cubic-Prism.html">《交互式 BOM
+物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<h2 id="cad-外壳模型">CAD 外壳模型</h2>
+<p>工程当中的 <code>CAD</code> 目录，是专门为 <a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Cubic-Prism"><strong>UINIO-Cubic-Prism</strong></a>
+重新设计的 3D 打印外壳模型，可以精确适配本项目的 PCB
+板框；分光棱镜分别采用左右两个延伸柱进行固定，免去使用胶水粘结到屏幕上的麻烦。</p>
+<p><img src="/projects/UINIO-Cubic-Prism/Sheel-1.png" width="450"></p>
+<p>CAD 模型被划分为上下两个部分（对应 FreeCAD 工程当中的
+<code>Base</code> 和 <code>Cover</code>
+两个零件），分别用于安装<strong>主板</strong>与<strong>屏幕扩展板</strong>。</p>
+<p><img src="/projects/UINIO-Cubic-Prism/Sheel-2.png" width="450"></p>
+<p>CAD 外壳模型的分光棱镜倾斜角度，被提高至 30°
+度，从而改善水平放置在桌面时的可视角度。同时对模型底部进行了掏空处理，提升主板的散热能力，同时也便于插拔
+TF 卡。</p>
+<p><img src="/projects/UINIO-Cubic-Prism/Sheel-3.png" width="450"></p>
+<p>RGB
+发光二极管对应的外壳位置，专门进行了削薄处理，便于启动时观察其工作状态。左右两侧预留有
+<code>2mm</code>
+直径的沉头螺丝开孔以及相应的装饰盖（需要使用胶水粘接）。</p>
+<h2 id="固件与工具">固件与工具</h2>
+<table>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 31%">
+<col style="width: 53%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">名称</th>
+<th style="text-align: left;">下载地址</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>HoloCubic AIO</strong></td>
+<td style="text-align: left;">https://github.com/ClimbSnail/HoloCubic_AIO</td>
+<td style="text-align: left;">兼容 <a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Cubic-Prism"><strong>UINIO-Cubic-Prism</strong></a>
+的开源固件。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>HoloCubic AIO Tool</strong></td>
+<td style="text-align: left;">https://github.com/ClimbSnail/HoloCubic_AIO_Tool</td>
+<td style="text-align: left;">固件烧录工具、图片与视频转换工具。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>LVGL Image
+Converter</strong></td>
+<td style="text-align: left;">https://github.com/W-Mai/lvgl_image_converter</td>
+<td style="text-align: left;">基于 LVGL 的图片转换工具。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>ESP32 投屏工具</strong></td>
+<td style="text-align: left;">https://gitee.com/superddg123/esp32-TFT/tree/master</td>
+<td style="text-align: left;">运行在电脑上的 ESP32 投屏上位机。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>天气时钟 API</strong></td>
+<td style="text-align: left;">https://www.tianqiapi.com/</td>
+<td style="text-align: left;">内置的天气时钟 API 服务申请地址。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="uinio-peg-board-洞洞实验板">UINIO-Peg-Board 洞洞实验板</h1>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/uinika/UINIO-Peg-Board"><strong>UINIO-Peg-Board</strong></a>
+是一款<strong>长度</strong>和<strong>宽度</strong>均等于
+<code>10cm</code>，焊盘间距保持在 <code>2.54mm</code> 的万用 PCB
+洞洞实验板，可以用来方便的搭建一些接插元件测试电路。</p>
+<p><img src="/projects/UINIO-Peg-Board/PCB-3D-1.png" width="450"></p>
+<h2 id="设计概要-19">设计概要</h2>
+<ol type="1">
+<li>板框上下左右四个角上都分别制作有 <code>3cm</code>
+的固定螺丝孔；</li>
+<li>PCB 板框的 4 个边角分别进行了 <code>5cm</code> 直径的圆角处理；</li>
+<li>建议使用黑色磨砂材质的阻焊油墨，打样之后的视觉效果更佳；</li>
+<li>工程的 <code>Edge</code> 目录下面是使用 <strong>FreeCAD</strong>
+绘制的板框；</li>
+<li>通过修改洞洞板 <a href="www.uinio.com"><strong>UinIO.com</strong></a> 丝印下面的
+<code>Version 1.0.1</code> 版本号，可以规避 PCB
+制造工厂的光绘文件重复性检查；</li>
+</ol>
+<h2 id="参考技术文档-19">参考技术文档</h2>
+<p><a target="_blank" rel="noopener" href="http://uinio.com/">UinIO.com 电子技术实验室</a> 为
+UINIO-Peg-Board 开源项目提供有如下一系列技术参考资料：</p>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Electronics/PCB-Principle/">《PCB
+基本布线规范与设计原则》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/Electronics/KiCad-Tutorial/">《开源 EDA
+工具 KiCad 6.0 电路设计小书》</a></li>
+<li><a target="_blank" rel="noopener" href="http://uinio.com/archives/BOM/UINIO-Peg-Board.html">《交互式 BOM
+物料清单与 PCB 版图在线预览》</a></li>
+</ol>
+<style>
+h1.title {
+  color: #8C634F;
+  border: 2px dotted #8C634F;
+  width: 100%;
+  font-size: 2.2rem !important;
+  font-weight: bold;
+  display: block;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  margin: 0 auto 1.5rem 0 !important;
+  font-family: Monda;
+}
+</style>
+</div><div class="article-licensing box"><div class="licensing-title"><p>UINIO 系列开源硬件概览</p><p><a href="http://www.uinio.com/projects/index.html">http://www.uinio.com/projects/index.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-09-04</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-09-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/images/avatar.png" alt="Hank"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Hank</p><p class="is-size-6 is-block">Electronics, Embedded &amp; Web</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>四川省·成都市</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">86</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">13</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">46</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="E-Mail" href="mailto:uinika@outlook.com"><i class="fas fa-envelope"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="IT 圈" href="/my/wechat.html"><i class="fab fa-weixin"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#uinio-mcu-rp2040-核心板"><span class="level-left"><span class="level-item">1</span><span class="level-item">UINIO-MCU-RP2040 核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#固件更新"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">固件更新</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-hc32f460keta-核心板"><span class="level-left"><span class="level-item">2</span><span class="level-item">UINIO-MCU-HC32F460KETA
+核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-1"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-1"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-hc32f460petb-核心板"><span class="level-left"><span class="level-item">3</span><span class="level-item">UINIO-MCU-HC32F460PETB
+核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-2"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-2"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-stm32l051k8u6-核心板"><span class="level-left"><span class="level-item">4</span><span class="level-item">UINIO-MCU-STM32L051K8U6
+核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-3"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-3"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-stm32f103c8t6-核心板"><span class="level-left"><span class="level-item">5</span><span class="level-item">UINIO-MCU-STM32F103C8T6
+核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-4"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#启动配置"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">启动配置</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-4"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-stm32f401ccu6-核心板"><span class="level-left"><span class="level-item">6</span><span class="level-item">UINIO-MCU-STM32F401CCU6
+核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-5"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#启动配置-1"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">启动配置</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-5"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-gd32f350rbt6-核心板"><span class="level-left"><span class="level-item">7</span><span class="level-item">UINIO-MCU-GD32F350RBT6
+核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#启动配置-2"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">启动配置</span></span></a></li><li><a class="level is-mobile" href="#设计概要-6"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-6"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-esp32s3-核心板"><span class="level-left"><span class="level-item">8</span><span class="level-item">UINIO-MCU-ESP32S3 核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-7"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#注意事项"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">注意事项</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-7"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-mcu-esp32c3-核心板"><span class="level-left"><span class="level-item">9</span><span class="level-item">UINIO-MCU-ESP32C3 核心板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-8"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#注意事项-1"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">注意事项</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-8"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-usb-serial-串行协议转换器"><span class="level-left"><span class="level-item">10</span><span class="level-item">UINIO-USB-Serial
+串行协议转换器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-9"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#工作模式简介"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">工作模式简介</span></span></a></li><li><a class="level is-mobile" href="#工作模式配置"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">工作模式配置</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-9"><span class="level-left"><span class="level-item">10.4</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-usb-uart-串口调试器"><span class="level-left"><span class="level-item">11</span><span class="level-item">UINIO-USB-UART 串口调试器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-10"><span class="level-left"><span class="level-item">11.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-10"><span class="level-left"><span class="level-item">11.2</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-power-ldo-线性稳压器模组"><span class="level-left"><span class="level-item">12</span><span class="level-item">UINIO-Power-LDO
+线性稳压器模组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#应用介绍"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">应用介绍</span></span></a></li><li><a class="level is-mobile" href="#设计概要-11"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-11"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-storage-低速存储器模组"><span class="level-left"><span class="level-item">13</span><span class="level-item">UINIO-Storage 低速存储器模组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#应用介绍-1"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">应用介绍</span></span></a></li><li><a class="level is-mobile" href="#设计概要-12"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-12"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-signal-translator-电平转换器"><span class="level-left"><span class="level-item">14</span><span class="level-item">UINIO-Signal-Translator
+电平转换器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-13"><span class="level-left"><span class="level-item">14.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#输入输出参数"><span class="level-left"><span class="level-item">14.2</span><span class="level-item">输入输出参数</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-13"><span class="level-left"><span class="level-item">14.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-monitor-显示屏幕模组"><span class="level-left"><span class="level-item">15</span><span class="level-item">UINIO-Monitor 显示屏幕模组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-14"><span class="level-left"><span class="level-item">15.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#注意事项-2"><span class="level-left"><span class="level-item">15.2</span><span class="level-item">注意事项</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-14"><span class="level-left"><span class="level-item">15.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-logic-24mhz-逻辑分析仪"><span class="level-left"><span class="level-item">16</span><span class="level-item">UINIO-Logic-24MHz 逻辑分析仪</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-15"><span class="level-left"><span class="level-item">16.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#注意事项-3"><span class="level-left"><span class="level-item">16.2</span><span class="level-item">注意事项</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-15"><span class="level-left"><span class="level-item">16.3</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-keyboard-多功能输入模组"><span class="level-left"><span class="level-item">17</span><span class="level-item">UINIO-Keyboard
+多功能输入模组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-16"><span class="level-left"><span class="level-item">17.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-16"><span class="level-left"><span class="level-item">17.2</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-dap-link-下载调试器"><span class="level-left"><span class="level-item">18</span><span class="level-item">UINIO-DAP-Link 下载调试器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-17"><span class="level-left"><span class="level-item">18.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-17"><span class="level-left"><span class="level-item">18.2</span><span class="level-item">参考技术文档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-cubic-prism-分光棱镜显示器"><span class="level-left"><span class="level-item">19</span><span class="level-item">UINIO-Cubic-Prism
+分光棱镜显示器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#工程目录说明"><span class="level-left"><span class="level-item">19.1</span><span class="level-item">工程目录说明</span></span></a></li><li><a class="level is-mobile" href="#设计概要-18"><span class="level-left"><span class="level-item">19.2</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-18"><span class="level-left"><span class="level-item">19.3</span><span class="level-item">参考技术文档</span></span></a></li><li><a class="level is-mobile" href="#cad-外壳模型"><span class="level-left"><span class="level-item">19.4</span><span class="level-item">CAD 外壳模型</span></span></a></li><li><a class="level is-mobile" href="#固件与工具"><span class="level-left"><span class="level-item">19.5</span><span class="level-item">固件与工具</span></span></a></li></ul></li><li><a class="level is-mobile" href="#uinio-peg-board-洞洞实验板"><span class="level-left"><span class="level-item">20</span><span class="level-item">UINIO-Peg-Board 洞洞实验板</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设计概要-19"><span class="level-left"><span class="level-item">20.1</span><span class="level-item">设计概要</span></span></a></li><li><a class="level is-mobile" href="#参考技术文档-19"><span class="level-left"><span class="level-item">20.2</span><span class="level-item">参考技术文档</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="关于锂离子电池选型里的一些重要细节"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">关于锂离子电池选型里的一些重要细节</a></p><p class="categories"><a href="/categories/%E7%94%B5%E5%AD%90%E7%A1%AC%E4%BB%B6/">电子硬件</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/Electronics/">Electronics</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Project/UINIO-MCU-GD32/"><img src="/Project/UINIO-MCU-GD32/logo.png" alt="兆易创新 UINIO-MCU-GD32F350 固件库开发指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-17T16:00:00.000Z">2024-03-18</time></p><p class="title"><a href="/Project/UINIO-MCU-GD32/">兆易创新 UINIO-MCU-GD32F350 固件库开发指南</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Design/"><span class="level-start"><span class="level-item">Design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Electronics/"><span class="level-start"><span class="level-item">Electronics</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Embedded/"><span class="level-start"><span class="level-item">Embedded</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/English/"><span class="level-start"><span class="level-item">English</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Math/"><span class="level-start"><span class="level-item">Math</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Project/"><span class="level-start"><span class="level-item">Project</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Thinking/"><span class="level-start"><span class="level-item">Thinking</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/Zen/"><span class="level-start"><span class="level-item">Zen</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%B5%E5%AD%90%E7%A1%AC%E4%BB%B6/"><span class="level-start"><span class="level-item">电子硬件</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Analog-Circuit/"><span class="tag">Analog Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C-C/"><span class="tag">C/C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Calculus/"><span class="tag">Calculus</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Analysis/"><span class="tag">Circuit Analysis</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Circuit-Theory/"><span class="tag">Circuit Theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Command/"><span class="tag">Command</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Component/"><span class="tag">Component</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Config/"><span class="tag">Config</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Convention/"><span class="tag">Convention</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Digital-Circuit/"><span class="tag">Digital Circuit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Economy/"><span class="tag">Economy</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elementary/"><span class="tag">Elementary</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Encrypt/"><span class="tag">Encrypt</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Grammar/"><span class="tag">Grammar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Industry/"><span class="tag">Industry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Instrument/"><span class="tag">Instrument</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Life/"><span class="tag">Life</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mobile/"><span class="tag">Mobile</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/New-Concept-English/"><span class="tag">New Concept English</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Protocol/"><span class="tag">Protocol</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RFID/"><span class="tag">RFID</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Server/"><span class="tag">Server</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Simulation/"><span class="tag">Simulation</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Zen/"><span class="tag">Zen</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%B1%A0/"><span class="tag">电池</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hackaday.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hackday 社区</span></span><span class="level-right"><span class="level-item tag">hackaday.com</span></span></a></li><li><a class="level is-mobile" href="https://www.eevblog.com/forum/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">EEVBlog 论坛</span></span><span class="level-right"><span class="level-item tag">www.eevblog.com</span></span></a></li><li><a class="level is-mobile" href="https://www.eetimes.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">EE Times 杂志</span></span><span class="level-right"><span class="level-item tag">www.eetimes.com</span></span></a></li><li><a class="level is-mobile" href="https://componentsearchengine.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">元件封装</span></span><span class="level-right"><span class="level-item tag">componentsearchengine.com</span></span></a></li><li><a class="level is-mobile" href="https://www.3dcontentcentral.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">3D 内容中心</span></span><span class="level-right"><span class="level-item tag">www.3dcontentcentral.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.snapeda.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">SnapEDA 封装</span></span><span class="level-right"><span class="level-item tag">www.snapeda.com</span></span></a></li><li><a class="level is-mobile" href="https://www.ultralibrarian.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Ultra Librarian</span></span><span class="level-right"><span class="level-item tag">www.ultralibrarian.com</span></span></a></li><li><a class="level is-mobile" href="https://www.thingiverse.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Thingiverse 模型</span></span><span class="level-right"><span class="level-item tag">www.thingiverse.com</span></span></a></li><li><a class="level is-mobile" href="https://www.digikey.cn/zh/resources/online-conversion-calculators" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">得捷电子工具集</span></span><span class="level-right"><span class="level-item tag">www.digikey.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.lceda.cn/editor/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">立创 EDA 编辑器</span></span><span class="level-right"><span class="level-item tag">www.lceda.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.oshwhub.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">立创开源硬件平台</span></span><span class="level-right"><span class="level-item tag">www.oshwhub.com</span></span></a></li><li><a class="level is-mobile" href="https://www.szlcsc.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">立创电子元件商城</span></span><span class="level-right"><span class="level-item tag">www.szlcsc.com</span></span></a></li><li><a class="level is-mobile" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/libraries.html" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">ESP32 Arduino</span></span><span class="level-right"><span class="level-item tag">docs.espressif.com</span></span></a></li><li><a class="level is-mobile" href="https://www.gd32mcu.com/cn/download" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">GD32 数据手册</span></span><span class="level-right"><span class="level-item tag">www.gd32mcu.com</span></span></a></li><li><a class="level is-mobile" href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/index.html" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">ESP IDF 开发指南</span></span><span class="level-right"><span class="level-item tag">docs.espressif.com</span></span></a></li><li><a class="level is-mobile" href="https://www.arduino.cc/reference/en/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Arduino 开发文档</span></span><span class="level-right"><span class="level-item tag">www.arduino.cc</span></span></a></li></ul></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://opensource.rock-chips.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">瑞芯微 Wiki</span></span><span class="level-right"><span class="level-item tag">opensource.rock-chips.com</span></span></a></li><li><a class="level is-mobile" href="https://www.t-firefly.com/wiki" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Firefly Wiki</span></span><span class="level-right"><span class="level-item tag">www.t-firefly.com</span></span></a></li><li><a class="level is-mobile" href="https://wiki.luatos.com/chips/index.html" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">合宙 Wiki</span></span><span class="level-right"><span class="level-item tag">wiki.luatos.com</span></span></a></li><li><a class="level is-mobile" href="http://www.orangepi.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">香橙派 Orange Pi</span></span><span class="level-right"><span class="level-item tag">www.orangepi.cn</span></span></a></li><li><a class="level is-mobile" href="https://docs.ai-thinker.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">安信可科技</span></span><span class="level-right"><span class="level-item tag">docs.ai-thinker.com</span></span></a></li><li><a class="level is-mobile" href="http://www.ashining.com/product.aspx" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">泽耀物联网</span></span><span class="level-right"><span class="level-item tag">www.ashining.com</span></span></a></li><li><a class="level is-mobile" href="https://www.waveshare.net/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">微雪电子</span></span><span class="level-right"><span class="level-item tag">www.waveshare.net</span></span></a></li><li><a class="level is-mobile" href="http://www.ing10bbs.com/forum.php?mod=viewthread&amp;tid=1458&amp;extra=page%3D1" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">硬石开发板</span></span><span class="level-right"><span class="level-item tag">www.ing10bbs.com</span></span></a></li><li><a class="level is-mobile" href="https://doc.embedfire.com/products/link/zh/latest/index.html" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">野火开发板</span></span><span class="level-right"><span class="level-item tag">doc.embedfire.com</span></span></a></li><li><a class="level is-mobile" href="https://www.armbbs.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">安富莱开发板</span></span><span class="level-right"><span class="level-item tag">www.armbbs.cn</span></span></a></li><li><a class="level is-mobile" href="http://www.openedv.com/docs/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">正点原子开发板</span></span><span class="level-right"><span class="level-item tag">www.openedv.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://www.deerchao.cn/tools/wegester/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">正则表达式</span></span><span class="level-right"><span class="level-item tag">www.deerchao.cn</span></span></a></li><li><a class="level is-mobile" href="http://www.falstad.com/circuit/circuitjs.html" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">CircuitJS 仿真器</span></span><span class="level-right"><span class="level-item tag">www.falstad.com</span></span></a></li><li><a class="level is-mobile" href="https://www.latexlive.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">LaTeX 数学公式</span></span><span class="level-right"><span class="level-item tag">www.latexlive.com</span></span></a></li><li><a class="level is-mobile" href="https://www.geogebra.org/calculator" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Geogebra 计算器</span></span><span class="level-right"><span class="level-item tag">www.geogebra.org</span></span></a></li><li><a class="level is-mobile" href="https://www.cryptii.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Cryptii 加解密</span></span><span class="level-right"><span class="level-item tag">www.cryptii.com</span></span></a></li><li><a class="level is-mobile" href="https://www.cryptool.org/en/cto/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">CrypTool 密码</span></span><span class="level-right"><span class="level-item tag">www.cryptool.org</span></span></a></li></ul></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://www.gd32mcu.com/cn/download" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">兆易创新</span></span><span class="level-right"><span class="level-item tag">www.gd32mcu.com</span></span></a></li><li><a class="level is-mobile" href="https://www.products.espressif.com/#/product-selector?language=zh" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">乐鑫科技</span></span><span class="level-right"><span class="level-item tag">www.products.espressif.com</span></span></a></li><li><a class="level is-mobile" href="https://www.wch.cn/products/categories/26.html?pid=5#data" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">沁恒电子</span></span><span class="level-right"><span class="level-item tag">www.wch.cn</span></span></a></li><li><a class="level is-mobile" href="http://www.microne.com.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">微盟电子</span></span><span class="level-right"><span class="level-item tag">www.microne.com.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.allwinnertech.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">全志科技</span></span><span class="level-right"><span class="level-item tag">www.allwinnertech.com</span></span></a></li><li><a class="level is-mobile" href="https://www.rock-chips.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">瑞芯微电子</span></span><span class="level-right"><span class="level-item tag">www.rock-chips.com</span></span></a></li><li><a class="level is-mobile" href="https://www.lrc.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">乐山无线电</span></span><span class="level-right"><span class="level-item tag">www.lrc.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.nexperia.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">安世半导体</span></span><span class="level-right"><span class="level-item tag">www.nexperia.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.st.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">意法半导体</span></span><span class="level-right"><span class="level-item tag">www.st.com</span></span></a></li><li><a class="level is-mobile" href="https://www.ti.com.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">德州仪器</span></span><span class="level-right"><span class="level-item tag">www.ti.com.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.nxp.com.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">恩智浦</span></span><span class="level-right"><span class="level-item tag">www.nxp.com.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.ni.com/zh-cn.html" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">国家半导体</span></span><span class="level-right"><span class="level-item tag">www.ni.com</span></span></a></li><li><a class="level is-mobile" href="https://www.infineon.com/cms/cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">英飞凌</span></span><span class="level-right"><span class="level-item tag">www.infineon.com</span></span></a></li><li><a class="level is-mobile" href="https://www.renesas.cn/cn/zh" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">瑞萨半导体</span></span><span class="level-right"><span class="level-item tag">www.renesas.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.onsemi.cn/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">安森美半导体</span></span><span class="level-right"><span class="level-item tag">www.onsemi.cn</span></span></a></li><li><a class="level is-mobile" href="https://www.ait-holding.com/cmos-ldo/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">AiT 创瑞</span></span><span class="level-right"><span class="level-item tag">www.ait-holding.com</span></span></a></li><li><a class="level is-mobile" href="https://www.analog.com/cn/index.html" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">ADI 半导体</span></span><span class="level-right"><span class="level-item tag">www.analog.com</span></span></a></li><li><a class="level is-mobile" href="https://www.nordicsemi.com/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Nordic 半导体</span></span><span class="level-right"><span class="level-item tag">www.nordicsemi.com</span></span></a></li></ul></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2024 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
