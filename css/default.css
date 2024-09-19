@@ -12414,12 +12414,15 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
 }
 .section .container .columns .column-main .card.widget .menu ul.menu-list li a {
   border: 1px solid #2a2f33;
+  border-radius: 5px;
 }
 .section .container .columns .column-main .card.widget .menu .field {
   margin: 3rem 0 5rem 0;
 }
 .section .container .columns .column-main .card.widget .menu .field .control {
-  margin: 1rem;
+  margin: 1.5rem 1rem;
+  border: 1px solid #a38272;
+  border-radius: 5px;
 }
 .section .container .columns .column-main .card.widget .menu .field .control span {
   font-size: 1rem !important;
