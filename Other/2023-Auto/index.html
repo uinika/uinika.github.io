@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>现代汽车机械电气结构与驾驶技术分享 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="1885 年，德国工程师卡尔·本茨制造了第一辆安装有两冲程单缸汽油机的三轮汽车；而在 1886 年，德国人哥特里布·戴姆勒又制造出了安装有四冲程汽油机的四轮汽车；1908 年，美国人亨利·福特设计出了著名的 T 型汽车，并于 1913 年在底特律建成了世界第一条汽车装配流水线，从而创造出了庞大的汽车产业。伴随工业化大批量生产时代的当来，美国、欧洲、日本的汽车产业相继崛起，涌现出了博世、采"><meta property="og:type" content="blog"><meta property="og:title" content="现代汽车机械电气结构与驾驶技术分享"><meta property="og:url" content="http://www.uinio.com/Other/2023-Auto/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="1885 年，德国工程师卡尔·本茨制造了第一辆安装有两冲程单缸汽油机的三轮汽车；而在 1886 年，德国人哥特里布·戴姆勒又制造出了安装有四冲程汽油机的四轮汽车；1908 年，美国人亨利·福特设计出了著名的 T 型汽车，并于 1913 年在底特律建成了世界第一条汽车装配流水线，从而创造出了庞大的汽车产业。伴随工业化大批量生产时代的当来，美国、欧洲、日本的汽车产业相继崛起，涌现出了博世、采"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2014-08-12T16:00:00.000Z"><meta property="article:modified_time" content="2021-10-05T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="汽车"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Other/2023-Auto/"},"headline":"现代汽车机械电气结构与驾驶技术分享","image":["http://www.uinio.com/Other/2023-Auto/logo.png"],"datePublished":"2014-08-12T16:00:00.000Z","dateModified":"2021-10-05T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"1885\r 年，德国工程师卡尔·本茨制造了第一辆安装有两冲程单缸汽油机的三轮汽车；而在\r 1886\r 年，德国人哥特里布·戴姆勒又制造出了安装有四冲程汽油机的四轮汽车；1908\r 年，美国人亨利·福特设计出了著名的 T 型汽车，并于 1913\r 年在底特律建成了世界第一条汽车装配流水线，从而创造出了庞大的汽车产业。伴随工业化大批量生产时代的当来，美国、欧洲、日本的汽车产业相继崛起，涌现出了博世、采"}</script><link rel="canonical" href="http://www.uinio.com/Other/2023-Auto/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2014-08-12T16:00:00.000Z" title="2014/8/13 00:00:00">2014-08-13</time>发表</span><span class="level-item"><time dateTime="2021-10-05T16:00:00.000Z" title="2021/10/6 00:00:00">2021-10-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/">生活日常</a></span><span class="level-item">1 小时读完 (大约13260个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">现代汽车机械电气结构与驾驶技术分享</h1><div class="content"><p>1885
+年，德国工程师<code>卡尔·本茨</code>制造了第一辆安装有两冲程单缸汽油机的三轮汽车；而在
+1886
+年，德国人<code>哥特里布·戴姆勒</code>又制造出了安装有四冲程汽油机的四轮汽车；1908
+年，美国人<code>亨利·福特</code>设计出了著名的 T 型汽车，并于 1913
+年在底特律建成了世界第一条汽车装配流水线，从而创造出了庞大的汽车产业。伴随工业化大批量生产时代的当来，<code>美国</code>、<code>欧洲</code>、<code>日本</code>的汽车产业相继崛起，涌现出了<strong>博世</strong>、<strong>采埃浮</strong>、<strong>德尔福</strong>、<strong>博格华纳</strong>、<strong>麦格纳</strong>、<strong>爱信</strong>、<strong>电装</strong>等著名主机厂。</p>
+<p><img src="/Other/2023-Auto/logo.png"></p>
+<p>时至今日，中国已经成为了全球最大的汽车产销单一市场，而伴随近几年新能源技术的快速普及，整车技术快速从机械化过渡电气化，全球汽车工业的产业重心开始逐步向中国转移。国内也相继涌现出了<strong>比亚迪</strong>、<strong>宁德时代</strong>等极具竞争力的新能源供应商。在这个<strong>传统燃油车</strong>与<strong>新能源技术</strong>交替换代的时间点，撰写本文主要用于记录一些现代汽车机械与电气结构方面知识，同时也会记录自己购车、用车以及保养方面的心得体会。</p>
+<span id="more"></span>
+<h2 id="仪表盘">仪表盘</h2>
+<p>家用车仪表盘上，主要拥有<strong>水温表</strong>、<strong>转速表</strong>、<strong>速度表</strong>、<strong>燃油表</strong>共
+4 组表显示信息：</p>
+<p><img src="/Other/2023-Auto/Panel/1.png"></p>
+<ol type="1">
+<li><strong>速度表</strong>显示汽车的当前时速，单位为
+<code>千米km/小时h</code>，最大刻度为 <code>220km/h</code>。</li>
+<li><strong>转速表</strong>指示发动机<strong>每分钟</strong>的转速，以
+<code>转数r/每分钟min</code> 作为单位，刻度范围为
+<code>0r/min ~ 8,000r/min</code>。如果行驶中转速太高，会造成发动机磨损较大和油耗增高。大部分的工况下，转速低的发动机会相对较为<strong>省油</strong>。禁止让发动机转速表指针达到红色区域，避免造成发动机严重损坏。</li>
+<li><strong>燃油表</strong>显示的是车辆油箱的存油量，当车辆在弯路或者山路上行驶时，所显示的油量会比实际存油量有误差，平地上燃油表所指示的存油量相对更加准确。如果燃油表指示到红色区域表示油量过低，此时报警灯亮起时，必须尽快为车辆加油。除此这外，油箱最好能保持超过
+<code>1/4</code>
+的油量，如果车辆长期在低油量下工作容易造成燃油泵损坏。</li>
+<li><strong>水温表</strong>显示的是<strong>发动机冷却液</strong>的温度，当车辆启动以后，水温表就会处于工作状态。发动机的工作温度会根据气温和发动机负荷，而产生各种变化。如果水温表指示到红色或者更高的区域时，应当将车辆停止或者保持发动机怠速运转，以便让发动机能够降温冷却。在如下严苛的行车条件下，发动机有可能会产生过热现象，例如：在炎热的天气进行长途爬坡、在高速行车后降低车速或停车、使用空调系统，并且让发动机长时间怠速、以及拖有尾车时。</li>
+</ol>
+<h2 id="灯光控制">灯光控制</h2>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 16%">
+<col style="width: 74%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">灯光类型</th>
+<th style="text-align: center;">图标</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>自动大灯</strong></td>
+<td style="text-align: center;"><img src="/Other/2023-Auto/Lighting/1.png"></td>
+<td style="text-align: left;">通过车辆光照强度传感器的亮度值，自动打开或者关闭<strong>示廓灯</strong>和<strong>近光灯</strong>；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>示廓灯</strong></td>
+<td style="text-align: center;"><img src="/Other/2023-Auto/Lighting/2.png"></td>
+<td style="text-align: left;">点亮车辆的四个边角，标识车辆轮廓，路况照明条件较差时开启；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>近光灯</strong></td>
+<td style="text-align: center;"><img src="/Other/2023-Auto/Lighting/3.png"></td>
+<td style="text-align: left;">用于车辆近距离照明，照射范围较大，但是照射距离较短；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>远光灯</strong></td>
+<td style="text-align: center;"><img src="/Other/2023-Auto/Lighting/4.png"></td>
+<td style="text-align: left;">照射高度比近光灯更高，能够照亮更远的物体，通常用于没有灯光照明的路况；会车时必须关闭，避免干扰到对向行驶司机；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>日间行车灯</strong></td>
+<td style="text-align: center;"><strong>无</strong></td>
+<td style="text-align: left;">通常在车辆启动之后自动打开，用于提高车辆在日间的辨识度；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>前雾灯</strong></td>
+<td style="text-align: center;"><img src="/Other/2023-Auto/Lighting/5.png"></td>
+<td style="text-align: left;">用于<strong>雾</strong>、<strong>雨</strong>、<strong>雪</strong>天气，雾灯的灯光较为发散，但是具有较高的穿透力与辨识度；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>后雾灯</strong></td>
+<td style="text-align: center;"><img src="/Other/2023-Auto/Lighting/6.png"></td>
+<td style="text-align: left;">控制车辆后方雾灯的开启与关闭；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>紧急警告灯</strong></td>
+<td style="text-align: center;"><img src="/Other/2023-Auto/Lighting/7.png"></td>
+<td style="text-align: left;">控制车辆后方雾灯的开启与关闭；</td>
+</tr>
+</tbody>
+</table>
+<p>灯光控制杆向<strong>外侧</strong>（远离转向盘的方向）拨动打开<strong>远光灯</strong>；向<strong>内侧</strong>（靠近转向盘的方向）拨动则打开<strong>超车灯</strong>：</p>
+<p><img src="/Other/2023-Auto/Lighting/8.png"></p>
+<p>灯光控制杆向<strong>上方</strong>（远离转向盘的方向）拨动打开<strong>右转向灯</strong>；向<strong>下方</strong>（靠近转向盘的方向）拨动则打开<strong>左转向灯</strong>：</p>
+<p><img src="/Other/2023-Auto/Lighting/9.png"></p>
+<h2 id="雨刷控制">雨刷控制</h2>
+<p><strong>雨刷控制杆</strong>用于控制车辆档风玻璃的<code>刮水器</code>和<code>喷水器</code>，通过上下拔动控制杆，可以控制<code>刮水器</code>的摇摆频率与速度：</p>
+<p><img src="/Other/2023-Auto/Wiper/1.png"></p>
+<p>转动<strong>雨刷控制杆</strong>上的旋钮，可以设置<code>刮水器</code>的摇摆间隔时间，以及选择当前控制的是<strong>前</strong>档风玻璃还是<strong>后</strong>档风玻璃：</p>
+<p><img src="/Other/2023-Auto/Wiper/2.png"></p>
+<p>按住<strong>雨刷控制杆</strong>顶部的按钮，可以向档风玻璃喷射玻璃洗涤液：</p>
+<p><img src="/Other/2023-Auto/Wiper/3.png"></p>
+<h2 id="手动变速器">手动变速器</h2>
+<p>手动变速器（MT，Manual
+Transmission）也称手动档，需要用手拨动变速杆才能调整变速器内齿轮的啮合位置，从而达到改变<strong>传动比</strong>调整<strong>车速</strong>和<strong>扭矩</strong>的目的。</p>
+<p><img src="/Other/2023-Auto/MT.png"></p>
+<h3 id="起步">起步</h3>
+<ol type="1">
+<li>在启动发动机前，变速器换档杆置于<strong>空档</strong>，踩下离合踏板，按下发动机启动按钮；</li>
+<li>发动机启动之后，踩住离合器踏板并且保持驻车制动，将换档杆切换至前进档
+<strong>1</strong> 档或倒档 <strong>R</strong>；</li>
+<li>释放驻车制动，慢慢抬起离合器踏板的同时缓慢踩下油门踏板，车辆平稳起步；</li>
+</ol>
+<h3 id="换前进档">换前进档</h3>
+<p>根据换档杆上的换档图标和车速进行前进换档，当需要<strong>升档</strong>或者<strong>降档</strong>时，一定要<strong>将离合器踏板踩到底</strong>。换档完成之后，再慢慢松开离合器踏板。而不进行换档操作时，切勿将脚放在离合器踏板上，否则容易造成离合器的过度磨损或者动力突然中断。</p>
+<ul>
+<li><strong>低档</strong>换<strong>高档</strong>时，轻踩<strong>油门</strong>拉高发动机转速度，配合适当的换档点，会让换档过程更为平顺；</li>
+<li><strong>高档</strong>换<strong>低档</strong>时，轻踩刹车减速之后，再进行换档操作，以免损伤变速器；</li>
+</ul>
+<h3 id="换倒档">换倒档</h3>
+<p>换入倒档之前，必须让车辆停稳，并且在发动机怠速运转时将离合器踏板踩到底，再换入倒档。</p>
+<ol type="1">
+<li>首先，需要将换档杆置于<strong>空档</strong>；</li>
+<li>然后，上提换档杆<strong>按钮</strong>，并将换档杆向左移动到底；</li>
+<li>最后，再将换档杆向前推入空档。</li>
+</ol>
+<h2 id="自动变速器">自动变速器</h2>
+<p>自动变速器（AT，Automatic
+Transmission）是相对于手动变速箱而出现，能够根据<strong>车速</strong>与<strong>转速</strong>进行自动换档操作的变速装置，目前燃油车的自动变速箱主要有<code>液力自动变速箱</code>（AT）、<code>机械无级自动变速箱</code>（CVT）、<code>双离合自动变速箱</code>（DCT）三种形式。</p>
+<p><img src="/Other/2023-Auto/AT.png"></p>
+<table>
+<colgroup>
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">车辆标识</th>
+<th style="text-align: center;">英文名称</th>
+<th style="text-align: center;">中文名称</th>
+<th style="text-align: left;">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>P</strong></td>
+<td style="text-align: center;"><strong>P</strong>arking</td>
+<td style="text-align: center;"><strong>驻车档</strong></td>
+<td style="text-align: left;">车辆驱动轮被机械锁止，允许同时启动发动机，如要要从<strong>驻车档</strong>挂入<strong>行驶档</strong>或<strong>倒档</strong>，必须先踩下制动踏板再按下换档杆上的解锁按钮；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;"><strong>R</strong>everse</td>
+<td style="text-align: center;"><strong>倒车档</strong></td>
+<td style="text-align: left;">向后行驶档位，静止时从<strong>倒车档</strong>挂入<strong>驻车档</strong>，需要按下换档杆上的解锁按钮，而无需踩下制动踏板；仅在车辆静止或者怠速时，才能挂入<strong>倒车档</strong>；</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>N</strong></td>
+<td style="text-align: center;"><strong>N</strong>eutral</td>
+<td style="text-align: center;"><strong>空档</strong></td>
+<td style="text-align: left;">发动机动力无法传递至驱动轮，同时也无法发挥发动机的制动作用；从<strong>空档</strong>挂入<strong>驻车档</strong>或<strong>倒车档</strong>，需要踩下制动踏板后按下档位解锁按钮；而从<strong>空档</strong>挂入<strong>行驶档</strong>，直接推动换档杆即可；</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>D</strong></td>
+<td style="text-align: center;"><strong>D</strong>rive</td>
+<td style="text-align: center;"><strong>行驶档</strong></td>
+<td style="text-align: left;">正常行驶档位，车辆静止时从<strong>前进档</strong>挂入<strong>倒车档</strong>或<strong>驻车档</strong>，需要踩下制动踏板后按下档位解锁按钮；如果要挂入<strong>空档</strong>，则只需直接推动换档杆即可；</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>只有在车辆静止时，才能挂入<strong>驻车档</strong>，避免损伤变速器。只有换档杆处于<strong>驻车档</strong>或<strong>空档</strong>时，发动机才能够启动；</li>
+<li>换档杆处于<strong>前进档</strong>或<strong>倒车档</strong>时，如果驾驶员松开制动踏板，车辆会开始自动前进或后退；</li>
+<li>车辆下坡时，不得将换档杆置于<strong>空档</strong>，否则会无法利用发动机的制动作用；</li>
+</ul>
+<h3 id="启动">启动</h3>
+<p>自动档车辆启动发动机，必须依照如下步骤进行操作：</p>
+<ol type="1">
+<li>驾驶者携带有效的智能钥匙；</li>
+<li>首先，踩下刹车制动踏板；</li>
+<li>然后，将换档杆置于<strong>驻车档</strong>或者<strong>空档</strong>；</li>
+<li>最后，按下发动机启动按钮；</li>
+</ol>
+<h3 id="停车">停车</h3>
+<ul>
+<li><strong>长时间停车</strong>或者<strong>坡道停车</strong>：让车辆完全停稳之后，按下电子手刹进行驻车，再将换档杆置于<strong>驻车档</strong>；</li>
+<li><strong>短时间停车</strong>：将换档杆置于空档，为了防止车辆溜车，需要同时按下电子手刹进行驻车；</li>
+<li><strong>极短时间停车</strong>：不建议在行驶档和拿到档一直踩住制动踏板，这样会影响到自动变速器的使用寿命；</li>
+</ul>
+<h2 id="燃油发动机前舱">燃油发动机前舱</h2>
+<p>燃油发动机舱当中通常包括<strong>发动机</strong>、<strong>空气滤清器</strong>、<strong>蓄电池</strong>、<strong>排气系统</strong>、<strong>节气门</strong>、<strong>车窗清洗液储液罐</strong>、<strong>制动液储液罐</strong>、<strong>发动机冷却液膨胀罐</strong>等装置。</p>
+<p><img src="/Other/2023-Auto/Engine-Room.png"></p>
+<ul>
+<li><strong>制动液</strong>：车轮液压制动系统当中，传递制动压力的液态介质，也称为<strong>刹车油</strong>；</li>
+<li><strong>冷却液</strong>：用于冷却发动机的液体介质，主要成份为水和添加剂，由于具有防冻功能，也称为<strong>防冻液</strong>；</li>
+<li><strong>车窗清洗液</strong>：俗称为<strong>玻璃水</strong>，主要用于辅助雨刷清洁前后档风玻璃上的污渍；</li>
+<li><strong>发动机机油</strong>：发动机润滑油，能对发动机起到润滑减磨、辅助冷却、密封防漏、防锈防蚀、减震缓冲等作用；</li>
+</ul>
+<h2 id="电子手刹-自动驻车">电子手刹 &amp; 自动驻车</h2>
+<p><strong>电子驻车制动系统</strong>（EPB，Electronic Parking
+Brake）也称为<strong>电子手刹</strong>，功能类似于机械拉杆手刹，同样通过刹车盘与刹车片的摩擦来达到制动目的，只是控制方式从过去的<strong>机械式拉杆</strong>变为<strong>电子按钮</strong>。</p>
+<p><img src="/Other/2023-Auto/Auto-Hold.png"></p>
+<p><strong>AUTO HOLD</strong>
+自动驻车功能由车辆内置的<strong>电子稳定程序</strong>（<strong>ESP</strong>，Electronic
+Stability
+Program）控制，当车辆临时停驻并在很短一段时间之后需要重新启动，这种情况的驻车就交由
+ESP
+控制的刹车来完成，程序会通过一系列的传感器来测量车身的水平度和车轮扭矩，对车辆滑行趋势做一个判定，并对车轮实施一个适当的刹车制动，使得车辆保持静止状态。此时的制度力度刚好可以阻止车辆滑动，以便再次踩下油门时，不会发生前窜。而在临时驻车超过一定时间限制之后，刹车系统会转为后轮机械驻车，此时相当于自动打开电子手刹。自动驻车功能主要用于辅助坡道起步，例如当车辆在坡道上停驻时，松开制动踏板后，ESP
+系统会继续保持制动，使得驾驶人员有足够的时间踩下油门踏板，进而减少溜坡影响。</p>
+<h2 id="发动机自动启停">发动机自动启停</h2>
+<p><strong>发动机自动启停技术</strong>（Engine Start-Stop
+Technology）是指在车辆临时停车时，发动机会自动熄火（节省怠速时的燃油消耗），当车辆需要继续前进时，发动机重新启动。随着燃油车辆排放法规与能耗标准越来越严格，自动启停技术已经逐渐普及。</p>
+<p><img src="/Other/2023-Auto/Stop-Start.png"></p>
+<p>发动机自动启停的工作原理是：当车辆因为拥堵或者红灯停止行驶时，驾驶者踩下制动踏板，并且挂入空挡，此时系统会自动开始进行检测；如果发动机处于怠速状态，离合器处于零档位，并且车轮转速传感器显示为零，蓄电池电量能够满足下一次启动时，发动机就会停止运转。</p>
+<blockquote>
+<p><strong>注意</strong>：分离或者集成式的 <code>启动机</code> 和
+<code>发电机</code>加上 <code>增强式启动机</code> 和
+<code>自动启停蓄电池</code> 是目前最为常见的自动启停技术实现方案。</p>
+</blockquote>
+<h2 id="上坡辅助-陡坡缓降">上坡辅助 / 陡坡缓降</h2>
+<ul>
+<li><strong>上坡辅助控制</strong>（HAC，Hill-start Assist
+Control）同样是在 ESP
+系统的基础上发展出来的功能，当车辆在上坡停车之后重新起步时，该功能会自动控制刹车几秒钟（通常在
+<code>3</code>
+秒以内），以防止车辆向后滑行，提升半坡起步的安全性。当自动变速箱换挡杆不在<strong>驻车档</strong>，驾驶者未踩下<strong>油门踏板</strong>，车辆开始向后溜车，并且未拉起手刹时，驾驶者深踩下<strong>制动踏板</strong>，此时防滑提示灯亮起、蜂鸣器响起，即表示该功能已经启动；</li>
+<li><strong>陡坡缓降控制</strong>（HDC，Hill Descent
+Control）可以让驾驶员在不踩下制动踏板的情况下，平稳的通过陡峭的下坡坡段；制动装置会按需自动控制车轮，以略快于行驶速度的速度向前移动，此时驾驶员可以专注于控制方向盘；该系统结合<code>发动机减速</code>与
+<code>ABS 防抱死</code>功能（发动机可以提供相当程度的减速效果，而且不存在轮胎锁死的问题；当陡坡坡度过大，发动机减速无法维持安全车速时，就可以借助
+ABS
+系统，在必要时启动快速点刹，以维持稳定安全的下坡速度），使得车辆在下陡坡时，依然可以维持低车速，但是并不会丧失轮胎抓地能力；该功能可以在变速箱档位位于<strong>行驶档</strong>（前进下坡）或者<strong>倒档</strong>（倒车下坡）时发挥作用，系统会自动设定车速上限；</li>
+</ul>
+<h2 id="abc-柱">ABC 柱</h2>
+<p>车辆的 <strong>A</strong>、<strong>B</strong>、<strong>C</strong>
+<strong>柱</strong>指代的都是机动车侧面的立柱，其提供了支撑车顶、保护车辆在翻滚中不发生变形、保护司机和乘客安全的作用。</p>
+<p><img src="/Other/2023-Auto/Structure/ABC.png"></p>
+<ul>
+<li><strong>A 柱</strong>：前挡风玻璃两边的立柱，从车侧面看着像字母
+<strong>A</strong>
+而得名，主要用于正面冲击能量的传递通道，将车头的正面冲击能量传递到车顶，主要起到保护驾驶舱的作用；宽大的
+A 柱虽然保护作用更好，但是容易遮挡<strong>左转向</strong>的视野；</li>
+<li><strong>B 柱</strong>：前车门与后车门之间的立柱，其与后门组成字母
+<strong>B</strong>
+而得名，属于车辆抵抗侧面撞击的力学结构，主要起到支撑车顶和保护乘客安全的作用；</li>
+<li><strong>C 柱</strong>：车辆后风挡玻璃两侧的立柱，因其像反着字母
+<strong>C</strong>
+而得名，主要用于将车尾撞击的能量传递到车顶，起到保护后排乘客的作用；</li>
+</ul>
+<h2 id="车辆行驶系统">车辆行驶系统</h2>
+<p>车辆的行驶系统通常由<strong>车身</strong>、<strong>车桥</strong>、<strong>悬架</strong>、<strong>车轮</strong>四部分组成：</p>
+<ul>
+<li><strong>车架</strong>：跨接在车辆前后车桥上的框架式结构，也称作<strong>大梁</strong>，通常由两根<code>纵梁</code>和几根<code>横梁</code>组成，经由悬挂装置﹑前桥﹑后桥支撑在车轮上；用于支撑和连接车辆的各个总成（发动机、传动系、悬架、转向），并且承受汽车内外的各种载荷；
+<img src="/Other/2023-Auto/Structure/Overview-1.png"></li>
+<li><strong>悬架</strong>：车架（或承载式车身）与车桥（或车轮）之间连接装置的总称，其作用是传递与缓冲车轮与车架之间的载荷，减少震动，确保车辆行驶的平顺性；典型的悬架结构由<code>弹性元件</code>、<code>导向机构</code>、<code>减震器</code>等组成，个别车型还拥有<code>缓冲块</code>、<code>横向稳定杆</code>等结构件；
+<img src="/Other/2023-Auto/Structure/Overview-2.png"></li>
+<li><strong>车桥</strong>：通过悬架与车架（或承载式车身）进行连接，两端安装有车轮，也称为<strong>车轴</strong>；车桥按照功能可以划分为<code>转向桥</code>、<code>驱动桥</code>、<code>转向驱动桥</code>、<code>支持桥</code>四种类型；车桥中间可以是断开式的，分布在底盘两侧，通过独立悬架系统支撑车身；
+<img src="/Other/2023-Auto/Structure/Overview-3.png"></li>
+</ul>
+<h3 id="副车架">副车架</h3>
+<p>民用车辆当中普遍采用的<strong>副车架</strong>并非完整的车架，而只是支撑前后<strong>车桥</strong>与<strong>悬架</strong>的支架，通过它再与真正的<strong>车架</strong>进行连接。传统的没有副车架的承载式车身，其悬架系统直接与车身连接，因此前后车桥的悬架机构都为散件，并非总成；副车架设计出现之后，前后悬挂可以先组装在副车架上面，从而构成一个车桥总成，然后再将这个总成安装到车身，在阻隔振动与噪声的同时，降低装配成本：</p>
+<ul>
+<li><strong>H
+型副车架</strong>的主体通常是由钢板冲压焊接而成的封闭断面，该结构一般会通过四个安装点与车身连接，主要用于<strong>前副车架</strong>，也被称作<strong>元宝梁</strong>，属于较早出现的副车架结构：
+<img src="/Other/2023-Auto/Structure/Carframe-1.png"></li>
+<li><strong>全框式副车架</strong>通常是由四段封闭式的钢梁焊接而成的框式结构，副车架通过四个或者六个点与车身相连接，通常用于前副车架。由于全框式副车架在发动机仓增加了额外的纵梁结构，可以以提升抗撞击能力，属于当前比较优质的前副车架设计结构：
+<img src="/Other/2023-Auto/Structure/Carframe-2.png"></li>
+</ul>
+<h3 id="纵梁">纵梁</h3>
+<p><strong>纵梁</strong>是<strong>车架</strong>上面最为关键的组成部分，主要起到承载作用，通常由合金钢板冲压而成，断面形状通常情况下为槽型或者
+<strong>Z</strong> 型：</p>
+<p><img src="/Other/2023-Auto/Structure/Girder.png"></p>
+<h2 id="车体结构">车体结构</h2>
+<p><strong>车身结构</strong>指构成车辆各个部件总成的布置形式，以及部件之间装配方式；按照车身承受负荷的方式，民用车辆的车身结构大致可以被划分为<strong>非承载式</strong>、<strong>承载式</strong>、<strong>半承载式</strong>三种主要类型：</p>
+<ul>
+<li><strong>非承载式车身</strong>拥有一副刚性车架，也称为<strong>底盘大梁</strong>；<strong>发动机</strong>、<strong>部分传动装置</strong>以及<strong>车身</strong>通过<code>弹簧</code>或者<code>橡胶垫</code>柔性连接到<strong>车架</strong>上面，而<strong>车架</strong>再通过前后<strong>悬架</strong>与<strong>车轮</strong>连接；虽然这种车身比较笨重，但是具备较好的平稳性和安全性，通常用于货车、客车、越野车；
+<img src="/Other/2023-Auto/Structure/Body-1.png"></li>
+<li><strong>承载式车身</strong>没有刚性车架，只是加强了<code>车头</code>、<code>侧围</code>、<code>车尾</code>、<code>底板</code>等部位，<strong>发动机</strong>、<strong>前后悬架</strong>、<strong>部分传动装置</strong>装配在<strong>车身</strong>上设计要求的位置，<strong>车身</strong>负载再通过<strong>悬架装置</strong>传递给车轮。这种承载式车身除了具有乘载功能之外，还要直接承受各种负荷力的作用；经过不断的发展与完善，这种车身的安全性和稳定性已经有了很大的提高，具备质量小、高度低、装配容易等优点，大部分民用车辆采用了这种车身结构；
+<img src="/Other/2023-Auto/Structure/Body-2.png"></li>
+<li><strong>半承载式车身</strong>的<strong>车身</strong>与<strong>车架</strong>通过螺钉、铆钉、焊接等方式刚性进行连接，这种情况下，车身除了承受各种载荷之外，还可以在一定程度上加固车架，分担车架各部分的载荷，这种车身结构的应用较少；
+<img src="/Other/2023-Auto/Structure/Body-3.png"></li>
+</ul>
+<h2 id="发动机技术">发动机技术</h2>
+<p>汽车发动机属于一种<strong>往复活塞式</strong>内燃机，用于将汽油燃烧的化学能转化为机械能。</p>
+<p><img src="/Other/2023-Auto/Engine.png"></p>
+<ul>
+<li><strong>曲轴</strong>：将活塞连杆传来的<code>推力</code>变为旋转的<code>扭力</code>；</li>
+<li><strong>凸轮轴</strong>：用于控制<strong>气门</strong>的<code>开启</code>与<code>闭合</code>动作；</li>
+<li><strong>正时机构</strong>：<strong>曲轴</strong>通过正时<code>链条</code>或者<code>皮带</code>，让<strong>凸轮轴</strong>在正确的时机开闭气门；</li>
+<li><strong>可变气门正时系统</strong>：英文缩写为
+<strong>VVT</strong>（Variable Valve
+Timing），其原理是通过调节凸轮轴的相位，使得气门开闭时间随着发动机转速的变化而变化，从而提高进气效率；</li>
+<li><strong>油底壳</strong>：位于发动机底部，内部安装有<strong>稳油挡板</strong>，<strong>曲轴</strong>每旋转一周都会浸入油底壳内的润滑油一次，从而起到不间断润滑的作用；</li>
+<li><strong>涡轮增压</strong>：本质上是一种<strong>空气压缩机</strong>，可以压缩空气增加发动机的进气量。利用发动机排出的废气推动涡轮室内的涡轮，涡轮的旋转带动同轴的叶轮，最后由叶轮压缩空气滤清器管道传输过来的空气，使之增压进入气缸；</li>
+</ul>
+<h2 id="悬架技术">悬架技术</h2>
+<p>典型的悬挂结构主要由<strong>弹性元件</strong>（螺旋弹簧）、<strong>导向机构</strong>（连杆）、<strong>减震器</strong>以及<strong>横向稳定杆</strong>等结构组成。根据两侧车轮的运动是否关联，可以大体将悬架划分为<strong>非独立悬架</strong>和<strong>独立悬架</strong>两种形式：</p>
+<p><img src="/Other/2023-Auto/Structure/Suspension-1.png"></p>
+<h3 id="相关结构件">相关结构件</h3>
+<ul>
+<li><strong>衬套</strong>：当路面起伏作用在车轮上，车轮就会通过悬架传递给车身，此时振动在悬架上存在着<code>弹簧+减振器</code>和<code>控制臂</code>两条传递路径，衬套就是用于降低控制臂传递振动的装置，其材质多为软质的金属、橡胶、尼龙、非金属聚合物等；
+<img src="/Other/2023-Auto/Structure/Part-1.png"></li>
+<li><strong>球头</strong>：一种安装在<code>转向轴</code>或者<code>传动轴</code>上的一种<strong>球型连接结构</strong>，有时候也被称为<strong>万向节</strong>；
+<img src="/Other/2023-Auto/Structure/Part-2.png"></li>
+<li><strong>转向节</strong>：传递并承受汽车前部载荷，支承并带动前轮绕主销转动而使汽车转向，也称为<strong>羊角</strong>；
+<img src="/Other/2023-Auto/Structure/Part-3.png"></li>
+<li><strong>横向稳定杆</strong>：用于防止车身在转弯时发生过大的横向侧倾，尽量使车身保持平衡，因此也被称为<strong>防倾杆</strong>、<strong>平衡杆</strong>；当车身只作垂直运动时，两侧悬架的变形相同，横向稳定杆不起作用；而当车辆转弯时，车身侧倾，两侧悬架跳动不一致，外侧悬架会压向稳定杆，稳定杆就会发生扭曲，杆身的弹力会阻止车轮抬起，从而使车身尽量保持平衡，起到横向稳定的作用。横向稳定杆由弹簧钢制成，形状呈
+<strong>U</strong>
+形，横置在汽车的前端和后端，杆身中部通过<strong>橡胶衬套</strong>与车身或者车架连接，两端通过侧壁端部的橡胶垫或者球头销与悬架导向臂连接；
+<img src="/Other/2023-Auto/Structure/Part-4.png"></li>
+<li><strong>主销</strong>：是指<strong>转向节</strong>围绕<strong>转向桥</strong>转动的轴，即转向轮进行转向时的回转轴线；该概念最早来自于早期简易工字梁底盘，是其转向轮<strong>羊角</strong>与<strong>车桥</strong>连接时所使用的<strong>活动插销</strong>；
+<img src="/Other/2023-Auto/Structure/Part-5.png"></li>
+<li><strong>半轴</strong>：用于在变速箱减速器与驱动轮之间传递扭矩的轴，通过半轴<strong>内</strong>、<strong>外</strong>两端的<strong>万向节</strong>与<code>减速器齿轮</code>及<code>轮毂轴承内圈</code>相互进行连接：
+<img src="/Other/2023-Auto/Structure/Part-6.png"></li>
+</ul>
+<h3 id="麦弗逊式独立悬架">麦弗逊式独立悬架</h3>
+<p>通常用于车辆<strong>前</strong>悬架，由<strong>下摆臂</strong>（也称为<strong>下控制臂</strong>）与<strong>减振支柱</strong>共同组成，车轮<code>上部</code>通过一根减振支柱与车身相连，而<code>下部</code>的连接部件则是一根
+<strong>A</strong> 字形摇臂：</p>
+<ul>
+<li>上部的减振支柱集成了<strong>弹簧</strong>和<strong>减振器</strong>，这根支柱不仅承担着车体的减振任务，还需要承受来自车轮上端的<code>横向力</code>；</li>
+<li>下部的 A
+字形摇臂可以承担车轮下端的<code>横向力</code>和<code>纵向力</code>；</li>
+</ul>
+<p><img src="/Other/2023-Auto/Structure/Suspension-2.png"></p>
+<h3 id="双叉臂式独立悬架">双叉臂式独立悬架</h3>
+<p>通常用于车辆<strong>前</strong>悬架，双叉臂式悬挂也称为<strong>双 A
+臂式独立悬挂</strong>，主要由上下两个<strong>双叉摆臂</strong>组成，横向力由两个叉臂同时吸收，支柱只承载车身重量，因此其横向刚度较大。双叉臂式悬挂的上下两个
+<strong>A</strong>
+字形叉臂可以精确的定位前轮的各种参数。而在前轮转弯时，上下两个叉臂能同时吸收轮胎所受到的横向力，加上两叉臂的横向刚度较大，所以转弯的侧倾比较小。双叉臂式悬挂通常采用上短下长的两条不等长叉臂，让车轮在上下运动时能自动改变外倾角并且减小轮距变化与轮胎磨损。</p>
+<p><img src="/Other/2023-Auto/Structure/Suspension-3.png"></p>
+<h3 id="多连杆式独立悬架">多连杆式独立悬架</h3>
+<p>通常用于车辆<strong>后</strong>悬架，多连杆式独立悬架的<strong>连杆</strong>数量比较多，通常将四连杆或者更多连杆结构的悬架称为<strong>多连杆式悬架</strong>，通常用于车辆的后悬架系统，其优点在于调校自由度大，路面冲击对车身影响较小，但是占用的空间比较大，下面是一个五连杆悬架的示意图：</p>
+<p><img src="/Other/2023-Auto/Structure/Suspension-4.png"></p>
+<h3 id="扭力梁式半独立悬架">扭力梁式半独立悬架</h3>
+<p>通常用于车辆<strong>后</strong>悬架，扭力梁式非独立悬架是入门级车型上比较常用的后悬架结构，其制造成本较低，承载能力相对较强。其通过有一定扭矩的<strong>硬梁</strong>，在车辆行驶中的动态状态下保证承载力与结构稳定性：</p>
+<p><img src="/Other/2023-Auto/Structure/Suspension-5.png"></p>
+<h2 id="轮胎规格">轮胎规格</h2>
+<p>国际标准的轮胎编号，通常以<strong>毫米</strong>作为单位来表示断面高度和扁平比的百分数，后面再加上<code>轮胎类型代号</code>，<code>轮圈直径</code>，<code>负荷指数</code>，<code>速度等级</code>。例如型号为
+<code>175/70R 14 77H</code> 的轮胎，其中 <code>175</code> 代表轮胎宽度为
+<code>175毫米</code>，而 <code>70</code>
+表示轮胎断面高度与宽度的比值（扁平比）为
+<code>70%</code>，<code>R</code> 表示子午线轮胎，轮圈直径为
+<code>14英寸</code>，负荷指数为 <code>77</code>，速度级别为
+<code>H</code> 级。</p>
+<p><img src="/Other/2023-Auto/Tyre/1.png"></p>
+<p>值得注意的是，<strong>速度等级</strong>可以标识在<strong>扁平比</strong>之后或者<strong>轮胎描述</strong>的最后，例如型号为
+<code>195/65 R15 88H</code> 的轮胎也可以表示为
+<code>195/65H R15 88</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">胎宽 --------------------- 195 毫米</span><br><span class="line">轮胎断面的扁平比 ----------- 胎厚 126.75 / 胎宽195 = 65%</span><br><span class="line">轮圈直径------------------ 15 英寸</span><br><span class="line">负荷指数------------------ 88</span><br><span class="line">速度级别------------------ H</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">速度等级</th>
+<th style="text-align: center;">最大时速</th>
+<th style="text-align: center;">常用车型</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>N</strong></td>
+<td style="text-align: center;"><code>140 公里/时</code></td>
+<td style="text-align: center;">备用胎</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>P</strong></td>
+<td style="text-align: center;"><code>150 公里/时</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Q</strong></td>
+<td style="text-align: center;"><code>160 公里/时</code></td>
+<td style="text-align: center;">雪地胎</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;"><code>170 公里/时</code></td>
+<td style="text-align: center;">轻型卡车胎</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>S</strong></td>
+<td style="text-align: center;"><code>180 公里/时</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>T</strong></td>
+<td style="text-align: center;"><code>190 公里/时</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>U</strong></td>
+<td style="text-align: center;"><code>200 公里/时</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>H</strong></td>
+<td style="text-align: center;"><code>210 公里/时</code></td>
+<td style="text-align: center;">运动型轿车</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>V</strong></td>
+<td style="text-align: center;"><code>240 公里/时</code></td>
+<td style="text-align: center;">跑车</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>W</strong></td>
+<td style="text-align: center;"><code>270 公里/时</code></td>
+<td style="text-align: center;">超级跑车</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Y</strong></td>
+<td style="text-align: center;"><code>300 公里/时</code></td>
+<td style="text-align: center;">超级跑车</td>
+</tr>
+</tbody>
+</table>
+<p><strong>安全轮胎</strong>主要是指<strong>缺气保用轮胎</strong>，也称为<strong>防爆轮胎</strong>，这种轮胎可以在亏气甚至零胎压的情况下，依靠坚硬的<strong>胎壁</strong>支撑车辆正常行驶相当长的一段距离。普通轮胎会在失去压力之后丧失去支撑力，导致轮胎脱离轮毂与地面直接接触；而缺气保用轮胎通过极具韧性与支撑性的胎壁，确保轮胎与轮毂的正常结合，从而给予车辆一定的支撑力，保证车辆的的安全。</p>
+<p><img src="/Other/2023-Auto/Tyre/2.png"></p>
+<p>各个品牌的轮胎都拥有各自的防爆标识：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">轮胎品牌</th>
+<th style="text-align: center;">防爆标志</th>
+<th style="text-align: center;">轮胎品牌</th>
+<th style="text-align: center;">防爆标志</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>倍耐力</strong></td>
+<td style="text-align: center;">R-F 或 Run-flat</td>
+<td style="text-align: center;"><strong>马牌</strong></td>
+<td style="text-align: center;">SSR</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>普利司通</strong></td>
+<td style="text-align: center;">RFT</td>
+<td style="text-align: center;"><strong>米其林</strong></td>
+<td style="text-align: center;">ZP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>邓禄普</strong></td>
+<td style="text-align: center;">ROF</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="电控安全系统">电控安全系统</h2>
+<ul>
+<li><strong>防抱死制动系统</strong>（<strong>ABS</strong>，Antilock
+Brake
+System）：该系统用于在车辆制动时，自动调整制动器的制动力大小，使得车轮不会处于抱死状态，而是处于边滚边滑的状态，从而保证车轮与地面之间附着力的最大值；当
+ABS 触发时，车辆的刹车踏板会有上下震动的现象；</li>
+<li><strong>电子制动力分配</strong>（<strong>EBD</strong>，Electronic
+Brake force
+Distribution）：能够根据车辆制动时产生轴荷转移的不同，而自动调节前后轴的制动力分配比例，从而提高制动效能，并配合
+ABS 提高制动的稳定性；该功能可以视为 ABS 衍生出来的辅助功能；</li>
+<li><strong>紧急制动辅助</strong>（<strong>EBA</strong>，Emergency Brake
+Assist）或<strong>制动辅助</strong> (<strong>BAS</strong>，Brake
+Assistant)：通过传感器分辨驾驶者踩踏板的状态，从而识别和判断是否引入紧急刹车程序；如果判断出需要，则系统立刻激发出最大刹车压力，以达到最大制动效果；</li>
+<li><strong>牵引力控制</strong>（<strong>TCS</strong>，Traction Control
+System）<strong>加速防滑控制</strong>（<strong>ASR</strong>，Acceleration
+Slip
+Regulation：用于保证车辆在各种工况下都能够获得最佳的牵引力，防止车辆在起步和加速时，驱动轮发生打滑现象，维持车辆行驶方向的稳定性；</li>
+<li><strong>电子稳定程序</strong>（<strong>ESP</strong>，Electronic
+Stability Program）：属于防抱死制动系统 <strong>ABS</strong>
+和加速防滑控制
+<strong>ASR</strong>，两种功能的延伸，由于紧急情况下，车轮受到的<strong>纵向力</strong>（沿车轮滚动方向）与<strong>侧向力</strong>（垂直车轮滚动方向）为此消彼长关系，该系统通过控制各个车轮纵向的制动力来影响侧向力，从而防止车辆在极限工况下出现打滑；</li>
+</ul>
+<h2 id="ecu-电子控制单元">ECU 电子控制单元</h2>
+<p><strong>电子控制单元</strong>（<strong>ECU</strong>，Electronic
+Control Unit）也称为<strong>行车电脑</strong>，主要由微控制器
+MCU、存储器 ROM 或 RAM
+等大规模集成电路组成，主要由<code>英飞凌</code>、<code>意法半导体</code>、<code>飞思卡尔</code>、<code>博世</code>、<code>大陆</code>等企业提供。通过不断采集车辆上各个传感器的信号，可以控制发动机的点火、空燃比、怠速、废气再循环等多项参数。ECU
+的电压工作范围位于 <code>6.5V ~ 16V</code>，工作电流在
+<code>0.015A ~ 0.1A</code>，工作温度介于
+<code>-40℃ ~ 80℃</code>，并且能够承受低于 <code>1000Hz</code>
+的振动。</p>
+<p><img src="/Other/2023-Auto/ECU.png"></p>
+<h2 id="obu-车载单元">OBU 车载单元</h2>
+<p><strong>车载单元</strong>（<strong>OBU</strong>，On Board
+Unit）是采用<strong>专用短程通信</strong>（<strong>DSRC</strong>，Dedicated
+Short Range
+Communication）技术与<strong>路侧单元</strong>（<strong>RSU</strong>，Road
+Side
+Unit）进行通讯的无线射频设备。在<strong>电子不停车收费系统</strong>（<strong>ETC</strong>，Electronic
+Toll Collection）系统当中，将 <strong>OBU</strong> 安装在车辆当中，而
+<strong>RSU</strong> 架设在公路旁边，相互之间通过国家标准为
+<strong>GB20851</strong> 频率为 <code>5.8GHz</code>
+的微波进行通讯。当载有 <strong>OBU</strong> 的车辆高速通过
+<strong>RSU</strong>
+的时候，两者之前的通信类似于非接触式射频卡，只是通信距离更远频率更高。从而可以在车辆行驶途中，实现车辆的身份识别、电子扣费等功能。</p>
+<p><img src="/Other/2023-Auto/OBU.png"></p>
+<h2 id="自动驾驶级别">自动驾驶级别</h2>
+<p>目前的<strong>自动驾驶级别</strong>是根据<strong>美国汽车工程师学会</strong>（SAE，Society
+of Automotive Engineers）于 2018 年发布的标准，一共可以划分为
+<code>L0 ～ L5</code> 共六个级别。</p>
+<p><code>L0 ～ L2</code>
+为需要人为介入的<strong>辅助驾驶</strong>，即使驾驶员双脚离开踏板，不进行方向控制，在辅助系统介入过程中车辆仍然视为由驾驶员驾驶，驾驶员需要持续监控车辆状态，随时准备刹车、转向、加速以保证行驶安全：</p>
+<ul>
+<li><strong>L0
+级别辅助驾驶</strong>：无自动驾驶，完全由驾驶员完成车辆的控制，辅助驾驶系统只能提供<code>警告</code>，以及<code>自动紧急刹车</code>、<code>盲区提醒</code>、<code>车道偏离提醒</code>等辅助功能；</li>
+<li><strong>L1
+级别辅助驾驶</strong>：驾驶员辅助驾驶，即最低级别的辅助驾驶功能，辅助驾驶系统可以提供<code>转向</code>、<code>制动</code>、<code>加速</code>的辅助控制，例如车道保持与自适应巡航；</li>
+<li><strong>L2
+级别辅助驾驶</strong>：高级驾驶员辅助驾驶，当前大部分车辆所能够达到的级别，辅助驾驶系统可以<strong>同时</strong>提供<code>转向</code>、<code>制动</code>、<code>加速</code>等辅助控制，例如在车道保持的同时进行自适应巡航；</li>
+</ul>
+<p><code>L3 ～ L5</code>
+为无需人为介入的<strong>自动驾驶</strong>，即整个驾驶过程当中，无需任何司乘人员的人工干预，完全由车载计算机控制车辆的行驶：</p>
+<ul>
+<li><strong>L3
+级别自动驾驶</strong>：受条件约束的自动驾驶，即在特定条件下可以实现自动驾驶，该级别依然需要驾驶员在必要时控制车辆，例如<code>拥堵辅助副驾驶</code>等；</li>
+<li><strong>L4
+级别自动驾驶</strong>：高度自动驾驶，即使发生特殊状况时，自动驾驶系统也可以自己应对，无需任何人为干预，但是驾乘人员也可以选择手动控制；该级别的自动驾驶有<code>地理围栏</code>限制，只能在特定区域行驶；</li>
+<li><strong>L5 级别自动驾驶</strong>：完全自动驾驶，在 L4
+级别的基础之上取消了<code>地理围栏</code>的限制，可以在任何情况下实现完全的自动驾驶；</li>
+</ul>
+<h2 id="新能源三电系统">新能源三电系统</h2>
+<p>新能源汽车最为核心的技术是包括<code>动力电池</code>、<code>驱动电机</code>、<code>电控系统</code>在内的<strong>三电系统</strong>：</p>
+<p><img src="/Other/2023-Auto/Electrocar/MEB.png"></p>
+<h3 id="动力电池">动力电池</h3>
+<p>国内在动力电池领域，主要以<code>磷酸铁锂电池</code>和<code>三元锂电池</code>技术为主：</p>
+<ul>
+<li><strong>三元锂电池</strong>：<strong>正极材料</strong>为镍盐、钴盐、锰盐/铝酸锂三种元素，<strong>负极材料</strong>为石墨，<strong>电解质</strong>为六氟磷酸锂；</li>
+<li><strong>磷酸铁锂电池</strong>：<strong>正极材料</strong>采用磷酸铁锂，<strong>负极材料</strong>同样为石墨。<strong>电解质</strong>也是六氟磷酸锂；</li>
+</ul>
+<p><img src="/Other/2023-Auto/Electrocar/Battery.png"></p>
+<h3 id="驱动电机">驱动电机</h3>
+<p><strong>感应异步交流电机</strong>（Induction
+Motor）会在<strong>定子</strong>的绕组当中输入三相交流电，定子绕组中的励磁电流在定子铁芯中产生旋转磁场，此时<strong>转子</strong>绕组中有感应电流通过并推动转子作旋转运动。当转子带有机械负载时，转子电流增加，由于电磁感应作用，定子绕组中的励磁电流也会增加。交流异步电机控制器采用
+<strong>PWM
+脉冲宽度调制</strong>来实现直流到三相交流的转换，同时采用<strong>变频器</strong>来实现电机的调速，采用<code>矢量控制</code>或<code>直接转矩控制</code>实现快速的转矩控制，满足负载变化特性的要求。目前主要应用于空间要求较低，速度性能要求不高的商用车型。</p>
+<ul>
+<li>结构简单，定子和转子无需直接接触；</li>
+<li>缺点在于能耗高，转子发热较快，高速工况下需要额外的冷却系统；</li>
+<li>功率因数低，需要大容量的变频器，造价较高，调速性能较差；</li>
+</ul>
+<p><strong>永磁电机</strong>（Permanent Magnetic
+Motor）包括由<code>正弦波</code>驱动的<strong>永磁同步交流电机</strong>和由<code>方波</code>驱动的<strong>永磁无刷直流电机</strong>两种类型：</p>
+<ul>
+<li><strong>永磁同步交流电机</strong>主要应用于体积小，速度和操控性能要求较高的电动乘用车领域；</li>
+<li><strong>永磁无刷直流电机</strong>则通常应用于小功率的低速电动车领域；</li>
+</ul>
+<h3 id="电控系统">电控系统</h3>
+<p>新能源车的电控系统主要由<strong>电池管理系统</strong>（BMS）、<strong>车辆控制器</strong>（VCU）、<strong>电机控制器</strong>（MCU）三大部分组成：</p>
+<p><img src="/Other/2023-Auto/Electrocar/Classify.png"></p>
+<ul>
+<li><strong>电池管理系统</strong>（<strong>BMS</strong>，Battery
+Management
+System）：负责监控和控制车辆动力电池的充放电参数与状态；其中最为核心的电压采集芯片基本由
+<code>美信 Maxim</code>、<code>德州仪器 TI</code>，<code>恩智浦 NXP</code>、<code>亚德诺 ADI</code>
+等国外企业垄断；</li>
+<li><strong>车辆控制器</strong>（<strong>VCU</strong>，Vehicle Control
+Unit）：负责车辆的日常行驶、制动能量回收、动力电池能量管理、网络管理、故障诊断处理、车辆状态监控等，主要由金属外壳、内部集成电路板、接口插件构成；国内除少数大型主机厂能够自行研发设计之外，其它基本被<code>博世 BOSCH</code>、<code>大陆集团 Continental AG</code>、<code>德尔福 DELPHI</code>、<code>电产 NIDEC</code>
+等国外企业把持；</li>
+<li><strong>电机控制器</strong>（<strong>MCU</strong>，Motor Control
+Unit）：根据 VCU
+的指令控制电机的旋转状态，并且接受动力电池输出的直流电能，逆变成为三相交流电提供给驱动电机；而在车辆制动过程当中，又可以将制动回收的电能存储到电池包；通常由主控电路、功率模块（<code>IGBT</code>
+或
+<code>SiC MOSFET</code>）、驱动电路、各种传感器组成；其中的核心功率半导体元件，基本被<code>英飞凌 Infineon</code>、<code>安森美 On Semiconductor</code>、<code>三菱 Mitsubishi</code>、<code>富士 Fuji</code>、<code>力特 Littelfuse</code>、<code>意法半导体 STMicroelectronics</code>
+等国外企业垄断；</li>
+</ul>
+<h2 id="机油">机油</h2>
+<p>机油由<strong>基础油</strong>和<strong>添加剂</strong>两部分组成，基础油是润滑油的主要成分，决定着润滑油的基本性质，添加剂则可弥补和改善基础油性能方面的不足，赋予某些新的性能，常见的机油品牌有<strong>壳牌</strong>、<strong>美孚</strong>、<strong>长城</strong>
+、<strong>昆仑</strong>、<strong>嘉实多</strong>、<strong>道达尔</strong>等。</p>
+<p><img src="/Other/2023-Auto/Lube.png"></p>
+<ul>
+<li><strong>普通矿物机油</strong>：简单精炼的矿物油，经提炼而形成的等级较低的基础油；</li>
+<li><strong>半合机油</strong>：普通矿物机油与合成机油的混合物，相比普通矿物机油能够获得更多的性能与保护；</li>
+<li><strong>全合成机油</strong>：基本不再含有矿物油，是一种采用多种添加剂合成的混合物，性能更加抗磨，使用寿命更加持久。</li>
+</ul>
+<h2 id="汽油">汽油</h2>
+<p><strong>汽油</strong>是一种从石油当中分馏、裂解出来的具有挥发性、可燃性的<strong>烃类混合物液体</strong>。<strong>汽油标号</strong>是实际油品抗爆性与标准抗爆性的比值，标号越高抗爆性能就越好，通常划分为
+<code>89</code>号、<code>92</code>号、<code>95</code>号。</p>
+<p><img src="/Other/2023-Auto/Gasoline.png"></p>
+<p>标准汽油主要由<strong>异辛烷</strong>和<strong>正庚烷</strong>两种成分组成，其中异辛烷抗爆性能较好，其值定为
+<code>100</code>；而正庚烷抗爆震性能较差，其值定为
+<code>0</code>。此时，标号为 <code>92</code> 号的汽油当中含有异辛烷
+<code>92%</code> 以及正庚烷 <code>8%</code>。</p>
+<h2 id="保险">保险</h2>
+<ul>
+<li><strong>交强险</strong>：是一种由保险公司对于发生道路交通事故造成受害人（不包括本车人员）人身伤亡或者财产损失，在责任限额内予以赔偿的强制性责任保险，其费率根据<strong>汽车座位数量</strong>全国统一进行收取，赔付总责任限额为
+<strong>20 万元</strong>；</li>
+<li><strong>机动车第三责任险</strong>：被保险人或者其允许的驾驶人员在驾驶车辆过程当中发生意外事故，致使第三者遭受人身伤亡或财产直接损毁，依法应当由被保险人承担的经济责任，改由保险公司负责赔偿；</li>
+<li><strong>机动车损失险</strong>：指车辆遭受保险责任范围内的自然灾害（不包括地震）或意外事故，造成保险车辆本身损失，保险人依据保险合同规定所给予的赔偿；</li>
+</ul>
+<h2 id="购车事项">购车事项</h2>
+<h3 id="试驾">试驾</h3>
+<ol type="1">
+<li>试驾时最好有两个人，可以分别体验<strong>前后排</strong>的乘坐感受；</li>
+<li>上车时关闭音响，并且加速到 <code>60kM/h</code>
+时速，这样可以感受车辆的 <strong>NVH</strong>；</li>
+<li>体验一下空调的<strong>风量大小</strong>，以及制冷制热效果；</li>
+<li>注意观察 <strong>A</strong> 和 <strong>B</strong>
+柱的盲区是否会影响到日常驾驶；</li>
+<li>打开中控上的 <strong>AC
+按键</strong>，增加发动机负荷，然后听一下<strong>怠速</strong>状态下发动机声浪，同时感受一下车内抖动；</li>
+<li>体验<strong>挂倒挡</strong>，观察变速箱介入反应是否较慢，油门是否容易控制，同时观察倒车雷达、影像的反应是否迅速；</li>
+<li>在路况较好的路面，通过不同力度反复踩下油门，然后同样不同力度反复踩下刹车，判断变速箱在<strong>升档</strong>和<strong>降档</strong>过程当中的反应速度；</li>
+<li>在路况较差的路面，感受<strong>底盘</strong>的软硬程度以及滤振效果；</li>
+<li>以 <code>40kM/h</code>
+时速过弯，感受一下车辆<strong>侧倾时的抓地力</strong>；</li>
+<li>行驶过程当中，可以检查<strong>中控按键</strong>操作起来是否方便；</li>
+</ol>
+<h3 id="议价">议价</h3>
+<ol type="1">
+<li>4S
+店的<strong>网络和电话报价</strong>都存在较大水份，主要是为了吸引客户到店，建议到店以后，添加
+4S
+店销售人员的微信慢慢砍价，注意不要急着下订金，多比较几家之后再做决定；</li>
+<li>由于受到厂家地域政策的限制、购车时间的不同、4S
+店的大小以及销售任务完成程度的影响，<strong>价格通常没有最低只有最合适</strong>，建议选择当地装修好、面积大、资金实力雄厚的
+4S 店；</li>
+<li>讲价不能只关注优惠多少，具体可以遵循公式
+<code>落地价 + 附赠福利 = 裸车价 + 购置税（基于裸车价，低开发票会影响后续保险索赔） + 保险 + 上牌 + 手续费（套路最多的地方）</code>；</li>
+<li>价格讲不动之后，可以索要具有实际价值的赠品，例如<code>保养</code>、<code>油卡</code>、<code>工时券</code>、<code>脚垫</code>、<code>后备箱垫</code>；</li>
+</ol>
+<h3 id="购车合同">购车合同</h3>
+<ol type="1">
+<li>合同里面必须备注<strong>价格明细</strong>（包括裸车、购置税、保险、上牌、手续费、其它增购费用），千万不能只写总价；</li>
+<li>必须备注赠送明细，尽量先看一下赠品实物，如果质量不好可以更换，并且将赠品的品牌与型号备注到合同当中；</li>
+<li>如果 4S
+店有现车，那么还需要将<strong>车架号</strong>备注到合同当中，避免被调包。</li>
+<li>尽量不选择超过 <strong>6</strong> 个月的库存车，尽量选择
+<strong>3</strong> 个月以内出厂的车辆；</li>
+<li>合同当中备注如果遇到<strong>瑕疵车</strong>（运损、事故、水泡），如何补偿或者退车；</li>
+<li>贷款购车时，避免使用<strong>年费率</strong>，而应当选择<strong>年利率</strong>；</li>
+<li>合同上一定要注明准确的<strong>提车时间</strong>，以及按期未交付的补偿方案；</li>
+<li>必须备注合同签订之后，后续不会再收取其它任何的<strong>额外费用</strong>；</li>
+<li>如果要收取<strong>订金</strong>，则尽量注明哪些情况下可以退回订金；</li>
+</ol>
+<h3 id="验车">验车</h3>
+<ol type="1">
+<li><strong>漆面</strong>：检查前需要清洗车辆并且晾干停放在光线较好的地方，主要关注<strong>色差</strong>与<strong>瑕疵</strong>，如果存在问题则还需要进一步检查漆面及其所对应零件是否被拧动过；</li>
+<li>查验<strong>车架号</strong>（第 10
+位表示出厂年份）、<strong>轮胎生产日期</strong>（观察标识连在一起的 4
+个数字，比如 <code>0320</code> 就是 20 年第 3
+周）、<strong>玻璃生产日期</strong>（数字和小点，如果小点在数字前面，就用
+<code>7</code> 减去小点个数，如果小点在前面，则用 <code>13</code>
+去减），配件的生产日期不能相差时间太久，否则可能属于损坏之后更换过的；</li>
+<li>检查<strong>机油</strong>（是否变质）、<strong>制动液</strong>（水份含量是否超标）、<strong>冷却液</strong>（数量是否保持在刻度中间）；</li>
+<li>上车检查<strong>灯光系统</strong>、<strong>玻璃升降</strong>、<strong>天窗</strong>以及其它车内功能是否正常；</li>
+</ol>
+<h3 id="提车">提车</h3>
+<ol type="1">
+<li><strong>车钥匙</strong>两把；</li>
+<li><strong>三包合同</strong>（已经盖章，并且明确责任到哪家店）；</li>
+<li><strong>购车发票</strong>（通常在上完牌、交完税之后只会留存两联）；</li>
+<li><strong>车辆一致性证书</strong>、<strong>车辆登记证</strong>、<strong>保险单</strong>；</li>
+<li><strong>PDI
+检测报告</strong>（很关键，拿到手或者拍照留存，后续出问题可以作为证据）；</li>
+<li><strong>首保卡</strong>（针对异地购车）；</li>
+<li>对照合同检查<strong>赠送物品</strong>；</li>
+</ol>
+<h2 id="附加条款模板">附加条款模板</h2>
+<hr>
+<ul>
+<li><strong>博越 L 2022 款 2.0TD DCT
+尊贵型</strong>（车漆颜色为<code>猎户银车身/黑色车顶</code>），官方指导价为
+<code>____________</code> 万元，加装价值 <strong>6000</strong>
+元的<strong>双色黑曜流光套装</strong>（<code>黑晶双色车身套件</code>、<code>LED 粒子射线贯穿灯组</code>、<code>发光 LOGO</code>、<code>晶钻挡把</code>、<code>20 英寸银黑星碟轮毂</code>、<code>固特异轮胎 + 光影墨镜遮阳板</code>），享受现金优惠
+<code>____________</code> 万元，优惠之后的裸车价格为
+<code>____________</code> 万元。</li>
+<li>需要缴纳的<strong>购置税</strong>金额为 <code>____________</code>
+元整（按照优惠之后的裸车价格开具，不得虚开购置税发票金额）；</li>
+<li>购买 <code>____________</code>
+<strong>保险公司</strong>的交强险（<code>____________</code>
+元）、机动车第三者责任保险（<strong>300
+万</strong>保额，<code>____________</code>
+元）、机动车损失保险（<code>____________</code>
+元）、医保外费用责任险（<code>____________</code>
+元，包含<strong>三者</strong>、<strong>司机</strong>、<strong>乘客</strong>）、机动车车上人员责任险（<code>____________</code>
+元），除此之外还可以包含<code>道路救援</code>、<code>车辆安全检测</code>、<code>代为驾驶</code>、<code>代为送检</code>等特约服务条款。（如果保险事项无法事前约定，可以请
+4S
+店销售人员提供包含前述车险的估价，并且约定实际保险金额不得超出该价格范围）。</li>
+<li>双方约定车身铭牌上的<strong>制造年月</strong>必须为 <strong>2023 年
+11 月</strong> 或者 <strong>2023 年 12
+月</strong>，即本合同签订之日起，一个月之前或者之后生产制造的车型，否则客户有权拒绝接收车辆，并且
+4S 店无条件退回订金。</li>
+<li>自本合同签订之间起，约定的交车时间不晚于 <strong>2023 年 12 月 31
+日</strong>，否则 4S
+店需要无条件退还订金，并且按照合同签订当月的央行存款基准利率补偿订金利息。</li>
+</ul>
+<hr>
+<ul>
+<li>赠送吉利厂家 3 年 6
+万公里的免费<strong>基础保养</strong>（包含机油机滤、工时费）政策，全国
+4S
+店通用（需要在合同中明确相应的<strong>使用限制</strong>与<strong>失效条款</strong>）；</li>
+<li>赠送吉利原厂的 <strong>3D 奢享脚垫</strong>、全车 <strong>3M
+品牌高隔热膜</strong>（贴膜必须当面拆封，只张贴 4 个前后门车窗玻璃，前排
+2 扇三角小窗、后备箱 2
+扇三角小窗，且全程必须由客户监督施工）、<strong>后背箱垫</strong>；</li>
+</ul>
+<hr>
+<ul>
+<li>需要 4S
+店代办并且按规则张贴<strong>临时牌照</strong>，<strong>车辆合格证</strong>必须在提车当天交付给客户（<strong>合格证</strong>标注的信息必须与<strong>发动机编号</strong>匹配）。</li>
+<li>验车的时候，由 4S 店<strong>清洗车身</strong>并且晾干，同时需要 4S
+店提供 <strong>PDI 检查表</strong>，由经销商陪同逐一进行检查。</li>
+<li>客户验车之前，必须保证车内仪表盘、中控大屏的贴膜完好无损，座椅处于防护套包裹状态，否则上述合同无效，4S
+店全额退还订金。</li>
+<li>验车时需要 4S
+店的举升机将车辆抬起，然后由客户检查底盘结构件是否存在剐蹭和损坏。如果发现底盘上存在少部分厂家没有喷涂到的位置，由
+4S 店工作人员局部补喷<strong>油性</strong>底盘装甲。</li>
+</ul>
+<hr>
+<ul>
+<li>4S
+店承诺除购车合同上约定的车价、车险、购置税费用之外，后续的验车、交车环节不再产生任何其它费用。</li>
+<li>4S
+店提供的购车制式合同上，权责不对等的条款，直接用笔叉掉处理（相应位置由双方签字盖章处理）。且上述约定的条款上面，必须加盖
+<strong>4S 店的公章</strong>。</li>
+<li>4S 店不得交付给客户运输损坏车辆、展示用车、试驾用车。</li>
+</ul>
+<hr>
+<ul>
+<li>吉利合伙人计划 5000 积分。</li>
+<li>抖音吉利旗舰店优惠券。</li>
+</ul>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>现代汽车机械电气结构与驾驶技术分享</p><p><a href="http://www.uinio.com/Other/2023-Auto/">http://www.uinio.com/Other/2023-Auto/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2014-08-13</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-10-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%B1%BD%E8%BD%A6/">汽车</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/Simple_Analysis/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">简明厄要的《电路理论》读书笔记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Web/Nodejs/"><span class="level-item">NodeJS 快速上手指南</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#仪表盘"><span class="level-left"><span class="level-item">1</span><span class="level-item">仪表盘</span></span></a></li><li><a class="level is-mobile" href="#灯光控制"><span class="level-left"><span class="level-item">2</span><span class="level-item">灯光控制</span></span></a></li><li><a class="level is-mobile" href="#雨刷控制"><span class="level-left"><span class="level-item">3</span><span class="level-item">雨刷控制</span></span></a></li><li><a class="level is-mobile" href="#手动变速器"><span class="level-left"><span class="level-item">4</span><span class="level-item">手动变速器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#起步"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">起步</span></span></a></li><li><a class="level is-mobile" href="#换前进档"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">换前进档</span></span></a></li><li><a class="level is-mobile" href="#换倒档"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">换倒档</span></span></a></li></ul></li><li><a class="level is-mobile" href="#自动变速器"><span class="level-left"><span class="level-item">5</span><span class="level-item">自动变速器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#启动"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">启动</span></span></a></li><li><a class="level is-mobile" href="#停车"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">停车</span></span></a></li></ul></li><li><a class="level is-mobile" href="#燃油发动机前舱"><span class="level-left"><span class="level-item">6</span><span class="level-item">燃油发动机前舱</span></span></a></li><li><a class="level is-mobile" href="#电子手刹-自动驻车"><span class="level-left"><span class="level-item">7</span><span class="level-item">电子手刹 &amp; 自动驻车</span></span></a></li><li><a class="level is-mobile" href="#发动机自动启停"><span class="level-left"><span class="level-item">8</span><span class="level-item">发动机自动启停</span></span></a></li><li><a class="level is-mobile" href="#上坡辅助-陡坡缓降"><span class="level-left"><span class="level-item">9</span><span class="level-item">上坡辅助 / 陡坡缓降</span></span></a></li><li><a class="level is-mobile" href="#abc-柱"><span class="level-left"><span class="level-item">10</span><span class="level-item">ABC 柱</span></span></a></li><li><a class="level is-mobile" href="#车辆行驶系统"><span class="level-left"><span class="level-item">11</span><span class="level-item">车辆行驶系统</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#副车架"><span class="level-left"><span class="level-item">11.1</span><span class="level-item">副车架</span></span></a></li><li><a class="level is-mobile" href="#纵梁"><span class="level-left"><span class="level-item">11.2</span><span class="level-item">纵梁</span></span></a></li></ul></li><li><a class="level is-mobile" href="#车体结构"><span class="level-left"><span class="level-item">12</span><span class="level-item">车体结构</span></span></a></li><li><a class="level is-mobile" href="#发动机技术"><span class="level-left"><span class="level-item">13</span><span class="level-item">发动机技术</span></span></a></li><li><a class="level is-mobile" href="#悬架技术"><span class="level-left"><span class="level-item">14</span><span class="level-item">悬架技术</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#相关结构件"><span class="level-left"><span class="level-item">14.1</span><span class="level-item">相关结构件</span></span></a></li><li><a class="level is-mobile" href="#麦弗逊式独立悬架"><span class="level-left"><span class="level-item">14.2</span><span class="level-item">麦弗逊式独立悬架</span></span></a></li><li><a class="level is-mobile" href="#双叉臂式独立悬架"><span class="level-left"><span class="level-item">14.3</span><span class="level-item">双叉臂式独立悬架</span></span></a></li><li><a class="level is-mobile" href="#多连杆式独立悬架"><span class="level-left"><span class="level-item">14.4</span><span class="level-item">多连杆式独立悬架</span></span></a></li><li><a class="level is-mobile" href="#扭力梁式半独立悬架"><span class="level-left"><span class="level-item">14.5</span><span class="level-item">扭力梁式半独立悬架</span></span></a></li></ul></li><li><a class="level is-mobile" href="#轮胎规格"><span class="level-left"><span class="level-item">15</span><span class="level-item">轮胎规格</span></span></a></li><li><a class="level is-mobile" href="#电控安全系统"><span class="level-left"><span class="level-item">16</span><span class="level-item">电控安全系统</span></span></a></li><li><a class="level is-mobile" href="#ecu-电子控制单元"><span class="level-left"><span class="level-item">17</span><span class="level-item">ECU 电子控制单元</span></span></a></li><li><a class="level is-mobile" href="#obu-车载单元"><span class="level-left"><span class="level-item">18</span><span class="level-item">OBU 车载单元</span></span></a></li><li><a class="level is-mobile" href="#自动驾驶级别"><span class="level-left"><span class="level-item">19</span><span class="level-item">自动驾驶级别</span></span></a></li><li><a class="level is-mobile" href="#新能源三电系统"><span class="level-left"><span class="level-item">20</span><span class="level-item">新能源三电系统</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#动力电池"><span class="level-left"><span class="level-item">20.1</span><span class="level-item">动力电池</span></span></a></li><li><a class="level is-mobile" href="#驱动电机"><span class="level-left"><span class="level-item">20.2</span><span class="level-item">驱动电机</span></span></a></li><li><a class="level is-mobile" href="#电控系统"><span class="level-left"><span class="level-item">20.3</span><span class="level-item">电控系统</span></span></a></li></ul></li><li><a class="level is-mobile" href="#机油"><span class="level-left"><span class="level-item">21</span><span class="level-item">机油</span></span></a></li><li><a class="level is-mobile" href="#汽油"><span class="level-left"><span class="level-item">22</span><span class="level-item">汽油</span></span></a></li><li><a class="level is-mobile" href="#保险"><span class="level-left"><span class="level-item">23</span><span class="level-item">保险</span></span></a></li><li><a class="level is-mobile" href="#购车事项"><span class="level-left"><span class="level-item">24</span><span class="level-item">购车事项</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#试驾"><span class="level-left"><span class="level-item">24.1</span><span class="level-item">试驾</span></span></a></li><li><a class="level is-mobile" href="#议价"><span class="level-left"><span class="level-item">24.2</span><span class="level-item">议价</span></span></a></li><li><a class="level is-mobile" href="#购车合同"><span class="level-left"><span class="level-item">24.3</span><span class="level-item">购车合同</span></span></a></li><li><a class="level is-mobile" href="#验车"><span class="level-left"><span class="level-item">24.4</span><span class="level-item">验车</span></span></a></li><li><a class="level is-mobile" href="#提车"><span class="level-left"><span class="level-item">24.5</span><span class="level-item">提车</span></span></a></li></ul></li><li><a class="level is-mobile" href="#附加条款模板"><span class="level-left"><span class="level-item">25</span><span class="level-item">附加条款模板</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/SI9000/"><img src="/Electronics/SI9000/logo.png" alt="基于 Polar Si9000e 计算传输线特征阻抗的全攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-04T16:00:00.000Z">2024-04-05</time></p><p class="title"><a href="/Electronics/SI9000/">基于 Polar Si9000e 计算传输线特征阻抗的全攻略</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Component/"><img src="/Electronics/Component/logo.png" alt="硬件电路设计当中 の 常用分立元器件选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-03-30T16:00:00.000Z">2024-03-31</time></p><p class="title"><a href="/Electronics/Component/">硬件电路设计当中 の 常用分立元器件选型</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2024 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

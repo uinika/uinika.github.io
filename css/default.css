@@ -12406,6 +12406,27 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
 .section .container {
   max-width: 1920px;
 }
+.section .container .columns .column-main .card.widget .menu ul.menu-list li {
+  padding: 0.5rem 0;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #2a2f33;
+}
+.section .container .columns .column-main .card.widget .menu ul.menu-list li a {
+  border: 1px solid #2a2f33;
+  border-radius: 5px;
+}
+.section .container .columns .column-main .card.widget .menu .field {
+  margin: 3rem 0 5rem 0;
+}
+.section .container .columns .column-main .card.widget .menu .field .control {
+  margin: 1.5rem 1rem;
+  border: 1px solid #a38272;
+  border-radius: 5px;
+}
+.section .container .columns .column-main .card.widget .menu .field .control span {
+  font-size: 1rem !important;
+}
 .section .container .columns [data-type='profile'] [title='RSS'] {
   font-size: 1.8rem;
   color: #f68422;
@@ -12439,6 +12460,7 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
 .section .container .columns .card .card-content nav.level:nth-child(1) p:nth-child(3) {
   font-family: Monda, Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 1.2rem !important;
+  margin: 0.5rem;
 }
 .section .container .columns .card .card-content nav.level:nth-child(1) p:nth-child(4) {
   margin-top: 1rem;
