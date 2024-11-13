@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>直流无刷电机的 PWM 驱动控制原理简述 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="直流无刷电机（BLDCM，Brushless Direct Current Motor）没有电刷和换向装置，需要采用 PWM 脉冲波来进行控制，相比于传统的直流有刷电机，其交换了定子与转子的位置（线圈绕组作为定子，钕硼永磁铁作为转子，以霍尔传感器取代碳刷进行换向），相比于传统的直流有刷电机，无刷电机需要配备专门的驱动控制电路，但是其具备更高的效率，并且能耗和噪音更低，可以伺服控制，并进行无级变"><meta property="og:type" content="blog"><meta property="og:title" content="直流无刷电机的 PWM 驱动控制原理简述"><meta property="og:url" content="http://www.uinio.com/Electronics/Motor-PWM/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="直流无刷电机（BLDCM，Brushless Direct Current Motor）没有电刷和换向装置，需要采用 PWM 脉冲波来进行控制，相比于传统的直流有刷电机，其交换了定子与转子的位置（线圈绕组作为定子，钕硼永磁铁作为转子，以霍尔传感器取代碳刷进行换向），相比于传统的直流有刷电机，无刷电机需要配备专门的驱动控制电路，但是其具备更高的效率，并且能耗和噪音更低，可以伺服控制，并进行无级变"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2024-11-06T16:00:00.000Z"><meta property="article:modified_time" content="2024-11-13T17:13:11.945Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="电机"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/Motor-PWM/"},"headline":"直流无刷电机的 PWM 驱动控制原理简述","image":["http://www.uinio.com/Electronics/Motor-PWM/logo.png"],"datePublished":"2024-11-06T16:00:00.000Z","dateModified":"2024-11-13T17:13:11.945Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"直流无刷电机（BLDCM，Brushless Direct Current\r Motor）没有电刷和换向装置，需要采用 PWM\r 脉冲波来进行控制，相比于传统的直流有刷电机，其交换了定子与转子的位置（线圈绕组作为定子，钕硼永磁铁作为转子，以霍尔传感器取代碳刷进行换向），相比于传统的直流有刷电机，无刷电机需要配备专门的驱动控制电路，但是其具备更高的效率，并且能耗和噪音更低，可以伺服控制，并进行无级变"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/Motor-PWM/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-11-06T16:00:00.000Z" title="2024/11/7 00:00:00">2024-11-07</time>发表</span><span class="level-item"><time dateTime="2024-11-13T17:13:11.945Z" title="2024/11/14 01:13:11">2024-11-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">28 分钟读完 (大约4226个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">直流无刷电机的 PWM 驱动控制原理简述</h1><div class="content"><p><strong>直流无刷电机</strong>（BLDCM，Brushless Direct Current
+Motor）没有电刷和换向装置，需要采用 PWM
+脉冲波来进行控制，相比于传统的直流有刷电机，其交换了定子与转子的位置（线圈绕组作为定子，钕硼永磁铁作为转子，以霍尔传感器取代碳刷进行换向），相比于传统的直流有刷电机，无刷电机需要配备专门的驱动控制电路，但是其具备更高的效率，并且能耗和噪音更低，可以伺服控制，并进行无级变频调速。</p>
+<p><img src="/Electronics/Motor-PWM/logo.png"></p>
+<p>普通有刷电机发生旋转的部分是绕组，而无刷电机无论是
+<code>内转子</code> 还是 <code>外转子</code>
+结构，其旋转的部分（转子）永远都是<strong>永磁体</strong>（钕铁硼磁铁）。而其<strong>定子</strong>则属于产生旋转磁场的部分，主要由
+<code>硅钢片</code> 和 <code>绕组</code>
+构成，本文旨在简单明了的介绍无刷电机的相关工作原理，作为后续撰写
+<strong>FOC</strong> 矢量控制算法相关内容的铺垫。</p>
+<span id="more"></span>
+<h1 id="左手定则">左手定则</h1>
+<p><strong>左手定则</strong>（Left Hand
+Rule）是由英国电机工程师约翰.安布罗斯.弗莱明（John Ambrose Fleming）于
+1885
+年提出，其具体内容是让<strong>左手</strong>的<code>拇指</code>、<code>食指</code>、<code>中指</code>三个手指相互垂直，此时
+<strong>拇指</strong>
+指向就是<code>导体受力</code>的方向（即安培力），而
+<strong>食指</strong>
+指向的则是<code>磁场</code>的方向，<strong>中指</strong>
+则是指向的<code>电流</code>的方向：</p>
+<p><img src="/Electronics/Motor-PWM/1-Left-Hand-Rule.png"></p>
+<p><strong>导体受力</strong> <code>F</code>（单位为
+<code>N</code>）等于<strong>磁通密度</strong> <code>B</code>（单位为
+<code>Wb/m²</code>）与<strong>电流</strong> <code>I</code>（单位为
+<code>A</code>），以及磁场中的<strong>导体长度</strong>
+<code>L</code>（单位为 <code>m</code>）的乘积：</p>
+<p><span class="math display">\[
+F = B \times I \times L
+\]</span></p>
+<p>左手定则说明：<strong>通电的导体在磁场当中会受到磁场力的作用</strong>。当磁场不变的时候，电流越大，导体长度越长，那么其所受到的力就会越大。这个力的大小与电流大小，以及导体的长度呈正比。</p>
+<h1 id="右手螺旋定则">右手螺旋定则</h1>
+<p>右手螺旋定则也称为<strong>安培定则</strong>（Ampere’s
+Rule），由物理学家安德烈·玛丽·安培（André Marie Ampère）于 1820
+年提出，主要用于判断<strong>电流产生的磁场的方向</strong>。右手握持住通电的螺旋状导线，如果手掌四个指头指向的是电流环绕的方向，那么<strong>拇指</strong>所指向的就是通电螺旋状导线产生的磁场
+<strong>N</strong> 极。</p>
+<p><img src="/Electronics/Motor-PWM/2-Ampere-Rule.png"></p>
+<p>右手螺旋定则说明：通电线圈会在其周围产生一定强度的磁场，磁场方向与电流的方向有关。换而言之，如果将通电线圈放置在两个<strong>永磁体</strong>的磁极之间，那么在两个磁场力的相互作用下，线圈就会发生移动，这正是电机运行的最底层基本原理。</p>
+<blockquote>
+<p><strong>注意</strong>：电磁学当中的 <strong>N</strong>
+是指北极（North），而 <strong>S</strong> 则是指南极（South）。</p>
+</blockquote>
+<h1 id="有刷电机基本原理">有刷电机基本原理</h1>
+<p>如果在中空的圆柱体形状之间放置两个永磁体，并且使它们的南北磁极相对，中间放置通电线圈。根据右手螺旋定则，线圈两端将会产生
+<strong>N</strong> 和 <strong>S</strong>
+两个极性。此时<strong>如果线圈的一个磁极被吸引，那么另外一个磁极就会被排斥</strong>，从而推动线圈朝着一个方向旋转，直到通电线圈的磁极方向与南北磁极方向相反（即通电线圈的
+<strong>N</strong> 极被永磁体的 <strong>S</strong> 极吸引，而
+<strong>S</strong> 极则被永磁体的 <strong>N</strong> 极吸引）。</p>
+<p>此时如果改变电流的方向，就会让线圈产生的磁场极性发生变换，之前相互吸引的磁极由于磁场极性发生变换，就会产生排斥力，促使线圈开始新一轮的转动。这就是<strong>直流有刷电机</strong>（Brush
+Motor）的基本工作原理。</p>
+<p><strong>有刷直流电机</strong>主要由<strong>定子</strong>、<strong>转子</strong>、<strong>换向器</strong>、<strong>电刷</strong>组成，其中定子固定不动，通常由永磁体制作。而换向器负责在特定位置改变电流的方向，使得转子上线圈的磁场始终与定子的磁场保持一定角度，确保在磁场力的作用下能够持续进行旋转。</p>
+<p><img src="/Electronics/Motor-PWM/3-Brush-Motor.png"></p>
+<p>上面示意图当中的 <strong>N</strong> 极与 <strong>S</strong>
+极是由永磁体制作的定子的两个磁极，内部则是由三组线圈绕制而成的转子。电刷的两端分别连接电源和换向器，每组线圈的换向器之间会使用绝缘材料进行隔离。</p>
+<p>直流有刷电机通过电刷进行换向，可以方便的通过<strong>电压</strong>进行调速。并且励磁方向始终与定子磁场方向呈现一定角度，从而可以保持较大的转矩。但是缺点在于电刷容易磨损，运行噪音会比较大，需要定期进行更换，且电刷与换向器的接触面上会产生摩擦粉尘。</p>
+<h1 id="无刷电机工作原理">无刷电机工作原理</h1>
+<p><strong>直流无刷电机</strong>通过微控制器代替电刷进行换向，同时采用<strong>霍尔传感器</strong>或者<strong>对感应电动势的过零点进行采样</strong>，来实时检测转子的位置。其基本工程流程是：微控制器根据霍尔传感器或者感应电动势获取转子的状态，然后通过驱动电路控制三相线圈的通断顺序，从而完成换向。下图展示了三相直流无刷电机的内部结构，该示意图当中只是简单描述了三相定子的
+<code>U</code>、<code>V</code>、<code>W</code>
+三组线圈，实际上的线圈通常会采用多组对称缠绕方式：</p>
+<p><img src="/Electronics/Motor-PWM/4-Brushless-Motor.png"></p>
+<p>而下面是一个典型的无刷直流电机的驱动电路原理图，通过三组共 6 枚功率
+MOS 管（每一组拥有 2 枚功率 MOS
+管，其<strong>源极</strong>分别会连接到正极和负极）的通断状态来控制三相无刷电机的转动：</p>
+<p><img src="/Electronics/Motor-PWM/5-Brushless-Motor-Driver.png"></p>
+<p>由于直流无刷电机需要增加额外的微控制器、霍尔传感器、过零点采样电路，所以整体生产制造成本会更高，但是也会获得更加灵活的编程控制方式。</p>
+<h1 id="无刷和有刷电机结构区别">无刷和有刷电机结构区别</h1>
+<p><strong>有刷电机</strong>的<strong>转子</strong>（Stator）处于电机的中心位置，而线圈绕组制作的<strong>定子</strong>（Rotor）位于电机的外侧：</p>
+<p><img src="/Electronics/Motor-PWM/6-Brushless.png"></p>
+<p><strong>有刷电机</strong>的定子与转子位置正好相反，其<strong>定子</strong>（Stator）位于电机的中心位置，而<strong>转子</strong>（Rotor）处于电机的外侧：</p>
+<p><img src="/Electronics/Motor-PWM/7-Brush.png"></p>
+<blockquote>
+<p><strong>注意</strong>：上图有刷与无刷电机的线圈绕组都采用了多组对称缠绕。</p>
+</blockquote>
+<h1 id="无刷电机的换向原理">无刷电机的换向原理</h1>
+<p>无刷电机的换向主要依靠<strong>霍尔传感器</strong>和<strong>对感应电动势的过零点进行采样</strong>，其中开关型的<strong>霍尔传感器</strong>是一种磁场敏感元件，经过南北磁极时，其输出信号会呈现高低电平变化。</p>
+<p><img src="/Electronics/Motor-PWM/8-Hall.png"></p>
+<p>通常会将三个霍尔传感器放置在定子的换向边，并呈 <code>120°</code>
+电角度摆放，当定子发生换向时，霍尔传感器就会输出高低电平的变化，从而检测出定子的换向。</p>
+<p>每当霍尔传感器经过磁极的时候，其输出状态就会改变一次，每旋转 1
+个磁场旋转周期，每个霍尔传感器会改变 2 次状态，三个霍尔传感器一共会改变
+6 次状态。</p>
+<h1 id="无刷电机的主要性能指标">无刷电机的主要性能指标</h1>
+<p>在下面的表格当中，总结了直流无刷电机的几个重要性能指标：</p>
+<table>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>性能指标</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>额定工作电压</strong></td>
+<td>是指无刷电机在指定负载条件下能够正常稳定工作的电压值，通常会基于额定电压来标注额定转速。</td>
+</tr>
+<tr class="even">
+<td><strong>最大工作电流</strong></td>
+<td>直流无刷电机能够安全稳定工作的最大电流值。</td>
+</tr>
+<tr class="odd">
+<td><strong>KV 值</strong></td>
+<td>无刷电机在 <code>1V</code>
+工作电压下的每分钟转速，直流无刷电机的<strong>转速</strong>与<strong>电压</strong>呈正比关系，因而
+<code>无刷电机转速 = KV值 * 工作电压</code>。</td>
+</tr>
+<tr class="even">
+<td><strong>转矩</strong></td>
+<td>无刷电机当中转子产生的可以用来带动机械负载的驱动力矩，可以简单的理解为电机转动的力量。</td>
+</tr>
+<tr class="odd">
+<td><strong>转速</strong></td>
+<td>无刷电机每分钟的转动速度，转矩和转速两个参数属于此消彼长的关系，转速越高，转矩就会越低，反之亦然。</td>
+</tr>
+<tr class="even">
+<td><strong>槽数 N</strong></td>
+<td>定子上面硅钢片齿槽的数量。</td>
+</tr>
+<tr class="odd">
+<td><strong>极数 P</strong></td>
+<td>转子上面永磁体的数量。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="pwm-方波控制原理">PWM 方波控制原理</h1>
+<p>采用 PWM
+脉冲波驱动三相无刷电机时，每次只会为其中的<strong>两相</strong>进行通电（一相连接到电源正极，一相连接到电源负极，另外一相浮空）。此时，电流会从电源正极流入，进入其中的一相，然后从另外一相回流至电源负极。</p>
+<p><img src="/Electronics/Motor-PWM/9.png"></p>
+<ol type="1">
+<li>关断 <strong>A 相</strong>连接的 <span class="math inline">\(Q_1\)</span> 与 <span class="math inline">\(Q_2\)</span> 两个功率管，使得电机的 A
+相<strong>浮空</strong>。</li>
+<li>开启 <strong>B 相</strong>连接的上桥臂功率管 <span class="math inline">\(Q_3\)</span>，使得 B
+相连被接至<strong>电源正极</strong>（由于上下两个功率管同时导通会发生短路，因而
+<span class="math inline">\(Q_3\)</span> 开通的时候 <span class="math inline">\(Q_4\)</span> 必须关断）。</li>
+<li>关断 <strong>C 相</strong>连接的上桥臂功率管 <span class="math inline">\(Q_5\)</span>，下桥臂功率管 <span class="math inline">\(Q_6\)</span> 开通，使得 C
+相连接至<strong>电源负极</strong>。</li>
+</ol>
+<p>这种情况下，电流就会从<strong>电源正极</strong>经过 <span class="math inline">\(Q_3\)</span> 流入电机的 <strong>B
+相</strong>，然后从电机的 <strong>C 相</strong>流出，最后通过 C
+相的下桥臂功率管 <span class="math inline">\(Q_6\)</span>
+进入<strong>电源负极</strong>。</p>
+<p>通电的线圈会产生磁场，从而在定子磁场的作用下产生一定角度旋转。此时如果根据霍尔传感器输出的状态，改变功率管的通断顺序，转子就会转动至下一个位置。每改变一次功率管的通断顺序就进行了一次<strong>换向</strong>，一个旋转周期需要进行<strong>六次换向</strong>。如果根据霍尔传感器的输出状态，按照下面表格所示的顺序。周期性切换功率管的通断，那么转子就会持续进行旋转：</p>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 18%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">霍尔传感器 <span class="math inline">\(H_1\)</span></th>
+<th style="text-align: center;">霍尔传感器 <span class="math inline">\(H_2\)</span></th>
+<th style="text-align: center;">霍尔传感器 <span class="math inline">\(H_3\)</span></th>
+<th style="text-align: center;">导通的功率管</th>
+<th style="text-align: center;">A 相</th>
+<th style="text-align: center;">B 相</th>
+<th style="text-align: center;">C 相</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;"><span class="math inline">\(Q_3\)</span>
+和 <span class="math inline">\(Q_6\)</span></td>
+<td style="text-align: center;">浮空</td>
+<td style="text-align: center;">正极</td>
+<td style="text-align: center;">负极</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;"><span class="math inline">\(Q_3\)</span>
+和 <span class="math inline">\(Q_2\)</span></td>
+<td style="text-align: center;">负极</td>
+<td style="text-align: center;">正极</td>
+<td style="text-align: center;">浮空</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;"><span class="math inline">\(Q_5\)</span>
+和 <span class="math inline">\(Q_2\)</span></td>
+<td style="text-align: center;">负极</td>
+<td style="text-align: center;">浮空</td>
+<td style="text-align: center;">正极</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;"><span class="math inline">\(Q_5\)</span>
+和 <span class="math inline">\(Q_4\)</span></td>
+<td style="text-align: center;">浮空</td>
+<td style="text-align: center;">负极</td>
+<td style="text-align: center;">正极</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;"><span class="math inline">\(Q_1\)</span>
+和 <span class="math inline">\(Q_4\)</span></td>
+<td style="text-align: center;">正极</td>
+<td style="text-align: center;">负极</td>
+<td style="text-align: center;">浮空</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">高电平</td>
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;">低电平</td>
+<td style="text-align: center;"><span class="math inline">\(Q_1\)</span>
+和 <span class="math inline">\(Q_6\)</span></td>
+<td style="text-align: center;">正极</td>
+<td style="text-align: center;">浮空</td>
+<td style="text-align: center;">负极</td>
+</tr>
+</tbody>
+</table>
+<p>上述表格体现的是转子<strong>逆时针</strong>旋转时，<strong>霍尔传感器输出状态</strong>与<strong>电机各相</strong>的通电顺序。如果是顺时针旋转，那么通电顺序正好相反。</p>
+<blockquote>
+<p><strong>注意</strong>：旋转过程当中，<strong>定子磁场</strong>与<strong>转子磁场</strong>始终会保持适当的角度差，通过调整定子磁场领先转子磁场的角度，可以提高电机产生的力矩。</p>
+</blockquote>
+<p>由于由于电机的三相每间隔 <code>120°</code>
+电角度（磁场旋转角度，其值等于<code>机械角度 x 电极对数</code>）进行摆放，所以三个霍尔传感器的输出信号波形也会间隔
+120° 电角度。除此之外，每个霍尔传感器的输出状态会每间隔
+<code>180°</code>
+改变一次，由于三个霍尔传感器会将整个平面划分为六个扇区，所以每间隔
+<code>60°</code>
+电角度，三个霍尔传感器的输出状态组合就会改变一次，下面的示意图展示了霍尔传感器的输出状态与其电角度之间的这种位置关系：</p>
+<p><img src="/Electronics/Motor-PWM/10.png"></p>
+<p>直流电机的<strong>转速</strong>与<strong>电压</strong>呈正比，这意味着通过改变功率管的
+PWM 占空比就可以进行调速（相当于改变了电机相线上的等效电压），PWM
+频率一般在 20KHz 左右，常见的调节方式具有如下几种：</p>
+<ul>
+<li><span class="math inline">\(H_{PWM}/L_{ON}\)</span>：其中一相的<strong>下桥臂</strong>一直开通，只调节另一相的<strong>上桥臂</strong>。例如上面表格里的第一个状态，设置
+B 相为正 C 相为负，功率管 <span class="math inline">\(Q_3\)</span> 和
+<span class="math inline">\(Q_6\)</span> 导通，电流从电源的正极经过
+<span class="math inline">\(Q_3\)</span> 流向电机的 B 相，再经过 C
+相流出，最后经过功率管 <span class="math inline">\(Q_6\)</span>
+进入电源负极，此时可以只调节上桥臂 <span class="math inline">\(Q_3\)</span> 的占空比，而 <span class="math inline">\(Q_6\)</span> 一直保持开启。</li>
+<li><span class="math inline">\(H_{ON}/L_{PWM}\)</span>：其中一相的<strong>上桥臂</strong>一直开通，只调节另一相的<strong>下桥臂</strong>。例如功率管
+<span class="math inline">\(Q_3\)</span> 保持打开状态，而只调节功率管
+<span class="math inline">\(Q_6\)</span>。</li>
+<li><span class="math inline">\(H_{PWM}/L_{PWM}\)</span>：<strong>互补调节</strong>两相桥臂对应的功率管，例如
+<span class="math inline">\(Q_3\)</span> 和 <span class="math inline">\(Q_4\)</span> 为一组互补输出，<span class="math inline">\(Q_5\)</span> 与 <span class="math inline">\(Q_6\)</span> 为一组互补输出，而 <span class="math inline">\(Q_1\)</span> 和 <span class="math inline">\(Q_0\)</span>
+关断。互补的优点在于上管关断的瞬间，电流可以立刻由下管进行续流，而不需要经过功率管内部的续流二极管，从而避免大电流损坏功率管。这种方式是实际开发工作当中，相对比较常用的一种方式。</li>
+</ul>
+<h1 id="pwm-控制方式的缺陷">PWM 控制方式的缺陷</h1>
+<p>虽然 PWM 电机控制算法比较简单，而且硬件 BOM
+成本也比较低，但是也存在着如下一系列显著的缺点：</p>
+<ol type="1">
+<li>采用 PWM
+脉冲宽度调制方式驱动无刷电机，由于电机的<strong>相电流</strong>只有<code>通</code>和<code>断</code>两种状态，即使在占空比和平均电流都很小的情况下，线圈上的<strong>脉动峰值电流</strong>也会比较大。由于发热量与电流的平方成正比，因而
+PWM 方式控制的电机，功率损耗和发热量都会比较大。</li>
+<li>由于 PWM 控制的电磁场不够连续，导致电机的转矩出现脉动。因而 PWM
+并不适用于转矩要求较高的场合，否则会导致控制精度降低。除此之外，转矩的脉动还会使得系统振动产生噪声，干扰
+PCB 上其它芯片和传感器的工作。</li>
+</ol>
+<p>为了解决上述问题，西门子公司的工程师 <strong>F.Blaschke</strong>
+在上世纪 70 年代提出了<strong>矢量控制方法</strong>（Vector
+Control），即处理时会将三相输出电流与电压以矢量方式来进行表示。其本质是将三相交流信号经过一系列坐标变换，转变为直流可控的两相正交电流。从而解耦复杂的电流关系，使得交流电机变得简单可控。这种控制方法，也被称作<strong>磁场导向控制</strong>（FOC，Field
+Oriented Control），后续我会为此再撰写一篇专题文章。</p>
+<blockquote>
+<p><strong>注意</strong>：笔者在撰写本文过程当中，还发现了这篇图文并茂的英文资料
+<a target="_blank" rel="noopener" href="https://howtomechatronics.com/how-it-works/how-brushless-motor-and-esc-work/">《How
+Brushless DC Motor
+Works?》</a>，大家可以结合本文一起阅读，便于快速的理解并掌握三相无刷电机的
+PWM 波控制原理。</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>直流无刷电机的 PWM 驱动控制原理简述</p><p><a href="http://www.uinio.com/Electronics/Motor-PWM/">http://www.uinio.com/Electronics/Motor-PWM/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-11-07</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-11-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%94%B5%E6%9C%BA/">电机</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/E-Series/"><span class="level-item">美国电子工业联盟 E 系列标准参数值速查手册</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#左手定则"><span class="level-left"><span class="level-item">1</span><span class="level-item">左手定则</span></span></a></li><li><a class="level is-mobile" href="#右手螺旋定则"><span class="level-left"><span class="level-item">2</span><span class="level-item">右手螺旋定则</span></span></a></li><li><a class="level is-mobile" href="#有刷电机基本原理"><span class="level-left"><span class="level-item">3</span><span class="level-item">有刷电机基本原理</span></span></a></li><li><a class="level is-mobile" href="#无刷电机工作原理"><span class="level-left"><span class="level-item">4</span><span class="level-item">无刷电机工作原理</span></span></a></li><li><a class="level is-mobile" href="#无刷和有刷电机结构区别"><span class="level-left"><span class="level-item">5</span><span class="level-item">无刷和有刷电机结构区别</span></span></a></li><li><a class="level is-mobile" href="#无刷电机的换向原理"><span class="level-left"><span class="level-item">6</span><span class="level-item">无刷电机的换向原理</span></span></a></li><li><a class="level is-mobile" href="#无刷电机的主要性能指标"><span class="level-left"><span class="level-item">7</span><span class="level-item">无刷电机的主要性能指标</span></span></a></li><li><a class="level is-mobile" href="#pwm-方波控制原理"><span class="level-left"><span class="level-item">8</span><span class="level-item">PWM 方波控制原理</span></span></a></li><li><a class="level is-mobile" href="#pwm-控制方式的缺陷"><span class="level-left"><span class="level-item">9</span><span class="level-item">PWM 控制方式的缺陷</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2024 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
