@@ -12456,7 +12456,11 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
 }
 .section .container .columns .card .card-content nav.level:nth-child(1) .title {
   font-weight: bold;
-  margin-top: 16px;
+  margin-top: 1.2rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #2a2f33;
+  border-radius: 1rem;
+  font-size: 1.6rem !important;
 }
 .section .container .columns .card .card-content nav.level:nth-child(1) p:nth-child(3) {
   font-family: Monda, Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
