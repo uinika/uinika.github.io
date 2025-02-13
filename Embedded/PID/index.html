@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>PID 闭环控制算法的原理剖析与实现 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="在工业自动化和控制工程领域，PID（比例-积分-微分）控制算法因其结构简单、鲁棒性强以及广泛适用性，成为最经典且广泛应用的控制方法之一。自 20 世纪初被提出以来，PID 控制算法以其卓越的性能和易于实现的特性，在温度控制、电机调速、过程控制等诸多领域发挥着不可替代的作用。无论是简单的单变量系统，还是复杂的多变量系统，PID 控制算法都能通过调节比例、积分和微分三个参数，实现对系统的精确控制"><meta property="og:type" content="blog"><meta property="og:title" content="PID 闭环控制算法的原理剖析与实现"><meta property="og:url" content="http://www.uinio.com/Embedded/PID/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="在工业自动化和控制工程领域，PID（比例-积分-微分）控制算法因其结构简单、鲁棒性强以及广泛适用性，成为最经典且广泛应用的控制方法之一。自 20 世纪初被提出以来，PID 控制算法以其卓越的性能和易于实现的特性，在温度控制、电机调速、过程控制等诸多领域发挥着不可替代的作用。无论是简单的单变量系统，还是复杂的多变量系统，PID 控制算法都能通过调节比例、积分和微分三个参数，实现对系统的精确控制"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2020-05-17T16:00:00.000Z"><meta property="article:modified_time" content="2025-02-13T12:58:46.702Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="算法"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Embedded/PID/"},"headline":"PID 闭环控制算法的原理剖析与实现","image":["http://www.uinio.com/Embedded/PID/logo.png"],"datePublished":"2020-05-17T16:00:00.000Z","dateModified":"2025-02-13T12:58:46.702Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"在工业自动化和控制工程领域，PID（比例-积分-微分）控制算法因其结构简单、鲁棒性强以及广泛适用性，成为最经典且广泛应用的控制方法之一。自\r 20 世纪初被提出以来，PID\r 控制算法以其卓越的性能和易于实现的特性，在温度控制、电机调速、过程控制等诸多领域发挥着不可替代的作用。无论是简单的单变量系统，还是复杂的多变量系统，PID\r 控制算法都能通过调节比例、积分和微分三个参数，实现对系统的精确控制"}</script><link rel="canonical" href="http://www.uinio.com/Embedded/PID/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-05-17T16:00:00.000Z" title="2020/5/18 00:00:00">2020-05-18</time>发表</span><span class="level-item"><time dateTime="2025-02-13T12:58:46.702Z" title="2025/2/13 20:58:46">2025-02-13</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></span><span class="level-item">21 分钟读完 (大约3134个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">PID 闭环控制算法的原理剖析与实现</h1><div class="content"><p>在工业自动化和控制工程领域，PID（比例-积分-微分）控制算法因其结构简单、鲁棒性强以及广泛适用性，成为最经典且广泛应用的控制方法之一。自
+20 世纪初被提出以来，PID
+控制算法以其卓越的性能和易于实现的特性，在温度控制、电机调速、过程控制等诸多领域发挥着不可替代的作用。无论是简单的单变量系统，还是复杂的多变量系统，PID
+控制算法都能通过调节比例、积分和微分三个参数，实现对系统的精确控制。</p>
+<p><img src="/Embedded/PID/logo.png"></p>
+<p>本文将从 PID
+控制算法的基本原理出发，深入剖析其数学模型、参数整定方法以及在实际应用中的优化策略。通过理论分析与实例结合，我们将探讨
+PID
+控制算法如何在不同场景中实现高效、稳定的控制效果，并展望其在智能化、自适应控制方向上的未来发展。无论您是控制领域的初学者，还是经验丰富的工程师，本文都将为您提供全面的知识梳理和实践指导。</p>
+<span id="more"></span>
+<h2 id="控制系统分类">控制系统分类</h2>
+<p>工业自动化控制算法当中，通常会根据当前是否存在有反馈信号，而将其划分为<strong>开环控制</strong>和<strong>闭环控制</strong>两种算法类型：</p>
+<ul>
+<li><strong>开环控制系统</strong>（Open
+Loop）：<strong>被控对象</strong>的输出(即<code>被控制量</code>)不会影响到<strong>控制装置</strong>的输出，这种控制系统不需要返回被控量，也不会形成任何的闭环回路。
+<img src="/Embedded/PID/1.png"></li>
+<li><strong>闭环控制系统</strong>（Closed
+Loop）：<strong>被控对象</strong>的输出（通过<strong>检测装置</strong>）返回并影响到<strong>控制装置</strong>的输出，进而形成闭环控制。
+<img src="/Embedded/PID/2.png"></li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：根据反馈信号与控制信号的<strong>极性</strong>是否相同，还可以将这种控制闭环进一步划分为<strong>正反馈</strong>和<strong>负反馈</strong>两种类型。</p>
+</blockquote>
+<p><strong>PID 算法属于一种闭环控制系统</strong>，下图展示了使用 PID
+控制器对直流无刷电机进行调速的过程，无刷电机的<strong>目标转速</strong>
+<span class="math inline">\(n_0(t)\)</span>
+会与<strong>实际转速</strong> <span class="math inline">\(n(t)\)</span>
+进行比较，其差值 <span class="math inline">\(e(t)=n_0(t)-n(t)\)</span>
+经过 PID 控制器调整之后，输出的电压控制信号 <span class="math inline">\(u(t)\)</span>
+经过功率放大，就可以驱动直流电动机并实时调整其转速：</p>
+<p><img src="/Embedded/PID/3.png"></p>
+<h2 id="pid-算法概览">PID 算法概览</h2>
+<p><strong>PID</strong>
+是<strong>比例</strong>（Proportional）、<strong>积分</strong>（Integral）、<strong>微分</strong>（Differential）三个英文单词的首字母缩写。顾名思义，这是一种基于系统运行时<code>偏差</code>，利用<strong>比例</strong>、<strong>积分</strong>、<strong>微分</strong>计算出实际控制量的一种算法。下面的示意图展示了
+PID 算法的总体工作流程，其中的 <span class="math inline">\(r(t)\)</span>
+是设定的目标值，<span class="math inline">\(y(t)\)</span>
+是实际输出值：</p>
+<p><img src="/Embedded/PID/4.png"></p>
+<p>设定的目标值 <span class="math inline">\(r(t)\)</span> 与实际输出值
+<span class="math inline">\(y(t)\)</span>
+之差，就构成了控制<strong>偏差</strong> <span class="math inline">\(e(t)\)</span>：</p>
+<p><span class="math display">\[
+e(t) = r(t) - y(t)
+\]</span></p>
+<p>上面示意图当中的<strong>偏差</strong> <span class="math inline">\(e(t)\)</span> 将会作为 PID
+控制器的<strong>输入</strong>，而信号 <span class="math inline">\(u(t)\)</span> 则会作为 PID
+控制器的<strong>输出</strong>或者被控对象的<strong>输入</strong>，整个
+PID 控制器的控制规律可以总结为如下的公式（其中参数 <span class="math inline">\(K_p\)</span> 是 PID
+控制器的<strong>比例系数</strong>，而 <span class="math inline">\(T_i\)</span> 是<strong>积分系数</strong>、<span class="math inline">\(T_d\)</span> 则是<strong>微分系数</strong>）：</p>
+<p><span class="math display">\[
+u(t) = K_p \Biggl( e(t) + \frac{1}{T_i} \int^t_0 e(t) dt + T_d
+\frac{de(t)}{dt} \Biggl)
+\]</span></p>
+<p>基于这个公式，可以将 PID 算法的控制流程梳理如下：</p>
+<ol type="1">
+<li>首先，计算出 <code>设定目标值</code> 与 <code>实际输出值</code>
+之间的偏差。</li>
+<li>然后，将结果导入
+<code>比例</code>、<code>积分</code>、<code>微分</code> 三个 PID
+算法控制环节进行处理。</li>
+<li>最后，通过<strong>闭环控制系统</strong>，不断的将
+<code>实际输出值</code> 反馈至偏差计算阶段，如此循环往复。</li>
+</ol>
+<p>根据上述的 PID
+算法的控制公式，可以将其划分为<strong>比例</strong>、<strong>积分</strong>、<strong>微分</strong>三个控制环节，接下来内容里我们会分别进行讨论。</p>
+<h2 id="比例-proportional">比例 Proportional</h2>
+<p><strong>比例控制环节</strong>主要用于补偿目标值与实际值之间的偏差，如果产生偏差
+PID
+控制器将会立刻产生控制作用，使得控制量向着降低偏差的方向进行变化，比例控制环节的数学式表达如下所示：</p>
+<p><span class="math display">\[
+比例系数 K_p \times 偏差 e(t)
+\]</span></p>
+<p>观察上述的数学公式可以发现，比例控制作用的强弱，主要取决于<strong>比例系数</strong>
+<span class="math inline">\(K_p\)</span>，该参数的取值具备如下特点：</p>
+<ul>
+<li><strong>优点</strong>：比例系数越大，控制作用就会越强，过渡过程就会越快，控制过程的静态偏差也就会越小；</li>
+<li><strong>缺点</strong>：比例系数越大，也就越容易让控制信号发生振荡，从而破坏整个控制系统的稳定性；</li>
+</ul>
+<p>因此，必须选用合适的比例系数取值，才能够减少过渡时间，降低振荡发生的概率，进而降低静态偏差，确保整个控制系统的稳定工作。</p>
+<h2 id="积分-integral">积分 Integral</h2>
+<p><strong>积分控制环节</strong>主要用于消除在比例控制环节产生的<strong>静态偏差</strong>（即控制系统达到稳态之后，输出值与期望值之间的偏差），其数学式表达如下所示：</p>
+<p><span class="math display">\[
+比例系数 K_p \times \frac{1}{积分系数 T_i} \times \int^t_0 偏差 e(t) dt
+\]</span></p>
+<p>观察上面的数学表达式可知：只要存在着偏差，其控制作用就会不断的增强。只有当偏差
+<span class="math inline">\(e(t)=0\)</span>
+的时候，其控制作用才会变成一个常数。虽然积分控制环节可以消除静态误差，但是同时也会降低控制系统的响应速度，导致控制系统出现<strong>超调</strong>（即输出量在达到设定值之前，就已经超过设定值的现象），所以必须根据实际的控制要求来选定<strong>积分系数</strong>
+<span class="math inline">\(T_i\)</span> 的取值：</p>
+<ul>
+<li>积分常数 <span class="math inline">\(T_i\)</span>
+越大，积分的累积作用就会越弱。虽然控制系统在过渡过程当中不会发生振荡，但是会减缓消除静态偏差的过程。但是可以降低超调量，提高控制系统的稳定性；</li>
+<li>积分常数 <span class="math inline">\(T_i\)</span>
+越小，积分的累积作用就会越强，此时过渡过程当中可能会产生振荡，不过消除静态偏差所需的时间比较短。</li>
+</ul>
+<h2 id="微分-differential">微分 Differential</h2>
+<p><strong>微分控制环节</strong>用于根据偏差的变化趋势或者变化速度，在偏差来临之前引入一个修正信号，把偏差消灭在萌芽状态，从而降低系统的<strong>动态偏差</strong>（即控制系统输出与期望值之间的差异随着时间变化的情况），微分控制环节的数学式表达如下所示：</p>
+<p><span class="math display">\[
+比例系数 K_p \times 微分系数 T_d \times \frac{de(t)}{dt}
+\]</span></p>
+<p>观察上述公式可以发现，其控制作用主要由<strong>微分系数</strong> <span class="math inline">\(T_d\)</span> 来决定。如果 <span class="math inline">\(T_d\)</span>
+的值越大，控制系统抑制<strong>偏差</strong> <span class="math inline">\(e(t)\)</span> 变化的能力就会越强。反之如果 <span class="math inline">\(T_d\)</span> 越小，其抑制<strong>偏差</strong>
+<span class="math inline">\(e(t)\)</span>
+变化的能力就会越弱，因此该参数同样需要合理的进行取值。</p>
+<p>概而言之，PID 控制系统不但需要在<strong>比例控制环节</strong>对
+<code>偏差量</code> 做出响应，以及在<strong>积分控制环节</strong>消除
+<code>静态误差</code>
+之外，还需要在<strong>微分控制环节</strong>根据偏差的变化趋势，预先修正<strong>动态偏差</strong>。</p>
+<ul>
+<li><strong>优点</strong>：微分控制环节有助于避免控制系统出现超调和发生振荡，同时能够提高控制系统的响应速度，并且改善动态性能；</li>
+<li><strong>缺点</strong>：容易引入高频噪声，在干扰信号比较严重的闭环控制系统当中，需要慎重引入微分控制环节，以及选择合理的微分系数
+<span class="math inline">\(T_d\)</span>；</li>
+</ul>
+<h2 id="pid-算法的直观示例">PID 算法的直观示例</h2>
+<p>本节内容，通过一个实例来形象的说明 PID
+算法的基本思想，假设有一个透明的水箱，水位高度可以实时观测，现在要通过阀门从零开始注水，以达到某个确定的水位。</p>
+<h3 id="比例调节阶段">比例调节阶段</h3>
+<p>如果想将水箱里的水灌注到指定位置，那么只需要观测水位的实际位置与目标位置的差值即可。如果差值较大，就将阀门开大一些。如果差值较小，就将阀门关小一些；伴随水位差值越来越小，直至完全关闭阀门，从而达到将水灌注到指定的水位。这种场景，就属于
+PID 控制算法的<strong>比例控制环节</strong>：</p>
+<p><span class="math display">\[
+输出 u(t) = 比例系数 K_p \times 偏差 e(t)
+\]</span></p>
+<p>这里的比例系数 <span class="math inline">\(K_p\)</span>
+就相当于阀门的开关幅度，该值越大就说明阀门开启得比较大，水流的调节速度就会更快；越小则说明阀门开启得比较小，水流的调节速度会更慢。换而言之，体现的就是<strong>通过增大比例系数，从而提高控制系统响应</strong>的思想。例如在下面示意图当中，比例系数
+<span class="math inline">\(K_p = 0.05\)</span> 会比 <span class="math inline">\(K_p = 0.01\)</span> 要更快的达到 <code>100%</code>
+的稳态：</p>
+<p><img src="/Embedded/PID/5.png"></p>
+<h3 id="积分调节阶段">积分调节阶段</h3>
+<p>当放水速度等于注水速度的时候，此时的偏差 <span class="math inline">\(e(t) = 0\)</span>。相应的当 <span class="math inline">\(e(t) \neq 0\)</span>
+的时候，水位的高度就会始终存在着一个<strong>静态误差</strong>。如果此时放水速度并非一个恒定不变的常量，那么单纯按比例进行控制，就无法补足这个静态误差。因而必须引入积分控制环节，依靠动态的调整注水速度来解决这个问题，此时控制算法会扩展成如下的方程式：</p>
+<p><span class="math display">\[
+输出 u(t) = \Biggl( 比例系数 K_p \times 偏差 e(t) \Biggl) + \Biggl(
+\frac{比例系数 K_p}{积分系数 T_i} \times \int^t_0 e(t) dt \Biggl)
+\]</span></p>
+<p>积分控制环节存在着一个重要的参数<strong>积分时间</strong> <span class="math inline">\(K_i =
+\frac{K_p}{T_i}\)</span>，积分时间变大会导致积分环节的调节量变小，相当于提高了积分调节的颗粒度。在水箱注水的例子里，可以理解为在第
+1 个注水阀门之外，额外增加了第 2
+个注水阀门，这个注水阀门的出水量大小就取决于上述方程中的积分系数 <span class="math inline">\(T_i\)</span>。</p>
+<p>如果当前没有达到预定水位，那么第 2
+个阀门就会持续向水箱进行注水。当达到目标水位的时候，这个阀门也就达到了最大出水量，进而开始导致水箱的注水量过多，这部分多出来的注水量就被称作<strong>超调</strong>。如果第
+2
+个阀门的开启幅度越大，其达到目标水位的速度也就会越快，但是由于超调导致的震荡也就会越多，具体可以参考下面的示意图：</p>
+<p><img src="/Embedded/PID/6.png"></p>
+<p>增大积分时间有助于降低超调，增加控制系统的稳定性，但是也会延长消除静态偏差所耗费的时间。</p>
+<h3 id="微分调节阶段">微分调节阶段</h3>
+<p><img src="/Embedded/PID/7.png"></p>
+<h2 id="pid-算法的-c-程序实现">PID 算法的 C 程序实现</h2>
+</div><div class="article-licensing box"><div class="licensing-title"><p>PID 闭环控制算法的原理剖析与实现</p><p><a href="http://www.uinio.com/Embedded/PID/">http://www.uinio.com/Embedded/PID/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-05-18</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2025-02-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/C&amp;C++/Qt-Quick/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Qt 5 桌面应用程序开发指南 - QtQuick 篇</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Embedded/RaspberryPi/"><span class="level-item">玩转树莓派 Raspberry Pi 开源硬件</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#控制系统分类"><span class="level-left"><span class="level-item">1</span><span class="level-item">控制系统分类</span></span></a></li><li><a class="level is-mobile" href="#pid-算法概览"><span class="level-left"><span class="level-item">2</span><span class="level-item">PID 算法概览</span></span></a></li><li><a class="level is-mobile" href="#比例-proportional"><span class="level-left"><span class="level-item">3</span><span class="level-item">比例 Proportional</span></span></a></li><li><a class="level is-mobile" href="#积分-integral"><span class="level-left"><span class="level-item">4</span><span class="level-item">积分 Integral</span></span></a></li><li><a class="level is-mobile" href="#微分-differential"><span class="level-left"><span class="level-item">5</span><span class="level-item">微分 Differential</span></span></a></li><li><a class="level is-mobile" href="#pid-算法的直观示例"><span class="level-left"><span class="level-item">6</span><span class="level-item">PID 算法的直观示例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#比例调节阶段"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">比例调节阶段</span></span></a></li><li><a class="level is-mobile" href="#积分调节阶段"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">积分调节阶段</span></span></a></li><li><a class="level is-mobile" href="#微分调节阶段"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">微分调节阶段</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pid-算法的-c-程序实现"><span class="level-left"><span class="level-item">7</span><span class="level-item">PID 算法的 C 程序实现</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

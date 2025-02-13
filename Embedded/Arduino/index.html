@@ -302,7 +302,7 @@ Arduino 开发板的代码。</li>
 <col style="width: 32%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>基数</th>
 <th>示例</th>
 <th>格式</th>
@@ -310,25 +310,25 @@ Arduino 开发板的代码。</li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>10</code>进制（<strong>D</strong>ecimal）</td>
 <td><code>123</code></td>
 <td>-</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>2</code>进制（<strong>B</strong>inary）</td>
 <td><code>B1111011</code></td>
 <td>字母<code>B</code>前缀</td>
 <td><code>0</code>和<code>1</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>8</code>进制（<strong>O</strong>ctal）</td>
 <td><code>0173</code></td>
 <td>数字<code>0</code>前缀</td>
 <td><code>0 - 7</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>16</code>进制（<strong>H</strong>exadecimal）</td>
 <td><code>0x7B</code></td>
 <td>字母数字<code>0x</code>前缀</td>
@@ -341,24 +341,24 @@ Arduino 开发板的代码。</li>
 位二进制数据，即<code>0 ~ 255</code>范围的整型二进制形式。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>格式</th>
 <th>描述</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>后缀<code>u</code>或<code>U</code></td>
 <td>将常量强制转换为<code>unsigned</code>数据格式</td>
 <td><code>33u</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>后缀<code>l</code>或<code>L</code></td>
 <td>将常量强制转换为<code>long</code>数据格式</td>
 <td><code>100000L</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>后缀<code>ul</code>或<code>UL</code></td>
 <td>将常量强制转换为<code>unsigned long</code>数据格式</td>
 <td><code>32767ul</code></td>
@@ -369,21 +369,21 @@ Arduino 开发板的代码。</li>
 <p>浮点常量除了使用小数点<code>.</code>表示以外，还可以采用科学计数法<code>E</code>或<code>e</code>进行表达。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>整型常量</th>
 <th>渲染结果</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>10.0</code></td>
 <td><span class="math inline">\(10\)</span></td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>2.34E5</code></td>
 <td><span class="math inline">\(2.34 \times 10^5 = 234000\)</span></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>67e-12</code></td>
 <td><span class="math inline">\(67.0 \times 10^{-12} =
 0.000000000067\)</span></td>
@@ -419,60 +419,60 @@ LED 都会连接到第 <strong>13</strong>
 <col style="width: 47%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">数据类型</th>
 <th style="text-align: center;">占用存储空间</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/array/">array</a></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{sizeof(array)}{sizeof(*array)}\)</span></td>
 <td><strong>数组</strong>，包含一系列相同数据类型的元素，可以采用索引进行访问。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/bool/">bool</a></td>
 <td style="text-align: center;"><strong>1 Byte</strong>（8bit）</td>
 <td><strong>布尔型</strong>，拥有<code>true</code>或<code>false</code>两个值。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/boolean/">boolean</a></td>
 <td style="text-align: center;"><strong>1 Byte</strong>（8bit）</td>
 <td><strong>布尔型别名</strong>，官方建议代码中使用<code>bool</code>关键字作为数据类型。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/byte/">byte</a></td>
 <td style="text-align: center;"><strong>1 Byte</strong>（8bit）</td>
 <td><strong>字节型</strong>，用于存储<code>0 ~ 255</code>的 8
 位<strong>无符号整数</strong>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/word/">word</a></td>
 <td style="text-align: center;"><strong>2 Byte</strong>（16bit）</td>
 <td><strong>单词型</strong>，用于存储 <code>0 ~ 65535</code>
 的<strong>无符号整数</strong>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/char/">char</a></td>
 <td style="text-align: center;"><strong>1 Byte</strong>（8bit）</td>
 <td><strong>字符型</strong>，用于存储单引号<code>'h'</code>字符，实际保存是其
 <strong>ASCII</strong> 编码。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/unsignedchar/">unsigned
 char</a></td>
 <td style="text-align: center;"><strong>1 Byte</strong>（8bit）</td>
 <td><strong>无符号字符型</strong>，其编码为<code>0 ~ 255</code>的数字。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/string/">char
 string[]</a></td>
 <td style="text-align: center;"><code>sizeof()</code></td>
 <td><strong>字符串</strong>，本质是字符数组，可以使用双引号进行表示<code>char myString[] = "Hank"</code>，结尾会自动添加
 ASCII 编码为 <code>\0</code> 的空字符。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/stringobject/">String
 类</a></td>
 <td style="text-align: center;"><code>length()</code></td>
@@ -480,52 +480,52 @@ ASCII 编码为 <code>\0</code> 的空字符。</td>
 构造函数创建一个 <code>String</code>
 类，该类拥有诸多便捷的字符串处理函数。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/float/">float</a></td>
 <td style="text-align: center;"><strong>4 Byte</strong>（32bit）</td>
 <td><strong>浮点型</strong>，用于保存小数，注意数据类型转换时会损失精度。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/double/">double</a></td>
 <td style="text-align: center;"><strong>4 Byte</strong>（32bit）</td>
 <td><strong>双精度浮点型</strong>，在 Arduino Due 上面占用 <strong>8
 Byte</strong>（64bit）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/int/">int</a></td>
 <td style="text-align: center;"><strong>2 Byte</strong>（16bit）</td>
 <td><strong>整型</strong>，在 Arduino Due 上面占用 <strong>4
 Byte</strong>（32bit）。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/unsignedint/">unsigned
 int</a></td>
 <td style="text-align: center;"><strong>2 Byte</strong>（16bit）</td>
 <td><strong>无符号整型</strong>，只存储正整数，与普通整型区别在于符号位的处理，在
 Arduino Due 上占用 <strong>4 Byte</strong>（32bit）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/short/">short</a></td>
 <td style="text-align: center;"><strong>2 Byte</strong>（16bit）</td>
 <td><strong>短整型</strong>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/long/">long</a></td>
 <td style="text-align: center;"><strong>4 Byte</strong>（32bit）</td>
 <td><strong>长整型</strong>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/unsignedlong/">unsigned
 long</a></td>
 <td style="text-align: center;"><strong>4 Byte</strong>（32bit）</td>
 <td><strong>无符号长整型</strong>，用于存储范围更大的正整数。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/size_t/">size_t</a></td>
 <td style="text-align: center;">-</td>
 <td>一种以字节（Byte）来表示任意对象大小的数据类型，也是<code>sizeof()</code>和<code>Serial.print()</code>的返回值类型。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/variables/data-types/void/">void</a></td>
 <td style="text-align: center;">-</td>
 <td>仅仅用于函数声明，表示当前函数没有任何返回信息。</td>
@@ -541,49 +541,49 @@ long</a></td>
 <col style="width: 76%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Arduino 风格</th>
 <th>标准 C 风格</th>
 <th>描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>(unsigned int)x</code></td>
 <td>-</td>
 <td>强制转换为<strong>无符号普通整型</strong>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>(unsigned long)x</code></td>
 <td>-</td>
 <td>强制转换为<strong>无符号长整型</strong>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>byte(x)</code></td>
 <td><code>(byte)x</code></td>
 <td>强制转换为<strong>字节型</strong>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>char(x)</code></td>
 <td><code>(char)x</code></td>
 <td>强制转换为<strong>字符型</strong>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>float(x)</code></td>
 <td><code>(float)x</code></td>
 <td>强制转换为<strong>浮点型</strong>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>int(x)</code></td>
 <td><code>(int)x</code></td>
 <td>强制转换为<strong>普通整型</strong>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>long(x)</code></td>
 <td><code>(long)x</code></td>
 <td>强制转换为<strong>长整型</strong>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>word(x, h/l)</code></td>
 <td><code>(word)x</code></td>
 <td>当第 2
@@ -615,7 +615,7 @@ long</a></td>
 <col style="width: 4%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>注释</th>
 <th>功能描述</th>
 <th>注释</th>
@@ -623,7 +623,7 @@ long</a></td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/further-syntax/blockcomment/">/*
 ... */</a></td>
 <td>块注释；</td>
@@ -640,58 +640,58 @@ long</a></td>
 <col style="width: 52%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>流程控制</th>
 <th>功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/while/">while</a></td>
 <td>连续进行循环，直至参数当中的表达式执行结果变为 <code>false</code>
 为止。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/dowhile/">do...while</a></td>
 <td>工作方式与 <code>while</code>
 循环相同，但会在循环结束的时候进行一次判断，所以这种循环至少会被执行一次。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/if/">if</a></td>
 <td>检查判断条件，如果为 <code>true</code>
 就执行内部的语句，否则就会绕开这些语句。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/else/">else</a></td>
 <td>通常与 <code>if</code> 语句搭配使用，如果 <code>if</code>
 语句的条件为 <code>false</code>，就会执行 <code>else</code>
 子句，从而实现对多个判断条件的分组；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/for/">for</a></td>
 <td>用于循环执行花括号 <code>&#123;&#125;</code> 当中的循环体语句。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/switchcase/">switch...case</a></td>
 <td>将 <code>switch</code> 语句的变量值与 <code>case</code>
 语句中指定的值进行比较，如果匹配就会执行这个 <code>case</code>
 语句当中的代码。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/break/">break</a></td>
 <td>退出 <code>for</code> 和 <code>while</code>、<code>do…while</code>
 循环， 以及 <code>switch case</code> 语句。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/continue/">continue</a></td>
 <td>跳出本次 <code>for</code> 和
 <code>while</code>、<code>do…while</code> 循环。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/return/">return</a></td>
 <td>终止函数的执行，并且返回函数的执行结果。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/control-structure/goto/">goto</a></td>
 <td>跳转程序的运行流程到指定的标记点。</td>
 </tr>
@@ -704,17 +704,17 @@ long</a></td>
 <col style="width: 42%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>预编译</th>
 <th>功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/further-syntax/define/">#define()</a></td>
 <td>在编译之前赋予常量一个引用，编译器会在编译时用常量值替换对这些引用。</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/further-syntax/include/">#include()</a></td>
 <td>用于在 Arduino 草图当中包含外部的库文件。</td>
 </tr>
@@ -729,7 +729,7 @@ long</a></td>
 <col style="width: 3%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">数学运算符</th>
 <th style="text-align: center;">功能描述</th>
 <th style="text-align: center;">数学运算符</th>
@@ -737,7 +737,7 @@ long</a></td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/arithmetic-operators/remainder/">A
 % B</a></td>
 <td style="text-align: center;">取余</td>
@@ -745,7 +745,7 @@ long</a></td>
 - B</a></td>
 <td style="text-align: center;">减法</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/arithmetic-operators/multiplication/">A
 * B</a></td>
 <td style="text-align: center;">乘法</td>
@@ -753,7 +753,7 @@ long</a></td>
 / B</a></td>
 <td style="text-align: center;">除法</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/arithmetic-operators/addition/">A
 + B</a></td>
 <td style="text-align: center;">加法</td>
@@ -772,7 +772,7 @@ long</a></td>
 <col style="width: 4%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">比较运算符</th>
 <th style="text-align: center;">功能描述</th>
 <th style="text-align: center;">比较运算符</th>
@@ -780,7 +780,7 @@ long</a></td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/comparison-operators/notequalto/">A
 != B</a></td>
 <td style="text-align: center;">不等于</td>
@@ -788,7 +788,7 @@ long</a></td>
 == B</a></td>
 <td style="text-align: center;">等于</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/comparison-operators/lessthan/">A
 &lt; B</a></td>
 <td style="text-align: center;">小于</td>
@@ -796,7 +796,7 @@ long</a></td>
 &gt; B</a></td>
 <td style="text-align: center;">大于</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/comparison-operators/lessthanorequalto/">A
 &lt;= B</a></td>
 <td style="text-align: center;">小于或等于</td>
@@ -817,7 +817,7 @@ long</a></td>
 <col style="width: 14%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">布尔运算符</th>
 <th style="text-align: center;">功能描述</th>
 <th style="text-align: center;">布尔运算符</th>
@@ -827,7 +827,7 @@ long</a></td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a href>! A</a></td>
 <td style="text-align: center;">逻辑非</td>
 <td style="text-align: center;"><a href>A &amp;&amp; B</a></td>
@@ -846,7 +846,7 @@ long</a></td>
 <col style="width: 15%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">指针运算符</th>
 <th style="text-align: center;">功能描述</th>
 <th style="text-align: center;">指针运算符</th>
@@ -854,7 +854,7 @@ long</a></td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/pointer-access-operators/reference/">&amp;
 A</a></td>
 <td style="text-align: center;">获取变量 <code>A</code> 的地址</td>
@@ -874,7 +874,7 @@ A</a></td>
 <col style="width: 3%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">位运算符</th>
 <th style="text-align: center;">功能描述</th>
 <th style="text-align: center;">位运算符</th>
@@ -882,7 +882,7 @@ A</a></td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/bitwise-operators/bitwiseand/">A
 &amp; B</a></td>
 <td style="text-align: center;">按位与</td>
@@ -890,7 +890,7 @@ A</a></td>
 ^ B</a></td>
 <td style="text-align: center;">按位异或</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/bitwise-operators/bitshiftleft/">A
 &lt;&lt; n</a></td>
 <td style="text-align: center;">左移 <code>n</code> 位，空位用二进制
@@ -899,7 +899,7 @@ A</a></td>
 〡 B</a></td>
 <td style="text-align: center;">按位或</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/bitwise-operators/bitshiftright/">A
 &gt;&gt; n</a></td>
 <td style="text-align: center;">右移 <code>n</code> 位，空位用二进制
@@ -919,7 +919,7 @@ A</a></td>
 <col style="width: 14%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">复合运算符</th>
 <th style="text-align: center;">功能描述</th>
 <th style="text-align: center;">复合运算符</th>
@@ -927,7 +927,7 @@ A</a></td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/compound-operators/increment/">A++</a></td>
 <td style="text-align: center;">对 <code>A</code> 进行递增</td>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/compound-operators/compoundmultiplication/">A
@@ -935,7 +935,7 @@ A</a></td>
 <td style="text-align: center;">首先 <code>A</code> 与 <code>B</code>
 相乘，然后再赋值给 <code>A</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/compound-operators/decrement/">A--</a></td>
 <td style="text-align: center;">对 <code>A</code> 进行递减</td>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/compound-operators/compoundsubtraction/">A
@@ -943,7 +943,7 @@ A</a></td>
 <td style="text-align: center;">首先 <code>A</code> 与 <code>B</code>
 相减，然后再赋值给 <code>A</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/compound-operators/compoundremainder/">A
 %= B</a></td>
 <td style="text-align: center;">首先 <code>A</code> 与 <code>B</code>
@@ -953,7 +953,7 @@ A</a></td>
 <td style="text-align: center;">首先 <code>A</code> 与 <code>B</code>
 相除，然后再赋值给 <code>A</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/compound-operators/compoundbitwiseand/">A
 &amp;= B</a></td>
 <td style="text-align: center;">首先 <code>A</code> 与 <code>B</code>
@@ -963,7 +963,7 @@ A</a></td>
 <td style="text-align: center;">首先 <code>A</code> 与 <code>B</code>
 按位异或，然后再赋值给 <code>A</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.arduino.cc/reference/en/language/structure/compound-operators/compoundaddition/">A
 += B</a></td>
 <td style="text-align: center;">首先 <code>A</code> 与 <code>B</code>
@@ -2361,7 +2361,7 @@ ignore)</a>
 <col style="width: 19%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">Arduino 型号</th>
 <th style="text-align: center;">SERIAL 引脚</th>
 <th style="text-align: center;">SERIAL1 引脚</th>
@@ -2370,28 +2370,28 @@ ignore)</a>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>Uno</strong></td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">0(RX) / 1(TX)</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">-</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>Mega</strong></td>
 <td style="text-align: center;">0(RX) / 1(TX)</td>
 <td style="text-align: center;">19(RX) / 18(TX)</td>
 <td style="text-align: center;">17(RX) / 16(TX)</td>
 <td style="text-align: center;">15(RX) / 14(TX)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>ESP8266</strong></td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">GPIO1(TX) / GPIO3(RX)</td>
 <td style="text-align: center;">GPIO2 (TX)</td>
 <td style="text-align: center;">-</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>ESP32</strong></td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">GPIO1(TX) / GPIO3(RX)</td>
@@ -2675,29 +2675,29 @@ Serial.write(val)<br> Serial.write(str)<br> Serial.write(buf, len)
 引脚在各种 Arduino 开发板上的默认位置：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">Arduino 型号</th>
 <th>I²C/TWI 功能引脚</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>Uno</strong></td>
 <td><code>A4</code>（SDA）、<code>A5</code>（SCL）</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>Mega2560</strong></td>
 <td><code>20</code>（SDA）、<code>21</code>（SCL）</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>Due</strong></td>
 <td><code>20</code>（SDA）、<code>21</code>（SCL）、<code>SDA1</code>、<code>SCL1</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>ESP8266</strong></td>
 <td><code>GPIO4/D2</code>（SDA）、<code>GPIO5/D1</code>（SCL）</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>ESP32</strong></td>
 <td><code>GPIO21</code>（SDA）、<code>GPIO22</code>（SCL）</td>
 </tr>
@@ -2906,7 +2906,7 @@ Polarity）；以及时钟是在<code>高电平</code>还是<code>低电平</cod
 Phase），这 4 种模式的相位与极性如下表所示：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">模式</th>
 <th style="text-align: center;">时钟相位</th>
 <th style="text-align: center;">时钟极性</th>
@@ -2915,28 +2915,28 @@ Phase），这 4 种模式的相位与极性如下表所示：</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><code>SPI_MODE0</code></td>
 <td style="text-align: center;">0</td>
 <td style="text-align: center;">0</td>
 <td style="text-align: center;">下降沿</td>
 <td style="text-align: center;">上升沿</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><code>SPI_MODE1</code></td>
 <td style="text-align: center;">0</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">上升沿</td>
 <td style="text-align: center;">下降沿</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><code>SPI_MODE2</code></td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">0</td>
 <td style="text-align: center;">上升沿</td>
 <td style="text-align: center;">下降沿</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><code>SPI_MODE3</code></td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
@@ -2968,7 +2968,7 @@ Arduino 开发板 SPI 引脚的默认分布情况：</p>
 <col style="width: 9%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">Arduino 型号</th>
 <th style="text-align: center;">MOSI</th>
 <th style="text-align: center;">MISO</th>
@@ -2978,7 +2978,7 @@ Arduino 开发板 SPI 引脚的默认分布情况：</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>Uno</strong></td>
 <td style="text-align: center;"><code>GPIO11</code> 或
 <code>ICSP4</code></td>
@@ -2989,7 +2989,7 @@ Arduino 开发板 SPI 引脚的默认分布情况：</p>
 <td style="text-align: center;"><code>GPIO10</code></td>
 <td style="text-align: center;">5V</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>Mega2560</strong></td>
 <td style="text-align: center;"><code>GPIO51</code> 或
 <code>ICSP4</code></td>
@@ -3000,7 +3000,7 @@ Arduino 开发板 SPI 引脚的默认分布情况：</p>
 <td style="text-align: center;"><code>GPIO53</code></td>
 <td style="text-align: center;">5V</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>ESP8266</strong></td>
 <td style="text-align: center;"><code>GPIO13</code></td>
 <td style="text-align: center;"><code>GPIO12</code></td>
@@ -3008,7 +3008,7 @@ Arduino 开发板 SPI 引脚的默认分布情况：</p>
 <td style="text-align: center;"><code>GPIO15</code></td>
 <td style="text-align: center;">3.3V</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>ESP32</strong></td>
 <td style="text-align: center;"><code>GPIO23</code></td>
 <td style="text-align: center;"><code>GPIO19</code></td>
@@ -3596,78 +3596,78 @@ GPIO 路由成为 <strong>I²C</strong> 的 <code>SDA</code> 和
 <p>下面的表格展示了 ESP32 基本外设的 GPIO 功能映射情况：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">外设类型</th>
 <th style="text-align: center;">GPIO 功能</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>ADC</strong></td>
 <td style="text-align: center;"><code>指定 GPIO</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>DAC</strong></td>
 <td style="text-align: center;"><code>指定 GPIO</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>触摸传感器</strong></td>
 <td style="text-align: center;"><code>指定 GPIO</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>JTAG</strong></td>
 <td style="text-align: center;"><code>指定 GPIO</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>SD/SDIO/MMC</strong>
 主控制器</td>
 <td style="text-align: center;"><code>指定 GPIO</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>Motor PWM</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>SDIO/SPI</strong> 从控制器</td>
 <td style="text-align: center;"><code>指定 GPIO</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>UART</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>I²C</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>I²S</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>LED PWM</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>RMT</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>GPIO</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>Parallel QSPI</strong></td>
 <td style="text-align: center;"><code>指定 GPIO</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>EMAC</strong></td>
 <td style="text-align: center;"><code>指定 GPIO</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>脉冲计数器</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>TWAI</strong></td>
 <td style="text-align: center;"><code>全部 GPIO</code></td>
 </tr>
@@ -3716,7 +3716,7 @@ RFID-RC522 模组的 Arduino
 第三方开源库，其对应的引脚功能映射如下面的表格所示：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>SPI 引脚</th>
 <th>MFRC522</th>
 <th>Uno</th>
@@ -3725,35 +3725,35 @@ RFID-RC522 模组的 Arduino
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>RST/Reset</strong></td>
 <td>RST</td>
 <td>9</td>
 <td>5</td>
 <td>D3</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>SPI SS</strong></td>
 <td>SDA</td>
 <td>10</td>
 <td>53</td>
 <td>D8</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>SPI MOSI</strong></td>
 <td>MOSI</td>
 <td>11/ICSP-4</td>
 <td>51</td>
 <td>D7</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>SPI MISO</strong></td>
 <td>MISO</td>
 <td>12/ICSP-1</td>
 <td>50</td>
 <td>D6</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>SPI SCK</strong></td>
 <td>SCK</td>
 <td>13/ICSP-3</td>
@@ -3779,7 +3779,7 @@ Circuit Card）是一种使用 ISO/IEC 14443A 接口的射频卡/标签，其与
 <code>https://cloud.codess-nas.top:5213/s/2Ocn?path=%2F</code>
 直接下载板级支持包文件进行安装即可。</p>
 </div><div class="article-licensing box"><div class="licensing-title"><p>玩转 Arduino Uno Mega 与 UINIO-MCU-ESP32 开源硬件</p><p><a href="http://www.uinio.com/Embedded/Arduino/">http://www.uinio.com/Embedded/Arduino/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2016-02-16</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-11-15</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Web/Webpack/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Webpack 4 核心配置剖析</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Software/Data-Structure/"><span class="level-item">常用数据结构 &amp; 算法分析</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#uno-r3"><span class="level-left"><span class="level-item">1</span><span class="level-item">UNO R3</span></span></a></li><li><a class="level is-mobile" href="#安装串口驱动"><span class="level-left"><span class="level-item">2</span><span class="level-item">安装串口驱动</span></span></a></li><li><a class="level is-mobile" href="#arduino-ide"><span class="level-left"><span class="level-item">3</span><span class="level-item">Arduino IDE</span></span></a></li><li><a class="level is-mobile" href="#安装第三方类库"><span class="level-left"><span class="level-item">4</span><span class="level-item">安装第三方类库</span></span></a></li><li><a class="level is-mobile" href="#安装板级支持包"><span class="level-left"><span class="level-item">5</span><span class="level-item">安装板级支持包</span></span></a></li><li><a class="level is-mobile" href="#引脚工作模式"><span class="level-left"><span class="level-item">6</span><span class="level-item">引脚工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数字引脚-digital"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">数字引脚 Digital</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#input-输入"><span class="level-left"><span class="level-item">6.1.1</span><span class="level-item">INPUT 输入</span></span></a></li><li><a class="level is-mobile" href="#input_pullup-上拉输入"><span class="level-left"><span class="level-item">6.1.2</span><span class="level-item">INPUT_PULLUP 上拉输入</span></span></a></li><li><a class="level is-mobile" href="#output-输出"><span class="level-left"><span class="level-item">6.1.3</span><span class="level-item">OUTPUT 输出</span></span></a></li></ul></li><li><a class="level is-mobile" href="#模拟引脚-analog"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">模拟引脚 Analog</span></span></a></li><li><a class="level is-mobile" href="#脉冲宽度调制-pwm"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">脉冲宽度调制 PWM</span></span></a></li></ul></li><li><a class="level is-mobile" href="#arduino-c"><span class="level-left"><span class="level-item">7</span><span class="level-item">Arduino C++</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#草图"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">草图</span></span></a></li><li><a class="level is-mobile" href="#常量"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">常量</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#整型常量"><span class="level-left"><span class="level-item">7.2.1</span><span class="level-item">整型常量</span></span></a></li><li><a class="level is-mobile" href="#浮点常量"><span class="level-left"><span class="level-item">7.2.2</span><span class="level-item">浮点常量</span></span></a></li><li><a class="level is-mobile" href="#布尔常量-true-与-false"><span class="level-left"><span class="level-item">7.2.3</span><span class="level-item">布尔常量 true 与 false</span></span></a></li><li><a class="level is-mobile" href="#电平状态-high-low"><span class="level-left"><span class="level-item">7.2.4</span><span class="level-item">电平状态 HIGH LOW</span></span></a></li><li><a class="level is-mobile" href="#输入状态-input-output-input_pullup"><span class="level-left"><span class="level-item">7.2.5</span><span class="level-item">输入状态 INPUT OUTPUT
-INPUT_PULLUP</span></span></a></li><li><a class="level is-mobile" href="#板载-led_builtin"><span class="level-left"><span class="level-item">7.2.6</span><span class="level-item">板载 LED_BUILTIN</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数据类型"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">数据类型</span></span></a></li><li><a class="level is-mobile" href="#数据类型转换"><span class="level-left"><span class="level-item">7.4</span><span class="level-item">数据类型转换</span></span></a></li><li><a class="level is-mobile" href="#运算符-操作符"><span class="level-left"><span class="level-item">7.5</span><span class="level-item">运算符 &amp; 操作符</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#sizeof"><span class="level-left"><span class="level-item">7.5.1</span><span class="level-item">sizeof()</span></span></a></li><li><a class="level is-mobile" href="#注释"><span class="level-left"><span class="level-item">7.5.2</span><span class="level-item">注释</span></span></a></li><li><a class="level is-mobile" href="#流程控制"><span class="level-left"><span class="level-item">7.5.3</span><span class="level-item">流程控制</span></span></a></li><li><a class="level is-mobile" href="#预编译"><span class="level-left"><span class="level-item">7.5.4</span><span class="level-item">预编译</span></span></a></li><li><a class="level is-mobile" href="#数学运算符"><span class="level-left"><span class="level-item">7.5.5</span><span class="level-item">数学运算符</span></span></a></li><li><a class="level is-mobile" href="#比较运算符"><span class="level-left"><span class="level-item">7.5.6</span><span class="level-item">比较运算符</span></span></a></li><li><a class="level is-mobile" href="#布尔运算符"><span class="level-left"><span class="level-item">7.5.7</span><span class="level-item">布尔运算符</span></span></a></li><li><a class="level is-mobile" href="#指针运算符"><span class="level-left"><span class="level-item">7.5.8</span><span class="level-item">指针运算符</span></span></a></li><li><a class="level is-mobile" href="#位运算符"><span class="level-left"><span class="level-item">7.5.9</span><span class="level-item">位运算符</span></span></a></li><li><a class="level is-mobile" href="#复合运算符"><span class="level-left"><span class="level-item">7.5.10</span><span class="level-item">复合运算符</span></span></a></li></ul></li><li><a class="level is-mobile" href="#变量限定符"><span class="level-left"><span class="level-item">7.6</span><span class="level-item">变量限定符</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#const"><span class="level-left"><span class="level-item">7.6.1</span><span class="level-item">const</span></span></a></li><li><a class="level is-mobile" href="#static"><span class="level-left"><span class="level-item">7.6.2</span><span class="level-item">static</span></span></a></li><li><a class="level is-mobile" href="#volatile"><span class="level-left"><span class="level-item">7.6.3</span><span class="level-item">volatile</span></span></a></li><li><a class="level is-mobile" href="#progmem"><span class="level-left"><span class="level-item">7.6.4</span><span class="level-item">PROGMEM</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数组处理"><span class="level-left"><span class="level-item">7.7</span><span class="level-item">数组处理</span></span></a></li></ul></li><li><a class="level is-mobile" href="#核心库函数"><span class="level-left"><span class="level-item">8</span><span class="level-item">核心库函数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数字-io"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">数字 I/O</span></span></a></li><li><a class="level is-mobile" href="#模拟-io"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">模拟 I/O</span></span></a></li><li><a class="level is-mobile" href="#高级-io"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">高级 I/O</span></span></a></li><li><a class="level is-mobile" href="#定时"><span class="level-left"><span class="level-item">8.4</span><span class="level-item">定时</span></span></a></li><li><a class="level is-mobile" href="#数学"><span class="level-left"><span class="level-item">8.5</span><span class="level-item">数学</span></span></a></li><li><a class="level is-mobile" href="#字符"><span class="level-left"><span class="level-item">8.6</span><span class="level-item">字符</span></span></a></li><li><a class="level is-mobile" href="#字符串"><span class="level-left"><span class="level-item">8.7</span><span class="level-item">字符串</span></span></a></li><li><a class="level is-mobile" href="#位操作"><span class="level-left"><span class="level-item">8.8</span><span class="level-item">位操作</span></span></a></li><li><a class="level is-mobile" href="#中断"><span class="level-left"><span class="level-item">8.9</span><span class="level-item">中断</span></span></a></li></ul></li><li><a class="level is-mobile" href="#io-工具类"><span class="level-left"><span class="level-item">9</span><span class="level-item">I/O 工具类</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#stream"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">stream</span></span></a></li><li><a class="level is-mobile" href="#serial"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">Serial</span></span></a></li><li><a class="level is-mobile" href="#wire"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">Wire</span></span></a></li><li><a class="level is-mobile" href="#spi"><span class="level-left"><span class="level-item">9.4</span><span class="level-item">SPI</span></span></a></li></ul></li><li><a class="level is-mobile" href="#外设工具类"><span class="level-left"><span class="level-item">10</span><span class="level-item">外设工具类</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#mouse"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">Mouse</span></span></a></li><li><a class="level is-mobile" href="#keyboard"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">Keyboard</span></span></a></li></ul></li><li><a class="level is-mobile" href="#mega-2560"><span class="level-left"><span class="level-item">11</span><span class="level-item">MEGA 2560</span></span></a></li><li><a class="level is-mobile" href="#esp-8266"><span class="level-left"><span class="level-item">12</span><span class="level-item">ESP 8266</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装板级支持包-1"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">安装板级支持包</span></span></a></li><li><a class="level is-mobile" href="#硬件串口-hardwareserial"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">硬件串口 HardwareSerial</span></span></a></li><li><a class="level is-mobile" href="#软件串口-softwareserial"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">软件串口 SoftwareSerial</span></span></a></li><li><a class="level is-mobile" href="#i²c-总线配置"><span class="level-left"><span class="level-item">12.4</span><span class="level-item">I²C 总线配置</span></span></a></li><li><a class="level is-mobile" href="#spi-总线配置"><span class="level-left"><span class="level-item">12.5</span><span class="level-item">SPI 总线配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#esp-32"><span class="level-left"><span class="level-item">13</span><span class="level-item">ESP 32</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装板级支持包-2"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">安装板级支持包</span></span></a></li><li><a class="level is-mobile" href="#gpio-矩阵与复用"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">GPIO 矩阵与复用</span></span></a></li><li><a class="level is-mobile" href="#i²c-总线配置-1"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">I²C 总线配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#外设运用实例"><span class="level-left"><span class="level-item">14</span><span class="level-item">外设运用实例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#pcf8574t-驱动-1602-液晶"><span class="level-left"><span class="level-item">14.1</span><span class="level-item">PCF8574T 驱动 1602 液晶</span></span></a></li><li><a class="level is-mobile" href="#mfrc-522-读写卡"><span class="level-left"><span class="level-item">14.2</span><span class="level-item">MFRC 522 读写卡</span></span></a></li></ul></li><li><a class="level is-mobile" href="#安装-esp-板级支持包的新方法"><span class="level-left"><span class="level-item">15</span><span class="level-item">安装 ESP 板级支持包的新方法</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2024 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+INPUT_PULLUP</span></span></a></li><li><a class="level is-mobile" href="#板载-led_builtin"><span class="level-left"><span class="level-item">7.2.6</span><span class="level-item">板载 LED_BUILTIN</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数据类型"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">数据类型</span></span></a></li><li><a class="level is-mobile" href="#数据类型转换"><span class="level-left"><span class="level-item">7.4</span><span class="level-item">数据类型转换</span></span></a></li><li><a class="level is-mobile" href="#运算符-操作符"><span class="level-left"><span class="level-item">7.5</span><span class="level-item">运算符 &amp; 操作符</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#sizeof"><span class="level-left"><span class="level-item">7.5.1</span><span class="level-item">sizeof()</span></span></a></li><li><a class="level is-mobile" href="#注释"><span class="level-left"><span class="level-item">7.5.2</span><span class="level-item">注释</span></span></a></li><li><a class="level is-mobile" href="#流程控制"><span class="level-left"><span class="level-item">7.5.3</span><span class="level-item">流程控制</span></span></a></li><li><a class="level is-mobile" href="#预编译"><span class="level-left"><span class="level-item">7.5.4</span><span class="level-item">预编译</span></span></a></li><li><a class="level is-mobile" href="#数学运算符"><span class="level-left"><span class="level-item">7.5.5</span><span class="level-item">数学运算符</span></span></a></li><li><a class="level is-mobile" href="#比较运算符"><span class="level-left"><span class="level-item">7.5.6</span><span class="level-item">比较运算符</span></span></a></li><li><a class="level is-mobile" href="#布尔运算符"><span class="level-left"><span class="level-item">7.5.7</span><span class="level-item">布尔运算符</span></span></a></li><li><a class="level is-mobile" href="#指针运算符"><span class="level-left"><span class="level-item">7.5.8</span><span class="level-item">指针运算符</span></span></a></li><li><a class="level is-mobile" href="#位运算符"><span class="level-left"><span class="level-item">7.5.9</span><span class="level-item">位运算符</span></span></a></li><li><a class="level is-mobile" href="#复合运算符"><span class="level-left"><span class="level-item">7.5.10</span><span class="level-item">复合运算符</span></span></a></li></ul></li><li><a class="level is-mobile" href="#变量限定符"><span class="level-left"><span class="level-item">7.6</span><span class="level-item">变量限定符</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#const"><span class="level-left"><span class="level-item">7.6.1</span><span class="level-item">const</span></span></a></li><li><a class="level is-mobile" href="#static"><span class="level-left"><span class="level-item">7.6.2</span><span class="level-item">static</span></span></a></li><li><a class="level is-mobile" href="#volatile"><span class="level-left"><span class="level-item">7.6.3</span><span class="level-item">volatile</span></span></a></li><li><a class="level is-mobile" href="#progmem"><span class="level-left"><span class="level-item">7.6.4</span><span class="level-item">PROGMEM</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数组处理"><span class="level-left"><span class="level-item">7.7</span><span class="level-item">数组处理</span></span></a></li></ul></li><li><a class="level is-mobile" href="#核心库函数"><span class="level-left"><span class="level-item">8</span><span class="level-item">核心库函数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数字-io"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">数字 I/O</span></span></a></li><li><a class="level is-mobile" href="#模拟-io"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">模拟 I/O</span></span></a></li><li><a class="level is-mobile" href="#高级-io"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">高级 I/O</span></span></a></li><li><a class="level is-mobile" href="#定时"><span class="level-left"><span class="level-item">8.4</span><span class="level-item">定时</span></span></a></li><li><a class="level is-mobile" href="#数学"><span class="level-left"><span class="level-item">8.5</span><span class="level-item">数学</span></span></a></li><li><a class="level is-mobile" href="#字符"><span class="level-left"><span class="level-item">8.6</span><span class="level-item">字符</span></span></a></li><li><a class="level is-mobile" href="#字符串"><span class="level-left"><span class="level-item">8.7</span><span class="level-item">字符串</span></span></a></li><li><a class="level is-mobile" href="#位操作"><span class="level-left"><span class="level-item">8.8</span><span class="level-item">位操作</span></span></a></li><li><a class="level is-mobile" href="#中断"><span class="level-left"><span class="level-item">8.9</span><span class="level-item">中断</span></span></a></li></ul></li><li><a class="level is-mobile" href="#io-工具类"><span class="level-left"><span class="level-item">9</span><span class="level-item">I/O 工具类</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#stream"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">stream</span></span></a></li><li><a class="level is-mobile" href="#serial"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">Serial</span></span></a></li><li><a class="level is-mobile" href="#wire"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">Wire</span></span></a></li><li><a class="level is-mobile" href="#spi"><span class="level-left"><span class="level-item">9.4</span><span class="level-item">SPI</span></span></a></li></ul></li><li><a class="level is-mobile" href="#外设工具类"><span class="level-left"><span class="level-item">10</span><span class="level-item">外设工具类</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#mouse"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">Mouse</span></span></a></li><li><a class="level is-mobile" href="#keyboard"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">Keyboard</span></span></a></li></ul></li><li><a class="level is-mobile" href="#mega-2560"><span class="level-left"><span class="level-item">11</span><span class="level-item">MEGA 2560</span></span></a></li><li><a class="level is-mobile" href="#esp-8266"><span class="level-left"><span class="level-item">12</span><span class="level-item">ESP 8266</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装板级支持包-1"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">安装板级支持包</span></span></a></li><li><a class="level is-mobile" href="#硬件串口-hardwareserial"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">硬件串口 HardwareSerial</span></span></a></li><li><a class="level is-mobile" href="#软件串口-softwareserial"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">软件串口 SoftwareSerial</span></span></a></li><li><a class="level is-mobile" href="#i²c-总线配置"><span class="level-left"><span class="level-item">12.4</span><span class="level-item">I²C 总线配置</span></span></a></li><li><a class="level is-mobile" href="#spi-总线配置"><span class="level-left"><span class="level-item">12.5</span><span class="level-item">SPI 总线配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#esp-32"><span class="level-left"><span class="level-item">13</span><span class="level-item">ESP 32</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装板级支持包-2"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">安装板级支持包</span></span></a></li><li><a class="level is-mobile" href="#gpio-矩阵与复用"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">GPIO 矩阵与复用</span></span></a></li><li><a class="level is-mobile" href="#i²c-总线配置-1"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">I²C 总线配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#外设运用实例"><span class="level-left"><span class="level-item">14</span><span class="level-item">外设运用实例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#pcf8574t-驱动-1602-液晶"><span class="level-left"><span class="level-item">14.1</span><span class="level-item">PCF8574T 驱动 1602 液晶</span></span></a></li><li><a class="level is-mobile" href="#mfrc-522-读写卡"><span class="level-left"><span class="level-item">14.2</span><span class="level-item">MFRC 522 读写卡</span></span></a></li></ul></li><li><a class="level is-mobile" href="#安装-esp-板级支持包的新方法"><span class="level-left"><span class="level-item">15</span><span class="level-item">安装 ESP 板级支持包的新方法</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
@@ -3796,6 +3796,6 @@ INPUT_PULLUP</span></span></a></li><li><a class="level is-mobile" href="#板载-
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
         });</script></body></html>

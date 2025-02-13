@@ -102,7 +102,7 @@ GPIO，具体的外设资源请参考下面表格：</p>
 <col style="width: 45%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>BOOT1</th>
 <th>BOOT0</th>
 <th>启动模式</th>
@@ -110,19 +110,19 @@ GPIO，具体的外设资源请参考下面表格：</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>×</td>
 <td><code>0</code></td>
 <td>主 <strong>Flash</strong> 存储器模式</td>
 <td>选择主 <strong>Flash</strong> 作为启动区域；</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>0</code></td>
 <td><code>1</code></td>
 <td>系统存储器模式，即 <strong>ISP</strong> 模式</td>
 <td>选择<strong>系统内存</strong>作为启动区域；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>1</code></td>
 <td><code>1</code></td>
 <td>内置 <strong>SRAM</strong> 模式</td>
@@ -230,7 +230,7 @@ AHB 外设或者存储器之间的数据传输，其传输目标是 AHB 和 APB
 <col style="width: 24%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">标识颜色</th>
 <th style="text-align: center;">块编号</th>
 <th style="text-align: left;">功能描述</th>
@@ -239,7 +239,7 @@ AHB 外设或者存储器之间的数据传输，其传输目标是 AHB 和 APB
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;">绿色</td>
 <td style="text-align: center;"><strong>Block 0</strong></td>
 <td style="text-align: left;">分配给片上的 <strong>Flash</strong>
@@ -247,7 +247,7 @@ AHB 外设或者存储器之间的数据传输，其传输目标是 AHB 和 APB
 <td style="text-align: center;">512MB</td>
 <td style="text-align: center;"><code>0x0000 0000 ~ 0x1FFF FFFF</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;">粉色</td>
 <td style="text-align: center;"><strong>Block 1</strong></td>
 <td style="text-align: left;">分配给片上的 <strong>SRAM</strong>
@@ -255,7 +255,7 @@ AHB 外设或者存储器之间的数据传输，其传输目标是 AHB 和 APB
 <td style="text-align: center;">512MB</td>
 <td style="text-align: center;"><code>0x2000 0000 ~ 0x3FFF FFFF</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;">蓝色</td>
 <td style="text-align: center;"><strong>Block 2</strong></td>
 <td style="text-align: left;">分配给片上的
@@ -377,43 +377,43 @@ API，它们涵盖了常见的外围设备，可以非常方便的向其它型�
 <col style="width: 76%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">源文件</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_hal_ppp.c</code><br><code>stm32f4xx_hal_ppp.h</code></td>
 <td style="text-align: left;">主要外设/模块驱动 <code>.c</code>
 源文件以及 <code>.h</code> 头文件，包括所有设备通用的 API，例如
 <code>stm32f4xx_hal_adc.c</code>、<code>stm32f4xx_hal_irda.c</code> 以及
 <code>stm32f4xx_hal_adc.h</code>、<code>stm32f4xx_hal_irda.h</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_hal_ppp_ex.c</code><br><code>stm32f4xx_hal_ppp_ex.h</code></td>
 <td style="text-align: left;">外设/模块驱动程序扩展的 <code>.c</code>
 源文件以及 <code>.h</code> 头文件，通常用于定义某个指定型号独有的
 API，例如 <code>stm32f4xx_hal_adc_ex.c</code> 以及
 <code>stm32f4xx_hal_flash_ex.c</code>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_hal.c</code><br><code>stm32f4xx_hal.h</code></td>
 <td style="text-align: left;">用于初始化 HAL 固件库的 <code>.c</code>
 源文件以及 <code>.h</code> 头文件，包含有
 <code>DBGMCU</code>、<code>Remap</code> 和基于 <code>SysTick</code>
 的时间延迟函数；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_hal_msp_template.c</code></td>
 <td style="text-align: left;">需要复制到用户应用工程目录的模板文件，包含有外设的<strong>主堆栈指针</strong>（<strong>MSP</strong>，Main
 Stack Pointer）的初始化和反向初始化；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_hal_conf_template.h</code></td>
 <td style="text-align: left;">用于配置指定应用驱动的模板文件；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_hal_def.h</code></td>
 <td style="text-align: left;">通用的 HAL 固件库资源，例如通用的
 <code>语句</code>、<code>枚举</code>、<code>结构体</code>、<code>宏</code>
@@ -429,45 +429,45 @@ Stack Pointer）的初始化和反向初始化；</td>
 <col style="width: 78%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">源文件</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>system_stm32f4xx.c</code></td>
 <td style="text-align: left;">包含系统启动时调用的
 <code>SystemInit()</code> 方法，该方法允许重新定位内部 SRAM
 中的向量表，并且配置 FSMC/FMC（如果可用）使用外置的 SRAM 或者 SDRAM
 作为数据存储器；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>startup_stm32f4xx.s</code></td>
 <td style="text-align: left;">包含有<code>重置处理器</code>与<code>异常向量</code>在内的，工具链指定的文件；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_flash.icf</code></td>
 <td style="text-align: left;"><strong>（可选）</strong>EWARM
 工具链的链接器文件，允许调整堆/栈大小以适应程序的需求；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_hal_msp.c</code></td>
 <td style="text-align: left;">包含用户应用程序当中使用到的外设<strong>主堆栈指针</strong>
 MSP
 的<code>初始化</code>与<code>反向初始化</code>（主程序与回调函数）；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_hal_conf.h</code></td>
 <td style="text-align: left;">该文件允许用户为特定的应用程序定制 HAL
 驱动程序；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_it.c</code> <br>
 <code>stm32f4xx_it.c.h</code></td>
 <td style="text-align: left;">包含异常处理程序与外围设备中断服务程序；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>main.c</code> <br>
 <code>main.c.h</code></td>
 <td style="text-align: left;">用户主程序，除了放置用户程序代码之外，还会调用
@@ -511,24 +511,24 @@ HAL 固件库的<strong>扩展</strong>（Extension）驱动程序源文件
 在驱动程序源代码文件当中的位置：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;"> </th>
 <th style="text-align: center;">通用驱动源文件</th>
 <th style="text-align: center;">扩展驱动源文件</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>公用 API</strong></td>
 <td style="text-align: center;">✔</td>
 <td style="text-align: center;">✔</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>产品系列 API</strong></td>
 <td style="text-align: center;">✖</td>
 <td style="text-align: center;">✔</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>指定型号 API</strong></td>
 <td style="text-align: center;">✖</td>
 <td style="text-align: center;">✔</td>
@@ -546,7 +546,7 @@ HAL 固件库的<strong>扩展</strong>（Extension）驱动程序源文件
 <col style="width: 31%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;"> </th>
 <th style="text-align: left;">通用</th>
 <th style="text-align: left;">系列指定</th>
@@ -554,37 +554,37 @@ HAL 固件库的<strong>扩展</strong>（Extension）驱动程序源文件
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">模块名称</td>
 <td style="text-align: left;"><code>stm32f4xx_hal_ppp (c/h)</code></td>
 <td style="text-align: left;"><code>stm32f4xx_hal_ppp_ex (c/h)</code></td>
 <td style="text-align: left;"><code>stm32f4xx_ hal_ppp_ex (c/h)</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">函数名称</td>
 <td style="text-align: left;"><code>HAL_PPP_ MODULE</code></td>
 <td style="text-align: left;"><code>HAL_PPP_ MODULE</code></td>
 <td style="text-align: left;"><code>HAL_PPP_ MODULE</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">头文件名称</td>
 <td style="text-align: left;"><code>HAL_PPP_Function</code><br><code>HAL_PPP_FeatureFunction_MODE</code></td>
 <td style="text-align: left;"><code>HAL_PPPEx_Function</code><br><code>HAL_PPPEx_FeatureFunction_MODE</code></td>
 <td style="text-align: left;"><code>HAL_PPPEx_Function</code><br><code>HAL_PPPEx_FeatureFunction_MODE</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">指针名称</td>
 <td style="text-align: left;"><code>PPP_HandleTypedef</code></td>
 <td style="text-align: left;"><strong>NA</strong></td>
 <td style="text-align: left;"><strong>NA</strong></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">初始化结构体名称</td>
 <td style="text-align: left;"><code>PPP_InitTypeDef</code></td>
 <td style="text-align: left;"><strong>NA</strong></td>
 <td style="text-align: left;"><code>PPP_InitTypeDef</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">枚举名称</td>
 <td style="text-align: left;"><code>HAL_PPP_StructnameTypeDef</code></td>
 <td style="text-align: left;"><strong>NA</strong></td>
@@ -641,50 +641,50 @@ HAL 固件库的<strong>扩展</strong>（Extension）驱动程序源文件
 <col style="width: 38%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">宏定义</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_ENABLE_IT(__HANDLE__, __INTERRUPT__)</code></td>
 <td style="text-align: left;"><strong>使能</strong>一个特定的外设中断；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_DISABLE_IT(__HANDLE__, __INTERRUPT__)</code></td>
 <td style="text-align: left;"><strong>失能</strong>一个特定的外设中断；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_GET_IT (__HANDLE__, __ INTERRUPT __)</code></td>
 <td style="text-align: left;"><strong>获取</strong>一个指定外设的中断状态；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_CLEAR_IT (__HANDLE__, __ INTERRUPT __)</code></td>
 <td style="text-align: left;"><strong>清除</strong>一个指定外设的中断状态；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_GET_FLAG (__HANDLE__, __FLAG__)</code></td>
 <td style="text-align: left;"><strong>获取</strong>一个指定外设的标志位状态；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_CLEAR_FLAG (__HANDLE__, __FLAG__)</code></td>
 <td style="text-align: left;"><strong>清除</strong>一个指定外设的标志位状态；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_ENABLE(__HANDLE__)</code></td>
 <td style="text-align: left;"><strong>使能</strong>一个外设；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_DISABLE(__HANDLE__)</code></td>
 <td style="text-align: left;"><strong>失能</strong>一个外设；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_XXXX (__HANDLE__, __PARAM__)</code></td>
 <td style="text-align: left;">指定 PPP
 外设驱动的<strong>宏</strong>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>__HAL_PPP_GET_ IT_SOURCE (__HANDLE__, __INTERRUPT__)</code></td>
 <td style="text-align: left;">检查指定的<strong>中断源</strong>；</td>
 </tr>
@@ -728,25 +728,25 @@ API 都位于 <code>stm32f4xx_hal_cortex.c</code> 源文件。</p>
 <col style="width: 73%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">回调函数</th>
 <th style="text-align: left;">示例</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_PPP_MspInit()</code><br><code>HAL_PPP_MspDeInit()</code></td>
 <td style="text-align: left;">例如 <code>HAL_USART_MspInit()</code>，由
 API 函数 <code>HAL_PPP_Init()</code>
 进行调用，用于进行外设的系统级初始化（GPIO、时钟、DMA、中断）；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_PPP_ProcessCpltCallback</code></td>
 <td style="text-align: left;">例如
 <code>HAL_USART_TxCpltCallback</code>，当处理执行完成时，由外设或者 DMA
 中断处理程序进行调用；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_PPP_ErrorCallback</code></td>
 <td style="text-align: left;">例如
 <code>HAL_USART_ErrorCallback</code>，当发生错误时，由外设或者 DMA
@@ -781,88 +781,88 @@ API</strong>：</p>
 <col style="width: 66%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">功能分组</th>
 <th style="text-align: left;">通用 API 名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">初始化函数</td>
 <td style="text-align: left;"><code>HAL_ADC_Init()</code></td>
 <td style="text-align: left;">初始化外设，配置时钟、GPIO、AF
 等底层资源；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_DeInit()</code></td>
 <td style="text-align: left;">恢复外设的默认状态，释放底层资源，并且消除与硬件的全部直接依赖；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">IO 操作函数</td>
 <td style="text-align: left;"><code>HAL_ADC_Start()</code></td>
 <td style="text-align: left;">在使用<strong>轮询模式</strong>时<strong>启用</strong>
 ADC 转换；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_Stop ()</code></td>
 <td style="text-align: left;">在使用<strong>轮询模式</strong>时<strong>停止</strong>
 ADC 转换；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_PollForConversion()</code></td>
 <td style="text-align: left;">在使用<strong>轮询模式</strong>时，等待<strong>转换结束</strong>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_Start_IT()</code></td>
 <td style="text-align: left;">在使用<strong>中断模式</strong>时<strong>启用</strong>
 ADC 转换；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_Stop_IT()</code></td>
 <td style="text-align: left;">在使用<strong>中断模式</strong>时<strong>停止</strong>
 ADC 转换；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_IRQHandler()</code></td>
 <td style="text-align: left;">处理 <strong>ADC</strong> 中断请求；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_ConvCpltCallback()</code></td>
 <td style="text-align: left;">在中断子程序内调用的回调函数，用于标识<strong>当前处理的结束</strong>或者
 <strong>DMA 传输在何时完成</strong>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_ErrorCallback()</code></td>
 <td style="text-align: left;">当发生外设错误或者 <strong>DMA</strong>
 传输错误的时候，该回调函数会在中断子程序当中被调用；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">控制函数</td>
 <td style="text-align: left;"><code>HAL_ADC_ConfigChannel()</code></td>
 <td style="text-align: left;">用于配置当前选择的 <strong>ADC</strong>
 常规通道，序列发生器当中相应的 <code>Rank</code> 与采样时间；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_AnalogWDGConfig</code></td>
 <td style="text-align: left;">该功能为选定的 <strong>ADC</strong>
 配置<strong>模拟看门狗</strong>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">状态与错误函数</td>
 <td style="text-align: left;"><code>HAL_ADC_GetState()</code></td>
 <td style="text-align: left;">用于在运行时获取<strong>外设</strong>与<strong>数据流</strong>的状态；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;"><code>HAL_ADC_GetError()</code></td>
 <td style="text-align: left;">获得发生在<strong>中断子程序</strong>当中的<strong>运行时错误</strong>；</td>
@@ -880,33 +880,33 @@ API</strong>：</p>
 <col style="width: 66%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">API 名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_ADCEx_InjectedStart()</code></td>
 <td style="text-align: left;">用于<strong>轮询</strong>模式下，<strong>开始</strong>注入
 ADC 转换通道；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_ADCEx_InjectedStop()</code></td>
 <td style="text-align: left;">用于<strong>轮询</strong>模式下，<strong>停止</strong>注入
 ADC 转换通道；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_ADCEx_InjectedStart_IT()</code></td>
 <td style="text-align: left;">用于<strong>中断</strong>模式下，<strong>开始</strong>注入
 ADC 转换通道；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_ADCEx_InjectedStop_IT()</code></td>
 <td style="text-align: left;">用于<strong>中断</strong>模式下，<strong>停止</strong>注入
 ADC 转换通道；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_ADCEx_InjectedConfigChannel()</code></td>
 <td style="text-align: left;">配置所选择 ADC
 的注入通道（序列发生器当中相应的 <code>Rank</code> 与采样时间）；</td>
@@ -981,118 +981,118 @@ STM32 微控制器型号进行分隔：</p>
 <col style="width: 21%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">配置项</th>
 <th style="text-align: left;">功能描述</th>
 <th style="text-align: left;">默认值</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HSE_VALUE</code></td>
 <td style="text-align: left;">定义外部晶振的值（<strong>HSE</strong>），单位为<strong>赫兹</strong>
 <code>Hz</code>；</td>
 <td style="text-align: left;"><code>25 000 000</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HSE_STARTUP_TIMEOUT</code></td>
 <td style="text-align: left;">HSE
 启动<strong>超时时间</strong>，单位为<strong>毫秒</strong>
 <code>ms</code>；</td>
 <td style="text-align: left;"><code>5000</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HSI_VALUE</code></td>
 <td style="text-align: left;">定义内部晶振的值（<strong>HSI</strong>），单位为<strong>赫兹</strong>
 <code>Hz</code>；</td>
 <td style="text-align: left;"><code>16 000 000</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>EXTERNAL_CLOCK_VALUE</code></td>
 <td style="text-align: left;">用于 I2S/SAI
 模块计算其<strong>时钟源</strong>频率</td>
 <td style="text-align: left;"><code>12288000</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>VDD_VALUE</code></td>
 <td style="text-align: left;"><strong>VDD</strong>
 的值，单位为<strong>毫伏</strong> <code>mV</code>；</td>
 <td style="text-align: left;"><code>3300</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>USE_RTOS</code></td>
 <td style="text-align: left;">使能嵌入式实时系统
 <strong>RTOS</strong>；</td>
 <td style="text-align: left;"><code>FALSE</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>PREFETCH_ENABLE</code></td>
 <td style="text-align: left;">使能<strong>预获取特性</strong>；</td>
 <td style="text-align: left;"><code>TRUE</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>INSTRUCTION_CACHE_ENABLE</code></td>
 <td style="text-align: left;">使能<strong>指令缓存</strong>；</td>
 <td style="text-align: left;"><code>TRUE</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>DATA_CACHE_ENABLE</code></td>
 <td style="text-align: left;">使能<strong>数据缓存</strong>；</td>
 <td style="text-align: left;"><code>TRUE</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>USE HAL_PPP_MODULE</code></td>
 <td style="text-align: left;">使能模块在 HAL 驱动程序当中使用；</td>
 <td style="text-align: left;"> </td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>MAC_ADDRx</code></td>
 <td style="text-align: left;">配置<strong>以太网</strong>外设的 MAC
 地址；</td>
 <td style="text-align: left;"> </td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>ETH_RX_BUF_SIZE</code></td>
 <td style="text-align: left;">配置<strong>以太网</strong>数据接收缓冲区的大小；</td>
 <td style="text-align: left;"><code>ETH_MAX_PACKET_SIZE</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>ETH_TX_BUF_SIZE</code></td>
 <td style="text-align: left;">配置<strong>以太网</strong>数据发送缓冲区的大小；</td>
 <td style="text-align: left;"><code>ETH_MAX_PACKET_SIZE</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>ETH_RXBUFNB</code></td>
 <td style="text-align: left;"><strong>以太网</strong>数据接收缓冲区的数量；</td>
 <td style="text-align: left;"><code>4</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>ETH_TXBUFNB</code></td>
 <td style="text-align: left;"><strong>以太网</strong>数据发送缓冲区的数量；</td>
 <td style="text-align: left;"><code>4</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>DP83848_PHY_ADDRESS</code></td>
 <td style="text-align: left;">DB83848 <strong>以太网</strong> PHY
 地址；</td>
 <td style="text-align: left;"><code>0x01</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>PHY_RESET_DELAY</code></td>
 <td style="text-align: left;">PHY 复位延迟；</td>
 <td style="text-align: left;"><code>0x000000FF</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>PHY_CONFIG_DELAY</code></td>
 <td style="text-align: left;">PHY 配置延迟；</td>
 <td style="text-align: left;"><code>0x000000FF</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>PHY_BCR PHY_BSR</code></td>
 <td style="text-align: left;">通用 PHY 寄存器；</td>
 <td style="text-align: left;"> </td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>PHY_SR PHY_MICR PHY_MISR</code></td>
 <td style="text-align: left;">扩展 PHY 寄存器；</td>
 <td style="text-align: left;"> </td>
@@ -1151,28 +1151,28 @@ MSP 的回调函数:</p>
 自动生成与修改，其中主要包含有如下四个函数：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">函数名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void HAL_MspInit()</code></td>
 <td style="text-align: left;"><strong>全局</strong> MSP
 初始化函数；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void HAL_MspDeInit()</code></td>
 <td style="text-align: left;"><strong>全局</strong> MSP
 反向初始化函数；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void HAL_PPP_MspInit()</code></td>
 <td style="text-align: left;"><strong>外设 PPP</strong> 的 MSP
 初始化函数；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void HAL_PPP_MspDeInit()</code></td>
 <td style="text-align: left;"><strong>外设 PPP</strong> 的 MSP
 反向初始化函数；</td>
@@ -1247,21 +1247,21 @@ API，其中定义了处理过程被阻塞直至错误被返回的延迟时间�
 <p><strong>超时</strong>的时间取值范围，具体如下面的表格所示：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>超时值</th>
 <th>功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>0</code></td>
 <td>没有轮询，立刻检查并且退出；</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>1 ~ (HAL_MAX_DELAY -1)</code></td>
 <td>以毫秒作为单位的超时值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>HAL_MAX_DELAY</code></td>
 <td>无限轮询直至处理成功；</td>
 </tr>
@@ -1342,40 +1342,40 @@ LL 固件库当中，主要提供有如下四种功能函数：</p>
 <col style="width: 86%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">LL 固件库源文件</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_ll_bus.h</code></td>
 <td style="text-align: left;">用于核心总线控制与外设时钟的使能与失能，例如：<code>LL_AHB2_GRP1_EnableClock</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_ll_ppp.h/.c</code></td>
 <td style="text-align: left;"><code>stm32f4xx_ll_ppp.c</code> 提供了
 <code>LL_PPP_Init()</code>、<code>LL_PPP_StructInit()</code>、<code>LL_PPP_DeInit()</code>
 等外设初始化函数，所有 API 都定义在 <code>stm32f4xx_ll_ppp.h</code>
 头文件当中；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_ll_cortex.h</code></td>
 <td style="text-align: left;">包含系统滴答定时器 <code>SysTick</code>
 与低功耗在内的 Cortex-M4 相关寄存器操作 API，例如
 <code>LL_SYSTICK_xxxxx</code>、<code>LL_LPM_xxxxx</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_ll_utils.h/.c</code></td>
 <td style="text-align: left;">该文件当中放置的是通用
 API，可以用于读取设备 ID
 和电子签名、时间基准与延迟管理、系统时钟配置；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>stm32f4xx_ll_system.h</code></td>
 <td style="text-align: left;">系统相关的操作，例如：<code>LL_SYSCFG_xxx</code>、<code>LL_DBGMCU_xxx</code>、<code>LL_FLASH_xxx</code>、<code>LL_VREFBUF_xxx</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>stm32_assert_template.h</code></td>
 <td style="text-align: left;">定义用于使能<strong>运行时检查</strong>的
 <code>assert_param</code> 宏模板文件，只会在独立使用 LL
@@ -1416,7 +1416,7 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <col style="width: 61%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">函数名称</th>
 <th style="text-align: left;">返回类型</th>
 <th style="text-align: left;">参数</th>
@@ -1424,21 +1424,21 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_PPP_Init</code></td>
 <td style="text-align: left;"><code>ErrorStatus</code></td>
 <td style="text-align: left;"><code>PPP_TypeDef* PPPx</code><br><code>LL_PPP_InitTypeDef* PPP_InitStruct</code></td>
 <td style="text-align: left;">根据 <code>PPP_InitStruct</code>
 当中指定的参数，初始化外设的主要特性，例如：<code>LL_USART_Init(USART_TypeDef *USARTx, LL_USART_InitTypeDef *USART_InitStruct)</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>LL_PPP_StructInit</code></td>
 <td style="text-align: left;"><code>void</code></td>
 <td style="text-align: left;"><code>LL_PPP_InitTypeDef* PPP_InitStruct</code></td>
 <td style="text-align: left;">采用默认值填充 <code>PPP_InitStruct</code>
 结构体的每一个成员，例如：<code>LL_USART_StructInit(LL_USART_InitTypeDef *USART_InitStruct)</code>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_PPP_DeInit</code></td>
 <td style="text-align: left;"><code>ErrorStatus</code></td>
 <td style="text-align: left;"><code>PPP_TypeDef* PPPx</code></td>
@@ -1455,7 +1455,7 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <col style="width: 81%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">函数名称</th>
 <th style="text-align: left;">返回类型</th>
 <th style="text-align: left;">参数</th>
@@ -1463,14 +1463,14 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_PPP&#123;_CATEGORY&#125;_Init</code></td>
 <td style="text-align: left;"><code>ErrorStatus</code></td>
 <td style="text-align: left;"><code>PPP_TypeDef* PPPx</code><br><code>LL_PPP&#123;_CATEGORY&#125;_InitTypeDef* PPP&#123;_CATEGORY&#125;_InitStruct</code></td>
 <td style="text-align: left;">根据 <code>PPP_InitStruct</code>
 结构体当中指定的参数初始化外设特性，例如：<br><code>LL_ADC_INJ_Init(ADC_TypeDef *ADCx, LL_ADC_INJ_InitTypeDef *ADC_INJ_InitStruct)</code><br><code>LL_RTC_TIME_Init(RTC_TypeDef *RTCx, uint32_t RTC_Format, LL_RTC_TimeTypeDef *RTC_TimeStruct)</code><br><code>LL_RTC_DATE_Init(RTC_TypeDef *RTCx, uint32_t RTC_Format, LL_RTC_DateTypeDef *RTC_DateStruct)</code><br><code>LL_TIM_IC_Init(TIM_TypeDef* TIMx, uint32_t Channel, LL_TIM_IC_InitTypeDef* TIM_IC_InitStruct)</code><br><code>LL_TIM_ENCODER_Init(TIM_TypeDef* TIMx, LL_TIM_ENCODER_InitTypeDef* TIM_EncoderInitStruct)</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>LL_PPP&#123;_CATEGORY&#125;_StructInit</code></td>
 <td style="text-align: left;"><code>void</code></td>
 <td style="text-align: left;"><code>LL_PPP&#123;_CATEGORY&#125;_InitTypeDef* PPP&#123;_CATEGORY&#125;_InitStruct</code></td>
@@ -1478,13 +1478,13 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <code>PPP&#123;_CATEGORY&#125;_InitStruct</code>
 结构体的每一个成员，例如：<br><code>LL_ADC_INJ_StructInit(LL_ADC_INJ_InitTypeDef *ADC_INJ_InitStruct)</code>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_PPP_CommonInit</code></td>
 <td style="text-align: left;"><code>ErrorStatus</code></td>
 <td style="text-align: left;"><code>PPP_TypeDef* PPPx</code><br><code>LL_PPP_CommonInitTypeDef* PPP_CommonInitStruct</code></td>
 <td style="text-align: left;">初始化相同外设不同实例之间共享的公共特性，例如：<br><code>LL_ADC_CommonInit(ADC_Common_TypeDef *ADCxy_COMMON, LL_ADC_CommonInitTypeDef *ADC_CommonInitStruct)</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>LL_PPP_CommonStructInit</code></td>
 <td style="text-align: left;"><code>void</code></td>
 <td style="text-align: left;"><code>LL_PPP_CommonInitTypeDef* PPP_CommonInitStruct</code></td>
@@ -1492,13 +1492,13 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <code>PPP&#123;_CATEGORY&#125;_InitStruct</code>
 结构体的每一个成员，例如：<br><code>LL_ADC_CommonStructInit(LL_ADC_CommonInitTypeDef *ADC_CommonInitStruct)</code>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_PPP_ClockInit</code></td>
 <td style="text-align: left;"><code>ErrorStatus</code></td>
 <td style="text-align: left;"><code>PPP_TypeDef* PPPx</code><br><code>LL_PPP_ClockInitTypeDef* PPP_ClockInitStruct</code></td>
 <td style="text-align: left;">通过同步模式，初始化外设时钟的配置，例如：<br><code>LL_USART_ClockInit(USART_TypeDef *USARTx, LL_USART_ClockInitTypeDef *USART_ClockInitStruct)</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>LL_PPP_ClockStructInit</code></td>
 <td style="text-align: left;"><code>void</code></td>
 <td style="text-align: left;"><code>LL_PPP_ClockInitTypeDef* PPP_ClockInitStruct</code></td>
@@ -1545,13 +1545,13 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <col style="width: 62%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">名称</th>
 <th style="text-align: left;">示例</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_PPP_&#123;_CATEGORY&#125;_ActionItem_BITNAME</code><br><code>LL_PPP&#123;_CATEGORY&#125;_IsItem_BITNAME_Action</code></td>
 <td style="text-align: left;"><code>LL_RCC_IsActiveFlag_LSIRDY</code><br><code>LL_RCC_IsActiveFlag_FWRST()</code><br><code>LL_ADC_ClearFlag_EOC(ADC1)</code><br><code>LL_DMA_ClearFlag_TCx(DMA_TypeDef* DMAx)</code></td>
 </tr>
@@ -1560,49 +1560,49 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <p>可以使用的函数格式如下面表格所示：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">类型</th>
 <th style="text-align: left;">行为</th>
 <th style="text-align: left;">格式</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>标志</strong></td>
 <td style="text-align: left;">获取</td>
 <td style="text-align: left;"><code>LL_PPP_IsActiveFlag_BITNAME</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;">清除</td>
 <td style="text-align: left;"><code>LL_PPP_ClearFlag_BITNAME</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>中断</strong></td>
 <td style="text-align: left;">启用</td>
 <td style="text-align: left;"><code>LL_PPP_EnableIT_BITNAME</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;">禁用</td>
 <td style="text-align: left;"><code>LL_PPP_DisableIT_BITNAME</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;">获取</td>
 <td style="text-align: left;"><code>LL_PPP_IsEnabledIT_BITNAME</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>DMA</strong></td>
 <td style="text-align: left;">启用</td>
 <td style="text-align: left;"><code>LL_PPP_EnableDMAReq_BITNAME</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;">禁用</td>
 <td style="text-align: left;"><code>LL_PPP_DisableDMAReq_BITNAME</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"> </td>
 <td style="text-align: left;">获取</td>
 <td style="text-align: left;"><code>LL_PPP_IsEnabledDMAReq_BITNAME</code></td>
@@ -1620,13 +1620,13 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <col style="width: 82%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">名称</th>
 <th style="text-align: left;">示例</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_BUS_GRPx_ActionClock&#123;Mode&#125;</code></td>
 <td style="text-align: left;"><code>LL_AHB2_GRP1_EnableClock (LL_AHB2_GRP1_PERIPH_GPIOA │ LL_AHB2_GRP1_PERIPH_GPIOB)</code><br><code>LL_APB1_GRP1_EnableClockSleep (LL_APB1_GRP1_PERIPH_DAC1)</code></td>
 </tr>
@@ -1644,13 +1644,13 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <col style="width: 66%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">名称</th>
 <th style="text-align: left;">示例</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_PPP&#123;_CATEGORY&#125;_Action&#123;Item&#125;</code><br><code>LL_PPP&#123;_CATEGORY&#125;_IsItemAction</code></td>
 <td style="text-align: left;"><code>LL_ADC_Enable()</code><br><code>LL_ADC_StartCalibration()</code><br><code>LL_ADC_IsCalibrationOnGoing</code><br><code>LL_RCC_HSI_Enable()</code><br><code>LL_RCC_HSI_IsReady()</code></td>
 </tr>
@@ -1663,13 +1663,13 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <col style="width: 61%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">名称</th>
 <th style="text-align: left;">示例</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>LL_PPP&#123;_CATEGORY&#125;_&#123;Set/Get&#125;ConfigItem</code></td>
 <td style="text-align: left;"><code>LL_USART_SetBaudRate(USART2, Clock, LL_USART_BAUDRATE_9600)</code></td>
 </tr>
@@ -1682,18 +1682,18 @@ LL 固件驱动之前调用的通用头文件里面，下面表格展示了 LL
 <col style="width: 100%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">名称</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><code>LL_PPP_WriteReg(__INSTANCE__, __REG__, __VALUE__)</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><code>LL_PPP_ReadReg(__INSTANCE__, __REG__)</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><code>LL_PPP_DMA_GetRegAddr(PPP_TypeDef *PPPx, &#123; Sub Instance if any ex : Channel &#125;, &#123;uint32_t Propriety&#125;)</code></td>
 </tr>
 </tbody>
@@ -2087,39 +2087,39 @@ HSE、HSI、LSE、LSI、PLL、CSS、MCO：</p>
 <col style="width: 80%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">英文缩写</th>
 <th style="text-align: center;">英文全名</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>HSI</strong></td>
 <td style="text-align: center;">high-speed internal</td>
 <td style="text-align: left;">直接使用 <code>16 MHz</code> 工厂校准的 RC
 振荡电路或者通过 PLL 锁相环作为系统时钟源；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>LSI</strong></td>
 <td style="text-align: center;">low-speed internal</td>
 <td style="text-align: left;"><code>32 KHz</code> 低功耗 RC
 振荡电路用于<strong>独立看门狗</strong> IWDG
 或者<strong>实时时钟</strong> RTC 的时钟源；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>HSE</strong></td>
 <td style="text-align: center;">high-speed external</td>
 <td style="text-align: left;">直接使用 <code>4 ~ 26MHz</code>
 晶振或者通过 PLL 锁相环作为系统时钟源，也可以作为 RTC 时钟源；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>LSE</strong></td>
 <td style="text-align: center;">low-speed external</td>
 <td style="text-align: left;"><code>32 KHz</code> 晶振作为 RTC
 实时时钟源；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>PLL</strong></td>
 <td style="text-align: center;">phase Locking Loop</td>
 <td style="text-align: left;">以 HSI 或 HSE
@@ -2128,7 +2128,7 @@ HSE、HSI、LSE、LSI、PLL、CSS、MCO：</p>
 <code>48 MHz</code> 的时钟、随机模拟发生器的 <code>≤ 48 MHz</code>
 的时钟、安全数字输入输出接口 SDIO 的 <code>≤ 48 MHz</code> 的时钟；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>CSS</strong></td>
 <td style="text-align: center;">clock security system</td>
 <td style="text-align: left;">使能宏定义
@@ -2137,13 +2137,13 @@ HSE、HSI、LSE、LSI、PLL、CSS、MCO：</p>
 作为系统时钟源），系统时钟将会自动切换到 HSI 并且产生中断，该中断链接至
 Cortex-M4 的非可屏蔽中断异常向量；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>MCO1</strong></td>
 <td style="text-align: center;">microcontroller clock output</td>
 <td style="text-align: left;">用于通过 <strong>PA8</strong> 引脚输出
 HSI、LSE、HSE、PLL 时钟（通过一个可配置的预分频器）；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;">  <strong>MCO2</strong>  </td>
 <td style="text-align: center;">microcontroller clock output</td>
 <td style="text-align: left;">用于通过 <strong>PC9</strong> 引脚输出
@@ -2183,45 +2183,45 @@ AHB 总线（挂载有 DMA、GPIO
 <col style="width: 72%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">RCC_OscInitTypeDef 结构体成员</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_OscInitTypeDef::OscillatorType</code></td>
 <td style="text-align: left;">当前所需要配置的振荡器类型，该参数可以是
 <code>RCC_Oscillator_Type</code> 里的值；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_OscInitTypeDef::HSEState</code></td>
 <td style="text-align: left;"><strong>HSE</strong>
 的新状态，该参数可以是 <code>RCC_HSE_Config</code> 里的值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_OscInitTypeDef::LSEState</code></td>
 <td style="text-align: left;"><strong>LSE</strong>
 的新状态，该参数可以是 <code>RCC_LSE_Config</code> 里的值；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_OscInitTypeDef::HSIState</code></td>
 <td style="text-align: left;"><strong>HSI</strong>
 的新状态，该参数可以是 <code>RCC_HSI_Config</code> 里的值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_OscInitTypeDef::HSICalibrationValue</code></td>
 <td style="text-align: left;">HSI 校准微调值，默认为
 <code>RCC_HSICALIBRATION_DEFAULT</code>，<br>该参数必须是位于
 <code>Min_Data = 0x00</code> 和 <code>Max_Data = 0x1F</code>
 之间的一个数值；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_OscInitTypeDef::LSIState</code></td>
 <td style="text-align: left;"><strong>LSI</strong>
 的新状态，该参数可以是 <code>RCC_LSI_Config</code> 里的值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>RCC_PLLInitTypeDef RCC_OscInitTypeDef::PLL</code></td>
 <td style="text-align: left;">锁相环 PLL 结构体参数；</td>
 </tr>
@@ -2235,36 +2235,36 @@ AHB 总线（挂载有 DMA、GPIO
 <col style="width: 70%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">RCC_ClkInitTypeDef 结构体成员</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_ClkInitTypeDef::ClockType</code></td>
 <td style="text-align: left;">当前所需要配置的时钟，该参数可以是
 <code>RCC_System_Clock_Type</code> 里的值；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_ClkInitTypeDef::SYSCLKSource</code></td>
 <td style="text-align: left;">将时钟源 <code>SYSCLKS</code>
 用于系统时钟，该参数可以是 <code>RCC_System_Clock_Source</code>
 里的值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_ClkInitTypeDef::AHBCLKDivider</code></td>
 <td style="text-align: left;">AHB 时钟 <code>HCLK</code>
 的分频器，该时钟由系统时钟 <code>SYSCLK</code> 派生而来，可以是
 <code>RCC_AHB_Clock_Source</code> 里的值；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_ClkInitTypeDef::APB1CLKDivider</code></td>
 <td style="text-align: left;">APB1 时钟 <code>PCLK1</code>
 的分频器，该时钟由 AHB 时钟 <code>HCLK</code> 派生而来，可以是
 <code>RCC_APB1_APB2_Clock_Source</code> 里的值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t RCC_ClkInitTypeDef::APB2CLKDivider</code></td>
 <td style="text-align: left;">APB2 时钟 <code>PCLK2</code>
 的分频器，该时钟由 AHB 时钟 <code>HCLK</code> 派生而来，可以是
@@ -2279,22 +2279,22 @@ AHB 总线（挂载有 DMA、GPIO
 <col style="width: 76%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">函数名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_DeInit()</code></td>
 <td style="text-align: left;">重置 RCC 时钟为默认状态；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_OscConfig()</code></td>
 <td style="text-align: left;">根据 <code>RCC_OscInitTypeDef</code>
 当中的指定参数初始化 RCC 振荡器；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_ClockConfig()</code></td>
 <td style="text-align: left;">根据 <code>RCC_ClkInitStruct</code>
 当中指定的参数初始化微控制器、AHB、APB 总线的时钟；</td>
@@ -2308,59 +2308,59 @@ AHB 总线（挂载有 DMA、GPIO
 <col style="width: 67%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">函数名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_MCOConfig()</code></td>
 <td style="text-align: left;">选择 <code>MCO1/PA8</code>
 引脚或者<code>MCO2/PC9</code> 引脚上输出的时钟源；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_EnableCSS()</code></td>
 <td style="text-align: left;">打开<strong>时钟安全系统</strong>（CSS，Clock
 Security System）；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_DisableCSS()</code></td>
 <td style="text-align: left;">关闭<strong>时钟安全系统</strong>（CSS，Clock
 Security System）；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_GetSysClockFreq()</code></td>
 <td style="text-align: left;">返回 <code>syscclk</code> 时钟频率；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_GetHCLKFreq()</code></td>
 <td style="text-align: left;">返回 <code>HCLK</code> 时钟频率；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_GetPCLK1Freq()</code></td>
 <td style="text-align: left;">返回 <code>PCLK1</code> 时钟频率；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_GetPCLK2Freq()</code></td>
 <td style="text-align: left;">返回 <code>PCLK2</code> 时钟频率；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_GetOscConfig()</code></td>
 <td style="text-align: left;">通过内部 RCC 寄存器配置
 <code>RCC_OscInitStruct</code>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_GetClockConfig()</code></td>
 <td style="text-align: left;">通过内部 RCC 寄存器配置
 <code>RCC_ClkInitStruct</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_NMI_IRQHandler()</code></td>
 <td style="text-align: left;">用于处理 RCC 的 CSS
 时钟安全系统中断请求；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_RCC_CSSCallback()</code></td>
 <td style="text-align: left;">RCC 时钟安全系统 CSS 的中断回调函数；</td>
 </tr>
@@ -2384,44 +2384,44 @@ GPIO 端口的硬件特性，它们可以分别被配置为如下几种工作模
 <col style="width: 73%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">中文名称</th>
 <th style="text-align: left;">英文名称</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>浮空输入</strong></td>
 <td style="text-align: left;">Input floating</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>上拉输入</strong></td>
 <td style="text-align: left;">Input pull-up</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>下拉输入</strong></td>
 <td style="text-align: left;">Input pull-down</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>模拟功能</strong></td>
 <td style="text-align: left;">Analog</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>带上下拉的开漏输出</strong></td>
 <td style="text-align: left;">Output open-drain with pull-up or
 pull-down capability</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>带上下拉的推挽输出</strong></td>
 <td style="text-align: left;">Output push-pull with pull-up or pull-down
 capability</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>带上下拉的可复用推挽</strong></td>
 <td style="text-align: left;">Alternate function push-pull with pull-up
 or pull-down capability</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>带上下拉的可复用开漏</strong></td>
 <td style="text-align: left;">Alternate function open-drain with pull-up
 or pull-down capability</td>
@@ -2533,33 +2533,33 @@ GPIO）生成事件/中断请求（每条输入线都可以被独立配置为指
 <col style="width: 66%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">GPIO_InitTypeDef 结构体成员</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t GPIO_InitTypeDef::Pin</code></td>
 <td style="text-align: left;">需要配置的振荡器，该参数可以是
 <code>GPIO_pins_define</code> 的任意值；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t GPIO_InitTypeDef::Mode</code></td>
 <td style="text-align: left;">指定所选引脚的工作模式，该参数可以是
 <code>GPIO_mode_define</code> 里的值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t GPIO_InitTypeDef::Pull</code></td>
 <td style="text-align: left;">指定所选引脚的上拉或下拉电阻激活状态，取值可以为
 <code>GPIO_pull_define</code> 里的值；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t GPIO_InitTypeDef::Speed</code></td>
 <td style="text-align: left;">指定所选引脚的工作速度，该参数可以是
 <code>GPIO_speed_define</code> 里的值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t GPIO_InitTypeDef::Alternate</code></td>
 <td style="text-align: left;">连接外设的指定引脚，该参数为
 <code>GPIO_Alternate_function_selection</code> 里的值；</td>
@@ -2574,18 +2574,18 @@ GPIO）生成事件/中断请求（每条输入线都可以被独立配置为指
 <col style="width: 73%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">函数名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_GPIO_Init()</code></td>
 <td style="text-align: left;">基于 <code>GPIO_Init</code>
 当中指定的参数初始化 <code>GPIOx</code> 外设；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_GPIO_DeInit()</code></td>
 <td style="text-align: left;">反向初始化 <code>GPIOx</code>
 外设寄存器为默认重置值；</td>
@@ -2595,33 +2595,33 @@ GPIO）生成事件/中断请求（每条输入线都可以被独立配置为指
 <h4 id="io-操作函数">IO 操作函数</h4>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">函数名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_GPIO_ReadPin()</code></td>
 <td style="text-align: left;">读取指定输入端口的引脚状态；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_GPIO_WritePin()</code></td>
 <td style="text-align: left;">设置或者清除指定的数据端口位；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_GPIO_TogglePin()</code></td>
 <td style="text-align: left;">切换指定的 GPIO 引脚状态；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_GPIO_LockPin()</code></td>
 <td style="text-align: left;">锁定 GPIO 引脚配置寄存器；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>HAL_GPIO_EXTI_IRQHandler()</code></td>
 <td style="text-align: left;">该函数用于处理 EXTI 中断请求；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>HAL_GPIO_EXTI_Callback()</code></td>
 <td style="text-align: left;">EXTI 线检测回调函数；</td>
 </tr>
@@ -2637,27 +2637,27 @@ GPIO）生成事件/中断请求（每条输入线都可以被独立配置为指
 <h2 id="spi-串行外设接口">SPI 串行外设接口</h2>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">函数名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 </tbody>
 </table>
-</div><div class="article-licensing box"><div class="licensing-title"><p>基于 HAL 与 LL 的 UINIO-MCU-STM32F401 开发实践</p><p><a href="http://www.uinio.com/Embedded/STM32F401/">http://www.uinio.com/Embedded/STM32F401/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-07-26</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-11-12</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/Altium/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">采用 Altium Designer 17.1 进行 PCB 电路绘制与仿真</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Embedded/Android/"><span class="level-item">Android 物联网应用开发实例</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#arm-cortex-m4-概要"><span class="level-left"><span class="level-item">1</span><span class="level-item">ARM Cortex M4 概要</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外设资源-peripheral"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">外设资源 Peripheral</span></span></a></li><li><a class="level is-mobile" href="#引脚定义-pin"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">引脚定义 Pin</span></span></a></li><li><a class="level is-mobile" href="#启动模式-boot"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">启动模式 Boot</span></span></a></li><li><a class="level is-mobile" href="#系统复位-reset"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">系统复位 Reset</span></span></a></li><li><a class="level is-mobile" href="#总线架构-bus"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">总线架构 Bus</span></span></a></li><li><a class="level is-mobile" href="#内存映射-memory-mapping"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">内存映射 Memory Mapping</span></span></a></li></ul></li><li><a class="level is-mobile" href="#stm32f401-核心电路分析"><span class="level-left"><span class="level-item">2</span><span class="level-item">STM32F401 核心电路分析</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#mcu-微控制器"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">MCU 微控制器</span></span></a></li><li><a class="level is-mobile" href="#复位电路-reset"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">复位电路 Reset</span></span></a></li><li><a class="level is-mobile" href="#启动配置按钮-boot"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">启动配置按钮 Boot</span></span></a></li><li><a class="level is-mobile" href="#usb-type-c-接口"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">USB Type-C 接口</span></span></a></li><li><a class="level is-mobile" href="#线性稳压器-ldo"><span class="level-left"><span class="level-item">2.5</span><span class="level-item">线性稳压器 LDO</span></span></a></li><li><a class="level is-mobile" href="#用户按键-button"><span class="level-left"><span class="level-item">2.6</span><span class="level-item">用户按键 Button</span></span></a></li><li><a class="level is-mobile" href="#状态指示-led"><span class="level-left"><span class="level-item">2.7</span><span class="level-item">状态指示 LED</span></span></a></li><li><a class="level is-mobile" href="#串行线调试接口-swd"><span class="level-left"><span class="level-item">2.8</span><span class="level-item">串行线调试接口 SWD</span></span></a></li><li><a class="level is-mobile" href="#板载-nor-flash"><span class="level-left"><span class="level-item">2.9</span><span class="level-item">板载 NOR Flash</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-硬件抽象层"><span class="level-left"><span class="level-item">3</span><span class="level-item">HAL 硬件抽象层</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#包含的数据结构"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">包含的数据结构</span></span></a></li><li><a class="level is-mobile" href="#hal-库-api-的分类"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">HAL 库 API 的分类</span></span></a></li><li><a class="level is-mobile" href="#hal-驱动规范"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">HAL 驱动规范</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#hal-api-命名规则"><span class="level-left"><span class="level-item">3.3.1</span><span class="level-item">HAL API 命名规则</span></span></a></li><li><a class="level is-mobile" href="#hal-通用命名规则"><span class="level-left"><span class="level-item">3.3.2</span><span class="level-item">HAL 通用命名规则</span></span></a></li><li><a class="level is-mobile" href="#中断处理程序与回调函数"><span class="level-left"><span class="level-item">3.3.3</span><span class="level-item">中断处理程序与回调函数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-通用-api"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">HAL 通用 API</span></span></a></li><li><a class="level is-mobile" href="#hal-扩展-api"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">HAL 扩展 API</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#添加指定型号的功能"><span class="level-left"><span class="level-item">3.5.1</span><span class="level-item">添加指定型号的功能</span></span></a></li><li><a class="level is-mobile" href="#添加产品系列的功能"><span class="level-left"><span class="level-item">3.5.2</span><span class="level-item">添加产品系列的功能</span></span></a></li><li><a class="level is-mobile" href="#添加新的外设"><span class="level-left"><span class="level-item">3.5.3</span><span class="level-item">添加新的外设</span></span></a></li><li><a class="level is-mobile" href="#更新现存的通用-api"><span class="level-left"><span class="level-item">3.5.4</span><span class="level-item">更新现存的通用 API</span></span></a></li><li><a class="level is-mobile" href="#更新现存的数据结构"><span class="level-left"><span class="level-item">3.5.5</span><span class="level-item">更新现存的数据结构</span></span></a></li></ul></li><li><a class="level is-mobile" href="#源文件包含关系"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">源文件包含关系</span></span></a></li><li><a class="level is-mobile" href="#公用资源定义"><span class="level-left"><span class="level-item">3.7</span><span class="level-item">公用资源定义</span></span></a></li><li><a class="level is-mobile" href="#配置-hal-固件库"><span class="level-left"><span class="level-item">3.8</span><span class="level-item">配置 HAL 固件库</span></span></a></li><li><a class="level is-mobile" href="#如何使用-hal-驱动"><span class="level-left"><span class="level-item">3.9</span><span class="level-item">如何使用 HAL 驱动</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#hal-全局初始化"><span class="level-left"><span class="level-item">3.9.1</span><span class="level-item">HAL 全局初始化</span></span></a></li><li><a class="level is-mobile" href="#时钟配置"><span class="level-left"><span class="level-item">3.9.2</span><span class="level-item">时钟配置</span></span></a></li><li><a class="level is-mobile" href="#初始化-msp"><span class="level-left"><span class="level-item">3.9.3</span><span class="level-item">初始化 MSP</span></span></a></li><li><a class="level is-mobile" href="#io-操作"><span class="level-left"><span class="level-item">3.9.4</span><span class="level-item">IO 操作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#轮询模式"><span class="level-left"><span class="level-item">3.9.4.1</span><span class="level-item">轮询模式</span></span></a></li><li><a class="level is-mobile" href="#中断模式"><span class="level-left"><span class="level-item">3.9.4.2</span><span class="level-item">中断模式</span></span></a></li><li><a class="level is-mobile" href="#dma-模式"><span class="level-left"><span class="level-item">3.9.4.3</span><span class="level-item">DMA 模式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#超时与错误管理"><span class="level-left"><span class="level-item">3.9.5</span><span class="level-item">超时与错误管理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#超时管理"><span class="level-left"><span class="level-item">3.9.5.1</span><span class="level-item">超时管理</span></span></a></li><li><a class="level is-mobile" href="#错误管理"><span class="level-left"><span class="level-item">3.9.5.2</span><span class="level-item">错误管理</span></span></a></li><li><a class="level is-mobile" href="#运行时检查"><span class="level-left"><span class="level-item">3.9.5.3</span><span class="level-item">运行时检查</span></span></a></li></ul></li></ul></li></ul></li><li><a class="level is-mobile" href="#ll-底层库"><span class="level-left"><span class="level-item">4</span><span class="level-item">LL 底层库</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#ll-底层库文件"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">LL 底层库文件</span></span></a></li><li><a class="level is-mobile" href="#外设初始化函数"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">外设初始化函数</span></span></a></li><li><a class="level is-mobile" href="#运行时检查-1"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">运行时检查</span></span></a></li><li><a class="level is-mobile" href="#外设的寄存器级配置"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">外设的寄存器级配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-ll-组合运用"><span class="level-left"><span class="level-item">5</span><span class="level-item">HAL &amp; LL 组合运用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#单独使用-ll-固件库"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">单独使用 LL 固件库</span></span></a></li><li><a class="level is-mobile" href="#组合运用-hal-和-ll-固件库"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">组合运用 HAL 和 LL 固件库</span></span></a></li></ul></li><li><a class="level is-mobile" href="#stm32-cube-ide-开发环境"><span class="level-left"><span class="level-item">6</span><span class="level-item">STM32 Cube IDE 开发环境</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建工程"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">新建工程</span></span></a></li><li><a class="level is-mobile" href="#工程源码结构"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">工程源码结构</span></span></a></li><li><a class="level is-mobile" href="#st-link-下载调试"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">ST-Link 下载调试</span></span></a></li><li><a class="level is-mobile" href="#cmsis-dap-下载调试"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">CMSIS-DAP 下载调试</span></span></a></li></ul></li><li><a class="level is-mobile" href="#stm32-cube-programmer-编程器"><span class="level-left"><span class="level-item">7</span><span class="level-item">STM32 Cube Programmer 编程器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#进入-bootloader-模式"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">进入 Bootloader 模式</span></span></a></li><li><a class="level is-mobile" href="#通过-usb-下载"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">通过 USB 下载</span></span></a></li><li><a class="level is-mobile" href="#通过-uart-下载"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">通过 UART 下载</span></span></a></li></ul></li><li><a class="level is-mobile" href="#rcc-复位时钟控制"><span class="level-left"><span class="level-item">8</span><span class="level-item">RCC 复位时钟控制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外设分析"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">外设分析</span></span></a></li><li><a class="level is-mobile" href="#api-描述"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">API 描述</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#指定特性"><span class="level-left"><span class="level-item">8.2.1</span><span class="level-item">指定特性</span></span></a></li><li><a class="level is-mobile" href="#使用限制"><span class="level-left"><span class="level-item">8.2.2</span><span class="level-item">使用限制</span></span></a></li><li><a class="level is-mobile" href="#内外部晶振与锁相环配置"><span class="level-left"><span class="level-item">8.2.3</span><span class="level-item">内外部晶振与锁相环配置</span></span></a></li><li><a class="level is-mobile" href="#系统总线时钟配置"><span class="level-left"><span class="level-item">8.2.4</span><span class="level-item">系统总线时钟配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-库-api"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">HAL 库 API</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#寄存器结构体"><span class="level-left"><span class="level-item">8.3.1</span><span class="level-item">寄存器结构体</span></span></a></li><li><a class="level is-mobile" href="#初始化与反向初始化"><span class="level-left"><span class="level-item">8.3.2</span><span class="level-item">初始化与反向初始化</span></span></a></li><li><a class="level is-mobile" href="#外设控制函数"><span class="level-left"><span class="level-item">8.3.3</span><span class="level-item">外设控制函数</span></span></a></li><li><a class="level is-mobile" href="#示例代码"><span class="level-left"><span class="level-item">8.3.4</span><span class="level-item">示例代码</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#gpio-通用输入输出"><span class="level-left"><span class="level-item">9</span><span class="level-item">GPIO 通用输入输出</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外设分析-1"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">外设分析</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#输入配置"><span class="level-left"><span class="level-item">9.1.1</span><span class="level-item">输入配置</span></span></a></li><li><a class="level is-mobile" href="#输出配置"><span class="level-left"><span class="level-item">9.1.2</span><span class="level-item">输出配置</span></span></a></li><li><a class="level is-mobile" href="#复用功能配置"><span class="level-left"><span class="level-item">9.1.3</span><span class="level-item">复用功能配置</span></span></a></li><li><a class="level is-mobile" href="#模拟配置"><span class="level-left"><span class="level-item">9.1.4</span><span class="level-item">模拟配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#api-描述-1"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">API 描述</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外设特性"><span class="level-left"><span class="level-item">9.2.1</span><span class="level-item">外设特性</span></span></a></li><li><a class="level is-mobile" href="#驱动使用"><span class="level-left"><span class="level-item">9.2.2</span><span class="level-item">驱动使用</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-库-api-1"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">HAL 库 API</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#寄存器结构体-1"><span class="level-left"><span class="level-item">9.3.1</span><span class="level-item">寄存器结构体</span></span></a></li><li><a class="level is-mobile" href="#初始化与反向初始化-1"><span class="level-left"><span class="level-item">9.3.2</span><span class="level-item">初始化与反向初始化</span></span></a></li><li><a class="level is-mobile" href="#io-操作函数"><span class="level-left"><span class="level-item">9.3.3</span><span class="level-item">IO 操作函数</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#nvic-与-exti-中断"><span class="level-left"><span class="level-item">10</span><span class="level-item">NVIC 与 EXTI 中断</span></span></a></li><li><a class="level is-mobile" href="#tim-定时器"><span class="level-left"><span class="level-item">11</span><span class="level-item">TIM 定时器</span></span></a></li><li><a class="level is-mobile" href="#systick-系统滴答定时器"><span class="level-left"><span class="level-item">12</span><span class="level-item">SysTick 系统滴答定时器</span></span></a></li><li><a class="level is-mobile" href="#dma-直接存储控制"><span class="level-left"><span class="level-item">13</span><span class="level-item">DMA 直接存储控制</span></span></a></li><li><a class="level is-mobile" href="#rtc-实时时钟"><span class="level-left"><span class="level-item">14</span><span class="level-item">RTC 实时时钟</span></span></a></li><li><a class="level is-mobile" href="#usart-通用同异步收发"><span class="level-left"><span class="level-item">15</span><span class="level-item">USART 通用同/异步收发</span></span></a></li><li><a class="level is-mobile" href="#i²c-内置集成电路总线"><span class="level-left"><span class="level-item">16</span><span class="level-item">I²C 内置集成电路总线</span></span></a></li><li><a class="level is-mobile" href="#spi-串行外设接口"><span class="level-left"><span class="level-item">17</span><span class="level-item">SPI 串行外设接口</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2024 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+</div><div class="article-licensing box"><div class="licensing-title"><p>基于 HAL 与 LL 的 UINIO-MCU-STM32F401 开发实践</p><p><a href="http://www.uinio.com/Embedded/STM32F401/">http://www.uinio.com/Embedded/STM32F401/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-07-26</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-11-12</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MCU/">MCU</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/Altium/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">采用 Altium Designer 17.1 进行 PCB 电路绘制与仿真</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Embedded/Android/"><span class="level-item">Android 物联网应用开发实例</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#arm-cortex-m4-概要"><span class="level-left"><span class="level-item">1</span><span class="level-item">ARM Cortex M4 概要</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外设资源-peripheral"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">外设资源 Peripheral</span></span></a></li><li><a class="level is-mobile" href="#引脚定义-pin"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">引脚定义 Pin</span></span></a></li><li><a class="level is-mobile" href="#启动模式-boot"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">启动模式 Boot</span></span></a></li><li><a class="level is-mobile" href="#系统复位-reset"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">系统复位 Reset</span></span></a></li><li><a class="level is-mobile" href="#总线架构-bus"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">总线架构 Bus</span></span></a></li><li><a class="level is-mobile" href="#内存映射-memory-mapping"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">内存映射 Memory Mapping</span></span></a></li></ul></li><li><a class="level is-mobile" href="#stm32f401-核心电路分析"><span class="level-left"><span class="level-item">2</span><span class="level-item">STM32F401 核心电路分析</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#mcu-微控制器"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">MCU 微控制器</span></span></a></li><li><a class="level is-mobile" href="#复位电路-reset"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">复位电路 Reset</span></span></a></li><li><a class="level is-mobile" href="#启动配置按钮-boot"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">启动配置按钮 Boot</span></span></a></li><li><a class="level is-mobile" href="#usb-type-c-接口"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">USB Type-C 接口</span></span></a></li><li><a class="level is-mobile" href="#线性稳压器-ldo"><span class="level-left"><span class="level-item">2.5</span><span class="level-item">线性稳压器 LDO</span></span></a></li><li><a class="level is-mobile" href="#用户按键-button"><span class="level-left"><span class="level-item">2.6</span><span class="level-item">用户按键 Button</span></span></a></li><li><a class="level is-mobile" href="#状态指示-led"><span class="level-left"><span class="level-item">2.7</span><span class="level-item">状态指示 LED</span></span></a></li><li><a class="level is-mobile" href="#串行线调试接口-swd"><span class="level-left"><span class="level-item">2.8</span><span class="level-item">串行线调试接口 SWD</span></span></a></li><li><a class="level is-mobile" href="#板载-nor-flash"><span class="level-left"><span class="level-item">2.9</span><span class="level-item">板载 NOR Flash</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-硬件抽象层"><span class="level-left"><span class="level-item">3</span><span class="level-item">HAL 硬件抽象层</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#包含的数据结构"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">包含的数据结构</span></span></a></li><li><a class="level is-mobile" href="#hal-库-api-的分类"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">HAL 库 API 的分类</span></span></a></li><li><a class="level is-mobile" href="#hal-驱动规范"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">HAL 驱动规范</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#hal-api-命名规则"><span class="level-left"><span class="level-item">3.3.1</span><span class="level-item">HAL API 命名规则</span></span></a></li><li><a class="level is-mobile" href="#hal-通用命名规则"><span class="level-left"><span class="level-item">3.3.2</span><span class="level-item">HAL 通用命名规则</span></span></a></li><li><a class="level is-mobile" href="#中断处理程序与回调函数"><span class="level-left"><span class="level-item">3.3.3</span><span class="level-item">中断处理程序与回调函数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-通用-api"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">HAL 通用 API</span></span></a></li><li><a class="level is-mobile" href="#hal-扩展-api"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">HAL 扩展 API</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#添加指定型号的功能"><span class="level-left"><span class="level-item">3.5.1</span><span class="level-item">添加指定型号的功能</span></span></a></li><li><a class="level is-mobile" href="#添加产品系列的功能"><span class="level-left"><span class="level-item">3.5.2</span><span class="level-item">添加产品系列的功能</span></span></a></li><li><a class="level is-mobile" href="#添加新的外设"><span class="level-left"><span class="level-item">3.5.3</span><span class="level-item">添加新的外设</span></span></a></li><li><a class="level is-mobile" href="#更新现存的通用-api"><span class="level-left"><span class="level-item">3.5.4</span><span class="level-item">更新现存的通用 API</span></span></a></li><li><a class="level is-mobile" href="#更新现存的数据结构"><span class="level-left"><span class="level-item">3.5.5</span><span class="level-item">更新现存的数据结构</span></span></a></li></ul></li><li><a class="level is-mobile" href="#源文件包含关系"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">源文件包含关系</span></span></a></li><li><a class="level is-mobile" href="#公用资源定义"><span class="level-left"><span class="level-item">3.7</span><span class="level-item">公用资源定义</span></span></a></li><li><a class="level is-mobile" href="#配置-hal-固件库"><span class="level-left"><span class="level-item">3.8</span><span class="level-item">配置 HAL 固件库</span></span></a></li><li><a class="level is-mobile" href="#如何使用-hal-驱动"><span class="level-left"><span class="level-item">3.9</span><span class="level-item">如何使用 HAL 驱动</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#hal-全局初始化"><span class="level-left"><span class="level-item">3.9.1</span><span class="level-item">HAL 全局初始化</span></span></a></li><li><a class="level is-mobile" href="#时钟配置"><span class="level-left"><span class="level-item">3.9.2</span><span class="level-item">时钟配置</span></span></a></li><li><a class="level is-mobile" href="#初始化-msp"><span class="level-left"><span class="level-item">3.9.3</span><span class="level-item">初始化 MSP</span></span></a></li><li><a class="level is-mobile" href="#io-操作"><span class="level-left"><span class="level-item">3.9.4</span><span class="level-item">IO 操作</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#轮询模式"><span class="level-left"><span class="level-item">3.9.4.1</span><span class="level-item">轮询模式</span></span></a></li><li><a class="level is-mobile" href="#中断模式"><span class="level-left"><span class="level-item">3.9.4.2</span><span class="level-item">中断模式</span></span></a></li><li><a class="level is-mobile" href="#dma-模式"><span class="level-left"><span class="level-item">3.9.4.3</span><span class="level-item">DMA 模式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#超时与错误管理"><span class="level-left"><span class="level-item">3.9.5</span><span class="level-item">超时与错误管理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#超时管理"><span class="level-left"><span class="level-item">3.9.5.1</span><span class="level-item">超时管理</span></span></a></li><li><a class="level is-mobile" href="#错误管理"><span class="level-left"><span class="level-item">3.9.5.2</span><span class="level-item">错误管理</span></span></a></li><li><a class="level is-mobile" href="#运行时检查"><span class="level-left"><span class="level-item">3.9.5.3</span><span class="level-item">运行时检查</span></span></a></li></ul></li></ul></li></ul></li><li><a class="level is-mobile" href="#ll-底层库"><span class="level-left"><span class="level-item">4</span><span class="level-item">LL 底层库</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#ll-底层库文件"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">LL 底层库文件</span></span></a></li><li><a class="level is-mobile" href="#外设初始化函数"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">外设初始化函数</span></span></a></li><li><a class="level is-mobile" href="#运行时检查-1"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">运行时检查</span></span></a></li><li><a class="level is-mobile" href="#外设的寄存器级配置"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">外设的寄存器级配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-ll-组合运用"><span class="level-left"><span class="level-item">5</span><span class="level-item">HAL &amp; LL 组合运用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#单独使用-ll-固件库"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">单独使用 LL 固件库</span></span></a></li><li><a class="level is-mobile" href="#组合运用-hal-和-ll-固件库"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">组合运用 HAL 和 LL 固件库</span></span></a></li></ul></li><li><a class="level is-mobile" href="#stm32-cube-ide-开发环境"><span class="level-left"><span class="level-item">6</span><span class="level-item">STM32 Cube IDE 开发环境</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建工程"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">新建工程</span></span></a></li><li><a class="level is-mobile" href="#工程源码结构"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">工程源码结构</span></span></a></li><li><a class="level is-mobile" href="#st-link-下载调试"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">ST-Link 下载调试</span></span></a></li><li><a class="level is-mobile" href="#cmsis-dap-下载调试"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">CMSIS-DAP 下载调试</span></span></a></li></ul></li><li><a class="level is-mobile" href="#stm32-cube-programmer-编程器"><span class="level-left"><span class="level-item">7</span><span class="level-item">STM32 Cube Programmer 编程器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#进入-bootloader-模式"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">进入 Bootloader 模式</span></span></a></li><li><a class="level is-mobile" href="#通过-usb-下载"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">通过 USB 下载</span></span></a></li><li><a class="level is-mobile" href="#通过-uart-下载"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">通过 UART 下载</span></span></a></li></ul></li><li><a class="level is-mobile" href="#rcc-复位时钟控制"><span class="level-left"><span class="level-item">8</span><span class="level-item">RCC 复位时钟控制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外设分析"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">外设分析</span></span></a></li><li><a class="level is-mobile" href="#api-描述"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">API 描述</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#指定特性"><span class="level-left"><span class="level-item">8.2.1</span><span class="level-item">指定特性</span></span></a></li><li><a class="level is-mobile" href="#使用限制"><span class="level-left"><span class="level-item">8.2.2</span><span class="level-item">使用限制</span></span></a></li><li><a class="level is-mobile" href="#内外部晶振与锁相环配置"><span class="level-left"><span class="level-item">8.2.3</span><span class="level-item">内外部晶振与锁相环配置</span></span></a></li><li><a class="level is-mobile" href="#系统总线时钟配置"><span class="level-left"><span class="level-item">8.2.4</span><span class="level-item">系统总线时钟配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-库-api"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">HAL 库 API</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#寄存器结构体"><span class="level-left"><span class="level-item">8.3.1</span><span class="level-item">寄存器结构体</span></span></a></li><li><a class="level is-mobile" href="#初始化与反向初始化"><span class="level-left"><span class="level-item">8.3.2</span><span class="level-item">初始化与反向初始化</span></span></a></li><li><a class="level is-mobile" href="#外设控制函数"><span class="level-left"><span class="level-item">8.3.3</span><span class="level-item">外设控制函数</span></span></a></li><li><a class="level is-mobile" href="#示例代码"><span class="level-left"><span class="level-item">8.3.4</span><span class="level-item">示例代码</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#gpio-通用输入输出"><span class="level-left"><span class="level-item">9</span><span class="level-item">GPIO 通用输入输出</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外设分析-1"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">外设分析</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#输入配置"><span class="level-left"><span class="level-item">9.1.1</span><span class="level-item">输入配置</span></span></a></li><li><a class="level is-mobile" href="#输出配置"><span class="level-left"><span class="level-item">9.1.2</span><span class="level-item">输出配置</span></span></a></li><li><a class="level is-mobile" href="#复用功能配置"><span class="level-left"><span class="level-item">9.1.3</span><span class="level-item">复用功能配置</span></span></a></li><li><a class="level is-mobile" href="#模拟配置"><span class="level-left"><span class="level-item">9.1.4</span><span class="level-item">模拟配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#api-描述-1"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">API 描述</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#外设特性"><span class="level-left"><span class="level-item">9.2.1</span><span class="level-item">外设特性</span></span></a></li><li><a class="level is-mobile" href="#驱动使用"><span class="level-left"><span class="level-item">9.2.2</span><span class="level-item">驱动使用</span></span></a></li></ul></li><li><a class="level is-mobile" href="#hal-库-api-1"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">HAL 库 API</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#寄存器结构体-1"><span class="level-left"><span class="level-item">9.3.1</span><span class="level-item">寄存器结构体</span></span></a></li><li><a class="level is-mobile" href="#初始化与反向初始化-1"><span class="level-left"><span class="level-item">9.3.2</span><span class="level-item">初始化与反向初始化</span></span></a></li><li><a class="level is-mobile" href="#io-操作函数"><span class="level-left"><span class="level-item">9.3.3</span><span class="level-item">IO 操作函数</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#nvic-与-exti-中断"><span class="level-left"><span class="level-item">10</span><span class="level-item">NVIC 与 EXTI 中断</span></span></a></li><li><a class="level is-mobile" href="#tim-定时器"><span class="level-left"><span class="level-item">11</span><span class="level-item">TIM 定时器</span></span></a></li><li><a class="level is-mobile" href="#systick-系统滴答定时器"><span class="level-left"><span class="level-item">12</span><span class="level-item">SysTick 系统滴答定时器</span></span></a></li><li><a class="level is-mobile" href="#dma-直接存储控制"><span class="level-left"><span class="level-item">13</span><span class="level-item">DMA 直接存储控制</span></span></a></li><li><a class="level is-mobile" href="#rtc-实时时钟"><span class="level-left"><span class="level-item">14</span><span class="level-item">RTC 实时时钟</span></span></a></li><li><a class="level is-mobile" href="#usart-通用同异步收发"><span class="level-left"><span class="level-item">15</span><span class="level-item">USART 通用同/异步收发</span></span></a></li><li><a class="level is-mobile" href="#i²c-内置集成电路总线"><span class="level-left"><span class="level-item">16</span><span class="level-item">I²C 内置集成电路总线</span></span></a></li><li><a class="level is-mobile" href="#spi-串行外设接口"><span class="level-left"><span class="level-item">17</span><span class="level-item">SPI 串行外设接口</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
@@ -2674,6 +2674,6 @@ GPIO）生成事件/中断请求（每条输入线都可以被独立配置为指
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
         });</script></body></html>

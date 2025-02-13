@@ -96,20 +96,20 @@ Arduino 核心文档</strong>》</a> 当中提供了如下这些 API
 <col style="width: 24%">
 </colgroup>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/adc.html">模数转换（ADC）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ble.html">低功耗蓝牙（BLE）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/bluetooth.html">传统蓝牙（Bluetooth）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/dac.html">数模转换（DAC）</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/deepsleep.html">深度休眠（Deep
 Sleep）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/espnow.html">短距离无线通信（ESP-NOW）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ethernet.html">以太网（Ethernet）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html">通用输入输出（GPIO）</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/hall_sensor.html">霍尔传感器（Hall
 Sensor）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html">内部集成电路总线（I²C）</a></td>
@@ -117,7 +117,7 @@ Sensor）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/insights.html">远程诊断（ESP
 Insights）</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/ledc.html">LED
 控制（LEDC，LED Control）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/preferences.html">Preferences</a></td>
@@ -126,7 +126,7 @@ Counter）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/rainmaker.html">ESP
 Rainmaker</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/reset_reason.html">复位原因（Reset
 Reason）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/rmt.html">红外收发器（RMT）</a></td>
@@ -134,7 +134,7 @@ Reason）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/sdmmc.html">SD
 MMC</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/sigmadelta.html">二阶
 <span class="math inline">\(\Sigma\Delta\)</span> 信号调制*</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/spi.html">串行外设接口（SPI）</a></td>
@@ -142,7 +142,7 @@ MMC</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/touch.html">触摸
 TOUCH</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/usb.html">通用串行总线（USB
 API）</a></td>
 <td style="text-align: left;"><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/usb_cdc.html">USB
@@ -284,69 +284,69 @@ LED 的亮度，具体的 API 方法可以参考下面的列表：</p>
 <col style="width: 56%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t ledcSetup(uint8_t channel, uint32_t freq, uint8_t resolution_bits);</code></td>
 <td style="text-align: left;">用于设置 LEDC
 通道的<strong>频率</strong>和<strong>分辨率</strong>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void ledcWrite(uint8_t chan, uint32_t duty);</code></td>
 <td style="text-align: left;"><strong>设置</strong>指定 LEDC
 通道的<strong>占空比</strong>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t ledcRead(uint8_t chan);</code></td>
 <td style="text-align: left;"><strong>获取</strong>指定 LEDC
 通道的<strong>占空比</strong>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t ledcReadFreq(uint8_t chan);</code></td>
 <td style="text-align: left;"><strong>获取</strong>指定 LEDC
 通道的<strong>频率</strong>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t ledcWriteTone(uint8_t chan, uint32_t freq);</code></td>
 <td style="text-align: left;">用于在指定频率上将 LEDC 通道设置为
 <code>50%</code> 占空比的 PWM <strong>音调</strong>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t ledcWriteNote(uint8_t chan, note_t note, uint8_t octave);</code></td>
 <td style="text-align: left;">用于将 LEDC
 通道设置为指定的<strong>音符</strong>；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void ledcAttachPin(uint8_t pin, uint8_t chan);</code></td>
 <td style="text-align: left;">用于将指定的 <strong>GPIO
 引脚</strong>绑定至 <strong>LEDC 通道</strong>;</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void ledcDetachPin(uint8_t pin);</code></td>
 <td style="text-align: left;">用于取消指定的 <strong>GPIO
 引脚</strong>与 <strong>LEDC 通道</strong>的绑定;</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t ledcChangeFrequency(uint8_t chan, uint32_t freq, uint8_t bit_num);</code></td>
 <td style="text-align: left;">用于动态改变 LEDC
 通道的<strong>频率</strong>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void analogWrite(uint8_t pin, int value);</code></td>
 <td style="text-align: left;">用于在指定 GPIO
 引脚上写入<strong>模拟值</strong>(PWM 波形信号)，该接口兼容 Arduino
 官方的 <code>analogWrite()</code> 函数；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void analogWriteResolution(uint8_t bits);</code></td>
 <td style="text-align: left;">用于设置所有 <code>analogWrite()</code>
 通道的<strong>分辨率</strong>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void analogWriteFrequency(uint32_t freq);</code></td>
 <td style="text-align: left;">用于设置所有 <code>analogWrite()</code>
 通道的<strong>频率</strong>；</td>
@@ -434,44 +434,44 @@ Approximation Register）ADC，一共支持 <strong>6</strong>
 <col style="width: 63%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">Arduino 通用的 ADC API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint16_t analogRead(uint8_t pin);</code></td>
 <td style="text-align: left;">获取指定引脚或者 ADC 通道的原始值。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t analogReadMilliVolts(uint8_t pin);</code></td>
 <td style="text-align: left;">获取指定引脚或者 ADC
 通道的原始值（以毫伏为单位）。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void analogReadResolution(uint8_t bits);</code></td>
 <td style="text-align: left;">设置 <code>analogRead()</code>
 返回值的分辨率，<strong>ESP32S3</strong> 默认为 <strong>13</strong>
 位（从 <code>0</code> 到 <code>8191</code>），其它型号默认为
 <strong>12</strong> 位（从 <code>0</code> 到 <code>4095</code>）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void analogSetClockDiv(uint8_t clockDiv);</code></td>
 <td style="text-align: left;">设置 ADC 时钟的分频器，范围为
 <code>0 ~ 255</code>，默认值为 <code>1</code>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void analogSetAttenuation(adc_attenuation_t attenuation);</code></td>
 <td style="text-align: left;">设置全部通道的衰减系数，共拥有
 <code>ADC_ATTEN_DB_0</code>、<code>ADC_ATTEN_DB_2_5</code>、<code>ADC_ATTEN_DB_6</code>、<code>ADC_ATTEN_DB_11</code>
 四个选项。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void analogSetPinAttenuation(uint8_t pin, adc_attenuation_t attenuation);</code></td>
 <td style="text-align: left;">设置指定引脚或者 ADC 通道的衰减系数。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool adcAttachPin(uint8_t pin);</code></td>
 <td style="text-align: left;">将 GPIO 引脚关联至 ADC，关联成功返回
 <code>true</code>，否则返回 <code>false</code>。</td>
@@ -485,29 +485,29 @@ Approximation Register）ADC，一共支持 <strong>6</strong>
 <col style="width: 37%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">ADC 衰减系数</th>
 <th style="text-align: center;">ESP32-C3 可测量输入电压范围</th>
 <th style="text-align: center;">ESP32-S3 可测量输入电压范围</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><code>ADC_ATTEN_DB_0</code></td>
 <td style="text-align: center;">0 mV ~ 750 mV</td>
 <td style="text-align: center;">0 mV ~ 950 mV</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><code>ADC_ATTEN_DB_2_5</code></td>
 <td style="text-align: center;">0 mV ~ 1050 mV</td>
 <td style="text-align: center;">0 mV ~ 1250 mV</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><code>ADC_ATTEN_DB_6</code></td>
 <td style="text-align: center;">0 mV ~ 1300 mV</td>
 <td style="text-align: center;">0 mV ~ 1750 mV</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><code>ADC_ATTEN_DB_11</code></td>
 <td style="text-align: center;">0 mV ~ 2500 mV</td>
 <td style="text-align: center;">0 mV ~ 3100 mV</td>
@@ -526,22 +526,22 @@ Approximation Register）ADC，一共支持 <strong>6</strong>
 <col style="width: 62%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">ESP32 专用的 ADC API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void analogSetWidth(uint8_t bits);</code></td>
 <td style="text-align: left;">设置硬件采样分辨率，取值范围为
 <code>9 ~ 12</code>，默认值是 <code>12</code>；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void analogSetVRefPin(uint8_t pin);</code></td>
 <td style="text-align: left;">设置需要进行 ADC 校准的引脚。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>int hallRead();</code></td>
 <td style="text-align: left;">读取连接至 <code>36</code>（SVP）和
 <code>39</code>（SVN）引脚的霍尔传感器 ADC 值。</td>
@@ -574,48 +574,48 @@ Wire</a> 官方库当中的如下一系列 API 函数：</p>
 <col style="width: 64%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">I²C 通用 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool begin();</code></td>
 <td style="text-align: left;">基于默认参数配置 I²C
 外设，正确初始化之后返回 <code>true</code>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool setPins(int sdaPin, int sclPin);</code></td>
 <td style="text-align: left;">用于定义 <code>SDA</code> 和
 <code>SCL</code> 引脚，两个参数的默认值分别为 <code>GPIO21</code> 和
 <code>GPIO22</code>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool setClock(uint32_t frequency);</code></td>
 <td style="text-align: left;"><strong>设置</strong> I²C
 总线的<strong>时钟频率</strong>，默认为 <code>100KHz</code>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t getClock();</code></td>
 <td style="text-align: left;"><strong>获取</strong> I²C
 总线的<strong>时钟频率</strong>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void setTimeOut(uint16_t timeOutMillis);</code></td>
 <td style="text-align: left;"><strong>设置</strong> I²C
 总线<strong>超时时间</strong>（毫秒）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void setTimeOut(uint16_t timeOutMillis);</code></td>
 <td style="text-align: left;"><strong>获取</strong> I²C
 总线<strong>超时时间</strong>（毫秒）。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>size_t write(const uint8_t *, size_t);</code></td>
 <td style="text-align: left;">将数据写入到总线缓冲区，返回值为写入数据的大小。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool end();</code></td>
 <td style="text-align: left;">完成 I²C
 通信并且释放之前所有被分配的外设资源。</td>
@@ -642,28 +642,28 @@ Mode）两种不同的工作模式：</p>
 <col style="width: 59%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">I²C 主设备模式 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool begin(int sdaPin, int sclPin, uint32_t frequency)</code></td>
 <td style="text-align: left;">指定 I²C 总线的 <code>SDA</code> 和
 <code>SCL</code> 引脚，以及通信频率。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void beginTransmission(uint16_t address)</code></td>
 <td style="text-align: left;">开始启动与指定 I²C
 地址<strong>从设备</strong>的通信。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint8_t endTransmission(bool sendStop);</code></td>
 <td style="text-align: left;">将数据写入至缓冲区以后，使用该函数把数据发送给<strong>从设备</strong>，参数
 <code>sendStop</code> 用于使能 I²C 总线停止信号。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint8_t requestFrom(uint16_t address, uint8_t size, bool sendStop)</code></td>
 <td style="text-align: left;">要求<strong>从设备</strong>向<strong>主设备</strong>发送响应数据。</td>
 </tr>
@@ -693,26 +693,26 @@ Mode）两种不同的工作模式：</p>
 <col style="width: 48%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">I²C 从设备模式 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool Wire.begin(uint8_t addr, int sdaPin, int sclPin, uint32_t frequency)</code></td>
 <td style="text-align: left;">在<strong>从设备</strong>模式下，必须通过传递<strong>从设备</strong>的地址来调用
 <code>begin()</code> 函数。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void onReceive( void (*)(int) )</code></td>
 <td style="text-align: left;">定义<strong>从设备</strong>接收<strong>主设备</strong>数据的回调函数。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void onRequest( void (*)(void) )</code></td>
 <td style="text-align: left;">定义<strong>从设备</strong>请求<strong>主设备</strong>数据的回调函数。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>size_t slaveWrite(const uint8_t *, size_t)</code></td>
 <td style="text-align: left;">接收到响应数据之前，该函数用于向<strong>从设备</strong>的缓冲区写入数据。</td>
 </tr>
@@ -935,121 +935,121 @@ Semaphore</h1>
 <col style="width: 28%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>hw_timer_t * timerBegin(uint8_t num, uint16_t divider, bool countUp)</code></td>
 <td style="text-align: left;">配置定时器；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void timerEnd(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">结束定时器；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t timerGetConfig(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器配置；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void timerSetConfig(hw_timer_t *timer, uint32_t config)</code></td>
 <td style="text-align: left;">配置已经初始化的定时器；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void timerAttachInterrupt(hw_timer_t *timer, void (*fn)(void), bool edge)</code></td>
 <td style="text-align: left;">添加定时器中断服务程序；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void timerDetachInterrupt(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">拆除定时器中断服务程序；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void timerStart(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">开始定时器计数；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void timerStop(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">停止定时器计数；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void timerRestart(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">重启定时器计数；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void timerWrite(hw_timer_t *timer, uint64_t val)</code></td>
 <td style="text-align: left;">设置定时器的计数值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void timerSetDivider(hw_timer_t *timer, uint16_t divider)</code></td>
 <td style="text-align: left;">设置定时器的分频系数；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void timerSetCountUp(hw_timer_t *timer, bool countUp)</code></td>
 <td style="text-align: left;">设置定时器的计数方向；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void timerSetAutoReload(hw_timer_t *timer, bool autoreload)</code></td>
 <td style="text-align: left;">设置定时器计数值的自动重载；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool timerStarted(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">判断定时器是否在运行；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint64_t timerRead(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的计数值；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint64_t timerReadMicros(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的计数（微秒）；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint64_t timerReadMilis(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的计数（毫秒）；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>double timerReadSeconds(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的计数（秒）；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint16_t timerGetDivider(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的分频系数；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool timerGetCountUp(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的计数方向；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool timerGetAutoReload(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器计数值的自动重载状态；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void timerAlarmEnable(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">使能定时器告警事件的生成；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void timerAlarmDisable(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">失能定时器告警事件的生成；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void timerAlarmWrite(hw_timer_t *timer, uint64_t alarm_value, bool autoreload)</code></td>
 <td style="text-align: left;">设置定时器的自动加载与告警值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool timerAlarmEnabled(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的告警状态；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint64_t timerAlarmRead(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的告警值；</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint64_t timerAlarmReadMicros(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的告警值（微秒）；</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>double timerAlarmReadSeconds(hw_timer_t *timer)</code></td>
 <td style="text-align: left;">获取定时器的告警值（秒）；</td>
 </tr>
@@ -1068,29 +1068,29 @@ API</a>，因而在 <strong>Arduino-ESP32</strong>
 <col style="width: 36%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>SemaphoreHandle_t xSemaphoreCreateBinary()</code></td>
 <td style="text-align: left;">创建一个二进制信号量，并返回一个可以引用该信号量的句柄。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>xSemaphoreTake( SemaphoreHandle_t xSemaphore, TickType_t xTicksToWait )</code></td>
 <td style="text-align: left;">获取信号量。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>xSemaphoreTakeFromISR(SemaphoreHandle_t xSemaphore, signed BaseType_t *pxHigherPriorityTaskWoken)</code></td>
 <td style="text-align: left;">在中断服务程序里获取信号量。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>xSemaphoreGive( SemaphoreHandle_t xSemaphore )</code></td>
 <td style="text-align: left;">释放信号量。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>xSemaphoreGiveFromISR(SemaphoreHandle_t xSemaphore, signed BaseType_t *pxHigherPriorityTaskWoken)</code></td>
 <td style="text-align: left;">在中断服务程序里释放信号量。</td>
 </tr>
@@ -1137,21 +1137,21 @@ API</a>，因而在 <strong>Arduino-ESP32</strong>
 <p>由于环境温度会对超声波信号的传输速度造成影响，如果需要更加精确的测量距离，那么就必须把温度的因素纳入考量范围，并且进行相应的温度补偿：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">环境温度</th>
 <th style="text-align: center;">超声波典型传输速度</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><code>0℃</code></td>
 <td style="text-align: center;"><code>330.45</code> 米每秒</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><code>20℃</code></td>
 <td style="text-align: center;"><code>342.62</code> 米每秒</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><code>40℃</code></td>
 <td style="text-align: center;"><code>354.85</code> 米每秒</td>
 </tr>
@@ -1240,38 +1240,38 @@ PWM 信号，其中脉冲宽度介于 <code>0.5 ~ 2.5</code>
 <strong>MG996R</strong> 小型舵机（上图右）的性能参数：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SG90 舵机性能参数</th>
 <th style="text-align: left;">参数值</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>旋转角度</strong></td>
 <td style="text-align: left;"><code>180° (± 15°)</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>工作电压</strong></td>
 <td style="text-align: left;"><code>4.8 V ~ 6 V</code> (典型值为
 <code>5 V</code>)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>空载电流</strong></td>
 <td style="text-align: left;"><code>10 mA</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>转动电流</strong></td>
 <td style="text-align: left;"><code>100 mA ~ 250 mA</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>堵转电流</strong></td>
 <td style="text-align: left;"><code>360 mA</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>失速力矩</strong></td>
 <td style="text-align: left;"><code>1.7 Kg·cm</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>转动速度</strong></td>
 <td style="text-align: left;"><code>0.12 秒 / 60°</code></td>
 </tr>
@@ -1279,38 +1279,38 @@ PWM 信号，其中脉冲宽度介于 <code>0.5 ~ 2.5</code>
 </table>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">MG996R 舵机性能参数</th>
 <th style="text-align: left;">参数值</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>旋转角度</strong></td>
 <td style="text-align: left;"><code>180° (± 10°)</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>工作电压</strong></td>
 <td style="text-align: left;"><code>4.8 V ~ 6 V</code> (典型值为
 <code>5 V</code>)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>空载电流</strong></td>
 <td style="text-align: left;"><code>10 mA</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>转动电流</strong></td>
 <td style="text-align: left;"><code>170 mA ~ 400 mA</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>堵转电流</strong></td>
 <td style="text-align: left;"><code>1.3 A ~ 1.5 A</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>失速力矩</strong></td>
 <td style="text-align: left;"><code>13 Kg·cm</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>转动速度</strong></td>
 <td style="text-align: left;"><code>0.2 秒 / 60°</code></td>
 </tr>
@@ -1326,18 +1326,18 @@ PWM 信号，其中脉冲宽度介于 <code>0.5 ~ 2.5</code>
 <col style="width: 87%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>Servo</code></td>
 <td style="text-align: left;">用于操作连接到
 <strong>UINIO-MCU-ESP32</strong> 引脚的舵机对象。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>int attach(pin, min, max)</code></td>
 <td style="text-align: left;">将指定的 GPIO 引脚关联到 1 个 <strong>LEDC
 通道</strong>，并且返回通道编号（如果失败返回 <code>0</code>）。其中参数
@@ -1345,38 +1345,38 @@ PWM 信号，其中脉冲宽度介于 <code>0.5 ~ 2.5</code>
 <code>544us</code>），而 <code>max</code> 的最大取值为
 <code>2500</code>（默认值为 <code>2400us</code>）。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void write()</code></td>
 <td style="text-align: left;">指定舵机的旋转角度（<code>0°~180°</code>）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void writeMicroseconds()</code></td>
 <td style="text-align: left;">以<code>微秒</code>作为单位设置脉冲宽度（必须设置）。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>int read()</code></td>
 <td style="text-align: left;">获取之前写入舵机的<strong>旋转角度</strong>（<code>0°~180°</code>）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>int readMicroseconds()</code></td>
 <td style="text-align: left;">获取之前写入舵机的<strong>脉冲宽度</strong>（以<code>微秒</code>为单位）。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool attached()</code></td>
 <td style="text-align: left;">如果舵机对象 <code>Servo</code> 成功绑定至
 <strong>UINIO-MCU-ESP32</strong> 的 GPIO 引脚，那么就会返回
 <code>true</code>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void detach()</code></td>
 <td style="text-align: left;">停止绑定 <code>Servo</code> 对象到 GPIO
 引脚，并且释放对于 LEDC 通道的占用。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>setTimerWidth(value)</code></td>
 <td style="text-align: left;">设置 PWM 定时器输出的脉冲宽度。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>int readTimerWidth()</code></td>
 <td style="text-align: left;">获取 PWM 定时器输出的脉冲宽度。</td>
 </tr>
@@ -1386,33 +1386,33 @@ PWM 信号，其中脉冲宽度介于 <code>0.5 ~ 2.5</code>
 函数指定舵机旋转角度的时候，传入的参数值会遵循如下的自动转换规则：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>&lt; 0</code></td>
 <td style="text-align: left;"><code>0</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>0 - 180</code></td>
 <td style="text-align: left;"><code>value</code> (以度数为单位)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>181 - 499</code></td>
 <td style="text-align: left;"><code>180</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>500 - (min-1)</code></td>
 <td style="text-align: left;"><code>min</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>min - max</code></td>
 <td style="text-align: left;"><code>value</code> (以微秒为单位)</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>(max + 1) - 2500</code></td>
 <td style="text-align: left;"><code>max</code></td>
 </tr>
@@ -1597,25 +1597,25 @@ SPI
 总线通信工作模式，它们分别定义了在时钟信号的哪个边沿<strong>采样信号</strong>，哪个边沿<strong>改变信号</strong>：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">模式</th>
 <th style="text-align: center;">时钟极性与相位</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>Mode 0</strong></td>
 <td style="text-align: center;"><code>CPOL = 0</code>，<code>CPHA = 0</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>Mode 1</strong></td>
 <td style="text-align: center;"><code>CPOL = 0</code>，<code>CPHA = 1</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>Mode 2</strong></td>
 <td style="text-align: center;"><code>CPOL = 1</code>，<code>CPHA = 0</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>Mode 3</strong></td>
 <td style="text-align: center;"><code>CPOL = 1</code>，<code>CPHA = 1</code></td>
 </tr>
@@ -1658,7 +1658,7 @@ Bit）优先传输是非常重要的两个关键因素，收发双方必须保�
 <col style="width: 13%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">分类</th>
 <th style="text-align: center;">主机输入从机输出引脚</th>
 <th style="text-align: center;">主机输出从机输入引脚</th>
@@ -1667,14 +1667,14 @@ Bit）优先传输是非常重要的两个关键因素，收发双方必须保�
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;"><strong>VSPI</strong></td>
 <td style="text-align: center;"><code>MISO = 19</code></td>
 <td style="text-align: center;"><code>MOSI = 23</code></td>
 <td style="text-align: center;"><code>SCLK = 18</code></td>
 <td style="text-align: center;"><code>CS = 5</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;"><strong>HSPI</strong></td>
 <td style="text-align: center;"><code>MISO = 12</code></td>
 <td style="text-align: center;"><code>MOSI = 13</code></td>
@@ -1738,13 +1738,13 @@ SPI 系统框图可以发现，两者都将 <code>GP-SPI2</code> 称为
 <col style="width: 57%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SPISettings 构造函数</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>SPISettings(uint32_t clock, uint8_t bitOrder, uint8_t dataMode)</code></td>
 <td style="text-align: left;">SPI
 总线配置参数的载体，三个参数的默认值分别为
@@ -1761,30 +1761,30 @@ SPI 系统框图可以发现，两者都将 <code>GP-SPI2</code> 称为
 <col style="width: 41%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SPIClass 中的主要 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void begin(int8_t sck=-1, int8_t miso=-1, int8_t mosi=-1, int8_t ss=-1)</code></td>
 <td style="text-align: left;">初始化 SPI 总线。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void end()</code></td>
 <td style="text-align: left;">结束 SPI 总线的资源占用。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void beginTransaction(SPISettings settings)</code></td>
 <td style="text-align: left;">使用 <code>SPISettings</code>
 作为参数，开始进行 SPI 总线通信。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void endTransaction(void)</code></td>
 <td style="text-align: left;">结束 SPI 总线通信。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>int8_t pinSS()</code></td>
 <td style="text-align: left;">返回 SPI 片选引脚。</td>
 </tr>
@@ -1796,40 +1796,40 @@ SPI 系统框图可以发现，两者都将 <code>GP-SPI2</code> 称为
 <col style="width: 55%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SPIClass 中的 Transfer API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void transfer(void * data, uint32_t size)</code></td>
 <td style="text-align: left;">发送 <code>size</code> 个字节的
 <code>data</code> 数据，但是并不会接收数据。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint8_t transfer(uint8_t data)</code></td>
 <td style="text-align: left;">发送 1 个字节的 <code>data</code>
 数据，同时接收 1 个字节的数据。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint16_t transfer16(uint16_t data)</code></td>
 <td style="text-align: left;">发送 2 个字节的 <code>data</code>
 数据，同时接收 2 个字节的数据。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint32_t transfer32(uint32_t data)</code></td>
 <td style="text-align: left;">发送 4 个字节的 <code>data</code>
 数据，同时接收 4 个字节的数据。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void transferBytes(const uint8_t * data, uint8_t * out, uint32_t size)</code></td>
 <td style="text-align: left;">接收 <code>size</code>
 个字节到<strong>读取缓冲区</strong> <code>data</code>，或者发送
 <code>size</code> 个字节到<strong>输出缓冲区</strong>
 <code>out</code>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void transferBits(uint32_t data, uint32_t * out, uint8_t bits)</code></td>
 <td style="text-align: left;">接收 <code>size</code>
 位数据到<strong>读取缓冲区</strong> <code>data</code>，或者发送
@@ -1844,38 +1844,38 @@ SPI 系统框图可以发现，两者都将 <code>GP-SPI2</code> 称为
 <col style="width: 60%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SPIClass 中的 Write API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void write(uint8_t data)</code></td>
 <td style="text-align: left;">发送 1 个字节的 <code>data</code>
 数据，但是不会接收数据。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void write16(uint16_t data)</code></td>
 <td style="text-align: left;">发送 2 个字节的 <code>data</code>
 数据，但是不会接收数据。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void write32(uint32_t data)</code></td>
 <td style="text-align: left;">发送 4 个字节的 <code>data</code>
 数据，但是不会接收数据。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void writeBytes(const uint8_t * data, uint32_t size)</code></td>
 <td style="text-align: left;">发送 <code>size</code> 个字节的
 <code>data</code> 数据，但是不会接收数据。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void writePattern(const uint8_t * data, uint8_t size, uint32_t repeat)</code></td>
 <td style="text-align: left;">循环发送 <code>size</code> 个字节的
 <code>data</code> 数据 <code>repeat</code> 次，但是不会接收数据。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void writePixels(const void * data, uint32_t size)</code></td>
 <td style="text-align: left;">请参考用户目录
 <code>USER\AppData\Local\Arduino15\packages\esp32\hardware\esp32\2.0.9\libraries\SPI\src</code>
@@ -1912,39 +1912,39 @@ API，需要在 <strong>Arduino IDE</strong> 当中安装第三方库 <a target=
 <col style="width: 29%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SPI 总线配置 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool begin(const uint8_t spi_bus = HSPI)</code></td>
 <td style="text-align: left;">使用默认的 <code>HSPI</code> 或者
 <code>VSPI</code> 作为 SPI 通信引脚。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool begin(const uint8_t spi_bus, const int8_t sck,</code><br><code>const int8_t miso, const int8_t mosi, const int8_t ss)</code></td>
 <td style="text-align: left;">自定义 SPI 通信引脚。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void setDataMode(const uint8_t m)</code></td>
 <td style="text-align: left;">设置 SPI 数据模式（SPI
 时钟的极性与相位）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void setSpiMode(const uint8_t m)</code></td>
 <td style="text-align: left;">设置 SPI 工作模式。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void setSlaveFlags(const uint32_t flags)</code></td>
 <td style="text-align: left;">设置从设备标记。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void setQueueSize(const int n)</code></td>
 <td style="text-align: left;">设置队列大小。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool end()</code></td>
 <td style="text-align: left;">结束 SPI 传输。</td>
 </tr>
@@ -1956,33 +1956,33 @@ API，需要在 <strong>Arduino IDE</strong> 当中安装第三方库 <a target=
 <col style="width: 50%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SPI 传输事务 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool wait(uint8_t* rx_buf, const size_t size)</code></td>
 <td style="text-align: left;">阻塞式等待传输事务，<strong>只接收不发送</strong>，成功返回
 <code>true</code>，失败返回 <code>false</code>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool wait(uint8_t* rx_buf, const uint8_t* tx_buf, const size_t size)</code></td>
 <td style="text-align: left;">阻塞式等待传输事务，<strong>即接收也发送</strong>，成功返回
 <code>true</code>，失败返回 <code>false</code>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool queue(uint8_t* rx_buf, const size_t size)</code></td>
 <td style="text-align: left;">添加传输事务，只接收不发送，成功返回
 <code>true</code>，失败返回 <code>false</code>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool queue(uint8_t* rx_buf, const uint8_t* tx_buf, const size_t size)</code></td>
 <td style="text-align: left;">添加传输事务，即接收也发送，成功返回
 <code>true</code>，失败返回 <code>false</code>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void yield()</code></td>
 <td style="text-align: left;">等待主设备处理完毕所有传输事务，如果
 <code>yield</code> 完成，则更新全部缓冲区。</td>
@@ -1995,27 +1995,27 @@ API，需要在 <strong>Arduino IDE</strong> 当中安装第三方库 <a target=
 <col style="width: 82%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SPI 传输结果信息 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>size_t available() const</code></td>
 <td style="text-align: left;">如果主设备的传输事务已经结束，那么从设备的
 <code>available()</code> 就会返回传输的结果数量，并且自动更新
 <code>spi_slave_rx_buf</code> 接收缓冲区。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>size_t remained() const</code></td>
 <td style="text-align: left;">判断传输队列当中剩余的事务数量。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint32_t size() const</code></td>
 <td style="text-align: left;">从传输队列当中接收到的字节数量。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void pop()</code></td>
 <td style="text-align: left;">获取从设备接收缓冲区当中的数据。</td>
 </tr>
@@ -2301,35 +2301,35 @@ WIFI 接入点</strong>，也支持
 <col style="width: 37%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">通用 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>wifi_event_id_t onEvent(WiFiEventCb, arduino_event_id_t = ARDUINO_EVENT_MAX)</code></td>
 <td style="text-align: left;">注册一个 WIFI 事件回调函数。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void removeEvent(WiFiEventCb, arduino_event_id_t = ARDUINO_EVENT_MAX)</code></td>
 <td style="text-align: left;">移除一个 WIFI 事件回调函数。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>setHostname(const char *hostname)</code></td>
 <td style="text-align: left;">设置 DHCP 客户端标识。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>const char *getHostname()</code></td>
 <td style="text-align: left;">获取 DHCP 客户端标识。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>static void useStaticBuffers(bool bufferMode)</code></td>
 <td style="text-align: left;">设置 Wi-Fi
 缓冲区的内存分配方式，<code>true</code> 为静态，而 <code>false</code>
 为动态。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool setDualAntennaConfig(uint8_t gpio_ant1, uint8_t gpio_ant2, wifi_rx_ant_t rx_mode, wifi_tx_ant_t tx_mode)</code></td>
 <td style="text-align: left;">配置双天线功能，仅支持带有 RF 开关的 ESP32
 使用。</td>
@@ -2342,73 +2342,73 @@ WIFI 接入点</strong>，也支持
 <col style="width: 17%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">AP 模式 WIFI 相关 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>WiFi.softAP(ssid, password)</code></td>
 <td style="text-align: left;">启动 Wi-Fi 作为接入点。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool softAP(const char* ssid, const char* passphrase = NULL, int channel = 1, int ssid_hidden = 0, int max_connection = 4, bool ftm_responder = false)</code></td>
 <td style="text-align: left;">配置 Wi-Fi 的 AP 特性</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool softAPConfig(IPAddress local_ip, IPAddress gateway, IPAddress subnet)</code></td>
 <td style="text-align: left;">用于配置静态 IP、网关、子网。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool softAPdisconnect(bool wifioff = false)</code></td>
 <td style="text-align: left;">强制断开 AP 连接。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint8_t softAPgetStationNum()</code></td>
 <td style="text-align: left;">返回当前连接到 AP 的客户端数量。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>IPAddress softAPIP()</code></td>
 <td style="text-align: left;">获取 AP 的 IPv4 地址。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>IPAddress softAPBroadcastIP()</code></td>
 <td style="text-align: left;">获取 AP 的 IPv4 广播地址。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>IPAddress softAPNetworkID()</code></td>
 <td style="text-align: left;">获取 AP 网络的 ID。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint8_t softAPSubnetCIDR()</code></td>
 <td style="text-align: left;">获取 AP 网络的子网 CIDR。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>IPAddress softAPSubnetMask()</code></td>
 <td style="text-align: left;">获取 AP 网络的子网掩码。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool softAPenableIpV6()</code></td>
 <td style="text-align: left;">启用 IPv6 支持。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>IPv6Address softAPIPv6()</code></td>
 <td style="text-align: left;">获取 IPv6 地址。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool softAPsetHostname(const char * hostname)</code></td>
 <td style="text-align: left;">设置 AP 的主机名称。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>const char * softAPgetHostname()</code></td>
 <td style="text-align: left;">获取 AP 的主机名称。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>uint8_t* softAPmacAddress(uint8_t* mac)</code></td>
 <td style="text-align: left;">设置或者获取 AP 的 MAC 地址。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>String softAPSSID(void) const</code></td>
 <td style="text-align: left;">获取 AP 网络的 SSID。</td>
 </tr>
@@ -2420,46 +2420,46 @@ WIFI 接入点</strong>，也支持
 <col style="width: 27%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">STA 模式 WIFI 相关 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>wl_status_t begin(const char* ssid, const char *passphrase = NULL, int32_t channel = 0, const uint8_t* bssid = NULL, bool connect = true);</code></td>
 <td style="text-align: left;">启动 Wi-Fi 连接。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = (uint32_t)0x00000000, IPAddress dns2 = (uint32_t)0x00000000)</code></td>
 <td style="text-align: left;">配置 IP 地址、网关、子网、DNS 信息。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>IPAddress(uint8_t first_octet, uint8_t second_octet, uint8_t third_octet, uint8_t fourth_octet)</code></td>
 <td style="text-align: left;"><code>IPAddress</code> 格式由 4
 个字节进行定义。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool reconnect()</code></td>
 <td style="text-align: left;">重新连接 Wi-Fi。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool disconnect(bool wifioff = false, bool eraseap = false)</code></td>
 <td style="text-align: left;">强制断开 Wi-Fi 连接。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool isConnected();</code></td>
 <td style="text-align: left;">获取 Wi-Fi 连接状态。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool setAutoReconnect(bool autoReconnect)</code></td>
 <td style="text-align: left;">设置连接丢失时，是否开启自动重新连接。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool getAutoReconnect()</code></td>
 <td style="text-align: left;">获取连接丢失时，自动重连的设置状态。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool setMinSecurity(wifi_auth_mode_t minSecurity)</code></td>
 <td style="text-align: left;">设置 AP 连接的最低安全性，默认为
 <code>WIFI_AUTH_WPA2_PSK</code>。</td>
@@ -2472,17 +2472,17 @@ WIFI 接入点</strong>，也支持
 <col style="width: 24%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">WiFiMulti 相关 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bool addAP(const char* ssid, const char *passphrase = NULL)</code></td>
 <td style="text-align: left;">添加多个 AP 接入点。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>uint8_t run(uint32_t connectTimeout=5000)</code></td>
 <td style="text-align: left;">开始运行 WiFiMulti。</td>
 </tr>
@@ -2494,25 +2494,25 @@ WIFI 接入点</strong>，也支持
 <col style="width: 18%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">WiFiScan 相关 API</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>int16_t scanNetworks(bool async = false, bool show_hidden = false, bool passive = false, uint32_t max_ms_per_chan = 300, uint8_t channel = 0)</code></td>
 <td style="text-align: left;">开始扫描可用的 WiFi 网络。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>int16_t scanComplete()</code></td>
 <td style="text-align: left;">采用异步模式获取扫描状态。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>void scanDelete()</code></td>
 <td style="text-align: left;">删除 RAM 当中的最后一次扫描结果。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bool getNetworkInfo(uint8_t networkItem, String &amp;ssid, uint8_t &amp;encryptionType, int32_t &amp;RSSI, uint8_t* &amp;BSSID, int32_t &amp;channel)</code></td>
 <td style="text-align: left;">获取扫描到的 WIFI 网络信息。</td>
 </tr>
@@ -2542,7 +2542,7 @@ Semaphore</span></span></a></li><li><a class="level is-mobile" href="#hc-sr04-�
 外设</span></span></a></li><li><a class="level is-mobile" href="#主设备-spi-官方库"><span class="level-left"><span class="level-item">16.3</span><span class="level-item">主设备 SPI 官方库</span></span></a></li><li><a class="level is-mobile" href="#从设备-spi-第三方库"><span class="level-left"><span class="level-item">16.4</span><span class="level-item">从设备 SPI 第三方库</span></span></a></li><li><a class="level is-mobile" href="#主-从设备-spi-通信实例"><span class="level-left"><span class="level-item">16.5</span><span class="level-item">主 &amp; 从设备 SPI 通信实例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#spimaster.ino"><span class="level-left"><span class="level-item">16.5.1</span><span class="level-item">SPIMaster.ino</span></span></a></li><li><a class="level is-mobile" href="#spislavewait.ino"><span class="level-left"><span class="level-item">16.5.2</span><span class="level-item">SPISlaveWait.ino</span></span></a></li><li><a class="level is-mobile" href="#spislavequeue.ino"><span class="level-left"><span class="level-item">16.5.3</span><span class="level-item">SPISlaveQueue.ino</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#基于-spi-操作-sd-存储卡"><span class="level-left"><span class="level-item">17</span><span class="level-item">基于 SPI 操作 SD 存储卡</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#arduino-esp32-提供的-sd-库"><span class="level-left"><span class="level-item">17.1</span><span class="level-item">Arduino-ESP32 提供的 SD 库</span></span></a></li><li><a class="level is-mobile" href="#第三方提供的-sdfat-库"><span class="level-left"><span class="level-item">17.2</span><span class="level-item">第三方提供的 SdFat 库</span></span></a></li></ul></li><li><a class="level is-mobile" href="#借用-freertos-的多任务与互斥量"><span class="level-left"><span class="level-item">18</span><span class="level-item">借用 FreeRTOS
 的多任务与互斥量</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#多任务处理"><span class="level-left"><span class="level-item">18.1</span><span class="level-item">多任务处理</span></span></a></li><li><a class="level is-mobile" href="#互斥锁机制"><span class="level-left"><span class="level-item">18.2</span><span class="level-item">互斥锁机制</span></span></a></li></ul></li><li><a class="level is-mobile" href="#基于-wifi-传输数据"><span class="level-left"><span class="level-item">19</span><span class="level-item">基于 WIFI 传输数据</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#wifi-相关-api-函数概览"><span class="level-left"><span class="level-item">19.1</span><span class="level-item">WIFI 相关 API 函数概览</span></span></a></li><li><a class="level is-mobile" href="#使用-httpclient-发起-get-请求"><span class="level-left"><span class="level-item">19.2</span><span class="level-item">使用 HttpClient 发起 GET
 请求</span></span></a></li><li><a class="level is-mobile" href="#配合-arduinojson-发起-post-请求"><span class="level-left"><span class="level-item">19.3</span><span class="level-item">配合 ArduinoJson 发起 POST
-请求</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2024 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+请求</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
@@ -2559,6 +2559,6 @@ Semaphore</span></span></a></li><li><a class="level is-mobile" href="#hc-sr04-�
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
         });</script></body></html>

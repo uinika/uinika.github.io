@@ -192,7 +192,7 @@ CPU 进行控制，但是开发人员也可以手动改变各个状态位的值�
 <col style="width: 8%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">程序状态字寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -205,7 +205,7 @@ CPU 进行控制，但是开发人员也可以手动改变各个状态位的值�
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">WPS</td>
 <td style="text-align: left;">CY</td>
 <td style="text-align: left;">AC</td>
@@ -216,7 +216,7 @@ CPU 进行控制，但是开发人员也可以手动改变各个状态位的值�
 <td>F1</td>
 <td>P</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">释义</td>
 <td style="text-align: left;">进位标志位</td>
 <td style="text-align: left;">进位辅助标志位</td>
@@ -323,7 +323,7 @@ SWBS 和 SWRST
 <col style="width: 5%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">寄存器名称</th>
 <th style="text-align: left;">地址</th>
 <th style="text-align: left;">B7</th>
@@ -337,7 +337,7 @@ SWBS 和 SWRST
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">ISP_CONTR</td>
 <td style="text-align: left;">E7H</td>
 <td style="text-align: left;"><strong>ISPEN</strong></td>
@@ -382,7 +382,7 @@ Timer</em>）让硬件复位。看门狗本质是一个计数器，如果微处�
 <col style="width: 5%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">看门狗控制寄存器</th>
 <th style="text-align: left;">地址</th>
 <th style="text-align: left;">B7</th>
@@ -396,7 +396,7 @@ Timer</em>）让硬件复位。看门狗本质是一个计数器，如果微处�
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">WDT_CONTR</td>
 <td style="text-align: left;">E1H</td>
 <td style="text-align: left;">-</td>
@@ -438,7 +438,7 @@ Down）</strong>两种省电模式以降低功耗，正常工作模式下单片�
 <col style="width: 10%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">电源控制寄存器</th>
 <th style="text-align: left;">地址</th>
 <th style="text-align: left;">B7</th>
@@ -452,7 +452,7 @@ Down）</strong>两种省电模式以降低功耗，正常工作模式下单片�
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">PCON</td>
 <td style="text-align: left;">87H</td>
 <td style="text-align: left;">SMOD</td>
@@ -567,7 +567,7 @@ uVision 5</strong>提供的 IDE 包含了 8051 开发环境以及 C51
 语言数据类型，并且额外提供了一些单片机开发所需的特殊数据类型。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">数据类型</th>
 <th style="text-align: left;">位</th>
 <th style="text-align: left;">字节</th>
@@ -575,85 +575,85 @@ uVision 5</strong>提供的 IDE 包含了 8051 开发环境以及 C51
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>bit</code></td>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><code>0 ‖ 1</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>signed char</code></td>
 <td style="text-align: left;">8</td>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;"><code>-128 ➠ +127</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>unsigned char</code></td>
 <td style="text-align: left;">8</td>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;"><code>0 ➠ 255</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>enum</code></td>
 <td style="text-align: left;">16</td>
 <td style="text-align: left;">2</td>
 <td style="text-align: left;"><code>-32768 ➠ +32767</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>signed short</code></td>
 <td style="text-align: left;">16</td>
 <td style="text-align: left;">2</td>
 <td style="text-align: left;"><code>-32768 ➠ +32767</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>unsigned short</code></td>
 <td style="text-align: left;">16</td>
 <td style="text-align: left;">2</td>
 <td style="text-align: left;"><code>0 ➠ 65535</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>signed int</code></td>
 <td style="text-align: left;">16</td>
 <td style="text-align: left;">2</td>
 <td style="text-align: left;"><code>-32768 ➠ +32767</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>unsigned int</code></td>
 <td style="text-align: left;">16</td>
 <td style="text-align: left;">2</td>
 <td style="text-align: left;"><code>0 ➠ 65535</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>signed long</code></td>
 <td style="text-align: left;">32</td>
 <td style="text-align: left;">4</td>
 <td style="text-align: left;"><code>-2,147,483,648 ➠ +2,147,483,647</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>unsigned long</code></td>
 <td style="text-align: left;">32</td>
 <td style="text-align: left;">4</td>
 <td style="text-align: left;"><code>0 ➠ 4,294,967,295</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>float</code></td>
 <td style="text-align: left;">32</td>
 <td style="text-align: left;">4</td>
 <td style="text-align: left;"><code>±1.175494E-38 ➠ ±3.402823E+38</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>sbit</code></td>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><code>0 ‖ 1</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>sfr</code></td>
 <td style="text-align: left;">8</td>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;"><code>0 ➠ 255</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>sfr16</code></td>
 <td style="text-align: left;">16</td>
 <td style="text-align: left;">2</td>
@@ -683,35 +683,35 @@ Keil
 单片机包含了多种内存空间，包含内外部的代码或数据存储器。因此，声明一个变量的时候，需要搞清楚这些变量归属于哪一类存储单元。下面的表格</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">存储类型</th>
 <th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>code</code></td>
 <td style="text-align: left;">代码存储器（<em>64K 字节</em>）</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>data</code></td>
 <td style="text-align: left;">可直接寻址的内部数据存储器（<em>128
 字节</em>）</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>idata</code></td>
 <td style="text-align: left;">可直接寻址的内部数据存储器（<em>256
 字节</em>）</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>bdata</code></td>
 <td style="text-align: left;">位寻址数据存储器（<em>16 字节</em>）</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>xdata</code></td>
 <td style="text-align: left;">外部数据存储器（<em>64K 字节</em>）</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>pdata</code></td>
 <td style="text-align: left;">被分页的外部数据存储器（<em>256
 字节</em>）</td>
@@ -732,22 +732,22 @@ Model</em>），那么可以通过 C 语言的<code>#Small</code>指令或者 Ke
 <col style="width: 90%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">存储模型</th>
 <th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>Small</code></td>
 <td style="text-align: left;">变量默认指定到内部数据存储单元（<em>data</em>）</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>Compact</code></td>
 <td style="text-align: left;">变量默认指定到扩展数据存储单元的前 256
 个字节，也就是存储器分页的第 1 页（<em>pdata</em>）</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>Large</code></td>
 <td style="text-align: left;">变量默认指定到扩展数据存储器（<em>xdata</em>）</td>
 </tr>
@@ -765,49 +765,49 @@ Model</em>），那么可以通过 C 语言的<code>#Small</code>指令或者 Ke
 10 进制数在 ASCII 当中的 16 进制编码。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">二进制数</th>
 <th style="text-align: left;">十六进制 ASCII 编码</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>0</code></td>
 <td style="text-align: left;"><code>30H</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>1</code></td>
 <td style="text-align: left;"><code>31H</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>2</code></td>
 <td style="text-align: left;"><code>32H</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>3</code></td>
 <td style="text-align: left;"><code>33H</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>4</code></td>
 <td style="text-align: left;"><code>34H</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>5</code></td>
 <td style="text-align: left;"><code>35H</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>6</code></td>
 <td style="text-align: left;"><code>36H</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>7</code></td>
 <td style="text-align: left;"><code>37H</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>8</code></td>
 <td style="text-align: left;"><code>38H</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>9</code></td>
 <td style="text-align: left;"><code>39H</code></td>
 </tr>
@@ -846,29 +846,29 @@ variable</em>）则是已经存放了数据地址的变量。</p>
 </blockquote>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">值</th>
 <th style="text-align: left;">数据存储类型</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>1</code></td>
 <td style="text-align: left;"><code>idata</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>2</code></td>
 <td style="text-align: left;"><code>xdata</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>3</code></td>
 <td style="text-align: left;"><code>pdata</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>4</code></td>
 <td style="text-align: left;"><code>data</code>、<code>bdata</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>5</code></td>
 <td style="text-align: left;"><code>code</code></td>
 </tr>
@@ -905,7 +905,7 @@ bank</em>），缺省时默认值为。</li>
 <col style="width: 8%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">参数个数</th>
 <th style="text-align: left;">字符型 <code>char</code> /1 字节指针</th>
 <th>整型 <code>int</code> /2 字符指针</th>
@@ -914,21 +914,21 @@ bank</em>），缺省时默认值为。</li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>1</strong></td>
 <td style="text-align: left;">R7</td>
 <td>R6 &amp; R7</td>
 <td>R4-R7</td>
 <td>R1-R3</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>2</strong></td>
 <td style="text-align: left;">R5</td>
 <td>R4 &amp; R5</td>
 <td>R4-R7</td>
 <td>-</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>3</strong></td>
 <td style="text-align: left;">R3</td>
 <td>R2 &amp; R3</td>
@@ -950,42 +950,42 @@ bank</em>），缺省时默认值为。</li>
 <col style="width: 35%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">返回值</th>
 <th style="text-align: left;">寄存器</th>
 <th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">位 <code>bit</code></td>
 <td style="text-align: left;">进位标记（<em>C</em>）</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">字符型 <code>char</code> / 无符号字符型
 <code>unsigned char</code> / 1 字节指针</td>
 <td style="text-align: left;">R7</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">整型 <code>int</code> / 无符号整型
 <code>unsigned int</code>/ 2 字节指针</td>
 <td style="text-align: left;">R6 &amp; R7</td>
 <td style="text-align: left;">最高位在 R6，最低位在 R7</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">长整型 <code>long</code> / 无符号长整型
 <code>unsigned long</code></td>
 <td style="text-align: left;">R4 ~ R7</td>
 <td style="text-align: left;">最高位在 R4，最低位在 R7</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">浮点型 <code>float</code></td>
 <td style="text-align: left;">R4 ~ R7</td>
 <td style="text-align: left;">32 位 IEEE 格式</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">通用指针</td>
 <td style="text-align: left;">R1 ~ R3</td>
 <td style="text-align: left;">存储类型在 R3，最高位在 R2，最低位在
@@ -1020,7 +1020,7 @@ R1</td>
 <col style="width: 10%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">中断源</th>
 <th style="text-align: left;">中断向量地址</th>
 <th style="text-align: left;">中断查询次序号</th>
@@ -1034,7 +1034,7 @@ R1</td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">外部中断 0(<em>INT0</em>)</td>
 <td style="text-align: left;">0003H</td>
 <td style="text-align: left;"><strong>0</strong> ↑ 高优先级</td>
@@ -1046,7 +1046,7 @@ R1</td>
 <td style="text-align: left;">IE0</td>
 <td style="text-align: left;">EX0/EA</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">定时器 0 中断</td>
 <td style="text-align: left;">000BH</td>
 <td style="text-align: left;"><strong>1</strong></td>
@@ -1058,7 +1058,7 @@ R1</td>
 <td style="text-align: left;">TF0</td>
 <td style="text-align: left;">ET0/EA</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">外部中断 1(<em>INT1</em>)</td>
 <td style="text-align: left;">0013H</td>
 <td style="text-align: left;"><strong>2</strong></td>
@@ -1070,7 +1070,7 @@ R1</td>
 <td style="text-align: left;">IE1</td>
 <td style="text-align: left;">EX1/EA</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">定时器 1 中断</td>
 <td style="text-align: left;">001BH</td>
 <td style="text-align: left;"><strong>3</strong></td>
@@ -1082,7 +1082,7 @@ R1</td>
 <td style="text-align: left;">TF1</td>
 <td style="text-align: left;">ET1/EA</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">串口中断(<em>UART</em>)</td>
 <td style="text-align: left;">0023H</td>
 <td style="text-align: left;"><strong>4</strong></td>
@@ -1094,7 +1094,7 @@ R1</td>
 <td style="text-align: left;">RI+TI</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">定时器 2 中断</td>
 <td style="text-align: left;">002BH</td>
 <td style="text-align: left;"><strong>5</strong></td>
@@ -1106,7 +1106,7 @@ R1</td>
 <td style="text-align: left;">TF2+EXF2</td>
 <td style="text-align: left;">ET2/EA</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">外部中断 2(<em>INT2</em>)</td>
 <td style="text-align: left;">0033H</td>
 <td style="text-align: left;"><strong>6</strong></td>
@@ -1118,7 +1118,7 @@ R1</td>
 <td style="text-align: left;">IE2</td>
 <td style="text-align: left;">EX2/EA</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">外部中断 3(<em>INT3</em>)</td>
 <td style="text-align: left;">003BH</td>
 <td style="text-align: left;"><strong>7</strong> ↓ 低优先级</td>
@@ -1147,43 +1147,43 @@ R1</td>
 <col style="width: 92%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">中断源</th>
 <th style="text-align: left;">触发条件</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">外部中断 0 (INT0)</td>
 <td style="text-align: left;"><code>IT0/TCON.0 = 1</code>（下降沿触发）、<code>IT1/TCON.0 = 0</code>（低电平触发）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">外部中断 1 (INT1)</td>
 <td style="text-align: left;"><code>IT1/TCON.2 = 1</code>（下降沿触发）、<code>IT1/TCON.2 = 0</code>（低电平触发）。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">外部中断 2 (INT2)</td>
 <td style="text-align: left;"><code>IT2/XICON.0 = 1</code>（下降沿触发）、<code>IT2/XICON.0 = 0</code>（低电平触发）。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">外部中断 3 (INT3)</td>
 <td style="text-align: left;"><code>IT3/XICON.4 = 1</code>（下降沿触发）、<code>IT3/XICON.4 = 0</code>（低电平触发）。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">定时器 0 中断</td>
 <td style="text-align: left;">中断请求标志位是 TF0，当定时寄存器 TH0/TL0
 发生溢出时，溢出标志位 TF0
 会被置为<code>1</code>，引发中断并执行相应中断程序后会重新将 TF0
 置为<code>0</code>。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">定时器 1 中断</td>
 <td style="text-align: left;">中断请求标志位是 TF1，当定时寄存器 TH1/TL1
 发生溢出时，溢出标志位 TF1
 会被置为<code>1</code>，引发中断并执行相应中断程序后会重新将 TF1
 置为<code>0</code>。</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">定时器 2 中断</td>
 <td style="text-align: left;">中断请求标志位是 TF2 和 EXF2；当定时寄存器
 TH2/TL2 发生溢出时，溢出标志位 TF2
@@ -1191,7 +1191,7 @@ TH2/TL2 发生溢出时，溢出标志位 TF2
 置为<code>0</code>；当 EXEN2 被置为<code>1</code>并且 T2EX
 的负跳变发生捕获或重装时，EXF2 会进行置位并引发中断。</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">UART</td>
 <td style="text-align: left;">当 RI（串口接收中断请求标志位）和
 TI（串口发送中断请求标志位）任何一位被置为<code>1</code>，就会触发串口中断。</td>
@@ -1213,7 +1213,7 @@ TI（串口发送中断请求标志位）任何一位被置为<code>1</code>，�
 <col style="width: 7%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">符号</th>
 <th style="text-align: left;">描述</th>
 <th style="text-align: left;">地址</th>
@@ -1223,7 +1223,7 @@ TI（串口发送中断请求标志位）任何一位被置为<code>1</code>，�
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IE</strong>（Interrupt
 Enable）</td>
 <td style="text-align: left;">中断允许寄存器</td>
@@ -1231,7 +1231,7 @@ Enable）</td>
 <td style="text-align: left;"><code>EA - ET2 ES ET1 EX1 ET0 EX0</code></td>
 <td style="text-align: left;">0x00 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>XICON</strong>（Auxiliary Interupt
 Control）</td>
 <td style="text-align: left;">辅助中断控制寄存器</td>
@@ -1239,7 +1239,7 @@ Control）</td>
 <td style="text-align: left;"><code>PX3 EX3 IE3 IT3 PX2 EX2 IE2 IT2</code></td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IP</strong>（Interrupt Priority
 Low）</td>
 <td style="text-align: left;">中断优先级控制寄存器（低）</td>
@@ -1247,7 +1247,7 @@ Low）</td>
 <td style="text-align: left;"><code>- - PT2 PS PT1 PX1 PT0 PX0</code></td>
 <td style="text-align: left;">xx00 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>IPH</strong>（Interrupt Priority
 High）</td>
 <td style="text-align: left;">中断优先级控制寄存器（高）</td>
@@ -1255,7 +1255,7 @@ High）</td>
 <td style="text-align: left;"><code>PX3H PX2H PT2H PSH PT1H PX1H PT0H PX0H</code></td>
 <td style="text-align: left;">0000,0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>TCON</strong>（Timer/Counter 0
 &amp; 1 Control）</td>
 <td style="text-align: left;">定时器/计数器 0 和 1 控制寄存器</td>
@@ -1263,7 +1263,7 @@ High）</td>
 <td style="text-align: left;"><code>TF1 TR1 TF0 TR0 IE1 IT1 IE0 IT0</code></td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>T2CON</strong>（Timer/Counter 2
 Control）</td>
 <td style="text-align: left;">定时器/计数器 2 控制寄存器</td>
@@ -1271,7 +1271,7 @@ Control）</td>
 <td style="text-align: left;"><code>TF2 EXF2 RCLK TCLK EXEN2 TR2 C/T2 CP/RL2</code></td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>SCON</strong>（Serial
 Control）</td>
 <td style="text-align: left;">串口控制寄存器</td>
@@ -1287,7 +1287,7 @@ XICON</h3>
 <p>指定当前哪个中断源被允许使用，可位寻址。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">中断允许寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -1300,7 +1300,7 @@ XICON</h3>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IE</strong></td>
 <td style="text-align: left;">EA</td>
 <td style="text-align: left;">-</td>
@@ -1331,7 +1331,7 @@ XICON</h3>
 <p>中断源使能的一些辅助控制，可位寻址。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">辅助中断控制寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -1344,7 +1344,7 @@ XICON</h3>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>XICON</strong></td>
 <td style="text-align: left;">PX3</td>
 <td style="text-align: left;">EX3</td>
@@ -1399,7 +1399,7 @@ IP、IPH、XICON</h3>
 <col style="width: 5%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">中断优先级控制寄存器（低）</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -1412,7 +1412,7 @@ IP、IPH、XICON</h3>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IP</strong></td>
 <td style="text-align: left;">保留</td>
 <td style="text-align: left;">保留</td>
@@ -1441,7 +1441,7 @@ IP、IPH、XICON</h3>
 <col style="width: 7%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">中断优先级控制寄存器（高）</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -1454,7 +1454,7 @@ IP、IPH、XICON</h3>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IPH</strong></td>
 <td style="text-align: left;">PX3H</td>
 <td style="text-align: left;">PX2H</td>
@@ -1482,7 +1482,7 @@ IP、IPH、XICON</h3>
 <col style="width: 5%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">XICON 中断辅助控制寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -1495,7 +1495,7 @@ IP、IPH、XICON</h3>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>XICON</strong></td>
 <td style="text-align: left;"><strong>PX3</strong></td>
 <td style="text-align: left;">EX3</td>
@@ -1549,7 +1549,7 @@ IP、IPH、XICON</h3>
 <col style="width: 12%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">串口控制寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -1562,7 +1562,7 @@ IP、IPH、XICON</h3>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>SCON</strong></td>
 <td style="text-align: left;">SM0/FE</td>
 <td style="text-align: left;">SM1</td>
@@ -1614,7 +1614,7 @@ C 语言中断关键字声明如下表：</p>
 <col style="width: 12%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">◄ 高 0</th>
 <th style="text-align: left;">高 1</th>
 <th style="text-align: left;">2</th>
@@ -1626,7 +1626,7 @@ C 语言中断关键字声明如下表：</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">外部中断 0(INT0)</td>
 <td style="text-align: left;">定时器 0 中断(T0)</td>
 <td style="text-align: left;">外部中断 1(INT1)</td>
@@ -1636,7 +1636,7 @@ C 语言中断关键字声明如下表：</p>
 <td>外部中断 2(INT2)</td>
 <td>外部中断 3(INT3)</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>void myTest0() interrupt0</code></td>
 <td style="text-align: left;"><code>void myTest1() interrupt1</code></td>
 <td style="text-align: left;"><code>void myTest2() interrupt2</code></td>
@@ -1662,7 +1662,7 @@ C 语言中断关键字声明如下表：</p>
 <col style="width: 12%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">◄ 高 0</th>
 <th style="text-align: left;">◄ 高 1</th>
 <th style="text-align: left;">2</th>
@@ -1674,7 +1674,7 @@ C 语言中断关键字声明如下表：</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">外部中断 0(INT0)</td>
 <td style="text-align: left;">定时器 0 中断(T0)</td>
 <td style="text-align: left;">外部中断 1(INT1)</td>
@@ -1684,7 +1684,7 @@ C 语言中断关键字声明如下表：</p>
 <td>外部中断 2(INT2)</td>
 <td>外部中断 3(INT3)</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">0003H</td>
 <td style="text-align: left;">000BH</td>
 <td style="text-align: left;">0013H</td>
@@ -1754,7 +1754,7 @@ IO 引脚则工作在计数方式。定时器操作相关的寄存器如下表�
 <col style="width: 11%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">符号</th>
 <th style="text-align: left;">描述</th>
 <th style="text-align: left;">地址</th>
@@ -1764,42 +1764,42 @@ IO 引脚则工作在计数方式。定时器操作相关的寄存器如下表�
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>TCON</strong></td>
 <td style="text-align: left;">定时器控制寄存器</td>
 <td style="text-align: left;">88H</td>
 <td style="text-align: left;"><code>TF1 TR1 TF0 TR0 IE1 IT1 IE0 IT0</code></td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>TMOD</strong></td>
 <td style="text-align: left;">定时器模式寄存器</td>
 <td style="text-align: left;">89H</td>
 <td style="text-align: left;"><code>GATE C/T M1 M0 GATE C/T M1 M0</code></td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>TL0</strong></td>
 <td style="text-align: left;">定时器 0 低位</td>
 <td style="text-align: left;">8AH</td>
 <td style="text-align: left;">-</td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>TH0</strong></td>
 <td style="text-align: left;">定时器 0 高位</td>
 <td style="text-align: left;">8BH</td>
 <td style="text-align: left;">-</td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>TL1</strong></td>
 <td style="text-align: left;">定时器 1 低位</td>
 <td style="text-align: left;">8CH</td>
 <td style="text-align: left;">-</td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>TH1</strong></td>
 <td style="text-align: left;">定时器 1 高位</td>
 <td style="text-align: left;">8DH</td>
@@ -1841,7 +1841,7 @@ STC-ISP 烧写工具进行设置。</p>
 的<strong>控制寄存器</strong>，同时也锁存溢出中断源以及外部请求中断源等，可位寻址。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">定时器控制寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -1854,7 +1854,7 @@ STC-ISP 烧写工具进行设置。</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>TCON</strong></td>
 <td style="text-align: left;">TF1</td>
 <td style="text-align: left;">TR1</td>
@@ -1920,7 +1920,7 @@ INT0 输入高电平时才允许 T0 计数。</li>
 <col style="width: 9%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">定时器工作模式寄存器</th>
 <th style="text-align: left;">定时器 1</th>
 <th style="text-align: left;">定时器 1</th>
@@ -1933,7 +1933,7 @@ INT0 输入高电平时才允许 T0 计数。</li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;">序号</td>
 <td style="text-align: left;">7</td>
 <td style="text-align: left;">6</td>
@@ -1944,7 +1944,7 @@ INT0 输入高电平时才允许 T0 计数。</li>
 <td>1</td>
 <td>0</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;">TMOD</td>
 <td style="text-align: left;">GATE</td>
 <td style="text-align: left;">C/T</td>
@@ -2053,7 +2053,7 @@ INT1 控制定时器。TR1 是 TCON 寄存器里的定时器 1
 <col style="width: 10%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">符号</th>
 <th style="text-align: left;">描述</th>
 <th style="text-align: left;">地址</th>
@@ -2063,42 +2063,42 @@ INT1 控制定时器。TR1 是 TCON 寄存器里的定时器 1
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>T2CON</strong></td>
 <td style="text-align: left;">定时器 2 控制寄存器</td>
 <td style="text-align: left;">C8H</td>
 <td style="text-align: left;"><code>TF2 EXF2 RCLK TCLK EXEN2 TR2 C/T2 CP/RL2</code></td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>T2MOD</strong></td>
 <td style="text-align: left;">定时器 2 模式寄存器</td>
 <td style="text-align: left;">C9H</td>
 <td style="text-align: left;"><code>--- ---- ---- ---- ----- --- T2OE DECN</code></td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>RCAP2L</strong></td>
 <td style="text-align: left;">定时器 2 重载与捕获低字节</td>
 <td style="text-align: left;">CAH</td>
 <td style="text-align: left;">-</td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>RCAP2H</strong></td>
 <td style="text-align: left;">定时器 2 重载与捕获高字节</td>
 <td style="text-align: left;">CBH</td>
 <td style="text-align: left;">-</td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>TL2</strong></td>
 <td style="text-align: left;">定时器 2 低字节</td>
 <td style="text-align: left;">CCH</td>
 <td style="text-align: left;">-</td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>TH2</strong></td>
 <td style="text-align: left;">定时器 2 高字节</td>
 <td style="text-align: left;">CDH</td>
@@ -2122,7 +2122,7 @@ INT1 控制定时器。TR1 是 TCON 寄存器里的定时器 1
 <col style="width: 11%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">定时器 2 控制寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -2135,7 +2135,7 @@ INT1 控制定时器。TR1 是 TCON 寄存器里的定时器 1
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>T2CON</strong></td>
 <td style="text-align: left;">TF2</td>
 <td style="text-align: left;">EXF2</td>
@@ -2200,7 +2200,7 @@ INT1 控制定时器。TR1 是 TCON 寄存器里的定时器 1
 <col style="width: 8%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">定时器 2 模式寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -2213,7 +2213,7 @@ INT1 控制定时器。TR1 是 TCON 寄存器里的定时器 1
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>T2MOD</strong></td>
 <td style="text-align: left;">-</td>
 <td style="text-align: left;">-</td>
@@ -2236,7 +2236,7 @@ INT1 控制定时器。TR1 是 TCON 寄存器里的定时器 1
 T2CON 当中的位进行选择：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">模式</th>
 <th style="text-align: left;">RCLK+TCLK</th>
 <th style="text-align: left;">CP/RL2</th>
@@ -2244,25 +2244,25 @@ T2CON 当中的位进行选择：</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>16 位捕获</strong></td>
 <td style="text-align: left;"><code>0</code></td>
 <td style="text-align: left;"><code>1</code></td>
 <td style="text-align: left;"><code>1</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>16 位自动重装</strong></td>
 <td style="text-align: left;"><code>0</code></td>
 <td style="text-align: left;"><code>0</code></td>
 <td style="text-align: left;"><code>1</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>波特率发生器</strong></td>
 <td style="text-align: left;"><code>1</code></td>
 <td style="text-align: left;"><code>x</code></td>
 <td style="text-align: left;"><code>1</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>关闭</strong></td>
 <td style="text-align: left;"><code>x</code></td>
 <td style="text-align: left;"><code>x</code></td>
@@ -2331,7 +2331,7 @@ RCAP2L 的 16 位值(由软件预置)。</p>
 <col style="width: 7%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">符号</th>
 <th style="text-align: left;">描述</th>
 <th style="text-align: left;">地址</th>
@@ -2341,7 +2341,7 @@ RCAP2L 的 16 位值(由软件预置)。</p>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>SCON</strong>（Serial
 Control）</td>
 <td style="text-align: left;">串行控制寄存器</td>
@@ -2349,7 +2349,7 @@ Control）</td>
 <td style="text-align: left;"><code>SM0/FE SM1 SM2 REN TB8 RB8 TI RI</code></td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>SBUF</strong>（Serial
 Buffer）</td>
 <td style="text-align: left;">串行数据缓冲寄存器</td>
@@ -2357,7 +2357,7 @@ Buffer）</td>
 <td style="text-align: left;">两个分别用于读写数据的缓冲器，可通过两个寄存器分别进行控制。</td>
 <td style="text-align: left;">xxxx xxxxB</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>PCON</strong>（Power
 Control）</td>
 <td style="text-align: left;">电源控制寄存器</td>
@@ -2365,7 +2365,7 @@ Control）</td>
 <td style="text-align: left;"><code>SMOD SMOD0 - POF GF1 GF0 PD IDL</code></td>
 <td style="text-align: left;">00x1 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>IE</strong>（Interrupt
 Enable）</td>
 <td style="text-align: left;">中断允许寄存器</td>
@@ -2373,7 +2373,7 @@ Enable）</td>
 <td style="text-align: left;"><code>EA - ET2 ES ET1 EX1 ET0 EX0</code></td>
 <td style="text-align: left;">0x00 0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IP</strong>（Interrupt Priority
 Low）</td>
 <td style="text-align: left;">中断优先级控制寄存器（低）</td>
@@ -2381,7 +2381,7 @@ Low）</td>
 <td style="text-align: left;"><code>- - PT2 PS PT1 PX1 PT0 PX0</code></td>
 <td style="text-align: left;">xx00 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>IPH</strong>（Interrupt Priority
 High）</td>
 <td style="text-align: left;">中断优先级控制寄存器（高）</td>
@@ -2389,7 +2389,7 @@ High）</td>
 <td style="text-align: left;"><code>PX3H PX2H PT2H PSH PT1H PX1H PT0H PX0H</code></td>
 <td style="text-align: left;">0000,0000B</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>SADEN</strong>（Slave Address
 Mask）</td>
 <td style="text-align: left;">电源控制寄存器</td>
@@ -2397,7 +2397,7 @@ Mask）</td>
 <td style="text-align: left;">从机地址掩模寄存器</td>
 <td style="text-align: left;">0000 0000B</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><strong>SADDR</strong>（Slave
 Address）</td>
 <td style="text-align: left;">电源控制寄存器</td>
@@ -2411,7 +2411,7 @@ Address）</td>
 <p>选择串行通信的工作方式等其它控制功能，可位寻址。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">串行控制寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -2424,7 +2424,7 @@ Address）</td>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>SCON</strong></td>
 <td style="text-align: left;">SM0/FE</td>
 <td style="text-align: left;">SM1</td>
@@ -2464,7 +2464,7 @@ RxD 进行串行接收，当<code>REN=0</code>时则禁止接收。
 <col style="width: 55%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">SM0</th>
 <th style="text-align: left;">SM1</th>
 <th style="text-align: left;">工作方式</th>
@@ -2473,28 +2473,28 @@ RxD 进行串行接收，当<code>REN=0</code>时则禁止接收。
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>0</code></td>
 <td style="text-align: left;"><code>0</code></td>
 <td style="text-align: left;">方式 0</td>
 <td style="text-align: left;">同步移位寄存器。</td>
 <td style="text-align: left;"><span class="math inline">\(\frac{单片机系统时钟频率}{12}\)</span></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>0</code></td>
 <td style="text-align: left;"><code>1</code></td>
 <td style="text-align: left;">方式 1</td>
 <td style="text-align: left;">8 位 UART，波特率可变。</td>
 <td style="text-align: left;"><span class="math inline">\(\frac{2^{SMOD}}{32}\times{定时器1溢出率}\)</span></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>1</code></td>
 <td style="text-align: left;"><code>0</code></td>
 <td style="text-align: left;">方式 2</td>
 <td style="text-align: left;">9 位 UART。</td>
 <td style="text-align: left;"><span class="math inline">\(\frac{2^{SMOD}}{64}\times{单片机系统时钟频率}\)</span></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>1</code></td>
 <td style="text-align: left;"><code>1</code></td>
 <td style="text-align: left;">方式 3</td>
@@ -2514,7 +2514,7 @@ RxD 进行串行接收，当<code>REN=0</code>时则禁止接收。
 2、方式 3 的波特率是否加倍。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">电源控制寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -2527,7 +2527,7 @@ RxD 进行串行接收，当<code>REN=0</code>时则禁止接收。
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>PCON</strong></td>
 <td style="text-align: left;">SMOD</td>
 <td style="text-align: left;">SMOD0</td>
@@ -2553,7 +2553,7 @@ SM0/FE 位将会用于 SM0，并与 SM1 一起指定串行口的工作方式。<
 <p>串行口中断允许位<strong>ES</strong>位于中断允许寄存器<strong>IE</strong>当中：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">中断允许寄存器</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -2566,7 +2566,7 @@ SM0/FE 位将会用于 SM0，并与 SM1 一起指定串行口的工作方式。<
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IE</strong></td>
 <td style="text-align: left;">EA</td>
 <td style="text-align: left;">-</td>
@@ -2597,7 +2597,7 @@ SM0/FE 位将会用于 SM0，并与 SM1 一起指定串行口的工作方式。<
 <col style="width: 5%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">中断优先级控制寄存器（低）</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -2610,7 +2610,7 @@ SM0/FE 位将会用于 SM0，并与 SM1 一起指定串行口的工作方式。<
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IP</strong></td>
 <td style="text-align: left;">保留</td>
 <td style="text-align: left;">保留</td>
@@ -2636,7 +2636,7 @@ SM0/FE 位将会用于 SM0，并与 SM1 一起指定串行口的工作方式。<
 <col style="width: 6%">
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">中断优先级控制寄存器（高）</th>
 <th style="text-align: left;">B7</th>
 <th style="text-align: left;">B6</th>
@@ -2649,7 +2649,7 @@ SM0/FE 位将会用于 SM0，并与 SM1 一起指定串行口的工作方式。<
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><strong>IPH</strong></td>
 <td style="text-align: left;">PX3H</td>
 <td style="text-align: left;">PX2H</td>
@@ -2678,7 +2678,7 @@ XICON</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href
 IP、IPH、XICON</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#ip-中断优先级控制寄存器低"><span class="level-left"><span class="level-item">9.2.2.1</span><span class="level-item">IP 中断优先级控制寄存器（低）</span></span></a></li><li><a class="level is-mobile" href="#iph-中断优先级控制寄存器高"><span class="level-left"><span class="level-item">9.2.2.2</span><span class="level-item">IPH 中断优先级控制寄存器（高）</span></span></a></li><li><a class="level is-mobile" href="#xicon-中断辅助控制寄存器"><span class="level-left"><span class="level-item">9.2.2.3</span><span class="level-item">XICON 中断辅助控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#中断优先级配置"><span class="level-left"><span class="level-item">9.2.2.4</span><span class="level-item">中断优先级配置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#scon-串口控制寄存器"><span class="level-left"><span class="level-item">9.2.3</span><span class="level-item">SCON 串口控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#tcont2con-定时器计数器控制寄存器"><span class="level-left"><span class="level-item">9.2.4</span><span class="level-item">TCON/T2CON
 定时器/计数器控制寄存器</span></span></a></li></ul></li><li><a class="level is-mobile" href="#中断优先级"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">中断优先级</span></span></a></li><li><a class="level is-mobile" href="#中断向量与汇编指令执行流程"><span class="level-left"><span class="level-item">9.4</span><span class="level-item">中断向量与汇编指令执行流程</span></span></a></li><li><a class="level is-mobile" href="#外部中断"><span class="level-left"><span class="level-item">9.5</span><span class="level-item">外部中断</span></span></a></li></ul></li><li><a class="level is-mobile" href="#定时器计数器-t0-与-t1"><span class="level-left"><span class="level-item">10</span><span class="level-item">定时器/计数器 T0 与 T1</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#tcon-定时器控制寄存器"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">TCON 定时器控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#tmod-定时器工作模式寄存器"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">TMOD 定时器工作模式寄存器</span></span></a></li><li><a class="level is-mobile" href="#定时器-0-工作模式"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">定时器 0 工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#位定时器"><span class="level-left"><span class="level-item">10.3.1</span><span class="level-item">13 位定时器</span></span></a></li><li><a class="level is-mobile" href="#位定时器-1"><span class="level-left"><span class="level-item">10.3.2</span><span class="level-item">16 位定时器</span></span></a></li><li><a class="level is-mobile" href="#位自动重装模式"><span class="level-left"><span class="level-item">10.3.3</span><span class="level-item">8 位自动重装模式</span></span></a></li><li><a class="level is-mobile" href="#双-8-位定时器"><span class="level-left"><span class="level-item">10.3.4</span><span class="level-item">双 8 位定时器</span></span></a></li></ul></li><li><a class="level is-mobile" href="#定时器-1-工作模式"><span class="level-left"><span class="level-item">10.4</span><span class="level-item">定时器 1 工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#位定时器-2"><span class="level-left"><span class="level-item">10.4.1</span><span class="level-item">13 位定时器</span></span></a></li><li><a class="level is-mobile" href="#位定时器-3"><span class="level-left"><span class="level-item">10.4.2</span><span class="level-item">16 位定时器</span></span></a></li><li><a class="level is-mobile" href="#位自动重装模式-1"><span class="level-left"><span class="level-item">10.4.3</span><span class="level-item">8 位自动重装模式</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#定时器计数器-t2"><span class="level-left"><span class="level-item">11</span><span class="level-item">定时器/计数器 T2</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#t2con-定时器-2-控制寄存器可位寻址"><span class="level-left"><span class="level-item">11.1</span><span class="level-item">T2CON 定时器 2
 控制寄存器（可位寻址）</span></span></a></li><li><a class="level is-mobile" href="#t2mod-定时器-2-模式选择寄存器不可位寻址"><span class="level-left"><span class="level-item">11.2</span><span class="level-item">T2MOD 定时器 2
-模式选择寄存器（不可位寻址）</span></span></a></li><li><a class="level is-mobile" href="#定时器-2-工作模式"><span class="level-left"><span class="level-item">11.3</span><span class="level-item">定时器 2 工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#位捕获模式"><span class="level-left"><span class="level-item">11.3.1</span><span class="level-item">16 位捕获模式</span></span></a></li><li><a class="level is-mobile" href="#位自动重装"><span class="level-left"><span class="level-item">11.3.2</span><span class="level-item">16 位自动重装</span></span></a></li><li><a class="level is-mobile" href="#串口波特率发生器"><span class="level-left"><span class="level-item">11.3.3</span><span class="level-item">串口波特率发生器</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#串行通信"><span class="level-left"><span class="level-item">12</span><span class="level-item">串行通信</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#scon-串行控制寄存器"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">SCON 串行控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#pcon-电源控制寄存器"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">PCON 电源控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#ieipiph-串行中断相关寄存器"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">IE/IP/IPH 串行中断相关寄存器</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2024 <span>UinIO.com</span> by Hank</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+模式选择寄存器（不可位寻址）</span></span></a></li><li><a class="level is-mobile" href="#定时器-2-工作模式"><span class="level-left"><span class="level-item">11.3</span><span class="level-item">定时器 2 工作模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#位捕获模式"><span class="level-left"><span class="level-item">11.3.1</span><span class="level-item">16 位捕获模式</span></span></a></li><li><a class="level is-mobile" href="#位自动重装"><span class="level-left"><span class="level-item">11.3.2</span><span class="level-item">16 位自动重装</span></span></a></li><li><a class="level is-mobile" href="#串口波特率发生器"><span class="level-left"><span class="level-item">11.3.3</span><span class="level-item">串口波特率发生器</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#串行通信"><span class="level-left"><span class="level-item">12</span><span class="level-item">串行通信</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#scon-串行控制寄存器"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">SCON 串行控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#pcon-电源控制寄存器"><span class="level-left"><span class="level-item">12.2</span><span class="level-item">PCON 电源控制寄存器</span></span></a></li><li><a class="level is-mobile" href="#ieipiph-串行中断相关寄存器"><span class="level-left"><span class="level-item">12.3</span><span class="level-item">IE/IP/IPH 串行中断相关寄存器</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/TVS/"><img src="/Electronics/TVS/logo.png" alt="瞬态电压抑制二极管 TVS 选型简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-09-05T16:00:00.000Z">2024-09-06</time></p><p class="title"><a href="/Electronics/TVS/">瞬态电压抑制二极管 TVS 选型简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Battery/"><img src="/Electronics/Battery/logo.png" alt="锂离子电池技术参数简明选型指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-28T16:00:00.000Z">2024-08-29</time></p><p class="title"><a href="/Electronics/Battery/">锂离子电池技术参数简明选型指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/LTspice/"><img src="/Electronics/LTspice/logo.png" alt="如何使用新版本的 LTspice 进行模拟电路仿真"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-05-21T16:00:00.000Z">2024-05-22</time></p><p class="title"><a href="/Electronics/LTspice/">如何使用新版本的 LTspice 进行模拟电路仿真</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
@@ -2695,6 +2695,6 @@ IP、IPH、XICON</span></span></a><ul class="menu-list"><li><a class="level is-m
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
         });</script></body></html>
