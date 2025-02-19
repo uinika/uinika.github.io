@@ -12597,6 +12597,11 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
 .section .container .columns .column-main .article .content hr {
   margin: 1rem 0;
 }
+.section .container .columns .column-main .article .content li ul,
+.section .container .columns .column-main .article .content li ol {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+}
 .section .container .columns .column-main .article .content .code .title {
   color: inherit !important;
 }
