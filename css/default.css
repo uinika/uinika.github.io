@@ -12458,7 +12458,7 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
   font-weight: bold;
   margin-top: 1.2rem;
   margin-bottom: 0.5rem;
-  border: 1px solid #2a2f33;
+  border: 2px dashed #8c634f;
   border-radius: 1rem;
   font-size: 1.6rem !important;
 }
