@@ -1,0 +1,2511 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>简明厄要的《电路理论》读书笔记 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="电路理论是电气工程和电子科学技术的主要理论基础，是一门研究电路分析和网络综合与设计基本规律的基础工程学科。所谓电路分析是在电路给定、参数已知的条件下，通过求解电路中的电压、电流而了解电路网络所具有的特性；而网络综合是在给定电路技术指标的情况下，设计出电路并确定元件参数，使电路的性能符合设计要求。因此电路分析是电路理论中最基本的部分，是学习电路理论的人门课程，被列为电子类专业重要的公共技术基础课。"><meta property="og:type" content="blog"><meta property="og:title" content="简明厄要的《电路理论》读书笔记"><meta property="og:url" content="http://www.uinio.com/Electronics/Simple-Analysis/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="电路理论是电气工程和电子科学技术的主要理论基础，是一门研究电路分析和网络综合与设计基本规律的基础工程学科。所谓电路分析是在电路给定、参数已知的条件下，通过求解电路中的电压、电流而了解电路网络所具有的特性；而网络综合是在给定电路技术指标的情况下，设计出电路并确定元件参数，使电路的性能符合设计要求。因此电路分析是电路理论中最基本的部分，是学习电路理论的人门课程，被列为电子类专业重要的公共技术基础课。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2014-11-25T16:00:00.000Z"><meta property="article:modified_time" content="2022-05-20T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="电路理论"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/Simple-Analysis/"},"headline":"简明厄要的《电路理论》读书笔记","image":["http://www.uinio.com/Electronics/Simple-Analysis/logo.png"],"datePublished":"2014-11-25T16:00:00.000Z","dateModified":"2022-05-20T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"电路理论是电气工程和电子科学技术的主要理论基础，是一门研究电路分析和网络综合与设计基本规律的基础工程学科。所谓电路分析是在电路给定、参数已知的条件下，通过求解电路中的电压、电流而了解电路网络所具有的特性；而网络综合是在给定电路技术指标的情况下，设计出电路并确定元件参数，使电路的性能符合设计要求。因此电路分析是电路理论中最基本的部分，是学习电路理论的人门课程，被列为电子类专业重要的公共技术基础课。"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/Simple-Analysis/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2014-11-25T16:00:00.000Z" title="2014/11/26 00:00:00">2014-11-26</time>发表</span><span class="level-item"><time dateTime="2022-05-20T16:00:00.000Z" title="2022/5/21 00:00:00">2022-05-21</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">4 小时读完 (大约33980个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">简明厄要的《电路理论》读书笔记</h1><div class="content"><p><strong>电路理论</strong>是<code>电气工程</code>和<code>电子科学技术</code>的主要理论基础，是一门研究<strong>电路分析</strong>和<strong>网络综合</strong>与设计基本规律的基础工程学科。所谓<strong>电路分析</strong>是在电路给定、参数已知的条件下，通过求解电路中的<code>电压</code>、<code>电流</code>而了解电路网络所具有的特性；而<strong>网络综合</strong>是在给定电路技术指标的情况下，设计出电路并确定<code>元件参数</code>，使电路的性能符合设计要求。因此电路分析是电路理论中最基本的部分，是学习电路理论的人门课程，被列为电子类专业重要的公共技术基础课。</p>
+<p><img src="/Electronics/Simple-Analysis/logo.png"></p>
+<p>这篇文章是邹建龙老师所出版 <strong>《电路实验》</strong>
+一书的读书笔记，并且结合他的相关的课件资料，在摒弃繁杂数学推导的基础上，言简意赅的介绍了
+<code>电路模型和电路定律</code>、<code>电路的分析方法与定理</code>、<code>动态电路</code>、<code>正弦稳态电路及其频域特性</code>、<code>互感</code>、<code>三相电路</code>、<code>非正弦周期电路</code>、<code>二端口网络</code>
+等电路分析方面的知识点，在凸出重要知识点的同时，力求简单易读，因而也可以作为大家的电路理论考前恶补资料使用
+ヽ(✿ ﾟ ▽ ﾟ)ノ。</p>
+<span id="more"></span>
+<h2 id="电路模型与定律">电路模型与定律</h2>
+<p>本节主要讨论两种电路模型：<strong>电源</strong>和<strong>电阻</strong>，以及电路分析的基础：<strong>基尔霍夫定律</strong>。</p>
+<h3 id="电源">电源</h3>
+<p><strong>电源</strong>是一种可以将其它形式能量转化为电能的设备，按照输出类型可以将其划分为<strong>电压源</strong>与<strong>电流源</strong>，而根据输出波形则可以将其划分为<strong>直流电源</strong>与<strong>交流电源</strong>。</p>
+<h4 id="电压源">电压源</h4>
+<p><strong>电压源</strong>是用于输出<code>电压</code>的电源，<strong>理想电压源</strong>的通用电路符号如下面左图所示。而对于<code>电池</code>等<strong>直流电压源</strong>也可以采用右侧的电路符号：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/1.png"></p>
+<p>电压源输出的电压大小与外接电路无关，而输出电流则由外接电路来决定。例如一节
+<code>5V</code> 碱性电池无论连接至哪个电路，其输出电压永远都为
+<code>5V</code>。如果外接电路为一个 <code>5Ω</code>
+电阻，则电压源输出的电流应当为 <code>1A</code>；如果外接电阻的阻值变为
+<code>10Ω</code> 欧姆，则输出的电流也相应的变为 <code>0.5A</code>。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>电压源不能短路</strong>，这是由于导线的<strong>电阻</strong>
+<span class="math inline">\(R\)</span>
+为<strong>零欧姆</strong>，从而致使方程 <span class="math inline">\(I =
+\frac{V}{R}\)</span> 失去意义。</p>
+</blockquote>
+<h4 id="电流源">电流源</h4>
+<p><strong>电流源</strong>是用于输出<code>电流</code>的电源，<strong>理想电流源</strong>的通用电路符号如下面左图所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/2.png"></p>
+<p>电流源输出的电流大小与外接电路无关，而输出电压则由外接电路来决定。例如一个
+<code>1A</code> 电流源无论连接至哪个电路，其输出电流永远都是
+<code>1A</code>。如果外接电路是一个 <code>5Ω</code>
+电阻，则电流源输出的电压应当为 <code>5V</code>；如果外接电阻的阻值变为
+<code>10Ω</code> 欧姆，则输出的电压也相应的变为 <code>10V</code>。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>电流源不能开路</strong>，因为两极之间的<strong>电阻</strong>
+<span class="math inline">\(R\)</span>
+将会趋于<strong>无穷大</strong>，根据 <span class="math inline">\(V =
+IR\)</span>，此时<strong>输出电压</strong> <span class="math inline">\(V\)</span> 也会趋于无穷大。</p>
+</blockquote>
+<h4 id="直流-交流源">直流 / 交流源</h4>
+<p>狭义上的<strong>直流电源</strong>指的是电源的输出<code>电压</code>或者<code>电流</code>为恒定值，<strong>交流电源</strong>指的是电源的输出<code>电压</code>或者<code>电流</code>为正弦波：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/3.png"></p>
+<p>广义上的<strong>直流电源</strong>指的是电源的输出<code>电压</code>或者<code>电流</code>的<strong>方向</strong>不会改变（始终为<code>正</code>或者为<code>负</code>），下图所示的三角波虽然大小不一，但是方向始终为正，所以广义上仍然认为属于直流电源的输出波形：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/4.png"></p>
+<p>广义上的<strong>交流电源</strong>指的是电源的输出<code>电压</code>或者<code>电流</code>为周期性波形（时而为<code>正</code>时而为<code>负</code>），下图所示的方波就属于广义上交流电源的输出波形：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/5.png"></p>
+<h3 id="电阻与欧姆定律">电阻与欧姆定律</h3>
+<p><strong>电阻器</strong>会阻碍电流的流动，并且将电能转化为其它形式的能量（光能或者热能），其电路符号如下图所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/6.png"></p>
+<p><strong>欧姆定律</strong>是指通过某段导体的<strong>电流</strong>
+<span class="math inline">\(I\)</span>
+与这段导体两端的<strong>电压</strong> <span class="math inline">\(U\)</span>
+成正比，而与这段导体的<strong>电阻值</strong> <span class="math inline">\(R\)</span> 成反比：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/7.png"></p>
+<blockquote>
+<p><strong>注意</strong>：上述方程成立的前提是<code>电压</code>与<code>电流</code>处于<strong>关联参考方向</strong>，如果<code>电压</code>与<code>电流</code>处于<strong>非关联参考方向</strong>，那么就需要在上述方程的右侧添加上<strong>负号</strong>。</p>
+</blockquote>
+<p>将欧姆定律代入功率的计算公式 <span class="math inline">\(P =
+UI\)</span>，就可以知道<strong>电阻器</strong>两端的<strong>功率</strong>
+<span class="math inline">\(P\)</span> 与<strong>电流</strong> <span class="math inline">\(I\)</span> 的平方以及<strong>电压</strong> <span class="math inline">\(U\)</span> 的平方皆成正比：</p>
+<p><span class="math display">\[
+\begin{aligned}
+功率 P &amp;= 电阻 R \times 电流 I^2 \\
+功率 P &amp;= \frac{电压 U^2}{电阻 R}
+\end{aligned}
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：由于<strong>电阻器</strong>总是将电能转化为其它形式的能量，所以它永远都在<strong>吸收功率</strong>，也就是所谓的<strong>正电阻</strong>。除此之外，还可以利用其它元件构成永远发出功率的<strong>负电阻</strong>。</p>
+</blockquote>
+<p>电阻的<strong>额定功率</strong>是指电阻器能够正常工作的最大功率，根据功率的表达式，可以得到电阻器额定功率
+<span class="math inline">\(P_{额定}\)</span> 的值：</p>
+<p><span class="math display">\[
+P_{额定} = \frac{U_{额定}^2}{R} = I^2_{额定} R
+\]</span></p>
+<p>根据上面的等式，已知电阻值及其额定功率，就可以快速的计算出该电阻器的<strong>额定电压</strong>
+<span class="math inline">\(U_{额定}\)</span>
+与<strong>额定电流</strong> <span class="math inline">\(I_{额定}\)</span>，即电阻器能够正常工作的最大电压与电流。由此可见，电阻的额定功率是一个非常重要的参数。事实上，<strong>电阻值</strong>与<strong>额定功率</strong>是选用电阻元器件两个非常重要的参数。</p>
+<h3 id="基尔霍夫定律">基尔霍夫定律</h3>
+<p>在讨论<strong>基尔霍夫定律</strong>之前，需要首先明确电路当中<strong>支路</strong>、<strong>结点</strong>、<strong>回路</strong>、<strong>网孔</strong>的概念：</p>
+<ul>
+<li><strong>支路</strong>：一个二端元件或者多个串联的二端元件都可以视为一条支路；</li>
+<li><strong>结点</strong>：支路与支路的连接点，电路上的等电位点都可以视为一个结点；</li>
+<li><strong>回路</strong>：指电路当中的闭合路径，其中<strong>虚拟回路</strong>并不一定要求闭合；</li>
+<li><strong>网孔</strong>：一种不会包含有其它支路的<strong>特殊回路</strong>；</li>
+</ul>
+<h4 id="基尔霍夫电流定律">基尔霍夫电流定律</h4>
+<p><strong>基尔霍夫电流定律</strong>（<strong>KCL</strong>，Kirchhoff’s
+Current Law）具有两种表述形式：</p>
+<ol type="1">
+<li><p>对于电路当中的任意一个<strong>结点</strong>，流入该结点的电流等于流出该结点的电流：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/8.png"></p></li>
+<li><p>对于电路当中的任意一个<strong>结点</strong>，经过该结点的所有电流的代数和等于零：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/9.png"></p></li>
+</ol>
+<p>基尔霍夫电流定律当中的结点可以是一个<strong>广义结点</strong>，即由一条封闭曲线所包围的区域：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/10.png"></p>
+<blockquote>
+<p><strong>注意</strong>：根据假定的电流参考方向列写方程，得到的结果如果为<strong>正值</strong>，则实际的电流方向与参考方向相同。反之，如果计算结果为<strong>负值</strong>，则实际的电流方向与参考方向相反。</p>
+</blockquote>
+<h4 id="基尔霍夫电压定律">基尔霍夫电压定律</h4>
+<p><strong>基尔霍夫电压定律</strong>（<strong>KVL</strong>，Kirchhoff’s
+Voltage Law）同样具有两种表述形式：</p>
+<ol type="1">
+<li><p>对于电路当中的任意一个<strong>回路</strong>，沿着回路绕行的方向，上升的电压等于降低的电压：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/11.png"></p></li>
+<li><p>对于电路当中的任意一个<strong>回路</strong>，该回路上的所有电压的代数和等于零：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-1/12.png"></p></li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：电路当中两点之间的电压，同样可以指定<strong>参考方向</strong>，通常使用<strong>正极性</strong>表示<strong>高电位</strong>，而<strong>负极性</strong>表示<strong>低电位</strong>，由<strong>正极性指向负极性就是电压的参考方向</strong>。在不同参考方向下，列写出的
+KVL 方程不同。</p>
+</blockquote>
+<h3 id="总结">总结</h3>
+<ul>
+<li><strong>电路模型</strong>是实际电路的抽象；</li>
+<li>电源包含<strong>电压源</strong>与<strong>电流源</strong>两种类型；</li>
+<li>电阻器满足<strong>欧姆定律</strong>，其两端<strong>功率</strong>与<code>电压</code>的平方或者<code>电流</code>的平方成<strong>正比</strong>；</li>
+<li><strong>KCL</strong>
+可以表述为两种形式：<strong>流入结点的电流等于流出结点的电流</strong>，<strong>结点上支路电流的代数和为零</strong>；</li>
+<li><strong>KVL</strong>
+可以表述为两种形式：<strong>沿着任意回路的升压等于降压</strong>，<strong>沿着任意回路的<code>支路电压</code>代数和为零</strong>；</li>
+<li><strong>基尔霍夫定律</strong>是整个电路分析理论的基础所在；</li>
+<li>对于拥有 <code>n</code> 个<strong>结点</strong>的电路，只需要列写
+<span class="math inline">\(n - 1\)</span> 个独立的 KCL
+方程，就可以完成求解；</li>
+<li>对于拥有 <code>n</code>
+个<strong>回路</strong>的电路，可以列写的独立 KVL
+方程数量等于其<strong>网孔</strong>数量；</li>
+</ul>
+<h2 id="电路分析方法">电路分析方法</h2>
+<p>运用<strong>基尔霍夫定律</strong>分析电路，需要列写大量的
+<strong>KCL</strong> 与 <strong>KVL</strong>
+方程，求解过程非常麻烦。要解决该问题，就需要使用到<strong>回路电流法</strong>（只需要列写
+<strong>KVL</strong> 方程）和<strong>结点电压法</strong>（只需要列写
+<strong>KCL</strong>
+方程），以及局部电路的<strong>等效变换</strong>。</p>
+<p>例如对于下图所示的电路，因为拥有 <strong>3
+个网孔</strong>，所以需要列写 <strong>3 个 KVL
+方程</strong>；除此之外，还拥有 <strong>4
+个结点</strong>，所以需要再列写 <strong>3 个 KCL
+方程</strong>。换而言之，总计需要列写 <strong>6
+个方程</strong>，整个求解过程比较繁琐。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/1.png"></p>
+<p>但是如果采用<strong>回路电流法</strong>和<strong>结点电压法</strong>，则只需要列写
+<strong>3 个方程</strong>就可以完成求解。</p>
+<h3 id="回路电流法">回路电流法</h3>
+<h4 id="基于-kvl-定律列写">基于 KVL 定律列写</h4>
+<p>下图所示的这个电路共计拥有 3 条支路，因而需要列写出 3
+个方程，从而求解出 3 个支路电流。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/2.png"></p>
+<p>首先，需要列写一个 <strong>KCL</strong> 方程：</p>
+<p><span class="math display">\[
+I_1 + I_2 = I_3
+\]</span></p>
+<p>除此之外，还需要分别对两个<strong>网孔</strong>列写
+<strong>KVL</strong> 方程：</p>
+<p><span class="math display">\[
+\begin{cases}
+-U_{S1} + R_1 I_1 + R_3 I_3 = 0 \\
+-U_{S2} + R_2 I_2 + R_3 I_3 = 0
+\end{cases}
+\]</span></p>
+<p>联立上述的 3 个方程，就可以求解出 3 个支路电流。但是由于 <span class="math inline">\(I_1 + I_2 =
+I_3\)</span>，这样就可以将中间的<strong>支路电流</strong> <span class="math inline">\(I_3\)</span> 转变为 <span class="math inline">\(I_1\)</span> 与 <span class="math inline">\(I_2\)</span> 两个电流的叠加：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/3.png"></p>
+<p>仔细观察上面的电路就可以发现，左侧的 <span class="math inline">\(I_1\)</span> 与中间支路的 <span class="math inline">\(I_1\)</span>
+形成了一个闭合的<strong>环流</strong>，而右侧的 <span class="math inline">\(I_2\)</span> 与中间支路的 <span class="math inline">\(I_2\)</span>
+也形成了一个闭合的<strong>环流</strong>，这样的闭合环流称为<strong>回路电流</strong>（虚构出来用于电路分析的电流）。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/4.png"></p>
+<p>构造回路电流的优点在于<strong>减少了一个未知量</strong>，上图所示的电路本来需要求解
+3
+个支路电流。当构造回路电流之后，中间的支路电流作为未知量就会消失，而改由两个回路电流来合成，整个电路的未知量就变为
+2
+个回路电流。只要求解出回路电流，中间支路的电流就可以通过两个回路电流相加得到。</p>
+<p>概而言之，<strong>回路电流法</strong>的本质就是通过构造<strong>回路电流</strong>，自动满足
+<strong>KCL</strong> 定律，因而可以省去列写 <strong>KCL</strong>
+方程的步骤，从而减少了方程数量。虽然<strong>回路电流法</strong>无需列写
+<strong>KCL</strong> 方程，但是仍然需要列写 <strong>KVL</strong>
+方程，因而<strong>回路电流法本质上就是在列写 KVL 方程</strong>。</p>
+<p>对于上图所示的电路，左侧与右侧回路的 <strong>KVL</strong>
+方程（降压取<strong>正</strong>
+<code>+</code>，升压取<strong>负</strong>
+<code>-</code>）分别如下所示：</p>
+<p><span class="math display">\[
+\begin{cases}
+-U_{S1} + R_1 I_1 + R_3(I_1 + I_2) = 0 \\
+-U_{S2} + R_2 I_2 + R_3(I_1 + I_2) = 0
+\end{cases}
+\]</span></p>
+<p>该方程组拥有 2 个方程以及 2
+个回路电流未知量，联立之后就可以顺利的进行求解。通过上述过程可以发现，采用回路电流法列写
+<strong>KVL</strong> 方程，与之前列写 <strong>KVL</strong>
+方程直接求解电路的步骤基本相同，<strong>回路电流</strong>的绕行方向本质上就是<strong>回路</strong>的方向，唯一区别在于中间的<strong>支路电流</strong>需要改用<strong>回路电流</strong>
+<span class="math inline">\(I_1 + I_2\)</span> 来进行表示。</p>
+<p>上面构造的这个回路电流，其<strong>左侧</strong>为顺时针，而<strong>右侧</strong>为逆时针。由于回路电流本质是为了分析电路虚构出来的，其绕行方向可以任意定义，例如可以修改为下面电路当中的绕行方向：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/5.png"></p>
+<p>如果采用上图所示的回路电流绕向，那么中间的支路电流就不再是两个回路电流相加，此时左右两侧回路的
+<strong>KVL</strong> 方程如下所示：</p>
+<p><span class="math display">\[
+\begin{cases}
+-U_{S1} + R_1 I_1 + R_3(I_1 - I_2) = 0 \\
+U_{S2} + R_2 I_2 + R_3(I_2 - I_1) = 0
+\end{cases}
+\]</span></p>
+<p>接下来，采用回路电流法求解下图所示的复杂电路，首先选择 3
+个网孔作为回路，回路电流的绕行方向如下面电路所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/6.png"></p>
+<p>然后观察上面的电路可以发现，中间三个<strong>电阻</strong> <span class="math inline">\(R_4\)</span>、<span class="math inline">\(R_5\)</span>、<span class="math inline">\(R_6\)</span> 所在的支路电流均由 2
+个回路电流构成，并且它们属于相减关系，3 个回路的 <strong>KVL</strong>
+方程可以依次列写为：</p>
+<p><span class="math display">\[
+\begin{cases}
+-U_{s1} + R_1 I_1 + R_5(I_1 - I_2) + R_4 (I_1 - I_3) = 0 \\
+R_2 I_2 + U_{S2} + R_6(I_2 - I_3) + R_5 (I_2 - I_1) = 0 \\
+R_4(I_3 - I_1) + R_6(I_3 - I_2) + U_{S3} + R_3 I_3 = 0 \\
+\end{cases}
+\]</span></p>
+<p>最后，通过上面列写的 3 个方程，就可以顺利的求解出 3
+个回路电流的未知量。</p>
+<h4 id="含有电流源的情况">含有电流源的情况</h4>
+<p>由于下图当中的<strong>电流源</strong> <span class="math inline">\(I_{S1}\)</span>
+两端的电压未知，从而导致无法正常的列写 <strong>KVL</strong> 方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/10.png"></p>
+<p>解决这类问题，可以选取特定的<strong>回路 1</strong> 与
+<strong>2</strong>，可以发现电流源的<strong>电流</strong> <span class="math inline">\(I_{S1}\)</span> 实质就是<strong>回路 1</strong>
+上的电流 <span class="math inline">\(I_1 =
+I_{S1}\)</span>，由于<strong>回路电流法</strong>的本质就是求解回路上的电流，而这里电流源的<strong>电流</strong>
+<span class="math inline">\(I_{S1}\)</span>
+是已知的，因而可以直接得到回路电流，无需继续列写 <span class="math inline">\(I_1\)</span> 回路的 <strong>KVL</strong>
+方程，而只需要列写出 <span class="math inline">\(I_2\)</span> 回路的
+<strong>KVL</strong> 方程即可：</p>
+<p><span class="math display">\[
+\begin{cases}
+I_1 = I_{S1} \\
+-R_3(I_1 - I_2) + R_2 I_2 + U_{S2} = 0
+\end{cases}
+\]</span></p>
+<p>对于这种含有电流源的电路，另外一种解决方法是假设电流源的<strong>电压</strong>为
+<span class="math inline">\(U\)</span>，然后再列写 <strong>KVL</strong>
+方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/11.png"></p>
+<p>因为新增了一个<strong>未知量</strong> <span class="math inline">\(U\)</span>，所以需要再行补充一个方程，即利用<strong>回路电流</strong>
+<span class="math inline">\(I_1\)</span> 与 <span class="math inline">\(I_2\)</span> 来表示<strong>电流源电流</strong>
+<span class="math inline">\(I_S\)</span>：</p>
+<p><span class="math display">\[
+\begin{cases}
+补充方程 \implies I_2 - I_1 = I_S \\
+回路1 \implies  -U_{S1} + R_1 I_1 + U = 0 \\
+回路2 \implies  -U + R_2 I_2 + U_{S2} = 0
+\end{cases}
+\]</span></p>
+<h4 id="基于自阻-互阻列写">基于自阻 &amp; 互阻列写</h4>
+<p>首先，针对下图所示的电路采用<strong>回路电流法</strong>，分别对<strong>回路
+1 和 2</strong> 列写 <strong>KVL</strong> 方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/7.png"></p>
+<p>然后，将 <strong>KVL</strong>
+方程组进行合并同类项，就可以得到如下的推导过程：</p>
+<p><span class="math display">\[
+\begin{cases}
+-U_{S1} + R_1 I_1 + R_3(I_1 - I_2) = 0 \\
+-R_3(I_1 - I_2) + R_2 I_2 + U_{S2} = 0
+\end{cases}
+\implies
+\begin{cases}
+{\color{OrangeRed}(R_1 + R_3) I_1} {\color{Blueviolet}-R_3 I_2} =
+{\color{Maroon}U_{S1}} \\
+{\color{Blueviolet}-R_3 I_1} + {\color{OrangeRed}(R_2 + R_3)I_2} =
+{\color{Maroon} - U_{S2}}
+\end{cases}
+\]</span></p>
+<p>观察就可以发现，可以将方程划分为<span class="math inline">\({\color{OrangeRed}自阻}\)</span>、<span class="math inline">\({\color{Blueviolet}互阻}\)</span>、<span class="math inline">\({\color{Maroon}右端电源项}\)</span>
+三个部分，从而就可以快速的列写出<strong>回路电流方程</strong>。回路电流方程的本质是列写
+<strong>KVL</strong>
+方程，即回路当中所有<strong>支路电压</strong>的代数和等于<strong>零</strong>，每个回路上面产生电压的因素包括如下三个方面：</p>
+<ol type="1">
+<li>回路电源上的电压，即<strong>右端电源项</strong>；</li>
+<li>回路电流在本回路电阻（<strong>自阻</strong>）上产生的电压，即<strong>自阻项</strong>；</li>
+<li>回路电流在与相邻回路共有的电阻（<strong>互阻</strong>）上产生的电压，即<strong>互阻项</strong>；</li>
+</ol>
+<p>例如对于下面这个电路，采用基于<strong>自阻</strong>与<strong>互阻</strong>的方法列写
+<strong>KVL</strong> 方程就可以得到：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/8.png"></p>
+<p><span class="math display">\[
+\begin{cases}
+回路1 \implies (R_1 + R_3) I_1(自阻项) + R_3 I_2 (互阻项) -
+U_{S1}(电压源项) = 0 \\
+回路2 \implies (R_2 + R_3) I_2(自阻项) + R_3 I_1 (互阻项) -
+U_{S2}(电压源项) = 0
+\end{cases}
+\]</span></p>
+<p>如果改变电路当中回路的绕行方向，那么<strong>自阻项</strong>不会发生变化，而<strong>互阻项</strong>与<strong>电源项</strong>都会发生改变：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/9.png"></p>
+<p><span class="math display">\[
+\begin{cases}
+回路1 \implies (R_1 + R_3) I_1(自阻项) - R_3 I_2 (互阻项) -
+U_{S1}(电压源项) = 0 \\
+回路2 \implies (R_2 + R_3) I_2(自阻项) - R_3 I_1 (互阻项) +
+U_{S2}(电压源项) = 0
+\end{cases}
+\]</span></p>
+<h3 id="结点电压法">结点电压法</h3>
+<h4 id="基于-kcl-定律列写">基于 KCL 定律列写</h4>
+<p>下图所示的电路拥有 <strong>3 个网孔</strong>，因而需要列写 <strong>3
+个 KVL 方程</strong>。除此之外，还拥有 <strong>3
+个结点</strong>，因而还需要列写 <strong>2 个 KCL
+方程</strong>，共计需要列写 <strong>5
+个方程</strong>。方程当中待求的未知数为 <strong>5
+个支路电流</strong>，方程的列写与求解过程都会比较繁琐。而采用<strong>结点电压法</strong>，把未知量由<strong>支路电流</strong>改为<strong>结点电压</strong>，可以将
+<strong>5</strong> 个方程数量减少至 <strong>2</strong> 个。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/12.png"></p>
+<p><strong>结点电压</strong>表示的是<strong>指定结点</strong>与<strong>参考结点</strong>（电位为零的结点）之间的<strong>电位差</strong>，以上图所示的电路为例，可以将最下方的结点标记为<strong>参考结点</strong>
+<code>0</code>，而左上方的结点标记为<strong>结点</strong>
+<code>1</code>，右上方的结点标记为<strong>结点</strong>
+<code>2</code>，两个结点相对于参考结点的电位差，就分别称为<strong>结点电压</strong>
+<span class="math inline">\(U_1\)</span> 与 <span class="math inline">\(U_2\)</span>，具体请参见下图所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/13.png"></p>
+<p>通过上图可以看到，只要求解出 <strong>2
+个结点电压</strong>，就能够确定电路当中所有的支路电流，从而将<strong>支路电流</strong>的求解转换为<strong>结点电压</strong>的求解。对于上面的电路，只需要针对
+<strong>2</strong> 个结点列写 <strong>KCL</strong>
+方程即可完成求解。</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{U_{S1} - U_1}{R_1} = \frac{U_1}{R_2} + \frac{U_1 - U_2}{R_3} \\
+\frac{U_1 - U_2}{R_3} = \frac{U_2}{R_4} + \frac{U_2 - U_{S2}}{R_5}
+\end{cases}
+\]</span></p>
+<p>联立上面的方程组，就可以分别求解出<strong>结点电压</strong> <span class="math inline">\(U_1\)</span> 与 <span class="math inline">\(U_2\)</span>。可以看到，整个过程不需要列写
+<strong>KVL</strong>
+方程即可完成求解，这是由于结点电压被定义为<code>指定结点</code>与<code>参考结点</code>之间的电位差，这个定义本身就自动满足了
+<strong>KVL</strong> 定律，因而无需再行列写 <strong>KVL</strong>
+方程。</p>
+<p>这个过程与之前定义的<strong>回路电流</strong>非常类似，虚构出的<code>回路电流</code>会自动满足
+<strong>KCL</strong> 方程，因而也就无需再去列写 <strong>KCL</strong>
+方程，进而减少了方程数量。<strong>结点电压</strong>的定义也是同理，虚构出的<code>结点电压</code>同样会自动满足
+<strong>KVL</strong> 方程，因而无需再行列写 <strong>KVL</strong>
+方程，进而也减少了方程的数量。</p>
+<p>总而言之，对于<strong>结点电压法</strong>而言，虽然可以不用再列写
+<strong>KVL</strong> 方程，但是仍然需要列写出 <strong>KCL</strong>
+方程，因而<strong>结点电压法本质上就是在列写 KCL 方程</strong>。</p>
+<blockquote>
+<p><strong>注意</strong>：通常会选择电路图最下面位置的结点作为<strong>参考结点</strong>，此外由于<strong>参考结点</strong>的电位为
+<code>0</code> 属于已知条件，所以无需对<strong>参考结点</strong>列写
+<strong>KCL</strong> 方程进行求解。</p>
+</blockquote>
+<h4 id="含无伴电压源的情况">含无伴电压源的情况</h4>
+<p>对于下图所示的电路，因为左侧电压源上面经过的电流未知，所以无法顺利的列写出
+<strong>KCL</strong> 方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/14.png"></p>
+<p>这种情况下，只需要选择下图所示的<strong>指定结点</strong>
+<code>1</code> 和 <code>2</code> 以及<strong>参考结点</strong>
+<code>0</code>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/15.png"></p>
+<p>就会发现<strong>结点 1</strong> 的<code>结点电压</code> <span class="math inline">\(U_1\)</span>
+正好等于左侧电压源的<strong>电压</strong> <span class="math inline">\(U_{S1}\)</span>，从而也就无需再行列写<strong>结点
+1</strong> 的 <strong>KCL</strong> 方程，而只需要对<strong>结点
+2</strong> 列写 <strong>KCL</strong> 方程即可：</p>
+<p><span class="math display">\[
+\begin{cases}
+U_1 = U_{S1} \\
+\frac{U_1 - U_2}{R_3} = \frac{U_2}{R_4} + \frac{U_2 - U_{S2}}{R_5}
+\end{cases}
+\]</span></p>
+<p>经过上述的分析过程可以知道，如果电路当中包含有<strong>无伴电压源</strong>（即支路上只存在一个电压源），解决办法就是以该电压源的<strong>负极</strong>作为<strong>参考结点</strong>，则无伴电压源的<strong>正极</strong>所在的<strong>结点电压</strong>正好等于该<strong>电压源</strong>的<strong>电压</strong>，也就无需再行列写该结点的
+<strong>KCL</strong>
+方程。但是这种方法仅适用于电路当中只存在有一个无伴电压源的情况，而不适用于存在多个无伴电压源的场景。</p>
+<h4 id="基于自导-互导列写">基于自导 &amp; 互导列写</h4>
+<p>首先，对于下面的电路，采用<strong>结点电压法</strong>，分别针对<strong>结点
+1 和 2</strong> 列写 <strong>KCL</strong> 方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/16.png"></p>
+<p>然后，将得到的 <strong>KCL</strong>
+方程组进行合并同类项处理，就可以得到下面的推导过程：</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{U_{S1} - U_1}{R_1} = \frac{U_1}{R_2} + \frac{U_1 - U_2}{R_3} \\
+\frac{U_1 - U_2}{R_3} = \frac{U_2}{R_4} + \frac{U_2 - U_{S2}}{R_5}
+\end{cases}
+\implies
+\begin{cases}
+{\color{Blueviolet}(\frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}) U_1}
+- {\color{OrangeRed}\frac{1}{R_3} U_2} =
+{\color{Maroon}\frac{U_{S1}}{R_1}}  \\
+{\color{OrangeRed}-\frac{1}{R_3} U_1} +
+{\color{Blueviolet}(\frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5}) U_2}
+= {\color{Maroon}\frac{U_{S2}}{R_5}}
+\end{cases}
+\]</span></p>
+<p>结点电压方程的本质就是 <strong>KCL</strong>
+方程，即与<strong>结点</strong>连接的所有<strong>支路电流</strong>的代数和为<strong>零</strong>，电路当中每个结点所连接支路上产生电流的因素，主要包括有如下三点：</p>
+<ol type="1">
+<li>当前结点所连接支路上的<strong>电压源</strong>、<strong>电流源</strong>产生的<code>电流</code>，即<strong>电源电流项</strong>；</li>
+<li>当前结点电压在其电导（<strong>自导</strong>）上面所产生的电流，即<strong>自导项</strong>；</li>
+<li>相邻结点的电压在共有电导（<strong>互导</strong>）上面产生的电流，即<strong>互导项</strong>；</li>
+</ol>
+<p>例如对于下面的电路，采用基于<strong>自导</strong>与<strong>互导</strong>的方法，就可以列写出如下的
+<strong>KCL</strong> 方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/16.png"></p>
+<p><span class="math display">\[
+\begin{cases}
+(\frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}) U_1 (自导项) -
+\frac{1}{R_3} U_2 (互导项) - \frac{U_{S1}}{R_1}(电源电流项) = 0 \\
+(\frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5}) U_2 (自导项) -
+\frac{1}{R_3} U_1 (互导项) - \frac{U_{S2}}{R_5}(电源电流项) = 0
+\end{cases}
+\]</span></p>
+<h3 id="等效变换">等效变换</h3>
+<p>电路的<strong>等效变换</strong>，就是将一个复杂的局部电路，变换为一个简单的局部电路，同时确保其端口<code>电压</code>与<code>电流</code>不变，从外接电路的角度来看，这个局部电路在变换前后是相互等效的。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/17.png"></p>
+<p><strong>等效变换</strong>是一种比较常见的电路简化方法，在电路分析过程当中经常被使用到。由于等效变换的情况比较多，接下来举几个比较简单的例子。</p>
+<h4 id="电压源串联">电压源串联</h4>
+<p>下图所示的电路由 2
+个<strong>电压源</strong>串联组成，这些串联的电压源可以等效为 1
+个<strong>电压源</strong>，<strong>等效电压源</strong>的<code>电压</code>等于<strong>串联电压源</strong>的<code>电压</code>之和：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/18.png"></p>
+<h4 id="电阻串联">电阻串联</h4>
+<p>下图所示的电路由 2
+个<strong>电阻</strong>串联组成，它们同样也可以被等效为 1
+个<strong>电阻</strong>，该<strong>等效电阻</strong>的值等于所有<strong>串联电阻</strong>的阻值之和，等效之后的<code>电压</code>与<code>电流</code>依然符合<strong>欧姆定律</strong>
+<span class="math inline">\(u = (R_1 + R_2)i\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/19.png"></p>
+<h4 id="电压源与电阻并联">电压源与电阻并联</h4>
+<p>下图所示的电路由 1 个<strong>电压源</strong>与 2
+个<strong>电阻</strong>并联构成，其中<strong>电压源</strong>与<strong>电阻</strong>
+<span class="math inline">\(R_1\)</span> 并联部分可以等效为 1
+个电压源，该电压源的电压等于变换前电压源的<strong>电压</strong> <span class="math inline">\(u\)</span>，而电流依然等于变换之前的<strong>电流</strong>
+<span class="math inline">\(i\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/20.png"></p>
+<p>上述电路在变换之前，被等效部分的电路包含有并联的<strong>电压源</strong>
+<span class="math inline">\(u_s\)</span> 与<strong>电阻</strong> <span class="math inline">\(R_1\)</span>，而在变换之后只剩下<strong>电压源</strong>，因而这种等效并不会体现在<strong>等效电路</strong>的内部。</p>
+<h4 id="三角形与星形变换">三角形与星形变换</h4>
+<p>电阻的<strong>三角形</strong>与<strong>星形</strong>等效变换涉及到
+<strong>3
+个端子</strong>，许多教材上列举的等效变换公式，并未在实质上降低分析的复杂度，因而违背了<strong>等效变换</strong>的初衷，本文在这里不作详细介绍（若三角形或者星形电路上的
+3
+个电阻相等，则变换过程就会比较简单，后续在<strong>三相电路</strong>的内容里会进一步讨论）。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/21.png"></p>
+<blockquote>
+<p><strong>注意</strong>：实际应用当中，多数的等效变换都只会涉及到 2
+个端子。</p>
+</blockquote>
+<h4 id="电压源电阻串联-电流源电阻并联的等效">电压源电阻串联 &amp;
+电流源电阻并联的等效</h4>
+<p>下图左侧是一个由<strong>电压源</strong> <span class="math inline">\(u_S\)</span> 与<strong>电阻</strong> <span class="math inline">\(R_{eq1}\)</span>
+<strong>串联</strong>组成的电路，而右侧是关于<strong>端口电压</strong>
+<span class="math inline">\(u\)</span> 的方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/22.png"></p>
+<p>下图左侧是一个由<strong>电流源</strong> <span class="math inline">\(i_S\)</span> 与<strong>电阻</strong> <span class="math inline">\(R_{eq2}\)</span>
+<strong>并联</strong>构成的电路，而右侧同样是关于<strong>端口电压</strong>
+<span class="math inline">\(u\)</span> 的方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-2/23.png"></p>
+<p>比较上述<strong>电压源与电阻串联</strong>，以及<strong>电流源与电阻并联</strong>的端口电压方程可以发现，两者之间进行等效变换的条件如下面的方程组所示：</p>
+<p><span class="math display">\[
+\begin{cases}
+{\color{Red}R_{eq1} = R_{eq2}}\\
+{\color{Blue}u_S = R_{eq2} \cdot i_S}
+\end{cases}
+\]</span></p>
+<h3 id="总结-1">总结</h3>
+<ul>
+<li><strong>回路电流法</strong>和<strong>结点电压法</strong>的主旨是减少方程数量，简化求解过程；</li>
+<li><strong>回路电流</strong>自动满足 <strong>KCL</strong>
+定律，因而无需再列写 <strong>KCL</strong>
+方程；<strong>回路电流法</strong>的本质是对<strong>回路</strong>（通常会选择<strong>网孔</strong>）列写
+<strong>KVL</strong> 方程；</li>
+<li><strong>结点电压</strong>自动满足 <strong>KVL</strong>
+定律，因而无需再列写 <strong>KVL</strong>
+方程；<strong>结点电压法</strong>的本质是对<strong>非参考结点</strong>列写
+<strong>KCL</strong> 方程；</li>
+<li><strong>等效变换</strong>的作用是对电路局部进行简化；对于外电路而言，等效变换之后的端口<code>电压</code>和<code>电流</code>不变；</li>
+</ul>
+<p>相比于<strong>回路电流法</strong>，<strong>结点电压法</strong>还具有如下几个优点，因而更加推荐在电路分析过程当中使用：</p>
+<ol type="1">
+<li><strong>结点电压</strong>的概念相比于<strong>回路电流</strong>更加容易理解；</li>
+<li>标记<strong>参考结点</strong>要比标记<strong>回路电流</strong>更加容易，并且不会让电路图显得凌乱；</li>
+<li><strong>回路电流法</strong>无需列写 <strong>KCL</strong>
+方程，<strong>结点电压法</strong>无需列写 <strong>KVL</strong>
+方程。实际求解电路时，<strong>KVL</strong> 方程数量一定大于或者等于
+<strong>KCL</strong>
+方程数量，致使<strong>结点电压法</strong>省略列写的方程数量，一定大于或等于<strong>回路电流法</strong>省略列写的方程数量，因而在电路分析过程当中更加推荐使用<strong>结点电压法</strong>；</li>
+</ol>
+<h2 id="电路定理">电路定理</h2>
+<p>本小节主要讨论<strong>叠加定理</strong>、<strong>替代定理</strong>、<strong>戴维南定理</strong>、<strong>诺顿定理</strong>、<strong>互易定理</strong>、<strong>特勒根定理</strong>等常用的电路分析定理。</p>
+<h3 id="叠加定理">叠加定理</h3>
+<p><strong>叠加定理</strong>是指在线性电路当中，任意一条支路上的<strong>响应</strong>，都等于各个<strong>激励</strong>单独作用在该支路上<strong>响应</strong>的叠加。此处的<strong>响应</strong>通常是指<code>电压</code>或者<code>电流</code>，而所谓的<strong>线性电路</strong>，指的是同时满足<strong>叠加性</strong>与<strong>齐次性</strong>的电路：</p>
+<ul>
+<li><strong>叠加性</strong>：主要是指叠加定理，满足叠加定理是线性电路的必要条件；</li>
+<li><strong>齐次性</strong>：如果线性电路当中的所有<strong>激励</strong>同时增大
+<code>k</code> 倍，那么任意一条支路上的<strong>响应</strong>也会增大
+<code>k</code> 倍；</li>
+</ul>
+<p>利用<strong>叠加定理</strong>求解电路的基本步骤如下所示：</p>
+<ol type="1">
+<li>把电路分解为由各个<strong>电源</strong>单独作用的电路；</li>
+<li>分别求解出每个电源单独作用产生的<strong>响应</strong>；</li>
+<li>将每个分解电路的响应叠加起来，就可以得到电路的<strong>总响应</strong>；</li>
+</ol>
+<p>接下来以下面的电路为例，利用<strong>叠加定理</strong>求解
+<code>10Ω</code> 欧姆电阻上面的<strong>电压</strong> <span class="math inline">\(u\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/1.png"></p>
+<p>首先<strong>分解电路</strong>，将上图所示的电路分解为下面的两个电路。对于<strong>电压源</strong>单独作用的电路，此时<strong>电流源</strong>的<code>电流</code>等于<strong>零</strong>表示为<strong>开路</strong>；而对于<strong>电流源</strong>单独作用的电路，此时<strong>电压源</strong>的<code>电压</code>等于<strong>零</strong>表示为<strong>短路</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/2.png"></p>
+<p>然后<strong>分别求解</strong>，上图当中的 <span class="math inline">\(u^{(1)}\)</span> 与 <span class="math inline">\(u^{(2)}\)</span>
+分别为<strong>电压源</strong>与<strong>电流源</strong>单独作用时的响应：</p>
+<p><span class="math display">\[
+\begin{cases}
+u^{(1)} = 10 V \\
+u^{(2)} = 20 V
+\end{cases}
+\]</span></p>
+<p>最后<strong>叠加求和</strong>，根据前述的叠加定理，就可以得到
+<code>10Ω</code> 电阻上面的电压 <span class="math inline">\(u\)</span>
+等于 <code>30V</code> 伏：</p>
+<p><span class="math display">\[
+u = u^{(1)} + u^{(2)} = 30V
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：观察可以发现，上面的电路采用<strong>结点电压法</strong>求解起来会更加容易。事实上，采用<strong>叠加定理</strong>未必比其它分析方法更加简单，有时候甚至会更加繁琐，叠加定理存在的首要意义不是用于求解电路，而是表达了线性电路的一个重要规律。</p>
+</blockquote>
+<h3 id="替代定理">替代定理</h3>
+<p><strong>替代定理</strong>是指对于电路当中的任意一个端口而言，如果其<strong>端口电压</strong>为
+<span class="math inline">\(u\)</span>，那么可以采用一个输出电压为 <span class="math inline">\(u\)</span>
+的<strong>电压源</strong>进行替代；如果其<strong>端口电流</strong>为
+<span class="math inline">\(i\)</span>，那么也可以采用一个输出电流为
+<span class="math inline">\(i\)</span>
+的<strong>电流源</strong>进行替代，而被替代端口之外的电路保持不变。</p>
+<p>例如下图所示电路相对较为复杂，仔细观察就会发现右侧的 3
+个支路并联，并且由于<strong>短路线</strong>两端的电压一定为<strong>零</strong>，根据<strong>替代定理</strong>，可以采用一个电压等于零的电压源（即<strong>短路线</strong>）进行替代，因此右侧三个支路可以全部移除并替换为一条短路线，根据<strong>欧姆定律</strong>就可以知道这条短路线上经过的电流
+<span class="math inline">\(i = 3A\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/3.png"></p>
+<p>而对于下图所示的电路，同样经过观察就会发现 <code>100Ω</code>
+<strong>电阻</strong>与<strong>电流源</strong>组成的<strong>串联</strong>支路上经过的电流为
+<code>6A</code>，根据<strong>替代定理</strong>，<code>100Ω</code>
+<strong>电阻</strong>与 <code>6A</code>
+<strong>电流源</strong>的串联，可以采用输出电流为 <code>6A</code>
+的<strong>电流源</strong>进行替代，此时电路上面经过的<strong>电流</strong>
+<span class="math inline">\(i = 4A\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/4.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>替代定理</strong>本质上也属于一种局部的<strong>等效变换</strong>。</p>
+</blockquote>
+<h3 id="戴维南定理">戴维南定理</h3>
+<p><strong>戴维南定理</strong>是指包含有<code>电源</code>和<code>线性电阻</code>的<strong>一端口网络</strong>，可以等效为
+1 个<code>电压源</code>和 1
+个<code>电阻</code>的<strong>串联</strong>，其中<code>电压源</code>是该一端口网络的<strong>开路电压</strong>，而<code>电阻</code>为一端口网络内部所有电源置零（即不起作用）时的<strong>等效电阻</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/5.png"></p>
+<ul>
+<li><strong>开路电压</strong>求解方法：简单的电路利用
+<strong>KCL</strong> 与 <strong>KVL</strong>
+就可以完成求解，复杂的电路则需要利用<strong>结点电压法</strong>进行求解；</li>
+<li><strong>等效电阻</strong>求解方法：首先将电源置零（<strong>电压源短路，电流源开路</strong>），然后再求解端口的等效电阻；</li>
+</ul>
+<h4 id="戴维南定理的证明">戴维南定理的证明</h4>
+<p><strong>戴维南定理</strong>的证明过程需要使用到前面讨论过的<strong>替代定理</strong>和<strong>叠加定理</strong>，下图是一个包含有<strong>线性含源一端口网络</strong>（只拥有<strong>电源</strong>和<strong>线性电阻</strong>）的电路。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/6.png"></p>
+<p>根据<strong>替代定理</strong>，上述<strong>一端口网络</strong>的外接电路，可以采用一个输出电流为
+<span class="math inline">\(i\)</span>
+的<strong>电流源</strong>进行替代：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/7.png"></p>
+<p>电路当中包含的<strong>电源</strong>可以划分为两种类型：<strong>线性含源一端口网络</strong>当中的电源、替代之后<strong>电流</strong>为
+<span class="math inline">\(i\)</span>
+的<strong>电流源</strong>。根据<strong>叠加定理</strong>，上图电路当中的<strong>电压</strong>
+<span class="math inline">\(u\)</span>
+等于<strong>含源一端口网络</strong>里电源单独作用时产生的响应，与电流为
+<span class="math inline">\(i\)</span>
+的<strong>电流源</strong>单独作用时产生响应的叠加，因而该电路可以分解为下图所示的两个电路：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/8.png"></p>
+<p>上图左侧的电路只包含有<strong>线性含源一端口网络</strong>里的电源，此时<strong>端口电压</strong>
+<span class="math inline">\(u_{oc}\)</span>
+正好等于<strong>开路电压</strong>。而上图右侧电路内部的<strong>电源</strong>全部置零，此时该<strong>一端口网络</strong>内部没有<strong>电源</strong>只有<strong>电阻</strong>，因而可以等效为下面电路当中的<strong>电阻</strong>
+<span class="math inline">\(R_{eq}\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/9.png"></p>
+<p>根据上面的电路可以得到 <span class="math inline">\(u^{(2)} = -R_{eq}
+i\)</span>，此时再基于<strong>叠加定理</strong>，就可以获得上面电路里<strong>线性含源一端口网络</strong>的端口<code>电压</code>与<code>电流</code>关系：</p>
+<p><span class="math display">\[
+u = u_{oc} + u^{(2)} = u_{oc} - R_{eq} i
+\]</span></p>
+<p>再来观察下面这个电路，根据 <strong>KVL</strong> 定律可以得到 <span class="math inline">\(u = u_{oc} - R_{eq}
+i\)</span>，将其与上面讨论得到的方程 <span class="math inline">\(u =
+u_{oc} + u^{(2)} = u_{oc} - R_{eq} i\)</span>
+进行比较，可以发现两个电路的端口电压电流关系完全相同。因而根据<strong>等效变换</strong>的定义，下图所示电路就是上面所讨论电路对应的等效电路，从而就完成了<strong>戴维南定理</strong>的证明：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/10.png"></p>
+<h4 id="戴维南等效电路的求解">戴维南等效电路的求解</h4>
+<p>根据<strong>戴维南定理</strong>，将<strong>线性含源一端口网络</strong>等效为<code>电压源</code>与<code>电阻</code>的<strong>串联</strong>，这个过程就称为<strong>戴维南等效电路</strong>的求解。其求解过程主要包括<strong>开路电压</strong>与<strong>等效电阻</strong>的求解两个部分，接下来通过一个示例来进行说明。</p>
+<p>▶【例题 1】求解下图所示电路的戴维南等效电路 ？</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/11.png"></p>
+<p>◉【解】根据<strong>基尔霍夫电压定律</strong>
+KVL，就可以很容易的得到回路上<strong>电流</strong> <span class="math inline">\(i\)</span> 的值：</p>
+<p><span class="math display">\[
+15V = 5Ω \times i + 10Ω \times i \implies  = i = 1A
+\]</span></p>
+<p>◉【解】此时再根据<strong>欧姆定律</strong>，就可以计算得到
+<code>10Ω</code>
+电阻上的电压，也就是该电路对应的<strong>开路电压</strong> <span class="math inline">\(u_{oc}\)</span>：</p>
+<p><span class="math display">\[
+u_{oc} = 10Ω \times 1A = 10V
+\]</span></p>
+<p>◉【解】而该电路对应的<strong>等效电阻</strong>，就是<strong>电压源</strong>置零（短路）以后从端口看进去的等效电阻，即
+<code>5Ω</code> 与 <code>10Ω</code> 电阻的并联：</p>
+<p><span class="math display">\[
+R_{eq} = \frac{5Ω \times 10Ω}{5Ω + 10Ω} = \frac{10}{3}Ω
+\]</span></p>
+<p>◉【解】根据上面求解得到的<strong>开路电压</strong> <span class="math inline">\(u_{oc} = 10V\)</span> 与<strong>等效电阻</strong>
+<span class="math inline">\(R_{eq} =
+\frac{10}{3}Ω\)</span>，就可以绘制出该电路对应的<strong>戴维南等效电路</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/12.png"></p>
+<p>▶【例题 2】求解下面这个复杂电路的戴维南等效电路 ？</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/13.png"></p>
+<p>◉【解】首先，对于顶部的结点列写 <strong>KCL</strong>
+方程，就可以推导得到该电路所对应的端口<strong>开路电压</strong> <span class="math inline">\(u_{oc}\)</span>：</p>
+<p><span class="math display">\[
+\frac{15 - u_{oc}}{5} + 5 = \frac{u_{oc} - 20}{10} \implies u_{oc} =
+\frac{100}{3}V
+\]</span></p>
+<p>◉【解】接下来，将上面电路当中的 2 个<strong>电压源</strong>短路，1
+个<strong>电流源</strong>开路，可以发现<strong>等效电阻</strong> <span class="math inline">\(R_{eq}\)</span> 等于 <code>5Ω</code> 与
+<code>10Ω</code> 电阻的并联：</p>
+<p><span class="math display">\[
+R_{eq} = \frac{5Ω \times 10Ω}{5Ω + 10Ω} = \frac{10}{3}Ω
+\]</span></p>
+<p>最后，根据上面得到的<strong>开路电压</strong> <span class="math inline">\(u_{oc} = \frac{100}{3}V\)</span>
+与<strong>等效电阻</strong> <span class="math inline">\(R_{eq} =
+\frac{10}{3}Ω\)</span>，就可以得到该电路对应的<strong>戴维南等效电路</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/14.png"></p>
+<h4 id="短路电流法求解等效电阻">短路电流法求解等效电阻</h4>
+<p>在前面的示例当中，都是利用了<strong>电阻的串并联关系</strong>来求解<strong>等效电阻</strong>
+<span class="math inline">\(R_{eq}\)</span>。除此之外，我们还可以利用<strong>短路电流法</strong>来进行求解：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/15.png"></p>
+<p>已知上面电路的端口<strong>开路电压</strong> <span class="math inline">\(u_{oc} =
+0.5V\)</span>，这里需要将端口短路，从而求解得到<strong>短路电流</strong>
+<span class="math inline">\(i_{sc} = \frac{1}{3}A\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/16.png"></p>
+<p>这样就可以得到如下的等效电路，然后再利用<strong>欧姆定律</strong>就可以求解得到<strong>等效电阻</strong>
+<span class="math inline">\(R_{eq} = \frac{u_{oc}}{i_{sc}} =
+1.5Ω\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/17.png"></p>
+<blockquote>
+<p><strong>注意</strong>：虽然<strong>短路电流法</strong>求解等效电阻相对较为麻烦，但是这种方法几乎可以用于任何电路的求解。</p>
+</blockquote>
+<h3 id="诺顿定理">诺顿定理</h3>
+<p><strong>诺顿定理</strong>是指包含有<code>电源</code>与<code>线性电阻</code>的<strong>一端口网络</strong>，可以等效为
+<code>1</code> 个<strong>电流源</strong>与 <code>1</code>
+个<strong>电阻</strong>的<strong>并联</strong>，这个<code>电流源</code>的电流等于该<strong>一端口网络</strong>的端口<strong>短路电流</strong>，而<code>电阻</code>等于该<strong>一端口网络</strong>内部所有电源置零（即不作用）时候的<strong>等效电阻</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/18.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>诺顿定理</strong>的证明过程与<strong>戴维南定理</strong>类似，不同之处在于应用<strong>替代定理</strong>时，采用的是<code>电压源</code>进行替代(而非<code>电流源</code>)，这里省略其证明过程，只需要记住结论即可。</p>
+</blockquote>
+<p><strong>诺顿等效电路</strong>与<strong>戴维南等效电路</strong>都是<strong>线性含源一端口网络</strong>的等效电路，这说明<strong>诺顿等效电路</strong>与<strong>戴维南等效电路</strong>两者之间也是相互等效的。</p>
+<p>▶【例题】求解下图所示电路对应的诺顿等效电路 ？</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/19.png"></p>
+<p>◉【解】首先，将上面电路的两个端口进行短路，从而就可以得到下面的电路：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/20.png"></p>
+<p>由于 <code>10Ω</code>
+电阻与短路线呈并联关系，电阻上面经过的电流为<strong>零</strong>，根据<strong>基尔霍夫电流定律</strong>
+KCL，此时的<strong>短路电流</strong> <span class="math inline">\(I_{sc}\)</span> 就等于：</p>
+<p><span class="math display">\[
+I_{sc} = \frac{15V}{5Ω} = 3A
+\]</span></p>
+<p>◉【解】然后，将端口内部的<strong>电压源</strong>全部短路置零，则从端口看进去的<strong>等效电阻</strong>
+<span class="math inline">\(R_{eq}\)</span> 等于 <code>10Ω</code> 与
+<code>3Ω</code> 电阻的并联：</p>
+<p><span class="math display">\[
+R_{eq} = \frac{5Ω \times 10Ω}{5Ω + 10Ω} = \frac{10}{3}Ω
+\]</span></p>
+<p>◉【解】最后，根据上面得到的<strong>短路电流</strong> <span class="math inline">\(I_{sc} = 3A\)</span> 与<strong>等效电阻</strong>
+<span class="math inline">\(R_{eq} =
+\frac{10}{3}Ω\)</span>，就可以绘制出该电路对应的<strong>诺顿等效电路</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/21.png"></p>
+<h3 id="最大功率传输定理">最大功率传输定理</h3>
+<p>下图电路左侧部份当中的<strong>电压源</strong> <span class="math inline">\(U_S\)</span> 与<strong>电阻</strong> <span class="math inline">\(R_S\)</span>
+都是固定不变的，而右侧连接的是一个<strong>可变电阻</strong> <span class="math inline">\(R_L\)</span>。显然，当<strong>可变电阻</strong>
+<span class="math inline">\(R_L\)</span>
+发生改变的时候，这个元件上的<code>电压</code>、<code>电流</code>、<code>功率</code>都会发生改变：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/22.png"></p>
+<p><strong>最大功率传输定理</strong>是指当<strong>可变电阻</strong>
+<span class="math inline">\(R_L\)</span> 等于<strong>电阻</strong> <span class="math inline">\(R_S\)</span> 的时候，<span class="math inline">\(R_L\)</span> 就可以获得<strong>最大功率</strong>
+<span class="math inline">\(P_{max}\)</span>：</p>
+<p><span class="math display">\[
+P_{max} = \frac{U_S^2}{4 R_S}
+\]</span></p>
+<p><strong>最大功率传输定理</strong>的推导过程如下面的步骤所示：</p>
+<p><span class="math display">\[
+\begin{aligned}
+P_{R_L} &amp;= \bigg( \frac{U_S}{R_L + R_S} \bigg)^2 \times R_L =
+\frac{R_L}{(R_L + R_S)^2} \times U_S^2
+= \frac{R_L}{R_L^2 + 2 R_L R_S + R_S^2} \times U_S^2 \\
+&amp;\implies
+\frac{R_L}{R_L^2 + 2 R_L R_S + R_S^2} \times U_S^2 \le \frac{R_L}{2 R_L
+R_S + 2 R_L R_S} \times U_S^2 = \frac{U_S^2}{4 R_S} \\
+&amp;\implies
+当 R_L = R_S 的时候，最大功率 P_{max} = \frac{U_S^2}{4 R_S}
+\end{aligned}
+\]</span></p>
+<p>除此之外，还可以将上面讨论的<strong>戴维南定理</strong>，应用于<strong>最大传输功率</strong>问题的求解过程：</p>
+<ol type="1">
+<li>首先，对<strong>可变电阻</strong>之外的电路进行<strong>戴维南等效</strong>；</li>
+<li>然后，再利用<strong>最大传输功率定理</strong>求解可变电阻上获得的<strong>最大功率</strong>；</li>
+</ol>
+<p>▶【例题】下图电路的右侧连接了一个<strong>可变电阻</strong> <span class="math inline">\(R_L\)</span>，试求解 <span class="math inline">\(R_L\)</span> 获得最大功率时候的阻值 ？</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/23.png"></p>
+<p>◉【解】上图左侧部分的电路较为复杂，可以应用<strong>戴维南定理</strong>，将复杂的<strong>线性一端口网络</strong>等效为<code>电压源</code>与<code>电阻</code>的串联：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/24.png"></p>
+<p>上面这个戴维南等效电路的<strong>开路电压</strong> <span class="math inline">\(U_{oc} = 5V\)</span>，而<strong>等效电阻</strong>
+<span class="math inline">\(R_{eq} = 5Ω\)</span>：</p>
+<p><span class="math display">\[
+\begin{cases}
+U_{oc} = 5V \\
+R_{eq} = 5Ω
+\end{cases}
+\]</span></p>
+<p>也就是说当 <span class="math inline">\(R_L = R_{eq} = 5Ω\)</span>
+的时候，<strong>可变电阻</strong> <span class="math inline">\(R_L\)</span> 能够获得的<strong>最大功率</strong>
+<span class="math inline">\(P_{max}\)</span> 等于：</p>
+<p><span class="math display">\[
+P_{max} = \frac{U_{oc}^2}{4 R_{eq}} = \frac{5^2}{4 \times 5} = 1.25W
+\]</span></p>
+<h3 id="互易定理">互易定理</h3>
+<p><strong>互易定理</strong>是指对于一个<strong>线性电阻网络</strong>而言，如果只存在一个<strong>激励</strong>(<code>电压源</code>、<code>电流源</code>)与一个<strong>响应</strong>(<code>电压</code>、<code>电流</code>)，那么当<code>激励</code>与<code>响应</code>互换位置之后，<code>激励</code>与<code>响应</code>的比值保持不变：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/25.png"></p>
+<p>根据上图的电路与<strong>互易定理</strong>，就可以得到下面这个等式：</p>
+<p><span class="math display">\[
+\frac{u_1(激励)}{i_1(响应)} =
+\frac{u_2(互换位置之后的激励)}{i_2(互换位置之后的响应)}
+\]</span></p>
+<p>从上面的等式可以看出，如果<strong>激励</strong>（电压源电压）相同，则互换位置之后的<strong>响应</strong>（电流）也就相同。</p>
+<h4 id="特勒根定理">特勒根定理</h4>
+<p>如果需要证明<strong>互易定理</strong>，那么必须要先证明<strong>两个定理</strong>(特勒根定理
+1 和 2)和<strong>一个定理推论</strong>(特勒根定理 2 推论)。</p>
+<h5 id="特勒根定理-1">特勒根定理 1</h5>
+<p><strong>特勒根定理 1</strong>
+是指在任意一个电路当中，如果每一条支路上的<strong>电流参考方向</strong>都是从<strong>电压参考方向</strong>的<strong>正极</strong>流入，那么所有支路的<code>电压</code>与<code>电流</code>的乘积之和一定等于<strong>零</strong>。</p>
+<p>由于<code>电压</code>与<code>电流</code>的乘积等于<code>功率</code>，所以<strong>特勒根定理
+1</strong>
+的物理含义就是指任意一个电路的<strong>总功率</strong>等于<strong>零</strong>，也就是<code>发出的功率</code>等于<code>吸收的功率</code>，即<strong>功率守恒</strong>。接下来讨论<strong>特勒根定理
+1</strong> 的证明过程：假设任意一个电路总计拥有 <code>b</code>
+条<strong>支路</strong> <code>n</code> 个<strong>结点</strong>，其中第
+<code>p</code> 与 <code>q</code> 个结点之间的<strong>电压</strong>记为
+<span class="math inline">\(u_{pq}\)</span> 而<strong>电流</strong>记为
+<span class="math inline">\(i_{pq}\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{k = 1}^b u_k i_k
+&amp;\xrightarrow{将支路电压与电流乘积之和，转化为结点与结点之间的电压与电流乘积之和
+\ \ \ \ \ \ }
+\frac{1}{2} \sum^{n}_{p=1} \sum^{n}_{q=1} u_{pq} i_{pq} \\
+&amp;\xrightarrow{运用 KVL，即 u_{pq} = u_p - u_q}
+\frac{1}{2} \sum^{n}_{p=1} \sum^{n}_{q=1}(u_p - u_q)i_{pq} \\
+&amp;\xrightarrow{应用求和符号 \sum 的特性}
+= \frac{1}{2} \sum^{n}_{p=1} u_p \sum^{n}_{q=1} i_{pq} - \frac{1}{2}
+\sum^{n}_{q=1} u_q \sum^{n}_{p=1} i_{pq}
+\xrightarrow{运用 KCL，即 \sum_{q = 1}^n i_{pq} = 0 与 \sum_{p = 1}^n
+i_{pq} = 0} = 0
+\end{aligned}
+\]</span></p>
+<p>通过上述的<strong>特勒根定理 1</strong>
+证明过程可以发现，整个过程的关键是应用到了 <strong>KCL</strong> 与
+<strong>KVL</strong> 定律，也就是说只需要满足 <strong>KCL</strong> 与
+<strong>KVL</strong> 定律，<strong>特勒根定理 1</strong>
+就一定会成立。</p>
+<h5 id="特勒根定理-2-及其推论">特勒根定理 2 及其推论</h5>
+<p><strong>特勒根定理 2</strong>
+描述起来比较复杂：如果存在两个结构相同的电路，并且两个电路里相同位置上的支路<code>电压</code>与<code>电流</code>参考方向相同，假定每一条支路的<code>电流参考方向</code>都是从<code>电压参考方向</code>的<strong>正极</strong>流入，那么其中一个电路所有支路上的<code>电压</code>，乘以另外一个电路对应支路上的<code>电流</code>，它们的乘积之和一定等于另外一个电路上面所有支路上的<code>电压</code>，乘以与该电路对应的所有支路上的<code>电流</code>的乘积之和，接下来直观的给出<strong>特勒根定理
+2</strong> 的示意图：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/26.png"></p>
+<p><strong>特勒根定理 2</strong>
+的通俗描述是：<strong>我的电压乘以你的电流，乘积之和等于零；你的电压乘以我的电流，乘积之和等于零</strong>。<strong>特勒根定理
+2</strong> 的证明过程与<strong>特勒根定理 1</strong>
+的证明过程类似，此处不再进行赘述。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>特勒根定理 2</strong>
+在实际电路分析当中几乎不会使用，其主要作用是引出它的一个推论，进而通过该推论去证明<strong>互易定理</strong>。</p>
+</blockquote>
+<p><strong>特勒根定理 2
+推论</strong>：如果两个电路具有相同的结构，其<code>电压</code>与<code>电流</code>的参考方向也完全相同，并且具有相同的<strong>纯电阻网络</strong>（即<strong>结构</strong>相同，并且<code>阻值</code>也相同）。假设<code>电流参考方向</code>都是从<code>电压参考方向</code>的<strong>正极</strong>流入，则除了<strong>纯电阻网络</strong>以外，一个电路的<code>支路电压</code>乘以另外一个电路对应的<code>支路电流</code>，即各个支路上<code>电压</code>与<code>电流</code>的乘积之<strong>和</strong>，<strong>等于</strong>另外一个电路的<code>支路电压</code>乘以该电路对应的<code>支路电流</code>，也即各个<code>支路电压</code>与<code>支路电流</code>的乘积之<strong>和</strong>，这里依然直观的给出<strong>特勒根定理
+2 推论</strong>的示意图：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/27.png"></p>
+<p><strong>特勒根定理 2 推论</strong>
+的通俗描述为：<strong>我的一部分电压乘以你的一部分电流，等于你的一部分电压乘以我的一部分电流</strong>。接下来，就以上面这个电路为例证明该推论。观察上面的电路，根据<strong>特勒根定理
+2</strong> 可以得到下面的方程组：</p>
+<p><span class="math display">\[
+\begin{cases}
+u_1 i_2 + u_x i_y + \sum u_k \hat{i_k} = 0 \\
+u_y i_x + u_2 i_1 + \sum \hat{u_k} i_k = 0
+\end{cases}
+\]</span></p>
+<p>上面方程里的<strong>求和</strong>，指的是对<strong>纯电阻网络</strong>部分<code>支路电压</code>与<code>支路电流</code>的乘积进行求和。根据<strong>欧姆定律</strong>，<strong>纯电阻网络</strong>满足
+<span class="math inline">\(u_k = R_k i_k\)</span> 和 <span class="math inline">\(\hat{u_k} = R_k \hat{i_k}\)</span>
+的关系，将其代入至上面的方程组，整理之后就可以得到<strong>特勒根定理 2
+的推论</strong>：</p>
+<p><span class="math display">\[
+u_1 i_2 + u_x i_y = u_y i_x + u_2 i_1
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>特勒根定理及其推论</strong>都假定<code>电流参考方向</code>从<code>电压参考方向</code>的<strong>正极</strong>流入，如果<code>电流参考方向</code>从<code>电压参考方向</code>的<strong>负极</strong>流入，则需要在<code>电压</code>与<code>电流</code>的乘积之前添加一个<strong>负号</strong>。</p>
+</blockquote>
+<h4 id="互易定理的证明">互易定理的证明</h4>
+<p>观察前面所讨论过的<strong>特勒根定理 2
+的推论</strong>相关的示意图：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/28.png"></p>
+<p>把 <span class="math inline">\(u_x = 0\)</span> 和 <span class="math inline">\(u_y = 0\)</span> 代入至<strong>特勒根定理 2
+的推论</strong> <span class="math inline">\(u_1 i_2 + u_x i_y = u_y i_x
++ u_2 i_1\)</span>
+当中，就可以得到前面的<strong>互易定理</strong>公式：</p>
+<p><span class="math display">\[
+u_1 i_2 = u_2 i_1  \implies \frac{u_1}{i_1} = \frac{u_2}{i_2}
+\]</span></p>
+<h4 id="互易定理的三种形式">互易定理的三种形式</h4>
+<p>根据<strong>激励</strong>与<strong>响应</strong>的不同，可以把<strong>互易定理</strong>划分为如下三种形式：</p>
+<ol type="1">
+<li>互易定理的第 1
+种形式：激励为<strong>电压源</strong>，响应为<strong>短路电流</strong>；</li>
+</ol>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/29.png"></p>
+<ol start="2" type="1">
+<li>互易定理的第 2
+种形式：激励为<strong>电流源</strong>，响应为<strong>开路电压</strong>；</li>
+</ol>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/30.png"></p>
+<ol start="3" type="1">
+<li>互易定理的第 3
+种形式：激励为<strong>电压源</strong>和<strong>电流源</strong>，响应为<strong>开路电压</strong>和<strong>短路电流</strong>。</li>
+</ol>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/31.png"></p>
+<p>分析实际电路时，运用<strong>互易定理</strong>经常会出现一些错误。这种情况下可以不使用<strong>互易定理</strong>，而是换用<strong>特勒根定理
+2
+的推论</strong>进行电路分析。由于<strong>互易定理</strong>本质上就是由<strong>特勒根定理
+2
+的推论</strong>经过推导得来的，所以凡是能够利用<strong>互易定理</strong>解决的问题，全部都可以采用<strong>特勒根定理
+2 的推论</strong>来解决。使用<strong>特勒根定理 2
+的推论</strong>优点在于正负号不容易出错，只需要确保<code>电流</code>从<code>电压</code>的<strong>正极</strong>流入时乘积取<strong>正</strong>，而从<strong>负极</strong>流入时则乘积取<strong>负</strong>。</p>
+<p>▶【例题】下图当中的 <span class="math inline">\(N\)</span>
+是一个<strong>纯电阻网络</strong>，求解该电路当中的<strong>电压</strong>
+<span class="math inline">\(U\)</span> ？</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/32.png"></p>
+<p>◉【解】采用<strong>互易定理</strong>进行电路分析的<strong>第 1
+步</strong>是要确定<strong>激励</strong>与<strong>响应</strong>，由于<strong>激励</strong>必须是<code>电压源</code>与<code>电流源</code>，相对而言比较容易确定，而<strong>响应</strong>确定起来就比较麻烦，响应只存在<code>开路电压</code>与<code>短路电流</code>两种可能，而上面电路很难直接找出响应所在的位置，此时可以<strong>无中生有</strong>的人为添加一个<strong>响应</strong>（左侧电路的<strong>开路电压</strong>、右侧电路的<strong>短路电流</strong>），从而得到下面的电路形式：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/33.png"></p>
+<p>◉【解】采用<strong>互易定理</strong>进行电路分析的<strong>第 2
+步</strong>是根据互易定理的三种形式之一来进行求解，由于上述电路难以直接着手应用<strong>互易定理</strong>，必须将电路里的<strong>电阻网络
+N</strong>
+以及其它电阻，<strong>海纳百川</strong>的放入到一个更大的<strong>电阻网络</strong>当中（即下图绿色阴影部分）：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-3/34.png"></p>
+<p>◉【解】观察就可以发现，该电路当中的 <span class="math inline">\(u_{oc} = 0.5 \times 3 = 1.5V\)</span>，而 <span class="math inline">\(i_{sc} = -
+\frac{U}{4}\)</span>，根据<strong>互易定理的第 3
+种形式</strong>列写如下公式，就可以推导得到<strong>电压</strong> <span class="math inline">\(U\)</span> 的值等于 <code>-7.2V</code>：</p>
+<p><span class="math display">\[
+\frac{5V}{u_{oc}} = \frac{6A}{i_{sc}} \implies \frac{5}{0.5 \times 3} =
+\frac{6}{- \frac{U}{4}} \implies U = - 7.2V
+\]</span></p>
+<h3 id="总结-2">总结</h3>
+<ul>
+<li><strong>叠加定理</strong>：线性电路当中任意一条支路的响应，都等于各个电源单独作用时产生响应的叠加；</li>
+<li><strong>替代定理</strong>：已知<strong>端口电压</strong>，可以采用<strong>电压源</strong>替代；已知<strong>端口电流</strong>，则可以采用<strong>电流源</strong>替代；</li>
+<li><strong>戴维南定理</strong>：<strong>线性含源一端口网络</strong>可以等效为<code>电压源</code>（端口<code>开路电压</code>）与<code>电阻</code>（端口内电源不作用时的等效电阻）的<strong>串联</strong>；</li>
+<li><strong>诺顿定理</strong>：<strong>线性含源一端口网络</strong>可以等效为<code>电流源</code>（端口<code>短路电流</code>）与<code>电阻</code>（端口内电源不作用时的等效电阻）的<strong>并联</strong>；</li>
+<li><strong>互易定理</strong>：如果纯电阻网络的<strong>激励</strong>与<strong>响应</strong>互换位置，那么<strong>激励</strong>与<strong>响应</strong>的比值将会保持不变；</li>
+</ul>
+<p><strong>戴维南等效</strong>与<strong>诺顿等效</strong>都是<strong>线性含源一端口网络</strong>的等效电路，两者之间也是相互等效的。<strong>诺顿等效电路</strong>的<code>电流源</code>与<code>电阻</code>是并联关系，更加适用于分析外接有<strong>并联电路</strong>的情况。而<strong>戴维南等效电路</strong>的<code>电压源</code>与<code>电阻</code>为串联关系，更加适用于外接有<strong>串联电路</strong>的情况。由于实际电路当中，串联电路相对更多一些，因而在实际的电路分析过程当中，<strong>戴维南等效</strong>比<strong>诺顿等效</strong>的应用场景要更多。</p>
+<blockquote>
+<p><strong>注意</strong>：除此之外，如果等效之后的<strong>戴维南等效电路</strong>只有一个<code>纯电压源</code>，由于<code>纯电压源</code>与<code>纯电流源</code>无法相互等效，这就意味着对应的<strong>诺顿等效电路</strong>不存在。同样的道理，如果等效之后的<strong>诺顿等效电路</strong>为一个<code>纯电流源</code>，这也意味着对应的<strong>戴维南等效电路</strong>不存在。</p>
+</blockquote>
+<h2 id="动态电路">动态电路</h2>
+<p>前面章节分析的都是<strong>静态电路</strong>，也就是<code>电压</code>与<code>电流</code><strong>不随时间变化</strong>的电路。而本章所要讨论的动态电路，是一种包含有<code>电容</code>、<code>电感</code>的电路，它的<code>电压</code>与<code>电流</code>可以随着时间变化。</p>
+<h3 id="电容">电容</h3>
+<h4 id="电容的定义">电容的定义</h4>
+<p><strong>电容</strong>这个名词包含有两重含义，一种是指<code>电容器</code>，另外一种是指<code>电容值</code>，两者通常都统称为<strong>电容</strong>。<strong>电容器</strong>是一种能够容纳与释放<strong>电荷</strong>的元件，在电路当中可以用于<code>储存电能</code>、<code>滤波</code>、<code>整流</code>等。电容器的结构比较简单，其中最为常见的是<strong>平行板电容器</strong>，它是由两个<strong>导体面板</strong>与夹在中间的<strong>绝缘介质</strong>所构成：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/1.png"></p>
+<p><strong>电容器</strong>在电路当中的表示符号如下面的图形所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/2.png"></p>
+<p>如果向电容器的两个极板施加<strong>电压</strong>，那么两个极板上面就会出现等量的<strong>异种电荷</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/3.png"></p>
+<p>上图当中，电容器存储的<strong>电荷量</strong> <span class="math inline">\(q\)</span> 与<strong>电压</strong> <span class="math inline">\(u_C\)</span> 之间存在如下关系，其中的比例系数
+<span class="math inline">\(C\)</span>
+就是该电容器的<strong>电容值</strong>：</p>
+<p><span class="math display">\[
+电荷量 q = 电容值 C \times 电压 u_C
+\]</span></p>
+<h4 id="电容器的电压-电流关系">电容器的电压-电流关系</h4>
+<p>电容器上面经过的<strong>电流</strong> <span class="math inline">\(i_C\)</span> 等于其所存储的<strong>电荷量</strong>
+<span class="math inline">\(q\)</span> 随着<strong>时间</strong> <span class="math inline">\(t\)</span> 进行变化的<strong>变化率</strong>：</p>
+<p><span class="math display">\[
+i_C = \frac{dq}{dt}
+\]</span></p>
+<p>将前面的 <span class="math inline">\(q = C \times u_C\)</span>
+代入上面的等式，就可以得到电容器上面<strong>电流</strong> <span class="math inline">\(i_C\)</span> 与<strong>电压</strong> <span class="math inline">\(u_C\)</span> 的<strong>微分关系</strong>：</p>
+<p><span class="math display">\[
+i_C = C \frac{du_C}{dt}
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：上面的微分关系对于<code>电压</code>与<code>电流</code>的<strong>参考方向</strong>存在要求，即<code>电流</code>的参考方向必须从<code>电压</code>参考方向的<strong>正极</strong>流入。如果<code>电流</code>的参考方向被指定为从<code>电压</code>参考方向的<strong>负极</strong>流入，那么上面微分关系式的右侧需要添加一个<code>-</code><strong>负号</strong>
+。</p>
+</blockquote>
+<p>对上面这个微分关系式的两端进行<strong>积分</strong>，就可以得到<strong>电容器</strong>上面<code>电压</code>与<code>电流</code>的<strong>积分关系</strong>：</p>
+<p><span class="math display">\[
+u_C(t) = u_C(t_0) + \frac{1}{C} \int^{t}_{t_0} i_C(\xi)d\xi
+\]</span></p>
+<p>观察上述的<strong>积分</strong>与<strong>微分</strong>关系可以发现，由于<strong>电容器</strong>上的<code>电压</code>与<code>电流</code>关系与<code>时间</code>相关，所以属于一种<strong>动态电路元件</strong>。而前面讨论过的<strong>电阻器</strong>，其<code>电压</code>与<code>电流</code>关系与<code>时间</code>无关，因而属于<strong>静态电路元件</strong>。</p>
+<h4 id="电容器消耗的能量">电容器消耗的能量</h4>
+<p>电容器所消耗的能量是<strong>功率</strong> <span class="math inline">\(w\)</span> 对于<strong>时间</strong> <span class="math inline">\(t\)</span> 的<strong>积分</strong>：</p>
+<p><span class="math display">\[
+w(t) = \int pdt = \int u_C i_C dt
+\]</span></p>
+<p>将之前得到的 <span class="math inline">\(i_C = C
+\frac{du_C}{dt}\)</span> 代入上面的积分关系式，就可以得到：</p>
+<p><span class="math display">\[
+w(t) = \frac{1}{2} C u_C (t)^2
+\]</span></p>
+<p>观察可以发现，电容器消耗的<strong>能量</strong> <span class="math inline">\(w\)</span> 的大小与<strong>电容值</strong> <span class="math inline">\(C\)</span>
+成正比，与电容器两端<strong>电压</strong> <span class="math inline">\(u_C\)</span> 的<strong>平方</strong>也成正比。</p>
+<h4 id="电容器的串联">电容器的串联</h4>
+<p>下图的电路展示了 <span class="math inline">\(C_1\)</span> 与 <span class="math inline">\(C_2\)</span>
+<strong>两个电容器</strong>的<strong>串联</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/4.png"></p>
+<p>根据上图，以及电容器<code>电压</code>与<code>电流</code>的<strong>微分关系</strong>
+<span class="math inline">\(i_C = C
+\frac{du_C}{dt}\)</span>，就可以得到下面的等式：</p>
+<p><span class="math display">\[
+i_C = C_1 \frac{d u_{C1}}{dt} = C_2 \frac{d u_{C2}}{dt}
+\]</span></p>
+<p>通过如下更进一步推导过程，就可以得到电容器的串联等效公式：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;C_1 \frac{d u_{C1}}{dt} + C_2 \frac{d u_{C2}}{dt} = \frac{d(u_{C1}
++ u_{C2})}{dt} = \frac{d u_C}{dt} = \frac{1}{C_1} i_C + \frac{1}{C_2}
+i_C \\
+&amp;\implies i_C = \frac{1}{\frac{1}{C_1} + \frac{1}{C_2}} \frac{d
+u_C}{dt} = \frac{C_1 C_2}{C_1 + C_2} \frac{du_C}{dt}
+\end{aligned}
+\]</span></p>
+<p>由此可见，<span class="math inline">\(C_1\)</span> 与 <span class="math inline">\(C_2\)</span>
+两个电容器串联之后，可以等效为一个电容 <span class="math inline">\(C_{eq}\)</span>，<strong>电容器</strong>的<strong>串联</strong>等效公式与<strong>电阻器</strong>的<strong>并联</strong>非常类似：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/5.png"></p>
+<h4 id="电容器的并联">电容器的并联</h4>
+<p>下面的电路展示了 <span class="math inline">\(C_1\)</span> 和 <span class="math inline">\(C_2\)</span>
+<strong>两个电容器</strong>的<strong>并联</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/6.png"></p>
+<p>两个电容并联同样可以等效为一个电容，具体的推导过程与电容器的串联相类似。两个电容并联之后的等效电容
+<span class="math inline">\(C_{eq}\)</span>
+如下图所示。观察可以发现，<strong>电容器</strong>的<strong>并联</strong>等效公式与<strong>电阻器</strong>的<strong>串联</strong>比较类似：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/7.png"></p>
+<ul>
+<li><strong>寄生电容</strong>：PCB
+布线或者元件引脚之间存在的电容效应，也被称为<strong>杂散电容</strong>。</li>
+<li><strong>超级电容</strong>：电容值可以达到几百甚至上千法拉，能够储存大量电能，可以用于驱动新能源汽车，起到类似电池的作用；</li>
+</ul>
+<h3 id="电容器充放电">电容器充放电</h3>
+<h4 id="电容器的充电">电容器的充电</h4>
+<p>如下图所示，电容初始电压为<strong>零</strong>，当 <span class="math inline">\(t = 0\)</span> 的时候开关闭合，电容开始充电：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/8.png"></p>
+<p>根据<strong>基尔霍夫电压定律</strong>可以得到 <span class="math inline">\(-U_s  + R \times i + u_C =
+0\)</span>，而电容器的<code>电压</code>与<code>电流</code>关系为 <span class="math inline">\(i = C \frac{d u_C}{dt}\)</span>，将其代入至 KVL
+方程就可以得到<strong>电容器充电的微分方程</strong>：</p>
+<p><span class="math display">\[
+RC \frac{d u_C}{dt} + u_C = U_s
+\]</span></p>
+<p>接下来，通过<strong>积分</strong>的方法求解上面这个微分方程的解，进而获得电容器两端<strong>电压</strong>
+<span class="math inline">\(u_C\)</span> 的表达式：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;RC \frac{d u_C}{dt} + u_C = U_s
+\implies
+\frac{d(U_s - u_C)}{U_s - u_C} = - \frac{1}{RC}dt  \\
+&amp;\xrightarrow{两侧同时积分\ \ }
+\ln (U_s - u_C) \bigg\vert
+\begin{aligned}
+u_C(t) \\
+u_C(0)
+\end{aligned}
+= - \frac{1}{RC}(t - 0) \\
+&amp;\xrightarrow{获得电容器的电压表达式\ \ \ }
+u_C(t) = U_s - U_s \times e^{- \frac{t}{RC}}
+\end{aligned}
+\]</span></p>
+<p>根据上述的推导结果，就可以绘制出电容器的<strong>电压</strong> <span class="math inline">\(u_C\)</span> 随着<strong>时间</strong> <span class="math inline">\(t\)</span> 进行变化的曲线：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/9.png"></p>
+<p>可以看到，电容器两端的<strong>电压</strong> <span class="math inline">\(u_C\)</span>
+并非线性上升，而是在开始的时候上升速度较快，后续则上升速度较慢。当<strong>时间</strong>
+<span class="math inline">\(t\)</span>
+趋于无穷大的时候，电容器两端的<strong>电压</strong> <span class="math inline">\(u_C\)</span> 等于电源<strong>电压</strong> <span class="math inline">\(U_s\)</span>，此时电容器的电压保持不变，意味着电容已经充电结束。</p>
+<blockquote>
+<p><strong>注意</strong>：虽然电容器的充电在理论上需要无穷长的时间，但是实际上在经过一段时间之后，就可以近似的认为电容器两端的电压达到电源电压，从而完成了充电，接下来将会讨论电容器<strong>充电时间长度</strong>相关的问题。</p>
+</blockquote>
+<h4 id="时间常数-tau">时间常数 <span class="math inline">\(\tau\)</span></h4>
+<p>根据前面得到的电容器两端<strong>电压</strong> <span class="math inline">\(u_C\)</span> 的表达式 <span class="math inline">\(u_C(t) = U_s - U_s \times e^{-
+\frac{t}{RC}}\)</span>，可以知道电容器的充电与 <span class="math inline">\(RC\)</span> 关系密切，如果令 <span class="math inline">\(\tau = RC\)</span>，则可以把<strong>电压</strong>
+<span class="math inline">\(u_C\)</span> 的表达式改写为如下形式：</p>
+<p><span class="math display">\[
+u_C(t) = U_s - U_s \times e^{- \frac{t}{\tau}}
+\]</span></p>
+<p>当<strong>时间</strong> <span class="math inline">\(t = 5
+\tau\)</span> 的时候，电容<strong>电压</strong> <span class="math inline">\(u_C(5 \tau) = U_s - U_s e^{- 5} \approx
+U_s\)</span>，因而可以认为电容器充满电所需的时间约为 <span class="math inline">\(5\tau\)</span>。这里的 <span class="math inline">\(\tau\)</span>
+在电路分析当中被称为<strong>时间常数</strong>，其值不但决定了电容的充电时间，还决定了电容充电的快慢。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>时间常数</strong>越<strong>小</strong>电容器的充电速度就会越<strong>快</strong>，越<strong>大</strong>则电容器充电的速度就会越<strong>慢</strong>。</p>
+</blockquote>
+<p><strong>时间常数</strong> <span class="math inline">\(\tau = R \times
+C\)</span> 说明<strong>电阻</strong> <span class="math inline">\(R\)</span> 和<strong>电容</strong> <span class="math inline">\(C\)</span> 越大，<strong>时间常数</strong> <span class="math inline">\(\tau\)</span>
+就会越大，电容器的充电速度就会随之越慢。反之，<strong>电阻</strong>
+<span class="math inline">\(R\)</span> 和<strong>电容</strong> <span class="math inline">\(C\)</span> 越小，<strong>时间常数</strong> <span class="math inline">\(\tau\)</span>
+也就会越小，电容器的充电速度同样就会越快。</p>
+<p>将电容器两端<strong>电压</strong> <span class="math inline">\(u_C\)</span> 的表达式 <span class="math inline">\(u_C(t) = U_s - U_s \times e^{-
+\frac{t}{RC}}\)</span>
+代入至它的<code>电压</code>与<code>电流</code>关系 <span class="math inline">\(i = C \frac{d u_C}{dt}\)</span>
+当中，从而可以得到电容器的<strong>充电电流</strong> <span class="math inline">\(i\)</span>：</p>
+<p><span class="math display">\[
+i(t) = \frac{U_s}{R} e^{- \frac{t}{RC}}
+\]</span></p>
+<p>观察上面等式可以发现，电容器的<strong>充电电流</strong> <span class="math inline">\(i\)</span> 随着<strong>时间</strong> <span class="math inline">\(t\)</span>
+的变化，而呈现出<strong>指数衰减</strong>，并且最终会衰减为<strong>零</strong>，这意味着电容器在充电完成之后，充电电流也就会随之而停止。</p>
+<p>如果电容器的初始电压不为<strong>零</strong>，而是等于<strong>电压</strong>
+<span class="math inline">\(U_0\)</span>，那么电容器两端<strong>电压</strong>
+<span class="math inline">\(u_C\)</span>
+的求解过程，与电容器两端<strong>电压</strong> <span class="math inline">\(u_C\)</span>
+初始值为<strong>零</strong>的情况相类似。当电容器两端的初始电压不为零时，其对应的电压表达式如下所示：</p>
+<p><span class="math display">\[
+u_C(t) = U_s + (U_0 - U_s) e^{- \frac{t}{RC}}
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：在实际的电路分析当中，电容器的充放电过程可以无需列写与求解微分方程，而只需要通过后续介绍的<strong>三要素公式</strong>，就能够简单方便的进行分析。</p>
+</blockquote>
+<h4 id="电容器的放电">电容器的放电</h4>
+<p>下面的电路当中，电容器的初始<strong>电压</strong>为 <span class="math inline">\(U_0\)</span>，当<strong>时间</strong> <span class="math inline">\(t = 0\)</span>
+的时候开关闭合，电容器开始放电：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/10.png"></p>
+<p>根据<strong>基尔霍夫电压定律</strong>可以得到 <span class="math inline">\(-u_C + Ri =
+0\)</span>，而电容器的<code>电压</code>与<code>电流</code>关系为 <span class="math inline">\(i = -C \frac{d u_C}{dt}\)</span>，将其代入至 KVL
+方程就能够得到<strong>电容器放电的微分方程</strong>：</p>
+<p><span class="math display">\[
+RC \frac{d u_C}{dt} + u_C = 0
+\]</span></p>
+<p>电容器放电微分方程的求解过程，与其充电过程相类似，而且相对更加简单。这里省略具体的推导过程，直接列写电容器在放电时两端<strong>电压</strong>
+<span class="math inline">\(u_C\)</span> 的表达式：</p>
+<p><span class="math display">\[
+u_C(t) = U_0 \cdot e^{- \frac{t}{RC}}
+\]</span></p>
+<p>可以看到，<strong>电容器的放电电压 <span class="math inline">\(u_C\)</span> 随着时间 <span class="math inline">\(t\)</span>
+呈指数衰减，并且最终会衰减为零</strong>，表示放电已经完毕。根据<strong>时间常数</strong>
+<span class="math inline">\(\tau = RC\)</span>，可以近似的认为经过 <span class="math inline">\(5 \tau\)</span>
+时间之后，电容器就可以放电完毕。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>时间常数</strong> <span class="math inline">\(\tau\)</span>
+越<strong>小</strong>放电速度就会越<strong>快</strong>，而 <span class="math inline">\(\tau\)</span>
+越<strong>大</strong>放电速度就会越<strong>慢</strong>。</p>
+</blockquote>
+<p>将电容器放电时两端<code>电压</code>的表达式 <span class="math inline">\(u_C(t) = U_0 \cdot e^{- \frac{t}{RC}}\)</span>
+代入至电容器的<code>电压</code>与<code>电流</code>关系 <span class="math inline">\(i = -C \frac{d
+u_C}{dt}\)</span>，就可以得到电容器的<strong>放电电流</strong> <span class="math inline">\(i\)</span></p>
+<p><span class="math display">\[
+i(t) = \frac{U_0}{R} \cdot e^{- \frac{t}{RC}}
+\]</span></p>
+<p>观察上述方程就能够发现，电容器的放电<strong>电流</strong> <span class="math inline">\(i\)</span> 随着<strong>时间</strong> <span class="math inline">\(t\)</span>
+的变化而呈指数衰减，并且最终同样会衰减至<strong>零</strong>。</p>
+<blockquote>
+<p><strong>注意</strong>：为了确保用电安全，可以在电路当中为电容器专门设计一个<strong>放电回路</strong>，避免在电源断电的情况下发生触电危险。</p>
+</blockquote>
+<h3 id="电感">电感</h3>
+<h4 id="电感的定义">电感的定义</h4>
+<p><strong>电感</strong>这个名词同样包含有两重含义，一种是指<code>电感器</code>，另外一种是指<code>电感值</code>，两者通常都统称为<strong>电感</strong>。<strong>电感器</strong>是一种能够存储与释放<strong>磁场</strong>能量的元件，在电路当中可以用于<code>储存磁能</code>、<code>变压</code>、<code>隔离</code>等。电感器的结构非常简单，主要由导线绕制成的<strong>线圈</strong>所构成：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/11.png"></p>
+<p>电感器在电路当中的表示符号如下面的图形所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/12.png"></p>
+<p>电感器通过电流就会产生磁场，经过的<strong>电流</strong>越大，产生的<strong>磁通量</strong>（多匝线圈时称为<strong>磁链</strong>）就会越大，即<strong>磁通量</strong>
+<span class="math inline">\(\varPsi\)</span> 与<strong>电流</strong>
+<span class="math inline">\(i_L\)</span> 的大小成正比：</p>
+<p><span class="math display">\[
+磁通量 \varPsi = 电感值 L \times 电流 i_L
+\]</span></p>
+<h4 id="电感器的电压-电流关系">电感器的电压-电流关系</h4>
+<p>根据<strong>法拉第电磁感应定律</strong>，如果电感器当中存在着变化的磁场，那么就会产生<strong>感应电压</strong>
+<span class="math inline">\(u_L\)</span>：</p>
+<p><span class="math display">\[
+u_L = \frac{d \varPsi}{dt}
+\]</span></p>
+<p>将前面的 <span class="math inline">\(\varPsi = L \times i_L\)</span>
+代入到这个公式，就可以得到电感器上面<strong>电压</strong> <span class="math inline">\(u_L\)</span> 与<strong>电流</strong> <span class="math inline">\(i_L\)</span> 的微分关系：</p>
+<p><span class="math display">\[
+u_L = L \frac{di_L}{dt}
+\]</span></p>
+<p>上述的微分关系要求<strong>电流</strong>参考方向必须从<strong>电压</strong>参考方向的<strong>正极</strong>流入，如果<strong>电流</strong>参考方向选定为从<strong>电压</strong>的<strong>负极</strong>流入，那么上面等式的右侧需要再添加<code>-</code><strong>负号</strong>。对上面等式的左右两侧进行<strong>积分</strong>，就可以得到电感器<code>电压</code>与<code>电流</code>的积分关系：</p>
+<p><span class="math display">\[
+i_L(t) = i_L(t_0) + \frac{1}{L} \int^{t}_{t_0} u_L (\xi) d \xi
+\]</span></p>
+<p>结合上述的 <span class="math inline">\(u_L\)</span> 与 <span class="math inline">\(i_L\)</span>
+公式，可以知道<strong>电感器</strong>的<code>电压</code>与<code>电流</code>关系同样与<code>时间</code>相关，因此也属于一种动态电路元件。</p>
+<h4 id="电感器消耗的能量">电感器消耗的能量</h4>
+<p>电感器消耗的能量是电感器的<strong>功率</strong> <span class="math inline">\(w\)</span> 对于<strong>时间</strong> <span class="math inline">\(t\)</span> 的<strong>积分</strong>：</p>
+<p><span class="math display">\[
+w(t) = \int p dt = \int u_L i_L dt
+\]</span></p>
+<p>把<strong>电感器电压与电流的微分关系</strong> <span class="math inline">\(u_L = L \frac{di_L}{dt}\)</span>
+代入上面等式，就可以得到：</p>
+<p><span class="math display">\[
+w(t) = \frac{1}{2} L \cdot i_L (t)^2
+\]</span></p>
+<p>观察上面的方程，可以看到电感器消耗的<strong>能量</strong> <span class="math inline">\(w\)</span> 与<strong>电感值</strong> <span class="math inline">\(L\)</span>
+成正比，与经过电感器的<strong>电流</strong> <span class="math inline">\(i_L\)</span> 的<strong>平方</strong>也成正比。</p>
+<h4 id="电感器的串联">电感器的串联</h4>
+<p>将 <span class="math inline">\(L_1\)</span> 与 <span class="math inline">\(L_2\)</span>
+两个电感器<strong>串联</strong>，同样可以等效为一个电感 <span class="math inline">\(L_{eq}\)</span>，<strong>电感器</strong>的<strong>串联</strong>公式与<strong>电阻器</strong>的<strong>串联</strong>公式相类似：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/13.png"></p>
+<h4 id="电感器的并联">电感器的并联</h4>
+<p>将 <span class="math inline">\(L_1\)</span> 与 <span class="math inline">\(L_2\)</span>
+两个电感器<strong>并联</strong>，依然可以等效为一个电感 <span class="math inline">\(L_{eq}\)</span>，<strong>电感器</strong>的<strong>并联</strong>公式与<strong>电阻器</strong>的<strong>并联</strong>公式相类似：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/14.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>电感器的串并联公式</strong>与<strong>电容器的串并联公式</strong>在形式上刚好相反，应用的时候需要避免混淆。</p>
+</blockquote>
+<ul>
+<li><strong>寄生电感</strong>：由于 PCB
+走线或者元件引脚产生的一种电感效应，也被称之为<strong>杂散电感</strong>，其大小通常只有<strong>纳亨</strong>级别。</li>
+</ul>
+<h3 id="电感器的充放电">电感器的充放电</h3>
+<h4 id="电感器的充电">电感器的充电</h4>
+<p>电感器的<strong>充电电路</strong>如下图所示，其充电的过程与电容器相类似，因而也不再进行赘述，而是直接给到结论：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/15.png"></p>
+<p>经过电感器的初始电流为<strong>零</strong>，当时间 <span class="math inline">\(t = 0\)</span>
+的时候开关闭合，电感器开始充电，其<strong>微分方程</strong>以及对应的<strong>解</strong>如下所示：</p>
+<p><span class="math display">\[
+L \frac{di_L}{dt} + R \cdot i_L = U_s
+\implies
+i_L(t) = \frac{U_s}{R} - \frac{U_s}{R} \cdot e^{- \frac{t}{L/R}}
+\]</span></p>
+<p>基于上面得到的微分方程解，就可以绘制出经过电感的<strong>电流</strong>
+<span class="math inline">\(i_L\)</span> 随着<strong>时间</strong> <span class="math inline">\(t\)</span> 进行变化的曲线：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/16.png"></p>
+<p>观察可以发现，电感器上经过的电流并非线性上升，而是在开始时候上升速度较快，而后续上升速度变慢。当<strong>时间</strong>
+<span class="math inline">\(t\)</span>
+趋于无穷大的时候，<strong>电感电流</strong> <span class="math inline">\(i_L\)</span> 等于<strong>电压源电压</strong> <span class="math inline">\(U_s\)</span> 除以<strong>电阻</strong> <span class="math inline">\(R\)</span>，此时电感相当于<strong>短路</strong>，说明电感器已经结束充电。</p>
+<p>电感器的充电在理论上需要无穷大的时间，但是实际上在经过一段时间之后，就可以近似的认为<strong>电流</strong>
+<span class="math inline">\(i_L\)</span>
+不会再发生改变，即电感器充电完毕。观察上面得到的方程 <span class="math inline">\(i_L(t) = \frac{U_s}{R} - \frac{U_s}{R} \cdot e^{-
+\frac{t}{L/R}}\)</span>，可以发现电感器的充电过程与 <span class="math inline">\(\frac{L}{R}\)</span>
+<strong>时间常数</strong>关系密切，这里令 <span class="math inline">\(\tau = \frac{L}{R}\)</span>，从而可以得到：</p>
+<p><span class="math display">\[
+i_L(t) = \frac{U_s}{R} - \frac{U_s}{R} \cdot e^{- \frac{t}{\tau}}
+\]</span></p>
+<p>观察上述等式可以发现，当<strong>时间</strong> <span class="math inline">\(t = 5\tau\)</span>
+的时候，就可以近似的认为电感器已经充电完成。<strong>时间常数</strong>
+<span class="math inline">\(\tau\)</span>
+既决定了电感器的充电时间，也决定了电感器的充电快慢。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>时间常数</strong> <span class="math inline">\(\tau\)</span>
+越<strong>小</strong>电感器充电就会越<strong>快</strong>，反之如果 <span class="math inline">\(\tau\)</span>
+越<strong>大</strong>电感器充电就会越<strong>慢</strong>。</p>
+</blockquote>
+<p>除此之外，由于<strong>时间常数</strong> <span class="math inline">\(\tau =
+\frac{L}{R}\)</span>，所以<strong>电感</strong> <span class="math inline">\(L\)</span> 越大而<strong>电阻</strong> <span class="math inline">\(R\)</span> 越小，<strong>时间常数</strong> <span class="math inline">\(\tau\)</span>
+就会越大，电感器的充电也就会越慢。反之，如果<strong>电感</strong> <span class="math inline">\(L\)</span> 越小而<strong>电阻</strong> <span class="math inline">\(R\)</span> 越大，<strong>时间常数</strong> <span class="math inline">\(\tau\)</span> 就会越小，电感器的充电就会越快。</p>
+<h4 id="电感器的放电">电感器的放电</h4>
+<p>下图是电感器的<strong>放电电路</strong>，电感器放电的分析过程依然与电容器类似，这里也不再详细介绍，同样直接了当给出结论：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/17.png"></p>
+<p>电感器放电的<strong>微分方程</strong>，以及这个微分方程对应的<strong>解</strong>如下面推导过程所示：</p>
+<p><span class="math display">\[
+L \frac{di_L}{dt} + R \cdot i_L = 0
+\implies i_L(t) = I_0 \cdot e^{-\frac{t}{L/R}}
+\]</span></p>
+<p>观察上面的等式可以发现，电感器在放电时，经过它的<strong>电流</strong>
+<span class="math inline">\(i_L\)</span>
+呈指数下降，并且最终降低至<strong>零</strong>，表示放电已经结束。电感器的充放电分析，同样可以采用<strong>三要素公式</strong>来进行，从而避免掉复杂的微分方程求解过程。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>电感器</strong>与<strong>电容器</strong>的充放电过程，符合电路分析当中的<strong>对偶原理</strong>。</p>
+</blockquote>
+<h3 id="二阶电路">二阶电路</h3>
+<h4 id="一阶电路-二阶电路">一阶电路 &amp; 二阶电路</h4>
+<p><strong>一阶电路</strong>是微分方程为一阶的电路（之前讨论的电路均属于一阶电路），下图所示电感器充电电路的<strong>微分方程</strong>为
+<span class="math inline">\(L \frac{di_L}{dt} + R \cdot i_L =
+U_s\)</span>，由于该方程属于<strong>一阶微分方程</strong>，因而该电路属于<strong>一阶电路</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/18.png"></p>
+<p><strong>二阶电路</strong>则是<strong>微分方程</strong>为二阶的电路，为了验证如下的二阶电路，就需要列写出该电路的微分方程：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/19.png"></p>
+<p>电容器上面<strong>电流</strong> <span class="math inline">\(i\)</span> 与<strong>电压</strong> <span class="math inline">\(u_C\)</span> 的<strong>微分关系</strong>为 <span class="math inline">\(i = -C \frac{d
+u_C}{dt}\)</span>，而电感器上面的<strong>电压</strong> <span class="math inline">\(u_L\)</span> 与<strong>电流</strong> <span class="math inline">\(i\)</span> 的<strong>微分关系</strong>为 <span class="math inline">\(u_L = L \frac{d
+i}{dt}\)</span>，接下来将前者代入到后者：</p>
+<p><span class="math display">\[
+\begin{cases}
+i = -C \frac{d u_C}{dt} \\
+u_L = L \frac{d i}{dt}
+\end{cases}
+\implies
+u_L = -LC \frac{d^2 u_C}{dt^2}
+\]</span></p>
+<p>根据<strong>基尔霍夫电压定律</strong>可以得到 <span class="math inline">\(-u_C + R \cdot i + u_L =
+0\)</span>，与上面的等式联立之后，就得到下面的方程组：</p>
+<p><span class="math display">\[
+\begin{cases}
+i = -C \frac{d u_C}{dt} \\
+u_L = -LC \frac{d^2 u_C}{dt^2} \\
+-u_C + R \cdot i + u_L = 0
+\end{cases}
+\implies
+LC \frac{d^2 u_C}{dt^2} + RC \frac{du_C}{dt} + u_C = 0
+\]</span></p>
+<p>经过换算之后得到的结果是一个<strong>二阶微分方程</strong>，证明该电路属于<strong>二阶电路</strong>。</p>
+<h4 id="二阶电路微分方程的求解">二阶电路微分方程的求解</h4>
+<p>假设上面的二阶电路当中，电容的<strong>初始电压</strong>为 <span class="math inline">\(U_0\)</span>，电感的<strong>初始电流</strong>等于<strong>零</strong>，根据微分方程的知识，需要列写出<strong>二阶微分方程</strong>
+<span class="math inline">\(LC \frac{d^2 u_C}{dt^2} + RC \frac{du_C}{dt}
++ u_C = 0\)</span> 所对应的<strong>特征方程</strong>：</p>
+<p><span class="math display">\[
+LC \lambda^2 + RC \lambda + 1 = 0
+\]</span></p>
+<p>上面的这个特征方程属于<strong>一元二次方程</strong>，求解之后可以得到该方程的<strong>根</strong>
+<span class="math inline">\(\lambda\)</span> 等于：</p>
+<p><span class="math display">\[
+\lambda = \frac{-RC \pm \sqrt{(RC)^2 - 4LC}}{2LC} = \frac{- R \pm
+\sqrt{R^2 - \frac{4L}{C}}}{2L}
+\]</span></p>
+<ol type="1">
+<li>当 <span class="math inline">\(R^2 - \frac{4L}{C} &gt; 0 \implies R
+&gt; 2 \sqrt{\frac{L}{C}}\)</span>
+的时候，特征方程的根为两个<strong>不相等并且小于零的实数</strong>；</li>
+<li>当 <span class="math inline">\(R = 2 \sqrt{\frac{L}{C}}\)</span>
+的时候，特征方程的根为两个<strong>相等的负实数</strong>；</li>
+<li>当 <span class="math inline">\(R &lt; 2 \sqrt{\frac{L}{C}}\)</span>
+的时候，特征方程的根为两个<strong>实部为负数的共轭复数</strong>；</li>
+</ol>
+<p>由此可见，<strong>特征方程</strong> <span class="math inline">\(LC
+\lambda^2 + RC \lambda + \lambda = 0\)</span>
+拥有三种不同形式的<strong>根</strong>，相应的<strong>二阶微分方程</strong>
+<span class="math inline">\(LC \frac{d^2 u_C}{dt^2} + RC \frac{du_C}{dt}
++ u_C = 0\)</span> 也拥有着三种不同形式的解：</p>
+<ol type="1">
+<li>如果<strong>特征方程</strong> <span class="math inline">\(LC
+\lambda^2 + RC \lambda + \lambda = 0\)</span> 的根 <span class="math inline">\(\lambda_1\)</span> 与 <span class="math inline">\(\lambda_2\)</span>
+为两个<strong>不相等的负实数</strong>，则<strong>二阶微分方程</strong>的解的形式为：</li>
+</ol>
+<p><span class="math display">\[
+u_C(t) = A \cdot e^{\lambda_1 t} + B \cdot e^{\lambda_2 t}
+\]</span></p>
+<ol start="2" type="1">
+<li>如果<strong>特征方程</strong> <span class="math inline">\(LC
+\lambda^2 + RC \lambda + \lambda = 0\)</span>
+的根为<strong>相等的负实数</strong> <span class="math inline">\(\lambda\)</span>，则<strong>二阶微分方程</strong>的解的形式为：</li>
+</ol>
+<p><span class="math display">\[
+u_C(t) = (A + B t) \cdot e^{\lambda t}
+\]</span></p>
+<ol start="3" type="1">
+<li>如果<strong>特征方程</strong> <span class="math inline">\(LC
+\lambda^2 + RC \lambda + \lambda = 0\)</span>
+的根为<strong>共轭复数</strong> <span class="math inline">\(\lambda_1 =
+- \delta + j\omega\)</span> 与 <span class="math inline">\(\lambda_2 = -
+\delta -
+j\omega\)</span>，则<strong>二阶微分方程</strong>的解的形式为：</li>
+</ol>
+<p><span class="math display">\[
+u_C(t) = e^{-\delta t}(A \cos \omega t + B \sin \omega t)
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：<span class="math inline">\(\delta\)</span> 与
+<span class="math inline">\(\omega\)</span> 的表达式可以参照前面的等式
+<span class="math inline">\(\lambda = \frac{-RC \pm \sqrt{(RC)^2 -
+4LC}}{2LC} = \frac{- R \pm \sqrt{R^2 - \frac{4L}{C}}}{2L}\)</span>。</p>
+</blockquote>
+<p>只要求解出上面三种形式<strong>解</strong>的<strong>待定系数</strong>，就可以得到二阶微分方程的解。下面给出
+<span class="math inline">\(u_C(t) = A \cdot e^{\lambda_1 t} + B \cdot
+e^{\lambda_2 t}\)</span>
+的<strong>待定系数</strong>求解过程（另外两种情况的求解方法相同）。根据已知条件，电容电压的初始值为
+<span class="math inline">\(U_0\)</span>，即 <span class="math inline">\(u_C(0) = U_0\)</span>，将其代入至 <span class="math inline">\(u_C(t) = A \cdot e^{\lambda_1 t} + B \cdot
+e^{\lambda_2 t}\)</span> 就可以得到：</p>
+<p><span class="math display">\[
+U_0 = A + B
+\]</span></p>
+<p>根据已知条件，电感电流的初值为零 <span class="math inline">\(i(0) = 0
+= -C \frac{d u_C}{dt} \big|_{t=0}\)</span>，因而可以得到 <span class="math inline">\(\frac{d u_C}{dt} \big|_{t=0} = 0\)</span>，对等式
+<span class="math inline">\(u_C(t) = A \cdot e^{\lambda_1 t} + B \cdot
+e^{\lambda_2 t}\)</span> 的两侧同时<strong>求导</strong>可以得到：</p>
+<p><span class="math display">\[
+\frac{du_C(t)}{dt} = A \lambda_1 e^{\lambda_1 t} + B \lambda_2
+e^{\lambda_2 t}
+\]</span></p>
+<p>再把 <span class="math inline">\(\frac{d u_C}{dt} \big|_{t=0} =
+0\)</span> 代入到上面的等式，就可以继续得到：</p>
+<p><span class="math display">\[
+0 = A \lambda_1 + B \lambda_2
+\]</span></p>
+<p>联立 <span class="math inline">\(U_0 = A + B\)</span>
+与上面的方程，就能够分别求解得到<strong>待定系数</strong> <span class="math inline">\(A\)</span> 与 <span class="math inline">\(B\)</span>，从而完成二阶微分方程的求解：</p>
+<p><span class="math display">\[
+\begin{cases}
+U_0 = A + B \\
+0 = A \lambda_1 + B \lambda_2
+\end{cases}
+\implies
+\begin{cases}
+A = \frac{- \lambda_2 U_0}{\lambda_1 - \lambda_2} \\
+B = \frac{\lambda_1 U_0}{\lambda_1 - \lambda_2}
+\end{cases}
+\]</span></p>
+<h4 id="二阶电路的三种工作状态">二阶电路的三种工作状态</h4>
+<p>经过前面的分析可以知道，二阶电路微分方程的<strong>解</strong>存在着三种情况，它们分别对应着二阶电路的<strong>过阻尼</strong>（<span class="math inline">\(R &gt; 2
+\sqrt{\frac{L}{C}}\)</span>）、<strong>临界阻尼</strong>（<span class="math inline">\(R = 2
+\sqrt{\frac{L}{C}}\)</span>）、<strong>欠阻尼</strong>（<span class="math inline">\(R &lt; 2
+\sqrt{\frac{L}{C}}\)</span>）三种工作状态：</p>
+<ul>
+<li><strong>过阻尼</strong>（<span class="math inline">\(R &gt; 2
+\sqrt{\frac{L}{C}}\)</span>）的情况下，根据 <span class="math inline">\(u_C(t) = A \cdot e^{\lambda_1 t} + B \cdot
+e^{\lambda_2 t}\)</span> 可以绘制出电容<strong>电压</strong> <span class="math inline">\(u_C\)</span>（单调衰减）随着<strong>时间</strong>
+<span class="math inline">\(t\)</span> 进行变化的波形：</li>
+</ul>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/20.png"></p>
+<ul>
+<li><strong>欠阻尼</strong>（<span class="math inline">\(R &lt; 2
+\sqrt{\frac{L}{C}}\)</span>）的情况下，根据 <span class="math inline">\(u_C(t) = e^{-\delta t}(A \cos \omega t + B \sin
+\omega t)\)</span> 可以绘制出电容<strong>电压</strong> <span class="math inline">\(u_C\)</span>（振荡衰减）随着<strong>时间</strong>
+<span class="math inline">\(t\)</span> 进行变化的波形：</li>
+</ul>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/21.png"></p>
+<ul>
+<li><strong>临界阻尼</strong>（<span class="math inline">\(R = 2
+\sqrt{\frac{L}{C}}\)</span>）的电容电压 <span class="math inline">\(u_C(t)\)</span>
+与过阻尼情况相类似，同样出现单调衰减，只不过衰减更加迅速；</li>
+</ul>
+<p>上面的数学推导过程显得十分枯燥，接下来举一个形象的例子，下图当中的<strong>红色</strong>曲线表示一个容器，内壁的<strong>绿色</strong>曲线代表具有一定摩擦系数的涂层，在容器边沿放置一个<strong>小球</strong>，松开手之后小球会开始向下滚落，此时小球的滚落存在着三种情况：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-4/22.png"></p>
+<ol type="1">
+<li>摩擦系数很大，小球滚动很慢，最后缓慢的到达容器底部，并且停留下来；</li>
+<li>摩擦系数刚好，小球滚动稍快，最后恰好到达容器底部，并且不会向容器左侧滚动；</li>
+<li>摩擦系数很小，小球滚动很快，迅速到达容器底部之后，在惯性的作用下会继续滚向容器左侧，然后再滚向右侧，往复多次之后，最终停留在底部；</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：上述的三种情况就类似于二阶电路的三种工作状态，对于三阶及其以上的更高阶电路，求解方法基本相似，只是过程更为复杂。</p>
+</blockquote>
+<p>除此之外，动态电路的<strong>阶跃响应</strong>与<strong>冲激响应</strong>涉及的主要的是数学方面的知识，不属于电路分析的概念范畴，因而这里不做讨论。实际上在《<strong>信号与系统</strong>》当中，这两者都是非常重要的内容。</p>
+<h3 id="补充">补充</h3>
+<p><strong>一阶电路</strong>求解的三个要素分别是指<strong>初值</strong>（<span class="math inline">\(u_{C(0)}\)</span> 或 <span class="math inline">\(i_{L(0)}\)</span>）、<strong>终值</strong>（<span class="math inline">\(u_{C(\infty)}\)</span> 或 <span class="math inline">\(i_{L(\infty)}\)</span>）、<strong>时间常数</strong>（<span class="math inline">\(\tau = RC\)</span> 或 <span class="math inline">\(\tau =
+\frac{L}{R}\)</span>），一旦确定这三个要素，就可以得到 <span class="math inline">\(u_C\)</span> 和 <span class="math inline">\(i_L\)</span> 的表达式：</p>
+<p><span class="math display">\[
+\begin{cases}
+u_C(t) = u_{C(\infty)} + [u_{C(0)} - u_{C(\infty)}] \cdot e^{-
+\frac{t}{\tau}} \\
+i_L(t) = i_{L(\infty)} + [i_{L(0)} - i_{L(\infty)}] \cdot e^{-
+\frac{t}{\tau}}
+\end{cases}
+\]</span></p>
+<p><strong>一阶电路三要素公式</strong>更为通用的表达形式如下面所示：</p>
+<p><span class="math display">\[
+f(t) = f(\infty) + [f(0) - f(\infty)] \cdot e^{- \frac{t}{\tau}}
+\]</span></p>
+<h3 id="总结-3">总结</h3>
+<ul>
+<li><strong>电容器</strong>（存储电场）和<strong>电感器</strong>（存储磁场）都属于储能元件，它们都能够储存与释放能量；</li>
+<li><strong>电容器</strong>的串并联规律与<strong>电阻器</strong>的串并联规律相反，而<strong>电感器</strong>的串并联规律与<strong>电阻器</strong>的串并联规律相同；</li>
+<li><strong>电容器</strong>与<strong>电感器</strong>的<code>电压</code>、<code>电流</code>都属于微分关系；</li>
+<li>包含有<strong>电容器</strong>、<strong>电感器</strong>的电路称为<strong>动态电路</strong>，对应的方程是<strong>微分方程</strong>；</li>
+<li><strong>微分方程</strong>为一阶的电路称为<strong>一阶电路</strong>，<strong>电容器</strong>与<strong>电感器</strong>的充放电电路都属于一阶电路；</li>
+<li><strong>电容器</strong>与<strong>电感器</strong>在充放电时的<code>电压</code>与<code>电流</code>均为<strong>指数函数</strong>；</li>
+<li><strong>电容器</strong>与<strong>电感器</strong>的充电速度取决于<strong>时间常数</strong>，时间常数越<strong>大</strong>充放电越<strong>慢</strong>，反之就会越<strong>快</strong>；</li>
+<li><strong>电容器</strong>充放电的<strong>时间常数</strong>，等于<strong>电阻</strong>
+<span class="math inline">\(R\)</span> 乘以<strong>电容</strong> <span class="math inline">\(C\)</span>；</li>
+<li><strong>电感器</strong>充放电的<strong>时间常数</strong>，等于<strong>电感</strong>
+<span class="math inline">\(L\)</span> 除以<strong>电阻</strong> <span class="math inline">\(R\)</span>；</li>
+<li><strong>微分方程</strong>为二阶的电路称为<strong>二阶电路</strong>，二阶电路拥有<code>过阻尼</code>、<code>临界阻尼</code>、<code>欠阻尼</code>三种工作状态；</li>
+</ul>
+<h2 id="正弦稳态电路">正弦稳态电路</h2>
+<p>前面讨论的静态与动态电路的输入都是<strong>直流激励</strong>，但是在工程实践当中，大多数情况下使用的输入都是<strong>正弦激励</strong>。但是正弦激励电路的<strong>时域</strong>分析极为困难，需要将其转换至<strong>相量域</strong>以简化分析。</p>
+<h3 id="正弦量">正弦量</h3>
+<p>习惯上使用<strong>余弦函数</strong>来表达电路理论当中的<strong>正弦量</strong>，正弦量本质上是一个<strong>周期函数</strong>，其波形如下图所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/1.png"></p>
+<p><strong>正弦量的三要素</strong>分别是指<strong>振幅</strong> <span class="math inline">\(F_m\)</span>、<strong>角频率</strong> <span class="math inline">\(\omega\)</span>、<strong>初相位</strong> <span class="math inline">\(\varphi\)</span>，确定了这三个要素，就可以确定一个正弦量，任意一个<strong>正弦量</strong>都可以表示为下面的形式：</p>
+<p><span class="math display">\[
+f(t) = 振幅F_m \cdot \cos(角频率 \omega t  + 初相位 \varphi)
+\]</span></p>
+<p>如果<strong>振幅</strong>使用<strong>有效值</strong> <span class="math inline">\(F\)</span>，那么上述的正弦量还可以表示为如下的形式：</p>
+<p><span class="math display">\[
+f(t) = \sqrt{2} \cdot 有效值 F \cdot \cos(角频率 \omega t  + 初相位
+\varphi)
+\]</span></p>
+<p>正弦量的<strong>有效值</strong>是指在一个周期当中，当<strong>直流激励</strong>与<strong>正弦激励</strong>分别通过电阻消耗同等能量时候的<strong>直流激励</strong>大小，也称为<strong>均方根值</strong>。接下来讨论正弦量的<strong>有效值</strong>与<strong>振幅</strong>之间的关系，如果电阻两端的<strong>直流电压</strong>为
+<span class="math inline">\(U\)</span>，<strong>正弦量电压</strong>为
+<span class="math inline">\(U_m \cdot \cos(\omega t +
+\varphi)\)</span>，那么根据有效值的定义就可以得到：</p>
+<p><span class="math display">\[
+\frac{U^2}{R} T = \int^{T}_{0} \frac{[U_m \cos (\omega t +
+\varphi)]^2}{R} dt
+\implies U^2 = \frac{1}{2} U_m^2
+\implies U = \frac{1}{\sqrt{2}} \cdot U_m \approx 0.707 \times U_m
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：正弦量的<strong>有效值</strong>在分析正弦稳态电路的<strong>功率</strong>时会相当有用。</p>
+</blockquote>
+<h3 id="正弦稳态电路的响应">正弦稳态电路的响应</h3>
+<p>下图所示电路的激励是一个<strong>正弦量</strong> <span class="math inline">\(u_S = U_m \cos(\omega t + \varphi)\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/2.png"></p>
+<p>首先，根据<strong>基尔霍夫定律</strong>列写 KVL 方程 <span class="math inline">\(-u_S + R \cdot i + u_C =
+0\)</span>。然后，代入电容器的<strong>电压与电流关系</strong> <span class="math inline">\(i = C \frac{du_C}{dt}\)</span>
+以及上面的<strong>正弦量</strong>激励。最后，就可以得到下面的等式：</p>
+<p><span class="math display">\[
+RC \frac{du_C}{dt} + u_C = U_m \cos(\omega t + \varphi)
+\]</span></p>
+<p>观察可以发现，该等式属于<strong>一阶非齐次微分方程</strong>，它的<strong>解</strong>包括<strong>齐次通解</strong>、<strong>非齐次特解</strong>两部分，其中的<strong>非齐次特解</strong>同时也是正弦激励电路的<strong>稳态解</strong>，需要重点进行关注。这个等式对应的<strong>稳态解</strong>同样是一个正弦量，并且其角频率等于<strong>电压源</strong>
+<span class="math inline">\(u_S\)</span>
+的<strong>角频率</strong>，这样该稳态解才能够满足<strong>微分方程</strong>的要求。因此，<strong>正弦稳态电路</strong>响应的重要特点，就是电路当中任何一个<code>电压</code>、<code>电流</code>都是与<strong>激励源</strong>相同频率的正弦量。换而言之，在没有开始求解稳态电路之前，就已经确定了其响应的的<strong>角频率</strong>，因而正弦稳态电路响应的角频率无需再行求解，这也是后续引入<strong>相量法</strong>求解正弦稳态电路的重要依据。</p>
+<h3 id="正弦量相位的超前与滞后">正弦量相位的超前与滞后</h3>
+<p>当多个正弦量需要判断<strong>相位</strong>的<strong>超前</strong>或者<strong>滞后</strong>时，如果<strong>正弦量
+A</strong> 的初相位减去<strong>正弦量 B</strong>
+的初相位，其结果介于正负 <code>180°</code>
+度之间，那么初相位之差<strong>大于零</strong>就说明 <strong>A</strong>
+超前于 <strong>B</strong>，<strong>小于零</strong>则说明
+<strong>A</strong> 滞后于 <strong>B</strong>。</p>
+<p>另外一种方法是根据波形进行判断，例如下图所示的三个正弦量波形，判断其相位超前与滞后的方法是：寻找任意两个波形距离相近的<strong>最高点</strong>，哪个波形的最高点位于<strong>左侧</strong>，就意味着该波形的相位更加<strong>超前</strong>，由此就可以判断出<strong>波形</strong>
+<span class="math inline">\(u_A\)</span> 超前于 <span class="math inline">\(u_B\)</span>，而<strong>波形</strong> <span class="math inline">\(u_B\)</span> 又超前于 <span class="math inline">\(u_C\)</span>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/3.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>交流电路</strong>的分析主要以<strong>复数</strong>作为基础，而<strong>直流电路</strong>的分析则是以<strong>实数</strong>作为基础，复数的计算相比于实数会略显复杂。</p>
+</blockquote>
+<h3 id="相量法">相量法</h3>
+<p><strong>正弦稳态电路</strong>的分析离不开复杂的<strong>正弦量</strong>计算，本节内容将要介绍的<strong>相量法</strong>，就是一种简单可行的正弦稳态电路分析方法。</p>
+<ul>
+<li>相量是<strong>复数</strong>，复数的运算远远比正弦量的计算更加简单；</li>
+<li>相量不包含<strong>时间</strong>，相对于<strong>时间</strong>相关的正弦量，分析起来更为方便；</li>
+</ul>
+<h4 id="相量法引入依据">相量法引入依据</h4>
+<p>引入相量法的依据主要有下面两个：</p>
+<ol type="1">
+<li>正弦稳态电路当中所有<code>电压</code>、<code>电流</code>的<strong>角频率</strong>相同并且已知，因而无需额外再行求解；</li>
+<li><strong>欧拉公式</strong> <span class="math inline">\(e^{j \theta} =
+\cos \theta + j \sin \theta\)</span>
+可以将<strong>复数</strong>与<strong>正弦/余弦函数</strong>联系起来；</li>
+</ol>
+<p>根据<strong>欧拉公式</strong>，可以将任意一个<strong>正弦量</strong>表示为一个<strong>复数</strong>的<strong>实部</strong>，从而建立起<strong>正弦量</strong>与<strong>复数</strong>之间的联系：</p>
+<p><span class="math display">\[
+f(t) = F_m \cos (\omega t + \varphi) = Re[F_m e^{j(\omega t + \varphi)}]
+= Re[{\color{blue}F_m e^{j \varphi}} e^{j \omega t}]
+\]</span></p>
+<p>只要确定上面等式当中的 <span class="math inline">\({\color{blue}F_m
+e^{j \varphi}}\)</span>，就可以确定正弦量的<strong>振幅</strong> <span class="math inline">\({\color{blue}F_m}\)</span>
+和<strong>初相位</strong> <span class="math inline">\({\color{blue}\varphi}\)</span>。而正弦稳态电路当中正弦量的<strong>角频率</strong>
+<span class="math inline">\({\color{blue}\omega}\)</span>
+已知，所以<strong>正弦量</strong> <span class="math inline">\(f(t) =
+{\color{blue}{F_m}} \cos({\color{blue}{\omega}}t +
+{\color{blue}{\varphi}})\)</span>
+就唯一确定下来。从而就可以将<strong>正弦量</strong>的计算，转化为<strong>复数</strong>
+<span class="math inline">\({\color{blue}F_m e^{j \varphi}}\)</span>
+的计算，称为 <span class="math inline">\(f(t)\)</span>
+对应的<strong>相量</strong> <span class="math inline">\(\dot{F_m}\)</span>：</p>
+<p><span class="math display">\[
+\dot{F_m} = {\color{blue}F_m e^{j \varphi}}
+\]</span></p>
+<p>之所以称 <span class="math inline">\(\dot{F_m}\)</span>
+为<strong>相量</strong>，是由于其包含了<strong>初相位</strong>（相）和<strong>幅值</strong>（量）两个要素。这里的相量指代的是振幅，称为<strong>振幅相量</strong>或者<strong>最大值相量</strong>，但是在实际电路分析当中，通常采用的是<strong>有效值相量</strong>
+<span class="math inline">\(\dot{F}\)</span>：</p>
+<p><span class="math display">\[
+\dot{F} = \color{blue}{F e^{j \varphi}} = F_m \frac{1}{\sqrt{2}} e^{j
+\varphi}
+\]</span></p>
+<p>比较<strong>相量</strong> <span class="math inline">\(\dot{F_m}\)</span> 与<strong>有效值相量</strong>
+<span class="math inline">\(\dot{F}\)</span>
+的表达式，可以发现两者的区别主要在于<strong>比例系数</strong>。有效值向量的优点在于计算功率时更加方便，后续内容当中提到的相量都默认是指<strong>有效值相量</strong>。</p>
+<h4 id="相量域-时域对应关系">相量域 &amp; 时域对应关系</h4>
+<p>首先，对<strong>正弦量</strong> <span class="math inline">\(f(t) =
+F_m \cos (\omega t + \varphi)\)</span> 的形式进行如下变换：</p>
+<p><span class="math display">\[
+f(t) = F_m \cos (\omega t + \varphi) = Re[F_m e^{j(\omega t + \varphi)}]
+= Re[{\color{blue}F_m e^{j \varphi}} e^{j \omega t}]
+\implies
+f(t) = \sqrt{2} F \cos(\omega t + \varphi) = Re[\sqrt{2} Fe^{j(\omega t
++ \varphi)}] = Re[\sqrt{2} {\color{blue}{F e^{j \varphi}}}e^{j \omega
+t}]
+\]</span></p>
+<p>然后，将 <span class="math inline">\({\color{Magenta}{\dot{F}}} =
+{\color{blue}{F e^{j \varphi}}}\)</span>
+代入上面右侧的等式就可以得到：</p>
+<p><span class="math display">\[
+f(t) = Re[\sqrt{2} {\color{Magenta}{\dot{F}}} e^{j \omega t}]
+\]</span></p>
+<p>从上面这个等式可以看到，<strong>时域</strong>的 <span class="math inline">\(f(t)\)</span> 与<strong>相量域</strong>的 <span class="math inline">\(\color{Magenta}{\dot{F}}\)</span>
+是一一对应关系，两者相互可以进行转换。换而言之，<strong>相量法</strong>就是将<strong>时域</strong>的<code>正弦量</code>转换为<strong>相量域</strong>的<code>相量</code>，接下来就把时域的<strong>正弦量</strong>计算转换为相量域的<strong>相量</strong>计算，根据上面的方程可以得到：</p>
+<p><span class="math display">\[
+kf(t) = k \times Re[\sqrt{2} {\color{Magenta}{\dot{F}}} e^{j \omega t}]
+= Re[\sqrt{2} {\color{Magenta}{(k \dot{F})}} e^{j \omega t}]
+\]</span></p>
+<p>观察就可以发现，<strong>时域</strong>的比例运算到了<strong>相量域</strong>仍然是比例运算，对于前面的等式
+<span class="math inline">\(f(t) = Re[\sqrt{2}
+{\color{Magenta}{\dot{F}}} e^{j \omega t}]\)</span>
+进行<strong>求导</strong>：</p>
+<p><span class="math display">\[
+\frac{d[f(t)]}{dt} = Re[\sqrt{2} {\color{Magenta}{(j \omega \dot{F})}}
+e^{j \omega t}]
+\]</span></p>
+<p>通过这个等式可以发现，时域的<strong>微分运算</strong>在相量域变为了<strong>比例运算</strong>，即在原来<strong>相量</strong>的基础之上乘以
+<span class="math inline">\(j
+\omega\)</span>，该运算规律是相量法的优势之一，因为它将<strong>微分运算</strong>转换成了<strong>代数运算</strong>，从而大大降低了计算的复杂度。最后来讨论时域的<strong>加减运算</strong>，所对应的<strong>相量域运算</strong>，假设当前存在如下两个时域形式的<strong>正弦量</strong>：</p>
+<p><span class="math display">\[
+\begin{cases}
+f_1(t) = \sqrt{2}F_1 \cos(\omega t + \varphi_1) \\
+f_2(t) = \sqrt{2}F_2 \cos(\omega t + \varphi_2)
+\end{cases}
+\]</span></p>
+<p>将前面的 <span class="math inline">\(f(t) = Re[\sqrt{2}
+{\color{Magenta}{\dot{F}}} e^{j \omega t}]\)</span>
+与上述等式进行联立，从而就可以得到：</p>
+<p><span class="math display">\[
+f_1(t) + f_2(t) = Re[\sqrt{2} {\color{Magenta}{\dot{F_1}}} e^{j \omega
+t}] + Re[\sqrt{2} {\color{Magenta}{\dot{F_2}}} e^{j \omega t}] =
+Re[\sqrt{2} {\color{Magenta}{(\dot{F_1} + \dot{F_2})}} e^{j \omega t}]
+\]</span></p>
+<p>根据上面的等式能够发现，时域的<strong>加法运算</strong>到了相量域仍然是<strong>加法运算</strong>，对于<strong>减法运算</strong>情况同样类似，下面的表格总结了正弦稳态电路<strong>时域运算</strong>与<strong>相量域运算</strong>的对应关系：</p>
+<table>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 25%">
+<col style="width: 24%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">时域</th>
+<th style="text-align: center;">相量域</th>
+<th style="text-align: center;">时域</th>
+<th style="text-align: center;">相量域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(\color{blue}{f(t)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\color{Magenta}{\dot{F}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\color{blue}{f_1(t) \pm f_2(t)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\color{Magenta}{\dot{F_1} \pm
+\dot{F_2}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(\color{blue}{k \times f(t)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\color{Magenta}{k \times \dot{F}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\color{blue}{\frac{d[f(t)]}{dt}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\color{Magenta}{j \omega \dot{F}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>根据上述表格里的加减运算，就可以了解正弦稳态电路的<strong>基尔霍夫定律</strong>，在<strong>时域</strong>与<strong>相量域</strong>之间的对应关系：</p>
+<table>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 36%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">基尔霍夫定律</th>
+<th style="text-align: center;">时域</th>
+<th style="text-align: center;">相量域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>KCL</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\color{blue}{\sum i_k = 0}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\color{Magenta}{\sum \dot{I_k} = 0}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>KVL</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\color{blue}{\sum u_k = 0}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\color{Magenta}{\sum \dot{U_k} = 0}\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong>：正弦稳态电路在相量域当中仍然满足
+<strong>KCL</strong> 与 <strong>KVL</strong>
+定律，这就意味着之前用于直流电路的求解方法，例如<code>基尔霍夫定律</code>、<code>回路电流法</code>、<code>结点电压法</code>、<code>等效变换</code>、<code>戴维宁定理</code>等仍然适用于<strong>正弦稳态电路</strong>。虽然正弦稳态电路的分析相比于直流电路更为复杂，但是总体而言两者的分析方法基本通用。</p>
+</blockquote>
+<p>正弦稳态电路分析时，电路当中的变量符号需要遵循以下规律，这里以<code>电压</code>进行举例：</p>
+<ul>
+<li><strong>时域</strong>里的电压符号一律<strong>小写</strong>为 <span class="math inline">\(u\)</span> 或者 <span class="math inline">\(u(t)\)</span>；</li>
+<li><strong>相量域</strong>下的电压必须<strong>大写</strong>，并且在顶部添加<strong>点号</strong>
+<span class="math inline">\(\dot{U}\)</span>；</li>
+<li><strong>有效值</strong>（也就是相量的<strong>模值</strong>）直接<strong>大写</strong>为
+<span class="math inline">\(U\)</span>；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：如果当前电路为<strong>直流电路</strong>，那么变量无需在顶部添加点号；当直流电路当中的变量为<strong>恒定值</strong>时，一般将其进行<strong>大写</strong>（<span class="math inline">\(U\)</span>）；如果是随着时间进行变化的<strong>非恒定值</strong>，则应当将其<strong>小写</strong>（<span class="math inline">\(u\)</span>）。</p>
+</blockquote>
+<p><strong>正弦量</strong>的分析之所以能够转化为<strong>相量</strong>的分析，是由于<code>角频率</code>作为正弦量的要素之一，正弦量可以被视为以<code>角频率</code>进行<strong>旋转</strong>。对于一个正弦稳态电路而言，虽然全部<code>电压</code>与<code>电流</code>都是以相同的<strong>角频率</strong>旋转，但是它们相互之间处于一种相对<strong>静止</strong>的状态，从而就可以实现<code>相量</code>与<code>时间</code>的解耦。</p>
+<p>最后，再来回顾一下<strong>复数</strong>的运算方法，对于给定的 <span class="math inline">\(Z = x + jy = |Z| \angle \theta\)</span>、<span class="math inline">\(Z_1 = x_1 + jy_1 = |Z_1| \angle
+\theta_1\)</span>、<span class="math inline">\(Z_2 = x_2 + jy_2 = |Z_2|
+\angle \theta_2\)</span>
+三个复数，它们之间的基本运算关系如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">运算关系</th>
+<th style="text-align: center;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>加减运算</strong></td>
+<td style="text-align: center;"><span class="math inline">\(Z_1 \pm Z_2
+= (x_1 \pm x_2) + j(y_1 \pm y_2)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>复数模值</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\vert Z
+\vert = \sqrt{x^2 + y^2}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>复数相角</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\theta =
+\tan^{-1} \frac{y}{x}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>复数共轭</strong>（电路分析当中的<strong>共轭</strong>采用
+<span class="math inline">\(*\)</span> 表示）</td>
+<td style="text-align: center;"><span class="math inline">\(Z^* = x - jy
+= \vert Z \vert \angle - \theta\)</span>，<span class="math inline">\(ZZ^* = x^2 + y^2 = \vert z \vert ^2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>乘法运算</strong>（<code>模值</code>相乘，<code>角度</code>相加）</td>
+<td style="text-align: center;"><span class="math inline">\(Z_1 \times
+Z_2 = \vert Z_1 \vert \times \vert Z_2 \vert \angle(\theta_1 +
+\theta_2)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>除法运算</strong>（<code>模值</code>相除，<code>角度</code>相减）</td>
+<td style="text-align: center;"><span class="math inline">\(\frac{Z_1}{Z_2} = \frac{\vert Z_1 \vert}{\vert Z_2
+\vert} \angle (\theta_1 - \theta_2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>除此之外，在电路分析过程当中，还会经常使用到下面这些复数计算公式：</p>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 19%">
+<col style="width: 69%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math inline">\(j^2 =
+-1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\frac{1}{j}
+= -j\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(j = 1 \angle
+\frac{\pi}{2}\)</span> 以及 <span class="math inline">\(-j = 1 \angle -
+\frac{\pi}{2}\)</span></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h3 id="阻抗">阻抗</h3>
+<h4 id="阻抗的引入">阻抗的引入</h4>
+<p>求解一个电路，既需要列写 <strong>KCL</strong> 和 <strong>KVL</strong>
+方程，也需要求解每一个电路元件（<code>电阻</code>、<code>电感</code>、<code>电容</code>）的电压与电流关系。由于<strong>正弦稳态电路</strong>在相量域仍然满足基尔霍夫定律，所以为了在相量域分析电路，还需要了解元件在相量域当中的电压与电流关系。下面的表格总结了正弦稳态电路<strong>时域</strong>与<strong>相量域</strong>的对应关系：</p>
+<table>
+<colgroup>
+<col style="width: 47%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">时域</th>
+<th style="text-align: center;">相量域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(\color{blue}{kf(t)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\color{Magenta}{k \dot{F}}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(\color{blue}{\frac{d[f(t)]}{dt}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\color{Magenta}{j \omega \dot{F}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>根据上面的表格，可以得出正弦稳态电路当中的<code>电阻</code>、<code>电感</code>、<code>电容</code>，在<strong>时域</strong>与<strong>相量域</strong>的<code>电压</code>与<code>电流</code>关系对照：</p>
+<table>
+<colgroup>
+<col style="width: 7%">
+<col style="width: 44%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">元件</th>
+<th style="text-align: center;">时域</th>
+<th style="text-align: center;">相量域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>电阻</strong></td>
+<td style="text-align: center;"><span class="math inline">\({\color{blue}{u_R(t) = R i_R(t)}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\color{Magenta}{\dot{U_R} = R
+\dot{I_R}}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>电感</strong></td>
+<td style="text-align: center;"><span class="math inline">\({\color{blue}{u_L(t) = L
+\frac{d[i_L(t)]}{dt}}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\color{Magenta}{\dot{U_L} = j \omega L
+\dot{I_L}}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>电容</strong></td>
+<td style="text-align: center;"><span class="math inline">\({\color{blue}{i_C(t) = C
+\frac{d[u_C(t)]}{dt}}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\color{Magenta}{\dot{I_C} = j \omega C
+\dot{U_C}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>根据上述<strong>相量域</strong>当中<strong>电阻</strong>、<strong>电感</strong>、<strong>电容</strong>的<code>电压</code>与<code>电流</code>关系，就可以得到下面这个方程组：</p>
+<p><span class="math display">\[
+\begin{cases}
+\frac{\dot{U_R}}{\dot{I_R}} = R \\
+\frac{\dot{U_L}}{\dot{I_L}} = j \omega L \\
+\frac{\dot{U_C}}{\dot{I_C}} = \frac{1}{j \omega C}
+\end{cases}
+\]</span></p>
+<p>观察上面的方程组可以发现，在相量域当中，<strong>电阻</strong>仍然满足欧姆定律（<code>电压</code>与<code>电流</code>之比为<strong>正实数</strong>），<strong>电感</strong>与<strong>电容</strong>满足广义的欧姆定律（<code>电压</code>与<code>电流</code>之比为<strong>虚数</strong>）。为了与<strong>时域</strong>模型当中的<strong>电阻</strong>进行区别，这里将<strong>相量域</strong>当中的<code>电压</code>与<code>电流</code>之比称为<strong>阻抗</strong>（<code>Impedance [ɪmˈpiːdns]</code>）。</p>
+<h4 id="阻抗的定义">阻抗的定义</h4>
+<p>在相量域当中，含有<strong>电阻</strong>、<strong>电感</strong>、<strong>电容</strong>支路上的<code>电压</code>与<code>电流</code>之比称为<strong>阻抗</strong>，采用字母
+<strong>Z</strong>
+表示。根据前面相量域当中元件的<code>电压</code>与<code>电流</code>关系可以知道：</p>
+<p><span class="math display">\[
+\begin{cases}
+电阻的阻抗\ Z = \frac{\dot{U_R}}{\dot{I_R}} = R \\
+电感的阻抗\ Z = \frac{\dot{U_L}}{\dot{I_L}} = j \omega L \\
+电容的阻抗\ Z = \frac{\dot{U_C}}{\dot{I_C}} = \frac{1}{j \omega C} = - j
+\frac{1}{\omega C}
+\end{cases}
+\]</span></p>
+<p>根据阻抗的定义，可以发现<strong>阻抗</strong>与<strong>电阻</strong>类似，两者皆满足广义上的欧姆定理，因而<strong>阻抗的串并联公式</strong>与<strong>电阻的串并联公式</strong>相同。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/4.png"></p>
+<p>上面电路当中的<code>电阻</code>、<code>电感</code>、<code>电容</code>为串联关系，则其<strong>等效阻抗</strong>
+<span class="math inline">\(Z_{eq}\)</span> 等于：</p>
+<p><span class="math display">\[
+Z_{eq} = R + j \omega L + \frac{1}{j \omega C} = R + j \bigg( \omega L -
+\frac{1}{\omega C} \bigg)
+\]</span></p>
+<p>任意一个阻抗都可以被写成下面的<strong>复数形式</strong>：</p>
+<p><span class="math display">\[
+阻抗 Z = 电阻 R + j \cdot 电抗 X
+\]</span></p>
+<p>其中 <span class="math inline">\(R\)</span>
+称为<strong>电阻</strong>，而 <span class="math inline">\(X\)</span>
+称为<strong>电抗</strong>。对于<code>纯电阻</code>而言 <span class="math inline">\(X = 0\)</span>，而对于一个<code>纯电感</code>而言
+<span class="math inline">\(R=0,\
+X&gt;0\)</span>，对于<code>纯电容</code>而言 <span class="math inline">\(R=0,\
+X&lt;0\)</span>。对于<code>阻抗</code>而言，如果 <span class="math inline">\(X&gt;0\)</span>
+就称为<strong>感性阻抗</strong>，如果 <span class="math inline">\(X&lt;0\)</span>，则称为<strong>容性阻抗</strong>。上面的复数形式阻抗，还可以写做<strong>极坐标形式</strong>：</p>
+<p><span class="math display">\[
+阻抗 Z = |阻抗模值 Z|\ \angle 阻抗角 \theta_z
+\]</span></p>
+<p>上面等式当中的 <span class="math inline">\(|Z|\)</span>
+称为<strong>阻抗模值</strong>，而 <span class="math inline">\(\theta_z\)</span>
+称为<strong>阻抗角</strong>。根据<code>阻抗</code>等于<code>电压</code>除以<code>电流</code>可以知道，<strong>阻抗角</strong>反映了阻抗的<code>电压</code>与<code>电流</code>之间的<strong>相位差</strong>。阻抗的<strong>模值</strong>与<strong>阻抗角</strong>既与<code>电阻值</code>、<code>电感值</code>、<code>电容值</code>相关，还与<strong>角频率</strong>相关。由此可见，<strong>角频率</strong>在正弦稳态电路当中起着比较重要的作用，这也是<strong>正弦稳态电路</strong>与<strong>直流电路</strong>最大的区别所在。</p>
+<p>下面的表格，给出了<code>电容</code>、<code>电感</code>、<code>电容</code>的<strong>阻抗模值</strong>与<strong>角频率</strong>之间的关系：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">元件</th>
+<th style="text-align: center;">阻抗模值</th>
+<th style="text-align: center;">阻抗模值与角频率关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>电阻</strong></td>
+<td style="text-align: center;"><span class="math inline">\(R\)</span></td>
+<td style="text-align: center;">无关</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>电感</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\omega
+L\)</span></td>
+<td style="text-align: center;">正比</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>电容</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{\omega C}\)</span></td>
+<td style="text-align: center;">反比</td>
+</tr>
+</tbody>
+</table>
+<p>阻抗角与电阻的相同之处在于，<strong>电阻</strong>与<strong>阻抗</strong>都满足<strong>欧姆定律</strong>，而且<strong>串并联的计算公式</strong>也完全相同，两者的不同之处则主要在于如下三点：</p>
+<ol type="1">
+<li><strong>电阻</strong>是<strong>时域</strong>当中<code>电阻器</code>的电阻值，而<strong>阻抗</strong>是<code>电阻器</code>、<code>电感器</code>、<code>电容器</code>在<strong>相量域</strong>当中的体现；</li>
+<li><strong>电阻</strong>的值是一个<strong>实数</strong>，其<code>电压</code>与<code>电流</code>的相位相同，而<strong>阻抗</strong>可以是<strong>复数</strong>，它的<code>阻抗角</code>体现了<code>电压</code>与<code>电流</code>之间的<strong>相位差</strong>；</li>
+<li><strong>电阻</strong>与<code>角频率</code>没有关系，但是<strong>阻抗</strong>与<code>角频率</code>存在着关联；</li>
+</ol>
+<h3 id="正弦稳态电路的分析">正弦稳态电路的分析</h3>
+<p>正弦稳态电路的分析包括<code>电压与电流的计算</code>、<code>功率的计算</code>两个方面，本节内容我们来探讨<code>电压与电流的计算</code>。</p>
+<p>通过前面的学习已经知道，<strong>正弦稳态电路</strong>的分析都是在<strong>相量域</strong>当中进行的，由于在相量域当中，<code>电流</code>满足
+KCL <strong>基尔霍夫电流定律</strong>，<code>电压</code>满足 KVL
+<strong>基尔霍夫电压定律</strong>，而<code>阻抗</code>满足<strong>欧姆定律</strong>，所以正弦稳态电路分析就是基于<strong>基尔霍夫定律</strong>和<strong>欧姆定律</strong>展开的。虽然这类似于直流电路的分析，但是不同之处在于正弦稳态电路的分析是基于<strong>复数</strong>，而直流电路分析是基于<strong>实数</strong>。接下来，通过一个例子展示正弦稳态电路的分析过程。</p>
+<p>▶【例题
+1】已知下图所示电路当中，电压源的<code>电压相量</code>、<code>角频率</code>、<code>电阻值</code>、<code>电感值</code>，求解该电路当中的<strong>电流相量</strong>和<code>电阻</code>、<code>电感</code>、<code>电容</code>的<strong>电压相量</strong>
+？</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/5.png"></p>
+<p>◉【解】根据阻抗的串并联关系与欧姆定律，上面电路当中的<strong>电流相量</strong>
+<span class="math inline">\(\dot{I}\)</span> 等于：</p>
+<p><span class="math display">\[
+\dot{I} = \frac{\dot{U_S}}{R + j \omega L + \frac{1}{j \omega C}} =
+\frac{\dot{U_S}}{R + j \big(\omega L - \frac{1}{\omega C} \big)}
+\]</span></p>
+<p>◉【解】再根据串联阻抗的<strong>分压</strong>特性，就可以分别求解得到<strong>电阻电压</strong>
+<span class="math inline">\(\dot{U_R}\)</span>、<strong>电感电压</strong>
+<span class="math inline">\(\dot{U_L}\)</span>、<strong>电容电压</strong>
+<span class="math inline">\(\dot{U_C}\)</span>：</p>
+<p><span class="math display">\[
+\begin{cases}
+\dot{U_R} = \frac{R}{R + j \big( \omega L - \frac{1}{\omega C} \big)}
+\times \dot{U_S} \\
+\dot{U_L} = \frac{j \omega L}{R + j \big( \omega L - \frac{1}{\omega C}
+\big)} \times \dot{U_S} \\
+\dot{U_C} = \frac{- j \frac{1}{\omega C}}{R + j \big( \omega L -
+\frac{1}{\omega C} \big)} \times \dot{U_S}
+\end{cases}
+\]</span></p>
+<p>▶【例题
+2】已知下图所示电路当中电压源的<code>电压相量</code>、<code>角频率</code>、<code>电阻值</code>、<code>电感值</code>，求解该电路里电感的<strong>电压相量</strong>
+？</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/6.png"></p>
+<p>◉【解】观察上图当中的电路，可以发现<strong>电感</strong>的电压就是<strong>结点电压</strong>，因而可以使用<strong>结点电压法</strong>进行求解，根据基尔霍夫电流定律列写如下方程：</p>
+<p><span class="math display">\[
+\frac{\dot{U_S} - \dot{U_L}}{R} = \frac{\dot{U_L}}{\frac{1}{j \omega C}}
++ \frac{\dot{U_L}}{j \omega L}
+\]</span></p>
+<p>◉【解】根据上面的方程，就可以得到电感的<strong>电压相量</strong>
+<span class="math inline">\(\dot{U_L}\)</span>：</p>
+<p><span class="math display">\[
+\dot{U_L} = \frac{\frac{1}{R}}{\frac{1}{R} + j \omega C + \frac{1}{j
+\omega L}} \dot{U_S}
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：从上面这个例子可以看出，正弦稳态电路可以使用<strong>结点电压法</strong>分析，类似的也可以采用<strong>回路电流法</strong>、<strong>等效变换</strong>等直流电路分析方法。</p>
+</blockquote>
+<ul>
+<li><strong>相量</strong>的另外一个要素是<strong>初相位</strong>，如果将信号视为一段长跑，那么初相位就类似于起跑点；</li>
+<li><strong>相量图</strong>也是一种非常重要的正弦稳态电路分析方法，后续内容中将会再进行介绍；</li>
+</ul>
+<h3 id="正弦稳态电路的功率">正弦稳态电路的功率</h3>
+<p>本节内容主要讨论<strong>正弦稳态电路</strong>当中，不同类型<strong>功率</strong>的<code>定义</code>与<code>分析</code>。正弦稳态电路当中之所以要定义多种功率，是由于正弦信号本身的复杂性，需要通过定义多种不同功率来体现相应的特点。</p>
+<h4 id="瞬时功率">瞬时功率</h4>
+<p>正弦稳态电路当中的<strong>瞬时功率</strong>等于<strong>时域</strong>里的<code>电压</code>乘以<code>电流</code>：</p>
+<p><span class="math display">\[
+p(t) = u(t) \times i(t)
+\]</span></p>
+<h5 id="电阻的瞬时功率">电阻的瞬时功率</h5>
+<p>对于<strong>电阻器</strong>而言 <span class="math inline">\(\dot{U} =
+R \times
+\dot{I}\)</span>，其<code>电压</code>与<code>电流</code>的<strong>相位</strong>相同，这里假定<strong>时域</strong>条件下电阻的<strong>电压</strong>
+<span class="math inline">\(u(t)\)</span> 与<strong>电流</strong> <span class="math inline">\(i(t)\)</span> 分别等于：</p>
+<p><span class="math display">\[
+\begin{cases}
+u(t) = \sqrt{2} \times U \cdot \cos \omega t \\
+i(t) = \sqrt{2} \times I \cdot \cos \omega t
+\end{cases}
+\]</span></p>
+<p>将上面这个方程组代入至<strong>瞬时功率</strong>的表达式 <span class="math inline">\(p(t) = u(t) \times
+i(t)\)</span>，就可以得到<strong>电阻</strong>的<strong>瞬时功率</strong>
+<span class="math inline">\(p(t)\)</span>：</p>
+<p><span class="math display">\[
+p(t) = UI(1 + \cos 2 \omega t)
+\]</span></p>
+<p>由此可见，电阻的<strong>瞬时功率</strong> <span class="math inline">\(p(t)\)</span> 伴随着<strong>时间</strong> <span class="math inline">\(t\)</span>
+进行周期性变化，并且始终大于等于<strong>零</strong>，这意味着电阻始终在<strong>吸收</strong>功率，其波形如下图所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/7.png"></p>
+<h5 id="电感的瞬时功率">电感的瞬时功率</h5>
+<p>而对于<strong>电感器</strong>而言 <span class="math inline">\(\dot{U}
+= j \omega L
+\dot{I}\)</span>，其<code>电压</code>的相位<strong>超前</strong>于<code>电流</code>的相位有
+<code>90°</code>
+度，同样假定<strong>时域</strong>条件下电感的<strong>电压</strong> <span class="math inline">\(u(t)\)</span> 与<strong>电流</strong> <span class="math inline">\(i(t)\)</span> 分别等于：</p>
+<p><span class="math display">\[
+\begin{cases}
+u(t) = \sqrt{2} \times U \cdot \cos \omega t \\
+i(t) = \sqrt{2} \times I \cdot \cos （\omega t - 90°)
+\end{cases}
+\]</span></p>
+<p>把上面这个方程组代入至<strong>瞬时功率</strong>的表达式 <span class="math inline">\(p(t) = u(t) \times
+i(t)\)</span>，同样可以得到<strong>电感</strong>的<strong>瞬时功率</strong>
+<span class="math inline">\(p(t)\)</span>：</p>
+<p><span class="math display">\[
+p(t) = UI \cdot \sin 2 \omega t
+\]</span></p>
+<p>由此可见，电感的<strong>瞬时功率</strong> <span class="math inline">\(p(t)\)</span> 伴随着<strong>时间</strong> <span class="math inline">\(t\)</span>
+进行周期性(正弦函数)变化，即在正/负半个周期之内交替的<strong>吸收</strong>与<strong>发出</strong>功率，其波形如下图所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/8.png"></p>
+<h5 id="电容的瞬时功率">电容的瞬时功率</h5>
+<p>而对于<strong>电容器</strong>而言 <span class="math inline">\(\dot{U}
+= \frac{1}{j \omega C}
+\dot{I}\)</span>，其<code>电压</code>的相位<strong>滞后</strong>于<code>电流</code>的相位有
+<code>90°</code>
+度，同样假定<strong>时域</strong>条件下电容的<strong>电压</strong> <span class="math inline">\(u(t)\)</span> 与<strong>电流</strong> <span class="math inline">\(i(t)\)</span> 分别等于：</p>
+<p><span class="math display">\[
+\begin{cases}
+u(t) = \sqrt{2} \times U \cdot \cos \omega t \\
+i(t) = \sqrt{2} \times I \cdot \cos （\omega t + 90°)
+\end{cases}
+\]</span></p>
+<p>这里依然把上面的方程组代入到<strong>瞬时功率</strong>的表达式 <span class="math inline">\(p(t) = u(t) \times
+i(t)\)</span>，从而得到<strong>电容</strong>的<strong>瞬时功率</strong>
+<span class="math inline">\(p(t)\)</span>：</p>
+<p><span class="math display">\[
+p(t) = - UI \cdot \sin 2 \omega t
+\]</span></p>
+<p>由此可见，电容的瞬时功率 <span class="math inline">\(p(t)\)</span>
+与电感相类似，也是在伴随着<strong>时间</strong> <span class="math inline">\(t\)</span>
+进行周期性(正弦函数)变化，并同样在正/负半个周期之内交替的<strong>吸收</strong>与<strong>发出</strong>功率，其波形如下图所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/9.png"></p>
+<p>通过以上的分析可以发现，正弦稳态电路当中的瞬时功率随着时间进行周期性变化，并不利于定量的体现正弦稳态电路的功率，因而接下来将会引入<strong>平均功率</strong>(<strong>有功功率</strong>)、<strong>无功功率</strong>、<strong>视在功率</strong>、<strong>复功率</strong>的概念。</p>
+<h4 id="平均功率">平均功率</h4>
+<p>正弦稳态电路的<strong>平均功率</strong>是指其瞬时功率在<strong>一个周期</strong>当中的<strong>平均值</strong>：</p>
+<p><span class="math display">\[
+平均功率 P = \frac{1}{T} \int^{T}_0 p(t) dt
+\]</span></p>
+<p>从上面的等式可以看到，<strong>平均功率</strong>主要用于<strong>做功</strong>，因而也称为<strong>有功功率</strong>，其单位为<strong>瓦</strong>
+<code>W</code>。将<strong>电阻</strong>的瞬时功率 <span class="math inline">\(p(t) = UI(1 + \cos 2 \omega
+t)\)</span>、<strong>电感</strong>的瞬时功率 <span class="math inline">\(p(t) = UI \cdot \sin 2 \omega
+t\)</span>、<strong>电容</strong>的瞬时功率 <span class="math inline">\(p(t) = - UI \cdot \sin 2 \omega t\)</span>
+代入至上面的等式，就可以分别得到<strong>电阻</strong>的平均功率 <span class="math inline">\(P_R\)</span>、<strong>电感</strong>的平均功率<span class="math inline">\(P_L\)</span>、<strong>电容</strong>的平均功率<span class="math inline">\(P_C\)</span>：</p>
+<p><span class="math display">\[
+\begin{cases}
+p(t) = UI(1 + \cos 2 \omega t) \\
+p(t) = UI \cdot \sin 2 \omega t \\
+p(t) = - UI \cdot \sin 2 \omega t
+\end{cases}
+\implies
+P = \int^{T}_0 p(t) dt
+\implies
+\begin{cases}
+P_R = UI \\
+P_L = 0 \\
+P_C = 0
+\end{cases}
+\]</span></p>
+<p>观察上述结果就可以发现，<strong>电阻</strong>的平均功率大于零，说明电阻在做功，并且在吸收功率；而<strong>电感</strong>与<strong>电容</strong>的平均功率都等于零，说明两者都不做功。对于正弦稳态电路当中的任意一条支路，假设其时域上的<code>电压</code>
+<span class="math inline">\(u(t)\)</span> 与<code>电流</code> <span class="math inline">\(i(t)\)</span> 分别等于：</p>
+<p><span class="math display">\[
+\begin{cases}
+u(t) = \sqrt{2} U \cos(\omega t + \varphi_u) \\
+i(t) = \sqrt{2} I \cos(\omega t + \varphi_i)
+\end{cases}
+\]</span></p>
+<p>这里把 <span class="math inline">\(u(t)\)</span> 与 <span class="math inline">\(i(t)\)</span> 分别代入至 <span class="math inline">\(p(t) = u(t) \times i(t)\)</span> 以及 <span class="math inline">\(P = \int^{T}_0 p(t)
+dt\)</span>，就可以得到<strong>平均功率</strong> <span class="math inline">\(P\)</span> 等于：</p>
+<p><span class="math display">\[
+有功功率 P = UI \cos (\varphi_u - \varphi_i) = UI \cos \varphi
+\]</span></p>
+<p>上面等式当中的 <span class="math inline">\(\varphi = \varphi_u -
+\varphi_i\)</span>，就是<strong>支路电压</strong> <span class="math inline">\(u\)</span> 与<strong>支路电流</strong> <span class="math inline">\(i\)</span>
+的<strong>相位差</strong>。对于<strong>电阻</strong>而言 <span class="math inline">\(\varphi =
+0°\)</span>，对于<strong>电感</strong>而言 <span class="math inline">\(\varphi =
+90°\)</span>，而对于<strong>电容</strong>而言 <span class="math inline">\(\varphi = -90°\)</span>。</p>
+<h4 id="无功功率">无功功率</h4>
+<p>观察之前<strong>电感</strong>与<strong>电容</strong>的瞬时功率波形可以发现，两者都是在<code>正半周期</code>吸收功率，而在<code>负半周期</code>发出功率，并且发出的功率等于吸收的功率，相当于功率在不停的进行循环吞吐。为了衡量这种功率的吞吐能力，可以将前面
+<span class="math inline">\(p(t) = UI \cdot \sin 2 \omega t\)</span>
+以及 <span class="math inline">\(p(t) = -UI \cdot \sin 2 \omega
+t\)</span> 当中正弦函数之前的系数称为<strong>无功功率
+Q</strong>，则<strong>电感</strong>的无功功率 <span class="math inline">\(Q_L\)</span> 与<strong>电容</strong>的无功功率
+<span class="math inline">\(Q_C\)</span> 分别如下所示：</p>
+<p><span class="math display">\[
+\begin{cases}
+Q_L = UI \\
+Q_C = -UI
+\end{cases}
+\]</span></p>
+<p><strong>无功功率</strong>用于表征功率的吞吐能力，单位为<strong>乏</strong>
+<code>var</code>。观察上面的方程组可以发现，<strong>电感</strong>的无功功率为<strong>正</strong>，<strong>电容</strong>的无功功率为<strong>负</strong>，为了区分两者的不同，一般称<strong>电感吸收无功功率，而电容发出无功功率</strong>(由于无功功率并不做功，所以发出与吸收无功功率只是约定俗成的说法)。而<strong>电阻</strong>由于瞬时功率始终大于或者等于<strong>零</strong>，并不具备吞吐功率的能力，所以电阻的无功功率为零。</p>
+<p>任意一条支路上的<strong>无功功率</strong> <span class="math inline">\(Q\)</span>，都可以采用下面的公式进行计算，这个公式当中的
+<span class="math inline">\(\varphi = \varphi_u -
+\varphi_i\)</span>，即支路电压 <span class="math inline">\(u\)</span>
+与支路电流 <span class="math inline">\(i\)</span>
+的<strong>相位差</strong>：</p>
+<p><span class="math display">\[
+无功功率 Q = UI \sin \varphi
+\]</span></p>
+<h4 id="复功率">复功率</h4>
+<p><strong>复功率</strong>是正弦稳态电路当中，<code>实部</code>为<strong>有功功率</strong>
+<span class="math inline">\(P\)</span>，<code>虚部</code>为<strong>无功功率</strong>
+<span class="math inline">\(Q\)</span>
+的一种复数量，经常用于通过<strong>相量法</strong>对正弦电路进行分析的场景：</p>
+<p><span class="math display">\[
+复功率 \bar{S} = 有功功率 P + j \times 无功功率 Q
+\]</span></p>
+<p>把<strong>有功功率</strong> <span class="math inline">\(P = UI \cos
+(\varphi_u - \varphi_i) = UI \cos \varphi\)</span>
+与<strong>无功功率</strong> <span class="math inline">\(Q = UI \sin
+\varphi\)</span> 代入上面<strong>复功率</strong> <span class="math inline">\(\bar{S}\)</span>
+的表达式，就可以得到如下的推导步骤：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\bar{S} &amp;= UI \cos(\varphi_u - \varphi_i) + j UI \sin(\varphi_u -
+\varphi_i) \\
+        &amp;= UI [\cos(\varphi_u - \varphi_i) + j \sin(\varphi_u -
+\varphi_i)] \\
+        &amp;= UI e^{j(\varphi_u - \varphi_i)} \\
+        &amp;= U e^{j \varphi_u} I e^{j (-\varphi_i)} \\
+        &amp;= \dot{U} \dot{I}^* \\
+\end{aligned}
+\]</span></p>
+<p>上述推导过程最终得到的结果，其实就是<strong>复功率</strong> <span class="math inline">\(\bar{S}\)</span>
+的计算公式。可以看到，只要求解出正弦稳态电路的<code>电压</code>与<code>电流</code>，就能够计算得到<strong>复功率</strong>
+<span class="math inline">\(\bar{S}\)</span>：</p>
+<p><span class="math display">\[
+复功率 \bar{S} = \dot{U} \dot{I}^*
+\]</span></p>
+<p>上面公式当中的<strong>星号</strong> <span class="math inline">\(*\)</span>
+表示<strong>共轭</strong>，即<strong>复功率</strong> <span class="math inline">\(\bar{S}\)</span> 等于<strong>电压向量</strong>
+<span class="math inline">\(\dot{U}\)</span>
+乘以<strong>电流向量</strong> <span class="math inline">\(\dot{I}\)</span> 的<strong>共轭</strong>。</p>
+<h4 id="视在功率">视在功率</h4>
+<p><strong>视在功率</strong> <span class="math inline">\(S\)</span>
+等于<strong>复功率</strong> <span class="math inline">\(\bar{S}\)</span>
+的<strong>模值</strong> <span class="math inline">\(S = |\bar{S}| =
+|\dot{U} \dot{I}^*| =
+UI\)</span>，表示的是交流用电设备的功率容量（设备做功的<strong>潜力</strong>），单位为<strong>伏安</strong>
+<code>VA</code>，其值等于<strong>电压有效值</strong> <span class="math inline">\(U\)</span> 与<strong>电流有效值</strong> <span class="math inline">\(I\)</span> 的乘积：</p>
+<p><span class="math display">\[
+视在功率 S = 电压有效值 U \times 电流有效值 I
+\]</span></p>
+<p><strong>视在功率</strong>并不表示交流电路当中实际消耗的功率，只表示电路可能提供的最大功率，或者电路可能消耗的最大有功功率。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>视在功率</strong>乘以<strong>功率因数</strong>之后的结果就等于<strong>有功功率</strong>。</p>
+</blockquote>
+<h4 id="功率因数">功率因数</h4>
+<p>前面提到的<strong>视在功率</strong>表示交流用电设备做功的潜力，而<strong>有功功率</strong>表示其实际做功的能力，即将介绍的<strong>功率因数</strong>
+<span class="math inline">\(\lambda\)</span>，则可以体现这种潜力实际发挥的程度，其值等于<strong>有功功率</strong>
+<span class="math inline">\(P\)</span> 除以<strong>视在功率</strong>
+<span class="math inline">\(S\)</span>：</p>
+<p><span class="math display">\[
+功率因数 \lambda = \frac{有功功率 P}{视在功率S}
+\]</span></p>
+<p>将<strong>有功功率</strong> <span class="math inline">\(P\)</span>
+与<strong>视在功率</strong> <span class="math inline">\(S\)</span>
+的表达式分别代入到上面的公式，就可以得到如下方程：</p>
+<p><span class="math display">\[
+\lambda = \frac{P}{S} = \frac{UI \cos \varphi}{UI} = \cos \varphi
+\]</span></p>
+<p>该方程当中的 <span class="math inline">\(\varphi\)</span>
+称为<strong>功率因数角</strong>，其值为<code>电压</code>与<code>电流</code>的相位差，由此可见<strong>功率因数</strong>最大只能等于
+<code>1</code>。</p>
+<blockquote>
+<p><strong>注意</strong>：<strong>功率因数</strong> <span class="math inline">\(\lambda\)</span>
+的值越大，就意味着交流用电设备的做功潜力得到了很好发挥。</p>
+</blockquote>
+<p>下面列出正弦稳态电路当中，各种功率之间的一些常用换算关系：</p>
+<p><span class="math display">\[
+\begin{aligned}
+S &amp;= |\bar{S}| \\
+P &amp;= S \cos \varphi \\
+Q &amp;= S \sin \varphi \\
+S^2 &amp;= P^2 + Q^2
+\end{aligned}
+\]</span></p>
+<h4 id="功率守恒">功率守恒</h4>
+<p>正弦稳态电路当中的<strong>瞬时功率</strong> <span class="math inline">\(p\)</span>、<strong>有功功率</strong> <span class="math inline">\(P\)</span>、<strong>无功功率</strong> <span class="math inline">\(Q\)</span>、<strong>复功率</strong> <span class="math inline">\(\bar{S}\)</span>
+都属于守恒功率，而<strong>视在功率</strong> <span class="math inline">\(S\)</span>
+属于不守恒功率。根据前面讨论的内容，如果满足<strong>基尔霍夫定律</strong>，那么<strong>特勒根定理
+1</strong> 就能够成立。因而<strong>特勒根定理 1</strong>
+不仅适用于直流电路，也同样适用于正弦稳态电路分析。</p>
+<p>由于正弦稳态电路在<strong>时域</strong>当中满足<strong>基尔霍夫定律</strong>，根据<strong>特勒根定理
+1</strong>，正弦稳态电路在时域的<strong>瞬时功率</strong>一定守恒。又由于正弦稳态电路在<strong>相量域</strong>当中也满足<strong>基尔霍夫定律</strong>，<strong>复功率</strong>等于<code>电压相量</code>乘以<code>电流相量</code>的<strong>共轭</strong>，表明<strong>复功率</strong>同样守恒（复功率之和为零），其证明过程与<strong>特勒根定理
+1</strong> 的证明过程相同。</p>
+<p>由于<strong>复功率</strong>的<code>实部</code>为<strong>有功功率</strong>，而<code>虚部</code>为<strong>无功功率</strong>，既然复功率守恒（复功率之和为零），那么<strong>有功功率</strong>与<strong>无功功率</strong>也就一定守恒，即<strong>有功功率之和为零，无功功率之和也为零</strong>。</p>
+<p><strong>视在功率</strong>不守恒的原因在于无法进行证明，这是由于视在功率当中的<strong>电压</strong>
+<span class="math inline">\(U\)</span> 与<strong>电流</strong> <span class="math inline">\(I\)</span>
+都属于<strong>有效值</strong>，有效值并不能够满足基尔霍夫定律，因而也就无法证明其守恒。</p>
+<h4 id="相量图">相量图</h4>
+<p><strong>相量</strong>属于一种矢量，<strong>相量图</strong>同样就属于一种矢量图。例如<strong>电压相量</strong>
+<span class="math inline">\(\dot{U} = 100 \angle 30°V\)</span>
+是一个<strong>复数</strong>，在这里可以将其表现为复平面当中的一个<strong>矢量</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-5/10.png"></p>
+<p>可以看到，相量图更加直观形象，在绘制时主要遵循下面的基本步骤：</p>
+<ol type="1">
+<li>选定<strong>参考相量</strong>；</li>
+<li>根据<code>电压</code>与<code>电流</code>关系绘制电压、电流的矢量图；</li>
+<li>根据<strong>基尔霍夫定律</strong>，使这些矢量图构成封闭的图形；</li>
+</ol>
+<h4 id="提高功率因数">提高功率因数</h4>
+<p><strong>功率因数</strong> <span class="math inline">\(\lambda\)</span> 等于<strong>有功功率</strong>
+<span class="math inline">\(P\)</span> 除以<strong>视在功率</strong>
+<span class="math inline">\(S\)</span>，从而可以得到如下的推导过程：</p>
+<p><span class="math display">\[
+\begin{cases}
+有功功率 P = UI \cos \varphi \\
+视在功率 S = UI
+\end{cases}
+\implies
+功率因数 \lambda = \frac{UI \cos \varphi}{UI} = \cos \varphi
+\]</span></p>
+<p>其中电压与电流的<strong>相位差</strong> <span class="math inline">\(\varphi = \varphi_u - \varphi_i\)</span>，假如阻抗
+<span class="math inline">\(\dot{Z} =
+\frac{\dot{U}}{\dot{I}}\)</span>，此时 <span class="math inline">\(\varphi_z = \varphi_u -
+\varphi_i\)</span>，由此可知 <span class="math inline">\(\varphi =
+\varphi_z\)</span>，从而可以得到：</p>
+<p><span class="math display">\[
+功率因数 \lambda = \cos 功率因数角 \varphi = \cos 阻抗角 \varphi_z
+\]</span></p>
+<p><strong>提高功率因数的原因</strong>：主要是由于<strong>视在功率</strong>
+<span class="math inline">\(S\)</span> 的取值通常比较固定，根据 <span class="math inline">\(P = \lambda \times S\)</span>
+可以知道，如果<strong>功率因数</strong> <span class="math inline">\(\lambda\)</span>
+可以增大，那么<strong>有功功率</strong> <span class="math inline">\(P\)</span>
+就会增大，从而更加有效的提升做功效率。</p>
+<p><strong>提高功率因数的方法</strong>：由于 <span class="math inline">\(\lambda = \cos \varphi = \cos
+\varphi_z\)</span>，要提高 <span class="math inline">\(\lambda\)</span>
+的值，就必须降低<strong>阻抗角的模值</strong> <span class="math inline">\(|\varphi_z|\)</span>。即当 <span class="math inline">\(\varphi_z = 0\)</span>
+的时候，<strong>功率因数</strong> <span class="math inline">\(\lambda =
+1\)</span> 达到最大值。简而言之，通过减小 <span class="math inline">\(\varphi_z\)</span>
+的绝对值，就可以有效的提高<strong>功率因数</strong> <span class="math inline">\(\lambda\)</span> 的大小。</p>
+<p>除此之外，还有另外一种提高功率因数的思路，如果降低<strong>阻抗角的模值</strong>
+<span class="math inline">\(|\varphi_z|\)</span>
+就可以提高功率因数，那么由于<strong>无功功率</strong> <span class="math inline">\(Q = UI \sin
+\varphi\)</span>，所以通过降低<strong>无功功率</strong> <span class="math inline">\(Q\)</span>，同样也可以达到提高<strong>功率因数</strong>
+<span class="math inline">\(\lambda\)</span> 的目的。</p>
+<h3 id="总结-4">总结</h3>
+<ul>
+<li>正弦稳态电路是一种激励为正弦量，并且已经达到了稳态的线性电路；</li>
+<li>分析正弦稳态电路的方法是<strong>相量法</strong>，这里的<strong>相量</strong>是一个复数（<strong>量</strong>是指<code>有效值</code>，<strong>相</strong>是指<code>初相角</code>）；</li>
+<li>相量的优点在于与时间无关，其计算比正弦量更为简单；</li>
+<li>正弦稳态电路当中的<strong>时域</strong>与<strong>相量域</strong>的<code>电压</code>、<code>电流</code>是一一对应关系，相互之间可以进行转换；</li>
+<li><strong>相量域</strong>同样满足<strong>基尔霍夫定律</strong>，因而直流电路的分析方法仍然适用于交流电路；</li>
+<li>交流电路当中的<code>电阻</code>、<code>电容</code>、<code>电感</code>同样满足<strong>欧姆定律</strong>，此时<code>电压</code>相量与<code>电流</code>相量之比称为<strong>阻抗</strong>；</li>
+<li>交流电路的分析基于<strong>复数</strong>，而直流电路的分析基于<strong>实数</strong>；</li>
+<li><strong>有功功率</strong>也称为<strong>平均功率</strong>，用于反映功率的消耗情况；</li>
+<li><strong>无功功率</strong>用于反映功率的搬运吞吐能力；</li>
+<li><strong>电阻</strong>只存在<strong>有功功率</strong>，不具有<strong>无功功率</strong>；而<strong>电感</strong>与<strong>电容</strong>只有<strong>无功功率</strong>，没有<strong>有功功率</strong>；</li>
+<li><strong>视在功率</strong>用于反映电路的功率容量（提供功率的潜力）；</li>
+<li><strong>复功率</strong>的定义主要是为了计算上的方便；</li>
+<li><strong>功率因数</strong>是<code>有功功率</code>与<code>视在功率</code>的比值，<strong>功率因数大越大越好</strong>；</li>
+</ul>
+<h2 id="正弦稳态电路的频域特性">正弦稳态电路的频域特性</h2>
+<p>本节主要讨论交流电路的<strong>频域</strong>特性，以及<strong>滤波器</strong>和<strong>谐振</strong>两种典型的电路应用。</p>
+<h3 id="网络函数">网络函数</h3>
+<p><strong>频率</strong> <span class="math inline">\(f\)</span>
+与<strong>角频率</strong> <span class="math inline">\(\omega = 2 \pi
+f\)</span> 的区别仅在于<strong>比例系数</strong> <span class="math inline">\(2 \pi\)</span>，所以分析<strong>角频率</strong>
+<span class="math inline">\(\omega\)</span>
+的影响，就相当于分析<strong>频率</strong> <span class="math inline">\(f\)</span>
+的影响。本文后续如果不特别加以说明，<strong>频率</strong>都默认指代的是<strong>角频率</strong>。接下来，列出<strong>电阻</strong>、<strong>电感</strong>、<strong>电容</strong>的<code>阻抗模值</code>与<code>角频率</code>之间的关系：</p>
+<ul>
+<li><strong>电阻</strong>的<code>阻抗模值</code> <span class="math inline">\(R\)</span> 与<code>角频率</code> <span class="math inline">\(\omega\)</span> 没有任何关系；</li>
+<li><strong>电感</strong>的<code>阻抗模值</code> <span class="math inline">\(\omega L\)</span> 与<code>角频率</code> <span class="math inline">\(\omega\)</span> 成正比；</li>
+<li><strong>电阻</strong>的<code>阻抗模值</code> <span class="math inline">\(\frac{1}{\omega C}\)</span> 与<code>角频率</code>
+<span class="math inline">\(\omega\)</span> 成反比；</li>
+</ul>
+<p>为了进一步分析正弦稳态电路的频率特性，需要引入<strong>网络函数</strong>的概念。正弦稳态电路的<strong>网络函数</strong>也称为<strong>传递函数</strong>，指的是相量域当中的任意两个量（<code>电压</code>或者<code>电流</code>）之间的比值，记为
+<span class="math inline">\(H(j \omega)\)</span>。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/1.png"></p>
+<p>对于上图所示的电路，其<code>电流</code> <span class="math inline">\(\dot{I}\)</span> 与<code>电压源电压</code> <span class="math inline">\(\dot{U_S}\)</span>
+的比值，以及<code>电容电压</code> <span class="math inline">\(\dot{U_C}\)</span> 与<code>电源电压</code> <span class="math inline">\(\dot{U_S}\)</span>
+的比值都属于<strong>网络函数</strong>，其中后者的网络函数如下所示：</p>
+<p><span class="math display">\[
+H(j \omega) = \frac{\dot{U_C}}{\dot{U_S}} = \frac{\frac{1}{j \omega
+C}}{R + \frac{1}{j \omega C}} = \frac{1}{j R \omega C + 1}
+\]</span></p>
+<p>观察上面的方程可以发现，<strong>网络函数</strong> <span class="math inline">\(H(j \omega)\)</span> 是一个与<code>角频率</code>
+<span class="math inline">\(\omega\)</span>
+相关的<strong>复数</strong>，定义<strong>网络函数</strong>的目的是为了分析<strong>相量域</strong>当中任意两个量（<code>电压</code>或者<code>电流</code>）之间的关系，分析网络函数的频率特性，就相当于分析正弦稳态电路的频率特性。</p>
+<h3 id="频率特性">频率特性</h3>
+<p>正弦稳态电路的<strong>频率特性</strong>，主要包含有<strong>幅频特性</strong>与<strong>相频特性</strong>两个方面：</p>
+<ul>
+<li><strong>幅频特性</strong>：指<strong>网络函数</strong>的<code>幅值</code>伴随<code>角频率</code>进行变化的规律；</li>
+<li><strong>相频特性</strong>：指<strong>网络函数</strong>的<code>相位</code>伴随<code>角频率</code>进行变化的规律；</li>
+</ul>
+<p>这里只对<strong>幅频特性</strong>进行讨论，以前面所述的<code>电容电压</code>
+<span class="math inline">\(\dot{U_C}\)</span> 与<code>电源电压</code>
+<span class="math inline">\(\dot{U_S}\)</span>
+比值的<strong>网络函数</strong> <span class="math inline">\(H(j
+\omega)\)</span> 为例，其<strong>幅值</strong>等于：</p>
+<p><span class="math display">\[
+|H(j \omega)| = \frac{U_C}{U_S} = \frac{1}{\sqrt{(R \omega C)^2 + 1}}
+\]</span></p>
+<p>由此可见，<strong>网络函数</strong>的<code>幅值</code>伴随着<strong>角频率</strong>的增大而减小，这意味着电容电压在高频时的有效值较小。下图展示了这个网络函数所对应的<strong>幅频特性曲线</strong>，可以看到当<strong>角频率</strong>
+<span class="math inline">\(\omega\)</span>
+为零的时候（即直流），该<strong>网络函数</strong>的<code>幅值</code>为
+<code>1</code>，此时<strong>电容电压</strong> <span class="math inline">\(U_C\)</span> 等于<strong>电源电压</strong> <span class="math inline">\(U_S\)</span>。伴随着<strong>角频率</strong> <span class="math inline">\(\omega\)</span>
+的不断增大，<strong>网络函数的幅值</strong> <span class="math inline">\(|H(j \omega)|\)</span> 也将会不断的单调减小：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/2.png"></p>
+<blockquote>
+<p><strong>注意</strong>：从<strong>时域</strong>角度观察正弦稳态电路，很多特征分析起来较为复杂。如果将<strong>时域</strong>转换到<strong>相量域</strong>，那么通过在<strong>相量域</strong>当中进行<strong>频率特性</strong>分析，就可以对正弦稳态电路有着更为清晰的认识。</p>
+</blockquote>
+<h3 id="滤波器">滤波器</h3>
+<p>滤波器根据其<code>频率特性</code>主要分为<strong>低通滤波器</strong>、<strong>高通滤波器</strong>、<strong>带通滤波器</strong>、<strong>带阻滤波器</strong>一共四类，下图分别展示了这四种理想滤波器的幅频特性曲线：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/3.png"></p>
+<h4 id="低通滤波器">低通滤波器</h4>
+<p>下图所示的是一个<strong>低通滤波器电路</strong>，其中<strong>电压源电压</strong>
+<span class="math inline">\(\dot{U_S}\)</span>
+为输入，而<strong>电阻电压</strong> <span class="math inline">\(\dot{U_R}\)</span> 为输出：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/4.png"></p>
+<p>我们将<strong>电阻电压</strong> <span class="math inline">\(\dot{U_R}\)</span> 与<strong>电压源电压</strong>
+<span class="math inline">\(\dot{U_S}\)</span>
+的比值定义为<strong>网络函数</strong> <span class="math inline">\(H(j
+\omega)\)</span>，该网络函数及其对应的<strong>幅值</strong> <span class="math inline">\(|H(j \omega)|\)</span> 分别为：</p>
+<p><span class="math display">\[
+\begin{cases}
+网络函数 H(j \omega) = \frac{\dot{U_R}}{\dot{U_S}} = \frac{R}{R + j
+\omega L} \\
+幅值 |H(j \omega)| = \frac{U_R}{U_S} = \frac{R}{\sqrt{R^2 + (\omega
+L)^2}}
+\end{cases}
+\]</span></p>
+<p>根据上面的等式，就可以绘制出低通滤波器电路的<strong>幅频特性曲线</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/5.png"></p>
+<p>观察上图可以发现，在实际低通滤波器电路的幅频特性曲线当中，很难严格区分出哪一段频率通过，哪一段频率被阻止，因而规定以<strong>网络函数幅值</strong>
+<span class="math inline">\(|H(j \omega)|\)</span> 的 <span class="math inline">\(\frac{\sqrt{2}}{2} \approx 0.707\)</span>
+倍作为<strong>通过或阻止频率的分界点</strong>。</p>
+<h4 id="高通滤波器">高通滤波器</h4>
+<p>下图所示的是一个<strong>高通滤波器</strong>电路，其中<strong>电压源电压</strong>
+<span class="math inline">\(\dot{U_S}\)</span>
+为输入，<strong>电阻电压</strong> <span class="math inline">\(\dot{U_R}\)</span> 为输出：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/6.png"></p>
+<p>同样把<strong>电阻电压</strong> <span class="math inline">\(\dot{U_R}\)</span> 与<strong>电压源电压</strong>
+<span class="math inline">\(\dot{U_S}\)</span>
+的比值定义为<strong>网络函数</strong> <span class="math inline">\(H(j
+\omega)\)</span>，该网络函数及其对应的<strong>幅值</strong> <span class="math inline">\(|H(j \omega)|\)</span> 分别等于：</p>
+<p><span class="math display">\[
+\begin{cases}
+网络函数 H(j \omega) = \frac{\dot{U_R}}{\dot{U_S}} = \frac{R}{R - j
+\frac{1}{\omega C}} \\
+幅值 |H(j \omega)| = \frac{U_R}{U_S} = \frac{R}{\sqrt{R^2 +
+(\frac{1}{\omega C})^2}}
+\end{cases}
+\]</span></p>
+<p>根据上面的等式，也可以绘制出高通滤波器电路的<strong>幅频特性曲线</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/7.png"></p>
+<h4 id="带通滤波器">带通滤波器</h4>
+<p>下图所示的是一个<strong>带通滤波器</strong>电路，其中<strong>电压源电压</strong>
+<span class="math inline">\(\dot{U_S}\)</span>
+为输入，<strong>电阻电压</strong> <span class="math inline">\(\dot{U_R}\)</span> 为输出：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/8.png"></p>
+<p>依然将<strong>电阻电压</strong> <span class="math inline">\(\dot{U_R}\)</span> 与<strong>电压源电压</strong>
+<span class="math inline">\(\dot{U_S}\)</span>
+的比值定义为<strong>网络函数</strong> <span class="math inline">\(H(j
+\omega)\)</span>，该网络函数及其对应的<strong>幅值</strong> <span class="math inline">\(|H(j \omega)|\)</span> 分别为：</p>
+<p><span class="math display">\[
+\begin{cases}
+网络函数 H(j \omega) = \frac{\dot{U_R}}{\dot{U_S}} = \frac{R}{R + j
+\omega L - j \frac{1}{\omega C}} \\
+幅值 |H(j \omega)| = \frac{U_R}{U_S} = \frac{R}{\sqrt{R^2 + (\omega L -
+\frac{1}{\omega C})^2}}
+\end{cases}
+\]</span></p>
+<p>根据上述的等式，就可以绘制出带通滤波器电路的<strong>幅频特性曲线</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/9.png"></p>
+<h4 id="带阻滤波器">带阻滤波器</h4>
+<p>下图所示的是一个<strong>带阻滤波器</strong>电路，其中<strong>电压源电压</strong>
+<span class="math inline">\(\dot{U_S}\)</span>
+为输入，<strong>电感</strong> <span class="math inline">\(L\)</span>
+与<strong>电容</strong> <span class="math inline">\(C\)</span>
+所构成<strong>串联支路两端的电压</strong> <span class="math inline">\(\dot{U}\)</span> 为输出：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/10.png"></p>
+<p>这里将<strong>串联支路两端的电压</strong> <span class="math inline">\(\dot{U}\)</span> 与<strong>电压源电压</strong>
+<span class="math inline">\(\dot{U_S}\)</span>
+的比值定义为<strong>网络函数</strong> <span class="math inline">\(H(j
+\omega)\)</span>，这个网络函数及其对应的<strong>幅值</strong> <span class="math inline">\(|H(j \omega)|\)</span> 分别等于：</p>
+<p><span class="math display">\[
+\begin{cases}
+网络函数 H(j \omega) = \frac{\dot{U}}{\dot{U_S}} = \frac{j \omega L - j
+\frac{1}{\omega C}}{R + j \omega L - j \frac{1}{\omega C}} \\
+幅值 |H(j \omega)| = \frac{U}{U_S} = \frac{|\omega L - \frac{1}{\omega
+C}|}{\sqrt{R^2 + (\omega L - \frac{1}{\omega C})^2}}
+\end{cases}
+\]</span></p>
+<p>根据上面的表达式，同样可以绘制出带阻滤波器电路的<strong>幅频特性曲线</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/11.png"></p>
+<h4 id="半功率点">0.707 半功率点</h4>
+<p>之所以将 <code>0.707</code>
+倍设置为区分<code>通过</code>与<code>阻止</code>频率的<strong>分界点</strong>，是由于<strong>网络函数</strong>的<strong>幅值</strong>反映了输出电压有效值的大小。把分界点设置为
+<span class="math inline">\(\frac{\sqrt{2}}{2} \approx 0.707\)</span>
+意味着在该频率之下，<code>输出电压的有效值</code>为<code>最大有效值</code>的
+<span class="math inline">\(\frac{\sqrt{2}}{2}\)</span>
+倍。此时的<strong>输出功率</strong>为<strong>最大功率</strong>的 <span class="math inline">\(\frac{1}{2}\)</span>
+倍，因而该分界点也被称作<strong>半功率点</strong>。</p>
+<p>由于信号的功率代表着其强度，当功率降低至<code>最大功率</code>一半的时候，就可以认为信号发生了显著的衰减，因而通常<strong>将半功率点作为信号通过与阻止的分界点</strong>，也被称作
+<code>-3dB</code> 点。</p>
+<h3 id="谐振">谐振</h3>
+<p>之前讨论的<strong>带通滤波器电路</strong>及其<strong>幅频特性曲线</strong>如下图所示：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/12.png"></p>
+<p>观察上图可以发现，<strong>网络函数</strong>的<strong>幅值</strong>
+<span class="math inline">\(|H(j \omega)|\)</span> 具有一个最大值
+<code>1</code>，其对应的<strong>角频率</strong>为 <span class="math inline">\(\omega_r\)</span>，该<strong>频率点</strong>在整个频率范围内比较特别，其所处位置的<strong>网络函数</strong>幅值为最大值，即<strong>电阻电压</strong>
+<span class="math inline">\(\dot{U_R}\)</span>
+为最大值，这意味着电阻获得了最大功率，这正是我们所期待的结果，因而把<strong>角频率</strong>
+<span class="math inline">\(\omega_R\)</span>
+位于<strong>最大幅值</strong> <span class="math inline">\(|H(j
+\omega)|\)</span> 时候的工作状态称为<strong>谐振</strong>。</p>
+<p><strong>谐振的严格定义</strong>是在正弦稳态电路当中，如果一个端口可以等效为一个<code>阻抗</code>，并且其等效阻抗为<strong>实数</strong>，那么就可以认为该端口发生了<strong>谐振</strong>。根据这个谐振的定义可以发现，产生谐振的条件是正弦稳态电路的端口<code>等效阻抗</code>为<strong>实数</strong>，接下来以最为常见的
+<strong>RLC 串联谐振电路</strong>与 <strong>RLC
+并联谐振电路</strong>为例，探讨<strong>等效阻抗为实数</strong>的意义。</p>
+<blockquote>
+<p><strong>注意</strong>：许多电路理论教材里定义<code>端口电压</code>与<code>端口电流</code>处于<strong>相同相位</strong>就会发生<strong>谐振</strong>，事实上这个定义并不严谨。以<strong>串联谐振电路</strong>为例，如果端口当中只包含有<code>电感</code>与<code>电容</code>，那么发生谐振的时候，其等效阻抗为<strong>零</strong>。等效阻抗为零则其电压也必须为零，而零电压的相位是不确定的，因而就无法判断出<code>电压</code>与<code>电流</code>是否处于相同相位，进而就无法确定是否发生了谐振。当然，这种情况较为特殊，多数情况下<strong>电压与电流处于相同相位</strong>仍然可以作为谐振产生的条件。</p>
+</blockquote>
+<h4 id="rlc-串联谐振">RLC 串联谐振</h4>
+<p>上面的<strong>带通滤波器电路</strong>，同时也属于 <strong>RLC
+串联谐振</strong>电路，其<strong>电阻</strong> <span class="math inline">\(R\)</span>、<strong>电感</strong> <span class="math inline">\(C\)</span>、<strong>电容</strong> <span class="math inline">\(L\)</span> 串联之后的<strong>等效阻抗</strong>
+<span class="math inline">\(Z_{eq}\)</span> 等于：</p>
+<p><span class="math display">\[
+Z_{eq} = R + j \omega L - j \frac{1}{\omega C} = R + j \bigg(\omega L -
+\frac{1}{\omega C} \bigg)
+\]</span></p>
+<p>根据<strong>谐振</strong>的定义，如果需要该 RLC
+串联电路发生谐振，那么 <span class="math inline">\(Z_{eq}\)</span>
+的<strong>虚部</strong>必须等于<strong>零</strong>，即 <span class="math inline">\(Im(Z_{eq}) = 0\)</span>：</p>
+<p><span class="math display">\[
+\omega L - \frac{1}{\omega C} = 0
+\]</span></p>
+<p>根据上面的等式就可以得到发生谐振时的<strong>角频率</strong> <span class="math inline">\(\omega_R\)</span> 等于：</p>
+<p><span class="math display">\[
+\omega_R = \frac{1}{\sqrt{LC}}
+\]</span></p>
+<p>这里的 <span class="math inline">\(\omega_R\)</span>
+被称为<strong>谐振角频率</strong>，根据前面的 <strong>RLC
+串联电路</strong>，<strong>电阻的电压有效值</strong> <span class="math inline">\(U_R\)</span> 与<strong>电压源的电压有效值</strong>
+<span class="math inline">\(U_S\)</span>
+之比称为<strong>网络函数</strong> <span class="math inline">\(H(j\omega)\)</span>，其对应的<strong>幅值</strong>
+<span class="math inline">\(|H(j\omega)|\)</span> 等于：</p>
+<p><span class="math display">\[
+|H(j\omega)| = \frac{U_R}{U_S} = \bigg| \frac{R}{R + j \omega L - j
+\frac{1}{\omega C}} \bigg| = \frac{R}{\sqrt{R^2 + \big(\omega L -
+\frac{1}{\omega C} \big)^2}}
+\]</span></p>
+<p>由此可见，当 <span class="math inline">\(\omega L - \frac{1}{\omega
+C} = 0\)</span> 的时候，<strong>幅值</strong> <span class="math inline">\(|H(j\omega)|\)</span>
+为最大，也就意味着<strong>电阻的电压有效值</strong> <span class="math inline">\(U_R\)</span> 为最大。根据之前得到的 <span class="math inline">\(Z_{eq} = R + j \bigg(\omega L - \frac{1}{\omega C}
+\bigg)\)</span> 与 <span class="math inline">\(\omega L -
+\frac{1}{\omega C} = 0\)</span> 两个等式，可以知道 <span class="math inline">\(\omega L - \frac{1}{\omega C} = 0\)</span>
+正好就是电路产生谐振的条件。换而言之，<strong>谐振角频率</strong> <span class="math inline">\(\omega_R\)</span>
+就是在<strong>幅值</strong>最大时候所对应的<strong>角频率</strong>。</p>
+<p>上面这种发生了谐振的 <strong>RLC 串联电路</strong>就被称为
+<strong>RLC 串联谐振电路</strong>，其通常具备如下特点：</p>
+<ol type="1">
+<li>电阻的<strong>电压有效值</strong>为最大；</li>
+<li>串联谐振电路的<strong>等效阻抗</strong>是一个<strong>纯电阻</strong>（实数），这个特点是谐振定义的要求；</li>
+<li>串联谐振当中<code>电容</code>与<code>电感</code>的串联等效阻抗为<strong>零</strong>，相当于<strong>短路</strong>，这个特点也是谐振定义的要求，并且由此可知<code>电感</code>与<code>电容</code>的电压互为相反数，这样两者之和才能为<strong>零</strong>；</li>
+</ol>
+<h4 id="rlc-并联谐振">RLC 并联谐振</h4>
+<p>下图所示的是一个 <strong>RLC 并联谐振电路</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/13.png"></p>
+<p>这个 RLC 并联谐振电路对应的<strong>等效阻抗</strong> <span class="math inline">\(Z_{eq}\)</span> 等于：</p>
+<p><span class="math display">\[
+Z_{eq} = \frac{1}{\frac{1}{R} + \frac{1}{j \omega L} + \frac{1}{1/{j
+\omega C}}}
+= \frac{1}{\frac{1}{R} + j \big(\omega C - \frac{1}{\omega L} \big)}
+\]</span></p>
+<p>根据上面的等式和谐振的定义，可以知道要想发生<strong>谐振</strong>必须满足<strong>等效阻抗</strong>
+<span class="math inline">\(Z_{eq}\)</span>为一个<strong>实数</strong>：</p>
+<p><span class="math display">\[
+\omega C - \frac{1}{\omega L} = 0
+\]</span></p>
+<p>根据上面的等式就可以得到，这个 <strong>RLC
+并联电路</strong>发生谐振时的<strong>角频率</strong> <span class="math inline">\(\omega_R\)</span> 等于：</p>
+<p><span class="math display">\[
+\omega_R = \frac{1}{\sqrt{LC}}
+\]</span></p>
+<p>由此可见，<strong>RLC
+并联电路</strong>的<strong>谐振角频率</strong>与 <strong>RLC
+串联电路</strong>的<strong>谐振角频率</strong>相同，即都是 <span class="math inline">\(\omega_R =
+\frac{1}{\sqrt{LC}}\)</span>。接下来，讨论 <strong>RLC
+并联谐振电路</strong>的相关特点：</p>
+<ol type="1">
+<li><p>电阻电流的有效值 <span class="math inline">\(I_R\)</span>
+为最大，这是由于上面电路当中<strong>电阻的电流有效值</strong> <span class="math inline">\(I_R\)</span>：</p>
+<p><span class="math display">\[
+I_R = \big| \frac{\dot{I_S} Z_{eq}}{R} \big| = \frac{1}{R} \cdot I_S
+\cdot \big| \frac{1}{\frac{1}{R} + j \omega C + \frac{1}{j \omega L}}
+\big| = \frac{1}{\sqrt{(\frac{1}{R})^2  + (\omega C - \frac{1}{\omega
+L})^2}} \cdot \frac{1}{R} \cdot I_S
+\]</span></p>
+<p>据此就可以知道当 <span class="math inline">\(\omega C -
+\frac{1}{\omega L} = 0\)</span> 的时候，电阻的电流有效值 <span class="math inline">\(I_R\)</span> 就为最大；</p></li>
+<li><p>并联谐振的等效阻抗为<strong>纯电阻</strong>（实数），该特点属于谐振定义的要求；</p></li>
+<li><p>并联<code>电容</code>与<code>电感</code>的等效阻抗为<strong>无穷大</strong>，相当于<strong>开路</strong>；这是因为<strong>电感</strong>
+<span class="math inline">\(L\)</span> 与<strong>电容</strong> <span class="math inline">\(C\)</span> 并联之后的<strong>等效阻抗</strong>
+<span class="math inline">\(Z_{LC_{eq}} = \frac{1}{j \omega C +
+\frac{1}{j \omega L}} = \frac{1}{j\big( \omega C - \frac{1}{\omega L}
+\big)}\)</span>，将发生并联谐振的条件 <span class="math inline">\(\omega
+C - \frac{1}{\omega L} = 0\)</span> 代入，就可以得到 <strong>LC
+并联等效阻抗</strong> <span class="math inline">\(Z_{LC_{eq}} =
+\infty\)</span>，即近似于开路状态；</p></li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：手机、收音机、无线充电器等设备都应用到了<strong>谐振原理</strong>，但是由于谐振会导致<code>电压</code>与<code>电流</code>达到<strong>最大值</strong>，可能会超出电路的承受能力，进而导致发生事故或者设备损毁。</p>
+</blockquote>
+<h4 id="品质因数">品质因数</h4>
+<p>品质因数通常用于衡量实际的<strong>电感器</strong>或者<strong>电容器</strong>的品质，两者的实际模型都包含有<strong>串联电阻</strong>
+<span class="math inline">\(R\)</span>，显然当 <span class="math inline">\(R = 0\)</span>
+的时候品质因数为最佳，不过这在实际生活当中是不可能的。</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/14.png"></p>
+<p><strong>品质因数</strong>用于衡量实际的<strong>电感器</strong>与<strong>电容器</strong>的品质，其值等于<strong>无功功率</strong>与<strong>有功功率</strong>的比值：</p>
+<p><span class="math display">\[
+功率因数 Q = \bigg |  \frac{有功功率}{无功功率} \bigg |
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：品质因数越<strong>大</strong>，实际的电感器与电容器的品质就会越<strong>好</strong>。</p>
+</blockquote>
+<p>根据上图所示的电路，就可以得到<strong>实际电感器</strong>的<strong>品质因数</strong>
+<span class="math inline">\(Q_L\)</span>：</p>
+<p><span class="math display">\[
+电感器品质因数 Q_L = \bigg |  \frac{有功功率}{无功功率} \bigg | =
+\frac{U_L I}{U_R I} = \frac{U_L}{U_R} = \frac{\omega L I}{RI} =
+\frac{\omega L}{R}
+\]</span></p>
+<p>观察可以发现，实际电感器的品质因数，不但与<strong>电感值</strong>
+<span class="math inline">\(L\)</span>、<strong>电阻值</strong> <span class="math inline">\(R\)</span> 有关，而且还与<strong>角频率</strong>
+<span class="math inline">\(\omega\)</span>
+有关。说明品质因数并非一个固定值，在不同的工作频率下面，品质因数也会有所不同。</p>
+<p>接下来，同样根据上面的电路，推导<strong>实际电容器</strong>的<strong>品质因数</strong>
+<span class="math inline">\(Q_C\)</span>：</p>
+<p><span class="math display">\[
+电容器品质因数 Q_C = \bigg |  \frac{有功功率}{无功功率} \bigg | =
+\frac{U_C I}{U_R I} = \frac{U_C}{U_R} = \frac{I \frac{1}{\omega C}}{RI}
+= \frac{1}{R \omega C}
+\]</span></p>
+<p>品质因数与谐振的关系在于，当<strong>电感器</strong>与<strong>电容器</strong>的品质因数相同时
+<span class="math inline">\(\omega L - \frac{1}{\omega C} =
+0\)</span>，此时电路正好产生谐振。<strong>品质因数</strong>对于<strong>谐振</strong>主要存在着如下两个方面的影响：</p>
+<ol type="1">
+<li>影响电路的输出<strong>带宽</strong>；</li>
+<li>影响谐振时<strong>电感器</strong>与<strong>电容器</strong>上面<strong>电压的有效值</strong>；</li>
+</ol>
+<p>下面分析<strong>品质因数</strong>对于<strong>电感器电压有效值</strong>的影响，根据串联谐振的条件，可以得到<strong>电感器的电压有效值</strong>
+<span class="math inline">\(U_L\)</span> 等于：</p>
+<p><span class="math display">\[
+U_L = |\dot{U_L}| = \omega L I = \omega L \bigg|
+\frac{\dot{U_S}}{Z_{eq}} \bigg| = \frac{\omega L}{R} U_S
+\]</span></p>
+<p>把前面得到的电感器品质因数公式 <span class="math inline">\(Q_L =
+\frac{\omega L}{R}\)</span> 代入到上面的等式当中，就可以得到：</p>
+<p><span class="math display">\[
+电感电压有效值 U_L = 品质因数 Q \times 电源电压有效值 U_S
+\]</span></p>
+<p>由此可见，<strong>品质因数</strong>的大小决定着<strong>电感器</strong>的<strong>电压有效值</strong>大小：当<strong>品质因数</strong>
+<span class="math inline">\(Q &lt; 1\)</span>
+的时候，电感器的电压有效值<strong>小于</strong>电压源的电压有效值 <span class="math inline">\(U_L &lt;
+U_S\)</span>；而<strong>当品质因数</strong> <span class="math inline">\(Q &gt; 1\)</span>
+的时候，电感器的电压有效值<strong>大于</strong>电压源的电压有效值 <span class="math inline">\(U_L &gt;
+U_S\)</span>，这种情况被称为<strong>过电压</strong>。因此设计电路的时候，需要特别注意过高的品质因数，有可能会导致电感器出现<strong>过电压</strong>损坏。</p>
+<h4 id="带宽">带宽</h4>
+<p>对于下图当中的<strong>带通滤波器电路</strong>的幅频特性曲线，<strong>幅值</strong>的
+<code>0.707</code> 倍对应到曲线上的 <span class="math inline">\(\omega_1\)</span> 与 <span class="math inline">\(\omega_2\)</span> 两个交点之差，即 <span class="math inline">\(\omega_2 - \omega_1\)</span>
+的值就称作<strong>带宽</strong>：</p>
+<p><img src="/Electronics/Simple-Analysis/Chapter-6/15.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>品质因数</strong>对于<strong>带宽</strong>所造成影响的数学推导过程较为复杂，这里直接给出结论
+—— <strong>品质因数越大带宽越窄，品质因数越小带宽越大</strong>。</p>
+</blockquote>
+<h3 id="总结-5">总结</h3>
+<ul>
+<li><strong>高阶滤波器</strong>相比于<strong>低阶滤波器</strong>，所经过的滤波工序更多，因而滤波效果也会更好；</li>
+<li><strong>频率</strong> <span class="math inline">\(f\)</span>
+或者<strong>角频率</strong> <span class="math inline">\(\omega = 2 \pi
+f\)</span> 对于正弦稳态电路而言极为重要；</li>
+<li><strong>幅频特性曲线</strong>是关于<strong>幅值</strong> <span class="math inline">\(|H(j \omega)|\)</span> 与<strong>角频率</strong>
+<span class="math inline">\(\omega\)</span>
+的关系曲线，用于反映正弦稳态电路的<strong>频域</strong>特性；</li>
+<li><strong>滤波器</strong>与<strong>谐振</strong>是与正弦稳态电路频域特性相关的两种具体应用；</li>
+<li><strong>滤波器</strong>的作用是滤除或者通过特定的<strong>频率分量</strong>，根据滤除频率的不同，可以划分为<strong>低通</strong>、<strong>高通</strong>、<strong>带通</strong>、<strong>带阻</strong>四种类型；</li>
+<li><strong>谐振</strong>是指在某一个频率下面，电路的<strong>等效阻抗</strong>表现为一个<strong>纯电阻</strong>（实数）；</li>
+<li><strong>串联谐振</strong>时<code>电阻</code>的<strong>电压有效值最大</strong>，<strong>并联谐振</strong>时<code>电阻</code>的<strong>电流有效值最大</strong>；</li>
+<li>如果电路上只拥有<strong>电感器</strong>和<strong>电容器</strong>，则其发生<strong>串联谐振</strong>时相当于<strong>短路</strong>，而在发生<strong>并联谐振</strong>时相当于<strong>开路</strong>；</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>简明厄要的《电路理论》读书笔记</p><p><a href="http://www.uinio.com/Electronics/Simple-Analysis/">http://www.uinio.com/Electronics/Simple-Analysis/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2014-11-26</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-05-21</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/">电路理论</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/Analysis-Mooc/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">电路分析经典理论与习题手记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Other/2023-Auto/"><span class="level-item">现代汽车机械电气结构与驾驶技术分享</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#电路模型与定律"><span class="level-left"><span class="level-item">1</span><span class="level-item">电路模型与定律</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电源"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">电源</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电压源"><span class="level-left"><span class="level-item">1.1.1</span><span class="level-item">电压源</span></span></a></li><li><a class="level is-mobile" href="#电流源"><span class="level-left"><span class="level-item">1.1.2</span><span class="level-item">电流源</span></span></a></li><li><a class="level is-mobile" href="#直流-交流源"><span class="level-left"><span class="level-item">1.1.3</span><span class="level-item">直流 / 交流源</span></span></a></li></ul></li><li><a class="level is-mobile" href="#电阻与欧姆定律"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">电阻与欧姆定律</span></span></a></li><li><a class="level is-mobile" href="#基尔霍夫定律"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">基尔霍夫定律</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基尔霍夫电流定律"><span class="level-left"><span class="level-item">1.3.1</span><span class="level-item">基尔霍夫电流定律</span></span></a></li><li><a class="level is-mobile" href="#基尔霍夫电压定律"><span class="level-left"><span class="level-item">1.3.2</span><span class="level-item">基尔霍夫电压定律</span></span></a></li></ul></li><li><a class="level is-mobile" href="#总结"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">总结</span></span></a></li></ul></li><li><a class="level is-mobile" href="#电路分析方法"><span class="level-left"><span class="level-item">2</span><span class="level-item">电路分析方法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#回路电流法"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">回路电流法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基于-kvl-定律列写"><span class="level-left"><span class="level-item">2.1.1</span><span class="level-item">基于 KVL 定律列写</span></span></a></li><li><a class="level is-mobile" href="#含有电流源的情况"><span class="level-left"><span class="level-item">2.1.2</span><span class="level-item">含有电流源的情况</span></span></a></li><li><a class="level is-mobile" href="#基于自阻-互阻列写"><span class="level-left"><span class="level-item">2.1.3</span><span class="level-item">基于自阻 &amp; 互阻列写</span></span></a></li></ul></li><li><a class="level is-mobile" href="#结点电压法"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">结点电压法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基于-kcl-定律列写"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">基于 KCL 定律列写</span></span></a></li><li><a class="level is-mobile" href="#含无伴电压源的情况"><span class="level-left"><span class="level-item">2.2.2</span><span class="level-item">含无伴电压源的情况</span></span></a></li><li><a class="level is-mobile" href="#基于自导-互导列写"><span class="level-left"><span class="level-item">2.2.3</span><span class="level-item">基于自导 &amp; 互导列写</span></span></a></li></ul></li><li><a class="level is-mobile" href="#等效变换"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">等效变换</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电压源串联"><span class="level-left"><span class="level-item">2.3.1</span><span class="level-item">电压源串联</span></span></a></li><li><a class="level is-mobile" href="#电阻串联"><span class="level-left"><span class="level-item">2.3.2</span><span class="level-item">电阻串联</span></span></a></li><li><a class="level is-mobile" href="#电压源与电阻并联"><span class="level-left"><span class="level-item">2.3.3</span><span class="level-item">电压源与电阻并联</span></span></a></li><li><a class="level is-mobile" href="#三角形与星形变换"><span class="level-left"><span class="level-item">2.3.4</span><span class="level-item">三角形与星形变换</span></span></a></li><li><a class="level is-mobile" href="#电压源电阻串联-电流源电阻并联的等效"><span class="level-left"><span class="level-item">2.3.5</span><span class="level-item">电压源电阻串联 &amp;
+电流源电阻并联的等效</span></span></a></li></ul></li><li><a class="level is-mobile" href="#总结-1"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">总结</span></span></a></li></ul></li><li><a class="level is-mobile" href="#电路定理"><span class="level-left"><span class="level-item">3</span><span class="level-item">电路定理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#叠加定理"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">叠加定理</span></span></a></li><li><a class="level is-mobile" href="#替代定理"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">替代定理</span></span></a></li><li><a class="level is-mobile" href="#戴维南定理"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">戴维南定理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#戴维南定理的证明"><span class="level-left"><span class="level-item">3.3.1</span><span class="level-item">戴维南定理的证明</span></span></a></li><li><a class="level is-mobile" href="#戴维南等效电路的求解"><span class="level-left"><span class="level-item">3.3.2</span><span class="level-item">戴维南等效电路的求解</span></span></a></li><li><a class="level is-mobile" href="#短路电流法求解等效电阻"><span class="level-left"><span class="level-item">3.3.3</span><span class="level-item">短路电流法求解等效电阻</span></span></a></li></ul></li><li><a class="level is-mobile" href="#诺顿定理"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">诺顿定理</span></span></a></li><li><a class="level is-mobile" href="#最大功率传输定理"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">最大功率传输定理</span></span></a></li><li><a class="level is-mobile" href="#互易定理"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">互易定理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#特勒根定理"><span class="level-left"><span class="level-item">3.6.1</span><span class="level-item">特勒根定理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#特勒根定理-1"><span class="level-left"><span class="level-item">3.6.1.1</span><span class="level-item">特勒根定理 1</span></span></a></li><li><a class="level is-mobile" href="#特勒根定理-2-及其推论"><span class="level-left"><span class="level-item">3.6.1.2</span><span class="level-item">特勒根定理 2 及其推论</span></span></a></li></ul></li><li><a class="level is-mobile" href="#互易定理的证明"><span class="level-left"><span class="level-item">3.6.2</span><span class="level-item">互易定理的证明</span></span></a></li><li><a class="level is-mobile" href="#互易定理的三种形式"><span class="level-left"><span class="level-item">3.6.3</span><span class="level-item">互易定理的三种形式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#总结-2"><span class="level-left"><span class="level-item">3.7</span><span class="level-item">总结</span></span></a></li></ul></li><li><a class="level is-mobile" href="#动态电路"><span class="level-left"><span class="level-item">4</span><span class="level-item">动态电路</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电容"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">电容</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电容的定义"><span class="level-left"><span class="level-item">4.1.1</span><span class="level-item">电容的定义</span></span></a></li><li><a class="level is-mobile" href="#电容器的电压-电流关系"><span class="level-left"><span class="level-item">4.1.2</span><span class="level-item">电容器的电压-电流关系</span></span></a></li><li><a class="level is-mobile" href="#电容器消耗的能量"><span class="level-left"><span class="level-item">4.1.3</span><span class="level-item">电容器消耗的能量</span></span></a></li><li><a class="level is-mobile" href="#电容器的串联"><span class="level-left"><span class="level-item">4.1.4</span><span class="level-item">电容器的串联</span></span></a></li><li><a class="level is-mobile" href="#电容器的并联"><span class="level-left"><span class="level-item">4.1.5</span><span class="level-item">电容器的并联</span></span></a></li></ul></li><li><a class="level is-mobile" href="#电容器充放电"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">电容器充放电</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电容器的充电"><span class="level-left"><span class="level-item">4.2.1</span><span class="level-item">电容器的充电</span></span></a></li><li><a class="level is-mobile" href="#时间常数-tau"><span class="level-left"><span class="level-item">4.2.2</span><span class="level-item">时间常数 \(\tau\)</span></span></a></li><li><a class="level is-mobile" href="#电容器的放电"><span class="level-left"><span class="level-item">4.2.3</span><span class="level-item">电容器的放电</span></span></a></li></ul></li><li><a class="level is-mobile" href="#电感"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">电感</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电感的定义"><span class="level-left"><span class="level-item">4.3.1</span><span class="level-item">电感的定义</span></span></a></li><li><a class="level is-mobile" href="#电感器的电压-电流关系"><span class="level-left"><span class="level-item">4.3.2</span><span class="level-item">电感器的电压-电流关系</span></span></a></li><li><a class="level is-mobile" href="#电感器消耗的能量"><span class="level-left"><span class="level-item">4.3.3</span><span class="level-item">电感器消耗的能量</span></span></a></li><li><a class="level is-mobile" href="#电感器的串联"><span class="level-left"><span class="level-item">4.3.4</span><span class="level-item">电感器的串联</span></span></a></li><li><a class="level is-mobile" href="#电感器的并联"><span class="level-left"><span class="level-item">4.3.5</span><span class="level-item">电感器的并联</span></span></a></li></ul></li><li><a class="level is-mobile" href="#电感器的充放电"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">电感器的充放电</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电感器的充电"><span class="level-left"><span class="level-item">4.4.1</span><span class="level-item">电感器的充电</span></span></a></li><li><a class="level is-mobile" href="#电感器的放电"><span class="level-left"><span class="level-item">4.4.2</span><span class="level-item">电感器的放电</span></span></a></li></ul></li><li><a class="level is-mobile" href="#二阶电路"><span class="level-left"><span class="level-item">4.5</span><span class="level-item">二阶电路</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#一阶电路-二阶电路"><span class="level-left"><span class="level-item">4.5.1</span><span class="level-item">一阶电路 &amp; 二阶电路</span></span></a></li><li><a class="level is-mobile" href="#二阶电路微分方程的求解"><span class="level-left"><span class="level-item">4.5.2</span><span class="level-item">二阶电路微分方程的求解</span></span></a></li><li><a class="level is-mobile" href="#二阶电路的三种工作状态"><span class="level-left"><span class="level-item">4.5.3</span><span class="level-item">二阶电路的三种工作状态</span></span></a></li></ul></li><li><a class="level is-mobile" href="#补充"><span class="level-left"><span class="level-item">4.6</span><span class="level-item">补充</span></span></a></li><li><a class="level is-mobile" href="#总结-3"><span class="level-left"><span class="level-item">4.7</span><span class="level-item">总结</span></span></a></li></ul></li><li><a class="level is-mobile" href="#正弦稳态电路"><span class="level-left"><span class="level-item">5</span><span class="level-item">正弦稳态电路</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#正弦量"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">正弦量</span></span></a></li><li><a class="level is-mobile" href="#正弦稳态电路的响应"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">正弦稳态电路的响应</span></span></a></li><li><a class="level is-mobile" href="#正弦量相位的超前与滞后"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">正弦量相位的超前与滞后</span></span></a></li><li><a class="level is-mobile" href="#相量法"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">相量法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#相量法引入依据"><span class="level-left"><span class="level-item">5.4.1</span><span class="level-item">相量法引入依据</span></span></a></li><li><a class="level is-mobile" href="#相量域-时域对应关系"><span class="level-left"><span class="level-item">5.4.2</span><span class="level-item">相量域 &amp; 时域对应关系</span></span></a></li></ul></li><li><a class="level is-mobile" href="#阻抗"><span class="level-left"><span class="level-item">5.5</span><span class="level-item">阻抗</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#阻抗的引入"><span class="level-left"><span class="level-item">5.5.1</span><span class="level-item">阻抗的引入</span></span></a></li><li><a class="level is-mobile" href="#阻抗的定义"><span class="level-left"><span class="level-item">5.5.2</span><span class="level-item">阻抗的定义</span></span></a></li></ul></li><li><a class="level is-mobile" href="#正弦稳态电路的分析"><span class="level-left"><span class="level-item">5.6</span><span class="level-item">正弦稳态电路的分析</span></span></a></li><li><a class="level is-mobile" href="#正弦稳态电路的功率"><span class="level-left"><span class="level-item">5.7</span><span class="level-item">正弦稳态电路的功率</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#瞬时功率"><span class="level-left"><span class="level-item">5.7.1</span><span class="level-item">瞬时功率</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#电阻的瞬时功率"><span class="level-left"><span class="level-item">5.7.1.1</span><span class="level-item">电阻的瞬时功率</span></span></a></li><li><a class="level is-mobile" href="#电感的瞬时功率"><span class="level-left"><span class="level-item">5.7.1.2</span><span class="level-item">电感的瞬时功率</span></span></a></li><li><a class="level is-mobile" href="#电容的瞬时功率"><span class="level-left"><span class="level-item">5.7.1.3</span><span class="level-item">电容的瞬时功率</span></span></a></li></ul></li><li><a class="level is-mobile" href="#平均功率"><span class="level-left"><span class="level-item">5.7.2</span><span class="level-item">平均功率</span></span></a></li><li><a class="level is-mobile" href="#无功功率"><span class="level-left"><span class="level-item">5.7.3</span><span class="level-item">无功功率</span></span></a></li><li><a class="level is-mobile" href="#复功率"><span class="level-left"><span class="level-item">5.7.4</span><span class="level-item">复功率</span></span></a></li><li><a class="level is-mobile" href="#视在功率"><span class="level-left"><span class="level-item">5.7.5</span><span class="level-item">视在功率</span></span></a></li><li><a class="level is-mobile" href="#功率因数"><span class="level-left"><span class="level-item">5.7.6</span><span class="level-item">功率因数</span></span></a></li><li><a class="level is-mobile" href="#功率守恒"><span class="level-left"><span class="level-item">5.7.7</span><span class="level-item">功率守恒</span></span></a></li><li><a class="level is-mobile" href="#相量图"><span class="level-left"><span class="level-item">5.7.8</span><span class="level-item">相量图</span></span></a></li><li><a class="level is-mobile" href="#提高功率因数"><span class="level-left"><span class="level-item">5.7.9</span><span class="level-item">提高功率因数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#总结-4"><span class="level-left"><span class="level-item">5.8</span><span class="level-item">总结</span></span></a></li></ul></li><li><a class="level is-mobile" href="#正弦稳态电路的频域特性"><span class="level-left"><span class="level-item">6</span><span class="level-item">正弦稳态电路的频域特性</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#网络函数"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">网络函数</span></span></a></li><li><a class="level is-mobile" href="#频率特性"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">频率特性</span></span></a></li><li><a class="level is-mobile" href="#滤波器"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">滤波器</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#低通滤波器"><span class="level-left"><span class="level-item">6.3.1</span><span class="level-item">低通滤波器</span></span></a></li><li><a class="level is-mobile" href="#高通滤波器"><span class="level-left"><span class="level-item">6.3.2</span><span class="level-item">高通滤波器</span></span></a></li><li><a class="level is-mobile" href="#带通滤波器"><span class="level-left"><span class="level-item">6.3.3</span><span class="level-item">带通滤波器</span></span></a></li><li><a class="level is-mobile" href="#带阻滤波器"><span class="level-left"><span class="level-item">6.3.4</span><span class="level-item">带阻滤波器</span></span></a></li><li><a class="level is-mobile" href="#半功率点"><span class="level-left"><span class="level-item">6.3.5</span><span class="level-item">0.707 半功率点</span></span></a></li></ul></li><li><a class="level is-mobile" href="#谐振"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">谐振</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#rlc-串联谐振"><span class="level-left"><span class="level-item">6.4.1</span><span class="level-item">RLC 串联谐振</span></span></a></li><li><a class="level is-mobile" href="#rlc-并联谐振"><span class="level-left"><span class="level-item">6.4.2</span><span class="level-item">RLC 并联谐振</span></span></a></li><li><a class="level is-mobile" href="#品质因数"><span class="level-left"><span class="level-item">6.4.3</span><span class="level-item">品质因数</span></span></a></li><li><a class="level is-mobile" href="#带宽"><span class="level-left"><span class="level-item">6.4.4</span><span class="level-item">带宽</span></span></a></li></ul></li><li><a class="level is-mobile" href="#总结-5"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">总结</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">23</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Power-Switching/"><img src="/Electronics/Power-Switching/logo.png" alt="开关电源 SMPS 基本原理 &amp; 拓扑结构剖析"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-03-05T16:00:00.000Z">2025-03-06</time></p><p class="title"><a href="/Electronics/Power-Switching/">开关电源 SMPS 基本原理 &amp; 拓扑结构剖析</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Embedded/FOC/"><img src="/Embedded/FOC/logo.png" alt="剖析无刷电机的 FOC 磁场定向控制理论"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-02-19T16:00:00.000Z">2025-02-20</time></p><p class="title"><a href="/Embedded/FOC/">剖析无刷电机的 FOC 磁场定向控制理论</a></p><p class="categories"><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Embedded/PID/"><img src="/Embedded/PID/logo.png" alt="闭环控制算法 PID 的原理剖析与实现"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-02-04T16:00:00.000Z">2025-02-05</time></p><p class="title"><a href="/Embedded/PID/">闭环控制算法 PID 的原理剖析与实现</a></p><p class="categories"><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

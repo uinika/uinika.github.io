@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>开源 EDA 工具 KiCad 6.0 电路设计小书 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="对于国内的中小型电子企业而言，Allegro、Pads、Altium Designer 等商业 EDA 工具的授权费用过于昂贵，且大部分只提供 Windows 操作系统版本，缺乏相应的跨平台支持。在电子信息技术行业版权问题充分受到重视的今天，一款易于使用并且受到厂商广泛支持的开源 EDA 工具，对于硬件电子工程师而言尤为重要。本文介绍的 KiCad 就是一款基于 GNU GPL v3 开"><meta property="og:type" content="blog"><meta property="og:title" content="开源 EDA 工具 KiCad 6.0 电路设计小书"><meta property="og:url" content="http://www.uinio.com/Electronics/KiCad-Tutorial/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="对于国内的中小型电子企业而言，Allegro、Pads、Altium Designer 等商业 EDA 工具的授权费用过于昂贵，且大部分只提供 Windows 操作系统版本，缺乏相应的跨平台支持。在电子信息技术行业版权问题充分受到重视的今天，一款易于使用并且受到厂商广泛支持的开源 EDA 工具，对于硬件电子工程师而言尤为重要。本文介绍的 KiCad 就是一款基于 GNU GPL v3 开"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2019-11-20T16:00:00.000Z"><meta property="article:modified_time" content="2021-07-26T16:00:00.000Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="EDA"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/KiCad-Tutorial/"},"headline":"开源 EDA 工具 KiCad 6.0 电路设计小书","image":["http://www.uinio.com/Electronics/KiCad-Tutorial/logo.png"],"datePublished":"2019-11-20T16:00:00.000Z","dateModified":"2021-07-26T16:00:00.000Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"对于国内的中小型电子企业而言，Allegro、Pads、Altium\r Designer 等商业 EDA 工具的授权费用过于昂贵，且大部分只提供\r Windows\r 操作系统版本，缺乏相应的跨平台支持。在电子信息技术行业版权问题充分受到重视的今天，一款易于使用并且受到厂商广泛支持的开源\r EDA 工具，对于硬件电子工程师而言尤为重要。本文介绍的 KiCad 就是一款基于 GNU GPL\r v3 开"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/KiCad-Tutorial/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-11-20T16:00:00.000Z" title="2019/11/21 00:00:00">2019-11-21</time>发表</span><span class="level-item"><time dateTime="2021-07-26T16:00:00.000Z" title="2021/7/27 00:00:00">2021-07-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">1 小时读完 (大约11193个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">开源 EDA 工具 KiCad 6.0 电路设计小书</h1><div class="content"><p>对于国内的中小型电子企业而言，<strong>Allegro</strong>、<strong>Pads</strong>、<strong>Altium
+Designer</strong> 等商业 EDA 工具的授权费用过于昂贵，且大部分只提供
+Windows
+操作系统版本，缺乏相应的跨平台支持。在电子信息技术行业版权问题充分受到重视的今天，一款易于使用并且受到厂商广泛支持的开源
+<strong>EDA</strong> 工具，对于硬件电子工程师而言尤为重要。本文介绍的 <a target="_blank" rel="noopener" href="https://kicad-pcb.org/"><strong>KiCad</strong></a> 就是一款基于 <a target="_blank" rel="noopener" href="https://www.kicad.org/about/licenses/"><strong>GNU GPL
+v3</strong></a> 开源许可协议的跨平台 <strong>EDA</strong>
+电子设计自动化工具集，其能够处理多达 <strong>32</strong>
+个铜层、<strong>14</strong> 个技术层、<strong>4</strong> 个辅助层的 PCB
+电路板，并且生成加工制造所需要的<code>网表</code>、<code>物料清单</code>、<code>光绘文件</code>、<code>钻孔文件</code>、<code>元件放置文件</code>。</p>
+<p><img src="/Electronics/KiCad-Tutorial/logo.png"></p>
+<p>自 2018 年 07 月 22 日发布 <strong>KiCad 5.0</strong>
+版本以后，历经了三年时间，终于在 2021 年 12 月 25 发布了全新的
+<strong>KiCad 6.0</strong>
+版本，新版本采用了全新的用户交互界面，带来全新<strong>原理图编辑器</strong>、<strong>PCB
+编辑器</strong>、<strong>3D 查看器</strong>的同时，还增加了更为丰富的
+<strong>DRC
+设计规则</strong>约束，并且提供了对于<strong>中文语言</strong>的良好支持。全文最早基于
+<strong>5.0</strong> 版本写作，鉴于官方已经升级至功能更为完善的
+<strong>6.0</strong> 版本，所以基于官方新版的 <a target="_blank" rel="noopener" href="https://docs.kicad.org/6.0/en/getting_started_in_kicad/getting_started_in_kicad.html"><strong>《Getting
+Started in KiCad》</strong></a> 对本文进行了全面的重写。</p>
+<span id="more"></span>
+<h2 id="kicad-6-简介">KiCad 6 简介</h2>
+<p>本文涉及的 <strong>KiCad</strong> 工程源文件，已经全部共享至笔者的
+<strong>Github</strong> 项目 <a target="_blank" rel="noopener" href="https://github.com/uinika/abrams">Abrams</a>，欢迎大家
+<code>Clone</code> 或者 <code>Fork</code>。类似于其它的
+<strong>EDA</strong> 电子设计自动化工具，<strong>KiCad</strong> 同样将
+PCB
+电路板的绘制过程划分为<strong>原理图</strong>（<strong>Schematic</strong>
+[skiːˈmætɪk]，电路的符号表示）与<strong>电路板</strong>（<strong>PCB</strong>，Printed
+Circuit
+Board，原理图的物理实现）两个部分，并且分别提供了独立的<strong>原理图/符号编辑器</strong>，以及<strong>电路板/封装编辑器</strong>：</p>
+<ol type="1">
+<li>首先，采用 <strong>KiCad
+原理图编辑器</strong>绘制原理图，即在原理图当中添加符号并且绘制连接，同时为每个元件指派或者创建封装。在通过
+<strong>ERC
+电气规则检查</strong>之后，就可以将其更新至<strong>电路板编辑器</strong>；</li>
+<li>然后，运用 <strong>KiCad PCB
+编辑器</strong>进行元件封装的物理布局与布线，这个过程当中需要特别注意
+<strong>SI 信号完整性</strong>相关的问题。在通过 <strong>DRC
+设计规则检查</strong>之后，就可以交付给工厂进行生产制造输出；</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：<strong>KiCad</strong>
+的<strong>原理图编辑器</strong>和<strong>PCB
+编辑器</strong>之间可以进行双向的同步更新，即支持<strong>交互式布线</strong>功能；</p>
+</blockquote>
+<h2 id="创建工程">创建工程</h2>
+<p>运行 <strong>KiCad</strong>
+之后，就会打开<strong>工程文件</strong>管理窗口，鼠标选择菜单栏的【<strong>文件
+➞ 新建工程</strong>】或者直接按下快捷键【<strong>Ctrl +
+N</strong>】，浏览至希望保存工程的位置，并且将工程命名为
+<code>uinio</code>，然后鼠标点击【<strong>保存</strong>】：</p>
+<p><img src="/Electronics/KiCad-Tutorial/1.png"></p>
+<p>此时 <strong>KiCad</strong> 就会自动在工程目录当中，分别创建后缀名为
+<code>.kicad_pro</code>(工程)、<code>.kicad_sch</code>(原理图)、<code>.kicad_pcb</code>(电路板)
+的三个源文件：</p>
+<p><img src="/Electronics/KiCad-Tutorial/2.png"></p>
+<p>除此之外，<strong>KiCad</strong> 还会自动生成一个用于工程备份的
+<code>-backups</code> 目录，可以通过鼠标选择菜单栏的【<strong>偏好设置 ➞
+偏好设置</strong>】或者直接按下快捷键【<strong>Ctrl +
+,</strong>】，打开【<strong>偏好设置</strong>】对话框，设置工程自动备份的规则：</p>
+<p><img src="/Electronics/KiCad-Tutorial/3.png"></p>
+<h2 id="调整配色方案">调整配色方案</h2>
+<p>下载 <a target="_blank" rel="noopener" href="https://github.com/aerospaceplane/kicad-color-schemes">kicad-color-schemes</a>
+到本地，解压之后得到一系列的配色方案，这里选择笔者比较喜欢使用的
+<strong>behave-dark</strong> 配色方案，拷贝该目录当中的
+<code>behave-dark.json</code> 和
+<code>behave-dark_footprints.json</code> 文件至目录
+<code>C:\Users\用户名\AppData\Roaming\kicad\6.0\colors</code>，然后重新启动
+<strong>KiCad</strong>，分别在<strong>原理图编辑器</strong>和<strong>PCB
+编辑器</strong>当中，鼠标选择菜单栏上的【<strong>偏好设置 ➞
+偏好设置</strong>】或者按下快捷键【<strong>Ctrl +
+,</strong>】，打开【<strong>偏好设置对话框</strong>】里的【<strong>颜色</strong>】菜单，将配色主题设置为<code>Behave Dark</code>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/4.png"></p>
+<p><img src="/Electronics/KiCad-Tutorial/5.png"></p>
+<p>对于其它的操作系统，可以参考 <strong>kicad-color-schemes</strong>
+工程自述文件当中的说明，拷贝 <code>.json</code>
+配色文件至相应的目录：</p>
+<ul>
+<li><strong>Linux</strong>：<code>~.config/kicad/6.0/colors</code>；</li>
+<li><strong>macOS</strong>: 用户 <strong>Home</strong> 主目录 +
+<code>/Library/Preferences/kicad/6.0/colors</code>；</li>
+<li><strong>Windows 10</strong>:
+<code>C:\Users\username\AppData\Roaming\kicad\6.0\colors</code>，即
+<code>%APPDATA%\kicad</code>；</li>
+</ul>
+<h2 id="原理图编辑">原理图编辑</h2>
+<h3 id="符号库表设置">符号库表设置</h3>
+<p>首次打开 <strong>KiCad</strong>
+的<strong>原理图编辑器</strong>时，会出现【<strong>配置全局符号库表</strong>】对话框，即指定原理图符号库文件
+<code>sym-lib-table</code>
+的存储位置，如果当前已经安装了默认库，那么可以选择默认的选项【<strong>复制默认全局符号库表</strong>】（把安装目录下的
+<code>sym-lib-table</code> 文件复制一份至用户目录）：</p>
+<p><img src="/Electronics/KiCad-Tutorial/6.png"></p>
+<p>如果 <strong>KiCad</strong> 在默认的位置找不到
+<code>sym-lib-table</code>
+符号库文件，则上述的默认选项将会被禁用。这种情况下，应当选择第 2
+个选项【<strong>复制自定义全局符号库表</strong>】，然后分别浏览到当前操作系统的如下目录，手动的选择
+<code>sym-lib-table</code> 文件：</p>
+<ul>
+<li><strong>Linux</strong>：<code>/usr/share/kicad/template/</code>；</li>
+<li><strong>macOS</strong>:
+<code>/Applications/KiCad/KiCad.app/Contents/SharedSupport/template/</code>；</li>
+<li><strong>Windows</strong>:
+<code>KiCad\share\kicad\template</code>；</li>
+</ul>
+<h3 id="原理图编辑器基础">原理图编辑器基础</h3>
+<p>通过 <strong>KiCad</strong> 的<strong>原理图编辑器</strong>打开
+<code>uinio.kicad_sch</code>
+原理图文件之后，可以通过【<strong>鼠标中键</strong>】或者【<strong>鼠标右键</strong>】平移原理图，或者使用按键【<strong>F1
+/ F2</strong>】或者【<strong>鼠标滚轮</strong>】进行放大与缩小操作：</p>
+<p><img src="/Electronics/KiCad-Tutorial/6-1.gif"></p>
+<p><strong>原理图编辑器</strong> 默认勾选了【<strong>偏好设置 ➞
+鼠标和触摸板 ➞
+缩放时居中光标</strong>】，可以在用户执行缩放操作时，使得鼠标光标能够自动的在屏幕上面居中。</p>
+<p><img src="/Electronics/KiCad-Tutorial/7.png"></p>
+<p>除此之外，还可以打开<strong>原理图编辑器</strong>当中的【<strong>偏好设置
+➞ 快捷键</strong>】菜单，由用户自定义快捷键：</p>
+<p><img src="/Electronics/KiCad-Tutorial/8.png"></p>
+<p><strong>原理图编辑器</strong>左侧的工具栏包含了基本的<strong>显示设置</strong>，而右侧的工具栏则包含了常用的<strong>原理图绘制工具</strong>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/9.png"></p>
+<h3 id="原理图设置">原理图设置</h3>
+<p>鼠标单击<strong>原理图编辑器</strong>菜单栏的【<strong>文件 →
+图框设置</strong>】，对原理图相关的信息进行设置，原理图框的<strong>尺寸</strong>默认为
+<code>A4 210 × 297mm</code>
+大小，而<strong>发行日期</strong>、<strong>修订</strong>、<strong>标题</strong>、<strong>厂商</strong>信息设置分别如下图所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/10.png"></p>
+<h3 id="添加原理图符号">添加原理图符号</h3>
+<p>鼠标点击工具栏右侧的【<strong>添加符号</strong>】按钮或者直接按下快捷键【<strong>A</strong>】，打开【<strong>选择符号</strong>】对话框，选择当前需要放置的原理图符号：</p>
+<p><img src="/Electronics/KiCad-Tutorial/11.png"></p>
+<p>首先，向下滚动并且展开【<strong>Device</strong>】库，选择【<strong>LED</strong>】符号，鼠标点击【<strong>确定</strong>】按钮或者按下【<strong>回车键</strong>】，再次点击【<strong>鼠标左键</strong>】放置原理图符号：</p>
+<p><img src="/Electronics/KiCad-Tutorial/12.png"></p>
+<p>然后，通过在【<strong>选择符号</strong>】对话框顶部过滤器内输入
+<code>R</code> 或者 <code>R_US</code>
+来添加一个限流电阻，并将其放置在原理图当中：</p>
+<p><img src="/Electronics/KiCad-Tutorial/13.png"></p>
+<p>最后，再放置一个 <code>Battery_Cell</code> 电池符号，用于为上面添加的
+<strong>LED</strong> 供电：</p>
+<p><img src="/Electronics/KiCad-Tutorial/14.png"></p>
+<h3 id="选择和移动符号">选择和移动符号</h3>
+<p>在<strong>原理图编辑器</strong>当中，如下的快捷键用于选择原理图符号：</p>
+<ul>
+<li>【<strong>鼠标左键</strong>】是选择一个原理图符号，</li>
+<li>【<strong>Shift + 鼠标左键</strong>】则是选择多个符号，</li>
+<li>【<strong>Ctrl + Shift +
+鼠标左键</strong>】移除当前选择的符号，</li>
+</ul>
+<p>而如下的快捷键，则可以用于操作原理图符号：</p>
+<ul>
+<li>【<strong>R</strong>】旋转原理图符号；</li>
+<li>【<strong>M</strong>】移动符号（<strong>连线</strong>不会跟随移动）；</li>
+<li>【<strong>G</strong>】拖动符号（<strong>连线</strong>同时跟随移动）；</li>
+<li>【<strong>Del</strong>】 删除原理图符号；</li>
+</ul>
+<p>将之前放置在原理图上的 3 个符号，按照下图所示的位置进行摆放：</p>
+<p><img src="/Electronics/KiCad-Tutorial/15.png"></p>
+<h3 id="连接原理图符号">连接原理图符号</h3>
+<p>首先，鼠标点击<strong>原理图编辑器</strong>右侧的【<strong>添加连线</strong>】按钮或者按下快捷键【<strong>W</strong>】，把原理符号按照下图所示的形式连接起来：</p>
+<p><img src="/Electronics/KiCad-Tutorial/16.png"></p>
+<blockquote>
+<p><strong>注意</strong>：按下快捷键【<strong>Esc</strong>】可以取消连接，或者将鼠标悬停在未连接的符号引脚上，当光标指示发生改变的时候，点击【<strong>鼠标左键</strong>】，同样可以从这个位置开始绘制<strong>连线</strong>。</p>
+</blockquote>
+<p>接下来，为了更加方便的理解原理图，需要再行添加<code>电源符号</code>和<code>接地符号</code>，鼠标左键点击<strong>原理图编辑器</strong>右侧的【<strong>添加电源端口</strong>】按钮或者按下快捷键【<strong>P</strong>】，打开【<strong>选择电源符号</strong>】对话框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/17.png"></p>
+<p>然后，分别向原理图当中添加一个 <code>VCC</code> 和一个
+<code>GND</code>
+符号，再使用<strong>连线</strong>将其连接至刚才的电路：</p>
+<p><img src="/Electronics/KiCad-Tutorial/18.png"></p>
+<p>最后，在<code>发光二极管</code>和<code>电阻器</code>之间的导线上添加<strong>网络标签</strong>，鼠标左键点击<strong>原理图编辑器</strong>左侧的【<strong>添加网络标签</strong>】按钮或者按下快捷键【<strong>L</strong>】，放置过程当中需要让标签的<strong>方形连接点</strong>与<strong>连线</strong>重叠：</p>
+<p><img src="/Electronics/KiCad-Tutorial/19.png"></p>
+<blockquote>
+<p><strong>注意</strong>：相同名称的<strong>标签</strong>和<strong>电源符号</strong>表示相互之间是连接在一起的，即使它们在视觉上没有连接关系。</p>
+</blockquote>
+<h3 id="位号-符号属性-封装">位号 / 符号属性 / 封装</h3>
+<p><strong>位号</strong>是每一个原理图符号的唯一标识，鼠标点击<strong>原理图编辑器</strong>顶部工具栏的【<strong>填写原理图符号位号</strong>】按钮，打开【<strong>批注原理图</strong>】对话框，并且点击【<strong>批注</strong>】按钮：</p>
+<p><img src="/Electronics/KiCad-Tutorial/20.png"></p>
+<p><strong>符号属性</strong>是每一个原理图符号的属性值，鼠标选中原理图里的
+<strong>LED
+发光二管</strong>，然后按下快捷键【<strong>E</strong>】或者选择鼠标右键菜单里的【<strong>属性</strong>】，打开【<strong>符号属性</strong>】对话框，将
+<code>Value</code> 字段的 <code>LED</code> 修改为 <code>Red LED</code>
+字符串，然后点击【<strong>确定</strong>】按钮：</p>
+<p><img src="/Electronics/KiCad-Tutorial/21.png"></p>
+<p>采用同样的方法，将<strong>电阻器</strong>和<strong>电池</strong>符号的
+<code>value</code> 属性分别修改为 <code>1k</code> 和
+<code>3V</code>，修改完毕之后的原理图如下面所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/22.png"></p>
+<p><strong>封装</strong>用于描述原理图符号映射到电路板时的物理形式，某一些原理图符号默认自带封装，而另外一些符号则需要手动进行指定。鼠标点击<strong>原理图编辑器</strong>顶部工具栏的【<strong>运行封装分配工具</strong>】按钮，打开【<strong>关联封装</strong>】对话框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/23.png"></p>
+<p>分别为当前原理图当中的符号，选择如下对应的<strong>封装规格</strong>，然后点击【<strong>确定</strong>】按钮完成封装分配：</p>
+<ul>
+<li><strong>电池</strong>：<code>Battery:BatteryHolder_Keystone_1058_1x2032</code></li>
+<li><strong>电阻</strong>：<code>Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal</code></li>
+<li><strong>发光二极管</strong>：<code>LED_THT:LED_D5.0mm</code></li>
+</ul>
+<p>筛选封装的过程当中，要善于利用对话框顶部的【<strong>封装筛选器</strong>】功能，它们分别是：</p>
+<ul>
+<li>按 <strong>库</strong> 筛选封装列表；</li>
+<li>按 <strong>引脚数量</strong> 筛选封装列表；</li>
+<li>按 <strong>符号中定义的封装筛选器</strong> 筛选封装列表；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：除此之外，也可以选择在原理图符号的【<strong>符号属性</strong>】对话框直接分配封装。</p>
+</blockquote>
+<h3 id="erc-电气规则检查">ERC 电气规则检查</h3>
+<p>通常会在原理图设计的最后阶段，执行一次<strong>电气规则检查</strong>（<strong>ERC</strong>，Electrical
+Rules
+Check），鼠标点击<strong>原理图编辑器</strong>顶部的【<strong>执行电气规则检查</strong>】按钮，打开【<strong>电气规则检查
+(ERC)</strong>】对话框，然后点击【<strong>运行
+ERC</strong>】按钮执行检查：</p>
+<p><img src="/Electronics/KiCad-Tutorial/24.png"></p>
+<p>可以看到，通过 <strong>ERC</strong>
+电气规则检查器，<strong>KiCad</strong>
+发现了两处错误。用鼠标选中错误信息，<strong>KiCad</strong>
+就会自动定位至原理图当中的报错位置。这个
+<code>输入电源引脚不受任何输出电源引脚驱动</code> 错误在初次上手
+<strong>KiCad</strong> 的时候比较常见，需要添加原理图符号库当中的
+<code>PWR_FLAG</code> 符号，显式的将 <code>VCC</code> 和
+<code>GND</code>
+标注为<strong>电源引脚</strong>，并且重新<strong>分配位号</strong>和<strong>运行
+ERC 检查</strong>。正常情况下 <strong>KiCad</strong>
+将不会再提示错误信息，最终获得的原理图如下面所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/25.png"></p>
+<p>虽然 <strong>KiCad</strong> 提供的 ERC
+电气规则检查器，无法确保原理图设计能够正常工作，但是仍然可以检查出一些常见的问题。具体的
+<strong>KiCad</strong>
+电气检查规则，可以通过鼠标点击<strong>原理图编辑器</strong>菜单栏的【<strong>文件
+➞ 原理图设置</strong>】：</p>
+<p><img src="/Electronics/KiCad-Tutorial/26.png"></p>
+<p>然后，打开【<strong>原理图设置</strong>】对话框下的【<strong>电气规则</strong>】菜单项进行查看：</p>
+<p><img src="/Electronics/KiCad-Tutorial/27.png"></p>
+<p><img src="/Electronics/KiCad-Tutorial/28.png"></p>
+<h3 id="bom-物料清单">BOM 物料清单</h3>
+<p>最后一个可选的步骤是生成<strong>物料清单</strong>（<strong>BOM</strong>，Bill
+Of
+Material），鼠标点击<strong>原理图编辑器</strong>顶部工具栏的【<strong>生成当前原理图的
+BOM</strong>】按钮，打开【<strong>BOM (物料清单)</strong>】对话框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/29.png"></p>
+<p>选择对话框当中的 <code>bom_csv_grouped_by_value_with_fp</code>
+脚本，然后鼠标点击【<strong>生成</strong>】按钮，此时
+<strong>KiCad</strong> 就会执行如下 Python 脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"><span class="string">&quot;D:\Software\Tech\KiCad\bin\scripting\plugins/bom_csv_grouped_by_value_with_fp.py&quot;</span></span><br><span class="line"><span class="string">&quot;D:\workspace\abrams\Tutorial\uinio.xml&quot;</span> <span class="string">&quot;D:/workspace/abrams/Tutorial/uinio.csv&quot;</span></span><br><span class="line">成功。</span><br></pre></td></tr></table></figure>
+<p>从而在当前工程所在的目录下面，生成以 <code>.csv</code> 和
+<code>.xml</code> 作为后缀名的文件，其中的 <code>.csv</code> 就是
+<strong>BOM</strong> 文件：</p>
+<p><img src="/Electronics/KiCad-Tutorial/30.png"></p>
+<h2 id="电路板绘制">电路板绘制</h2>
+<p>完成原理图的绘制工作以后，鼠标左键点击<strong>原理图编辑器</strong>顶部工具栏的【<strong>在电路板编辑器中打开
+PCB</strong>】按钮，或者返回<strong>工程管理器</strong>点击【<strong>PCB
+编辑器</strong>】按钮，就可以打开 PCB 电路板文件
+<code>uinio.kicad_pcb</code>。在 <strong>PCB
+编辑器</strong>当中同样可以通过【<strong>鼠标中键</strong>】或者【<strong>鼠标右键</strong>】平移原理图，或者使用按键【<strong>F1
+/ F2</strong>】以及【<strong>鼠标滚轮</strong>】进行放大与缩小。</p>
+<p><img src="/Electronics/KiCad-Tutorial/30-1.gif"></p>
+<p><strong>PCB
+编辑器</strong>的中间是用于设计电路板的编辑区，左侧工具栏是各种显示选项，而右侧工具栏则包含有
+PCB
+设计工具。除此之外，最右侧还有【<strong>外观</strong>】面板和【<strong>选择筛选器</strong>】面板。</p>
+<h3 id="pcb-设置">PCB 设置</h3>
+<p>开始设计 PCB 电路板之前，可以先设置一些 PCB
+电路板文件的信息，鼠标左键单击【<strong>文件 ➞
+图框设置</strong>】​，这里同样将 PCB 图框的尺寸设置为
+<code>A4 210 × 297mm</code>
+大小，而<strong>发行日期</strong>、<strong>修订</strong>、<strong>标题</strong>、<strong>厂商信息</strong>设置分别如下图所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/31.png"></p>
+<p>接下来，转到【<strong>文件 ➞ 电路板设置</strong>】定义 PCB
+如何进行生产制造，这里最重要的选项是【<strong>物理压层</strong>】，这里保持默认的<strong>铜层</strong>数量为
+<code>2</code> 层即可：</p>
+<p><img src="/Electronics/KiCad-Tutorial/32.png"></p>
+<p>接下来，转到【<strong>设计规则 ➞ 约束</strong>】界面，这里需要根据
+PCB 制造工厂的工艺规格进行相应设置，在这里我们保持默认值即可：</p>
+<p><img src="/Electronics/KiCad-Tutorial/33.png"></p>
+<p>最后，打开【<strong>设计规则 ➞
+网络类表</strong>】界面，<strong>KiCad</strong>
+可以支持基于<strong>网络类</strong>来为特定的电路网络配置设计规则：</p>
+<p><img src="/Electronics/KiCad-Tutorial/34.png"></p>
+<blockquote>
+<p><strong>注意</strong>：虽然可以在绘制电路板的过程当中手动管理这些约束，但是
+<strong>KiCad</strong>
+官方还是建议使用<strong>网络类</strong>，因为它能够自动的进行设计规则检查。</p>
+</blockquote>
+<h3 id="导入原理图">导入原理图</h3>
+<p>打开<strong>原理图编辑器</strong>顶部工具栏的【<strong>在电路板编辑器中打开
+PCB</strong>】按钮或者直接按下快捷键【<strong>F8</strong>】，打开【<strong>从原理图更新
+PCB</strong>】对话框，点击【<strong>更新
+PCB</strong>】按钮，将之前原理图当中的设计数据导入至 <strong>PCB
+编辑器</strong>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/35.png"></p>
+<p>然后移动鼠标，选择的合适的位置按下【<strong>鼠标左键</strong>】，把原理图当中的
+3 个元件封装放置在<strong>原理图编辑器</strong>的编辑区当中：</p>
+<p><img src="/Electronics/KiCad-Tutorial/36.png"></p>
+<h3 id="绘制-pcb-板框">绘制 PCB 板框</h3>
+<p>放置好元件封装以后，就可以开始绘制 PCB
+板框，绘制板框时通常需要将<strong>网格尺寸</strong>切换至
+<code>1mm</code>，同时选中【外观】面板当中的 <code>Edge.Cuts</code>
+层：</p>
+<p><img src="/Electronics/KiCad-Tutorial/37.png"></p>
+<p>鼠标选择右侧工具栏当中的【<strong>绘制矩形</strong>】，围绕 3
+个元件封装绘制一个闭合的矩形作为 PCB 板框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/38.png"></p>
+<blockquote>
+<p><strong>注意</strong>：除此之外，还可以利用右侧工具栏当中提供的工具，绘制出<strong>线</strong>、<strong>圆弧</strong>、<strong>矩形</strong>、<strong>圆形</strong>、<strong>多边形</strong>，组合运用它们就能够绘制出复杂的板框形状。</p>
+</blockquote>
+<h3 id="元件的摆放布局">元件的摆放布局</h3>
+<p>完成板框的绘制之后，接下来的工作便是对元件进行合理的摆放与布局，通常需要考虑到下面几个因素：</p>
+<ul>
+<li>遵循结构要求，合理的布局<code>连接器</code>、<code>屏幕</code>、<code>按钮</code>、<code>开关</code>等接插元件；</li>
+<li>考虑<strong>信号完整性</strong>问题，例如旁路电容应当靠近关联的电源引脚，敏感的模拟元件应当远离数字信号的干扰；</li>
+<li>合理的选择将元件封装放置在 PCB
+电路板的<strong>正面</strong>（Front）或者<strong>反面</strong>（Back）；</li>
+<li>根据<strong>预拉线</strong>（也称为<strong>飞线</strong>，Ratsnest）的提示，元件的摆放位置要便于布线操作，相互连接的元件封装要摆放到一起；</li>
+</ul>
+<p>选择 <strong>KiCad</strong> 右侧外观面板上的 <code>F.Cu</code>
+顶层铜层，按下快捷键【<strong>M</strong>】按照下图所示移动与摆放元件封装，然后选中<strong>电池座</strong>
+<code>BT1</code>，接下快捷键【<strong>F</strong>】将其从
+<code>F.Cu</code> <strong>顶层</strong>（显示为红色）翻转至
+<code>B.Cu</code> <strong>底层</strong>（显示为蓝色）：</p>
+<p><img src="/Electronics/KiCad-Tutorial/39.png"></p>
+<h3 id="开始布线">开始布线</h3>
+<p>完成元件封装的摆放布局之后，就可以开始着手进行布线了。首先将当前的活动层切换至
+<code>F.Cu</code>
+<strong>顶层铜层</strong>，然后点击工具栏上的【<strong>布线</strong>】按钮，或者直接按下快捷键【<strong>X</strong>】，开始连接元件封装的焊盘，布线过程当中如果按下快捷键【<strong>V</strong>】则会在鼠标停留位置添加一个连接<strong>顶层</strong>与<strong>底层</strong>的<strong>通孔</strong>，按下鼠标放置过孔之后，同时走线也会自动切换至
+<code>B.Cu</code> <strong>底层铜层</strong>，完成布线之后的 PCB
+电路板如下图所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/40.png"></p>
+<blockquote>
+<p><strong>注意</strong>：布线过程当中，可以通过按下快捷键【<strong>W</strong>】和【<strong>Shift
++ W</strong>】前后切换预定义的<strong>线宽</strong>。</p>
+</blockquote>
+<h3 id="覆铜操作">覆铜操作</h3>
+<p>数字电路设计当中，覆铜区域通常会与 <code>GND</code> 或者
+<code>VCC</code>
+相互连接，从而降低<strong>地线阻抗</strong>提升抗干扰能力，或者降低<strong>电压降</strong>提升电源效率。鼠标点击右侧工具栏当中的【<strong>添加填充覆铜</strong>】或者按下快捷键【<strong>Ctrl
++ Shift + Z</strong>】。此时 <strong>KiCad</strong>
+会自动弹出【<strong>覆铜区属性</strong>】对话框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/41.png"></p>
+<p>这里选择<strong>覆铜区</strong>所在的层为 <code>B.Cu</code>
+<strong>底层铜层</strong>，所要连接的网络为
+<strong>GND</strong>，然后点击按钮【<strong>确定</strong>】，依次选择出覆铜区域的四个角，最后双击鼠标完成覆铜区域的框选：</p>
+<p><img src="/Electronics/KiCad-Tutorial/42.png"></p>
+<p>接着鼠标展开 <strong>KiCad</strong> 顶部菜单栏的【<strong>编辑 ➞
+填充所有覆铜</strong>】，或者直接按下快捷键【<strong>B</strong>】，对覆铜区域进行填充操作：</p>
+<p><img src="/Electronics/KiCad-Tutorial/43.png"></p>
+<blockquote>
+<p><strong>注意</strong>：覆铜操作之后，如果移动了元件封装，此时
+<strong>KiCad</strong>
+并不会自动重新进行覆铜，必须再次手动进行覆铜操作。除此之外，如果覆铜区域在视觉上比较遮挡接下来的布线操作，则可以点击左侧工具栏上的【<strong>仅显示覆铜边界</strong>】按钮，隐藏覆铜区的高亮颜色。</p>
+</blockquote>
+<h3 id="drc-设计规则检查">DRC 设计规则检查</h3>
+<p>最后，鼠标选择 <strong>KiCad</strong>
+顶部工具栏的【<strong>显示设计规则检查器窗口</strong>】，点击【<strong>运行
+DRC</strong>】按钮开始执行 DRC 设计规则检查：</p>
+<p><img src="/Electronics/KiCad-Tutorial/44.gif"></p>
+<p>DRC 设计规则的相关提示信息，可以在 <strong>KiCad</strong>
+顶部菜单栏【<strong>文件 ➞ 电路板设置 ➞ 设计规则 ➞
+违规严重程度</strong>】的下面进行配置：</p>
+<p><img src="/Electronics/KiCad-Tutorial/45.png"></p>
+<blockquote>
+<p><strong>注意</strong>：当 <strong>KiCad</strong> 提示 DRC
+检查的<strong>错误</strong>和<strong>警告</strong>数量为 <code>0</code>
+的时候，就完成了 PCB 电路板的全部设计过程。</p>
+</blockquote>
+<h3 id="查看-3d-效果">查看 3D 效果</h3>
+<p><strong>KiCad</strong> 的 <strong>PCB 编辑器</strong>提供了一个
+<strong>3D 查看器</strong>，可以用于查看 PCB
+电路板的实物效果。鼠标点击顶部菜单栏的【<strong>视图 ➞ 3D
+查看器</strong>】，或者直接按下快捷键【<strong>Alt +
+3</strong>】，就可以实时的查看到当前 PCB 电路板的 3D 预览效果：</p>
+<p><img src="/Electronics/KiCad-Tutorial/46.gif"></p>
+<h2 id="制造输出">制造输出</h2>
+<p>完成 PCB 电路板的设计工作之后，就可以导出 <strong>Gerber</strong>
+光绘文件，交付给工厂进行加工制造生产。</p>
+<h3 id="生成-gerber-文件">生成 Gerber 文件</h3>
+<p>鼠标选择 <strong>PCB 编辑器</strong>顶部菜单栏上面的【<strong>文件 ➞
+制造输出 ➞ Gebers
+(.gbr)</strong>】，在弹出的【<strong>绘制</strong>】对话框里，按照下图所示的选项进行设置。按下【<strong>绘制</strong>】按钮之后，生成的
+<strong>Gerber</strong> 文件将会存放至当前工程的 <code>Gerber</code>
+目录下面：</p>
+<p><img src="/Electronics/KiCad-Tutorial/47.png"></p>
+<h3 id="生成钻孔文件">生成钻孔文件</h3>
+<p>按下【<strong>绘制</strong>】按钮生成 <strong>Geber</strong>
+文件之后，再点击【<strong>绘制</strong>】对话框右下角的【<strong>生成钻孔文件</strong>】按钮，在打开的【<strong>生成钻孔文件</strong>】对话框里勾选如下设置，这里依然将生成的<strong>钻孔文件</strong>存放在当前工程的
+<code>Gerber</code> 目录：</p>
+<p><img src="/Electronics/KiCad-Tutorial/48.png"></p>
+<h3 id="生成封装位置文件">生成封装位置文件</h3>
+<p>鼠标选择 <strong>PCB 编辑器</strong>顶部菜单栏上面的【<strong>文件 ➞
+制造输出 ➞ 元件放置文件
+(.pos)</strong>】，在弹出的【<strong>生成放置文件</strong>】对话框里进行如下设置，这里同样把生成的<strong>位置文件</strong>存放在当前工程的
+<code>Gerber</code> 目录：</p>
+<p><img src="/Electronics/KiCad-Tutorial/49.png"></p>
+<h3 id="预览-gerber-文件">预览 Gerber 文件</h3>
+<p>使用 <strong>KiCad</strong> 提供的 <strong>Gerber 文件查看器</strong>
+，可以打开上述步骤在 <code>Gerber</code>
+目录下生成的<strong>绘制文件</strong>与<strong>钻孔文件</strong>进行预览：</p>
+<p><img src="/Electronics/KiCad-Tutorial/50.png"></p>
+<h3 id="生产制造文件清单">生产制造文件清单</h3>
+<p>经过上述一系列的操作步骤之后，就可以将生成的这 <strong>11</strong>
+个文件交付给 PCB 电路板工厂进行生产制造：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">D:\<span class="title">Workspace</span>\<span class="title">abrams</span>\<span class="title">Tutorial</span>\<span class="title">Gerber</span>(<span class="title">master</span> -&gt; <span class="title">origin</span>)</span></span><br><span class="line"><span class="function">λ <span class="title">ls</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">uinio.drl</span>       <span class="title">uinio</span>-<span class="title">B_Mask.gbs</span>        <span class="title">uinio</span>-<span class="title">Edge_Cuts.gm1</span>  <span class="title">uinio</span>-<span class="title">F_Paste.gtp</span></span></span><br><span class="line"><span class="function"><span class="title">uinio</span>-<span class="title">all.pos</span>   <span class="title">uinio</span>-<span class="title">B_Paste.gbp</span>       <span class="title">uinio</span>-<span class="title">F_Cu.gtl</span>       <span class="title">uinio</span>-<span class="title">F_Silkscreen.gto</span></span></span><br><span class="line"><span class="function"><span class="title">uinio</span>-<span class="title">B_Cu.gbl</span>  <span class="title">uinio</span>-<span class="title">B_Silkscreen.gbo</span>  <span class="title">uinio</span>-<span class="title">F_Mask.gts</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="电路板的分层">电路板的分层</h2>
+<p><strong>KiCad</strong> 提供的 <strong>PCB 编辑器</strong> 支持多达
+<code>49</code> 个不同的图层，其中 <code>32</code>
+个用于布线的<strong>铜层</strong>，以及 <code>14</code>
+个固定用途的<strong>技术层</strong>（包含 <code>12</code>
+个正面或背面的<strong>配对技术层</strong>以及 <code>2</code>
+个<strong>独立技术层</strong>）。除此之外，还拥有
+<code>User.1 ~ User.9</code> 一共 9 个可供用户自定义的图层，以及
+<code>User.Eco1</code>、<code>User.Eco2</code>、<code>User.Comments</code>(注释层)、<code>User.Drawings</code>(图纸层)
+这 4 个<strong>辅助层</strong>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/51.png"></p>
+<p>打开 <strong>PCB
+编辑器</strong>顶部菜单栏的【<strong>电路板设置</strong>】，展开【<strong>电路板压层</strong>】菜单的<strong>物理压层</strong>与<strong>电路板编辑器图层</strong>，就可以对当前
+PCB 电路板的分层信息进行设置：</p>
+<p><img src="/Electronics/KiCad-Tutorial/52.png"></p>
+<h3 id="铜层">铜层</h3>
+<p><strong>铜层</strong>（<code>F.Cu</code>、<code>B.Cu</code>、<code>In编号.Cu</code>）：用于放置元件与布线的常用工作层，层编号从<code>0</code>开始（即最前面的第
+<code>1</code> 个铜层）到 <code>31</code>（即最后的第 32
+个铜层）结束，由于元器件不能摆放在编号 <code>1 ~ 30</code>
+的内层当中，因而只有<strong>第</strong> <code>0</code>
+和<strong>第</strong> <code>31</code>
+这两层属于<strong>元件层</strong>。</p>
+<h3 id="配对技术层">配对技术层</h3>
+<p>这 <code>12</code>
+个配对技术层总是成对出现：一个用于<strong>正面</strong>（用
+<code>F</code> 标识），另外一个用于<strong>背面</strong>（用
+<code>B</code>
+标识），构成这些层之一的覆盖区（焊盘，绘图，文本）元素将会自动镜像，并在翻转覆盖区时移动到补充层。</p>
+<ul>
+<li><strong>粘合剂层</strong>（<code>F.Adhesive</code>、<code>B.Adhesive</code>）：用于<strong>粘合剂涂抹</strong>，通常在波峰焊之前将贴片元件粘贴至
+PCB；</li>
+<li><strong>焊膏层</strong>（<code>F.Paste</code>、<code>B.Paste</code>）：用于<strong>制造钢网</strong>，以方便在进行回流焊之前，在贴片元件焊盘上涂抹锡浆；</li>
+<li><strong>丝印层</strong>（<code>F.Silkscreen</code>、<code>B.Silkscreen</code>）：用于<strong>标识元件</strong>的层，例如元件的极性、首引脚标识、安装参考等；</li>
+<li><strong>阻焊层</strong>（<code>F.Mask</code>、<code>B.Mask</code>）：用于<strong>放置焊盘</strong>的层，该层不会被阻焊油覆盖；</li>
+<li><strong>封装层</strong>（<code>F.Courtyard</code>、<code>B.Courtyard</code>）：用于展示元件在电路板上面占用<strong>物理空间</strong>的大小；</li>
+<li><strong>制造层</strong>（<code>F.Fab</code>、<code>B.Fab</code>）：用于记录需要传递给
+PCB 电路板生产工厂的<strong>加工制造信息</strong>；</li>
+</ul>
+<h3 id="独立技术层">独立技术层</h3>
+<ul>
+<li><strong>边缘切割</strong>（<code>Edge.Cuts</code>）用于绘制电路板边框，放置在该图层上的任何元素（例如<code>图形</code>与<code>文本</code>）都会出现在其它层；</li>
+<li><strong>电气边界</strong>（<code>Margin</code>）用于划分<strong>板框</strong>的电气边界，避免元件封装和走线被放置到<strong>板框</strong>以外；</li>
+</ul>
+<h2 id="库与库表的管理">库与库表的管理</h2>
+<p><strong>KiCad</strong> 当中的<code>原理图符号</code>和
+<code>PCB 封装</code>都是以<strong>库</strong>的形式进行组织（即<strong>原理图符号库</strong>与
+<strong>PCB
+封装库</strong>），它们分别以<strong>原理图符号库表</strong>和
+<strong>PCB 封装库表</strong>的形式被 <strong>KiCad</strong>
+纳入进行管理，<strong>库表</strong>当中主要保存有库的<strong>名称</strong>以及所存储的<strong>磁盘位置</strong>。</p>
+<p><strong>库表</strong>分为<strong>全局</strong>和<strong>工程</strong>两种作用域，其中<strong>全局库表</strong>里的<code>符号</code>与<code>封装</code>在所有工程当中共用，而<strong>工程库表</strong>当中的<code>符号</code>与<code>封装</code>只对指定的工程可用，<strong>KiCad</strong>
+允许用户将自定义的<strong>库</strong>添加至<strong>全局库表</strong>或者<strong>工程库表</strong>当中。</p>
+<p>在<strong>原理图编辑器</strong>当中，点击顶部菜单栏的【<strong>偏好设置
+➞
+管理符号库</strong>】，就可以打开<strong>符号库</strong>的管理界面：</p>
+<p><img src="/Electronics/KiCad-Tutorial/53.png"></p>
+<p>在<strong>PCB
+编辑器</strong>当中，同样点击顶部菜单栏的【<strong>偏好设置 ➞
+管理封装库</strong>】，也可以打开封装库的管理界面：</p>
+<p><img src="/Electronics/KiCad-Tutorial/54.png"></p>
+<p>观察上图可以发现，<strong>库</strong>的路径都是采用<strong>路径变量</strong>进行定义的，这样即使用户把所有<strong>库</strong>移动到新的位置，只需要重新定义<strong>路径变量</strong>指向新的位置即可，<strong>KiCad</strong>
+的<strong>路径变量</strong>可以在<strong>原理图编辑器</strong>或者<strong>PCB
+编辑器</strong>顶部菜单栏的【<strong>偏好设置 ➞
+配置路径</strong>】界面进行设置：</p>
+<p><img src="/Electronics/KiCad-Tutorial/55.png"></p>
+<blockquote>
+<p><strong>注意</strong>：上述界面当中的<code>&#123;KIPRJMOD&#125;</code>是一个非常有用的<strong>路径变量</strong>，该变量始终指向当前的工程目录，因而可以用于指定仅用于当前工程的<strong>符号库</strong>或者<strong>封装库</strong></p>
+</blockquote>
+<p>通过鼠标点击 <strong>KiCad</strong>
+提供的<strong>符号编辑器</strong>或者<strong>封装编辑器</strong>顶部菜单栏的【<strong>文件
+➞
+新建库</strong>】，就可以新建一个<code>符号库</code>或者<code>封装库</code>，此时两者都会弹出一个【<strong>添加到库表</strong>】对话框，询问要将该新建<strong>库</strong>添加至<strong>全局库表</strong>还是<strong>工程库表</strong>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/56.png"></p>
+<p><code>符号</code>和<code>封装</code><strong>库表文件</strong>的具体存放位置，取决于当前所使用的操作系统：</p>
+<ul>
+<li><strong>Linux</strong>:
+<code>~/.config/kicad/6.0/sym-lib-table</code> 和
+<code>~/.config/kicad/6.0/fp-lib-table</code>；</li>
+<li><strong>Windows</strong>:
+<code>%APPDATA%\kicad\6.0\sym-lib-table</code> 和
+<code>%APPDATA%\kicad\6.0\fp-lib-table</code>；</li>
+<li><strong>MacOS</strong>:
+<code>~/Library/Preferences/kicad/6.0/sym-lib-table</code> 和
+<code>~/Library/Preferences/kicad/6.0/fp-lib-table</code>；</li>
+</ul>
+<h2 id="自定义原理图符号">自定义原理图符号</h2>
+<h3 id="新建符号库">新建符号库</h3>
+<p>鼠标点击<strong>原理图编辑器</strong>顶部菜单栏的【<strong>工具 ➞
+符号编辑器</strong>】，就可以打开原理图<strong>符号编辑器</strong>对话框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/57.png"></p>
+<p>继续点击<strong>符号编辑器</strong>顶部菜单栏的【<strong>文件 ➞
+新建库</strong>】，新建一个名称为 <code>Getting_Started.kicad_sym</code>
+的<strong>符号库</strong>，将其加入至【<strong>工程</strong>】库表，并且选择存放在当前的工程目录之下，此时<strong>符号编辑器</strong>左侧的【<strong>库</strong>】面板就会自动刷新显示出
+<code>Getting_Started</code> 库：</p>
+<p><img src="/Electronics/KiCad-Tutorial/58.png"></p>
+<h3 id="新建符号">新建符号</h3>
+<p>鼠标选中左侧【<strong>库</strong>】面板当中的
+<code>Getting_Started</code>
+库，再点击鼠标右键菜单当中的【<strong>新建符号</strong>】选项，新建一个符号名称为
+<code>M2011S3A1W03</code>，默认位号为 <code>SW</code>
+的<strong>单刀单掷开关</strong>（<strong>SPST</strong>，Single-Pole
+Single-Throw）：</p>
+<p><img src="/Electronics/KiCad-Tutorial/59.png"></p>
+<blockquote>
+<p><strong>注意</strong>：该型号为 <code>M2011S3A1W03</code>
+<strong>单刀单掷开关</strong>的数据手册点击可以<a target="_blank" rel="noopener" href="https://www.nkkswitches.com/pdf/MtogglesBushing.pdf">这里</a>进行下载。</p>
+</blockquote>
+<p>此时，这个新建的名称为 <code>M2011S3A1W03</code>
+的原理科符号就会出现在【<strong>库</strong>】面板当中，接下来就可以在
+<strong>KiCad</strong> 中间的编辑区进行符号的绘制工作：</p>
+<p><img src="/Electronics/KiCad-Tutorial/60.png"></p>
+<h3 id="绘制符号引脚">绘制符号引脚</h3>
+<p>首先点击<strong>符号编辑器</strong>右侧工具栏当中的【<strong>符号引脚</strong>】按钮，或者直接按下快捷键【<strong>P</strong>】，然后再点击编辑区弹出【<strong>引脚属性</strong>】对话框。这里设置<strong>引脚名称</strong>为
+<code>A</code>，<strong>引脚编号</strong>为
+<code>2</code>，<strong>电气类型</strong>选择为
+<code>无源</code>，<strong>方向</strong>设置为
+<code>向右</code>，<strong>X
+坐标</strong>设置为<code>-5.08</code>，<strong>Y 坐标</strong>设置为
+<code>0</code>，最后按下【<strong>确定</strong>】按钮把引脚放置在编辑区当中：</p>
+<p><img src="/Electronics/KiCad-Tutorial/61.png"></p>
+<blockquote>
+<p><strong>注意</strong>：如果需要再次编辑当前选中的引脚属性，可以【<strong>鼠标双击</strong>】引脚符号，或者选择鼠标右键菜单当中的【<strong>属性</strong>】，以及直接按下快捷键【<strong>E</strong>】。</p>
+</blockquote>
+<p>接下来直接按下键盘上的【<strong>Insert</strong>】按键，在上述引脚的右侧放置一个<strong>引脚编号</strong>为
+<code>3</code> 的引脚，并将其<strong>引脚名称</strong>设置为
+<code>B</code>，<strong>引脚编号</strong>自动被赋值为
+<code>3</code>，<strong>方向</strong>设置为 <code>向左</code>，<strong>X
+坐标</strong>设置为<code>5.08</code>，<strong>Y 坐标</strong>设置为
+<code>0</code>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/62.png"></p>
+<p><strong>原理图符号的引脚必须放置在 <code>1.27mm/50mil</code>
+尺寸的网格</strong>，没有与网格对齐的引脚将无法在<strong>原理图编辑器</strong>当中进行<strong>连线</strong>操作。经过上述一系列操作之后，获得的效果如下图所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/63.png"></p>
+<blockquote>
+<p><strong>注意</strong>：快捷键【<strong>Insert</strong>】在
+<strong>KiCad</strong>
+当中用于重复上一个动作，此时所添加原理图符号的编号将会自动增长。</p>
+</blockquote>
+<h3 id="放置其它图形">放置其它图形</h3>
+<p>在编辑区按下鼠标右键，选择弹出菜单当中的【<strong>网格</strong>】，将<strong>符号编辑器</strong>的网格从
+<code>1.27mm/50mil</code>
+切换至<strong>更小的尺寸</strong>，以便于绘制其它的图形：</p>
+<p><img src="/Electronics/KiCad-Tutorial/64.png"></p>
+<p>在更小的网格尺寸下，分别再绘制一个<strong>矩形</strong>和<strong>圆形</strong>，使得原理图符号的形状更加接近于<strong>单刀单掷开关</strong>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/65.png"></p>
+<blockquote>
+<p><strong>注意</strong>：在完成了其它图形的绘制操作之后，务必从更小的网格尺寸切换回
+<code>1.27mm/50mil</code> 网格。</p>
+</blockquote>
+<h3 id="编辑符号属性">编辑符号属性</h3>
+<p>鼠标点击<strong>符号编辑器</strong>菜单栏上的【<strong>文件 ➞
+符号属性</strong>】，或者【<strong>鼠标双击</strong>】中间的编辑区，打开【<strong>库符号属性</strong>】对话框，将<code>关键字</code>描述设置为
+<code>SPST Switch Toggle</code>，点击【<strong>确定</strong>】按钮并且保存，这样就完成了<strong>原理图符号</strong>的绘制：</p>
+<p><img src="/Electronics/KiCad-Tutorial/66.png"></p>
+<h2 id="自定义-pcb-封装">自定义 PCB 封装</h2>
+<p>前面完成了<strong>原理图符号</strong>的绘制工作之后，接下来着手进行
+<strong>PCB 封装</strong>的绘制，同样用鼠标点击<strong>PCB
+编辑器</strong>顶部菜单栏的【<strong>工具 ➞
+封装编辑器</strong>】，就可以打开 <strong>PCB
+封装编辑器</strong>对话框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/67.png"></p>
+<p>继续点击<strong>封装编辑器</strong>顶部菜单栏的【<strong>文件 ➞
+新建库</strong>】，新建一个名称为 <code>Getting_Started.pretty</code>
+的封装库，依然将其加入至【<strong>工程</strong>】库表，并且选择存放在当前的工程目录下面，此时<strong>封装编辑器</strong>左侧的【<strong>库</strong>】面板就会自动刷新显示出
+<code>Getting_Started</code> 库：</p>
+<p><img src="/Electronics/KiCad-Tutorial/68.png"></p>
+<h3 id="新建封装">新建封装</h3>
+<p>鼠标选中左侧【<strong>库</strong>】面板当中的
+<code>Getting_Started</code>
+库，再选择鼠标右键菜单当中的【<strong>新建封装</strong>】选项，设置封装名称为
+<code>Switch_Toggle_SPST_NKK_M2011S3A1x03</code>，封装类型为<code>通孔</code>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/69.png"></p>
+<p>点击【<strong>确定</strong>】按钮，就可以在<strong>封装编辑器</strong>的左侧【<strong>库</strong>】面板当中看到这个新建的封装：</p>
+<p><img src="/Electronics/KiCad-Tutorial/70.png"></p>
+<h3 id="放置焊盘">放置焊盘</h3>
+<p>这个<strong>单刀单掷开关</strong>拥有 2
+个引脚，在数据手册当中的编号分别为 <code>2</code> 和
+<code>3</code>，引脚之间的间距为
+<code>4.7mm</code>。这里鼠标依次点击<strong>封装编辑器</strong>顶部菜单栏上的【<strong>视图
+➞
+网格属性</strong>】，打开【<strong>网格设置</strong>】对话框，添加一个尺寸为
+<code>4.7mm</code> 的自定义网格：</p>
+<p><img src="/Electronics/KiCad-Tutorial/71.png"></p>
+<p>添加好自定义网格之后，切换<strong>封装编辑器</strong>顶部工具栏上的【<strong>网格</strong>】为上面设置的
+<code>4.7mm</code> <strong>用户网格</strong>：</p>
+<p><img src="/Electronics/KiCad-Tutorial/72.png"></p>
+<p>接下来，鼠标点击<strong>封装编辑器</strong>右侧工具栏上的【<strong>添加焊盘</strong>】按钮，习惯上<strong>通孔封装</strong>的引脚
+<code>1</code> 通常会位于编辑区坐标的 <code>(0, 0)</code>
+位置（即封装左上角处），由于这个<strong>单刀单掷开关</strong>没有编号为
+<code>1</code> 的引脚，因而只能将 <code>(0, 0)</code>
+的位置留空，并且把焊盘 <code>2</code> 和 <code>3</code> 分别放置在
+<code>(0, 4.7mm)</code> 和 <code>(0, 9.4mm)</code> 的坐标位置：</p>
+<p><img src="/Electronics/KiCad-Tutorial/73.png"></p>
+<p><img src="/Electronics/KiCad-Tutorial/74.png"></p>
+<blockquote>
+<p><strong>注意</strong>：由于<strong>单刀单掷开关</strong>的引脚对角线尺寸为
+<code>1.42mm</code>，所以需要将<strong>钻孔</strong>的尺寸设置为
+<code>1.42mm + 0.2mm = 1.62mm</code>，<strong>焊盘</strong>的尺寸设置为
+<code>1.62mm + 2 × 0.15mm = 1.92mm</code>。</p>
+</blockquote>
+<p>观察可以发现此时的焊盘尺寸过小，因而可以将<strong>焊盘</strong>的尺寸增大至
+<code>1.62mm + 2 × 0.3mm = 2.22mm</code>，以确保更好的固定开关元件。由于
+<strong>KiCad</strong>
+的许多输入框都能够直接输入数学表达式，这里分别选择焊盘 <code>2</code> 和
+<code>3</code> 按下快捷键【<strong>E</strong>】修改其属性，直接将等式
+<code>1.62 + 2 * 0.3</code>
+作为焊盘的尺寸输入进去，然后按下【<strong>确定</strong>】按钮进行保存：</p>
+<p><img src="/Electronics/KiCad-Tutorial/75.png"></p>
+<h3 id="制作轮廓">制作轮廓</h3>
+<p>制作封装轮廓的时候，首先会在 <strong>KiCad</strong>
+的<strong>制造层</strong>（<code>F.Fab</code>）绘制一个精确的<strong>真实轮廓</strong>，用于标识元件的实际尺寸；然后在<strong>丝印层</strong>（<code>F.Silkscreen</code>）绘制一个稍大一些的<strong>丝印轮廓</strong>，用于展示元件的安装位置，而在<strong>封装层</strong>（<code>F.Courtyard</code>）绘制一个更大的<strong>封装轮廓</strong>，用于防止与其它的封装发生重叠。</p>
+<p>第一步，鼠标点击<strong>封装编辑器</strong>右侧外观面板当中的
+<code>F.Fab</code>
+切换到<strong>制造层</strong>，此时的轮廓必须与元件的物理尺寸精确匹配，即宽度为
+<code>7.9mm</code>，高度为
+<code>13mm</code>。接下来，就可以利用右侧工具栏当中提供的<strong>线</strong>、<strong>圆弧</strong>、<strong>圆形</strong>、<strong>矩形</strong>、<strong>多边形</strong>工具绘制轮廓。通过将用户网格设置为如下参数，可以实现矩形轮廓的精确放置：</p>
+<ul>
+<li><strong>网格尺寸 X 和 Y</strong> 分别设置为 <code>7.9mm</code> 和
+<code>13mm</code>；</li>
+<li><strong>网格原点坐标 X 和 Y</strong> 分别设置为
+<code>7.9mm / 2 = 3.95mm</code> 和
+<code>4.7mm - (13mm / 2) = -1.8mm</code>；</li>
+</ul>
+<p><img src="/Electronics/KiCad-Tutorial/76.png"></p>
+<p>首先，切换<strong>封装编辑器</strong>顶部工具栏上的【<strong>网格</strong>】为上面设置的<strong>用户网格</strong>；然后，在右侧【<strong>外观</strong>】面板切换至
+<code>F.Fab</code>
+<strong>制造层</strong>；最后，点击右侧工具栏当中的【<strong>绘制矩形</strong>】按钮，用鼠标拖拽出一个下图这样的矩形框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/77.png"></p>
+<p>第二步，切换到 <code>F.Silkscreen</code>
+<strong>丝印层</strong>，因为<strong>丝印轮廓</strong>正好在<strong>真实轮廓</strong>之外，所以绘制的时候需要向外移动
+<code>0.11mm</code>。这里同样可以通过设置如下的自定义网格参数，快速实现轮廓的精确绘制：</p>
+<ul>
+<li><strong>网格尺寸 X 和 Y</strong> 分别设置为
+<code>7.9mm + 2 * 0.11mm = 8.12mm</code> 和
+<code>13mm + 2 * 0.11mm = 13.22mm</code>；</li>
+<li><strong>网格原点坐标 X 和 Y</strong> 分别设置为
+<code>8.12mm / 2 = 4.06mm</code> 和
+<code>-1.8mm - 0.11mm = -1.91mm</code>；</li>
+</ul>
+<p><img src="/Electronics/KiCad-Tutorial/78.png"></p>
+<p>依然选中右侧工具栏当中的【<strong>绘制矩形</strong>】按钮，使用鼠标在<strong>真实轮廓</strong>外面拖拽出一个类似于下图这样的矩形框：</p>
+<p><img src="/Electronics/KiCad-Tutorial/79.png"></p>
+<p>第三步，切换到 <code>F.Courtyard</code>
+<strong>封装层</strong>，同样由于<strong>封装轮廓</strong>正好位于<strong>丝印轮廓</strong>外侧，所以绘制时依然需要向外移动
+<code>0.25mm</code>。这里不再利用自定义网格的方式进行精确的绘制，而是直接切换至
+<strong>KiCad</strong> 预定义的 <code>1mm</code>
+网格，使用鼠标点击【<strong>绘制矩形</strong>】按钮并大致的拖拽出一个下图这样的矩形：</p>
+<p><img src="/Electronics/KiCad-Tutorial/80.png"></p>
+<p>接下来再选中这个矩形，选择鼠标右键菜单当中的【<strong>属性</strong>】，或者按下快捷键【<strong>E</strong>】，打开【<strong>矩形属性</strong>】对话框，分别设置该矩形<strong>起始点</strong>的
+<strong>X</strong> 与 <strong>Y</strong> 坐标为 <code>-4.2mm</code> 和
+<code>-2.05mm</code>，<strong>结束点</strong>的 <strong>X</strong> 与
+<strong>Y</strong> 坐标为 <code>4.2mm</code> 和
+<code>11.45mm</code>，按下【<strong>确定</strong>】按钮之后，<strong>封装轮廓</strong>就会自动缩小至正确的位置：</p>
+<p><img src="/Electronics/KiCad-Tutorial/81.png"></p>
+<p>第四步，按照下图展示的样子，重新摆放一下封装当中的文字信息，从而就完成了
+PCB 封装的全部绘制工作：</p>
+<p><img src="/Electronics/KiCad-Tutorial/82.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>KiCad</strong> 官方提出<a target="_blank" rel="noopener" href="https://klc.kicad.org/">《KiCad Library
+Convention》</a>规范用于维护高质量的<strong>原理图符号</strong>与
+<strong>PCB 封装</strong>库。</p>
+</blockquote>
+<h2 id="关联符号与封装">关联符号与封装</h2>
+<p>返回到<strong>符号编辑器</strong>，打开<strong>单刀单掷开关</strong>的原理图符号，依次打开【<strong>文件
+➞
+符号属性</strong>】，打开【<strong>库符号属性</strong>】对话框，鼠标单击
+<code>Footprint</code> 字段，选择刚才在 <code>Getting_Started</code>
+封装库下制作的 <code>Switch_Toggle_SPST_NKK_M2011S3A1x03</code>
+封装，完成之后再点击【<strong>确定</strong>】按钮保存配置：</p>
+<p><img src="/Electronics/KiCad-Tutorial/83.png"></p>
+<p>从现在开始，<strong>单刀单掷开关</strong>的<strong>原理图符号</strong>与
+<strong>PCB 封装</strong>之间就建立起了关联，每次从原理图更新 PCB
+时，就不需要再手动选择封装。接下来再打开<strong>原理图编辑器</strong>，将上面绘制的<strong>单刀单掷开关</strong>原理图符号添加到电路里去，并且重新进行【<strong>填写原理图符号位号</strong>】和【<strong>执行电气规则检查</strong>】的操作，最后得到的原理图如下面所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/84.png"></p>
+<p>保存上面的原理图，然后按下【<strong>F8</strong>】键，将原理图更新到
+PCB
+电路板，并且删除之前的<code>布线</code>与<code>过孔</code>，在【<strong>PCB
+编辑器</strong>】当中重新进行<strong>布局</strong>、<strong>布线</strong>、<strong>覆铜</strong>、<strong>设计规则检查</strong>，并且添加上丝印
+<code>UinIO.com by Hank</code>，最后得到的 PCB 电路板如下图所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/85.png"></p>
+<p>在【<strong>PCB 编辑器</strong>】按下快捷键【<strong>Alt +
+3</strong>】打开 <strong>3D 查看器</strong>，就可以对 PCB
+电路板的效果进行预览：</p>
+<p><img src="/Electronics/KiCad-Tutorial/86.gif"></p>
+<p><strong>原理图编辑器</strong>当中的每一个符号都需要分配相应的封装，分配给每一个原理图符号的封装名称，都会被保存在【<strong>符号属性</strong>】的
+<code>Footprint</code> 字段里面：</p>
+<p><img src="/Electronics/KiCad-Tutorial/87.png"></p>
+<blockquote>
+<p><strong>注意</strong>：<strong>原理图符号</strong>必须指定相应的
+<strong>PCB 封装</strong>，但是反过来 <strong>PCB
+封装</strong>并不需要关联至<strong>原理图符号</strong>。</p>
+</blockquote>
+<p>封装的 3D 模型同样会被保存在【<strong>封装属性</strong>】的
+<strong>3D 模型</strong>标签下面，<strong>KiCad</strong> 可以支持以
+<code>.step</code> 和 <code>.wrl</code> 作为后缀的 3D
+模型格式，这些格式可以通过 <a target="_blank" rel="noopener" href="https://www.freecadweb.org/"><strong>FreeCad</strong></a> 和 <a target="_blank" rel="noopener" href="https://github.com/easyw/kicadStepUpMod/"><strong>KiCad
+StepUp</strong></a> 两个工具进行创建：</p>
+<p><img src="/Electronics/KiCad-Tutorial/88.png"></p>
+<p>总而言之，<code>原理图符号</code>、<code>PCB 封装</code>、<code>3D 模型</code>三者之间的关联关系可以概括为<strong>原理图符号
+➥ PCB 封装 ➥ 3D 模型</strong>，全文至此正式结束，更多关于
+<strong>KiCad</strong> 使用技巧方面的内容，可以直接浏览<a target="_blank" rel="noopener" href="https://docs.kicad.org/">《<strong>KiCad
+官方文档</strong>》</a>。</p>
+<h2 id="pcb-原点">PCB 原点</h2>
+<p>KiCAD 的 PCB
+编辑器当中，<strong>原点</strong>的位置可以被设置为<strong>图框原点</strong>（编辑器图框左上角）、<strong>钻孔/放置文件原点</strong>（手动放置）、<strong>网格原点</strong>（手动放置）三种形式。由于历史遗留原因，PCB
+编辑器默认的坐标系原点位置计算方式如下所示：</p>
+<p><img src="/Electronics/KiCad-Tutorial/89.png"></p>
+<p>可以发现上图当中 <strong>Y
+轴</strong>的定义，与传统认知当中数学平面直角坐标系的定义相悖（如下图所示）：</p>
+<p><img src="/Electronics/KiCad-Tutorial/90.png"></p>
+<p>面对这种情况，可以通过 PCB
+编辑器【<strong>偏好设置</strong>】下的<strong>原点和轴</strong>的选项进行调整：</p>
+<p><img src="/Electronics/KiCad-Tutorial/91.png"></p>
+<h2 id="拼板">拼板</h2>
+<p>KiCAD 插件 <a target="_blank" rel="noopener" href="https://github.com/sej7278/kicad-panelizer"><strong>kicad
+panelizer</strong></a> 只能支持一款 PCB
+的复制拼板，如果需要拼接多块不同的 PCB，则推荐使用 <a target="_blank" rel="noopener" href="https://github.com/ThisIsNotRocketScience/GerberTools"><strong>GerberTools</strong></a>
+工具。</p>
+<p><img src="/Electronics/KiCad-Tutorial/92.png"></p>
+<h2 id="插件缺失-pyclipper-的问题">插件缺失 pyclipper 的问题</h2>
+<p>解决<strong>过孔栅栏生成器（Via Fence Generator）</strong> 插件找不到
+<code>pyclipper</code> 库的问题，可以进入 <strong>KiCad</strong>
+安装目录下的 <code>D:\Software\Tech\KiCad\bin</code>，执行
+<code>python -m pip install pyclipper</code> 命令即可解决问题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">D:\Software\Tech\KiCad\bin</span><br><span class="line"></span><br><span class="line">λ python -m pip install pyclipper</span><br><span class="line">Collecting pyclipper</span><br><span class="line">  Downloading pyclipper-1.3.0.post3-cp39-cp39-win_amd64.whl (94 kB)</span><br><span class="line">     ---------------------------------------- 94.4/94.4 kB 179.4 kB/s eta 0:00:00</span><br><span class="line">Installing collected packages: pyclipper</span><br><span class="line">Successfully installed pyclipper-1.3.0.post3</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>开源 EDA 工具 KiCad 6.0 电路设计小书</p><p><a href="http://www.uinio.com/Electronics/KiCad-Tutorial/">http://www.uinio.com/Electronics/KiCad-Tutorial/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-11-21</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-07-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/EDA/">EDA</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Embedded/RaspberryPi/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">玩转树莓派 Raspberry Pi 开源硬件</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/Altium/"><span class="level-item">采用 Altium Designer 17.1 进行 PCB 电路绘制与仿真</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#kicad-6-简介"><span class="level-left"><span class="level-item">1</span><span class="level-item">KiCad 6 简介</span></span></a></li><li><a class="level is-mobile" href="#创建工程"><span class="level-left"><span class="level-item">2</span><span class="level-item">创建工程</span></span></a></li><li><a class="level is-mobile" href="#调整配色方案"><span class="level-left"><span class="level-item">3</span><span class="level-item">调整配色方案</span></span></a></li><li><a class="level is-mobile" href="#原理图编辑"><span class="level-left"><span class="level-item">4</span><span class="level-item">原理图编辑</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#符号库表设置"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">符号库表设置</span></span></a></li><li><a class="level is-mobile" href="#原理图编辑器基础"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">原理图编辑器基础</span></span></a></li><li><a class="level is-mobile" href="#原理图设置"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">原理图设置</span></span></a></li><li><a class="level is-mobile" href="#添加原理图符号"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">添加原理图符号</span></span></a></li><li><a class="level is-mobile" href="#选择和移动符号"><span class="level-left"><span class="level-item">4.5</span><span class="level-item">选择和移动符号</span></span></a></li><li><a class="level is-mobile" href="#连接原理图符号"><span class="level-left"><span class="level-item">4.6</span><span class="level-item">连接原理图符号</span></span></a></li><li><a class="level is-mobile" href="#位号-符号属性-封装"><span class="level-left"><span class="level-item">4.7</span><span class="level-item">位号 / 符号属性 / 封装</span></span></a></li><li><a class="level is-mobile" href="#erc-电气规则检查"><span class="level-left"><span class="level-item">4.8</span><span class="level-item">ERC 电气规则检查</span></span></a></li><li><a class="level is-mobile" href="#bom-物料清单"><span class="level-left"><span class="level-item">4.9</span><span class="level-item">BOM 物料清单</span></span></a></li></ul></li><li><a class="level is-mobile" href="#电路板绘制"><span class="level-left"><span class="level-item">5</span><span class="level-item">电路板绘制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#pcb-设置"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">PCB 设置</span></span></a></li><li><a class="level is-mobile" href="#导入原理图"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">导入原理图</span></span></a></li><li><a class="level is-mobile" href="#绘制-pcb-板框"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">绘制 PCB 板框</span></span></a></li><li><a class="level is-mobile" href="#元件的摆放布局"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">元件的摆放布局</span></span></a></li><li><a class="level is-mobile" href="#开始布线"><span class="level-left"><span class="level-item">5.5</span><span class="level-item">开始布线</span></span></a></li><li><a class="level is-mobile" href="#覆铜操作"><span class="level-left"><span class="level-item">5.6</span><span class="level-item">覆铜操作</span></span></a></li><li><a class="level is-mobile" href="#drc-设计规则检查"><span class="level-left"><span class="level-item">5.7</span><span class="level-item">DRC 设计规则检查</span></span></a></li><li><a class="level is-mobile" href="#查看-3d-效果"><span class="level-left"><span class="level-item">5.8</span><span class="level-item">查看 3D 效果</span></span></a></li></ul></li><li><a class="level is-mobile" href="#制造输出"><span class="level-left"><span class="level-item">6</span><span class="level-item">制造输出</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#生成-gerber-文件"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">生成 Gerber 文件</span></span></a></li><li><a class="level is-mobile" href="#生成钻孔文件"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">生成钻孔文件</span></span></a></li><li><a class="level is-mobile" href="#生成封装位置文件"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">生成封装位置文件</span></span></a></li><li><a class="level is-mobile" href="#预览-gerber-文件"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">预览 Gerber 文件</span></span></a></li><li><a class="level is-mobile" href="#生产制造文件清单"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">生产制造文件清单</span></span></a></li></ul></li><li><a class="level is-mobile" href="#电路板的分层"><span class="level-left"><span class="level-item">7</span><span class="level-item">电路板的分层</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#铜层"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">铜层</span></span></a></li><li><a class="level is-mobile" href="#配对技术层"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">配对技术层</span></span></a></li><li><a class="level is-mobile" href="#独立技术层"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">独立技术层</span></span></a></li></ul></li><li><a class="level is-mobile" href="#库与库表的管理"><span class="level-left"><span class="level-item">8</span><span class="level-item">库与库表的管理</span></span></a></li><li><a class="level is-mobile" href="#自定义原理图符号"><span class="level-left"><span class="level-item">9</span><span class="level-item">自定义原理图符号</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建符号库"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">新建符号库</span></span></a></li><li><a class="level is-mobile" href="#新建符号"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">新建符号</span></span></a></li><li><a class="level is-mobile" href="#绘制符号引脚"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">绘制符号引脚</span></span></a></li><li><a class="level is-mobile" href="#放置其它图形"><span class="level-left"><span class="level-item">9.4</span><span class="level-item">放置其它图形</span></span></a></li><li><a class="level is-mobile" href="#编辑符号属性"><span class="level-left"><span class="level-item">9.5</span><span class="level-item">编辑符号属性</span></span></a></li></ul></li><li><a class="level is-mobile" href="#自定义-pcb-封装"><span class="level-left"><span class="level-item">10</span><span class="level-item">自定义 PCB 封装</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建封装"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">新建封装</span></span></a></li><li><a class="level is-mobile" href="#放置焊盘"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">放置焊盘</span></span></a></li><li><a class="level is-mobile" href="#制作轮廓"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">制作轮廓</span></span></a></li></ul></li><li><a class="level is-mobile" href="#关联符号与封装"><span class="level-left"><span class="level-item">11</span><span class="level-item">关联符号与封装</span></span></a></li><li><a class="level is-mobile" href="#pcb-原点"><span class="level-left"><span class="level-item">12</span><span class="level-item">PCB 原点</span></span></a></li><li><a class="level is-mobile" href="#拼板"><span class="level-left"><span class="level-item">13</span><span class="level-item">拼板</span></span></a></li><li><a class="level is-mobile" href="#插件缺失-pyclipper-的问题"><span class="level-left"><span class="level-item">14</span><span class="level-item">插件缺失 pyclipper 的问题</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">23</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Power-Switching/"><img src="/Electronics/Power-Switching/logo.png" alt="开关电源 SMPS 基本原理 &amp; 拓扑结构剖析"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-03-05T16:00:00.000Z">2025-03-06</time></p><p class="title"><a href="/Electronics/Power-Switching/">开关电源 SMPS 基本原理 &amp; 拓扑结构剖析</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Embedded/FOC/"><img src="/Embedded/FOC/logo.png" alt="剖析无刷电机的 FOC 磁场定向控制理论"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-02-19T16:00:00.000Z">2025-02-20</time></p><p class="title"><a href="/Embedded/FOC/">剖析无刷电机的 FOC 磁场定向控制理论</a></p><p class="categories"><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Embedded/PID/"><img src="/Embedded/PID/logo.png" alt="闭环控制算法 PID 的原理剖析与实现"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-02-04T16:00:00.000Z">2025-02-05</time></p><p class="title"><a href="/Embedded/PID/">闭环控制算法 PID 的原理剖析与实现</a></p><p class="categories"><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/E-Series/"><img src="/Electronics/E-Series/logo.png" alt="美国电子工业联盟 E 系列标准参数值速查手册"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-05T16:00:00.000Z">2024-11-06</time></p><p class="title"><a href="/Electronics/E-Series/">美国电子工业联盟 E 系列标准参数值速查手册</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
