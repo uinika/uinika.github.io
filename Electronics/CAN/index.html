@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>车规级总线协议 CAN/CANopen 与 LIN 深度剖析 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="在汽车电子和工业控制领域，控制器区域网络（CAN，Controller Area Network）和 本地互联网络（LIN，Local Interconnect Network）是目前广泛应用的串行总线通信协议，其中 CAN 总线以其高可靠性、实时性和抗干扰能力，广泛应用于 发动机、底盘 等通信速率和容错性要求较高的场景。而 LIN 总线作为低成本、低复杂度的补充方案，主要用于 车门"><meta property="og:type" content="blog"><meta property="og:title" content="车规级总线协议 CAN/CANopen 与 LIN 深度剖析"><meta property="og:url" content="http://www.uinio.com/Electronics/CAN/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="在汽车电子和工业控制领域，控制器区域网络（CAN，Controller Area Network）和 本地互联网络（LIN，Local Interconnect Network）是目前广泛应用的串行总线通信协议，其中 CAN 总线以其高可靠性、实时性和抗干扰能力，广泛应用于 发动机、底盘 等通信速率和容错性要求较高的场景。而 LIN 总线作为低成本、低复杂度的补充方案，主要用于 车门"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2025-04-30T16:00:00.000Z"><meta property="article:modified_time" content="2025-05-06T13:22:37.718Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="总线"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/CAN/"},"headline":"车规级总线协议 CAN/CANopen 与 LIN 深度剖析","image":["http://www.uinio.com/Electronics/Motor-PWM/logo.png"],"datePublished":"2025-04-30T16:00:00.000Z","dateModified":"2025-05-06T13:22:37.718Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"在汽车电子和工业控制领域，控制器区域网络（CAN，Controller\r Area Network）和 本地互联网络（LIN，Local Interconnect\r Network）是目前广泛应用的串行总线通信协议，其中 CAN\r 总线以其高可靠性、实时性和抗干扰能力，广泛应用于\r 发动机、底盘\r 等通信速率和容错性要求较高的场景。而 LIN\r 总线作为低成本、低复杂度的补充方案，主要用于\r 车门"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/CAN/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-04-30T16:00:00.000Z" title="2025/5/1 00:00:00">2025-05-01</time>发表</span><span class="level-item"><time dateTime="2025-05-06T13:22:37.718Z" title="2025/5/6 21:22:37">2025-05-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">16 分钟读完 (大约2365个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">车规级总线协议 CAN/CANopen 与 LIN 深度剖析</h1><div class="content"><p>在汽车电子和工业控制领域，<strong>控制器区域网络</strong>（CAN，Controller
+Area Network）和 <strong>本地互联网络</strong>（LIN，Local Interconnect
+Network）是目前广泛应用的串行总线通信协议，其中 <strong>CAN</strong>
+总线以其高可靠性、实时性和抗干扰能力，广泛应用于
+<code>发动机</code>、<code>底盘</code>
+等通信速率和容错性要求较高的场景。而 <strong>LIN</strong>
+总线作为低成本、低复杂度的补充方案，主要用于
+<code>车门</code>、<code>座椅</code>
+等对速率与容错性要求相对较低的场景。两者<strong>相互补充</strong>，共同构建了<strong>层次化</strong>的总线通信网络。</p>
+<p><img src="/Electronics/CAN/logo.png"></p>
+<p>众所周知，<strong>CAN</strong>
+总线以其高可靠性和实时性特点，已经成为汽车和工业控制领域的核心通信标准。而
+<strong>CANopen</strong> 则基于 <strong>CAN</strong>
+构建了标准化的应用层协议，进一步简化了设备之间的互操作性。除此之外，<strong>LIN</strong>
+总线以其低成本、低复杂度的优势，成为汽车辅助电子系统的理想选择。本篇文章将会通过图文并茂的方式，帮助大家快速理解它们的基本原理和应用场景，从而能够根据项目需求选择恰当的总线通信方案。</p>
+<span id="more"></span>
+<h2 id="can-总线发展历程">CAN 总线发展历程</h2>
+<p><strong>控制器区域网络</strong>（CAN，Controller Area
+Network）是一种广泛应用于汽车和工业领域的现场总线协议，由<a target="_blank" rel="noopener" href="https://www.bosch.com.cn/"><strong>德国博世 BOSCH
+公司</strong></a>于 <strong>1983</strong>
+年推出，用于解决汽车电子系统中复杂的线束问题，实现各个<strong>电子控制单元</strong>（ECU，Electronic
+Control Unit）之间的可靠通信。</p>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 20%">
+<col style="width: 22%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>特性</strong></th>
+<th><strong>CAN 1.0</strong></th>
+<th><strong>CAN 2.0</strong></th>
+<th><strong>CAN FD</strong></th>
+<th><strong>CAN XL</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>标准</strong></td>
+<td>ISO 11898-1:<strong>1993</strong></td>
+<td>ISO 11898-1:<strong>2003</strong></td>
+<td>ISO 11898-1:<strong>2015</strong></td>
+<td>ISO 11898-1:<strong>2024</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>数据长度</strong></td>
+<td>8 字节</td>
+<td>8 字节</td>
+<td>64 字节</td>
+<td>2048 字节</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>通信速率</strong></td>
+<td><code>1 Mbit/s</code></td>
+<td><code>1 Mbit/s</code></td>
+<td><code>2/5/8 Mbit/s</code></td>
+<td><code>20 Mbit/s</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>标识符长度</strong></td>
+<td><code>11 位</code><strong>标准格式</strong></td>
+<td><code>11/29 位</code><strong>扩展格式</strong></td>
+<td>同 CAN 2.0</td>
+<td>同 CAN 2.0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRC 校验位</strong></td>
+<td>15 位</td>
+<td>15 位</td>
+<td>17/21 位</td>
+<td>32 位</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>CAN FD</strong>：CAN 灵活数据速率总线（Controller Area
+Network Flexible Data Rate）；</li>
+<li><strong>CAN XL</strong>：CAN 扩展数据域长度总线（Controller Area
+Network Extended Data-field Length）；</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：<strong>ISO 11898-1</strong> 国际标准定义了
+CAN 规范的核心部分，主要定义了<strong>数据链路层</strong>（Data Link
+Layer）和<strong>物理层</strong>（Physical Layer）的相关标准。</p>
+</blockquote>
+<h2 id="iso-11898-标准化规范">ISO 11898 标准化规范</h2>
+<p><strong>ISO 11898</strong> 是 ISO 国际标准化组织针对 CAN
+总线制定的一系列标准，广泛应用于汽车、工业控制等领域。该系列标准分为多个部分，分别针对不同的
+CAN 总线类型和速率：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">协议部分</th>
+<th style="text-align: left;">协议名称</th>
+<th style="text-align: left;">英文名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>ISO 11898-1</strong></td>
+<td style="text-align: left;">CAN 数据链路层</td>
+<td style="text-align: left;">Data Link Layer</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ISO 11898-2</strong></td>
+<td style="text-align: left;">高速 CAN</td>
+<td style="text-align: left;">High-Speed CAN</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ISO 11898-3</strong></td>
+<td style="text-align: left;">低速容错 CAN</td>
+<td style="text-align: left;">Low-Speed Fault-Tolerant CAN</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ISO 11898-4</strong></td>
+<td style="text-align: left;">时间触发 CAN</td>
+<td style="text-align: left;">Time-Triggered CAN</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ISO 11898-5</strong></td>
+<td style="text-align: left;">灵活数据速率 CAN</td>
+<td style="text-align: left;">Flexible Data Rate</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ISO 11898-6</strong></td>
+<td style="text-align: left;">扩展数据域长度 CAN</td>
+<td style="text-align: left;">Extended Data-field Length</td>
+</tr>
+</tbody>
+</table>
+<p>上面表格当中的 <strong>ISO 11898-1</strong> 主要定义了 CAN 总线的
+<strong>数据链路层</strong>，也就是<strong>定义了数据在单个链路上如何进行传输</strong>，主要包括如下几个功能方面：</p>
+<ul>
+<li><strong>如何将数据组合成数据块</strong>（在数据链路层中称这种数据块为帧，<strong>帧</strong>是数据链路层的传送单位）；</li>
+<li><strong>如何控制帧在物理信道上的传输</strong>（包括如何处理传输差错，如何调节发送速率）；</li>
+<li><strong>提供网络节点之间数据链路的管理</strong>（建立、维持、释放）。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：2006 年发布的 <strong>ISO 11898-3</strong>
+整合并且取代了 <strong>ISO 11519-2</strong>，已经成为了新的低速容错 CAN
+标准。</p>
+</blockquote>
+<h2 id="can-总线与-osi-模型">CAN 总线与 OSI 模型</h2>
+<p><strong>开放系统互连模型</strong>（OSI，Open System Interconnect）由
+<strong>ISO 国际标准化组织</strong>于 1985
+年正式制订使用，主要定义了网络互连的七层框架（<code>物理层</code>、<code>数据链路层</code>、<code>网络层</code>、<code>传输层</code>、<code>会话层</code>、<code>表示层</code>、<code>应用层</code>），通常也被称作
+<strong>OSI 参考模型</strong>：</p>
+<p><img src="/Electronics/CAN/OSI-1.png"></p>
+<p>CAN 总线规范 <strong>ISO 11898</strong> 与 OSI
+模型的对应关系如下图所示，其中 <strong>ISO 11898-1</strong> 定义了 CAN
+协议的<strong>数据链路层</strong>（Data Link），而 <strong>ISO
+11898-2</strong> 则是定义了高速 CAN
+总线的<strong>物理层</strong>（Physical）。简而言之，<strong>ISO 11898-1
+是协议基础，而 ISO 11898-2 是物理层实现</strong>：</p>
+<p><img src="/Electronics/CAN/OSI-2.png"></p>
+<p>除此之外，<strong>数据链路层</strong>被进一步划分为了<strong>媒介访问控制</strong>（MAC，Medium
+Access Control）和<strong>逻辑链路控制</strong>（LLC，Logical Link
+Control）两个子层。</p>
+<h2 id="can-总线的基本拓扑">CAN 总线的基本拓扑</h2>
+<p>CAN 总线依赖于 <code>CANH</code>（CAN High）和 <code>CANL</code>（CAN
+Low）两根差分信号线进行通信，并且两端分别连接有一枚 <code>120Ω</code>
+的端接电阻器，防止信号在 CAN 总线上出现反射干扰：</p>
+<p><img src="/Electronics/CAN/CAN-1.png"></p>
+<blockquote>
+<p><strong>注意</strong>：通常情况下，CAN
+总线上的设备节点都会连接到公共的地平面，从而具备有相等的接地电位。</p>
+</blockquote>
+<h2 id="差分信号传输原理">差分信号传输原理</h2>
+<p>CAN 总线之所以采用<strong>差分信号</strong>（Differential
+Signaling）进行传输，原因在于<strong>单端信号</strong>（Single-Ended
+Signaling）的连接方式容易受到电磁干扰，导致传输线路上出现尖峰电压，致使系统错误的将其判断为高电平
+<code>1</code>，从而破坏传输信号的完整性。</p>
+<p><img src="/Electronics/CAN/CAN-2.png"></p>
+<p>例如上面的波形图当中，应当传输的正确信号为
+<code>00011000</code>，由于受到尖峰电压的干扰，接收端实际读取到的信号变成了
+<code>01011011</code>。而 CAN 总线采用 <code>CANH</code> 和
+<code>CANL</code>
+两个<strong>相位相反，幅值一致</strong>的差分信号来传输数据，并且从信号的电位差当中提取有效数据：</p>
+<p><span class="math display">\[
+V_{参考电平} = V_{CANH} - V_{CANL}
+\]</span></p>
+<p>例如对于使用 <code>3.3V</code> 电平信号的 CAN
+总线，其数据使用如下两种状态进行传输（这些状态源自于 <code>CANH</code>
+和 <code>CANL</code> 两条信号线之间的电位差）：</p>
+<p><img src="/Electronics/CAN/CAN-3.png"></p>
+<ol type="1">
+<li><strong>显性状态</strong>（Dominant State）：表示逻辑信号
+<code>0</code>，此时 <code>CANH</code> 和 <code>CANL</code>
+之间的电位差约为 <code>3.5V - 1.5V = 2V</code>；</li>
+<li><strong>隐性状态</strong>（Recessive State）：表示逻辑信号
+<code>1</code>，此时 <code>CANH</code> 和 <code>CANL</code>
+之间的电位差约为 <code>2.5V - 2.5V = 0V</code>；</li>
+</ol>
+<p>CAN 总线差分信号传输方式的抗干扰能力，主要来源于 <code>CANH</code> 和
+<code>CANL</code>
+组成的双绞线，同时接收到的尖峰电压噪声幅度基本一致。而噪声幅度保持一致的两个信号，其电位差等效于没有受到噪声的干扰，具体请参见下面的图示：</p>
+<p><img src="/Electronics/CAN/CAN-4.png"></p>
+<h2 id="can-总线节点的构成">CAN 总线节点的构成</h2>
+<p>通常情况下，<strong>MCU
+微控制器</strong>只能产生<strong>数字信号</strong>，因而需要额外连接一片用于产生<strong>差分信号</strong>的
+<strong>CAN 收发器</strong>，共同形成一个 CAN 总线节点：</p>
+<p><img src="/Electronics/CAN/CAN-5.png"></p>
+<p>CAN 总线属于<strong>异步半双工</strong>通信协议，因而 <strong>CAN
+收发器</strong>通常携带有 <code>TXD</code>（数据发送）和
+<code>RXD</code>（数据接收）两个引脚，用于与 MCU
+微控制器交换数据，并将单端的 <code>TXD/RXD</code> 数字信号转换为差分的
+<code>CANH/CANL</code> 信号：</p>
+<p><img src="/Electronics/CAN/CAN-6.png"></p>
+<p><strong>CAN 收发器</strong> 芯片的额定工作电压通常为
+<code>5V</code>，在与工作电压同样为 <code>5V</code> 的 MCU
+微控制器协同工作的时候，双方都可以通过 <code>5V</code> 的
+<strong>LDO</strong> 或者 <strong>DC-DC</strong>
+电源进行供电，并且两者需要形成<strong>共地连接</strong>：</p>
+<p><img src="/Electronics/CAN/CAN-5V.png"></p>
+<p>如果 MCU 微控制器的额定工作电压为 <code>3.3V</code>，
+那么就必须分别采用两颗 <code>3.3V</code> 和 <code>5V</code>
+的电源进行供电，并且两者依然需要形成<strong>共地连接</strong>关系：</p>
+<p><img src="/Electronics/CAN/CAN-3V3.png"></p>
+<h2 id="can-总线电平规范">CAN 总线电平规范</h2>
+<p>CAN 总线采用了阻抗为 <code>120Ω</code>
+的闭环总线结构，两端分别连接一枚 <code>120Ω</code>
+的端接电阻，线材方面通常使用的是<strong>双绞线</strong>。而 CAN
+总线上的<strong>隐性电平</strong>与<strong>显性电平</strong>的取值范围，分别如下面两个列表所示：</p>
+<table>
+<thead>
+<tr>
+<th>隐性电平</th>
+<th>最小值</th>
+<th>典型值</th>
+<th>最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CAN_High</strong></td>
+<td><code>2.00 V</code></td>
+<td><code>2.50 V</code></td>
+<td><code>3.00 V</code></td>
+</tr>
+<tr>
+<td><strong>CAN_Low</strong></td>
+<td><code>2.00 V</code></td>
+<td><code>2.50 V</code></td>
+<td><code>3.00 V</code></td>
+</tr>
+<tr>
+<td><strong>电位差</strong></td>
+<td><code>-0.5 V</code></td>
+<td><code>0 V</code></td>
+<td><code>0.05 V</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>显性电平</th>
+<th>最小值</th>
+<th>典型值</th>
+<th>最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CAN_High</strong></td>
+<td><code>2.75 V</code></td>
+<td><code>3.50 V</code></td>
+<td><code>4.50 V</code></td>
+</tr>
+<tr>
+<td><strong>CAN_Low</strong></td>
+<td><code>0.50 V</code></td>
+<td><code>1.50 V</code></td>
+<td><code>2.25 V</code></td>
+</tr>
+<tr>
+<td><strong>电位差</strong></td>
+<td><code>1.5 V</code></td>
+<td><code>2.0 V</code></td>
+<td><code>3.0 V</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="速率单位-mbs-与-mbps">速率单位 MB/s 与 Mbps</h2>
+<p><strong>兆字节每秒</strong>（<strong>MB/s</strong>，​Megabytes Per
+Second）和 <strong>兆比特每秒</strong>（<strong>Mbps</strong> 或
+<strong>Mbit/s</strong>，​​Megabits Per
+Second​）都是用于衡量<strong>数据传输速率</strong>的单位：</p>
+<ul>
+<li><code>1 MB/s</code> 表示每秒传输 <code>1</code>
+百万个<strong>字节</strong> <code>Bytes</code> ​​ 的数据。</li>
+<li><code>1 Mbps</code> 表示每秒传输 <code>1</code>
+百万个<strong>比特位</strong> <code>bits</code> ​​ 的数据。</li>
+</ul>
+<p>根据 <code>1 Byte = 8 Bits</code>，可以将 <code>MB/s</code> 与
+<code>Mbps</code> 的换算关系联立为如下的推导公式：</p>
+<p><span class="math display">\[
+1 Byte = 8 Bits
+\implies
+\begin{cases}
+1 MB/s​ = 8 Mbps​ \\
+​​1 Mbps = 0.125 MB/s​​
+\end{cases}
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：大写的 <code>B</code>
+通常用于表示<strong>字节</strong> <code>Byte</code>，而小写的
+<code>b</code> 则通常用来表示<strong>比特位</strong>
+<code>bit</code>。</p>
+</blockquote>
+<h2 id="can-协议帧详解">CAN 协议帧详解</h2>
+</div><div class="article-licensing box"><div class="licensing-title"><p>车规级总线协议 CAN/CANopen 与 LIN 深度剖析</p><p><a href="http://www.uinio.com/Electronics/CAN/">http://www.uinio.com/Electronics/CAN/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2025-05-01</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2025-05-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%80%BB%E7%BA%BF/">总线</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Embedded/FOC/"><span class="level-item">剖析无刷电机的 FOC 磁场定向控制算法</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#can-总线发展历程"><span class="level-left"><span class="level-item">1</span><span class="level-item">CAN 总线发展历程</span></span></a></li><li><a class="level is-mobile" href="#iso-11898-标准化规范"><span class="level-left"><span class="level-item">2</span><span class="level-item">ISO 11898 标准化规范</span></span></a></li><li><a class="level is-mobile" href="#can-总线与-osi-模型"><span class="level-left"><span class="level-item">3</span><span class="level-item">CAN 总线与 OSI 模型</span></span></a></li><li><a class="level is-mobile" href="#can-总线的基本拓扑"><span class="level-left"><span class="level-item">4</span><span class="level-item">CAN 总线的基本拓扑</span></span></a></li><li><a class="level is-mobile" href="#差分信号传输原理"><span class="level-left"><span class="level-item">5</span><span class="level-item">差分信号传输原理</span></span></a></li><li><a class="level is-mobile" href="#can-总线节点的构成"><span class="level-left"><span class="level-item">6</span><span class="level-item">CAN 总线节点的构成</span></span></a></li><li><a class="level is-mobile" href="#can-总线电平规范"><span class="level-left"><span class="level-item">7</span><span class="level-item">CAN 总线电平规范</span></span></a></li><li><a class="level is-mobile" href="#速率单位-mbs-与-mbps"><span class="level-left"><span class="level-item">8</span><span class="level-item">速率单位 MB/s 与 Mbps</span></span></a></li><li><a class="level is-mobile" href="#can-协议帧详解"><span class="level-left"><span class="level-item">9</span><span class="level-item">CAN 协议帧详解</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/CAN/"><img src="/Electronics/Motor-PWM/logo.png" alt="车规级总线协议 CAN/CANopen 与 LIN 深度剖析"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-04-30T16:00:00.000Z">2025-05-01</time></p><p class="title"><a href="/Electronics/CAN/">车规级总线协议 CAN/CANopen 与 LIN 深度剖析</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Embedded/FOC/"><img src="/Embedded/FOC/logo.png" alt="剖析无刷电机的 FOC 磁场定向控制算法"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-04-14T16:00:00.000Z">2025-04-15</time></p><p class="title"><a href="/Embedded/FOC/">剖析无刷电机的 FOC 磁场定向控制算法</a></p><p class="categories"><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Power-Switching/"><img src="/Electronics/Power-Switching/logo.png" alt="开关电源 SMPS 基本原理 &amp; 拓扑结构剖析"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-03-05T16:00:00.000Z">2025-03-06</time></p><p class="title"><a href="/Electronics/Power-Switching/">开关电源 SMPS 基本原理 &amp; 拓扑结构剖析</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Embedded/PID/"><img src="/Embedded/PID/logo.png" alt="闭环控制算法 PID 的原理剖析与实现"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-02-04T16:00:00.000Z">2025-02-05</time></p><p class="title"><a href="/Embedded/PID/">闭环控制算法 PID 的原理剖析与实现</a></p><p class="categories"><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Motor-PWM/"><img src="/Electronics/Motor-PWM/logo.png" alt="直流无刷电机的 PWM 驱动控制原理简述"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-11-06T16:00:00.000Z">2024-11-07</time></p><p class="title"><a href="/Electronics/Motor-PWM/">直流无刷电机的 PWM 驱动控制原理简述</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%80%BB%E7%BA%BF/"><span class="tag">总线</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
