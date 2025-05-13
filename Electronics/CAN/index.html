@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>控制器区域网络 CAN 总线协议图解 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="控制器区域网络（CAN，Controller Area Network）总线协议规范正式发布于 1986 年，由德国博世公司为解决汽车电子系统当中，复杂的线束问题而设计。1991 年发布的 CAN 2.0 A&amp;#x2F;B 规范的推出标志着其开启了标准化的进程。1993 年推出的 ISO 11898 标准进一步巩固了其国际规范地位。伴随汽车电子和工业控制需求的增长，2012 年发布的 CAN"><meta property="og:type" content="blog"><meta property="og:title" content="控制器区域网络 CAN 总线协议图解"><meta property="og:url" content="http://www.uinio.com/Electronics/CAN/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="控制器区域网络（CAN，Controller Area Network）总线协议规范正式发布于 1986 年，由德国博世公司为解决汽车电子系统当中，复杂的线束问题而设计。1991 年发布的 CAN 2.0 A&amp;#x2F;B 规范的推出标志着其开启了标准化的进程。1993 年推出的 ISO 11898 标准进一步巩固了其国际规范地位。伴随汽车电子和工业控制需求的增长，2012 年发布的 CAN"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2025-04-30T16:00:00.000Z"><meta property="article:modified_time" content="2025-05-13T13:46:15.433Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="总线"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/CAN/"},"headline":"控制器区域网络 CAN 总线协议图解","image":["http://www.uinio.com/Electronics/CAN/logo.png"],"datePublished":"2025-04-30T16:00:00.000Z","dateModified":"2025-05-13T13:46:15.433Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"控制器区域网络（CAN，Controller Area\r Network）总线协议规范正式发布于 1986\r 年，由德国博世公司为解决汽车电子系统当中，复杂的线束问题而设计。1991\r 年发布的 CAN 2.0 A&#x2F;B\r 规范的推出标志着其开启了标准化的进程。1993 年推出的 ISO\r 11898\r 标准进一步巩固了其国际规范地位。伴随汽车电子和工业控制需求的增长，2012\r 年发布的 CAN"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/CAN/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>控制器区域网络 CAN 总线协议图解 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="控制器区域网络（CAN，Controller Area Network）总线协议规范正式发布于 1986 年，由德国博世公司为解决汽车电子系统当中，复杂的线束问题而设计。1991 年发布的 CAN 2.0 A&amp;#x2F;B 规范的推出标志着其开启了标准化的进程。1993 年推出的 ISO 11898 标准进一步巩固了其国际规范地位。伴随汽车电子和工业控制增涨的通信需求，2012 年发布的 CA"><meta property="og:type" content="blog"><meta property="og:title" content="控制器区域网络 CAN 总线协议图解"><meta property="og:url" content="http://www.uinio.com/Electronics/CAN/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="控制器区域网络（CAN，Controller Area Network）总线协议规范正式发布于 1986 年，由德国博世公司为解决汽车电子系统当中，复杂的线束问题而设计。1991 年发布的 CAN 2.0 A&amp;#x2F;B 规范的推出标志着其开启了标准化的进程。1993 年推出的 ISO 11898 标准进一步巩固了其国际规范地位。伴随汽车电子和工业控制增涨的通信需求，2012 年发布的 CA"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2025-04-30T16:00:00.000Z"><meta property="article:modified_time" content="2025-05-13T15:27:08.226Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="总线"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/CAN/"},"headline":"控制器区域网络 CAN 总线协议图解","image":["http://www.uinio.com/Electronics/CAN/logo.png"],"datePublished":"2025-04-30T16:00:00.000Z","dateModified":"2025-05-13T15:27:08.226Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"控制器区域网络（CAN，Controller Area\r Network）总线协议规范正式发布于 1986\r 年，由德国博世公司为解决汽车电子系统当中，复杂的线束问题而设计。1991\r 年发布的 CAN 2.0 A&#x2F;B\r 规范的推出标志着其开启了标准化的进程。1993 年推出的 ISO\r 11898\r 标准进一步巩固了其国际规范地位。伴随汽车电子和工业控制增涨的通信需求，2012\r 年发布的 CA"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/CAN/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
   (function () {
       function switchTab() {
           if (!location.hash) {
@@ -29,29 +29,29 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-04-30T16:00:00.000Z" title="2025/5/1 00:00:00">2025-05-01</time>发表</span><span class="level-item"><time dateTime="2025-05-13T13:46:15.433Z" title="2025/5/13 21:46:15">2025-05-13</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">1 小时读完 (大约9250个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">控制器区域网络 CAN 总线协议图解</h1><div class="content"><p><strong>控制器区域网络</strong>（CAN，Controller Area
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-04-30T16:00:00.000Z" title="2025/5/1 00:00:00">2025-05-01</time>发表</span><span class="level-item"><time dateTime="2025-05-13T15:27:08.226Z" title="2025/5/13 23:27:08">2025-05-13</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">1 小时读完 (大约9277个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">控制器区域网络 CAN 总线协议图解</h1><div class="content"><p><strong>控制器区域网络</strong>（CAN，Controller Area
 Network）总线协议规范正式发布于 1986
 年，由德国博世公司为解决汽车电子系统当中，复杂的线束问题而设计。1991
 年发布的 <strong>CAN 2.0 A/B</strong>
 规范的推出标志着其开启了标准化的进程。1993 年推出的 <strong>ISO
 11898</strong>
-标准进一步巩固了其国际规范地位。伴随汽车电子和工业控制需求的增长，2012
+标准进一步巩固了其国际规范地位。伴随汽车电子和工业控制增涨的通信需求，2012
 年发布的 <strong>CAN FD</strong> 进一步提升了带宽与数据长度。而 2020
 年发布的 <strong>CAN XL</strong>
-则能够支持更大的数据量传输，从而适应未来的高速场景。</p>
+则能够支持更大数据量的传输，从而适应未来的智能化场景。</p>
 <p><img src="/Electronics/CAN/logo.png"></p>
-<p>CAN 总线协议发展到今天，以其
-<code>低成本</code>、<code>高实时性</code>、<code>高可靠性</code>、<code>优秀的抗干扰能力</code>，已经成为了一款当下应用非常广泛的标准化通信协议，被广泛应用于
+<p>CAN 总线协议发展至今日，已经以其
+<code>低成本</code>、<code>高实时性</code>、<code>高可靠性</code>、<code>优秀的抗干扰能力</code>，成为当下使用极为广泛的标准化串行通信协议，被大面积运用于
 <code>工业控制</code>、<code>汽车电子</code>、<code>航空航天</code>
-等高科技领域。众所周知，<strong>理工类技术的最佳学习方式，往往需要基于最为直观的理解，而大量的示意图和表格正是化繁为简的利器</strong>。本文就将通过一系列丰富的图片与表格，来展示
+等对于可靠性要求较高的领域。众所周知，<strong>理工类技术的最佳学习方式，往往需要基于最为直观的理解，而大量的示意图和表格正是化繁为简的利器</strong>。本文就将通过一系列丰富的图片与表格，来展示
 CAN
-总线协议的各个技术细节，以便让大家能够快速的理解这款串行总线通信协议。</p>
+总线协议的各个技术细节，以便让大家能够快速的理解这款倍受工程师欢迎的总线通信协议。</p>
 <span id="more"></span>
 <h2 id="can-总线发展历程">CAN 总线发展历程</h2>
 <p><strong>控制器区域网络</strong>（CAN，Controller Area
 Network）是一款广泛应用于汽车和工业领域的现场总线协议，由<a target="_blank" rel="noopener" href="https://www.bosch.com.cn/"><strong>德国博世 BOSCH
 公司</strong></a>于 <strong>1983</strong>
-年推出，用于解决汽车电子系统中复杂的线束问题，实现各个<strong>电子控制单元</strong>（ECU，Electronic
+年推出，用于解决汽车电子系统中复杂的线束连接问题，以实现各个<strong>电子控制单元</strong>（ECU，Electronic
 Control Unit）之间的可靠通信。</p>
 <table>
 <colgroup>
@@ -73,7 +73,7 @@ Control Unit）之间的可靠通信。</p>
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>标准</strong></td>
-<td>博世公司率先发布</td>
+<td>博世公司首先发布</td>
 <td>ISO 11898-1:<strong>1993/2003</strong></td>
 <td>ISO 11898-1:<strong>2015</strong></td>
 <td>ISO 11898-1:<strong>2024</strong></td>
@@ -109,10 +109,10 @@ Control Unit）之间的可靠通信。</p>
 </tbody>
 </table>
 <ul>
-<li><strong>CAN FD</strong>：CAN 灵活数据速率总线（Controller Area
-Network Flexible Data Rate）；</li>
-<li><strong>CAN XL</strong>：CAN 扩展数据域长度总线（Controller Area
-Network Extended Data-field Length）；</li>
+<li><strong>CAN 灵活数据速率总线</strong>（<strong>CAN
+FD</strong>，Controller Area Network Flexible Data Rate）；</li>
+<li><strong>CAN 扩展数据域长度总线</strong>（<strong>CAN
+XL</strong>，Controller Area Network Extended Data-field Length）；</li>
 </ul>
 <blockquote>
 <p><strong>注意</strong>：<strong>ISO 11898-1</strong> 国际标准定义了
@@ -120,9 +120,10 @@ CAN 规范的核心部分，即<strong>数据链路层</strong>（Data Link
 Layer）和<strong>物理层</strong>（Physical Layer）的相关标准。</p>
 </blockquote>
 <h2 id="iso-11898-标准化规范">ISO 11898 标准化规范</h2>
-<p><strong>ISO 11898</strong> 是 ISO 国际标准化组织针对 CAN
-总线制定的一系列标准，广泛应用于汽车、工业控制等领域。该系列标准分为多个部分，分别针对不同的
-CAN 总线类型和速率：</p>
+<p><strong>ISO 11898</strong> 是 <strong>ISO 国际标准化组织</strong>
+针对 CAN
+总线制定的一系列国际标准，该系列标准被划分为多个部分（通过最后的数字进行区分），分别对应于不同速率的
+CAN 总线类型：</p>
 <table>
 <thead>
 <tr>
@@ -165,7 +166,7 @@ CAN 总线类型和速率：</p>
 </tbody>
 </table>
 <p>上面表格当中的 <strong>ISO 11898-1</strong> 主要定义了 CAN 总线的
-<strong>数据链路层</strong>，也就是<strong>定义了数据在单个链路上如何进行传输</strong>，主要解决了如下几个问题：</p>
+<strong>数据链路层</strong>，也就是<strong>定义了数据在单个链路上如何进行传输</strong>，其主要解决了如下几个方面的问题：</p>
 <ul>
 <li><strong>如何将数据组装为数据块</strong>（该数据块就是<strong>帧</strong>，是数据链路层的基本传送单位）；</li>
 <li><strong>如何控制帧在物理信道上的传输</strong>（包括如何处理传输错误，如何调节发送速率）；</li>
@@ -174,12 +175,12 @@ CAN 总线类型和速率：</p>
 <blockquote>
 <p><strong>注意</strong>：许多书籍和资料上提到的 <strong>ISO
 11519-2</strong> 已经于 2006 年被 <strong>ISO 11898-3</strong>
-整合并且取代，成为新的低速容错 CAN 标准。</p>
+整合并且取代，成为了新的低速容错 CAN 标准。</p>
 </blockquote>
 <h2 id="can-总线与-osi-模型">CAN 总线与 OSI 模型</h2>
 <p><strong>开放系统互连模型</strong>（OSI，Open System Interconnect）由
 <strong>ISO 国际标准化组织</strong>于 1985
-年正式制订使用，主要定义了网络互连的七层框架（<code>物理层</code>、<code>数据链路层</code>、<code>网络层</code>、<code>传输层</code>、<code>会话层</code>、<code>表示层</code>、<code>应用层</code>），通常也被称作
+年正式制订使用，主要定义了网络互连的七层架构（<code>物理层</code>、<code>数据链路层</code>、<code>网络层</code>、<code>传输层</code>、<code>会话层</code>、<code>表示层</code>、<code>应用层</code>），通常也被称作
 <strong>OSI 参考模型</strong>：</p>
 <p><img src="/Electronics/CAN/OSI/1.png"></p>
 <p>CAN 总线规范 <strong>ISO 11898</strong> 与 OSI
@@ -196,8 +197,9 @@ Control）两个子层。</p>
 <p>如前所述，CAN 总线被划分为<strong>高速 CAN</strong>（定义于
 <code>ISO 11898-2</code> 规范），以及<strong>低速容错
 CAN</strong>（定义于 <code>ISO 11519-2</code> 以及后续的
-<code>ISO 11898-3</code> 规范）两种类型，这种划分会体现在 CAN
-收发器芯片的规格书当中，进行参数选型时需要格外关注这个参数（下图是
+<code>ISO 11898-3</code> 规范）两种类型，这种划分方式会体现在
+<strong>CAN
+收发器</strong>芯片的规格书当中，进行参数选型时需要格外关注这个参数（下图是
 <strong>NXP</strong> 公司的经典 CAN 收发器芯片 <a target="_blank" rel="noopener" href="https://www.nxp.com.cn/products/interfaces/can-transceivers/legacy-can/high-speed-can-transceiver:TJA1050">TJA1050</a>
 的数据手册首页）：</p>
 <p><img src="/Electronics/CAN/Topology/1.png"></p>
@@ -230,11 +232,11 @@ V_{有效电平} = V_{CANH} - V_{CANL}
 [rɪˈsesɪv]）表示逻辑信号 <code>1</code>。</p>
 </blockquote>
 <p>根据 <strong>ISO11898-2</strong> 和 <strong>ISO11898-3</strong>
-国际规范，CAN 总线网络差分信号线 <code>CANH</code> 与 <code>CANL</code>
-上传输的电平值，需要遵循下面表格当中的取值范围：</p>
+两款国际规范，差分信号线 <code>CANH</code> 与 <code>CANL</code>
+上面传输的电平值，需要遵循下面表格当中定义的范围：</p>
 <p><img src="/Electronics/CAN/Topology/4.png"></p>
 <p>根据上面表格当中的数据，就可以获得不同 CAN
-总线网络上面，隐性电平与显性电平分别所需的典型电压差值：</p>
+总线网络上面，<strong>隐性电平</strong>与<strong>显性电平</strong>的典型电压差值：</p>
 <ul>
 <li><strong>高速 CAN
 总线</strong>：<strong>隐性电平</strong>（相当于逻辑
@@ -250,14 +252,14 @@ V_{有效电平} = V_{CANH} - V_{CANL}
 = 3.0V\)</span>。</li>
 </ul>
 <blockquote>
-<p><strong>注意</strong>：在 CAN
-总线网络上面，<strong>只要一个节点输出显性电平，整个总线就呈现出显性电平。只有当所有的节点都输出隐性电平的时候，总线才会呈现为隐性电平</strong>。</p>
+<p><strong>注意</strong>：CAN
+总线网络当中，<strong>只要一个节点输出显性电平，整个总线就会呈现出显性电平。只有当所有的节点都输出隐性电平的时候，总线才会呈现为隐性电平</strong>。</p>
 </blockquote>
 <h2 id="差分信号传输原理">差分信号传输原理</h2>
 <p>下图所示的高速 CAN 总线网络，采用了阻抗为 <code>120Ω</code>
-的闭环总线结构，两端分别连接了一枚 <code>120Ω</code>
+的闭环总线结构，两端分别连接有一枚 <code>120Ω</code>
 的端接电阻（防止信号在 CAN
-总线上出现反射），线材方面通常使用的是<strong>双绞线</strong>。</p>
+总线上出现反射），线材方面通常使用的是<strong>双绞线</strong>：</p>
 <p><img src="/Electronics/CAN/Protocol/1.png"></p>
 <blockquote>
 <p><strong>注意</strong>：通常情况下，CAN
@@ -290,17 +292,17 @@ V_{有效电平} = V_{CANH} - V_{CANL}
 </ol>
 <p>CAN 总线差分信号传输方式的抗干扰能力，主要来源于 <code>CANH</code> 和
 <code>CANL</code>
-组成的双绞线，它们同时接收到的尖峰电压噪声幅值基本一致。而噪声幅值保持一致的两个信号，其电位差等效于没有受到噪声的干扰，具体请参见下面的示意图：</p>
+组成的双绞线，它们同时接收到的尖峰电压噪声幅值基本一致。而噪声幅值保持一致的两个信号，其电位差等效于没有受到噪声的干扰，具体可以参考下面的示意图：</p>
 <p><img src="/Electronics/CAN/Protocol/4.png"></p>
 <h2 id="can-总线节点的构成">CAN 总线节点的构成</h2>
 <p>通常情况下，<strong>MCU
 微控制器</strong>只能产生<strong>数字信号</strong>，因而需要额外连接一片用于产生<strong>差分信号</strong>的
 <strong>CAN 收发器</strong>，共同形成一个 CAN 总线节点：</p>
 <p><img src="/Electronics/CAN/Protocol/5.png"></p>
-<p>CAN 总线属于<strong>异步半双工</strong>通信协议，因而 <strong>CAN
-收发器</strong>通常携带有 <code>TXD</code>（数据发送）和
+<p>CAN 总线属于<strong>异步半双工</strong>的通信协议，因而 <strong>CAN
+收发器</strong>具备有 <code>TXD</code>（数据发送）和
 <code>RXD</code>（数据接收）两个引脚，用于与 MCU
-微控制器交换数据，并将单端的 <code>TXD/RXD</code> 数字信号转换为差分的
+微控制器交换数据，并且将单端的 <code>TXD/RXD</code> 数字信号转换为差分的
 <code>CANH/CANL</code> 信号：</p>
 <p><img src="/Electronics/CAN/Protocol/6.png"></p>
 <p><strong>CAN 收发器</strong> 芯片的额定工作电压通常为
@@ -317,7 +319,7 @@ V_{有效电平} = V_{CANH} - V_{CANL}
 <p>上面已经简单介绍过一个<strong>CAN 总线节点</strong>通常是由
 <strong>CAN 控制器</strong>（CAN Controller）和 <strong>CAN
 收发器</strong>（CAN
-Transceive）共同构成的，接下来的内容会对两者的功能进行明确定义，以避免大家在器件选型的时候出现混淆：</p>
+Transceive）共同构成的，接下来的内容会对两者的功能进行明确的定义，以避免大家在器件选型的时候出现混淆：</p>
 <ul>
 <li><strong>CAN 控制器</strong>：负责 CAN
 总线<strong>数据链路层</strong>的处理，其核心功能包括
@@ -332,37 +334,39 @@ Transceive）共同构成的，接下来的内容会对两者的功能进行明�
 收发器的区别：</p>
 <table>
 <colgroup>
-<col style="width: 11%">
-<col style="width: 44%">
-<col style="width: 43%">
+<col style="width: 10%">
+<col style="width: 49%">
+<col style="width: 39%">
 </colgroup>
 <thead>
 <tr>
-<th>特性</th>
-<th>CAN 控制器芯片</th>
-<th>CAN 收发器芯片</th>
+<th style="text-align: center;">特性</th>
+<th style="text-align: left;">CAN 控制器芯片</th>
+<th style="text-align: left;">CAN 收发器芯片</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>核心功能</td>
-<td>协议处理</td>
-<td>电平转换</td>
+<td style="text-align: center;">核心功能</td>
+<td style="text-align: left;">协议处理</td>
+<td style="text-align: left;">电平转换</td>
 </tr>
 <tr>
-<td>接口方向</td>
-<td>连接至主控芯片</td>
-<td>连接至物理 CAN 总线（双绞线）</td>
+<td style="text-align: center;">接口方向</td>
+<td style="text-align: left;">连接至主控芯片</td>
+<td style="text-align: left;">连接至物理 CAN 总线（双绞线）</td>
 </tr>
 <tr>
-<td>通信层级</td>
-<td><strong>数据链路层</strong>（OSI Layer 2）</td>
-<td><strong>物理层</strong>（OSI Layer 1）</td>
+<td style="text-align: center;">通信层级</td>
+<td style="text-align: left;"><strong>数据链路层</strong>（OSI Layer
+2）</td>
+<td style="text-align: left;"><strong>物理层</strong>（OSI Layer
+1）</td>
 </tr>
 <tr>
-<td>典型芯片</td>
-<td><code>MCP2515</code>、<code>SJA1000</code>、MCU 外设</td>
-<td><code>TJA1050</code>、<code>SN65HVD230</code></td>
+<td style="text-align: center;">典型芯片</td>
+<td style="text-align: left;"><code>MCP2515</code>、<code>SJA1000</code>、<code>MCU 片内外设</code></td>
+<td style="text-align: left;"><code>TJA1050</code>、<code>SN65HVD230</code></td>
 </tr>
 </tbody>
 </table>
@@ -408,7 +412,8 @@ Second​）都是用于衡量<strong>数据传输速率</strong>的单位：</p
 <li><strong>远程帧</strong>：用于 <code>接收单元</code>
 向具有相同<strong>标识符</strong>的 <code>发送单元</code>
 请求数据。</li>
-<li><strong>错误帧</strong>：用于在检测出错误的时候，向其它单元通知错误。</li>
+<li><strong>错误帧</strong>：用于在检测出 <code>错误</code>
+的时候，向其它单元发送错误通知。</li>
 <li><strong>过载帧</strong>：用于 <code>接收单元</code>
 通知其尚未做好接收准备。</li>
 <li><strong>帧间隔</strong>：用于分离
