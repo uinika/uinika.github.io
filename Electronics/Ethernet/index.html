@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>一篇关于以太网 Ethernet 的技术摘要 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="早在 1972 年，就职于美国施乐 Xerox 公司的 Robert Metcalfe（被称作以太网之父）与另外两位学者，协作发表了一篇名为《以太网：区域计算机网络的分布式包交换技术》的文章，并在不久之后获得了《具有冲突检测的多点数据通信系统》专利，以太网（Ethernet）技术的雏形就此诞生。至此以太网相关的标准不断演进，诞生了标准以太网(10 Mbit&amp;#x2F;s)、快速以太网(100 Mbit&amp;#x2F;"><meta property="og:type" content="blog"><meta property="og:title" content="一篇关于以太网 Ethernet 的技术摘要"><meta property="og:url" content="http://www.uinio.com/Electronics/Ethernet/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="早在 1972 年，就职于美国施乐 Xerox 公司的 Robert Metcalfe（被称作以太网之父）与另外两位学者，协作发表了一篇名为《以太网：区域计算机网络的分布式包交换技术》的文章，并在不久之后获得了《具有冲突检测的多点数据通信系统》专利，以太网（Ethernet）技术的雏形就此诞生。至此以太网相关的标准不断演进，诞生了标准以太网(10 Mbit&amp;#x2F;s)、快速以太网(100 Mbit&amp;#x2F;"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2025-06-04T16:00:00.000Z"><meta property="article:modified_time" content="2025-06-16T15:46:07.028Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="总线"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/Ethernet/"},"headline":"一篇关于以太网 Ethernet 的技术摘要","image":["http://www.uinio.com/Electronics/Ethernet/logo.png"],"datePublished":"2025-06-04T16:00:00.000Z","dateModified":"2025-06-16T15:46:07.028Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"早在 1972 年，就职于美国施乐 Xerox\r 公司的 Robert\r Metcalfe（被称作以太网之父）与另外两位学者，协作发表了一篇名为《以太网：区域计算机网络的分布式包交换技术》的文章，并在不久之后获得了《具有冲突检测的多点数据通信系统》专利，以太网（Ethernet）技术的雏形就此诞生。至此以太网相关的标准不断演进，诞生了标准以太网(10 Mbit&#x2F;s)、快速以太网(100 Mbit&#x2F;"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/Ethernet/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>一篇关于以太网 Ethernet 的技术摘要 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="早在 1972 年，就职于美国施乐 Xerox 公司的 Robert Metcalfe（被称作以太网之父）与另外两位学者，协作发表了一篇名为《以太网：区域计算机网络的分布式包交换技术》的文章，并在不久之后获得了《具有冲突检测的多点数据通信系统》专利，以太网（Ethernet）技术的雏形就此诞生。至此以太网相关的标准不断演进，诞生了标准以太网(10 Mbit&amp;#x2F;s)、快速以太网(100 Mbit&amp;#x2F;"><meta property="og:type" content="blog"><meta property="og:title" content="一篇关于以太网 Ethernet 的技术摘要"><meta property="og:url" content="http://www.uinio.com/Electronics/Ethernet/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="早在 1972 年，就职于美国施乐 Xerox 公司的 Robert Metcalfe（被称作以太网之父）与另外两位学者，协作发表了一篇名为《以太网：区域计算机网络的分布式包交换技术》的文章，并在不久之后获得了《具有冲突检测的多点数据通信系统》专利，以太网（Ethernet）技术的雏形就此诞生。至此以太网相关的标准不断演进，诞生了标准以太网(10 Mbit&amp;#x2F;s)、快速以太网(100 Mbit&amp;#x2F;"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2025-06-04T16:00:00.000Z"><meta property="article:modified_time" content="2025-06-16T15:50:01.501Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="总线"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Electronics/Ethernet/"},"headline":"一篇关于以太网 Ethernet 的技术摘要","image":["http://www.uinio.com/Electronics/Ethernet/logo.png"],"datePublished":"2025-06-04T16:00:00.000Z","dateModified":"2025-06-16T15:50:01.501Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"早在 1972 年，就职于美国施乐 Xerox\r 公司的 Robert\r Metcalfe（被称作以太网之父）与另外两位学者，协作发表了一篇名为《以太网：区域计算机网络的分布式包交换技术》的文章，并在不久之后获得了《具有冲突检测的多点数据通信系统》专利，以太网（Ethernet）技术的雏形就此诞生。至此以太网相关的标准不断演进，诞生了标准以太网(10 Mbit&#x2F;s)、快速以太网(100 Mbit&#x2F;"}</script><link rel="canonical" href="http://www.uinio.com/Electronics/Ethernet/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
   (function () {
       function switchTab() {
           if (!location.hash) {
@@ -29,7 +29,7 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-06-04T16:00:00.000Z" title="2025/6/5 00:00:00">2025-06-05</time>发表</span><span class="level-item"><time dateTime="2025-06-16T15:46:07.028Z" title="2025/6/16 23:46:07">2025-06-16</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">19 分钟读完 (大约2921个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">一篇关于以太网 Ethernet 的技术摘要</h1><div class="content"><p>早在 <strong>1972</strong> 年，就职于<a target="_blank" rel="noopener" href="https://www.xerox.com/en-us">美国施乐 <strong>Xerox</strong>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-06-04T16:00:00.000Z" title="2025/6/5 00:00:00">2025-06-05</time>发表</span><span class="level-item"><time dateTime="2025-06-16T15:50:01.501Z" title="2025/6/16 23:50:01">2025-06-16</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">20 分钟读完 (大约2971个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">一篇关于以太网 Ethernet 的技术摘要</h1><div class="content"><p>早在 <strong>1972</strong> 年，就职于<a target="_blank" rel="noopener" href="https://www.xerox.com/en-us">美国施乐 <strong>Xerox</strong>
 公司</a>的 <strong>Robert
 Metcalfe</strong>（被称作以太网之父）与另外两位学者，协作发表了一篇名为《<strong>以太网：区域计算机网络的分布式包交换技术</strong>》的文章，并在不久之后获得了《具有冲突检测的多点数据通信系统》专利，<strong>以太网</strong>（Ethernet）技术的雏形就此诞生。至此以太网相关的标准不断演进，诞生了<strong>标准以太网</strong>(<code>10 Mbit/s</code>)、<strong>快速以太网</strong>(<code>100 Mbit/s</code>)、<strong>千兆以太网</strong>(<code>1000 Mbit/s</code>)、<strong>万兆以太网</strong>(<code>10000 Mbit/s</code>)等一系列标准。</p>
 <p><img src="/Electronics/Ethernet/logo.png"></p>
@@ -38,6 +38,12 @@ Sense Multiple Access with Collision
 Detection）协议，从而确保多个设备在相同的物理介质上通信。当其中一个设备有数据需要发送时，会先监听线路上是否存在其它信号，线路空闲就开始传输数据，线路繁忙则等待直至线路可用为止。如果在传输过程当中发生了碰撞（即两个设备同时发送数据导致信号叠加），设备就会检测到这种情况并且发送阻塞信号，然后等待随机时间之后再进行重试。</p>
 <span id="more"></span>
 <h2 id="以太网发展历程">以太网发展历程</h2>
+<p>1972
+年<strong>以太网</strong>诞生之后，其标准不断演进。经过长期的发展，已经包括
+<code>10 Mbit/s</code>
+<strong>标准以太网</strong>、<code>100 Mbit/s</code>
+<strong>快速以太网</strong>、<code>1000 Mbit/s</code>
+<strong>千兆以太网</strong>、<code>10 Gbit/s</code> 万兆以太网等。</p>
 <h2 id="物理线缆标准">物理线缆标准</h2>
 <h2 id="以太网基本拓扑">以太网基本拓扑</h2>
 <h2 id="mac-与-phy-的连接规范">MAC 与 PHY 的连接规范</h2>
@@ -193,13 +199,13 @@ Interface）是一种精简了引脚的 <code>10/100 Mbps</code>
 <code>50 MHz</code>，数据位宽 <code>2 bit</code>）：</p>
 <table>
 <colgroup>
-<col style="width: 16%">
-<col style="width: 13%">
-<col style="width: 70%">
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 74%">
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left;">收发两侧 MAC-PHY 共用引脚</th>
+<th style="text-align: left;">MAC-PHY 共用引脚</th>
 <th style="text-align: left;">引脚名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
@@ -485,13 +491,13 @@ Independent Interface），通过在一个时钟周期的上升沿读取
 <code>125 MHz</code> 数据位宽 <code>4 bit</code>）：</p>
 <table>
 <colgroup>
-<col style="width: 18%">
-<col style="width: 8%">
-<col style="width: 72%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 77%">
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left;">收发两侧 MAC-PHY 共用引脚</th>
+<th style="text-align: left;">MAC-PHY 共用引脚</th>
 <th style="text-align: left;">引脚名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
@@ -573,13 +579,13 @@ Independent Interface）是一种串行传输的 GMII 接口（时钟频率
 <code>1250 MHz</code>，数据位宽 <code>1 bit</code>）：</p>
 <table>
 <colgroup>
-<col style="width: 19%">
+<col style="width: 13%">
 <col style="width: 6%">
-<col style="width: 73%">
+<col style="width: 79%">
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left;">收发两侧 MAC-PHY 共用引脚</th>
+<th style="text-align: left;">MAC-PHY 共用引脚</th>
 <th style="text-align: left;">引脚名称</th>
 <th style="text-align: left;">功能描述</th>
 </tr>
