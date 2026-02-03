@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>电子学单位分贝 dB 的数学推导过程 - UinIO.com 电子技术实验室</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="UinIO 电子技术实验室"><meta name="msapplication-TileImage" content="/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UinIO 电子技术实验室"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="分贝（dB，Decibel [ˈdesɪbel]）是一个用于衡量声压等级、信号功率强度的对数无量纲单位，该单位来源于美国的电话发明家贝尔 Alexander Graham Bell 的名字，是从单位贝尔（B，Bel）衍生而来，即一贝尔等于十分贝 \(1Bel &amp;#x3D; 10dB\)，其最初被用于贝尔实验室长途电话线路损耗的计量，从而解决线性度量单位无法描述超过 \(10^{14}\) 数量"><meta property="og:type" content="blog"><meta property="og:title" content="电子学单位分贝 dB 的数学推导过程"><meta property="og:url" content="http://www.uinio.com/Math/Decible/"><meta property="og:site_name" content="UinIO.com 电子技术实验室"><meta property="og:description" content="分贝（dB，Decibel [ˈdesɪbel]）是一个用于衡量声压等级、信号功率强度的对数无量纲单位，该单位来源于美国的电话发明家贝尔 Alexander Graham Bell 的名字，是从单位贝尔（B，Bel）衍生而来，即一贝尔等于十分贝 \(1Bel &amp;#x3D; 10dB\)，其最初被用于贝尔实验室长途电话线路损耗的计量，从而解决线性度量单位无法描述超过 \(10^{14}\) 数量"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.uinio.com/images/favicon.png"><meta property="article:published_time" content="2026-01-17T16:00:00.000Z"><meta property="article:modified_time" content="2026-02-03T18:30:30.323Z"><meta property="article:author" content="Hank"><meta property="article:tag" content="芯片"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://www.uinio.com/images/favicon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.uinio.com/Math/Decible/"},"headline":"电子学单位分贝 dB 的数学推导过程","image":["http://www.uinio.com/Math/Decible/logo.png"],"datePublished":"2026-01-17T16:00:00.000Z","dateModified":"2026-02-03T18:30:30.323Z","author":{"@type":"Person","name":"Hank"},"publisher":{"@type":"Organization","name":"UinIO.com 电子技术实验室","logo":{"@type":"ImageObject","url":{"text":"UinIO Lab"}}},"description":"分贝（dB，Decibel\r [ˈdesɪbel]）是一个用于衡量声压等级、信号功率强度的对数无量纲单位，该单位来源于美国的电话发明家贝尔\r Alexander Graham Bell\r 的名字，是从单位贝尔（B，Bel）衍生而来，即一贝尔等于十分贝\r \\(1Bel &#x3D;\r 10dB\\)，其最初被用于贝尔实验室长途电话线路损耗的计量，从而解决线性度量单位无法描述超过\r \\(10^{14}\\)\r 数量"}</script><link rel="canonical" href="http://www.uinio.com/Math/Decible/"><link rel="alternate" href="/atom.xml" title="UinIO.com 电子技术实验室" type="application/atom+xml"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://unpkg.com/highlight.js@11.7.0/styles/monokai.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://unpkg.com/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">UinIO Lab</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" target="_blank" rel="noopener" href="https://space.bilibili.com/1514341594">Bilibili</a><a class="navbar-item" target="_blank" rel="noopener" href="https://www.zhihu.com/people/uinika">知乎</a><a class="navbar-item" target="_blank" rel="noopener" href="https://github.com/uinika">Github</a><a class="navbar-item" target="_blank" rel="noopener" href="https://gitee.com/uinika">Gitee</a><a class="navbar-item" href="/my/works.html">开源硬件</a><a class="navbar-item" href="/my/about.html">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2026-01-17T16:00:00.000Z" title="2026/1/18 00:00:00">2026-01-18</time>发表</span><span class="level-item"><time dateTime="2026-02-03T18:30:30.323Z" title="2026/2/4 02:30:30">2026-02-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></span><span class="level-item">13 分钟读完 (大约1917个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">电子学单位分贝 dB 的数学推导过程</h1><div class="content"><p><strong>分贝</strong>（<code>dB</code>，Decibel
+[ˈdesɪbel]）是一个用于衡量声压等级、信号功率强度的对数无量纲单位，该单位来源于美国的电话发明家<strong>贝尔</strong>
+<code>Alexander Graham Bell</code>
+的名字，是从单位<strong>贝尔</strong>（<strong>B</strong>，Bel）衍生而来，即<strong>一贝尔等于十分贝</strong>
+<span class="math inline">\(1Bel =
+10dB\)</span>，其最初被用于贝尔实验室长途电话线路损耗的计量，从而解决线性度量单位无法描述超过
+<span class="math inline">\(10^{14}\)</span>
+数量级的信号强度问题，而后成为
+<strong>声学</strong>、<strong>电子</strong>、<strong>通信</strong>
+等领域的通用计量单位。</p>
+<p><img src="/Math/Decible/logo.png"></p>
+<p>分贝并不是一个线性的绝对数值单位，其反映的是两个相同单位物理量的比值，在取对数之后再分别乘以
+<code>10</code>（<strong>功率类参数</strong>，例如
+<code>声音功率</code>、<code>电功率</code>）或者
+<code>20</code>（<strong>场量类参数</strong>，<code>声压</code>、<code>电压</code>、<code>电流</code>、<code>场强</code>），其<strong>反映的是相对量级，而非绝对的数值</strong>。总而言之，由于分贝采用了<strong>对数</strong>
+<span class="math inline">\(y = \log_a x\)</span>
+来作为单位的标度，从而能够极大的压缩数值范围以及简化计算，同时也更加适配人类听觉以及信号传输的<strong>非线性感知特性</strong>。</p>
+<span id="more"></span>
+<h2 id="声学当中的分贝">声学当中的分贝</h2>
+<p>最常见的以分贝 <code>dB</code>
+作为声学单位的是<strong>声压级</strong>（SPL，Sound Pressure
+Level），该参数能够压缩人耳所能感知的巨大动态范围，并且匹配人耳对声音强度的非线性感知特性，其计算公式如下面所示：</p>
+<p><span class="math display">\[
+SPL_{dB} = 20 \cdot \log_{10} \left(
+\frac{P_{实际声压}}{P_{人类听觉下限参考声压}} \right)
+\]</span></p>
+<blockquote>
+<p><strong>注意</strong>：人类听觉下限的参考声压通常为
+<code>20 μPa</code>，即健康人耳在 1 kHz 频率时的听觉阈值。</p>
+</blockquote>
+<h2 id="功率比分贝公式">功率比分贝公式</h2>
+<p>使用 <strong>分贝</strong> <code>dB</code>
+作为单位，可以将两个相同物理量的比值，转换为一个<strong>对数</strong>尺度上的值（通过压缩数值表达的动态范围，从而便于表达和计算），电子学当中使用该单位来表达
+<code>功率</code>、<code>电压</code>、<code>电流</code>、<code>增益</code>、<code>衰减</code>
+等参数，但是其原始定义是以<strong>功率比值</strong>来作为基准：</p>
+<p><span class="math display">\[
+\text{dB} = 10 \cdot \log_{10} \left( \frac{功率值 P_2}{功率值 P_1}
+\right)
+\]</span></p>
+<h2 id="补充对数函数的知识">补充对数函数的知识</h2>
+<p><strong>指数函数</strong>的定义如下面所示，其中 <span class="math inline">\(x\)</span> 是<strong>自变量</strong>，<span class="math inline">\(a\)</span> 是<strong>底数</strong>，该函数的
+<strong>定义域</strong> <span class="math inline">\(x \in
+R\)</span>，而<strong>值域</strong> <span class="math inline">\(y &gt;
+0\)</span>：</p>
+<p><span class="math display">\[
+y = a^x \quad (a &gt; 0, \, a \neq 1)
+\]</span></p>
+<p>上述这个指数函数，可以在转换形式之后，被定义为<strong>对数函数</strong>的形式，此时<strong>数</strong>
+<span class="math inline">\(y\)</span> 被称作以 <span class="math inline">\(a\)</span> 作为<strong>底</strong>的 <span class="math inline">\(x\)</span> 的<strong>对数</strong>。相应的该函数的
+<strong>定义域</strong> <span class="math inline">\(x &gt;
+0\)</span>，而<strong>值域</strong> <span class="math inline">\(y \in
+R\)</span>：</p>
+<p><span class="math display">\[
+a^y = x（a&gt;0, a\neq 1)
+\implies
+y = \log_a x
+\]</span></p>
+<p>上述的指数函数和对数函数互为<strong>反函数</strong>，它们的图像关于直线
+<span class="math inline">\(y = x\)</span> 对称。当 <span class="math inline">\(a&gt;0, a\neq 1\)</span>
+的时候，指数函数和对数函数可以相互进行转化：</p>
+<p><span class="math display">\[
+a^y = x \Longleftrightarrow y = \log_a x
+\]</span></p>
+<p><strong>常用对数</strong>是以 <code>10</code> 作为底的对数 <span class="math inline">\(\log_{10} x\)</span>，可以简写为 <span class="math inline">\(\lg x\)</span>：</p>
+<p><span class="math display">\[
+\log_{10} x
+\implies
+\lg x
+\]</span></p>
+<p><strong>自然对数</strong>则是以<strong>自然常数</strong> <span class="math inline">\(e≈2.718281828\)</span> 作为底数的对数：</p>
+<p><span class="math display">\[
+\log_e x
+\implies
+\ln x
+\]</span></p>
+<h2 id="建立功率与电压和电流的关系">建立功率与电压和电流的关系</h2>
+<p>根据欧姆定律 <span class="math inline">\(I = \frac{V}{R}\)</span>
+以及功率的计算公式 <span class="math inline">\(P = I \cdot
+V\)</span>，可以分别得到功率 <span class="math inline">\(P\)</span>
+与电压 <span class="math inline">\(V\)</span> 以及电流 <span class="math inline">\(I\)</span> 的换算关系：</p>
+<p><span class="math display">\[
+\begin{cases}
+I = \frac{V}{R} \\
+P = I \cdot V
+\end{cases}
+\implies
+\begin{align}
+&amp; P = \frac{V^2}{R} \\
+&amp; P = I^2 R
+\end{align}
+\]</span></p>
+<h2 id="推导电压分贝公式">推导电压分贝公式</h2>
+<p>假设当前存在两个不同的<strong>电压</strong> <span class="math inline">\(V_2\)</span> 和 <span class="math inline">\(V_1\)</span>
+分别作用在相同的<strong>负载电阻</strong> <span class="math inline">\(R\)</span> 上面，则可以推导出：</p>
+<ul>
+<li>当<strong>负载电阻</strong> <span class="math inline">\(R\)</span>
+相同，并且<strong>电压</strong>等于 <span class="math inline">\(V_1\)</span> 时，此时<strong>功率</strong>的值等于
+<span class="math inline">\(P_1 = \frac{V_1^2}{R}\)</span>；</li>
+<li>当<strong>负载电阻</strong> <span class="math inline">\(R\)</span>
+相同，并且<strong>电压</strong>等于 <span class="math inline">\(V_2\)</span> 时，此时<strong>功率</strong>的值等于
+<span class="math inline">\(P_2 = \frac{V_2^2}{R}\)</span>；</li>
+</ul>
+<p>根据上述关系，进而就可以计算出 <span class="math inline">\(P_2\)</span> 和 <span class="math inline">\(P_1\)</span> 两个功率的比值：</p>
+<p><span class="math display">\[
+\frac{P_2}{P_1} = \frac{\frac{V_2^2}{R}}{\frac{V_1^2}{R}} =
+\frac{V_2^2}{R} \times \frac{R}{V_1^2} = \frac{V_2^2}{V_1^2} = \left(
+\frac{V_2}{V_1} \right)^2
+\]</span></p>
+<p>可以发现公式当中的<strong>负载电阻</strong> <span class="math inline">\(R\)</span>
+被省略，说明<strong>只要两个电路的负载电阻相等，它们功率的比值就等于电压比值的平方</strong>。接下来，将这个功率的比值
+<span class="math inline">\(\frac{P_2}{P_1} =
+(\frac{V_2}{V_1})^2\)</span>，代入到上述功率分贝的定义 <span class="math inline">\(10 \log_{10}(\frac{P_2}{P_1})\)</span> 当中：</p>
+<p><span class="math display">\[
+\text{dB} = 10 \log*{10} \left( \frac{P_2}{P_1} \right) = 10 \log*{10}
+\left( \left( \frac{V_2}{V_1} \right)^2 \right)
+\]</span></p>
+<p>使用对数的运算法则 <span class="math inline">\(\log_b (x^y) = y
+\log_b (x)\)</span>
+进行化简，就可以推导出<strong>电压增益分贝</strong>的计算公式：</p>
+<p><span class="math display">\[
+\text{dB} = 10 \times \left[ \log_{10} \left( \left( \frac{V_2}{V_1}
+\right)^2 \right) \right] = 10 \times \left[ 2 \times \log_{10} \left(
+\frac{V_2}{V_1} \right) \right]  = 20 \log_{10} \left( \frac{V_2}{V_1}
+\right)
+\]</span></p>
+<h2 id="推导电流分贝公式">推导电流分贝公式</h2>
+<p>类似于前面电压增益分贝公式的推导过程，假设当前存在两个不同的<strong>电流</strong>
+<span class="math inline">\(I_2\)</span> 和 <span class="math inline">\(I_1\)</span>
+分别通过相同的<strong>负载电阻</strong> <span class="math inline">\(R\)</span> 可以推导出：</p>
+<ul>
+<li>当电流 <span class="math inline">\(I_1\)</span>
+通过相同的<strong>负载电阻</strong> <span class="math inline">\(R\)</span> 时，<strong>功率</strong>的值等于 <span class="math inline">\(P_1 = I_1^2 R\)</span>；</li>
+<li>当电流 <span class="math inline">\(I_2\)</span>
+通过相同的<strong>负载电阻</strong> <span class="math inline">\(R\)</span> 时，<strong>功率</strong>的值等于 <span class="math inline">\(P_2 = I_2^2 R\)</span>；</li>
+</ul>
+<p>根据上述关系，进而就可以计算出 <span class="math inline">\(P_2\)</span> 和 <span class="math inline">\(P_1\)</span> 两个功率的比值：</p>
+<p><span class="math display">\[
+\frac{P_2}{P_1} = \frac{I_2^2 R}{I_1^2 R} = \frac{I_2^2}{I_1^2} = \left(
+\frac{I_2}{I_1} \right)^2
+\]</span></p>
+<p>同样可以发现公式当中的<strong>负载电阻</strong> <span class="math inline">\(R\)</span>
+被略去，说明<strong>只要两个电路的负载电阻相等，它们功率的比值就等于电流比值的平方</strong>。接下来，依然将这个功率的比值
+<span class="math inline">\(\frac{P_2}{P_1} =
+(\frac{I_2}{I_1})^2\)</span>，代入到上述功率分贝的定义 <span class="math inline">\(10 \log_{10}(\frac{P_2}{P_1})\)</span> 当中：</p>
+<p><span class="math display">\[
+\text{dB} = 10 \log*{10} \left( \frac{P_2}{P_1} \right) = 10 \log*{10}
+\left( \left( \frac{I_2}{I_1} \right)^2 \right)
+\]</span></p>
+<p>使用对数的运算法则 <span class="math inline">\(\log_b (x^y) = y
+\log_b (x)\)</span>
+进行化简，就可以推导出<strong>电流增益分贝</strong>的计算公式：</p>
+<p><span class="math display">\[
+\text{dB} = 10 \times \left[ \log_{10} \left( \left( \frac{I_2}{I_1}
+\right)^2 \right) \right] = 10 \times \left[ 2 \times \log_{10} \left(
+\frac{I_2}{I_1} \right) \right]  = 20 \log_{10} \left( \frac{I_2}{I_1}
+\right)
+\]</span></p>
+<h2 id="电子学中的分贝总结">电子学中的分贝总结</h2>
+<p>总而言之，功率相关的比值皆使用对数公式 <span class="math inline">\(10
+\cdot
+log_{10}()\)</span>；而凡是在相同负载电阻前提下，涉及电压与电流平方关系的比值，则使用
+<span class="math inline">\(20 \cdot log_{10}()\)</span>
+作为对数公式：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">物理量</th>
+<th style="text-align: left;">关系公式</th>
+<th style="text-align: left;">分贝公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>功率</strong> <span class="math inline">\(P\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(P =
+VI\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(10
+\log_{10}(\frac{P_2}{P_1})\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>电压</strong> <span class="math inline">\(V\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(P = V^2 /
+R\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(20
+\log_{10}(\frac{V_2}{V_1})\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>电流</strong> <span class="math inline">\(I\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(P = I^2
+R\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(20
+\log_{10}(\frac{I_2}{I_1})\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="分贝衍生的单位">分贝衍生的单位</h2>
+<p>分贝在电信号领域用于衡量增益、衰减、信噪比，会结合参考值定义绝对分贝单位：</p>
+<table>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 33%">
+<col style="width: 15%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr>
+<th>分贝单位</th>
+<th>表征对象</th>
+<th>固定基准值</th>
+<th>核心公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dBm</strong></td>
+<td>功率（分贝毫瓦）</td>
+<td><span class="math inline">\(P_0=1\ \text{mW}\)</span></td>
+<td><span class="math inline">\(P(\text{dBm})=10\log\left(\frac{P(\text{mW})}{1}\right)\)</span></td>
+</tr>
+<tr>
+<td><strong>dBW</strong></td>
+<td>功率（分贝瓦）</td>
+<td><span class="math inline">\(P_0=1\ \text{W}\)</span></td>
+<td><span class="math inline">\(P(\text{dBW})=10\log\left(\frac{P(\text{W})}{1}\right)\)</span></td>
+</tr>
+<tr>
+<td><strong>dBu</strong></td>
+<td>电压（分贝伏，参考电压为 <code>0.775V</code> 真有效值）</td>
+<td><span class="math inline">\(U_0=0.775\ \text{V}\)</span></td>
+<td><span class="math inline">\(U(\text{dBu})=20\log\left(\frac{U(\text{V})}{0.775}\right)\)</span></td>
+</tr>
+<tr>
+<td><strong>dBV</strong></td>
+<td>电压（分贝伏，参考电压为 <code>1V</code> 真有效值）</td>
+<td><span class="math inline">\(U_0=1\ \text{V}\)</span></td>
+<td><span class="math inline">\(U(\text{dBV})=20\log\left(\frac{U(\text{V})}{1}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div><div class="article-licensing box"><div class="licensing-title"><p>电子学单位分贝 dB 的数学推导过程</p><p><a href="http://www.uinio.com/Math/Decible/">http://www.uinio.com/Math/Decible/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hank</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2026-01-18</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-02-04</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E8%8A%AF%E7%89%87/">芯片</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Electronics/Amplifier/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">运算放大器 Op-Amp 基本应用与参数选型</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Electronics/IEEE1394/"><span class="level-item">IEEE1394 FireWire 火线通信协议与 PHY 硬件设计</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#声学当中的分贝"><span class="level-left"><span class="level-item">1</span><span class="level-item">声学当中的分贝</span></span></a></li><li><a class="level is-mobile" href="#功率比分贝公式"><span class="level-left"><span class="level-item">2</span><span class="level-item">功率比分贝公式</span></span></a></li><li><a class="level is-mobile" href="#补充对数函数的知识"><span class="level-left"><span class="level-item">3</span><span class="level-item">补充对数函数的知识</span></span></a></li><li><a class="level is-mobile" href="#建立功率与电压和电流的关系"><span class="level-left"><span class="level-item">4</span><span class="level-item">建立功率与电压和电流的关系</span></span></a></li><li><a class="level is-mobile" href="#推导电压分贝公式"><span class="level-left"><span class="level-item">5</span><span class="level-item">推导电压分贝公式</span></span></a></li><li><a class="level is-mobile" href="#推导电流分贝公式"><span class="level-left"><span class="level-item">6</span><span class="level-item">推导电流分贝公式</span></span></a></li><li><a class="level is-mobile" href="#电子学中的分贝总结"><span class="level-left"><span class="level-item">7</span><span class="level-item">电子学中的分贝总结</span></span></a></li><li><a class="level is-mobile" href="#分贝衍生的单位"><span class="level-left"><span class="level-item">8</span><span class="level-item">分贝衍生的单位</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/C-C-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">C/C++ 语言</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">Linux 操作系统</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Python-%E8%AF%AD%E8%A8%80/"><span class="level-start"><span class="level-item">Python 语言</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/UINIO-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%96%99/"><span class="level-start"><span class="level-item">UINIO 开源项目资料</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/Web-%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">Web 开发</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile" href="/categories/%E4%BA%A7%E4%B8%9A%E7%BB%8F%E6%B5%8E/"><span class="level-start"><span class="level-item">产业经济</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%A4%96%E8%A7%82%E4%B8%8E%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/"><span class="level-start"><span class="level-item">外观与结构设计</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9B%BA%E4%BB%B6/"><span class="level-start"><span class="level-item">嵌入式固件</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">开发环境配置</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="level-start"><span class="level-item">数学</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"><span class="level-start"><span class="level-item">版本管理</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/"><span class="level-start"><span class="level-item">生活日常</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="level-start"><span class="level-item">硬件电子技术</span></span><span class="level-end"><span class="level-item tag">31</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%8B%B1%E8%AF%AD/"><span class="level-start"><span class="level-item">英语</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><span class="level-start"><span class="level-item">软件工具</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Amplifier/"><img src="/Electronics/Amplifier/logo.png" alt="运算放大器 Op-Amp 基本应用与参数选型"></a></figure><div class="media-content"><p class="date"><time dateTime="2026-02-02T16:00:00.000Z">2026-02-03</time></p><p class="title"><a href="/Electronics/Amplifier/">运算放大器 Op-Amp 基本应用与参数选型</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Math/Decible/"><img src="/Math/Decible/logo.png" alt="电子学单位分贝 dB 的数学推导过程"></a></figure><div class="media-content"><p class="date"><time dateTime="2026-01-17T16:00:00.000Z">2026-01-18</time></p><p class="title"><a href="/Math/Decible/">电子学单位分贝 dB 的数学推导过程</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/IEEE1394/"><img src="/Electronics/IEEE1394/logo.png" alt="IEEE1394 FireWire 火线通信协议与 PHY 硬件设计"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-11-21T16:00:00.000Z">2025-11-22</time></p><p class="title"><a href="/Electronics/IEEE1394/">IEEE1394 FireWire 火线通信协议与 PHY 硬件设计</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/Cadence-Skill/"><img src="/Electronics/Cadence-Skill/logo.png" alt="Cadence SPB OrCAD/Allegro 设计技巧合集"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-09-27T16:00:00.000Z">2025-09-28</time></p><p class="title"><a href="/Electronics/Cadence-Skill/">Cadence SPB OrCAD/Allegro 设计技巧合集</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/Electronics/I2C/"><img src="/Electronics/I2C/logo.png" alt="内置集成电路总线协议 I²C 简明指南"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-09-05T16:00:00.000Z">2025-09-06</time></p><p class="title"><a href="/Electronics/I2C/">内置集成电路总线协议 I²C 简明指南</a></p><p class="categories"><a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/">硬件电子技术</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAD/"><span class="tag">CAD</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDA/"><span class="tag">EDA</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GCC-GDB/"><span class="tag">GCC/GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LaTeX/"><span class="tag">LaTeX</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MCU/"><span class="tag">MCU</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Make/"><span class="tag">Make</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdown/"><span class="tag">Markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PCB/"><span class="tag">PCB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python3/"><span class="tag">Python3</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Qt/"><span class="tag">Qt</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidity/"><span class="tag">Solidity</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tools/"><span class="tag">Tools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windows/"><span class="tag">Windows</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E6%95%B0/"><span class="tag">代数</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%BF%E7%9C%9F/"><span class="tag">仿真</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%85%83%E5%99%A8%E4%BB%B6/"><span class="tag">元器件</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tag">命令行</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"><span class="tag">密码学</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%84%E9%A2%91/"><span class="tag">射频</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-Linux/"><span class="tag">嵌入式 Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><span class="tag">开发规范</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"><span class="tag">微积分</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%8B%E6%9C%BA/"><span class="tag">手机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%A6%E7%BB%93%E6%9E%84/"><span class="tag">数学结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD/"><span class="tag">新概念英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82%E8%B0%88/"><span class="tag">杂谈</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%BD%E8%BD%A6/"><span class="tag">汽车</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E5%AD%90%E4%BB%AA%E5%99%A8/"><span class="tag">电子仪器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%9C%BA/"><span class="tag">电机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E6%BA%90/"><span class="tag">电源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E7%90%86%E8%AE%BA/"><span class="tag">电路理论</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="tag">网络协议</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%8A%AF%E7%89%87/"><span class="tag">芯片</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%80%9A%E4%BF%A1%E6%80%BB%E7%BA%BF/"><span class="tag">通信总线</span><span class="tag">4</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><p class="is-size-7"><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv" style="display:inline-block;margin:auto 0.5rem;">0</span>个访客</span></p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img src="/images/ICP.png"> 蜀 ICP 备 2021027760 号</a><p class="is-size-7">Copyright © 2025 <span>UinIO 电子技术实验室</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://unpkg.com/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://unpkg.com/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/js/math.js"></script><script id="MathJax-script" async src="/js/es5/tex-mml-chtml.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
