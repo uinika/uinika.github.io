@@ -1,0 +1,227 @@
+<h1 id="mathjax">MathJax</h1>
+<h2 id="beautiful-math-in-all-browsers">Beautiful math in all
+browsers</h2>
+<p><strong>Note:</strong> MathJax code development is performed in the
+<a href="https://github.com/mathjax/MathJax-src">MathJax-src</a>
+repository. This repository holds the packaged version of MathJax, along
+with the main issue tracker for MathJax bugs.</p>
+<p><img
+src="https://img.shields.io/github/v/release/mathjax/MathJax-src.svg?sort=semver"
+alt="GitHub release version" /> <img
+src="https://img.shields.io/github/package-json/v/mathjax/MathJax/legacy-v3.svg?label=release-v3"
+alt="GitHub release version (v3)" /> <img
+src="https://img.shields.io/github/package-json/v/mathjax/MathJax/legacy-v2.svg?label=release-v2"
+alt="GitHub release version (v2)" /> <img
+src="https://img.shields.io/npm/v/mathjax.svg?style=flat"
+alt="NPM version" /> <img
+src="https://flat.badgen.net/jsdelivr/rank/npm/mathjax?color=green"
+alt="jsdelivr rank" /> <img
+src="https://img.shields.io/jsdelivr/npm/hm/mathjax"
+alt="jsDelivr hits (npm)" /> <img
+src="https://img.shields.io/npm/dm/mathjax?label=npm"
+alt="npm monthly downloads (full)" /> <img
+src="https://img.shields.io/npm/dt/mathjax.svg?style=flat&amp;label=npm%20total"
+alt="npm total downloads" /></p>
+<p>MathJax is an open-source JavaScript display engine for LaTeX,
+MathML, and AsciiMath notation that works in all modern browsers, with
+built-in support for assistive technology like screen readers, including
+automatic speech generation and an expression explorer that can be used
+to investigate typeset mathematics on a more granular level than the
+complete expression. It requires no setup on the part of the user (no
+plugins to download or software to install), so the page author can
+write web documents that include mathematics and be confident that users
+will be able to view it naturally and easily. Simply include MathJax and
+some mathematics in a web page, and MathJax does the rest.</p>
+<p>Some of the main features of MathJax include:</p>
+<ul>
+<li><p>High-quality display of LaTeX, MathML, and AsciiMath notation in
+HTML pages</p></li>
+<li><p>Supported in most browsers with no plug-ins, extra fonts, or
+special setup for the reader</p></li>
+<li><p>Easy for authors, flexible for publishers, extensible for
+developers</p></li>
+<li><p>Supports math accessibility, cut-and-paste interoperability, and
+other advanced functionality</p></li>
+<li><p>Powerful API for integration with other web applications</p></li>
+</ul>
+<p>See <a href="http://www.mathjax.org/"
+class="uri">http://www.mathjax.org/</a> for additional details about
+MathJax, and <a href="https://docs.mathjax.org"
+class="uri">https://docs.mathjax.org</a> for the MathJax
+documentation.</p>
+<h2 id="mathjax-components">MathJax Components</h2>
+<p>MathJax uses files called <em>components</em> that contain the
+various MathJax modules that you can include in your web pages or access
+on a server through NodeJS. Some components combine all the pieces you
+need to run MathJax with one or more input formats and a particular
+output format, while other components are pieces that can be loaded on
+demand when needed, or by a configuration that specifies the pieces you
+want to combine in a custom way. For usage instructions, see the <a
+href="https://docs.mathjax.org">MathJax documentation</a>.</p>
+<p>Components provide a convenient packaging of MathJax's modules, but
+it is possible for you to form your own custom components, or to use
+MathJax's modules directly in a node application on a server. There are
+<a href="https://github.com/mathjax/MathJax-demos-web">web examples</a>
+showing how to use MathJax in web pages and how to build your own
+components, and <a
+href="https://github.com/mathjax/MathJax-demos-node">node examples</a>
+illustrating how to use components in node applications or call MathJax
+modules directly.</p>
+<h2 id="whats-in-this-repository">What's in this Repository</h2>
+<p>This repository contains only the component files for MathJax, not
+the source code for MathJax (which are available in a separate <a
+href="https://github.com/mathjax/MathJax-src/">MathJax source
+repository</a>). These component files are the ones served by the CDNs
+that offer MathJax to the web. In version 2, the files used on the web
+were also the source files for MathJax, but in version 3 and above, the
+source files are no longer on the CDN, as they are not what are run in
+the browser.</p>
+<p>The components are ES6 format as CommonJS modules.</p>
+<h2 id="installation-and-use">Installation and Use</h2>
+<h3 id="using-mathjax-components-from-a-cdn-on-the-web">Using MathJax
+components from a CDN on the web</h3>
+<p>If you are loading MathJax from a CDN into a web page, there is no
+need to install anything. Simply use a <code>script</code> tag that
+loads MathJax from the CDN. E.g.,</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js&quot;</span><span class="ot"> defer</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>See the <a
+href="https://docs.mathjax.org/en/latest/index.html#browser-components">MathJax
+documentation</a> and the <a
+href="https://github.com/mathjax/MathJax-demos-web">MathJax Web
+Demos</a>, and the <a
+href="https://github.com/mathjax/MathJax-demos-node">MathJax Node
+Demos</a> for more information.</p>
+<h3 id="hosting-your-own-copy-of-the-mathjax-components">Hosting your
+own copy of the MathJax Components</h3>
+<p>If you want to host MathJax from your own server, you can do so by
+installing the <code>mathjax</code> package using <code>npm</code> and
+moving the contents to an appropriate location on your server:</p>
+<pre><code>npm install mathjax@4
+mv node_modules/mathjax &lt;path-to-server-location&gt;/mathjax</code></pre>
+<p>Alternatively, you can get the files via GitHub:</p>
+<pre><code>git clone https://github.com/mathjax/MathJax.git mathjax
+mv mathjax &lt;path-to-server-location&gt;/mathjax</code></pre>
+<p>Then (in either case) you can use a script tag like the
+following:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">url-to-your-site&gt;/mathjax/tex-chtml.js&quot;</span><span class="ot"> defer</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>where <code>&lt;url-to-your-site&gt;</code> is replaced by the URL to
+the location where you moved the MathJax files above.</p>
+<p>See the <a
+href="https://docs.mathjax.org/en/latest/web/hosting.html">documentation</a>
+for details.</p>
+<h3 id="using-mathjax-components-in-a-node-application">Using MathJax
+components in a node application</h3>
+<p>To use MathJax components in a node application, install the
+<code>mathjax</code> package:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install mathjax@4</span></code></pre></div>
+<p>Then import <code>mathjax</code> within your application and
+initialize it:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> MathJax <span class="im">from</span> <span class="st">&#39;mathjax&#39;</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> MathJax<span class="op">.</span><span class="fu">init</span>({ <span class="op">...</span> })<span class="op">;</span></span></code></pre></div>
+<p>where <code>{ ... }</code> is the MathJax configuration you want to
+use. E.g.,</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> MathJax <span class="im">from</span> <span class="st">&#39;mathjax&#39;</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> MathJax<span class="op">.</span><span class="fu">init</span>({</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">loader</span><span class="op">:</span> {<span class="dt">load</span><span class="op">:</span> [<span class="st">&#39;input/tex&#39;</span><span class="op">,</span> <span class="st">&#39;output/svg&#39;</span>]}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> svg <span class="op">=</span> <span class="cf">await</span> MathJax<span class="op">.</span><span class="fu">tex2svgPromise</span>(<span class="st">&#39;</span><span class="sc">\\</span><span class="st">frac{1}{x^2-1}&#39;</span><span class="op">,</span> {<span class="dt">display</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(MathJax<span class="op">.</span><span class="at">startup</span><span class="op">.</span><span class="at">adaptor</span><span class="op">.</span><span class="fu">serializeXML</span>(svg))<span class="op">;</span></span></code></pre></div>
+<p>Alternatively, in an ES5 node application, you can use</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> MathJax <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;mathjax&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>MathJax<span class="op">.</span><span class="fu">init</span>({ <span class="op">...</span> })<span class="op">.</span><span class="fu">then</span>(() <span class="kw">=&gt;</span> { <span class="op">...</span> })<span class="op">;</span></span></code></pre></div>
+<p>where the first <code>{ ... }</code> is a MathJax configuration, and
+the second <code>{ ... }</code> is the code to run after MathJax has
+been loaded. E.g.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> MathJax <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;mathjax&#39;</span>)<span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>MathJax<span class="op">.</span><span class="fu">init</span>({</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">loader</span><span class="op">:</span> {<span class="dt">load</span><span class="op">:</span> [<span class="st">&#39;input/tex&#39;</span><span class="op">,</span> <span class="st">&#39;output/svg&#39;</span>]}</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>})<span class="op">.</span><span class="fu">then</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> svg <span class="op">=</span> MathJax<span class="op">.</span><span class="fu">tex2svg</span>(<span class="st">&#39;</span><span class="sc">\\</span><span class="st">frac{1}{x^2-1}&#39;</span><span class="op">,</span> {<span class="dt">display</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(MathJax<span class="op">.</span><span class="at">startup</span><span class="op">.</span><span class="at">adaptor</span><span class="op">.</span><span class="fu">serializeXML</span>(svg))<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">.</span><span class="fu">catch</span>((err) <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(err<span class="op">.</span><span class="at">message</span>))<span class="op">;</span></span></code></pre></div>
+<p><strong>Note:</strong> the technique in the two examples above is for
+node-based application only, not for browser applications. This method
+sets up an alternative DOM implementation, which you don't need in the
+browser, and it depends on node and the local file system in other ways.
+This setup will not work properly in the browser, even if you webpack it
+or use some other bundler.</p>
+<p>See the <a
+href="https://docs.mathjax.org/en/latest/index.html#server-nodejs">documentation</a>
+and the <a href="https://github.com/mathjax/MathJax-demos-node">MathJax
+Node Repository</a> for more details.</p>
+<h2 id="reducing-the-size-of-the-components-directory">Reducing the Size
+of the Components Directory</h2>
+<p>Since the MathJax package contains <em>all</em> the component files,
+so if you are only planning one use one configuration, you can reduce
+the size of the MathJax directory by removing unused components. For
+example, if you are using the <code>tex-chtml.js</code> component, then
+you can remove the <code>tex-mml-chtml.js</code>,
+<code>tex-svg.js</code>, <code>tex-mml-svg.js</code>, and the files
+ending in <code>-nofont.js</code>, which will save considerable space.
+Indeed, you should be able to remove everything other than
+<code>tex-chtml.js</code>, and the <code>input/tex/extensions</code>,
+<code>adaptors</code>, <code>a11y</code>, and <code>sre</code>
+directories. If you are using the results only on the web, you can
+remove <code>adaptors</code> as well. If you are using MathML input
+rather than TeX (e.g., <code>mml-chtml.js</code> rather than
+<code>tex-chtml.js</code>), then you can remove
+<code>input/tex/extensions</code> as well.</p>
+<p>If you are using a font other than the default
+<code>mathjax-newcm</code> font in a node application, then you will
+need to install that font as well. E.g.,</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install @mathjax/mathjax-stix2-font@4</span></code></pre></div>
+<p>to install the <code>mathjax-stix2</code> font locally. On the web,
+MathJax will look for the font and its dynamic ranges on the
+<code>cdn.jsdelivr.net</code> CDN service, so if you want to use the
+font from your own server, you will need to configure the path to the
+font. For example:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>MathJax <span class="op">=</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">loader</span><span class="op">:</span> {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">paths</span><span class="op">:</span> {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;mathjax-stix2&#39;</span><span class="op">:</span> <span class="st">&#39;&lt;url-to-your-server&gt;/mathjax-stix2-font&#39;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>to set the location for the <code>mathjax-stix2</code> font to a URL
+on your server.</p>
+<h2 id="the-component-files-and-pull-requests">The Component Files and
+Pull Requests</h2>
+<p>The contents of this repository are generated automatically, so you
+should not submit pull requests that modify this repository. If you wish
+to submit a modification to MathJax, you should make a pull request in
+the <a href="https://github.com/mathjax/MathJax-src">MathJax source
+repository</a>.</p>
+<h2 id="mathjax-community">MathJax Community</h2>
+<p>The main MathJax website is <a href="http://www.mathjax.org"
+class="uri">http://www.mathjax.org</a>, and it includes announcements
+and other important information. A <a
+href="http://groups.google.com/group/mathjax-users">MathJax user
+forum</a> for asking questions and getting assistance is hosted at
+Google, and the <a
+href="https://github.com/mathjax/MathJax/issues">MathJax bug tracker</a>
+is hosted at GitHub.</p>
+<p>Before reporting a bug, please check that it has not already been
+reported. Also, please use the bug tracker (rather than the help forum)
+for reporting bugs, and use the user's forum (rather than the bug
+tracker) for questions about how to use MathJax.</p>
+<h2 id="mathjax-resources">MathJax Resources</h2>
+<ul>
+<li><a href="https://docs.mathjax.org">MathJax Documentation</a></li>
+<li><a href="https://github.com/mathjax/MathJax">MathJax
+Components</a></li>
+<li><a href="https://github.com/mathjax/MathJax-src">MathJax Source
+Code</a></li>
+<li><a href="https://github.com/mathjax/MathJax-demos-web">MathJax Web
+Examples</a></li>
+<li><a href="https://github.com/mathjax/MathJax-demos-node">MathJax Node
+Examples</a></li>
+<li><a href="https://github.com/mathjax/MathJax/issues">MathJax Bug
+Tracker</a></li>
+<li><a href="http://groups.google.com/group/mathjax-users">MathJax
+Users' Group</a></li>
+</ul>
