@@ -108,8 +108,7 @@ function loadInsight(config, translation) {
       case 'PAGES':
         $searchItems = array.map((item) => {
           const title = findAndHighlight(item.title, keywords);
-          const text = findAndHighlight(item.text, keywords, 100);
-          return searchItem('file', title, null, text, item.link);
+          return searchItem('file', title, null, null, item.link);
         });
         break;
       case 'CATEGORIES':
@@ -165,10 +164,10 @@ function loadInsight(config, translation) {
   function filterFactory(keywords) {
     return {
       post: function (obj) {
-        return filter(keywords, obj, ['title', 'text']);
+        return filter(keywords, obj, ['title']);
       },
       page: function (obj) {
-        return filter(keywords, obj, ['title', 'text']);
+        return filter(keywords, obj, ['title']);
       },
       category: function (obj) {
         return filter(keywords, obj, ['name', 'slug']);
@@ -202,10 +201,10 @@ function loadInsight(config, translation) {
   function weightFactory(keywords) {
     return {
       post: function (obj) {
-        return weight(keywords, obj, ['title', 'text'], [3, 1]);
+        return weight(keywords, obj, ['title'], [3]);
       },
       page: function (obj) {
-        return weight(keywords, obj, ['title', 'text'], [3, 1]);
+        return weight(keywords, obj, ['title'], [3]);
       },
       category: function (obj) {
         return weight(keywords, obj, ['name', 'slug'], [1, 1]);
