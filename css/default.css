@@ -12483,6 +12483,9 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
   background: #a38272;
   text-decoration: none;
 }
+.section .container .columns .card .card-content .menu ul.menu-list li a .tag {
+  background: #e2d8d3;
+}
 .section .container .columns .card .card-content .menu ul.menu-list li ul {
   margin: 0.2em;
 }
