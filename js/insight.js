@@ -31,49 +31,50 @@ function loadInsight(config, translation) {
     if (!Array.isArray(matches) || !matches.length || !text) {
       return maxlen ? text.slice(0, maxlen) : text;
     }
-    const testText = text.toLowerCase();
-    const indices = matches
-      .map((match) => {
-        const index = testText.indexOf(match.toLowerCase());
-        if (!match || index === -1) {
-          return null;
-        }
-        return [index, index + match.length];
-      })
-      .filter((match) => {
-        return match !== null;
-      })
-      .sort((a, b) => {
-        return a[0] - b[0] || a[1] - b[1];
-      });
 
-    if (!indices.length) {
+    const testText = text.toLowerCase();
+    let allIndices = [];
+
+    /* 遍历所有关键词，收集所有匹配位置*/
+    matches.forEach((match) => {
+      const keyword = match.toLowerCase();
+      let index = testText.indexOf(keyword);
+
+      /* 处理关键词多次出现的情况（比如标题中多次出现同一关键词）*/
+      while (index !== -1) {
+        allIndices.push([index, index + keyword.length]);
+        index = testText.indexOf(keyword, index + keyword.length);
+      }
+    });
+
+    if (!allIndices.length) {
       return text;
     }
 
-    let result = '';
-    let last = 0;
-    const ranges = merge(indices);
-    const sumRange = [ranges[0][0], ranges[ranges.length - 1][1]];
-    if (maxlen && maxlen < sumRange[1]) {
-      last = sumRange[0];
-    }
+    /* 合并重叠/相邻的匹配区间（避免重复标红）*/
+    allIndices = allIndices.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    const mergedRanges = merge(allIndices);
 
-    for (let i = 0; i < ranges.length; i++) {
-      const range = ranges[i];
-      result += text.slice(last, Math.min(range[0], sumRange[0] + maxlen));
-      if (maxlen && range[0] >= sumRange[0] + maxlen) {
-        break;
+    let result = '';
+    let last = 0; // 从文本开头开始截取，保留关键词前内容
+
+    /* 遍历所有匹配区间，逐段拼接+高亮 */
+    mergedRanges.forEach((range, i) => {
+      const [start, end] = range;
+      result += text.slice(last, start); // 拼接当前区间前的普通文本
+      result += `<em>${text.slice(start, end)}</em>`; // 高亮当前区间的文本
+      last = end;
+
+      /* 处理最大长度限制（仅正文预览用，标题传maxlen=null）*/
+      if (maxlen && last >= maxlen) {
+        result += text.slice(end, maxlen) + '...';
+        return false; // 终止循环
       }
-      result += '<em>' + text.slice(range[0], range[1]) + '</em>';
-      last = range[1];
-      if (i === ranges.length - 1) {
-        if (maxlen) {
-          result += text.slice(range[1], Math.min(text.length, sumRange[0] + maxlen + 1));
-        } else {
-          result += text.slice(range[1]);
-        }
-      }
+    });
+
+    /* 拼接最后一个匹配区间后的文本 */
+    if (!maxlen || last < maxlen) {
+      result += text.slice(last);
     }
 
     return result;
