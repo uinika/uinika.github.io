@@ -12295,28 +12295,28 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a::before {
   font-size: 1.5rem;
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(1)::before {
-  content: '\e3af';
+  content: '\f015';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(2)::before {
   content: '\f802';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(3)::before {
-  content: '\f0b1';
+  content: '\f03a';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(4)::before {
   content: '\f02c';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(5)::before {
-  content: '\e3d9';
-}
-nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(6)::before {
-  content: '\f63f';
-}
-nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(7)::before {
   content: '\f09b';
 }
+nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(6)::before {
+  content: '\e863';
+}
+nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(7)::before {
+  content: '\f1ec';
+}
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(8)::before {
-  content: '\f1d3';
+  content: '\f7d9';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(9)::before {
   content: '\f2db';
@@ -12427,17 +12427,26 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
 .section .container .columns .column-main .card.widget .menu .field .control span {
   font-size: 1rem !important;
 }
-.section .container .columns [data-type='profile'] [title='RSS'] {
+.section .container .columns [data-type='profile'] [title] {
   font-size: 1.8rem;
+  border: 1px solid;
+  margin: 0.31rem !important;
+}
+.section .container .columns [data-type='profile'] [title]:hover {
+  background: #ded1c7;
+  text-decoration: none !important;
+}
+.section .container .columns [data-type='profile'] [title='RSS'] {
   color: #f68422;
 }
 .section .container .columns [data-type='profile'] [title='IT 圈'] {
-  font-size: 1.8rem;
   color: #07c160;
 }
 .section .container .columns [data-type='profile'] [title='E-Mail'] {
-  font-size: 1.8rem;
   color: #0078d4;
+}
+.section .container .columns [data-type='profile'] [title='Bilibili'] {
+  color: #ff699a;
 }
 .section .container .columns .card {
   animation: zoomIn;
