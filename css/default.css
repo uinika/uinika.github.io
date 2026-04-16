@@ -12313,15 +12313,18 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(
   content: '\e863';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(7)::before {
-  content: '\f1ec';
-}
-nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(8)::before {
-  content: '\f7d9';
-}
-nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(9)::before {
   content: '\f2db';
 }
+nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(8)::before {
+  content: '\f1ec';
+}
+nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(9)::before {
+  content: '\f287';
+}
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(10)::before {
+  content: '\f7d9';
+}
+nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-start a:nth-child(11)::before {
   content: '\f4fb';
 }
 nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
@@ -12431,6 +12434,7 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
   font-size: 1.8rem;
   border: 1px solid;
   margin: 0.31rem !important;
+  padding: 1rem !important;
 }
 .section .container .columns [data-type='profile'] [title]:hover {
   background: #ded1c7;
