@@ -12440,17 +12440,17 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
   background: #ded1c7;
   text-decoration: none !important;
 }
-.section .container .columns [data-type='profile'] [title='RSS'] {
-  color: #f68422;
-}
 .section .container .columns [data-type='profile'] [title='IT 圈'] {
   color: #07c160;
 }
-.section .container .columns [data-type='profile'] [title='E-Mail'] {
-  color: #0078d4;
-}
 .section .container .columns [data-type='profile'] [title='Bilibili'] {
   color: #ff699a;
+}
+.section .container .columns [data-type='profile'] [title='RSS'] {
+  color: #ff6d2c;
+}
+.section .container .columns [data-type='profile'] [title='E-Mail'] {
+  color: #0078d4;
 }
 .section .container .columns .card {
   animation: zoomIn;
