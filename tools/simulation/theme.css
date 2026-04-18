@@ -1,20 +1,50 @@
-
 .gwt-MenuBar.gwt-MenuBar-horizontal {
-    background: #A38272;
-    border: #A38272;
+  background: #A38272;
+  border: #A38272;
+  font-size: 1rem !important;
 }
+
+.menuPopupContent td.gwt-MenuItem:hover {
+  background: #A38272;
+  color: white;
+}
+
+gwt-MenuItem gwt-MenuItem-selected
 
 .verticalPanel {
   background: #E2D8D3;
 }
 
 .verticalPanel button {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  display: block;
+  margin: 2rem auto;
+}
+
+.gwt-Label {
+  margin-left: 0.5rem;
+}
+
+.verticalPanel .gwt-Label {
   margin-left: 1rem;
 }
 
-.verticalPanel table tbody tr {
-  display: block;
-  padding-top: 0.5rem;;
+div[class="gwt-Label"] {
+  color: #8C634F;
+  font-weight: bold;
+  font-size: 1.1rem;;
 }
+
+#painel .topButton {
+ background-color: #A38272;
+ color: white;
+ margin-left: 0.9rem;
+ padding: 0.5rem;
+}
+
+#painel .topButton-red {
+ background-color: rgb(190, 100, 100);
+ color: white;
+ margin-left: 0.9rem;
+ padding: 0.5rem;
+}
+
