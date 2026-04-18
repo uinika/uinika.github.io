@@ -1,18 +1,21 @@
 .gwt-MenuBar.gwt-MenuBar-horizontal {
-  background: #A38272;
-  border: #A38272;
+  background: #a38272;
+  border: #a38272;
   font-size: 1rem !important;
 }
 
 .menuPopupContent td.gwt-MenuItem:hover {
-  background: #A38272;
+  background: #a38272;
   color: white;
 }
 
-gwt-MenuItem gwt-MenuItem-selected
+.gwt-MenuBar .gwt-MenuItem-selected {
+  background: #8c634f !important;
+  color: white !important;
+}
 
 .verticalPanel {
-  background: #E2D8D3;
+  background: #e2d8d3;
 }
 
 .verticalPanel button {
@@ -29,22 +32,25 @@ gwt-MenuItem gwt-MenuItem-selected
 }
 
 div[class="gwt-Label"] {
-  color: #8C634F;
+  color: #8c634f;
   font-weight: bold;
-  font-size: 1.1rem;;
+  font-size: 1.1rem;
+}
+
+:has(> .gwt-Label) {
+  background-color: #e2d8d3 !important;
 }
 
 #painel .topButton {
- background-color: #A38272;
- color: white;
- margin-left: 0.9rem;
- padding: 0.5rem;
+  background-color: #a38272;
+  color: white;
+  margin-left: 0.9rem;
+  padding: 0.5rem;
 }
 
 #painel .topButton-red {
- background-color: rgb(190, 100, 100);
- color: white;
- margin-left: 0.9rem;
- padding: 0.5rem;
+  background-color: rgb(190, 100, 100);
+  color: white;
+  margin-left: 0.9rem;
+  padding: 0.5rem;
 }
-
