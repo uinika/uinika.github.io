@@ -1,12 +1,13 @@
+/* For index.html */
 .gwt-MenuBar.gwt-MenuBar-horizontal {
-  background: #a38272;
   border: #a38272;
+  background: #a38272;
   font-size: 1rem !important;
 }
 
 .menuPopupContent td.gwt-MenuItem:hover {
-  background: #a38272;
   color: white;
+  background: #a38272;
 }
 
 .gwt-MenuBar .gwt-MenuItem-selected {
@@ -31,14 +32,10 @@
   margin-left: 1rem;
 }
 
-div[class="gwt-Label"] {
+#painel div[class="gwt-Label"] {
   color: #8c634f;
   font-weight: bold;
   font-size: 1.1rem;
-}
-
-:has(> .gwt-Label) {
-  background-color: #e2d8d3 !important;
 }
 
 #painel .topButton {
@@ -53,4 +50,29 @@ div[class="gwt-Label"] {
   color: white;
   margin-left: 0.9rem;
   padding: 0.5rem;
+}
+ 
+/* For iframe.html */
+.button {
+  display: block;
+  font-size: 1rem;
+  margin: 0 auto;
+  padding: 0.4rem 1rem;
+  border-radius: 0.3rem;
+  color: white;
+  background: #a38272;
+  border: 1px solid #8c634f;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  font-family: "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", "sans-serif";
+}
+.button div {
+  white-space: nowrap;
+}
+.button:hover {
+  background: #b49181;
+  border-color: #8c634f;
+}
+.button:active {
+  background: #8c634f;
 }

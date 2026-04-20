@@ -12543,6 +12543,12 @@ nav.navbar.navbar-main .navbar-container .navbar-menu .navbar-end .search {
   justify-content: center;
   order: 2;
 }
+.section .container .columns .column-main .article .article-meta .level-item a.link-muted {
+  font-weight: bolder;
+}
+.section .container .columns .column-main .article .article-meta .level-item a.link-muted:hover {
+  color: #8c634f !important;
+}
 .section .container .columns .column-main .article .content {
   font-size: 16px;
   order: 3;
