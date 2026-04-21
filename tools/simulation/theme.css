@@ -38,6 +38,16 @@
   font-size: 1.1rem;
 }
 
+div:has(> .gwt-Label) {
+  border-color: #e2d8d3 !important;
+  background-color: #e2d8d3 !important;
+}
+
+input::selection {
+  color: white;
+  background-color: #8c634f;
+}
+
 #painel .topButton {
   background-color: #a38272;
   color: white;
@@ -51,7 +61,7 @@
   margin-left: 0.9rem;
   padding: 0.5rem;
 }
- 
+
 /* For iframe.html */
 .button {
   display: block;
