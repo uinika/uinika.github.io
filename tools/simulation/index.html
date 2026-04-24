@@ -25,7 +25,7 @@
         align-items: center;
         justify-content: center;
         gap: 16px;
-        z-index: 999999;
+        z-index: 9999999;
       "
     >
       <style>
@@ -34,7 +34,7 @@
             transform: rotate(360deg);
           }
         }
-        .loader-spin {
+        .loader {
           width: 50px;
           height: 50px;
           border: 5px solid #ded1c7;
@@ -43,7 +43,7 @@
           animation: spin 0.8s linear infinite;
         }
       </style>
-      <div class="loader-spin"></div>
+      <div class="loader"></div>
       <div style="color: #8c634f; font-size: 1.2rem">
         请稍后，正在加载电路仿真资源 ...
       </div>
@@ -53,18 +53,22 @@
       function hideLoading() {
         if (!loading) return;
         loading.style.opacity = 0;
-        loading.style.transition = "opacity 0.5s";
+        loading.style.transition = "opacity 0.5s ease";
         setTimeout(() => loading.remove(), 500);
       }
-      function waitForCircuitJSReady() {
-        if (window.circuitjs1 || document.getElementById("canvas")) {
-          hideLoading();
+      function waitForCircuitJSLoad() {
+        const iframe = document.getElementById("circuitjs1");
+        const hasCanvas =
+          document.querySelector("canvas") ||
+          document.getElementById("gwt_main");
+        if (iframe && (hasCanvas || document.readyState === "complete")) {
+          setTimeout(hideLoading, 200);
           return;
         }
-        setTimeout(waitForCircuitJSReady, 100);
+        setTimeout(waitForCircuitJSLoad, 100);
       }
-      waitForCircuitJSReady();
-      setTimeout(hideLoading, 10000);
+      waitForCircuitJSLoad();
+      setTimeout(hideLoading, 15000);
     </script>
 
     <!-- Global Style Sheet -->
