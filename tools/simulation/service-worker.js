@@ -2,7 +2,7 @@ const CACHE_NAME = 'circuitjs1-app-cache-v1';
 const urlsToCache = [
   './about.html',
   './canvas2svg.js',
-  './circuitjs.html',
+  './index.html',
   './crystal.html',
   './customfunction.html',
   './customlogic.html',
@@ -13,10 +13,8 @@ const urlsToCache = [
   './iframe.html',
   './lz-string.min.js',
   './manifest.json',
-  './mexle.html',
   './mosfet-beta.html',
   './opampreal.html',
-  './split.js',
   './subcircuits.html',
   // put everything else here
 ];

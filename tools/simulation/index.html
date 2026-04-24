@@ -49,24 +49,25 @@
         }
       </style>
       <div class="loader-spin"></div>
-      <div style="color: #8c634f; font-size: 15px; letter-spacing: 1px">
+      <div style="color: #8c634f; font-size: 1rem; letter-spacing: 1px">
         请稍等，正在加载电路仿真资源...
       </div>
     </div>
     <script>
-      const loadingDom = document.getElementById("pageLoading");
-      
-      window.addEventListener("load", () => {
-        loadingDom.style.opacity = "0";
-        setTimeout(() => {
-          loadingDom.style.visibility = "hidden"; // 页面资源加载完成之后关闭动画
-        }, 500);
-      });
-      
-      setTimeout(() => {
-        loadingDom.style.opacity = "0";
-        setTimeout(() => (loadingDom.style.visibility = "hidden"), 500);
-      }, 30000); // 30 秒之后强制关闭动画
+      // 最可靠方案：DOM 完全解析 + 所有资源加载完毕 双保险
+      const loading = document.getElementById("pageLoading");
+
+      function hideLoading() {
+        loading.style.opacity = 0;
+        setTimeout(() => loading.remove(), 500);
+      }
+
+      // ✅ 核心：window.onload 会等待 所有 CSS / JS / 图片 / 字体 全部加载完成
+      // 这是浏览器原生保证，绝对不会提前触发
+      window.addEventListener("load", hideLoading);
+
+      // ✅ 兜底：防止极端情况卡住
+      setTimeout(hideLoading, 12000);
     </script>
 
     <!-- Global Style Sheet -->
