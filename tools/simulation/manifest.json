@@ -1,11 +1,11 @@
 {
-  "name": "CircuitJS1",
-  "short_name": "CircuitJS1",
+  "name": "UinIO.com 在线电路仿真",
+  "short_name": "UinIO Lab",
   "start_url": "/circuit/circuitjs.html",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#2196f3",
-  "description": "Circuit Simulator",
+  "theme_color": "#8c634f",
+  "description": "一款运行在 UinIO.com 的在线电路仿真工具",
   "icons": [
     {
       "src": "./icon512.png",
@@ -19,4 +19,3 @@
     }
   ]
 }
-
