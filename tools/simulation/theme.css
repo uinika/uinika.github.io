@@ -10,6 +10,10 @@
   background: #a38272;
 }
 
+.gwt-MenuBar > table {
+  margin-left: 0.2rem;
+}
+
 .gwt-MenuBar .gwt-MenuItem-selected {
   background: #8c634f !important;
   color: white !important;
@@ -26,6 +30,13 @@
 
 .gwt-Label {
   margin-left: 0.5rem;
+  border: 1px solid #DED1C7;
+}
+
+.gwt-Label:hover {
+  color:#8c634f !important;
+  border: 1px solid #8c634f;
+  border-radius: 0.3rem;
 }
 
 .verticalPanel .gwt-Label {
