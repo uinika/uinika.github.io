@@ -50,11 +50,10 @@
       </style>
       <div class="loader-spin"></div>
       <div style="color: #8c634f; font-size: 1rem; letter-spacing: 1px">
-        请稍等，正在加载电路仿真资源...
+        请稍等，正在加载在线电路仿真资源...
       </div>
     </div>
     <script>
-      // 终极可靠：等待页面 100% 完全就绪后关闭 loading
       function hideLoading() {
         let el = document.getElementById("pageLoading");
         if (el) {
@@ -63,15 +62,10 @@
           setTimeout(() => el.remove(), 500);
         }
       }
-
-      // 核心：等待所有静态资源 + 仿真引擎完全加载
       window.addEventListener("load", function () {
-        // 额外延迟 200ms 确保画布/仿真程序完全渲染
         setTimeout(hideLoading, 200);
       });
-
-      // 兜底保险
-      setTimeout(hideLoading, 8000);
+      setTimeout(hideLoading, 15000);
     </script>
 
     <!-- Global Style Sheet -->
