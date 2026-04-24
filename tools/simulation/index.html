@@ -19,7 +19,7 @@
       style="
         position: fixed;
         inset: 0;
-        background: #E2D8D3;
+        background: #e2d8d3;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -37,41 +37,33 @@
         .loader-spin {
           width: 50px;
           height: 50px;
-          border: 5px solid #DED1C7;
+          border: 5px solid #ded1c7;
           border-top: 5px solid #8c634f;
           border-radius: 50%;
           animation: spin 0.8s linear infinite;
         }
       </style>
       <div class="loader-spin"></div>
-      <div style="color: #8c634f; font-size: 1.2rem">请稍后，正在加载电路仿真资源...</div>
+      <div style="color: #8c634f; font-size: 1.2rem">
+        请稍后，正在加载电路仿真资源 ...
+      </div>
     </div>
-
     <script>
       const loading = document.getElementById("pageLoading");
-
       function hideLoading() {
         if (!loading) return;
         loading.style.opacity = 0;
         loading.style.transition = "opacity 0.5s";
         setTimeout(() => loading.remove(), 500);
       }
-
-      // 监听 GWT / CircuitJS 异步模块加载完成
       function waitForCircuitJSReady() {
-        // 检查核心仿真对象是否初始化
         if (window.circuitjs1 || document.getElementById("canvas")) {
           hideLoading();
           return;
         }
-        // 每100ms检查一次
         setTimeout(waitForCircuitJSReady, 100);
       }
-
-      // 启动监听
       waitForCircuitJSReady();
-
-      // 兜底 10 秒强制关闭
       setTimeout(hideLoading, 10000);
     </script>
 
