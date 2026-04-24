@@ -1,7 +1,7 @@
 {
   "name": "UinIO.com 在线电路仿真",
   "short_name": "UinIO Lab",
-  "start_url": "/circuit/circuitjs.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#8c634f",
