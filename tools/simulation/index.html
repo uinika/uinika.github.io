@@ -39,16 +39,16 @@
     </div>
   </div>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    window.onload = function () {
       const loading = document.getElementById('pageLoading');
       if (loading) {
         loading.style.transition = 'opacity 0.6s ease';
         loading.style.opacity = '0';
         setTimeout(() => {
           loading.style.display = 'none';
-        }, 1000);
+        }, 800);
       }
-    });
+    };
   </script>
 
   <!-- Global Style Sheet -->
