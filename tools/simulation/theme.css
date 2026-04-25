@@ -34,9 +34,10 @@
 }
 
 .gwt-Label:hover {
-  color:#8c634f !important;
+  color:white !important;
+  background: #a38272;
+  border-radius: 0.2rem;
   border: 1px solid #8c634f;
-  border-radius: 0.3rem;
 }
 
 .verticalPanel .gwt-Label {

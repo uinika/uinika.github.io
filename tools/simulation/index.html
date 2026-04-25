@@ -1,252 +1,244 @@
 <!doctype html>
 <html>
-  <head>
-    <link rel="manifest" href="./manifest.json" />
 
-    <!-- Properties can be specified to influence deferred binding -->
-    <meta charset="UTF-8" />
-    <meta name="gwt:property" content="locale=en_UK" />
-    <link rel="icon" href="../../images/avatar.png" type="image/png" />
+<head>
+  <link rel="manifest" href="./manifest.json" />
 
-    <!-- Titles are optional, but useful -->
-    <title></title>
-    <link rel="stylesheet" href="./theme.css" />
-    <script src="./canvas2svg.js"></script>
+  <!-- Properties can be specified to influence deferred binding -->
+  <meta charset="UTF-8" />
+  <meta name="gwt:property" content="locale=en_UK" />
+  <link rel="icon" href="../../images/avatar.png" type="image/png" />
 
-    <!-- Page loading animation -->
-    <div
-      id="pageLoading"
-      style="
-        position: fixed;
-        inset: 0;
-        background: #e2d8d3;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        z-index: 9999999;
-      "
-    >
-      <style>
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        .loader {
-          width: 50px;
-          height: 50px;
-          border: 5px solid #ded1c7;
-          border-top: 5px solid #8c634f;
-          border-radius: 50%;
-          animation: spin 0.8s linear infinite;
-        }
-      </style>
-      <div class="loader"></div>
-      <div style="color: #8c634f; font-size: 1.2rem">
-        请稍后，正在加载电路仿真资源 ...
-      </div>
-    </div>
-    <script>
-      const loading = document.getElementById("pageLoading");
-      function hideLoading() {
-        if (!loading) return;
-        loading.style.opacity = 0;
-        loading.style.transition = "opacity 0.5s ease";
-        setTimeout(() => loading.remove(), 500);
-      }
-      function waitForCircuitJSLoad() {
-        const iframe = document.getElementById("circuitjs1");
-        const hasCanvas =
-          document.querySelector("canvas") ||
-          document.getElementById("gwt_main");
-        if (iframe && (hasCanvas || document.readyState === "complete")) {
-          setTimeout(hideLoading, 200);
-          return;
-        }
-        setTimeout(waitForCircuitJSLoad, 100);
-      }
-      waitForCircuitJSLoad();
-      setTimeout(hideLoading, 15000);
-    </script>
+  <!-- Titles are optional, but useful -->
+  <title></title>
+  <link rel="stylesheet" href="./theme.css" />
+  <script src="./canvas2svg.js"></script>
 
-    <!-- Global Style Sheet -->
+  <!-- Page loading animation -->
+  <div id="pageLoading"
+    style="position: fixed;inset: 0;background: #e2d8d3;display: flex;flex-direction: column;align-items: center;justify-content: center;gap: 16px;z-index: 9999999;">
     <style>
-      .disabled {
-      	color: lightgray
-      }
-      .topSpace {
-      	margin-top: 12px;
-      }
-      .cursorPointer {
-         cursor: default;
-      }
-      .cursorCross {
-         cursor: crosshair;
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
       }
 
-      .cursorSplitter {
-         cursor: row-resize;
-      }
-
-      .gwt-MenuItem-disabled {
-      	color: lightgray;
-      }
-      .offScreen {
-      	position: absolute;
-      	right: 101%;
-      	overflow: hidden;
-      }
-      .gwt-Frame{
-      	scrolling="no";
-      	border: 0px !important;
-      }
-
-      .gwt-MenuItem {
-      	font-size: 14px !important;
-      }
-
-      .gwt-MenuBar-horizontal {
-      	font-size: 12px !important;
-      	}
-
-      .gwt-Label-selected {
-      	font-size: 1.3em;
-      	font-weight: 700;
-      	border-top: 1px solid black;
-      	border-bottom: 1px solid black;
-      }
-      .gwt-Label-1off {
-      	color: DarkGray;
-      }
-
-      .gwt-Label-2off {
-      	font-size:0.8em;
-      	color: LightGray;
-      }
-
-      .gwt-Button.chbut {
-      	padding:3px;
-      	margin: 3px;
-      }
-
-      .gwt-Button.chbut.chsel {
-      	font-weight: bold;
-      }
-
-      .gwt-Button.chbut-black {
-      	background: black;
-      	color: white;
-      }
-
-      .gwt-Button.chbut-white {
-      	background: white;
-      	color: black;
-      }
-
-      .gwt-TextBox.scalebox {
-      	width: 100px;
-      }
-
-      .gwt-Button.expand-but {
-      	line-height: 0;
-      	font-size: 13px;
-      	margin-right: 5px;
-      	border-radius:0px;
-      	display: inline-block;
-      	text-align: center;
-      	width: 15px;
-      	height: 15px;
-      	padding-left: 0;
-      	padding-right: 0;
-      	padding-bottom:1px;
-      	padding-top:0;
-      	margin-bottom:1px;
-      	background:gray;
-      	color:white;
-      }
-
-
-      .topButton-red {
-          margin-top: 5px;
-          margin-bottom: 5px;
-          margin-left:5px;
-          padding: 5px 7px;
-          text-decoration: none;
-          color: #ffffff;
-          cursor: pointer;
-          cursor: hand;
-          font-size: small;
-          background-color: #ff0000;
-          border: 1px solid #bbb;
-          border-bottom: 1px solid #a0a0a0;
-          border-radius: 3px;
-          -moz-border-radius: 3px;
-      }
-
-      .topButton {
-          margin-top: 5px;
-          margin-bottom: 5px;
-          margin-left:5px;
-          padding: 5px 7px;
-          text-decoration: none;
-          cursor: pointer;
-          cursor: hand;
-          font-size: small;
-          background-color: #e7e7e7;
-          border: 1px solid #bbb;
-          border-bottom: 1px solid #a0a0a0;
-          border-radius: 3px;
-          -moz-border-radius: 3px;
-      }
-
-      .radioPanel label {
-      	margin-right: 15px;
+      .loader {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #ded1c7;
+        border-top: 5px solid #8c634f;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
       }
     </style>
-
-    <link rel="stylesheet" href="font/fontello.css" />
-  </head>
-  <body>
-    <!-- Include the next line to allow support for dropbox import/export. You will need your own app key. -->
-    <!--<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="YOUR_KEY"></script>-->
-
-    <script language="javascript" src="lz-string.min.js"></script>
-
-    <!-- This script tag is what actually loads the GWT module.  The -->
-    <!-- 'nocache.js' file (also called a "selection script") is     -->
-    <!-- produced by the GWT compiler in the module output directory -->
-    <!-- or generated automatically in development mode.             -->
-    <script
-      language="javascript"
-      src="circuitjs1/circuitjs1.nocache.js"
-    ></script>
-
-    <!-- Include a history iframe to enable full GWT history support -->
-    <!-- (the id must be exactly as shown)                           -->
-    <iframe
-      src="javascript:''"
-      id="__gwt_historyFrame"
-      style="width: 0; height: 0; border: 0"
-    ></iframe>
-
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("service-worker.js")
-            .then((registration) => {
-              console.log(
-                "Service Worker registered with scope:",
-                registration.scope,
-              );
-            })
-            .catch((error) => {
-              console.error("Service Worker registration failed:", error);
-            });
-        });
+    <div class="loader"></div>
+    <div style="color: #8c634f; font-size: 1.1rem">
+      请稍后，正在加载电路仿真资源 ...
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let checkTimer = setInterval(() => {
+        if (window.circuitjs1) {
+          clearInterval(checkTimer);
+          closeLoading();
+        }
+      }, 50);
+      setTimeout(() => {
+        clearInterval(checkTimer);
+        closeLoading();
+      }, 10000);
+      function closeLoading() {
+        const loading = document.getElementById("pageLoading");
+        if (!loading) return;
+        loading.style.transition = "opacity 0.6s ease";
+        loading.style.opacity = "0";
+        setTimeout(() => {
+          loading.style.display = "none";
+        }, 800);
       }
-    </script>
-  </body>
+    });
+  </script>
+
+  <!-- Global Style Sheet -->
+  <style>
+    .disabled {
+      color: lightgray
+    }
+
+    .topSpace {
+      margin-top: 12px;
+    }
+
+    .cursorPointer {
+      cursor: default;
+    }
+
+    .cursorCross {
+      cursor: crosshair;
+    }
+
+    .cursorSplitter {
+      cursor: row-resize;
+    }
+
+    .gwt-MenuItem-disabled {
+      color: lightgray;
+    }
+
+    .offScreen {
+      position: absolute;
+      right: 101%;
+      overflow: hidden;
+    }
+
+    .gwt-Frame {
+      scrolling="no";
+      border: 0px !important;
+    }
+
+    .gwt-MenuItem {
+      font-size: 14px !important;
+    }
+
+    .gwt-MenuBar-horizontal {
+      font-size: 12px !important;
+    }
+
+    .gwt-Label-selected {
+      font-size: 1.3em;
+      font-weight: 700;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    .gwt-Label-1off {
+      color: DarkGray;
+    }
+
+    .gwt-Label-2off {
+      font-size: 0.8em;
+      color: LightGray;
+    }
+
+    .gwt-Button.chbut {
+      padding: 3px;
+      margin: 3px;
+    }
+
+    .gwt-Button.chbut.chsel {
+      font-weight: bold;
+    }
+
+    .gwt-Button.chbut-black {
+      background: black;
+      color: white;
+    }
+
+    .gwt-Button.chbut-white {
+      background: white;
+      color: black;
+    }
+
+    .gwt-TextBox.scalebox {
+      width: 100px;
+    }
+
+    .gwt-Button.expand-but {
+      line-height: 0;
+      font-size: 13px;
+      margin-right: 5px;
+      border-radius: 0px;
+      display: inline-block;
+      text-align: center;
+      width: 15px;
+      height: 15px;
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 1px;
+      padding-top: 0;
+      margin-bottom: 1px;
+      background: gray;
+      color: white;
+    }
+
+
+    .topButton-red {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      padding: 5px 7px;
+      text-decoration: none;
+      color: #ffffff;
+      cursor: pointer;
+      cursor: hand;
+      font-size: small;
+      background-color: #ff0000;
+      border: 1px solid #bbb;
+      border-bottom: 1px solid #a0a0a0;
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+    }
+
+    .topButton {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      padding: 5px 7px;
+      text-decoration: none;
+      cursor: pointer;
+      cursor: hand;
+      font-size: small;
+      background-color: #e7e7e7;
+      border: 1px solid #bbb;
+      border-bottom: 1px solid #a0a0a0;
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+    }
+
+    .radioPanel label {
+      margin-right: 15px;
+    }
+  </style>
+
+  <link rel="stylesheet" href="font/fontello.css" />
+</head>
+
+<body>
+  <!-- Include the next line to allow support for dropbox import/export. You will need your own app key. -->
+  <!--<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="YOUR_KEY"></script>-->
+
+  <script language="javascript" src="lz-string.min.js"></script>
+
+  <!-- This script tag is what actually loads the GWT module.  The -->
+  <!-- 'nocache.js' file (also called a "selection script") is     -->
+  <!-- produced by the GWT compiler in the module output directory -->
+  <!-- or generated automatically in development mode.             -->
+  <script language="javascript" src="circuitjs1/circuitjs1.nocache.js"></script>
+
+  <!-- Include a history iframe to enable full GWT history support -->
+  <!-- (the id must be exactly as shown)                           -->
+  <iframe src="javascript:''" id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope,
+            );
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      });
+    }
+  </script>
+</body>
+
 </html>
